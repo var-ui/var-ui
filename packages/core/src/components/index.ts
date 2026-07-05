@@ -11,6 +11,7 @@ export { namedContainerQuery } from './namedContainerQuery';
 export { steps } from './steps';
 export { fileTree } from './fileTree';
 export { checkbox } from './checkbox';
+export { icon } from './icon';
 export { dialog } from './dialog';
 export { link } from './link';
 export { radio } from './radio';
