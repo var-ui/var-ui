@@ -1,0 +1,48 @@
+import type { HTMLAttributes, JSX } from 'react';
+import { stack } from '@var-ui/core';
+import { cx } from './utils';
+
+export type StackProps = HTMLAttributes<HTMLDivElement> & {
+  direction?: 'column' | 'row';
+  gap?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  align?: 'start' | 'center' | 'end' | 'stretch';
+  justify?: 'start' | 'center' | 'end' | 'between';
+  wrap?: boolean;
+};
+
+/**
+ * Flex stack layout primitive. Vertical by default; see `HStack`/`VStack`.
+ *
+ * ```tsx
+ * <Stack gap="lg">{sections}</Stack>
+ * ```
+ */
+export function Stack({
+  direction = 'column',
+  gap = 'md',
+  align = 'stretch',
+  justify = 'start',
+  wrap = false,
+  className,
+  ...props
+}: StackProps): JSX.Element {
+  return (
+    <div
+      {...props}
+      className={cx(
+        stack({ direction, gap, align, justify, wrap: wrap ? 'wrap' : 'nowrap' }),
+        className,
+      )}
+    />
+  );
+}
+
+/** Horizontal stack — row direction with centered cross axis by default. */
+export function HStack({ align = 'center', ...props }: Omit<StackProps, 'direction'>): JSX.Element {
+  return <Stack {...props} align={align} direction="row" />;
+}
+
+/** Vertical stack — explicit alias for readability at call sites. */
+export function VStack(props: Omit<StackProps, 'direction'>): JSX.Element {
+  return <Stack {...props} direction="column" />;
+}

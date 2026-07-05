@@ -1,0 +1,35 @@
+import type { HTMLAttributes, JSX } from 'react';
+import { grid } from '@var-ui/core';
+import { cx } from './utils';
+
+export type GridProps = HTMLAttributes<HTMLDivElement> & {
+  /** 'auto' packs minmax(240px, 1fr) tracks; numbers give fixed equal tracks. */
+  columns?: 'auto' | 1 | 2 | 3 | 4;
+  gap?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+};
+
+const columnVariant = {
+  auto: 'auto',
+  1: 'one',
+  2: 'two',
+  3: 'three',
+  4: 'four',
+} as const;
+
+/**
+ * Responsive grid layout primitive.
+ *
+ * ```tsx
+ * <Grid columns="auto" gap="lg">{cards}</Grid>
+ * ```
+ */
+export function Grid({
+  columns = 'auto',
+  gap = 'md',
+  className,
+  ...props
+}: GridProps): JSX.Element {
+  return (
+    <div {...props} className={cx(grid({ columns: columnVariant[columns], gap }), className)} />
+  );
+}
