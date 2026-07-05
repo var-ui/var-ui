@@ -151,6 +151,9 @@ importers:
       '@var-ui/core':
         specifier: workspace:*
         version: link:../core
+      '@var-ui/icons':
+        specifier: workspace:*
+        version: link:../icons
       jsdom:
         specifier: ^26.0.0
         version: 26.1.0
@@ -3343,12 +3346,12 @@ snapshots:
       - utf-8-validate
       - vite
 
-  '@vitest/browser-preview@4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(vitest@4.1.9)':
+  '@vitest/browser-preview@4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(vitest@4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9)(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(typescript@6.0.3)(yaml@2.9.0))(jsdom@26.1.0))':
     dependencies:
       '@testing-library/dom': 10.4.1
       '@testing-library/user-event': 14.6.1(@testing-library/dom@10.4.1)
-      '@vitest/browser': 4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(vitest@4.1.9)
-      vitest: 4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9)(jsdom@26.1.0)(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))
+      '@vitest/browser': 4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(vitest@4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9)(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(typescript@6.0.3)(yaml@2.9.0))(jsdom@26.1.0))
+      vitest: 4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9)(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(typescript@6.0.3)(yaml@2.9.0))(jsdom@26.1.0)
     transitivePeerDependencies:
       - bufferutil
       - msw
@@ -3372,7 +3375,7 @@ snapshots:
       - utf-8-validate
       - vite
 
-  '@vitest/browser@4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(vitest@4.1.9)':
+  '@vitest/browser@4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(vitest@4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9)(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(typescript@6.0.3)(yaml@2.9.0))(jsdom@26.1.0))':
     dependencies:
       '@blazediff/core': 1.9.1
       '@vitest/mocker': 4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))
@@ -3381,7 +3384,7 @@ snapshots:
       pngjs: 7.0.0
       sirv: 3.0.2
       tinyrainbow: 3.1.0
-      vitest: 4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9)(jsdom@26.1.0)(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))
+      vitest: 4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9)(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(typescript@6.0.3)(yaml@2.9.0))(jsdom@26.1.0)
       ws: 8.21.0
     transitivePeerDependencies:
       - bufferutil
@@ -4524,8 +4527,8 @@ snapshots:
     dependencies:
       '@oxc-project/types': 0.138.0
       '@oxlint/plugins': 1.68.0
-      '@vitest/browser': 4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(vitest@4.1.9)
-      '@vitest/browser-preview': 4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(vitest@4.1.9)
+      '@vitest/browser': 4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(vitest@4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9)(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(typescript@6.0.3)(yaml@2.9.0))(jsdom@26.1.0))
+      '@vitest/browser-preview': 4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(vitest@4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9)(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(typescript@6.0.3)(yaml@2.9.0))(jsdom@26.1.0))
       '@vitest/expect': 4.1.9
       '@vitest/mocker': 4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))
       '@vitest/pretty-format': 4.1.9
@@ -4537,7 +4540,7 @@ snapshots:
       oxfmt: 0.57.0(vite-plus@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(jsdom@26.1.0)(typescript@6.0.3)(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(yaml@2.9.0))
       oxlint: 1.72.0(oxlint-tsgolint@0.24.0)(vite-plus@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(jsdom@26.1.0)(typescript@6.0.3)(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(yaml@2.9.0))
       oxlint-tsgolint: 0.24.0
-      vitest: 4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9)(jsdom@26.1.0)(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))
+      vitest: 4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(typescript@6.0.3)(yaml@2.9.0))(vitest@4.1.9))(jsdom@26.1.0)(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))
     optionalDependencies:
       '@voidzero-dev/vite-plus-darwin-arm64': 0.2.2
       '@voidzero-dev/vite-plus-darwin-x64': 0.2.2
@@ -4591,6 +4594,35 @@ snapshots:
       fsevents: 2.3.3
       yaml: 2.9.0
 
+  vitest@4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(typescript@6.0.3)(yaml@2.9.0))(vitest@4.1.9))(jsdom@26.1.0)(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0)):
+    dependencies:
+      '@vitest/expect': 4.1.9
+      '@vitest/mocker': 4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))
+      '@vitest/pretty-format': 4.1.9
+      '@vitest/runner': 4.1.9
+      '@vitest/snapshot': 4.1.9
+      '@vitest/spy': 4.1.9
+      '@vitest/utils': 4.1.9
+      es-module-lexer: 2.3.0
+      expect-type: 1.4.0
+      magic-string: 0.30.21
+      obug: 2.1.3
+      pathe: 2.0.3
+      picomatch: 4.0.5
+      std-env: 4.1.0
+      tinybench: 2.9.0
+      tinyexec: 1.2.4
+      tinyglobby: 0.2.17
+      tinyrainbow: 3.1.0
+      vite: 8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0)
+      why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@types/node': 24.13.2
+      '@vitest/browser-preview': 4.1.9(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(typescript@6.0.3)(yaml@2.9.0))(vitest@4.1.9)
+      jsdom: 26.1.0
+    transitivePeerDependencies:
+      - msw
+
   vitest@4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9)(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(typescript@6.0.3)(yaml@2.9.0))(jsdom@26.1.0):
     dependencies:
       '@vitest/expect': 4.1.9
@@ -4616,35 +4648,6 @@ snapshots:
     optionalDependencies:
       '@types/node': 24.13.2
       '@vitest/browser-preview': 4.1.9(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(typescript@6.0.3)(yaml@2.9.0))(vitest@4.1.9)
-      jsdom: 26.1.0
-    transitivePeerDependencies:
-      - msw
-
-  vitest@4.1.9(@types/node@24.13.2)(@vitest/browser-preview@4.1.9)(jsdom@26.1.0)(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0)):
-    dependencies:
-      '@vitest/expect': 4.1.9
-      '@vitest/mocker': 4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))
-      '@vitest/pretty-format': 4.1.9
-      '@vitest/runner': 4.1.9
-      '@vitest/snapshot': 4.1.9
-      '@vitest/spy': 4.1.9
-      '@vitest/utils': 4.1.9
-      es-module-lexer: 2.3.0
-      expect-type: 1.4.0
-      magic-string: 0.30.21
-      obug: 2.1.3
-      pathe: 2.0.3
-      picomatch: 4.0.5
-      std-env: 4.1.0
-      tinybench: 2.9.0
-      tinyexec: 1.2.4
-      tinyglobby: 0.2.17
-      tinyrainbow: 3.1.0
-      vite: 8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0)
-      why-is-node-running: 2.3.0
-    optionalDependencies:
-      '@types/node': 24.13.2
-      '@vitest/browser-preview': 4.1.9(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(yaml@2.9.0))(vitest@4.1.9)
       jsdom: 26.1.0
     transitivePeerDependencies:
       - msw

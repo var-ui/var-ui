@@ -49,4 +49,12 @@ export {
   type DesignSystemProviderProps,
 } from './theme';
 export { layout, text } from './styles';
+export {
+  Icon,
+  IconProvider,
+  useIcons,
+  type IconProps,
+  type IconProviderProps,
+  type IconRegistry,
+} from './icons';
 export * from './hooks';

@@ -1,0 +1,60 @@
+import { describe, expect, it } from 'vite-plus/test';
+import { render } from '@testing-library/react';
+import { Icon, IconProvider } from './index';
+
+const star = <svg data-testid="star" viewBox="0 0 24 24" />;
+const moon = <svg data-testid="moon" viewBox="0 0 24 24" />;
+
+describe('Icon', () => {
+  it('resolves glyphs from the provider registry', () => {
+    const { getByTestId } = render(
+      <IconProvider icons={{ close: star }}>
+        <Icon name="close" />
+      </IconProvider>,
+    );
+    expect(getByTestId('star')).toBeTruthy();
+  });
+
+  it('renders the shared empty fallback for unmapped names', () => {
+    const { container } = render(
+      <IconProvider icons={{}}>
+        <Icon name="search" />
+      </IconProvider>,
+    );
+    const shell = container.querySelector('[data-icon-fallback]');
+    expect(shell).toBeTruthy();
+  });
+
+  it('shallow-merges nested providers over the parent registry', () => {
+    const { getByTestId, queryByTestId } = render(
+      <IconProvider icons={{ close: star, search: star }}>
+        <IconProvider icons={{ close: moon }}>
+          <Icon name="close" />
+        </IconProvider>
+      </IconProvider>,
+    );
+    expect(getByTestId('moon')).toBeTruthy();
+    expect(queryByTestId('star')).toBeNull();
+  });
+
+  it('children bypass the registry and aria-label switches to role img', () => {
+    const { getByRole, getByTestId } = render(
+      <IconProvider icons={{}}>
+        <Icon aria-label="custom">{star}</Icon>
+      </IconProvider>,
+    );
+    expect(getByTestId('star')).toBeTruthy();
+    expect(getByRole('img', { name: 'custom' })).toBeTruthy();
+  });
+
+  it('applies the icon recipe size class', () => {
+    const { container } = render(
+      <IconProvider icons={{}}>
+        <Icon name="close" size="lg" />
+      </IconProvider>,
+    );
+    expect((container.firstElementChild as HTMLElement).className).toContain(
+      'example-ds-icon-size-lg',
+    );
+  });
+});
