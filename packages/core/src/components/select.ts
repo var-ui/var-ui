@@ -1,5 +1,6 @@
 import { styles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { fieldChrome } from './field';
 
 export const select = styles.component(
   'select',
@@ -46,18 +47,15 @@ export const select = styles.component(
         inherits: false,
       },
     });
+    // Select has no description/error slots — reuse only the shared root/label chrome.
+    const chrome = fieldChrome({ label: v.labelColor.var, description: '', error: '' });
     return {
       slots: ['root', 'label', 'trigger', 'popover', 'item'],
       root: {
-        display: 'grid',
-        gap: t.space[1],
+        ...chrome.root,
         minWidth: '240px',
       },
-      label: {
-        fontSize: t.fontSize.md,
-        fontWeight: t.fontWeight.medium,
-        color: v.labelColor.var,
-      },
+      label: chrome.label,
       trigger: {
         textAlign: 'left',
         border: `1px solid ${v.triggerBorder.var}`,

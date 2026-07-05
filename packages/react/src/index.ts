@@ -13,6 +13,8 @@ export {
   Dialog,
   CodeBlock,
   Alert,
+  Field,
+  type FieldProps,
   type AlertAppearance,
   type AlertProps,
   type AlertVariant,
