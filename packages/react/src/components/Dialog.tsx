@@ -7,6 +7,7 @@ import {
   ModalOverlay,
 } from 'react-aria-components';
 import { dialog } from '@var-ui/core';
+import { useLayer } from '../layers/LayerProvider';
 import { Button } from './Button';
 
 export type DialogProps = {
@@ -23,10 +24,11 @@ export function Dialog({
   closeLabel = 'Close',
 }: DialogProps): JSX.Element {
   const d = dialog();
+  const { style: layerStyle } = useLayer();
   return (
     <DialogTrigger>
       <Button intent="secondary">{triggerLabel}</Button>
-      <ModalOverlay className={d.overlay}>
+      <ModalOverlay className={d.overlay} style={layerStyle}>
         <Modal className={d.modal}>
           <AriaDialog>
             {({ close }) => (

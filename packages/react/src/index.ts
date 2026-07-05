@@ -73,4 +73,5 @@ export {
   type IconProviderProps,
   type IconRegistry,
 } from './icons';
+export { LayerProvider, useLayer, type LayerProviderProps } from './layers/LayerProvider';
 export * from './hooks';

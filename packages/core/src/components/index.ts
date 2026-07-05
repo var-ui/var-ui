@@ -17,6 +17,7 @@ export { divider } from './divider';
 export { field, fieldChrome, type FieldChromeColors } from './field';
 export { grid } from './grid';
 export { icon } from './icon';
+export { overlay } from './overlay';
 export { section } from './section';
 export { stack } from './stack';
 export { dialog } from './dialog';
