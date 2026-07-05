@@ -1,0 +1,55 @@
+{
+  "name": "@var-ui/react",
+  "version": "0.0.1",
+  "description": "React components for the var-ui design system",
+  "homepage": "https://github.com/var-ui/var-ui/tree/main/packages/react#readme",
+  "bugs": "https://github.com/var-ui/var-ui/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/var-ui/var-ui.git",
+    "directory": "packages/react"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "./dist/index.mjs"
+  ],
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "pack": "vp pack",
+    "dev": "vp pack --watch"
+  },
+  "dependencies": {
+    "typestyles": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@var-ui/core": "workspace:*",
+    "react": "catalog:",
+    "react-aria-components": "catalog:",
+    "react-dom": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "@var-ui/core": "workspace:^",
+    "react": "catalog:",
+    "react-aria-components": "catalog:",
+    "react-dom": "catalog:"
+  }
+}

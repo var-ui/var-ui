@@ -1,0 +1,1327 @@
+{
+  "version": 1,
+  "classNames": [
+    "example-ds-alert-action",
+    "example-ds-alert-actionLink",
+    "example-ds-alert-body",
+    "example-ds-alert-content",
+    "example-ds-alert-content-contentGap-flush",
+    "example-ds-alert-content-contentGap-spaced",
+    "example-ds-alert-icon",
+    "example-ds-alert-root",
+    "example-ds-alert-root-appearance-solid",
+    "example-ds-alert-root-appearance-subtle",
+    "example-ds-alert-root-tone-danger",
+    "example-ds-alert-root-tone-info",
+    "example-ds-alert-root-tone-success",
+    "example-ds-alert-root-tone-tip",
+    "example-ds-alert-root-tone-warning",
+    "example-ds-alert-title",
+    "example-ds-alert-title-appearance-solid",
+    "example-ds-badge-base",
+    "example-ds-badge-tone-accent",
+    "example-ds-badge-tone-danger",
+    "example-ds-badge-tone-neutral",
+    "example-ds-badge-tone-success",
+    "example-ds-badge-tone-tip",
+    "example-ds-badge-tone-warning",
+    "example-ds-button-base",
+    "example-ds-button-intent-ghost",
+    "example-ds-button-intent-primary",
+    "example-ds-button-intent-secondary",
+    "example-ds-card-body",
+    "example-ds-card-grid",
+    "example-ds-card-linkDescription",
+    "example-ds-card-linkHint",
+    "example-ds-card-linkRoot",
+    "example-ds-card-linkTitle",
+    "example-ds-card-root",
+    "example-ds-card-title",
+    "example-ds-checkbox-box",
+    "example-ds-checkbox-label",
+    "example-ds-checkbox-root",
+    "example-ds-code-block-actions",
+    "example-ds-code-block-body",
+    "example-ds-code-block-bodyScrollable",
+    "example-ds-code-block-bodyTerminal",
+    "example-ds-code-block-code",
+    "example-ds-code-block-copyButton",
+    "example-ds-code-block-copyButtonCopied",
+    "example-ds-code-block-copyButtonError",
+    "example-ds-code-block-copyButtonIdle",
+    "example-ds-code-block-feedback",
+    "example-ds-code-block-feedbackError",
+    "example-ds-code-block-feedbackInline",
+    "example-ds-code-block-feedbackSuccess",
+    "example-ds-code-block-feedbackToast",
+    "example-ds-code-block-filename",
+    "example-ds-code-block-header",
+    "example-ds-code-block-headerTerminal",
+    "example-ds-code-block-language",
+    "example-ds-code-block-languageTerminal",
+    "example-ds-code-block-line",
+    "example-ds-code-block-lineAdded",
+    "example-ds-code-block-lineContent",
+    "example-ds-code-block-lineDeleted",
+    "example-ds-code-block-lineHighlighted",
+    "example-ds-code-block-lineNumber",
+    "example-ds-code-block-lines",
+    "example-ds-code-block-pre",
+    "example-ds-code-block-preScrollX",
+    "example-ds-code-block-preTerminal",
+    "example-ds-code-block-preWrap",
+    "example-ds-code-block-root",
+    "example-ds-code-block-rootDefault",
+    "example-ds-code-block-rootDiff",
+    "example-ds-code-block-rootInline",
+    "example-ds-code-block-rootTerminal",
+    "example-ds-code-block-title",
+    "example-ds-command-palette-backdrop",
+    "example-ds-command-palette-dialog",
+    "example-ds-command-palette-dialog-open-true",
+    "example-ds-command-palette-empty",
+    "example-ds-command-palette-input",
+    "example-ds-command-palette-inputIcon",
+    "example-ds-command-palette-inputRow",
+    "example-ds-command-palette-mark",
+    "example-ds-command-palette-result",
+    "example-ds-command-palette-resultLink",
+    "example-ds-command-palette-resultLinkActive",
+    "example-ds-command-palette-resultMeta",
+    "example-ds-command-palette-results",
+    "example-ds-command-palette-resultTitle",
+    "example-ds-command-palette-root",
+    "example-ds-command-palette-root-open-true",
+    "example-ds-dialog-content",
+    "example-ds-dialog-description",
+    "example-ds-dialog-heading",
+    "example-ds-dialog-modal",
+    "example-ds-dialog-overlay",
+    "example-ds-docs-prose-headingAnchor",
+    "example-ds-docs-prose-root",
+    "example-ds-docs-prose-tableWrap",
+    "example-ds-ds-hljs-root",
+    "example-ds-ds-layout-row",
+    "example-ds-ds-layout-section",
+    "example-ds-ds-layout-stack",
+    "example-ds-ds-named-cq-body",
+    "example-ds-ds-named-cq-root",
+    "example-ds-ds-text-caption",
+    "example-ds-ds-text-label",
+    "example-ds-ds-text-sectionTitle",
+    "example-ds-ds-text-subtitle",
+    "example-ds-ds-text-title",
+    "example-ds-fileTree-file",
+    "example-ds-fileTree-folder",
+    "example-ds-fileTree-item",
+    "example-ds-fileTree-list",
+    "example-ds-fileTree-listNested",
+    "example-ds-fileTree-root",
+    "example-ds-fileTree-row",
+    "example-ds-link",
+    "example-ds-radio-control",
+    "example-ds-radio-group",
+    "example-ds-radio-groupLabel",
+    "example-ds-radio-item",
+    "example-ds-radio-label",
+    "example-ds-select-item",
+    "example-ds-select-label",
+    "example-ds-select-popover",
+    "example-ds-select-root",
+    "example-ds-select-trigger",
+    "example-ds-steps-root",
+    "example-ds-switch-label",
+    "example-ds-switch-root",
+    "example-ds-switch-thumb",
+    "example-ds-switch-track",
+    "example-ds-tabs-list",
+    "example-ds-tabs-panel",
+    "example-ds-tabs-root",
+    "example-ds-tabs-tab",
+    "example-ds-text-area-field-description",
+    "example-ds-text-area-field-error",
+    "example-ds-text-area-field-input",
+    "example-ds-text-area-field-label",
+    "example-ds-text-area-field-root",
+    "example-ds-text-field-description",
+    "example-ds-text-field-error",
+    "example-ds-text-field-input",
+    "example-ds-text-field-label",
+    "example-ds-text-field-root"
+  ],
+  "entries": [
+    {
+      "className": "example-ds-alert-action",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "action",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-actionLink",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "actionLink",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-body",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "body",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-content",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "content",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-content-contentGap-flush",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "content-contentGap-flush",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-content-contentGap-spaced",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "content-contentGap-spaced",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-icon",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "icon",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-root",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "root",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-root-appearance-solid",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "root-appearance-solid",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-root-appearance-subtle",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "root-appearance-subtle",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-root-tone-danger",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "root-tone-danger",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-root-tone-info",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "root-tone-info",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-root-tone-success",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "root-tone-success",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-root-tone-tip",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "root-tone-tip",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-root-tone-warning",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "root-tone-warning",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-title",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "title",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-alert-title-appearance-solid",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "title-appearance-solid",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "example-ds-badge-base",
+      "kind": "component",
+      "namespace": "badge",
+      "suffix": "base",
+      "file": "src/components/badge.ts",
+      "line": 14
+    },
+    {
+      "className": "example-ds-badge-tone-accent",
+      "kind": "component",
+      "namespace": "badge",
+      "suffix": "tone-accent",
+      "file": "src/components/badge.ts",
+      "line": 14
+    },
+    {
+      "className": "example-ds-badge-tone-danger",
+      "kind": "component",
+      "namespace": "badge",
+      "suffix": "tone-danger",
+      "file": "src/components/badge.ts",
+      "line": 14
+    },
+    {
+      "className": "example-ds-badge-tone-neutral",
+      "kind": "component",
+      "namespace": "badge",
+      "suffix": "tone-neutral",
+      "file": "src/components/badge.ts",
+      "line": 14
+    },
+    {
+      "className": "example-ds-badge-tone-success",
+      "kind": "component",
+      "namespace": "badge",
+      "suffix": "tone-success",
+      "file": "src/components/badge.ts",
+      "line": 14
+    },
+    {
+      "className": "example-ds-badge-tone-tip",
+      "kind": "component",
+      "namespace": "badge",
+      "suffix": "tone-tip",
+      "file": "src/components/badge.ts",
+      "line": 14
+    },
+    {
+      "className": "example-ds-badge-tone-warning",
+      "kind": "component",
+      "namespace": "badge",
+      "suffix": "tone-warning",
+      "file": "src/components/badge.ts",
+      "line": 14
+    },
+    {
+      "className": "example-ds-button-base",
+      "kind": "component",
+      "namespace": "button",
+      "suffix": "base",
+      "file": "src/components/button.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-button-intent-ghost",
+      "kind": "component",
+      "namespace": "button",
+      "suffix": "intent-ghost",
+      "file": "src/components/button.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-button-intent-primary",
+      "kind": "component",
+      "namespace": "button",
+      "suffix": "intent-primary",
+      "file": "src/components/button.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-button-intent-secondary",
+      "kind": "component",
+      "namespace": "button",
+      "suffix": "intent-secondary",
+      "file": "src/components/button.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-card-body",
+      "kind": "component",
+      "namespace": "card",
+      "suffix": "body",
+      "file": "src/components/card.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-card-grid",
+      "kind": "component",
+      "namespace": "card",
+      "suffix": "grid",
+      "file": "src/components/card.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-card-linkDescription",
+      "kind": "component",
+      "namespace": "card",
+      "suffix": "linkDescription",
+      "file": "src/components/card.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-card-linkHint",
+      "kind": "component",
+      "namespace": "card",
+      "suffix": "linkHint",
+      "file": "src/components/card.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-card-linkRoot",
+      "kind": "component",
+      "namespace": "card",
+      "suffix": "linkRoot",
+      "file": "src/components/card.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-card-linkTitle",
+      "kind": "component",
+      "namespace": "card",
+      "suffix": "linkTitle",
+      "file": "src/components/card.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-card-root",
+      "kind": "component",
+      "namespace": "card",
+      "suffix": "root",
+      "file": "src/components/card.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-card-title",
+      "kind": "component",
+      "namespace": "card",
+      "suffix": "title",
+      "file": "src/components/card.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-checkbox-box",
+      "kind": "component",
+      "namespace": "checkbox",
+      "suffix": "box",
+      "file": "src/components/checkbox.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-checkbox-label",
+      "kind": "component",
+      "namespace": "checkbox",
+      "suffix": "label",
+      "file": "src/components/checkbox.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-checkbox-root",
+      "kind": "component",
+      "namespace": "checkbox",
+      "suffix": "root",
+      "file": "src/components/checkbox.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-actions",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "actions",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-body",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "body",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-bodyScrollable",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "bodyScrollable",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-bodyTerminal",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "bodyTerminal",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-code",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "code",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-copyButton",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "copyButton",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-copyButtonCopied",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "copyButtonCopied",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-copyButtonError",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "copyButtonError",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-copyButtonIdle",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "copyButtonIdle",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-feedback",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "feedback",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-feedbackError",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "feedbackError",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-feedbackInline",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "feedbackInline",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-feedbackSuccess",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "feedbackSuccess",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-feedbackToast",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "feedbackToast",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-filename",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "filename",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-header",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "header",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-headerTerminal",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "headerTerminal",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-language",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "language",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-languageTerminal",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "languageTerminal",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-line",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "line",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-lineAdded",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "lineAdded",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-lineContent",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "lineContent",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-lineDeleted",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "lineDeleted",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-lineHighlighted",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "lineHighlighted",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-lineNumber",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "lineNumber",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-lines",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "lines",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-pre",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "pre",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-preScrollX",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "preScrollX",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-preTerminal",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "preTerminal",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-preWrap",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "preWrap",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-root",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "root",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-rootDefault",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "rootDefault",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-rootDiff",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "rootDiff",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-rootInline",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "rootInline",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-rootTerminal",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "rootTerminal",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-code-block-title",
+      "kind": "component",
+      "namespace": "code-block",
+      "suffix": "title",
+      "file": "src/components/codeBlock.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-command-palette-backdrop",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "backdrop",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-dialog",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "dialog",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-dialog-open-true",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "dialog-open-true",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-empty",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "empty",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-input",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "input",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-inputIcon",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "inputIcon",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-inputRow",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "inputRow",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-mark",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "mark",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-result",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "result",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-resultLink",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "resultLink",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-resultLinkActive",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "resultLinkActive",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-resultMeta",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "resultMeta",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-results",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "results",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-resultTitle",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "resultTitle",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-root",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "root",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-command-palette-root-open-true",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "root-open-true",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "example-ds-dialog-content",
+      "kind": "component",
+      "namespace": "dialog",
+      "suffix": "content",
+      "file": "src/components/dialog.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-dialog-description",
+      "kind": "component",
+      "namespace": "dialog",
+      "suffix": "description",
+      "file": "src/components/dialog.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-dialog-heading",
+      "kind": "component",
+      "namespace": "dialog",
+      "suffix": "heading",
+      "file": "src/components/dialog.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-dialog-modal",
+      "kind": "component",
+      "namespace": "dialog",
+      "suffix": "modal",
+      "file": "src/components/dialog.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-dialog-overlay",
+      "kind": "component",
+      "namespace": "dialog",
+      "suffix": "overlay",
+      "file": "src/components/dialog.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-docs-prose-headingAnchor",
+      "kind": "component",
+      "namespace": "docs-prose",
+      "suffix": "headingAnchor",
+      "file": "src/components/proseContent.ts",
+      "line": 17
+    },
+    {
+      "className": "example-ds-docs-prose-root",
+      "kind": "component",
+      "namespace": "docs-prose",
+      "suffix": "root",
+      "file": "src/components/proseContent.ts",
+      "line": 17
+    },
+    {
+      "className": "example-ds-docs-prose-tableWrap",
+      "kind": "component",
+      "namespace": "docs-prose",
+      "suffix": "tableWrap",
+      "file": "src/components/proseContent.ts",
+      "line": 17
+    },
+    {
+      "className": "example-ds-ds-hljs-root",
+      "kind": "component",
+      "namespace": "ds-hljs",
+      "suffix": "root",
+      "file": "src/components/codeHighlight.ts",
+      "line": 27
+    },
+    {
+      "className": "example-ds-ds-layout-row",
+      "kind": "component",
+      "namespace": "ds-layout",
+      "suffix": "row",
+      "file": "src/components/styles.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-ds-layout-section",
+      "kind": "component",
+      "namespace": "ds-layout",
+      "suffix": "section",
+      "file": "src/components/styles.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-ds-layout-stack",
+      "kind": "component",
+      "namespace": "ds-layout",
+      "suffix": "stack",
+      "file": "src/components/styles.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-ds-named-cq-body",
+      "kind": "class",
+      "namespace": "ds-named-cq-body",
+      "file": "src/components/namedContainerQuery.ts",
+      "line": 28
+    },
+    {
+      "className": "example-ds-ds-named-cq-root",
+      "kind": "class",
+      "namespace": "ds-named-cq-root",
+      "file": "src/components/namedContainerQuery.ts",
+      "line": 14
+    },
+    {
+      "className": "example-ds-ds-text-caption",
+      "kind": "component",
+      "namespace": "ds-text",
+      "suffix": "caption",
+      "file": "src/components/styles.ts",
+      "line": 54
+    },
+    {
+      "className": "example-ds-ds-text-label",
+      "kind": "component",
+      "namespace": "ds-text",
+      "suffix": "label",
+      "file": "src/components/styles.ts",
+      "line": 54
+    },
+    {
+      "className": "example-ds-ds-text-sectionTitle",
+      "kind": "component",
+      "namespace": "ds-text",
+      "suffix": "sectionTitle",
+      "file": "src/components/styles.ts",
+      "line": 54
+    },
+    {
+      "className": "example-ds-ds-text-subtitle",
+      "kind": "component",
+      "namespace": "ds-text",
+      "suffix": "subtitle",
+      "file": "src/components/styles.ts",
+      "line": 54
+    },
+    {
+      "className": "example-ds-ds-text-title",
+      "kind": "component",
+      "namespace": "ds-text",
+      "suffix": "title",
+      "file": "src/components/styles.ts",
+      "line": 54
+    },
+    {
+      "className": "example-ds-fileTree-file",
+      "kind": "component",
+      "namespace": "fileTree",
+      "suffix": "file",
+      "file": "src/components/fileTree.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-fileTree-folder",
+      "kind": "component",
+      "namespace": "fileTree",
+      "suffix": "folder",
+      "file": "src/components/fileTree.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-fileTree-item",
+      "kind": "component",
+      "namespace": "fileTree",
+      "suffix": "item",
+      "file": "src/components/fileTree.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-fileTree-list",
+      "kind": "component",
+      "namespace": "fileTree",
+      "suffix": "list",
+      "file": "src/components/fileTree.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-fileTree-listNested",
+      "kind": "component",
+      "namespace": "fileTree",
+      "suffix": "listNested",
+      "file": "src/components/fileTree.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-fileTree-root",
+      "kind": "component",
+      "namespace": "fileTree",
+      "suffix": "root",
+      "file": "src/components/fileTree.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-fileTree-row",
+      "kind": "component",
+      "namespace": "fileTree",
+      "suffix": "row",
+      "file": "src/components/fileTree.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-link",
+      "kind": "class",
+      "namespace": "link",
+      "file": "src/components/link.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-radio-control",
+      "kind": "component",
+      "namespace": "radio",
+      "suffix": "control",
+      "file": "src/components/radio.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-radio-group",
+      "kind": "component",
+      "namespace": "radio",
+      "suffix": "group",
+      "file": "src/components/radio.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-radio-groupLabel",
+      "kind": "component",
+      "namespace": "radio",
+      "suffix": "groupLabel",
+      "file": "src/components/radio.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-radio-item",
+      "kind": "component",
+      "namespace": "radio",
+      "suffix": "item",
+      "file": "src/components/radio.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-radio-label",
+      "kind": "component",
+      "namespace": "radio",
+      "suffix": "label",
+      "file": "src/components/radio.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-select-item",
+      "kind": "component",
+      "namespace": "select",
+      "suffix": "item",
+      "file": "src/components/select.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-select-label",
+      "kind": "component",
+      "namespace": "select",
+      "suffix": "label",
+      "file": "src/components/select.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-select-popover",
+      "kind": "component",
+      "namespace": "select",
+      "suffix": "popover",
+      "file": "src/components/select.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-select-root",
+      "kind": "component",
+      "namespace": "select",
+      "suffix": "root",
+      "file": "src/components/select.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-select-trigger",
+      "kind": "component",
+      "namespace": "select",
+      "suffix": "trigger",
+      "file": "src/components/select.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-steps-root",
+      "kind": "component",
+      "namespace": "steps",
+      "suffix": "root",
+      "file": "src/components/steps.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-switch-label",
+      "kind": "component",
+      "namespace": "switch",
+      "suffix": "label",
+      "file": "src/components/switch.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-switch-root",
+      "kind": "component",
+      "namespace": "switch",
+      "suffix": "root",
+      "file": "src/components/switch.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-switch-thumb",
+      "kind": "component",
+      "namespace": "switch",
+      "suffix": "thumb",
+      "file": "src/components/switch.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-switch-track",
+      "kind": "component",
+      "namespace": "switch",
+      "suffix": "track",
+      "file": "src/components/switch.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-tabs-list",
+      "kind": "component",
+      "namespace": "tabs",
+      "suffix": "list",
+      "file": "src/components/tabs.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-tabs-panel",
+      "kind": "component",
+      "namespace": "tabs",
+      "suffix": "panel",
+      "file": "src/components/tabs.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-tabs-root",
+      "kind": "component",
+      "namespace": "tabs",
+      "suffix": "root",
+      "file": "src/components/tabs.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-tabs-tab",
+      "kind": "component",
+      "namespace": "tabs",
+      "suffix": "tab",
+      "file": "src/components/tabs.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-text-area-field-description",
+      "kind": "component",
+      "namespace": "text-area-field",
+      "suffix": "description",
+      "file": "src/components/textAreaField.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-text-area-field-error",
+      "kind": "component",
+      "namespace": "text-area-field",
+      "suffix": "error",
+      "file": "src/components/textAreaField.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-text-area-field-input",
+      "kind": "component",
+      "namespace": "text-area-field",
+      "suffix": "input",
+      "file": "src/components/textAreaField.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-text-area-field-label",
+      "kind": "component",
+      "namespace": "text-area-field",
+      "suffix": "label",
+      "file": "src/components/textAreaField.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-text-area-field-root",
+      "kind": "component",
+      "namespace": "text-area-field",
+      "suffix": "root",
+      "file": "src/components/textAreaField.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-text-field-description",
+      "kind": "component",
+      "namespace": "text-field",
+      "suffix": "description",
+      "file": "src/components/textField.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-text-field-error",
+      "kind": "component",
+      "namespace": "text-field",
+      "suffix": "error",
+      "file": "src/components/textField.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-text-field-input",
+      "kind": "component",
+      "namespace": "text-field",
+      "suffix": "input",
+      "file": "src/components/textField.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-text-field-label",
+      "kind": "component",
+      "namespace": "text-field",
+      "suffix": "label",
+      "file": "src/components/textField.ts",
+      "line": 5
+    },
+    {
+      "className": "example-ds-text-field-root",
+      "kind": "component",
+      "namespace": "text-field",
+      "suffix": "root",
+      "file": "src/components/textField.ts",
+      "line": 5
+    }
+  ]
+}
