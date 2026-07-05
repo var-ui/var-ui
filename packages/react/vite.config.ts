@@ -10,4 +10,7 @@ export default defineConfig({
       neverBundle: ['react', 'react-dom', 'react-aria-components', '@var-ui/core', 'typestyles'],
     },
   },
+  test: {
+    environment: 'jsdom',
+  },
 });

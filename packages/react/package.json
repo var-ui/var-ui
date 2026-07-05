@@ -37,9 +37,12 @@
     "typestyles": "catalog:"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@var-ui/core": "workspace:*",
+    "jsdom": "^26.0.0",
     "react": "catalog:",
     "react-aria-components": "catalog:",
     "react-dom": "catalog:",
