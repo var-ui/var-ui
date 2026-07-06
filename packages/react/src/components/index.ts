@@ -17,6 +17,7 @@ export { Divider, type DividerProps } from './Divider';
 export { Grid, type GridProps } from './Grid';
 export { Section, type SectionProps } from './Section';
 export { HStack, Stack, VStack, type StackProps } from './Stack';
+export { Banner, type BannerProps, type BannerTone } from './Banner';
 export { ProgressBar, type ProgressBarProps } from './ProgressBar';
 export { Spinner, type SpinnerProps } from './Spinner';
 export { Heading, Text, type HeadingProps, type TextProps } from './Typography';

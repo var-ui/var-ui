@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vite-plus/test';
 import { getRegisteredCss } from 'typestyles';
+import { banner } from './banner';
 import { progressBar } from './progressBar';
 import { skeleton } from './skeleton';
 import { spinner } from './spinner';
@@ -33,6 +34,15 @@ describe('progressBar', () => {
     expect(css).toContain('example-ds-progress-bar-track');
     expect(css).toContain('example-ds-progress-bar-fill');
     expect(css).toContain('example-ds-progress-bar-root-tone-success');
+  });
+});
+
+describe('banner', () => {
+  it('registers slots and tone variants', () => {
+    banner({ tone: 'warning', appearance: 'solid' });
+    const css = getRegisteredCss();
+    expect(css).toContain('example-ds-banner-root-tone-warning');
+    expect(css).toContain('example-ds-banner-dismiss');
   });
 });
 

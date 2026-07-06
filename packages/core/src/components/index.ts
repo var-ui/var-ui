@@ -6,6 +6,7 @@ export { button, linkButton } from './button';
 export { codeBlock } from './codeBlock';
 export { alert } from './alert';
 export { badge } from './badge';
+export { banner } from './banner';
 export { card } from './card';
 export { namedContainerQuery } from './namedContainerQuery';
 export { steps } from './steps';
