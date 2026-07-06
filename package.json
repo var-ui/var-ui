@@ -11,6 +11,9 @@
     "build": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build",
     "pack": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons pack",
     "dev": "vp run @var-ui/example-vite-app#dev",
+    "docs:dev": "vp run @var-ui/docs#dev",
+    "docs:build": "vp run @var-ui/docs#build",
+    "docs:preview": "vp run @var-ui/docs#preview",
     "ready": "vp check && vp test run && vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build"
   },
   "devDependencies": {
