@@ -4,7 +4,7 @@ description: Triggers an action or event.
 ---
 
 import { Demo } from '@/components/Demo';
-import { ButtonDemo } from '@/demos/ButtonDemo';
+import { ButtonDefaultDemo, ButtonDisabledDemo, ButtonVariantsDemo } from '@/demos/ButtonDemo';
 
 # Button
 
@@ -17,7 +17,36 @@ Triggers an action or event.
 <Demo code={`import { Button } from '@var-ui/react';
 
 <Button>Click me</Button>`}>
-  <ButtonDemo />
+  <ButtonDefaultDemo />
+</Demo>
+
+### Variants
+
+Use the `intent` prop to change visual weight. Group related actions in an `HStack`.
+
+<Demo code={`import { Button, HStack } from '@var-ui/react';
+
+<HStack gap="sm" wrap>
+  <Button intent="primary">Primary</Button>
+  <Button intent="secondary">Secondary</Button>
+  <Button intent="ghost">Ghost</Button>
+</HStack>`}>
+  <ButtonVariantsDemo />
+</Demo>
+
+### Disabled
+
+Pass `isDisabled` to remove the button from the tab order and block press events.
+
+<Demo code={`import { Button, HStack } from '@var-ui/react';
+
+<HStack gap="sm" wrap>
+  <Button isDisabled>Disabled</Button>
+  <Button intent="primary" isDisabled>
+    Disabled primary
+  </Button>
+</HStack>`}>
+  <ButtonDisabledDemo />
 </Demo>
 
 ## Props
