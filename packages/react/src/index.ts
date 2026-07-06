@@ -31,6 +31,8 @@ export {
   type StackProps,
   Spinner,
   type SpinnerProps,
+  ProgressBar,
+  type ProgressBarProps,
   type AlertAppearance,
   type AlertProps,
   type AlertVariant,

@@ -18,6 +18,7 @@ export { field, fieldChrome, type FieldChromeColors } from './field';
 export { grid } from './grid';
 export { icon } from './icon';
 export { overlay } from './overlay';
+export { progressBar } from './progressBar';
 export { section } from './section';
 export { skeleton } from './skeleton';
 export { spinner } from './spinner';
