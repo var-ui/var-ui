@@ -29,6 +29,8 @@ export {
   Stack,
   VStack,
   type StackProps,
+  Spinner,
+  type SpinnerProps,
   type AlertAppearance,
   type AlertProps,
   type AlertVariant,

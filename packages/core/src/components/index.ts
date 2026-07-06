@@ -19,6 +19,7 @@ export { grid } from './grid';
 export { icon } from './icon';
 export { overlay } from './overlay';
 export { section } from './section';
+export { spinner } from './spinner';
 export { stack } from './stack';
 export { dialog } from './dialog';
 export { link } from './link';
