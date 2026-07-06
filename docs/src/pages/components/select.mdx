@@ -1,0 +1,35 @@
+---
+title: Select
+description: Dropdown single-select with options.
+---
+
+import { Demo } from '@/components/Demo';
+import { SelectDemo } from '@/demos/SelectDemo';
+
+# Select
+
+Dropdown single-select with options.
+
+## Examples
+
+### Default
+
+<Demo code={`import { Select } from '@var-ui/react';
+
+<Select
+  label="Fruit"
+  options={[
+    { id: 'apple', label: 'Apple' },
+    { id: 'plum', label: 'Plum' },
+  ]}
+/>`}>
+  <SelectDemo />
+</Demo>
+
+## Props
+
+See TypeScript types in `@var-ui/react` for the full props surface.
+
+## Accessibility
+
+Built on React Aria Components where applicable.

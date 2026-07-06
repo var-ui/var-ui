@@ -1,0 +1,34 @@
+---
+title: Tabs
+description: Tabbed content panels.
+---
+
+import { Demo } from '@/components/Demo';
+import { TabsDemo } from '@/demos/TabsDemo';
+
+# Tabs
+
+Tabbed content panels.
+
+## Examples
+
+### Default
+
+<Demo code={`import { Tabs, Text } from '@var-ui/react';
+
+<Tabs
+  tabs={[
+    { id: 'overview', label: 'Overview', content: <Text>First panel content.</Text> },
+    { id: 'details', label: 'Details', content: <Text>Second panel content.</Text> },
+  ]}
+/>`}>
+  <TabsDemo />
+</Demo>
+
+## Props
+
+See TypeScript types in `@var-ui/react` for the full props surface.
+
+## Accessibility
+
+Built on React Aria Components where applicable.
