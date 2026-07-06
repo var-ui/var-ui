@@ -24,7 +24,9 @@ export {
   type AvatarProps,
   type AvatarSize,
 } from './Avatar';
+export { Badge, type BadgeProps } from './Badge';
 export { Banner, type BannerProps, type BannerTone } from './Banner';
+export { Card, ClickableCard, type CardProps, type ClickableCardProps } from './Card';
 export { EmptyState, type EmptyStateProps } from './EmptyState';
 export { ProgressBar, type ProgressBarProps } from './ProgressBar';
 export { Spinner, type SpinnerProps } from './Spinner';
