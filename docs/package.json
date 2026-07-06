@@ -2,5 +2,28 @@
   "name": "@var-ui/docs",
   "version": "0.0.0",
   "private": true,
-  "description": "Documentation site for var-ui (placeholder)"
+  "description": "Documentation site for var-ui",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "scaffold:pages": "node scripts/scaffold-component-pages.mjs"
+  },
+  "dependencies": {
+    "@var-ui/core": "workspace:*",
+    "@var-ui/icons": "workspace:*",
+    "@var-ui/react": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "vocs": "^2.0.0",
+    "waku": "^1.0.0-beta.6"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
 }
