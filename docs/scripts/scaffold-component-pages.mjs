@@ -27,7 +27,7 @@ const components = [
     importLine: "import { Link } from '@var-ui/react';",
     demoImports: ["import { Link } from '@var-ui/react';"],
     demoReturn: '<Link href="#">Documentation</Link>',
-    codeExample: "import { Link } from '@var-ui/react';\n\n<Link href=\"#\">Documentation</Link>",
+    codeExample: 'import { Link } from \'@var-ui/react\';\n\n<Link href="#">Documentation</Link>',
   },
   {
     slug: 'text-field',
@@ -38,7 +38,7 @@ const components = [
     demoReturn:
       '<TextField label="Project name" description="Shown on the dashboard." placeholder="My project" />',
     codeExample:
-      "import { TextField } from '@var-ui/react';\n\n<TextField label=\"Project name\" description=\"Shown on the dashboard.\" placeholder=\"My project\" />",
+      'import { TextField } from \'@var-ui/react\';\n\n<TextField label="Project name" description="Shown on the dashboard." placeholder="My project" />',
   },
   {
     slug: 'text-area-field',
@@ -48,7 +48,7 @@ const components = [
     demoImports: ["import { TextAreaField } from '@var-ui/react';"],
     demoReturn: '<TextAreaField label="Notes" placeholder="Add a note…" />',
     codeExample:
-      "import { TextAreaField } from '@var-ui/react';\n\n<TextAreaField label=\"Notes\" placeholder=\"Add a note…\" />",
+      'import { TextAreaField } from \'@var-ui/react\';\n\n<TextAreaField label="Notes" placeholder="Add a note…" />',
   },
   {
     slug: 'checkbox',
@@ -66,8 +66,7 @@ const components = [
     importLine: "import { Switch } from '@var-ui/react';",
     demoImports: ["import { Switch } from '@var-ui/react';"],
     demoReturn: '<Switch>Enable notifications</Switch>',
-    codeExample:
-      "import { Switch } from '@var-ui/react';\n\n<Switch>Enable notifications</Switch>",
+    codeExample: "import { Switch } from '@var-ui/react';\n\n<Switch>Enable notifications</Switch>",
   },
   {
     slug: 'radio-group',
@@ -147,7 +146,7 @@ const components = [
     demoReturn:
       '<Alert variant="info" title="Registry icons">Alerts pull their tone glyph from IconProvider automatically.</Alert>',
     codeExample:
-      "import { Alert } from '@var-ui/react';\n\n<Alert variant=\"info\" title=\"Registry icons\">Alerts pull their tone glyph from IconProvider automatically.</Alert>",
+      'import { Alert } from \'@var-ui/react\';\n\n<Alert variant="info" title="Registry icons">Alerts pull their tone glyph from IconProvider automatically.</Alert>',
   },
   {
     slug: 'badge',
@@ -156,7 +155,7 @@ const components = [
     importLine: "import { Badge } from '@var-ui/react';",
     demoImports: ["import { Badge } from '@var-ui/react';"],
     demoReturn: '<Badge tone="accent">Beta</Badge>',
-    codeExample: "import { Badge } from '@var-ui/react';\n\n<Badge tone=\"accent\">Beta</Badge>",
+    codeExample: 'import { Badge } from \'@var-ui/react\';\n\n<Badge tone="accent">Beta</Badge>',
   },
   {
     slug: 'banner',
@@ -166,7 +165,7 @@ const components = [
     demoImports: ["import { Banner } from '@var-ui/react';"],
     demoReturn: '<Banner tone="success" appearance="solid">Deploy finished in 42s.</Banner>',
     codeExample:
-      "import { Banner } from '@var-ui/react';\n\n<Banner tone=\"success\" appearance=\"solid\">Deploy finished in 42s.</Banner>",
+      'import { Banner } from \'@var-ui/react\';\n\n<Banner tone="success" appearance="solid">Deploy finished in 42s.</Banner>',
   },
   {
     slug: 'spinner',
@@ -175,7 +174,8 @@ const components = [
     importLine: "import { Spinner } from '@var-ui/react';",
     demoImports: ["import { Spinner } from '@var-ui/react';"],
     demoReturn: '<Spinner label="Loading results" />',
-    codeExample: "import { Spinner } from '@var-ui/react';\n\n<Spinner label=\"Loading results\" />",
+    codeExample:
+      'import { Spinner } from \'@var-ui/react\';\n\n<Spinner label="Loading results" />',
   },
   {
     slug: 'progress-bar',
@@ -185,7 +185,7 @@ const components = [
     demoImports: ["import { ProgressBar } from '@var-ui/react';"],
     demoReturn: '<ProgressBar label="Uploading assets" value={64} />',
     codeExample:
-      "import { ProgressBar } from '@var-ui/react';\n\n<ProgressBar label=\"Uploading assets\" value={64} />",
+      'import { ProgressBar } from \'@var-ui/react\';\n\n<ProgressBar label="Uploading assets" value={64} />',
   },
   {
     slug: 'empty-state',
@@ -366,7 +366,7 @@ const components = [
     demoImports: ["import { Text } from '@var-ui/react';"],
     demoReturn: '<Text tone="secondary">Body text with secondary tone.</Text>',
     codeExample:
-      "import { Text } from '@var-ui/react';\n\n<Text tone=\"secondary\">Body text with secondary tone.</Text>",
+      'import { Text } from \'@var-ui/react\';\n\n<Text tone="secondary">Body text with secondary tone.</Text>',
   },
   {
     slug: 'code-block',
@@ -374,9 +374,9 @@ const components = [
     description: 'Syntax-highlighted code display.',
     importLine: "import { CodeBlock } from '@var-ui/react';",
     demoImports: ["import { CodeBlock } from '@var-ui/react';"],
-    demoReturn: "<CodeBlock code={'const greeting = \"hello\";'} language=\"tsx\" />",
+    demoReturn: '<CodeBlock code={\'const greeting = "hello";\'} language="tsx" />',
     codeExample:
-      "import { CodeBlock } from '@var-ui/react';\n\n<CodeBlock code={'const greeting = \"hello\";'} language=\"tsx\" />",
+      'import { CodeBlock } from \'@var-ui/react\';\n\n<CodeBlock code={\'const greeting = "hello";\'} language="tsx" />',
   },
   {
     slug: 'timestamp',
@@ -409,7 +409,7 @@ const previewUrl = '…';
     demoImports: ["import { Avatar } from '@var-ui/react';"],
     demoReturn: '<Avatar name="Ada Lovelace" status="success" />',
     codeExample:
-      "import { Avatar } from '@var-ui/react';\n\n<Avatar name=\"Ada Lovelace\" status=\"success\" />",
+      'import { Avatar } from \'@var-ui/react\';\n\n<Avatar name="Ada Lovelace" status="success" />',
   },
   {
     slug: 'card',
@@ -419,7 +419,7 @@ const previewUrl = '…';
     demoImports: ["import { Card } from '@var-ui/react';"],
     demoReturn: '<Card title="Static card">Plain content surface.</Card>',
     codeExample:
-      "import { Card } from '@var-ui/react';\n\n<Card title=\"Static card\">Plain content surface.</Card>",
+      'import { Card } from \'@var-ui/react\';\n\n<Card title="Static card">Plain content surface.</Card>',
   },
   {
     slug: 'clickable-card',
@@ -487,7 +487,7 @@ export function ${demoComponentName(name)}() {
 }
 
 function renderMdxFile(component) {
-  const { slug, name, description, codeExample } = component;
+  const { slug: _slug, name, description, codeExample } = component;
   const demoName = demoComponentName(name);
   const escapedCode = escapeTemplateLiteral(codeExample);
 
