@@ -17,6 +17,13 @@ export { Divider, type DividerProps } from './Divider';
 export { Grid, type GridProps } from './Grid';
 export { Section, type SectionProps } from './Section';
 export { HStack, Stack, VStack, type StackProps } from './Stack';
+export {
+  Avatar,
+  AvatarGroup,
+  type AvatarGroupProps,
+  type AvatarProps,
+  type AvatarSize,
+} from './Avatar';
 export { Banner, type BannerProps, type BannerTone } from './Banner';
 export { EmptyState, type EmptyStateProps } from './EmptyState';
 export { ProgressBar, type ProgressBarProps } from './ProgressBar';

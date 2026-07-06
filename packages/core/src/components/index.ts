@@ -5,6 +5,7 @@ export { commandPalette } from './commandPalette';
 export { button, linkButton } from './button';
 export { codeBlock } from './codeBlock';
 export { alert } from './alert';
+export { avatar, avatarGroup } from './avatar';
 export { badge } from './badge';
 export { banner } from './banner';
 export { card } from './card';
