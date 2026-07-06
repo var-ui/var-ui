@@ -23,6 +23,7 @@ export { section } from './section';
 export { skeleton } from './skeleton';
 export { spinner } from './spinner';
 export { stack } from './stack';
+export { statusDot } from './statusDot';
 export { dialog } from './dialog';
 export { link } from './link';
 export { radio } from './radio';
