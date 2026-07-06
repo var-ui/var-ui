@@ -8,10 +8,10 @@
     "fmt": "vp fmt",
     "lint": "vp lint",
     "test": "vp test run",
-    "build": "vp run packages/core#build packages/react#build",
-    "pack": "vp run packages/core#pack packages/react#pack",
-    "dev": "vp run examples/vite-app#dev",
-    "ready": "vp check && vp test run && vp run packages/core#build packages/react#build"
+    "build": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build",
+    "pack": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons pack",
+    "dev": "vp run @var-ui/example-vite-app#dev",
+    "ready": "vp check && vp test run && vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.6.0",
