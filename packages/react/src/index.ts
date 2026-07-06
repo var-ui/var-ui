@@ -36,6 +36,8 @@ export {
   Banner,
   type BannerProps,
   type BannerTone,
+  EmptyState,
+  type EmptyStateProps,
   Heading,
   type HeadingProps,
   Text,

@@ -15,6 +15,7 @@ export { aspectRatio } from './aspectRatio';
 export { center } from './center';
 export { checkbox } from './checkbox';
 export { divider } from './divider';
+export { emptyState } from './emptyState';
 export { field, fieldChrome, type FieldChromeColors } from './field';
 export { grid } from './grid';
 export { heading, textBlock } from './typography';
