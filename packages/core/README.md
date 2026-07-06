@@ -22,6 +22,22 @@ import '@var-ui/core/codeHighlight';
 
 Pair with a **typestyles extraction entry** in consuming apps so token and recipe CSS lands in production output — see [`examples/vite-app`](../vite-app/README.md).
 
+## Recipe inventory
+
+Every recipe follows the [`c.vars()` override contract](#authoring-recipes) and
+emits stable public class names.
+
+| Category       | Recipes                                                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Actions**    | `button`, `linkButton`, `link`                                                                                |
+| **Data input** | `textField`, `textAreaField`, `checkbox`, `radio`, `switchStyles`, `select`, `field` (+ `fieldChrome` helper) |
+| **Feedback**   | `alert`, `banner`, `badge`, `spinner`, `skeleton`, `progressBar`, `statusDot`                                 |
+| **Layout**     | `stack`, `grid`, `section`, `center`, `aspectRatio`, `divider`, `layout`/`text` utilities                     |
+| **Content**    | `heading`, `textBlock`, `kbd`, `emptyState`, `codeBlock`, `proseContent`, `steps`, `fileTree`                 |
+| **Containers** | `card`, `carousel`, `thumbnail`, `avatar`, `avatarGroup`                                                      |
+| **Overlay**    | `dialog`, `overlay`, `commandPalette`, `tabs`                                                                 |
+| **Icons**      | `icon` recipe + `IconName` union / `iconNameList` (glyphs live in `@var-ui/icons`)                            |
+
 ## Token layers
 
 Tokens are grouped for clarity; recipes consume the flat `designTokens` object (unchanged ergonomics).

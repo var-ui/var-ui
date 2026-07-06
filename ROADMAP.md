@@ -97,6 +97,28 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
   - Can proceed in parallel with V3 (`c.vars()` audit on existing recipes).
   - `@var-ui/lab` (charts, Schedule, Stepper, etc.) is a separate track —
     see spec's Lab tier section.
+  - [x] **Phase 0 — infrastructure** — `field` recipe + shared `fieldChrome`
+        (textField/textAreaField/select refactored, class names unchanged);
+        icon system (`IconName` + `icon` recipe in core, `IconProvider`/`useIcons`/
+        `<Icon>` with empty fallback in react, new **`@var-ui/icons`** package with
+        bundle 1 glyphs as optional peer); layout primitives (`stack`, `grid`,
+        `divider`, `section`, `center`, `aspectRatio` + React wrappers incl.
+        `HStack`/`VStack`); floating-layer groundwork (`overlay` recipe,
+        `LayerProvider`/`useLayer`, `useMediaQuery`, `useScrollLock`); jsdom +
+        testing-library test project for `packages/react`.
+        Plan: `docs/superpowers/plans/2026-07-05-component-breadth-phase-0-1.md`.
+  - [ ] **Phase 1 — feedback, content atoms, containers** — shipped: Spinner,
+        Skeleton, ProgressBar, Banner, StatusDot, EmptyState, Kbd, Heading, Text,
+        Avatar/AvatarGroup, Badge + Card/ClickableCard wrappers, Carousel,
+        Thumbnail, Timestamp; registry icons wired into Alert, Select, Dialog,
+        CodeBlock. Remaining before closing the phase: visual QA pass across all
+        8 themes in the example app.
+  - [ ] Phase 2 — actions, menus, and form expansion
+  - [ ] Phase 3 — overlays and command surfaces
+  - [ ] Phase 4 — lists, tables, and data display
+  - [ ] Phase 5 — navigation and app chrome
+  - [ ] Phase 6 — layout polish and collapsible regions
+  - [ ] Phase 7 — chat
 
 ## Future (unscheduled)
 

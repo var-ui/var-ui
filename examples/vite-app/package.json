@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@var-ui/core": "workspace:*",
+    "@var-ui/icons": "workspace:*",
     "@var-ui/react": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:"

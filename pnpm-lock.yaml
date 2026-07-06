@@ -70,6 +70,9 @@ importers:
       '@var-ui/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@var-ui/icons':
+        specifier: workspace:*
+        version: link:../../packages/icons
       '@var-ui/react':
         specifier: workspace:*
         version: link:../../packages/react
