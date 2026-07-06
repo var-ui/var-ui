@@ -10,6 +10,7 @@ import {
   type SelectProps as RACSelectProps,
 } from 'react-aria-components';
 import { select } from '@var-ui/core';
+import { Icon } from '../icons';
 
 export type SelectOption = {
   id: string;
@@ -34,6 +35,9 @@ export function Select({
       {label ? <Label className={s.label}>{label}</Label> : null}
       <AriaButton className={s.trigger}>
         <SelectValue>{({ defaultChildren }) => defaultChildren ?? placeholder}</SelectValue>
+        <span className={s.triggerIcon}>
+          <Icon name="chevronDown" size="sm" />
+        </span>
       </AriaButton>
       <Popover className={s.popover}>
         <ListBox>
