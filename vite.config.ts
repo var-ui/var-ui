@@ -46,6 +46,6 @@ export default defineConfig({
     cache: true,
   },
   test: {
-    projects: ['packages/core'],
+    projects: ['packages/core', 'packages/react', 'packages/icons'],
   },
 });

@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { useMemo, useState } from 'react';
 import { codeBlock } from '@var-ui/core';
+import { Icon } from '../icons';
 import { cx } from './utils';
 
 type CodeBlockVariant = 'default' | 'inline' | 'diff' | 'terminal';
@@ -116,6 +117,7 @@ export function CodeBlock({
               onClick={onCopy}
               aria-label={isCopied ? copiedLabel : copyLabel}
             >
+              <Icon name={isCopied ? 'check' : 'copy'} size="sm" />
               {isCopied ? 'Copied' : hasError ? 'Error' : 'Copy'}
             </button>
             <span className={feedbackClassName} role="status" aria-live="polite">

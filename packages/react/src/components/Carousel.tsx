@@ -1,0 +1,62 @@
+import type { JSX, ReactNode } from 'react';
+import { Children, useRef } from 'react';
+import { Button as AriaButton } from 'react-aria-components';
+import { carousel } from '@var-ui/core';
+import { Icon } from '../icons';
+import { cx } from './utils';
+
+export type CarouselProps = {
+  children: ReactNode;
+  /** Accessible name for the carousel region. */
+  label: string;
+  /** CSS length for each snap item (default 280px). */
+  itemWidth?: string;
+  className?: string;
+};
+
+/**
+ * Scroll-snap carousel with prev/next nudge buttons. CSS-first: no index
+ * state, no autoplay — the viewport is natively scrollable and focusable.
+ *
+ * ```tsx
+ * <Carousel label="Featured">{cards}</Carousel>
+ * ```
+ */
+export function Carousel({ children, label, itemWidth, className }: CarouselProps): JSX.Element {
+  const s = carousel();
+  const viewportRef = useRef<HTMLDivElement>(null);
+
+  const nudge = (direction: 1 | -1) => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const item = viewport.querySelector('[data-carousel-item]');
+    const step = item instanceof HTMLElement ? item.offsetWidth : viewport.clientWidth;
+    viewport.scrollBy({ left: direction * step, behavior: 'smooth' });
+  };
+
+  return (
+    <section className={cx(s.root, className)} role="region" aria-label={label}>
+      <div
+        ref={viewportRef}
+        className={s.viewport}
+        data-carousel-viewport
+        tabIndex={0}
+        style={itemWidth ? { gridAutoColumns: itemWidth } : undefined}
+      >
+        {Children.map(children, (child) => (
+          <div className={s.item} data-carousel-item>
+            {child}
+          </div>
+        ))}
+      </div>
+      <div className={s.controls}>
+        <AriaButton className={s.control} aria-label="Previous" onPress={() => nudge(-1)}>
+          <Icon name="chevronLeft" size="sm" />
+        </AriaButton>
+        <AriaButton className={s.control} aria-label="Next" onPress={() => nudge(1)}>
+          <Icon name="chevronRight" size="sm" />
+        </AriaButton>
+      </div>
+    </section>
+  );
+}
