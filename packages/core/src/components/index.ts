@@ -9,6 +9,7 @@ export { avatar, avatarGroup } from './avatar';
 export { badge } from './badge';
 export { banner } from './banner';
 export { card } from './card';
+export { carousel } from './carousel';
 export { namedContainerQuery } from './namedContainerQuery';
 export { steps } from './steps';
 export { fileTree } from './fileTree';

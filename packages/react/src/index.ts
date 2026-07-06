@@ -49,6 +49,8 @@ export {
   ClickableCard,
   type CardProps,
   type ClickableCardProps,
+  Carousel,
+  type CarouselProps,
   Heading,
   type HeadingProps,
   Text,
