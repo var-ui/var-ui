@@ -1,3 +1,5 @@
+'use client';
+
 import { codeHljsScope } from '@var-ui/core';
 import { defaultIcons } from '@var-ui/icons';
 import { DesignSystemProvider, IconProvider, LayerProvider } from '@var-ui/react';
