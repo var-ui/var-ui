@@ -28,8 +28,8 @@ catalogs:
       specifier: ^6.0.0
       version: 6.0.3
     typestyles:
-      specifier: ^0.8.0
-      version: 0.8.0
+      specifier: ^0.8.1
+      version: 0.8.1
     vite-plus:
       specifier: 0.2.2
       version: 0.2.2
@@ -100,7 +100,7 @@ importers:
     dependencies:
       typestyles:
         specifier: 'catalog:'
-        version: 0.8.0
+        version: 0.8.1
     devDependencies:
       '@typestyles/cli':
         specifier: ^0.2.0
@@ -137,7 +137,7 @@ importers:
     dependencies:
       typestyles:
         specifier: 'catalog:'
-        version: 0.8.0
+        version: 0.8.1
     devDependencies:
       '@testing-library/react':
         specifier: ^16.1.0
@@ -2250,8 +2250,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typestyles@0.8.0:
-    resolution: {integrity: sha512-yGgfKMr4tAkqsckECN9SPDfUslP3IB0OsUDm0+tWjHjg6w+gsiRoN2dnkb9MGzXrQeNNRHwIeU+OSt4z3oJacQ==}
+  typestyles@0.8.1:
+    resolution: {integrity: sha512-zoaI+foniR/+ZGtE+cPO0xvt7j+ynkY80rtN2fPOcc2x2upLGtAAs3ifrRmkGpPPNi8jloT7uCJm0EhMW7C8HQ==}
 
   undici-types@7.18.2:
     resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
@@ -4446,7 +4446,7 @@ snapshots:
 
   typescript@6.0.3: {}
 
-  typestyles@0.8.0:
+  typestyles@0.8.1:
     dependencies:
       csstype: 3.2.3
 
