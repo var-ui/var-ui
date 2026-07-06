@@ -36,5 +36,6 @@ export { radio } from './radio';
 export { select } from './select';
 export { switchStyles } from './switch';
 export { tabs } from './tabs';
+export { thumbnail } from './thumbnail';
 export { textAreaField } from './textAreaField';
 export { textField } from './textField';

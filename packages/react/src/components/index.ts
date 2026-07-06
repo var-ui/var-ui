@@ -28,6 +28,8 @@ export { Badge, type BadgeProps } from './Badge';
 export { Banner, type BannerProps, type BannerTone } from './Banner';
 export { Card, ClickableCard, type CardProps, type ClickableCardProps } from './Card';
 export { Carousel, type CarouselProps } from './Carousel';
+export { Thumbnail, type ThumbnailProps } from './Thumbnail';
+export { Timestamp, type TimestampProps } from './Timestamp';
 export { EmptyState, type EmptyStateProps } from './EmptyState';
 export { ProgressBar, type ProgressBarProps } from './ProgressBar';
 export { Spinner, type SpinnerProps } from './Spinner';
