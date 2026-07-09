@@ -4,14 +4,23 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "jsx": "react-jsx",
     "strict": true,
     "skipLibCheck": true,
     "noEmit": true,
     "isolatedModules": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "content-collections": ["./.content-collections/generated"]
     }
   },
-  "include": ["src", "vocs.config.ts", "vite.config.ts"]
+  "include": [
+    "src",
+    "content-collections.ts",
+    "vite.config.ts",
+    "typestyles-entry.ts",
+    ".content-collections/generated",
+    "scripts"
+  ]
 }

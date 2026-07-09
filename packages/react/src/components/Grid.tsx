@@ -3,8 +3,9 @@ import { grid } from '@var-ui/core';
 import { cx } from './utils';
 
 export type GridProps = HTMLAttributes<HTMLDivElement> & {
-  /** 'auto' packs minmax(240px, 1fr) tracks; numbers give fixed equal tracks. */
+  /** `auto` packs minmax(240px, 1fr) tracks; numbers give fixed equal tracks. @default auto */
   columns?: 'auto' | 1 | 2 | 3 | 4;
+  /** Gap between grid items. @default md */
   gap?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 };
 

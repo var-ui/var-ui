@@ -3,10 +3,13 @@ import { textBlock } from '@var-ui/core';
 import { cx } from './utils';
 
 export type TimestampProps = {
+  /** Date value to format. Accepts a `Date`, ISO string, or epoch milliseconds. */
   date: Date | string | number;
-  /** relative ("5 minutes ago"), date, time, or datetime. */
+  /** Output format: relative ("5 minutes ago"), date, time, or datetime. @default relative */
   format?: 'relative' | 'date' | 'time' | 'datetime';
+  /** BCP 47 locale for formatting. Uses the runtime default when omitted. */
   locale?: string;
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 

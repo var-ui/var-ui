@@ -15,6 +15,7 @@ type TabDefinition = {
 };
 
 export type TabsProps = Omit<RACTabsProps, 'children'> & {
+  /** Tab definitions with id, label, and panel content. */
   tabs: TabDefinition[];
 };
 

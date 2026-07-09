@@ -10,7 +10,7 @@ describe('field recipe', () => {
     field();
     const css = getRegisteredCss();
     for (const slot of ['root', 'label', 'description', 'error']) {
-      expect(css).toContain(`example-ds-field-${slot}`);
+      expect(css).toContain(`var-ui-field-${slot}`);
     }
   });
 
@@ -18,7 +18,7 @@ describe('field recipe', () => {
     textField();
     const css = getRegisteredCss();
     for (const slot of ['root', 'label', 'input', 'description', 'error']) {
-      expect(css).toContain(`example-ds-text-field-${slot}`);
+      expect(css).toContain(`var-ui-text-field-${slot}`);
     }
   });
 
@@ -27,10 +27,10 @@ describe('field recipe', () => {
     select();
     const css = getRegisteredCss();
     for (const slot of ['root', 'label', 'input', 'description', 'error']) {
-      expect(css).toContain(`example-ds-text-area-field-${slot}`);
+      expect(css).toContain(`var-ui-text-area-field-${slot}`);
     }
     for (const slot of ['root', 'label', 'trigger', 'popover', 'item']) {
-      expect(css).toContain(`example-ds-select-${slot}`);
+      expect(css).toContain(`var-ui-select-${slot}`);
     }
   });
 });

@@ -14,16 +14,23 @@ const toneIcon: Record<BannerTone, IconName> = {
 };
 
 export type BannerProps = {
+  /** Semantic tone that drives color and the default icon. @default info */
   tone?: BannerTone;
+  /** Surface treatment. @default subtle */
   appearance?: 'subtle' | 'solid';
+  /** Optional bold headline shown before the body text. */
   title?: string;
   /** Override the default tone glyph; pass null to hide the icon slot. */
   icon?: ReactNode | null;
   /** Inline action elements (links, small buttons). */
   actions?: ReactNode;
+  /** When provided, renders a dismiss button that calls this handler on press. */
   onDismiss?: () => void;
+  /** Accessible label for the dismiss button. @default Dismiss */
   dismissLabel?: string;
+  /** Announcement body text. */
   children: ReactNode;
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 

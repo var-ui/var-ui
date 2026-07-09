@@ -5,9 +5,13 @@ import { cx } from './utils';
 export type EmptyStateProps = {
   /** Decorative glyph or illustration; consumers pass `<Icon>` or a custom node. */
   icon?: ReactNode;
+  /** Primary headline. */
   title: string;
+  /** Supporting copy below the title. */
   description?: ReactNode;
+  /** Call-to-action slot (typically a button or link). */
   action?: ReactNode;
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 

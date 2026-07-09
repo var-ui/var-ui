@@ -6,11 +6,13 @@ import { Icon } from '../icons';
 import { cx } from './utils';
 
 export type CarouselProps = {
+  /** Slides to render inside the scroll viewport. */
   children: ReactNode;
   /** Accessible name for the carousel region. */
   label: string;
-  /** CSS length for each snap item (default 280px). */
+  /** CSS length for each snap item. @default 280px */
   itemWidth?: string;
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 

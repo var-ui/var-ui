@@ -3,12 +3,17 @@ import { field } from '@var-ui/core';
 import { cx } from './utils';
 
 export type FieldProps = {
+  /** Visible label rendered above the control. */
   label?: string;
+  /** Helper text shown below the control when there is no error. */
   description?: string;
+  /** Validation message; when set, the field is shown in an error state. */
   errorMessage?: string;
   /** id of the wrapped control, wired to the label's `htmlFor`. */
   htmlFor?: string;
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
+  /** The input or custom control to wrap with field chrome. */
   children: ReactNode;
 };
 

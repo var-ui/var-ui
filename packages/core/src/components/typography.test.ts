@@ -7,20 +7,20 @@ describe('typography recipes', () => {
   it('heading registers size variants including display', () => {
     heading({ size: 'display' });
     const css = getRegisteredCss();
-    expect(css).toContain('example-ds-heading-base');
-    expect(css).toContain('example-ds-heading-size-display');
+    expect(css).toContain('var-ui-heading-base');
+    expect(css).toContain('var-ui-heading-size-display');
   });
 
   it('textBlock registers size, tone, and weight axes', () => {
     textBlock({ size: 'sm', tone: 'secondary', weight: 'medium' });
     const css = getRegisteredCss();
-    expect(css).toContain('example-ds-text-block-size-sm');
-    expect(css).toContain('example-ds-text-block-tone-secondary');
-    expect(css).toContain('example-ds-text-block-weight-medium');
+    expect(css).toContain('var-ui-text-block-size-sm');
+    expect(css).toContain('var-ui-text-block-tone-secondary');
+    expect(css).toContain('var-ui-text-block-weight-medium');
   });
 
   it('kbd registers a key-cap base class', () => {
     kbd();
-    expect(getRegisteredCss()).toContain('example-ds-kbd-base');
+    expect(getRegisteredCss()).toContain('var-ui-kbd-base');
   });
 });

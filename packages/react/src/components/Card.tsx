@@ -25,7 +25,9 @@ export function Card({ title, className, children, ...props }: CardProps): JSX.E
 }
 
 export type ClickableCardProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+  /** Card headline. */
   title: string;
+  /** Supporting copy below the title. */
   description?: string;
   /** Trailing hint line (e.g. reading time, "Learn more →"). */
   hint?: string;

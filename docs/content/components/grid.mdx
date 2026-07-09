@@ -1,0 +1,32 @@
+---
+title: Grid
+description: CSS grid layout primitive.
+---
+
+import { Demo } from '../../src/components/Demo';
+import { GridDemo } from '../../src/demos/GridDemo';
+
+# Grid
+
+CSS grid layout primitive.
+
+## Examples
+
+### Default
+
+<Demo code={`import { Card, Grid } from '@var-ui/react';
+
+<Grid columns={2} gap="md">
+  <Card title="Static card">Plain content surface.</Card>
+  <Card title="Another card">Second grid cell.</Card>
+</Grid>`}>
+  <GridDemo />
+</Demo>
+
+## Props
+
+<PropsTable slug="grid" />
+
+## Accessibility
+
+Built on React Aria Components where applicable.

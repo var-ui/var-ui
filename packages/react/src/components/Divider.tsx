@@ -3,6 +3,7 @@ import { divider } from '@var-ui/core';
 import { cx } from './utils';
 
 export type DividerProps = HTMLAttributes<HTMLHRElement> & {
+  /** Layout direction of the separator line. @default horizontal */
   orientation?: 'horizontal' | 'vertical';
 };
 

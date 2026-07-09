@@ -4,9 +4,9 @@ import { heading, textBlock } from '@var-ui/core';
 import { cx } from './utils';
 
 export type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {
-  /** Semantic heading level (document outline). Defaults to 2. */
+  /** Semantic heading level (document outline). @default 2 */
   level?: 1 | 2 | 3 | 4 | 5 | 6;
-  /** Visual size, independent of level. */
+  /** Visual size, independent of level. @default md */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'display';
 };
 
@@ -27,9 +27,13 @@ export function Heading({
 }
 
 export type TextProps = HTMLAttributes<HTMLElement> & {
+  /** HTML element to render. @default p */
   as?: 'p' | 'span' | 'div';
+  /** Typographic size. @default md */
   size?: 'sm' | 'md' | 'lg';
+  /** Foreground color emphasis. @default primary */
   tone?: 'primary' | 'secondary';
+  /** Font weight. @default normal */
   weight?: 'normal' | 'medium' | 'semibold';
 };
 

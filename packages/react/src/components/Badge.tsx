@@ -3,6 +3,7 @@ import { badge } from '@var-ui/core';
 import { cx } from './utils';
 
 export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
+  /** Semantic color treatment. @default neutral */
   tone?: 'neutral' | 'accent' | 'success' | 'warning' | 'danger' | 'tip';
 };
 

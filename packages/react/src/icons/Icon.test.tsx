@@ -53,8 +53,6 @@ describe('Icon', () => {
         <Icon name="close" size="lg" />
       </IconProvider>,
     );
-    expect((container.firstElementChild as HTMLElement).className).toContain(
-      'example-ds-icon-size-lg',
-    );
+    expect((container.firstElementChild as HTMLElement).className).toContain('var-ui-icon-size-lg');
   });
 });

@@ -10,7 +10,7 @@ describe('Typography', () => {
       </Heading>,
     );
     const h = screen.getByRole('heading', { level: 3, name: 'Title' });
-    expect(h.className).toContain('example-ds-heading-size-lg');
+    expect(h.className).toContain('var-ui-heading-size-lg');
   });
 
   it('Text renders the requested element with tone class', () => {
@@ -21,6 +21,6 @@ describe('Typography', () => {
     );
     const el = screen.getByText('hint');
     expect(el.tagName).toBe('SPAN');
-    expect(el.className).toContain('example-ds-text-block-tone-secondary');
+    expect(el.className).toContain('var-ui-text-block-tone-secondary');
   });
 });

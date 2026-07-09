@@ -92,7 +92,9 @@ export {
 export {
   DesignSystemProvider,
   useDesignSystemTheme,
+  getThemeInitScript,
   type DesignSystemProviderProps,
+  type GetThemeInitScriptOptions,
 } from './theme';
 export { layout, text } from './styles';
 export {

@@ -513,7 +513,7 @@ ${description}
 
 ## Props
 
-See TypeScript types in \`@var-ui/react\` for the full props surface.
+<PropsTable slug="${slug}" />
 
 ## Accessibility
 

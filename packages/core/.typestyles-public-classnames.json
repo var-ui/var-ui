@@ -1,296 +1,296 @@
 {
   "version": 1,
   "classNames": [
-    "example-ds-alert-action",
-    "example-ds-alert-actionLink",
-    "example-ds-alert-body",
-    "example-ds-alert-content",
-    "example-ds-alert-content-contentGap-flush",
-    "example-ds-alert-content-contentGap-spaced",
-    "example-ds-alert-icon",
-    "example-ds-alert-root",
-    "example-ds-alert-root-appearance-solid",
-    "example-ds-alert-root-appearance-subtle",
-    "example-ds-alert-root-tone-danger",
-    "example-ds-alert-root-tone-info",
-    "example-ds-alert-root-tone-success",
-    "example-ds-alert-root-tone-tip",
-    "example-ds-alert-root-tone-warning",
-    "example-ds-alert-title",
-    "example-ds-alert-title-appearance-solid",
-    "example-ds-aspect-ratio-base",
-    "example-ds-avatar-group-item",
-    "example-ds-avatar-group-overflow",
-    "example-ds-avatar-group-root",
-    "example-ds-avatar-image",
-    "example-ds-avatar-initials",
-    "example-ds-avatar-root",
-    "example-ds-avatar-root-size-lg",
-    "example-ds-avatar-root-size-md",
-    "example-ds-avatar-root-size-sm",
-    "example-ds-avatar-root-size-xl",
-    "example-ds-avatar-root-size-xs",
-    "example-ds-avatar-status",
-    "example-ds-badge-base",
-    "example-ds-badge-tone-accent",
-    "example-ds-badge-tone-danger",
-    "example-ds-badge-tone-neutral",
-    "example-ds-badge-tone-success",
-    "example-ds-badge-tone-tip",
-    "example-ds-badge-tone-warning",
-    "example-ds-banner-actions",
-    "example-ds-banner-content",
-    "example-ds-banner-dismiss",
-    "example-ds-banner-icon",
-    "example-ds-banner-icon-appearance-solid",
-    "example-ds-banner-root",
-    "example-ds-banner-root-appearance-solid",
-    "example-ds-banner-root-appearance-subtle",
-    "example-ds-banner-root-tone-danger",
-    "example-ds-banner-root-tone-info",
-    "example-ds-banner-root-tone-success",
-    "example-ds-banner-root-tone-warning",
-    "example-ds-banner-title",
-    "example-ds-banner-title-appearance-solid",
-    "example-ds-button-base",
-    "example-ds-button-intent-ghost",
-    "example-ds-button-intent-primary",
-    "example-ds-button-intent-secondary",
-    "example-ds-card-body",
-    "example-ds-card-grid",
-    "example-ds-card-linkDescription",
-    "example-ds-card-linkHint",
-    "example-ds-card-linkRoot",
-    "example-ds-card-linkTitle",
-    "example-ds-card-root",
-    "example-ds-card-title",
-    "example-ds-carousel-control",
-    "example-ds-carousel-controls",
-    "example-ds-carousel-item",
-    "example-ds-carousel-root",
-    "example-ds-carousel-viewport",
-    "example-ds-center-base",
-    "example-ds-checkbox-box",
-    "example-ds-checkbox-label",
-    "example-ds-checkbox-root",
-    "example-ds-code-block-actions",
-    "example-ds-code-block-body",
-    "example-ds-code-block-bodyScrollable",
-    "example-ds-code-block-bodyTerminal",
-    "example-ds-code-block-code",
-    "example-ds-code-block-copyButton",
-    "example-ds-code-block-copyButtonCopied",
-    "example-ds-code-block-copyButtonError",
-    "example-ds-code-block-copyButtonIdle",
-    "example-ds-code-block-feedback",
-    "example-ds-code-block-feedbackError",
-    "example-ds-code-block-feedbackInline",
-    "example-ds-code-block-feedbackSuccess",
-    "example-ds-code-block-feedbackToast",
-    "example-ds-code-block-filename",
-    "example-ds-code-block-header",
-    "example-ds-code-block-headerTerminal",
-    "example-ds-code-block-language",
-    "example-ds-code-block-languageTerminal",
-    "example-ds-code-block-line",
-    "example-ds-code-block-lineAdded",
-    "example-ds-code-block-lineContent",
-    "example-ds-code-block-lineDeleted",
-    "example-ds-code-block-lineHighlighted",
-    "example-ds-code-block-lineNumber",
-    "example-ds-code-block-lines",
-    "example-ds-code-block-pre",
-    "example-ds-code-block-preScrollX",
-    "example-ds-code-block-preTerminal",
-    "example-ds-code-block-preWrap",
-    "example-ds-code-block-root",
-    "example-ds-code-block-rootDefault",
-    "example-ds-code-block-rootDiff",
-    "example-ds-code-block-rootInline",
-    "example-ds-code-block-rootTerminal",
-    "example-ds-code-block-title",
-    "example-ds-command-palette-backdrop",
-    "example-ds-command-palette-dialog",
-    "example-ds-command-palette-dialog-open-true",
-    "example-ds-command-palette-empty",
-    "example-ds-command-palette-input",
-    "example-ds-command-palette-inputIcon",
-    "example-ds-command-palette-inputRow",
-    "example-ds-command-palette-mark",
-    "example-ds-command-palette-result",
-    "example-ds-command-palette-resultLink",
-    "example-ds-command-palette-resultLinkActive",
-    "example-ds-command-palette-resultMeta",
-    "example-ds-command-palette-results",
-    "example-ds-command-palette-resultTitle",
-    "example-ds-command-palette-root",
-    "example-ds-command-palette-root-open-true",
-    "example-ds-dialog-closeButton",
-    "example-ds-dialog-content",
-    "example-ds-dialog-description",
-    "example-ds-dialog-header",
-    "example-ds-dialog-heading",
-    "example-ds-dialog-modal",
-    "example-ds-dialog-overlay",
-    "example-ds-divider-base",
-    "example-ds-divider-orientation-horizontal",
-    "example-ds-divider-orientation-vertical",
-    "example-ds-docs-prose-headingAnchor",
-    "example-ds-docs-prose-root",
-    "example-ds-docs-prose-tableWrap",
-    "example-ds-ds-hljs-root",
-    "example-ds-ds-layout-row",
-    "example-ds-ds-layout-section",
-    "example-ds-ds-layout-stack",
-    "example-ds-ds-named-cq-body",
-    "example-ds-ds-named-cq-root",
-    "example-ds-ds-text-caption",
-    "example-ds-ds-text-label",
-    "example-ds-ds-text-sectionTitle",
-    "example-ds-ds-text-subtitle",
-    "example-ds-ds-text-title",
-    "example-ds-empty-state-action",
-    "example-ds-empty-state-description",
-    "example-ds-empty-state-icon",
-    "example-ds-empty-state-root",
-    "example-ds-empty-state-title",
-    "example-ds-field-description",
-    "example-ds-field-error",
-    "example-ds-field-label",
-    "example-ds-field-root",
-    "example-ds-fileTree-file",
-    "example-ds-fileTree-folder",
-    "example-ds-fileTree-item",
-    "example-ds-fileTree-list",
-    "example-ds-fileTree-listNested",
-    "example-ds-fileTree-root",
-    "example-ds-fileTree-row",
-    "example-ds-grid-base",
-    "example-ds-grid-columns-auto",
-    "example-ds-grid-columns-four",
-    "example-ds-grid-columns-one",
-    "example-ds-grid-columns-three",
-    "example-ds-grid-columns-two",
-    "example-ds-grid-gap-lg",
-    "example-ds-grid-gap-md",
-    "example-ds-grid-gap-none",
-    "example-ds-grid-gap-sm",
-    "example-ds-grid-gap-xl",
-    "example-ds-grid-gap-xs",
-    "example-ds-heading-base",
-    "example-ds-heading-size-display",
-    "example-ds-heading-size-lg",
-    "example-ds-heading-size-md",
-    "example-ds-heading-size-sm",
-    "example-ds-heading-size-xl",
-    "example-ds-heading-size-xs",
-    "example-ds-icon-base",
-    "example-ds-icon-size-inherit",
-    "example-ds-icon-size-lg",
-    "example-ds-icon-size-md",
-    "example-ds-icon-size-sm",
-    "example-ds-link",
-    "example-ds-overlay-backdrop",
-    "example-ds-overlay-positioner",
-    "example-ds-progress-bar-fill",
-    "example-ds-progress-bar-fill-indeterminate-true",
-    "example-ds-progress-bar-header",
-    "example-ds-progress-bar-label",
-    "example-ds-progress-bar-root",
-    "example-ds-progress-bar-root-tone-danger",
-    "example-ds-progress-bar-root-tone-success",
-    "example-ds-progress-bar-root-tone-warning",
-    "example-ds-progress-bar-track",
-    "example-ds-progress-bar-valueText",
-    "example-ds-radio-control",
-    "example-ds-radio-group",
-    "example-ds-radio-groupLabel",
-    "example-ds-radio-item",
-    "example-ds-radio-label",
-    "example-ds-section-root",
-    "example-ds-section-title",
-    "example-ds-select-item",
-    "example-ds-select-label",
-    "example-ds-select-popover",
-    "example-ds-select-root",
-    "example-ds-select-trigger",
-    "example-ds-select-triggerIcon",
-    "example-ds-skeleton-base",
-    "example-ds-skeleton-shape-circle",
-    "example-ds-skeleton-shape-rect",
-    "example-ds-skeleton-shape-text",
-    "example-ds-spinner-base",
-    "example-ds-spinner-size-lg",
-    "example-ds-spinner-size-md",
-    "example-ds-spinner-size-sm",
-    "example-ds-spinner-tone-accent",
-    "example-ds-spinner-tone-neutral",
-    "example-ds-stack-align-center",
-    "example-ds-stack-align-end",
-    "example-ds-stack-align-start",
-    "example-ds-stack-align-stretch",
-    "example-ds-stack-base",
-    "example-ds-stack-direction-column",
-    "example-ds-stack-direction-row",
-    "example-ds-stack-gap-lg",
-    "example-ds-stack-gap-md",
-    "example-ds-stack-gap-none",
-    "example-ds-stack-gap-sm",
-    "example-ds-stack-gap-xl",
-    "example-ds-stack-gap-xs",
-    "example-ds-stack-justify-between",
-    "example-ds-stack-justify-center",
-    "example-ds-stack-justify-end",
-    "example-ds-stack-justify-start",
-    "example-ds-stack-wrap-nowrap",
-    "example-ds-stack-wrap-wrap",
-    "example-ds-status-dot-base",
-    "example-ds-status-dot-pulse-false",
-    "example-ds-status-dot-pulse-true",
-    "example-ds-status-dot-tone-accent",
-    "example-ds-status-dot-tone-danger",
-    "example-ds-status-dot-tone-info",
-    "example-ds-status-dot-tone-neutral",
-    "example-ds-status-dot-tone-success",
-    "example-ds-status-dot-tone-warning",
-    "example-ds-steps-root",
-    "example-ds-switch-label",
-    "example-ds-switch-root",
-    "example-ds-switch-thumb",
-    "example-ds-switch-track",
-    "example-ds-tabs-list",
-    "example-ds-tabs-panel",
-    "example-ds-tabs-root",
-    "example-ds-tabs-tab",
-    "example-ds-text-area-field-description",
-    "example-ds-text-area-field-error",
-    "example-ds-text-area-field-input",
-    "example-ds-text-area-field-label",
-    "example-ds-text-area-field-root",
-    "example-ds-text-block-base",
-    "example-ds-text-block-size-lg",
-    "example-ds-text-block-size-md",
-    "example-ds-text-block-size-sm",
-    "example-ds-text-block-tone-primary",
-    "example-ds-text-block-tone-secondary",
-    "example-ds-text-block-weight-medium",
-    "example-ds-text-block-weight-normal",
-    "example-ds-text-block-weight-semibold",
-    "example-ds-text-field-description",
-    "example-ds-text-field-error",
-    "example-ds-text-field-input",
-    "example-ds-text-field-label",
-    "example-ds-text-field-root",
-    "example-ds-thumbnail-dismiss",
-    "example-ds-thumbnail-image",
-    "example-ds-thumbnail-root",
-    "example-ds-thumbnail-root-size-lg",
-    "example-ds-thumbnail-root-size-md",
-    "example-ds-thumbnail-root-size-sm"
+    "var-ui-alert-action",
+    "var-ui-alert-actionLink",
+    "var-ui-alert-body",
+    "var-ui-alert-content",
+    "var-ui-alert-content-contentGap-flush",
+    "var-ui-alert-content-contentGap-spaced",
+    "var-ui-alert-icon",
+    "var-ui-alert-root",
+    "var-ui-alert-root-appearance-solid",
+    "var-ui-alert-root-appearance-subtle",
+    "var-ui-alert-root-tone-danger",
+    "var-ui-alert-root-tone-info",
+    "var-ui-alert-root-tone-success",
+    "var-ui-alert-root-tone-tip",
+    "var-ui-alert-root-tone-warning",
+    "var-ui-alert-title",
+    "var-ui-alert-title-appearance-solid",
+    "var-ui-aspect-ratio-base",
+    "var-ui-avatar-group-item",
+    "var-ui-avatar-group-overflow",
+    "var-ui-avatar-group-root",
+    "var-ui-avatar-image",
+    "var-ui-avatar-initials",
+    "var-ui-avatar-root",
+    "var-ui-avatar-root-size-lg",
+    "var-ui-avatar-root-size-md",
+    "var-ui-avatar-root-size-sm",
+    "var-ui-avatar-root-size-xl",
+    "var-ui-avatar-root-size-xs",
+    "var-ui-avatar-status",
+    "var-ui-badge-base",
+    "var-ui-badge-tone-accent",
+    "var-ui-badge-tone-danger",
+    "var-ui-badge-tone-neutral",
+    "var-ui-badge-tone-success",
+    "var-ui-badge-tone-tip",
+    "var-ui-badge-tone-warning",
+    "var-ui-banner-actions",
+    "var-ui-banner-content",
+    "var-ui-banner-dismiss",
+    "var-ui-banner-icon",
+    "var-ui-banner-icon-appearance-solid",
+    "var-ui-banner-root",
+    "var-ui-banner-root-appearance-solid",
+    "var-ui-banner-root-appearance-subtle",
+    "var-ui-banner-root-tone-danger",
+    "var-ui-banner-root-tone-info",
+    "var-ui-banner-root-tone-success",
+    "var-ui-banner-root-tone-warning",
+    "var-ui-banner-title",
+    "var-ui-banner-title-appearance-solid",
+    "var-ui-button-base",
+    "var-ui-button-intent-ghost",
+    "var-ui-button-intent-primary",
+    "var-ui-button-intent-secondary",
+    "var-ui-card-body",
+    "var-ui-card-grid",
+    "var-ui-card-linkDescription",
+    "var-ui-card-linkHint",
+    "var-ui-card-linkRoot",
+    "var-ui-card-linkTitle",
+    "var-ui-card-root",
+    "var-ui-card-title",
+    "var-ui-carousel-control",
+    "var-ui-carousel-controls",
+    "var-ui-carousel-item",
+    "var-ui-carousel-root",
+    "var-ui-carousel-viewport",
+    "var-ui-center-base",
+    "var-ui-checkbox-box",
+    "var-ui-checkbox-label",
+    "var-ui-checkbox-root",
+    "var-ui-code-block-actions",
+    "var-ui-code-block-body",
+    "var-ui-code-block-bodyScrollable",
+    "var-ui-code-block-bodyTerminal",
+    "var-ui-code-block-code",
+    "var-ui-code-block-copyButton",
+    "var-ui-code-block-copyButtonCopied",
+    "var-ui-code-block-copyButtonError",
+    "var-ui-code-block-copyButtonIdle",
+    "var-ui-code-block-feedback",
+    "var-ui-code-block-feedbackError",
+    "var-ui-code-block-feedbackInline",
+    "var-ui-code-block-feedbackSuccess",
+    "var-ui-code-block-feedbackToast",
+    "var-ui-code-block-filename",
+    "var-ui-code-block-header",
+    "var-ui-code-block-headerTerminal",
+    "var-ui-code-block-language",
+    "var-ui-code-block-languageTerminal",
+    "var-ui-code-block-line",
+    "var-ui-code-block-lineAdded",
+    "var-ui-code-block-lineContent",
+    "var-ui-code-block-lineDeleted",
+    "var-ui-code-block-lineHighlighted",
+    "var-ui-code-block-lineNumber",
+    "var-ui-code-block-lines",
+    "var-ui-code-block-pre",
+    "var-ui-code-block-preScrollX",
+    "var-ui-code-block-preTerminal",
+    "var-ui-code-block-preWrap",
+    "var-ui-code-block-root",
+    "var-ui-code-block-rootDefault",
+    "var-ui-code-block-rootDiff",
+    "var-ui-code-block-rootInline",
+    "var-ui-code-block-rootTerminal",
+    "var-ui-code-block-title",
+    "var-ui-command-palette-backdrop",
+    "var-ui-command-palette-dialog",
+    "var-ui-command-palette-dialog-open-true",
+    "var-ui-command-palette-empty",
+    "var-ui-command-palette-input",
+    "var-ui-command-palette-inputIcon",
+    "var-ui-command-palette-inputRow",
+    "var-ui-command-palette-mark",
+    "var-ui-command-palette-result",
+    "var-ui-command-palette-resultLink",
+    "var-ui-command-palette-resultLinkActive",
+    "var-ui-command-palette-resultMeta",
+    "var-ui-command-palette-results",
+    "var-ui-command-palette-resultTitle",
+    "var-ui-command-palette-root",
+    "var-ui-command-palette-root-open-true",
+    "var-ui-dialog-closeButton",
+    "var-ui-dialog-content",
+    "var-ui-dialog-description",
+    "var-ui-dialog-header",
+    "var-ui-dialog-heading",
+    "var-ui-dialog-modal",
+    "var-ui-dialog-overlay",
+    "var-ui-divider-base",
+    "var-ui-divider-orientation-horizontal",
+    "var-ui-divider-orientation-vertical",
+    "var-ui-docs-prose-headingAnchor",
+    "var-ui-docs-prose-root",
+    "var-ui-docs-prose-tableWrap",
+    "var-ui-ds-hljs-root",
+    "var-ui-ds-layout-row",
+    "var-ui-ds-layout-section",
+    "var-ui-ds-layout-stack",
+    "var-ui-ds-named-cq-body",
+    "var-ui-ds-named-cq-root",
+    "var-ui-ds-text-caption",
+    "var-ui-ds-text-label",
+    "var-ui-ds-text-sectionTitle",
+    "var-ui-ds-text-subtitle",
+    "var-ui-ds-text-title",
+    "var-ui-empty-state-action",
+    "var-ui-empty-state-description",
+    "var-ui-empty-state-icon",
+    "var-ui-empty-state-root",
+    "var-ui-empty-state-title",
+    "var-ui-field-description",
+    "var-ui-field-error",
+    "var-ui-field-label",
+    "var-ui-field-root",
+    "var-ui-fileTree-file",
+    "var-ui-fileTree-folder",
+    "var-ui-fileTree-item",
+    "var-ui-fileTree-list",
+    "var-ui-fileTree-listNested",
+    "var-ui-fileTree-root",
+    "var-ui-fileTree-row",
+    "var-ui-grid-base",
+    "var-ui-grid-columns-auto",
+    "var-ui-grid-columns-four",
+    "var-ui-grid-columns-one",
+    "var-ui-grid-columns-three",
+    "var-ui-grid-columns-two",
+    "var-ui-grid-gap-lg",
+    "var-ui-grid-gap-md",
+    "var-ui-grid-gap-none",
+    "var-ui-grid-gap-sm",
+    "var-ui-grid-gap-xl",
+    "var-ui-grid-gap-xs",
+    "var-ui-heading-base",
+    "var-ui-heading-size-display",
+    "var-ui-heading-size-lg",
+    "var-ui-heading-size-md",
+    "var-ui-heading-size-sm",
+    "var-ui-heading-size-xl",
+    "var-ui-heading-size-xs",
+    "var-ui-icon-base",
+    "var-ui-icon-size-inherit",
+    "var-ui-icon-size-lg",
+    "var-ui-icon-size-md",
+    "var-ui-icon-size-sm",
+    "var-ui-link",
+    "var-ui-overlay-backdrop",
+    "var-ui-overlay-positioner",
+    "var-ui-progress-bar-fill",
+    "var-ui-progress-bar-fill-indeterminate-true",
+    "var-ui-progress-bar-header",
+    "var-ui-progress-bar-label",
+    "var-ui-progress-bar-root",
+    "var-ui-progress-bar-root-tone-danger",
+    "var-ui-progress-bar-root-tone-success",
+    "var-ui-progress-bar-root-tone-warning",
+    "var-ui-progress-bar-track",
+    "var-ui-progress-bar-valueText",
+    "var-ui-radio-control",
+    "var-ui-radio-group",
+    "var-ui-radio-groupLabel",
+    "var-ui-radio-item",
+    "var-ui-radio-label",
+    "var-ui-section-root",
+    "var-ui-section-title",
+    "var-ui-select-item",
+    "var-ui-select-label",
+    "var-ui-select-popover",
+    "var-ui-select-root",
+    "var-ui-select-trigger",
+    "var-ui-select-triggerIcon",
+    "var-ui-skeleton-base",
+    "var-ui-skeleton-shape-circle",
+    "var-ui-skeleton-shape-rect",
+    "var-ui-skeleton-shape-text",
+    "var-ui-spinner-base",
+    "var-ui-spinner-size-lg",
+    "var-ui-spinner-size-md",
+    "var-ui-spinner-size-sm",
+    "var-ui-spinner-tone-accent",
+    "var-ui-spinner-tone-neutral",
+    "var-ui-stack-align-center",
+    "var-ui-stack-align-end",
+    "var-ui-stack-align-start",
+    "var-ui-stack-align-stretch",
+    "var-ui-stack-base",
+    "var-ui-stack-direction-column",
+    "var-ui-stack-direction-row",
+    "var-ui-stack-gap-lg",
+    "var-ui-stack-gap-md",
+    "var-ui-stack-gap-none",
+    "var-ui-stack-gap-sm",
+    "var-ui-stack-gap-xl",
+    "var-ui-stack-gap-xs",
+    "var-ui-stack-justify-between",
+    "var-ui-stack-justify-center",
+    "var-ui-stack-justify-end",
+    "var-ui-stack-justify-start",
+    "var-ui-stack-wrap-nowrap",
+    "var-ui-stack-wrap-wrap",
+    "var-ui-status-dot-base",
+    "var-ui-status-dot-pulse-false",
+    "var-ui-status-dot-pulse-true",
+    "var-ui-status-dot-tone-accent",
+    "var-ui-status-dot-tone-danger",
+    "var-ui-status-dot-tone-info",
+    "var-ui-status-dot-tone-neutral",
+    "var-ui-status-dot-tone-success",
+    "var-ui-status-dot-tone-warning",
+    "var-ui-steps-root",
+    "var-ui-switch-label",
+    "var-ui-switch-root",
+    "var-ui-switch-thumb",
+    "var-ui-switch-track",
+    "var-ui-tabs-list",
+    "var-ui-tabs-panel",
+    "var-ui-tabs-root",
+    "var-ui-tabs-tab",
+    "var-ui-text-area-field-description",
+    "var-ui-text-area-field-error",
+    "var-ui-text-area-field-input",
+    "var-ui-text-area-field-label",
+    "var-ui-text-area-field-root",
+    "var-ui-text-block-base",
+    "var-ui-text-block-size-lg",
+    "var-ui-text-block-size-md",
+    "var-ui-text-block-size-sm",
+    "var-ui-text-block-tone-primary",
+    "var-ui-text-block-tone-secondary",
+    "var-ui-text-block-weight-medium",
+    "var-ui-text-block-weight-normal",
+    "var-ui-text-block-weight-semibold",
+    "var-ui-text-field-description",
+    "var-ui-text-field-error",
+    "var-ui-text-field-input",
+    "var-ui-text-field-label",
+    "var-ui-text-field-root",
+    "var-ui-thumbnail-dismiss",
+    "var-ui-thumbnail-image",
+    "var-ui-thumbnail-root",
+    "var-ui-thumbnail-root-size-lg",
+    "var-ui-thumbnail-root-size-md",
+    "var-ui-thumbnail-root-size-sm"
   ],
   "entries": [
     {
-      "className": "example-ds-alert-action",
+      "className": "var-ui-alert-action",
       "kind": "component",
       "namespace": "alert",
       "suffix": "action",
@@ -298,7 +298,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-actionLink",
+      "className": "var-ui-alert-actionLink",
       "kind": "component",
       "namespace": "alert",
       "suffix": "actionLink",
@@ -306,7 +306,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-body",
+      "className": "var-ui-alert-body",
       "kind": "component",
       "namespace": "alert",
       "suffix": "body",
@@ -314,7 +314,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-content",
+      "className": "var-ui-alert-content",
       "kind": "component",
       "namespace": "alert",
       "suffix": "content",
@@ -322,7 +322,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-content-contentGap-flush",
+      "className": "var-ui-alert-content-contentGap-flush",
       "kind": "component",
       "namespace": "alert",
       "suffix": "content-contentGap-flush",
@@ -330,7 +330,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-content-contentGap-spaced",
+      "className": "var-ui-alert-content-contentGap-spaced",
       "kind": "component",
       "namespace": "alert",
       "suffix": "content-contentGap-spaced",
@@ -338,7 +338,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-icon",
+      "className": "var-ui-alert-icon",
       "kind": "component",
       "namespace": "alert",
       "suffix": "icon",
@@ -346,7 +346,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-root",
+      "className": "var-ui-alert-root",
       "kind": "component",
       "namespace": "alert",
       "suffix": "root",
@@ -354,7 +354,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-root-appearance-solid",
+      "className": "var-ui-alert-root-appearance-solid",
       "kind": "component",
       "namespace": "alert",
       "suffix": "root-appearance-solid",
@@ -362,7 +362,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-root-appearance-subtle",
+      "className": "var-ui-alert-root-appearance-subtle",
       "kind": "component",
       "namespace": "alert",
       "suffix": "root-appearance-subtle",
@@ -370,7 +370,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-root-tone-danger",
+      "className": "var-ui-alert-root-tone-danger",
       "kind": "component",
       "namespace": "alert",
       "suffix": "root-tone-danger",
@@ -378,7 +378,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-root-tone-info",
+      "className": "var-ui-alert-root-tone-info",
       "kind": "component",
       "namespace": "alert",
       "suffix": "root-tone-info",
@@ -386,7 +386,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-root-tone-success",
+      "className": "var-ui-alert-root-tone-success",
       "kind": "component",
       "namespace": "alert",
       "suffix": "root-tone-success",
@@ -394,7 +394,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-root-tone-tip",
+      "className": "var-ui-alert-root-tone-tip",
       "kind": "component",
       "namespace": "alert",
       "suffix": "root-tone-tip",
@@ -402,7 +402,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-root-tone-warning",
+      "className": "var-ui-alert-root-tone-warning",
       "kind": "component",
       "namespace": "alert",
       "suffix": "root-tone-warning",
@@ -410,7 +410,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-title",
+      "className": "var-ui-alert-title",
       "kind": "component",
       "namespace": "alert",
       "suffix": "title",
@@ -418,7 +418,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-alert-title-appearance-solid",
+      "className": "var-ui-alert-title-appearance-solid",
       "kind": "component",
       "namespace": "alert",
       "suffix": "title-appearance-solid",
@@ -426,7 +426,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-aspect-ratio-base",
+      "className": "var-ui-aspect-ratio-base",
       "kind": "component",
       "namespace": "aspect-ratio",
       "suffix": "base",
@@ -434,7 +434,7 @@
       "line": 12
     },
     {
-      "className": "example-ds-avatar-group-item",
+      "className": "var-ui-avatar-group-item",
       "kind": "component",
       "namespace": "avatar-group",
       "suffix": "item",
@@ -442,7 +442,7 @@
       "line": 105
     },
     {
-      "className": "example-ds-avatar-group-overflow",
+      "className": "var-ui-avatar-group-overflow",
       "kind": "component",
       "namespace": "avatar-group",
       "suffix": "overflow",
@@ -450,7 +450,7 @@
       "line": 105
     },
     {
-      "className": "example-ds-avatar-group-root",
+      "className": "var-ui-avatar-group-root",
       "kind": "component",
       "namespace": "avatar-group",
       "suffix": "root",
@@ -458,7 +458,7 @@
       "line": 105
     },
     {
-      "className": "example-ds-avatar-image",
+      "className": "var-ui-avatar-image",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "image",
@@ -466,7 +466,7 @@
       "line": 25
     },
     {
-      "className": "example-ds-avatar-initials",
+      "className": "var-ui-avatar-initials",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "initials",
@@ -474,7 +474,7 @@
       "line": 25
     },
     {
-      "className": "example-ds-avatar-root",
+      "className": "var-ui-avatar-root",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "root",
@@ -482,7 +482,7 @@
       "line": 25
     },
     {
-      "className": "example-ds-avatar-root-size-lg",
+      "className": "var-ui-avatar-root-size-lg",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "root-size-lg",
@@ -490,7 +490,7 @@
       "line": 25
     },
     {
-      "className": "example-ds-avatar-root-size-md",
+      "className": "var-ui-avatar-root-size-md",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "root-size-md",
@@ -498,7 +498,7 @@
       "line": 25
     },
     {
-      "className": "example-ds-avatar-root-size-sm",
+      "className": "var-ui-avatar-root-size-sm",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "root-size-sm",
@@ -506,7 +506,7 @@
       "line": 25
     },
     {
-      "className": "example-ds-avatar-root-size-xl",
+      "className": "var-ui-avatar-root-size-xl",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "root-size-xl",
@@ -514,7 +514,7 @@
       "line": 25
     },
     {
-      "className": "example-ds-avatar-root-size-xs",
+      "className": "var-ui-avatar-root-size-xs",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "root-size-xs",
@@ -522,7 +522,7 @@
       "line": 25
     },
     {
-      "className": "example-ds-avatar-status",
+      "className": "var-ui-avatar-status",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "status",
@@ -530,7 +530,7 @@
       "line": 25
     },
     {
-      "className": "example-ds-badge-base",
+      "className": "var-ui-badge-base",
       "kind": "component",
       "namespace": "badge",
       "suffix": "base",
@@ -538,7 +538,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-badge-tone-accent",
+      "className": "var-ui-badge-tone-accent",
       "kind": "component",
       "namespace": "badge",
       "suffix": "tone-accent",
@@ -546,7 +546,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-badge-tone-danger",
+      "className": "var-ui-badge-tone-danger",
       "kind": "component",
       "namespace": "badge",
       "suffix": "tone-danger",
@@ -554,7 +554,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-badge-tone-neutral",
+      "className": "var-ui-badge-tone-neutral",
       "kind": "component",
       "namespace": "badge",
       "suffix": "tone-neutral",
@@ -562,7 +562,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-badge-tone-success",
+      "className": "var-ui-badge-tone-success",
       "kind": "component",
       "namespace": "badge",
       "suffix": "tone-success",
@@ -570,7 +570,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-badge-tone-tip",
+      "className": "var-ui-badge-tone-tip",
       "kind": "component",
       "namespace": "badge",
       "suffix": "tone-tip",
@@ -578,7 +578,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-badge-tone-warning",
+      "className": "var-ui-badge-tone-warning",
       "kind": "component",
       "namespace": "badge",
       "suffix": "tone-warning",
@@ -586,7 +586,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-banner-actions",
+      "className": "var-ui-banner-actions",
       "kind": "component",
       "namespace": "banner",
       "suffix": "actions",
@@ -594,7 +594,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-content",
+      "className": "var-ui-banner-content",
       "kind": "component",
       "namespace": "banner",
       "suffix": "content",
@@ -602,7 +602,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-dismiss",
+      "className": "var-ui-banner-dismiss",
       "kind": "component",
       "namespace": "banner",
       "suffix": "dismiss",
@@ -610,7 +610,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-icon",
+      "className": "var-ui-banner-icon",
       "kind": "component",
       "namespace": "banner",
       "suffix": "icon",
@@ -618,7 +618,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-icon-appearance-solid",
+      "className": "var-ui-banner-icon-appearance-solid",
       "kind": "component",
       "namespace": "banner",
       "suffix": "icon-appearance-solid",
@@ -626,7 +626,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-root",
+      "className": "var-ui-banner-root",
       "kind": "component",
       "namespace": "banner",
       "suffix": "root",
@@ -634,7 +634,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-root-appearance-solid",
+      "className": "var-ui-banner-root-appearance-solid",
       "kind": "component",
       "namespace": "banner",
       "suffix": "root-appearance-solid",
@@ -642,7 +642,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-root-appearance-subtle",
+      "className": "var-ui-banner-root-appearance-subtle",
       "kind": "component",
       "namespace": "banner",
       "suffix": "root-appearance-subtle",
@@ -650,7 +650,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-root-tone-danger",
+      "className": "var-ui-banner-root-tone-danger",
       "kind": "component",
       "namespace": "banner",
       "suffix": "root-tone-danger",
@@ -658,7 +658,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-root-tone-info",
+      "className": "var-ui-banner-root-tone-info",
       "kind": "component",
       "namespace": "banner",
       "suffix": "root-tone-info",
@@ -666,7 +666,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-root-tone-success",
+      "className": "var-ui-banner-root-tone-success",
       "kind": "component",
       "namespace": "banner",
       "suffix": "root-tone-success",
@@ -674,7 +674,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-root-tone-warning",
+      "className": "var-ui-banner-root-tone-warning",
       "kind": "component",
       "namespace": "banner",
       "suffix": "root-tone-warning",
@@ -682,7 +682,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-title",
+      "className": "var-ui-banner-title",
       "kind": "component",
       "namespace": "banner",
       "suffix": "title",
@@ -690,7 +690,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-banner-title-appearance-solid",
+      "className": "var-ui-banner-title-appearance-solid",
       "kind": "component",
       "namespace": "banner",
       "suffix": "title-appearance-solid",
@@ -698,7 +698,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-button-base",
+      "className": "var-ui-button-base",
       "kind": "component",
       "namespace": "button",
       "suffix": "base",
@@ -706,7 +706,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-button-intent-ghost",
+      "className": "var-ui-button-intent-ghost",
       "kind": "component",
       "namespace": "button",
       "suffix": "intent-ghost",
@@ -714,7 +714,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-button-intent-primary",
+      "className": "var-ui-button-intent-primary",
       "kind": "component",
       "namespace": "button",
       "suffix": "intent-primary",
@@ -722,7 +722,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-button-intent-secondary",
+      "className": "var-ui-button-intent-secondary",
       "kind": "component",
       "namespace": "button",
       "suffix": "intent-secondary",
@@ -730,7 +730,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-card-body",
+      "className": "var-ui-card-body",
       "kind": "component",
       "namespace": "card",
       "suffix": "body",
@@ -738,7 +738,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-card-grid",
+      "className": "var-ui-card-grid",
       "kind": "component",
       "namespace": "card",
       "suffix": "grid",
@@ -746,7 +746,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-card-linkDescription",
+      "className": "var-ui-card-linkDescription",
       "kind": "component",
       "namespace": "card",
       "suffix": "linkDescription",
@@ -754,7 +754,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-card-linkHint",
+      "className": "var-ui-card-linkHint",
       "kind": "component",
       "namespace": "card",
       "suffix": "linkHint",
@@ -762,7 +762,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-card-linkRoot",
+      "className": "var-ui-card-linkRoot",
       "kind": "component",
       "namespace": "card",
       "suffix": "linkRoot",
@@ -770,7 +770,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-card-linkTitle",
+      "className": "var-ui-card-linkTitle",
       "kind": "component",
       "namespace": "card",
       "suffix": "linkTitle",
@@ -778,7 +778,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-card-root",
+      "className": "var-ui-card-root",
       "kind": "component",
       "namespace": "card",
       "suffix": "root",
@@ -786,7 +786,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-card-title",
+      "className": "var-ui-card-title",
       "kind": "component",
       "namespace": "card",
       "suffix": "title",
@@ -794,7 +794,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-carousel-control",
+      "className": "var-ui-carousel-control",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "control",
@@ -802,7 +802,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-carousel-controls",
+      "className": "var-ui-carousel-controls",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "controls",
@@ -810,7 +810,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-carousel-item",
+      "className": "var-ui-carousel-item",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "item",
@@ -818,7 +818,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-carousel-root",
+      "className": "var-ui-carousel-root",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "root",
@@ -826,7 +826,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-carousel-viewport",
+      "className": "var-ui-carousel-viewport",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "viewport",
@@ -834,7 +834,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-center-base",
+      "className": "var-ui-center-base",
       "kind": "component",
       "namespace": "center",
       "suffix": "base",
@@ -842,7 +842,7 @@
       "line": 11
     },
     {
-      "className": "example-ds-checkbox-box",
+      "className": "var-ui-checkbox-box",
       "kind": "component",
       "namespace": "checkbox",
       "suffix": "box",
@@ -850,7 +850,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-checkbox-label",
+      "className": "var-ui-checkbox-label",
       "kind": "component",
       "namespace": "checkbox",
       "suffix": "label",
@@ -858,7 +858,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-checkbox-root",
+      "className": "var-ui-checkbox-root",
       "kind": "component",
       "namespace": "checkbox",
       "suffix": "root",
@@ -866,7 +866,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-actions",
+      "className": "var-ui-code-block-actions",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "actions",
@@ -874,7 +874,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-body",
+      "className": "var-ui-code-block-body",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "body",
@@ -882,7 +882,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-bodyScrollable",
+      "className": "var-ui-code-block-bodyScrollable",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "bodyScrollable",
@@ -890,7 +890,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-bodyTerminal",
+      "className": "var-ui-code-block-bodyTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "bodyTerminal",
@@ -898,7 +898,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-code",
+      "className": "var-ui-code-block-code",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "code",
@@ -906,7 +906,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-copyButton",
+      "className": "var-ui-code-block-copyButton",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "copyButton",
@@ -914,7 +914,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-copyButtonCopied",
+      "className": "var-ui-code-block-copyButtonCopied",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "copyButtonCopied",
@@ -922,7 +922,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-copyButtonError",
+      "className": "var-ui-code-block-copyButtonError",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "copyButtonError",
@@ -930,7 +930,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-copyButtonIdle",
+      "className": "var-ui-code-block-copyButtonIdle",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "copyButtonIdle",
@@ -938,7 +938,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-feedback",
+      "className": "var-ui-code-block-feedback",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedback",
@@ -946,7 +946,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-feedbackError",
+      "className": "var-ui-code-block-feedbackError",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedbackError",
@@ -954,7 +954,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-feedbackInline",
+      "className": "var-ui-code-block-feedbackInline",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedbackInline",
@@ -962,7 +962,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-feedbackSuccess",
+      "className": "var-ui-code-block-feedbackSuccess",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedbackSuccess",
@@ -970,7 +970,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-feedbackToast",
+      "className": "var-ui-code-block-feedbackToast",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedbackToast",
@@ -978,7 +978,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-filename",
+      "className": "var-ui-code-block-filename",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "filename",
@@ -986,7 +986,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-header",
+      "className": "var-ui-code-block-header",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "header",
@@ -994,7 +994,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-headerTerminal",
+      "className": "var-ui-code-block-headerTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "headerTerminal",
@@ -1002,7 +1002,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-language",
+      "className": "var-ui-code-block-language",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "language",
@@ -1010,7 +1010,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-languageTerminal",
+      "className": "var-ui-code-block-languageTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "languageTerminal",
@@ -1018,7 +1018,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-line",
+      "className": "var-ui-code-block-line",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "line",
@@ -1026,7 +1026,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-lineAdded",
+      "className": "var-ui-code-block-lineAdded",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineAdded",
@@ -1034,7 +1034,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-lineContent",
+      "className": "var-ui-code-block-lineContent",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineContent",
@@ -1042,7 +1042,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-lineDeleted",
+      "className": "var-ui-code-block-lineDeleted",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineDeleted",
@@ -1050,7 +1050,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-lineHighlighted",
+      "className": "var-ui-code-block-lineHighlighted",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineHighlighted",
@@ -1058,7 +1058,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-lineNumber",
+      "className": "var-ui-code-block-lineNumber",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineNumber",
@@ -1066,7 +1066,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-lines",
+      "className": "var-ui-code-block-lines",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lines",
@@ -1074,7 +1074,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-pre",
+      "className": "var-ui-code-block-pre",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "pre",
@@ -1082,7 +1082,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-preScrollX",
+      "className": "var-ui-code-block-preScrollX",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "preScrollX",
@@ -1090,7 +1090,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-preTerminal",
+      "className": "var-ui-code-block-preTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "preTerminal",
@@ -1098,7 +1098,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-preWrap",
+      "className": "var-ui-code-block-preWrap",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "preWrap",
@@ -1106,7 +1106,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-root",
+      "className": "var-ui-code-block-root",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "root",
@@ -1114,7 +1114,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-rootDefault",
+      "className": "var-ui-code-block-rootDefault",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "rootDefault",
@@ -1122,7 +1122,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-rootDiff",
+      "className": "var-ui-code-block-rootDiff",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "rootDiff",
@@ -1130,7 +1130,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-rootInline",
+      "className": "var-ui-code-block-rootInline",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "rootInline",
@@ -1138,7 +1138,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-rootTerminal",
+      "className": "var-ui-code-block-rootTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "rootTerminal",
@@ -1146,7 +1146,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-code-block-title",
+      "className": "var-ui-code-block-title",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "title",
@@ -1154,7 +1154,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-command-palette-backdrop",
+      "className": "var-ui-command-palette-backdrop",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "backdrop",
@@ -1162,7 +1162,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-dialog",
+      "className": "var-ui-command-palette-dialog",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "dialog",
@@ -1170,7 +1170,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-dialog-open-true",
+      "className": "var-ui-command-palette-dialog-open-true",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "dialog-open-true",
@@ -1178,7 +1178,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-empty",
+      "className": "var-ui-command-palette-empty",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "empty",
@@ -1186,7 +1186,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-input",
+      "className": "var-ui-command-palette-input",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "input",
@@ -1194,7 +1194,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-inputIcon",
+      "className": "var-ui-command-palette-inputIcon",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "inputIcon",
@@ -1202,7 +1202,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-inputRow",
+      "className": "var-ui-command-palette-inputRow",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "inputRow",
@@ -1210,7 +1210,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-mark",
+      "className": "var-ui-command-palette-mark",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "mark",
@@ -1218,7 +1218,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-result",
+      "className": "var-ui-command-palette-result",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "result",
@@ -1226,7 +1226,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-resultLink",
+      "className": "var-ui-command-palette-resultLink",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "resultLink",
@@ -1234,7 +1234,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-resultLinkActive",
+      "className": "var-ui-command-palette-resultLinkActive",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "resultLinkActive",
@@ -1242,7 +1242,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-resultMeta",
+      "className": "var-ui-command-palette-resultMeta",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "resultMeta",
@@ -1250,7 +1250,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-results",
+      "className": "var-ui-command-palette-results",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "results",
@@ -1258,7 +1258,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-resultTitle",
+      "className": "var-ui-command-palette-resultTitle",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "resultTitle",
@@ -1266,7 +1266,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-root",
+      "className": "var-ui-command-palette-root",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "root",
@@ -1274,7 +1274,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-command-palette-root-open-true",
+      "className": "var-ui-command-palette-root-open-true",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "root-open-true",
@@ -1282,7 +1282,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-dialog-closeButton",
+      "className": "var-ui-dialog-closeButton",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "closeButton",
@@ -1290,7 +1290,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-dialog-content",
+      "className": "var-ui-dialog-content",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "content",
@@ -1298,7 +1298,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-dialog-description",
+      "className": "var-ui-dialog-description",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "description",
@@ -1306,7 +1306,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-dialog-header",
+      "className": "var-ui-dialog-header",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "header",
@@ -1314,7 +1314,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-dialog-heading",
+      "className": "var-ui-dialog-heading",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "heading",
@@ -1322,7 +1322,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-dialog-modal",
+      "className": "var-ui-dialog-modal",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "modal",
@@ -1330,7 +1330,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-dialog-overlay",
+      "className": "var-ui-dialog-overlay",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "overlay",
@@ -1338,7 +1338,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-divider-base",
+      "className": "var-ui-divider-base",
       "kind": "component",
       "namespace": "divider",
       "suffix": "base",
@@ -1346,7 +1346,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-divider-orientation-horizontal",
+      "className": "var-ui-divider-orientation-horizontal",
       "kind": "component",
       "namespace": "divider",
       "suffix": "orientation-horizontal",
@@ -1354,7 +1354,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-divider-orientation-vertical",
+      "className": "var-ui-divider-orientation-vertical",
       "kind": "component",
       "namespace": "divider",
       "suffix": "orientation-vertical",
@@ -1362,7 +1362,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-docs-prose-headingAnchor",
+      "className": "var-ui-docs-prose-headingAnchor",
       "kind": "component",
       "namespace": "docs-prose",
       "suffix": "headingAnchor",
@@ -1370,7 +1370,7 @@
       "line": 17
     },
     {
-      "className": "example-ds-docs-prose-root",
+      "className": "var-ui-docs-prose-root",
       "kind": "component",
       "namespace": "docs-prose",
       "suffix": "root",
@@ -1378,7 +1378,7 @@
       "line": 17
     },
     {
-      "className": "example-ds-docs-prose-tableWrap",
+      "className": "var-ui-docs-prose-tableWrap",
       "kind": "component",
       "namespace": "docs-prose",
       "suffix": "tableWrap",
@@ -1386,7 +1386,7 @@
       "line": 17
     },
     {
-      "className": "example-ds-ds-hljs-root",
+      "className": "var-ui-ds-hljs-root",
       "kind": "component",
       "namespace": "ds-hljs",
       "suffix": "root",
@@ -1394,7 +1394,7 @@
       "line": 31
     },
     {
-      "className": "example-ds-ds-layout-row",
+      "className": "var-ui-ds-layout-row",
       "kind": "component",
       "namespace": "ds-layout",
       "suffix": "row",
@@ -1402,7 +1402,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-ds-layout-section",
+      "className": "var-ui-ds-layout-section",
       "kind": "component",
       "namespace": "ds-layout",
       "suffix": "section",
@@ -1410,7 +1410,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-ds-layout-stack",
+      "className": "var-ui-ds-layout-stack",
       "kind": "component",
       "namespace": "ds-layout",
       "suffix": "stack",
@@ -1418,21 +1418,21 @@
       "line": 5
     },
     {
-      "className": "example-ds-ds-named-cq-body",
+      "className": "var-ui-ds-named-cq-body",
       "kind": "class",
       "namespace": "ds-named-cq-body",
       "file": "src/components/namedContainerQuery.ts",
       "line": 28
     },
     {
-      "className": "example-ds-ds-named-cq-root",
+      "className": "var-ui-ds-named-cq-root",
       "kind": "class",
       "namespace": "ds-named-cq-root",
       "file": "src/components/namedContainerQuery.ts",
       "line": 14
     },
     {
-      "className": "example-ds-ds-text-caption",
+      "className": "var-ui-ds-text-caption",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "caption",
@@ -1440,7 +1440,7 @@
       "line": 54
     },
     {
-      "className": "example-ds-ds-text-label",
+      "className": "var-ui-ds-text-label",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "label",
@@ -1448,7 +1448,7 @@
       "line": 54
     },
     {
-      "className": "example-ds-ds-text-sectionTitle",
+      "className": "var-ui-ds-text-sectionTitle",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "sectionTitle",
@@ -1456,7 +1456,7 @@
       "line": 54
     },
     {
-      "className": "example-ds-ds-text-subtitle",
+      "className": "var-ui-ds-text-subtitle",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "subtitle",
@@ -1464,7 +1464,7 @@
       "line": 54
     },
     {
-      "className": "example-ds-ds-text-title",
+      "className": "var-ui-ds-text-title",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "title",
@@ -1472,7 +1472,7 @@
       "line": 54
     },
     {
-      "className": "example-ds-empty-state-action",
+      "className": "var-ui-empty-state-action",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "action",
@@ -1480,7 +1480,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-empty-state-description",
+      "className": "var-ui-empty-state-description",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "description",
@@ -1488,7 +1488,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-empty-state-icon",
+      "className": "var-ui-empty-state-icon",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "icon",
@@ -1496,7 +1496,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-empty-state-root",
+      "className": "var-ui-empty-state-root",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "root",
@@ -1504,7 +1504,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-empty-state-title",
+      "className": "var-ui-empty-state-title",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "title",
@@ -1512,7 +1512,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-field-description",
+      "className": "var-ui-field-description",
       "kind": "component",
       "namespace": "field",
       "suffix": "description",
@@ -1520,7 +1520,7 @@
       "line": 52
     },
     {
-      "className": "example-ds-field-error",
+      "className": "var-ui-field-error",
       "kind": "component",
       "namespace": "field",
       "suffix": "error",
@@ -1528,7 +1528,7 @@
       "line": 52
     },
     {
-      "className": "example-ds-field-label",
+      "className": "var-ui-field-label",
       "kind": "component",
       "namespace": "field",
       "suffix": "label",
@@ -1536,7 +1536,7 @@
       "line": 52
     },
     {
-      "className": "example-ds-field-root",
+      "className": "var-ui-field-root",
       "kind": "component",
       "namespace": "field",
       "suffix": "root",
@@ -1544,7 +1544,7 @@
       "line": 52
     },
     {
-      "className": "example-ds-fileTree-file",
+      "className": "var-ui-fileTree-file",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "file",
@@ -1552,7 +1552,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-fileTree-folder",
+      "className": "var-ui-fileTree-folder",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "folder",
@@ -1560,7 +1560,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-fileTree-item",
+      "className": "var-ui-fileTree-item",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "item",
@@ -1568,7 +1568,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-fileTree-list",
+      "className": "var-ui-fileTree-list",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "list",
@@ -1576,7 +1576,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-fileTree-listNested",
+      "className": "var-ui-fileTree-listNested",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "listNested",
@@ -1584,7 +1584,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-fileTree-root",
+      "className": "var-ui-fileTree-root",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "root",
@@ -1592,7 +1592,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-fileTree-row",
+      "className": "var-ui-fileTree-row",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "row",
@@ -1600,7 +1600,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-grid-base",
+      "className": "var-ui-grid-base",
       "kind": "component",
       "namespace": "grid",
       "suffix": "base",
@@ -1608,7 +1608,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-grid-columns-auto",
+      "className": "var-ui-grid-columns-auto",
       "kind": "component",
       "namespace": "grid",
       "suffix": "columns-auto",
@@ -1616,7 +1616,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-grid-columns-four",
+      "className": "var-ui-grid-columns-four",
       "kind": "component",
       "namespace": "grid",
       "suffix": "columns-four",
@@ -1624,7 +1624,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-grid-columns-one",
+      "className": "var-ui-grid-columns-one",
       "kind": "component",
       "namespace": "grid",
       "suffix": "columns-one",
@@ -1632,7 +1632,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-grid-columns-three",
+      "className": "var-ui-grid-columns-three",
       "kind": "component",
       "namespace": "grid",
       "suffix": "columns-three",
@@ -1640,7 +1640,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-grid-columns-two",
+      "className": "var-ui-grid-columns-two",
       "kind": "component",
       "namespace": "grid",
       "suffix": "columns-two",
@@ -1648,7 +1648,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-grid-gap-lg",
+      "className": "var-ui-grid-gap-lg",
       "kind": "component",
       "namespace": "grid",
       "suffix": "gap-lg",
@@ -1656,7 +1656,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-grid-gap-md",
+      "className": "var-ui-grid-gap-md",
       "kind": "component",
       "namespace": "grid",
       "suffix": "gap-md",
@@ -1664,7 +1664,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-grid-gap-none",
+      "className": "var-ui-grid-gap-none",
       "kind": "component",
       "namespace": "grid",
       "suffix": "gap-none",
@@ -1672,7 +1672,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-grid-gap-sm",
+      "className": "var-ui-grid-gap-sm",
       "kind": "component",
       "namespace": "grid",
       "suffix": "gap-sm",
@@ -1680,7 +1680,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-grid-gap-xl",
+      "className": "var-ui-grid-gap-xl",
       "kind": "component",
       "namespace": "grid",
       "suffix": "gap-xl",
@@ -1688,7 +1688,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-grid-gap-xs",
+      "className": "var-ui-grid-gap-xs",
       "kind": "component",
       "namespace": "grid",
       "suffix": "gap-xs",
@@ -1696,7 +1696,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-heading-base",
+      "className": "var-ui-heading-base",
       "kind": "component",
       "namespace": "heading",
       "suffix": "base",
@@ -1704,7 +1704,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-heading-size-display",
+      "className": "var-ui-heading-size-display",
       "kind": "component",
       "namespace": "heading",
       "suffix": "size-display",
@@ -1712,7 +1712,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-heading-size-lg",
+      "className": "var-ui-heading-size-lg",
       "kind": "component",
       "namespace": "heading",
       "suffix": "size-lg",
@@ -1720,7 +1720,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-heading-size-md",
+      "className": "var-ui-heading-size-md",
       "kind": "component",
       "namespace": "heading",
       "suffix": "size-md",
@@ -1728,7 +1728,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-heading-size-sm",
+      "className": "var-ui-heading-size-sm",
       "kind": "component",
       "namespace": "heading",
       "suffix": "size-sm",
@@ -1736,7 +1736,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-heading-size-xl",
+      "className": "var-ui-heading-size-xl",
       "kind": "component",
       "namespace": "heading",
       "suffix": "size-xl",
@@ -1744,7 +1744,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-heading-size-xs",
+      "className": "var-ui-heading-size-xs",
       "kind": "component",
       "namespace": "heading",
       "suffix": "size-xs",
@@ -1752,7 +1752,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-icon-base",
+      "className": "var-ui-icon-base",
       "kind": "component",
       "namespace": "icon",
       "suffix": "base",
@@ -1760,7 +1760,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-icon-size-inherit",
+      "className": "var-ui-icon-size-inherit",
       "kind": "component",
       "namespace": "icon",
       "suffix": "size-inherit",
@@ -1768,7 +1768,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-icon-size-lg",
+      "className": "var-ui-icon-size-lg",
       "kind": "component",
       "namespace": "icon",
       "suffix": "size-lg",
@@ -1776,7 +1776,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-icon-size-md",
+      "className": "var-ui-icon-size-md",
       "kind": "component",
       "namespace": "icon",
       "suffix": "size-md",
@@ -1784,7 +1784,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-icon-size-sm",
+      "className": "var-ui-icon-size-sm",
       "kind": "component",
       "namespace": "icon",
       "suffix": "size-sm",
@@ -1792,14 +1792,14 @@
       "line": 13
     },
     {
-      "className": "example-ds-link",
+      "className": "var-ui-link",
       "kind": "class",
       "namespace": "link",
       "file": "src/components/link.ts",
       "line": 6
     },
     {
-      "className": "example-ds-overlay-backdrop",
+      "className": "var-ui-overlay-backdrop",
       "kind": "component",
       "namespace": "overlay",
       "suffix": "backdrop",
@@ -1807,7 +1807,7 @@
       "line": 16
     },
     {
-      "className": "example-ds-overlay-positioner",
+      "className": "var-ui-overlay-positioner",
       "kind": "component",
       "namespace": "overlay",
       "suffix": "positioner",
@@ -1815,7 +1815,7 @@
       "line": 16
     },
     {
-      "className": "example-ds-progress-bar-fill",
+      "className": "var-ui-progress-bar-fill",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "fill",
@@ -1823,7 +1823,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-progress-bar-fill-indeterminate-true",
+      "className": "var-ui-progress-bar-fill-indeterminate-true",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "fill-indeterminate-true",
@@ -1831,7 +1831,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-progress-bar-header",
+      "className": "var-ui-progress-bar-header",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "header",
@@ -1839,7 +1839,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-progress-bar-label",
+      "className": "var-ui-progress-bar-label",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "label",
@@ -1847,7 +1847,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-progress-bar-root",
+      "className": "var-ui-progress-bar-root",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "root",
@@ -1855,7 +1855,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-progress-bar-root-tone-danger",
+      "className": "var-ui-progress-bar-root-tone-danger",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "root-tone-danger",
@@ -1863,7 +1863,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-progress-bar-root-tone-success",
+      "className": "var-ui-progress-bar-root-tone-success",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "root-tone-success",
@@ -1871,7 +1871,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-progress-bar-root-tone-warning",
+      "className": "var-ui-progress-bar-root-tone-warning",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "root-tone-warning",
@@ -1879,7 +1879,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-progress-bar-track",
+      "className": "var-ui-progress-bar-track",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "track",
@@ -1887,7 +1887,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-progress-bar-valueText",
+      "className": "var-ui-progress-bar-valueText",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "valueText",
@@ -1895,7 +1895,7 @@
       "line": 15
     },
     {
-      "className": "example-ds-radio-control",
+      "className": "var-ui-radio-control",
       "kind": "component",
       "namespace": "radio",
       "suffix": "control",
@@ -1903,7 +1903,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-radio-group",
+      "className": "var-ui-radio-group",
       "kind": "component",
       "namespace": "radio",
       "suffix": "group",
@@ -1911,7 +1911,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-radio-groupLabel",
+      "className": "var-ui-radio-groupLabel",
       "kind": "component",
       "namespace": "radio",
       "suffix": "groupLabel",
@@ -1919,7 +1919,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-radio-item",
+      "className": "var-ui-radio-item",
       "kind": "component",
       "namespace": "radio",
       "suffix": "item",
@@ -1927,7 +1927,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-radio-label",
+      "className": "var-ui-radio-label",
       "kind": "component",
       "namespace": "radio",
       "suffix": "label",
@@ -1935,7 +1935,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-section-root",
+      "className": "var-ui-section-root",
       "kind": "component",
       "namespace": "section",
       "suffix": "root",
@@ -1943,7 +1943,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-section-title",
+      "className": "var-ui-section-title",
       "kind": "component",
       "namespace": "section",
       "suffix": "title",
@@ -1951,7 +1951,7 @@
       "line": 14
     },
     {
-      "className": "example-ds-select-item",
+      "className": "var-ui-select-item",
       "kind": "component",
       "namespace": "select",
       "suffix": "item",
@@ -1959,7 +1959,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-select-label",
+      "className": "var-ui-select-label",
       "kind": "component",
       "namespace": "select",
       "suffix": "label",
@@ -1967,7 +1967,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-select-popover",
+      "className": "var-ui-select-popover",
       "kind": "component",
       "namespace": "select",
       "suffix": "popover",
@@ -1975,7 +1975,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-select-root",
+      "className": "var-ui-select-root",
       "kind": "component",
       "namespace": "select",
       "suffix": "root",
@@ -1983,7 +1983,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-select-trigger",
+      "className": "var-ui-select-trigger",
       "kind": "component",
       "namespace": "select",
       "suffix": "trigger",
@@ -1991,7 +1991,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-select-triggerIcon",
+      "className": "var-ui-select-triggerIcon",
       "kind": "component",
       "namespace": "select",
       "suffix": "triggerIcon",
@@ -1999,7 +1999,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-skeleton-base",
+      "className": "var-ui-skeleton-base",
       "kind": "component",
       "namespace": "skeleton",
       "suffix": "base",
@@ -2007,7 +2007,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-skeleton-shape-circle",
+      "className": "var-ui-skeleton-shape-circle",
       "kind": "component",
       "namespace": "skeleton",
       "suffix": "shape-circle",
@@ -2015,7 +2015,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-skeleton-shape-rect",
+      "className": "var-ui-skeleton-shape-rect",
       "kind": "component",
       "namespace": "skeleton",
       "suffix": "shape-rect",
@@ -2023,7 +2023,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-skeleton-shape-text",
+      "className": "var-ui-skeleton-shape-text",
       "kind": "component",
       "namespace": "skeleton",
       "suffix": "shape-text",
@@ -2031,7 +2031,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-spinner-base",
+      "className": "var-ui-spinner-base",
       "kind": "component",
       "namespace": "spinner",
       "suffix": "base",
@@ -2039,7 +2039,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-spinner-size-lg",
+      "className": "var-ui-spinner-size-lg",
       "kind": "component",
       "namespace": "spinner",
       "suffix": "size-lg",
@@ -2047,7 +2047,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-spinner-size-md",
+      "className": "var-ui-spinner-size-md",
       "kind": "component",
       "namespace": "spinner",
       "suffix": "size-md",
@@ -2055,7 +2055,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-spinner-size-sm",
+      "className": "var-ui-spinner-size-sm",
       "kind": "component",
       "namespace": "spinner",
       "suffix": "size-sm",
@@ -2063,7 +2063,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-spinner-tone-accent",
+      "className": "var-ui-spinner-tone-accent",
       "kind": "component",
       "namespace": "spinner",
       "suffix": "tone-accent",
@@ -2071,7 +2071,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-spinner-tone-neutral",
+      "className": "var-ui-spinner-tone-neutral",
       "kind": "component",
       "namespace": "spinner",
       "suffix": "tone-neutral",
@@ -2079,7 +2079,7 @@
       "line": 19
     },
     {
-      "className": "example-ds-stack-align-center",
+      "className": "var-ui-stack-align-center",
       "kind": "component",
       "namespace": "stack",
       "suffix": "align-center",
@@ -2087,7 +2087,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-align-end",
+      "className": "var-ui-stack-align-end",
       "kind": "component",
       "namespace": "stack",
       "suffix": "align-end",
@@ -2095,7 +2095,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-align-start",
+      "className": "var-ui-stack-align-start",
       "kind": "component",
       "namespace": "stack",
       "suffix": "align-start",
@@ -2103,7 +2103,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-align-stretch",
+      "className": "var-ui-stack-align-stretch",
       "kind": "component",
       "namespace": "stack",
       "suffix": "align-stretch",
@@ -2111,7 +2111,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-base",
+      "className": "var-ui-stack-base",
       "kind": "component",
       "namespace": "stack",
       "suffix": "base",
@@ -2119,7 +2119,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-direction-column",
+      "className": "var-ui-stack-direction-column",
       "kind": "component",
       "namespace": "stack",
       "suffix": "direction-column",
@@ -2127,7 +2127,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-direction-row",
+      "className": "var-ui-stack-direction-row",
       "kind": "component",
       "namespace": "stack",
       "suffix": "direction-row",
@@ -2135,7 +2135,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-gap-lg",
+      "className": "var-ui-stack-gap-lg",
       "kind": "component",
       "namespace": "stack",
       "suffix": "gap-lg",
@@ -2143,7 +2143,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-gap-md",
+      "className": "var-ui-stack-gap-md",
       "kind": "component",
       "namespace": "stack",
       "suffix": "gap-md",
@@ -2151,7 +2151,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-gap-none",
+      "className": "var-ui-stack-gap-none",
       "kind": "component",
       "namespace": "stack",
       "suffix": "gap-none",
@@ -2159,7 +2159,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-gap-sm",
+      "className": "var-ui-stack-gap-sm",
       "kind": "component",
       "namespace": "stack",
       "suffix": "gap-sm",
@@ -2167,7 +2167,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-gap-xl",
+      "className": "var-ui-stack-gap-xl",
       "kind": "component",
       "namespace": "stack",
       "suffix": "gap-xl",
@@ -2175,7 +2175,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-gap-xs",
+      "className": "var-ui-stack-gap-xs",
       "kind": "component",
       "namespace": "stack",
       "suffix": "gap-xs",
@@ -2183,7 +2183,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-justify-between",
+      "className": "var-ui-stack-justify-between",
       "kind": "component",
       "namespace": "stack",
       "suffix": "justify-between",
@@ -2191,7 +2191,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-justify-center",
+      "className": "var-ui-stack-justify-center",
       "kind": "component",
       "namespace": "stack",
       "suffix": "justify-center",
@@ -2199,7 +2199,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-justify-end",
+      "className": "var-ui-stack-justify-end",
       "kind": "component",
       "namespace": "stack",
       "suffix": "justify-end",
@@ -2207,7 +2207,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-justify-start",
+      "className": "var-ui-stack-justify-start",
       "kind": "component",
       "namespace": "stack",
       "suffix": "justify-start",
@@ -2215,7 +2215,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-wrap-nowrap",
+      "className": "var-ui-stack-wrap-nowrap",
       "kind": "component",
       "namespace": "stack",
       "suffix": "wrap-nowrap",
@@ -2223,7 +2223,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-stack-wrap-wrap",
+      "className": "var-ui-stack-wrap-wrap",
       "kind": "component",
       "namespace": "stack",
       "suffix": "wrap-wrap",
@@ -2231,7 +2231,7 @@
       "line": 13
     },
     {
-      "className": "example-ds-status-dot-base",
+      "className": "var-ui-status-dot-base",
       "kind": "component",
       "namespace": "status-dot",
       "suffix": "base",
@@ -2239,7 +2239,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-status-dot-pulse-false",
+      "className": "var-ui-status-dot-pulse-false",
       "kind": "component",
       "namespace": "status-dot",
       "suffix": "pulse-false",
@@ -2247,7 +2247,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-status-dot-pulse-true",
+      "className": "var-ui-status-dot-pulse-true",
       "kind": "component",
       "namespace": "status-dot",
       "suffix": "pulse-true",
@@ -2255,7 +2255,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-status-dot-tone-accent",
+      "className": "var-ui-status-dot-tone-accent",
       "kind": "component",
       "namespace": "status-dot",
       "suffix": "tone-accent",
@@ -2263,7 +2263,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-status-dot-tone-danger",
+      "className": "var-ui-status-dot-tone-danger",
       "kind": "component",
       "namespace": "status-dot",
       "suffix": "tone-danger",
@@ -2271,7 +2271,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-status-dot-tone-info",
+      "className": "var-ui-status-dot-tone-info",
       "kind": "component",
       "namespace": "status-dot",
       "suffix": "tone-info",
@@ -2279,7 +2279,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-status-dot-tone-neutral",
+      "className": "var-ui-status-dot-tone-neutral",
       "kind": "component",
       "namespace": "status-dot",
       "suffix": "tone-neutral",
@@ -2287,7 +2287,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-status-dot-tone-success",
+      "className": "var-ui-status-dot-tone-success",
       "kind": "component",
       "namespace": "status-dot",
       "suffix": "tone-success",
@@ -2295,7 +2295,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-status-dot-tone-warning",
+      "className": "var-ui-status-dot-tone-warning",
       "kind": "component",
       "namespace": "status-dot",
       "suffix": "tone-warning",
@@ -2303,7 +2303,7 @@
       "line": 24
     },
     {
-      "className": "example-ds-steps-root",
+      "className": "var-ui-steps-root",
       "kind": "component",
       "namespace": "steps",
       "suffix": "root",
@@ -2311,7 +2311,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-switch-label",
+      "className": "var-ui-switch-label",
       "kind": "component",
       "namespace": "switch",
       "suffix": "label",
@@ -2319,7 +2319,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-switch-root",
+      "className": "var-ui-switch-root",
       "kind": "component",
       "namespace": "switch",
       "suffix": "root",
@@ -2327,7 +2327,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-switch-thumb",
+      "className": "var-ui-switch-thumb",
       "kind": "component",
       "namespace": "switch",
       "suffix": "thumb",
@@ -2335,7 +2335,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-switch-track",
+      "className": "var-ui-switch-track",
       "kind": "component",
       "namespace": "switch",
       "suffix": "track",
@@ -2343,7 +2343,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-tabs-list",
+      "className": "var-ui-tabs-list",
       "kind": "component",
       "namespace": "tabs",
       "suffix": "list",
@@ -2351,7 +2351,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-tabs-panel",
+      "className": "var-ui-tabs-panel",
       "kind": "component",
       "namespace": "tabs",
       "suffix": "panel",
@@ -2359,7 +2359,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-tabs-root",
+      "className": "var-ui-tabs-root",
       "kind": "component",
       "namespace": "tabs",
       "suffix": "root",
@@ -2367,7 +2367,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-tabs-tab",
+      "className": "var-ui-tabs-tab",
       "kind": "component",
       "namespace": "tabs",
       "suffix": "tab",
@@ -2375,7 +2375,7 @@
       "line": 5
     },
     {
-      "className": "example-ds-text-area-field-description",
+      "className": "var-ui-text-area-field-description",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "description",
@@ -2383,7 +2383,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-text-area-field-error",
+      "className": "var-ui-text-area-field-error",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "error",
@@ -2391,7 +2391,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-text-area-field-input",
+      "className": "var-ui-text-area-field-input",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "input",
@@ -2399,7 +2399,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-text-area-field-label",
+      "className": "var-ui-text-area-field-label",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "label",
@@ -2407,7 +2407,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-text-area-field-root",
+      "className": "var-ui-text-area-field-root",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "root",
@@ -2415,7 +2415,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-text-block-base",
+      "className": "var-ui-text-block-base",
       "kind": "component",
       "namespace": "text-block",
       "suffix": "base",
@@ -2423,7 +2423,7 @@
       "line": 55
     },
     {
-      "className": "example-ds-text-block-size-lg",
+      "className": "var-ui-text-block-size-lg",
       "kind": "component",
       "namespace": "text-block",
       "suffix": "size-lg",
@@ -2431,7 +2431,7 @@
       "line": 55
     },
     {
-      "className": "example-ds-text-block-size-md",
+      "className": "var-ui-text-block-size-md",
       "kind": "component",
       "namespace": "text-block",
       "suffix": "size-md",
@@ -2439,7 +2439,7 @@
       "line": 55
     },
     {
-      "className": "example-ds-text-block-size-sm",
+      "className": "var-ui-text-block-size-sm",
       "kind": "component",
       "namespace": "text-block",
       "suffix": "size-sm",
@@ -2447,7 +2447,7 @@
       "line": 55
     },
     {
-      "className": "example-ds-text-block-tone-primary",
+      "className": "var-ui-text-block-tone-primary",
       "kind": "component",
       "namespace": "text-block",
       "suffix": "tone-primary",
@@ -2455,7 +2455,7 @@
       "line": 55
     },
     {
-      "className": "example-ds-text-block-tone-secondary",
+      "className": "var-ui-text-block-tone-secondary",
       "kind": "component",
       "namespace": "text-block",
       "suffix": "tone-secondary",
@@ -2463,7 +2463,7 @@
       "line": 55
     },
     {
-      "className": "example-ds-text-block-weight-medium",
+      "className": "var-ui-text-block-weight-medium",
       "kind": "component",
       "namespace": "text-block",
       "suffix": "weight-medium",
@@ -2471,7 +2471,7 @@
       "line": 55
     },
     {
-      "className": "example-ds-text-block-weight-normal",
+      "className": "var-ui-text-block-weight-normal",
       "kind": "component",
       "namespace": "text-block",
       "suffix": "weight-normal",
@@ -2479,7 +2479,7 @@
       "line": 55
     },
     {
-      "className": "example-ds-text-block-weight-semibold",
+      "className": "var-ui-text-block-weight-semibold",
       "kind": "component",
       "namespace": "text-block",
       "suffix": "weight-semibold",
@@ -2487,7 +2487,7 @@
       "line": 55
     },
     {
-      "className": "example-ds-text-field-description",
+      "className": "var-ui-text-field-description",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "description",
@@ -2495,7 +2495,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-text-field-error",
+      "className": "var-ui-text-field-error",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "error",
@@ -2503,7 +2503,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-text-field-input",
+      "className": "var-ui-text-field-input",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "input",
@@ -2511,7 +2511,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-text-field-label",
+      "className": "var-ui-text-field-label",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "label",
@@ -2519,7 +2519,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-text-field-root",
+      "className": "var-ui-text-field-root",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "root",
@@ -2527,7 +2527,7 @@
       "line": 6
     },
     {
-      "className": "example-ds-thumbnail-dismiss",
+      "className": "var-ui-thumbnail-dismiss",
       "kind": "component",
       "namespace": "thumbnail",
       "suffix": "dismiss",
@@ -2535,7 +2535,7 @@
       "line": 21
     },
     {
-      "className": "example-ds-thumbnail-image",
+      "className": "var-ui-thumbnail-image",
       "kind": "component",
       "namespace": "thumbnail",
       "suffix": "image",
@@ -2543,7 +2543,7 @@
       "line": 21
     },
     {
-      "className": "example-ds-thumbnail-root",
+      "className": "var-ui-thumbnail-root",
       "kind": "component",
       "namespace": "thumbnail",
       "suffix": "root",
@@ -2551,7 +2551,7 @@
       "line": 21
     },
     {
-      "className": "example-ds-thumbnail-root-size-lg",
+      "className": "var-ui-thumbnail-root-size-lg",
       "kind": "component",
       "namespace": "thumbnail",
       "suffix": "root-size-lg",
@@ -2559,7 +2559,7 @@
       "line": 21
     },
     {
-      "className": "example-ds-thumbnail-root-size-md",
+      "className": "var-ui-thumbnail-root-size-md",
       "kind": "component",
       "namespace": "thumbnail",
       "suffix": "root-size-md",
@@ -2567,7 +2567,7 @@
       "line": 21
     },
     {
-      "className": "example-ds-thumbnail-root-size-sm",
+      "className": "var-ui-thumbnail-root-size-sm",
       "kind": "component",
       "namespace": "thumbnail",
       "suffix": "root-size-sm",

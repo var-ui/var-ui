@@ -3,10 +3,15 @@ import { stack } from '@var-ui/core';
 import { cx } from './utils';
 
 export type StackProps = HTMLAttributes<HTMLDivElement> & {
+  /** Flex direction. @default column */
   direction?: 'column' | 'row';
+  /** Spacing between children. @default md */
   gap?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  /** Cross-axis alignment. @default stretch */
   align?: 'start' | 'center' | 'end' | 'stretch';
+  /** Main-axis distribution. @default start */
   justify?: 'start' | 'center' | 'end' | 'between';
+  /** Whether flex items wrap to new lines. @default false */
   wrap?: boolean;
 };
 

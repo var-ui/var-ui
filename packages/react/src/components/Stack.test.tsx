@@ -14,15 +14,15 @@ describe('Stack', () => {
       </Stack>,
     );
     const el = container.firstElementChild as HTMLElement;
-    expect(el.className).toContain('example-ds-stack-direction-row');
-    expect(el.className).toContain('example-ds-stack-gap-lg');
+    expect(el.className).toContain('var-ui-stack-direction-row');
+    expect(el.className).toContain('var-ui-stack-gap-lg');
   });
 
   it('HStack defaults to row with centered cross axis', () => {
     const { container } = render(<HStack>x</HStack>);
     const el = container.firstElementChild as HTMLElement;
-    expect(el.className).toContain('example-ds-stack-direction-row');
-    expect(el.className).toContain('example-ds-stack-align-center');
+    expect(el.className).toContain('var-ui-stack-direction-row');
+    expect(el.className).toContain('var-ui-stack-align-center');
   });
 });
 
@@ -30,7 +30,7 @@ describe('Grid', () => {
   it('maps numeric columns onto named variants', () => {
     const { container } = render(<Grid columns={3}>x</Grid>);
     expect((container.firstElementChild as HTMLElement).className).toContain(
-      'example-ds-grid-columns-three',
+      'var-ui-grid-columns-three',
     );
   });
 });
@@ -40,7 +40,7 @@ describe('Divider', () => {
     render(<Divider orientation="vertical" />);
     const hr = document.querySelector('hr') as HTMLHRElement;
     expect(hr.getAttribute('aria-orientation')).toBe('vertical');
-    expect(hr.className).toContain('example-ds-divider-orientation-vertical');
+    expect(hr.className).toContain('var-ui-divider-orientation-vertical');
   });
 });
 
@@ -48,7 +48,7 @@ describe('Section', () => {
   it('renders a section element with an optional heading', () => {
     render(<Section title="Forms">body</Section>);
     expect(screen.getByRole('heading', { name: 'Forms' }).className).toContain(
-      'example-ds-section-title',
+      'var-ui-section-title',
     );
   });
 });

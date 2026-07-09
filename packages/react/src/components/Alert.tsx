@@ -16,13 +16,19 @@ const variantIconName: Record<AlertVariant, IconName> = {
 };
 
 export type AlertProps = {
+  /** Semantic tone that drives color and the default icon. */
   variant: AlertVariant;
+  /** Surface treatment. @default subtle */
   appearance?: AlertAppearance;
+  /** Optional bold headline above the body content. */
   title?: string;
+  /** Optional text link rendered below the message body. */
   action?: { href: string; label: string };
   /** Override the default tone glyph; pass null to hide the icon slot. */
   icon?: ReactNode | null;
+  /** Message body. */
   children: ReactNode;
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 

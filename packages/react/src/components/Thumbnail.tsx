@@ -5,11 +5,17 @@ import { Icon } from '../icons';
 import { cx } from './utils';
 
 export type ThumbnailProps = {
+  /** Image URL for the preview. */
   src: string;
+  /** Accessible description of the image. */
   alt: string;
+  /** Tile dimensions. @default md */
   size?: 'sm' | 'md' | 'lg';
+  /** When provided, renders a remove button that calls this handler on press. */
   onDismiss?: () => void;
+  /** Accessible label for the remove button. @default Remove */
   dismissLabel?: string;
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 

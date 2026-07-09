@@ -3,10 +3,13 @@ import { spinner } from '@var-ui/core';
 import { cx } from './utils';
 
 export type SpinnerProps = {
+  /** Diameter of the spinner ring. @default md */
   size?: 'sm' | 'md' | 'lg';
+  /** Color treatment. @default accent */
   tone?: 'accent' | 'neutral';
-  /** Accessible loading announcement. */
+  /** Accessible loading announcement. @default Loading */
   label?: string;
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 

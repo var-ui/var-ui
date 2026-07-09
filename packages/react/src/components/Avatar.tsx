@@ -6,12 +6,17 @@ import { cx } from './utils';
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export type AvatarProps = {
+  /** Image URL. When missing or on load error, initials are shown instead. */
   src?: string;
+  /** Accessible description of the image. */
   alt?: string;
   /** Display name — initials fallback uses the first letter of the first two words. */
   name?: string;
+  /** Diameter of the avatar. @default md */
   size?: AvatarSize;
+  /** Optional presence indicator shown on the avatar rim. */
   status?: 'success' | 'warning' | 'danger' | 'neutral';
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 
@@ -70,9 +75,11 @@ export function Avatar({
 }
 
 export type AvatarGroupProps = {
+  /** Avatar elements to stack with overlap. */
   children: ReactNode;
-  /** Maximum avatars before collapsing into a "+N" chip. */
+  /** Maximum avatars before collapsing into a "+N" chip. @default 4 */
   max?: number;
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 

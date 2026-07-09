@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router';
 import { categoryLabels, componentRegistry } from '@/data/components';
 
 export function ComponentIndex() {
@@ -20,7 +21,9 @@ export function ComponentIndex() {
                 {components.map((entry) => (
                   <tr key={entry.slug}>
                     <td>
-                      <a href={`/components/${entry.slug}`}>{entry.name}</a>
+                      <Link to="/components/$slug" params={{ slug: entry.slug }}>
+                        {entry.name}
+                      </Link>
                     </td>
                     <td>{entry.description}</td>
                   </tr>

@@ -8,10 +8,13 @@ import { progressBar } from '@var-ui/core';
 import { cx } from './utils';
 
 export type ProgressBarProps = Omit<RACProgressBarProps, 'children' | 'className'> & {
+  /** Label rendered above the track. */
   label?: string;
+  /** Fill color treatment. @default accent */
   tone?: 'accent' | 'success' | 'warning' | 'danger';
-  /** Show the formatted value (e.g. "40%") next to the label. */
+  /** Show the formatted value (e.g. "40%") next to the label. @default true */
   showValueText?: boolean;
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 

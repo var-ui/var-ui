@@ -6,7 +6,7 @@ describe('Button', () => {
   it('renders children and applies the intent recipe class', () => {
     render(<Button intent="primary">Save</Button>);
     const button = screen.getByRole('button', { name: 'Save' });
-    expect(button.className).toContain('example-ds-button-base');
-    expect(button.className).toContain('example-ds-button-intent-primary');
+    expect(button.className).toContain('var-ui-button-base');
+    expect(button.className).toContain('var-ui-button-intent-primary');
   });
 });
