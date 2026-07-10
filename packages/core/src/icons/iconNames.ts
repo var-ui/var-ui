@@ -16,6 +16,10 @@ export const iconNameList = [
   'success',
   'warning',
   'error',
+  'arrowUp',
+  'stop',
+  'wrench',
+  'clock',
 ] as const;
 
 export type IconName = (typeof iconNameList)[number];

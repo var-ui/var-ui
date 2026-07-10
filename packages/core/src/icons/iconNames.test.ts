@@ -4,7 +4,7 @@ import { icon } from '../components/icon';
 import { iconNameList } from './iconNames';
 
 describe('icon system (core)', () => {
-  it('ships the bundle 1 semantic names', () => {
+  it('ships bundle 1 + chat bundle 2 semantic names', () => {
     expect([...iconNameList].sort()).toEqual(
       [
         'check',
@@ -18,6 +18,10 @@ describe('icon system (core)', () => {
         'search',
         'success',
         'warning',
+        'arrowUp',
+        'stop',
+        'wrench',
+        'clock',
       ].sort(),
     );
   });
