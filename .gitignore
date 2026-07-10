@@ -4,3 +4,4 @@ dist-types
 .turbo
 *.log
 .DS_Store
+docs/src/pages.gen.ts

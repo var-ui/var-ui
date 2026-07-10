@@ -27,7 +27,7 @@ export const dialog = styles.component(
       },
     });
     return {
-      slots: ['overlay', 'modal', 'content', 'heading', 'description'],
+      slots: ['overlay', 'modal', 'content', 'header', 'heading', 'description', 'closeButton'],
       overlay: {
         position: 'fixed',
         inset: 0,
@@ -48,10 +48,35 @@ export const dialog = styles.component(
         display: 'grid',
         gap: t.space[3],
       },
+      header: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        gap: t.space[3],
+      },
       heading: {
         fontSize: '18px',
         fontWeight: t.fontWeight.semibold,
         margin: 0,
+      },
+      closeButton: {
+        appearance: 'none',
+        border: 'none',
+        background: 'transparent',
+        color: t.color.text.secondary,
+        cursor: 'pointer',
+        display: 'inline-flex',
+        padding: t.space[1],
+        marginRight: `calc(${t.space[1]} * -1)`,
+        borderRadius: t.radius.sm,
+        '&:hover': {
+          backgroundColor: t.color.background.subtle,
+          color: t.color.text.primary,
+        },
+        '&:focus-visible': {
+          outline: `2px solid ${t.color.border.focus}`,
+          outlineOffset: '1px',
+        },
       },
       description: {
         margin: 0,

@@ -1,5 +1,6 @@
 import { styles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { fieldChrome } from './field';
 
 export const textField = styles.component(
   'text-field',
@@ -41,17 +42,17 @@ export const textField = styles.component(
         inherits: false,
       },
     });
+    const chrome = fieldChrome({
+      label: v.labelColor.var,
+      description: v.descriptionColor.var,
+      error: v.errorColor.var,
+    });
     return {
       slots: ['root', 'label', 'input', 'description', 'error'],
+      ...chrome,
       root: {
-        display: 'grid',
-        gap: t.space[1],
+        ...chrome.root,
         minWidth: '240px',
-      },
-      label: {
-        fontSize: t.fontSize.md,
-        fontWeight: t.fontWeight.medium,
-        color: v.labelColor.var,
       },
       input: {
         border: `1px solid ${v.inputBorder.var}`,
@@ -68,14 +69,6 @@ export const textField = styles.component(
         '&::placeholder': {
           color: v.placeholderColor.var,
         },
-      },
-      description: {
-        fontSize: t.fontSize.sm,
-        color: v.descriptionColor.var,
-      },
-      error: {
-        fontSize: t.fontSize.sm,
-        color: v.errorColor.var,
       },
     };
   },

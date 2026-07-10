@@ -4,6 +4,7 @@ import { link } from '@var-ui/core';
 import { cx } from './utils';
 
 export type LinkProps = Omit<RACLinkProps, 'className'> & {
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 

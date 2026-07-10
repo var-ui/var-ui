@@ -4,6 +4,7 @@ import { textAreaField } from '@var-ui/core';
 import type { BaseTextFieldProps } from './utils';
 
 export type TextAreaFieldProps = BaseTextFieldProps & {
+  /** Placeholder text shown when the textarea is empty. */
   placeholder?: string;
 };
 

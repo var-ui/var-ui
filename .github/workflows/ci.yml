@@ -20,6 +20,6 @@ jobs:
           node-version: '24'
           cache: true
 
-      - run: vp run packages/core#build packages/react#build
+      - run: vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build
       - run: vp check
       - run: vp test run
