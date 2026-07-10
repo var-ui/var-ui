@@ -1,0 +1,29 @@
+---
+title: CodeBlock
+description: Syntax-highlighted code display.
+---
+
+import { Demo } from '../../src/components/Demo';
+import { CodeBlockDemo } from '../../src/demos/CodeBlockDemo';
+
+# CodeBlock
+
+Syntax-highlighted code display.
+
+## Examples
+
+### Default
+
+<Demo code={`import { CodeBlock } from '@var-ui/react';
+
+<CodeBlock code={'const greeting = "hello";'} language="tsx" />`}>
+  <CodeBlockDemo />
+</Demo>
+
+## Props
+
+<PropsTable slug="code-block" />
+
+## Accessibility
+
+Built on React Aria Components where applicable.

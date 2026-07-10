@@ -40,7 +40,7 @@ Configuration lives in the root `vite.config.ts` — lint (Oxlint), formatting (
 | `@var-ui/core`             | Framework-agnostic tokens and component styles |
 | `@var-ui/react`            | React bindings (React Aria Components)         |
 | `@var-ui/example-vite-app` | Example consumer app (`examples/vite-app`)     |
-| `@var-ui/docs`             | Docs site placeholder                          |
+| `@var-ui/docs`             | Documentation site (Vocs)                      |
 
 ## Publishing
 

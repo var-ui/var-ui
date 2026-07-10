@@ -1,17 +1,34 @@
 import type { JSX, ReactNode } from 'react';
-import { alert } from '@var-ui/core';
+import { alert, type IconName } from '@var-ui/core';
+import { Icon } from '../icons';
 import { cx } from './utils';
 
 export type AlertVariant = 'info' | 'success' | 'warning' | 'danger' | 'tip';
 export type AlertAppearance = 'subtle' | 'solid';
 
+/** Tone → registry glyph (spec §0.4): danger shares the `error` glyph, tip shares `info`. */
+const variantIconName: Record<AlertVariant, IconName> = {
+  info: 'info',
+  success: 'success',
+  warning: 'warning',
+  danger: 'error',
+  tip: 'info',
+};
+
 export type AlertProps = {
+  /** Semantic tone that drives color and the default icon. */
   variant: AlertVariant;
+  /** Surface treatment. @default subtle */
   appearance?: AlertAppearance;
+  /** Optional bold headline above the body content. */
   title?: string;
+  /** Optional text link rendered below the message body. */
   action?: { href: string; label: string };
-  icon?: ReactNode;
+  /** Override the default tone glyph; pass null to hide the icon slot. */
+  icon?: ReactNode | null;
+  /** Message body. */
   children: ReactNode;
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 
@@ -30,6 +47,8 @@ export function Alert({
     contentGap: title ? 'spaced' : 'flush',
   });
 
+  const resolvedIcon = icon === undefined ? <Icon name={variantIconName[variant]} /> : icon;
+
   return (
     <div
       className={cx(a.root, className)}
@@ -37,9 +56,9 @@ export function Alert({
       data-alert-variant={variant}
       data-alert-appearance={appearance}
     >
-      {icon ? (
+      {resolvedIcon !== null ? (
         <div className={a.icon} data-alert-icon>
-          {icon}
+          {resolvedIcon}
         </div>
       ) : null}
       <div className={a.body}>

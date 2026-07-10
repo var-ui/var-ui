@@ -8,12 +8,16 @@ import {
 import { radio } from '@var-ui/core';
 
 export type RadioGroupOption = {
+  /** Value submitted with the form when this option is selected. */
   value: string;
+  /** Visible label beside the radio control. */
   label: string;
 };
 
 export type RadioGroupProps = Omit<RACRadioGroupProps, 'children'> & {
+  /** Group label rendered above the option list. */
   label?: string;
+  /** Options to render as radio buttons. */
   options: RadioGroupOption[];
 };
 

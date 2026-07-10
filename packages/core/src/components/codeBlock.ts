@@ -178,6 +178,9 @@ export const codeBlock = styles.component(
        */
       copyButton: {
         appearance: 'none',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: t.space[1],
         border: 'none',
         backgroundColor: 'transparent',
         color: v.copyButtonColor.var,

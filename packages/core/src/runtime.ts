@@ -6,7 +6,7 @@ import { createTypeStyles } from 'typestyles';
  * that uses `@layer`.
  */
 export const { styles, tokens, global } = createTypeStyles({
-  scopeId: 'example-ds',
+  scopeId: 'var-ui',
   mode: 'semantic',
   layers: ['tokens', 'components', 'utilities'] as const,
   tokenLayer: 'tokens',
@@ -21,6 +21,18 @@ export const { styles, tokens, global } = createTypeStyles({
 global.fontFace('Space Grotesk', {
   src: "url('/fonts/space-grotesk-latin.woff2') format('woff2')",
   fontWeight: '300 700',
+  fontStyle: 'normal',
+  fontDisplay: 'swap',
+  unicodeRange:
+    'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+});
+
+/**
+ * Self-hosted JetBrains Mono (Latin, wght 100–800) from each host's `public/fonts/`.
+ */
+global.fontFace('JetBrains Mono', {
+  src: "url('/fonts/jetbrains-mono-latin.woff2') format('woff2')",
+  fontWeight: '100 800',
   fontStyle: 'normal',
   fontDisplay: 'swap',
   unicodeRange:
