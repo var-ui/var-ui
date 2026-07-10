@@ -1,2 +1,2 @@
-// Hooks barrel for future design-system hooks.
-export {};
+export { useMediaQuery } from './useMediaQuery';
+export { useScrollLock } from './useScrollLock';

@@ -1,23 +1,36 @@
 import type { JSX } from 'react';
 import { useMemo, useState } from 'react';
 import { codeBlock } from '@var-ui/core';
+import { Icon } from '../icons';
 import { cx } from './utils';
 
 type CodeBlockVariant = 'default' | 'inline' | 'diff' | 'terminal';
 type FeedbackTone = 'success' | 'error' | null;
 
 export type CodeBlockProps = {
+  /** Source code string to display. */
   code: string;
+  /** Language tag shown in the header (e.g. `tsx`, `bash`). */
   language?: string;
+  /** Optional filename shown in the header. */
   filename?: string;
+  /** Additional CSS class names merged onto the root element. */
   className?: string;
+  /** Whether to show the copy-to-clipboard button. @default true */
   copyable?: boolean;
+  /** Visual variant of the code block. @default default */
   variant?: CodeBlockVariant;
+  /** Wrap long lines instead of horizontal scrolling. @default false */
   wrapLongLines?: boolean;
+  /** Show line numbers in a gutter column. @default false */
   showLineNumbers?: boolean;
+  /** 1-based line numbers to highlight. */
   highlightedLines?: number[];
+  /** Accessible label for the copy button. @default Copy code */
   copyLabel?: string;
+  /** Feedback text after a successful copy. @default Copied */
   copiedLabel?: string;
+  /** Feedback text when clipboard write fails. @default Copy failed */
   copyErrorLabel?: string;
 };
 
@@ -116,6 +129,7 @@ export function CodeBlock({
               onClick={onCopy}
               aria-label={isCopied ? copiedLabel : copyLabel}
             >
+              <Icon name={isCopied ? 'check' : 'copy'} size="sm" />
               {isCopied ? 'Copied' : hasError ? 'Error' : 'Copy'}
             </button>
             <span className={feedbackClassName} role="status" aria-live="polite">

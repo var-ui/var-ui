@@ -1,5 +1,6 @@
 import { styles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { fieldChrome } from './field';
 
 export const textAreaField = styles.component(
   'text-area-field',
@@ -43,15 +44,11 @@ export const textAreaField = styles.component(
     });
     return {
       slots: ['root', 'label', 'input', 'description', 'error'],
-      root: {
-        display: 'grid',
-        gap: t.space[1],
-      },
-      label: {
-        fontSize: t.fontSize.md,
-        fontWeight: t.fontWeight.medium,
-        color: v.labelColor.var,
-      },
+      ...fieldChrome({
+        label: v.labelColor.var,
+        description: v.descriptionColor.var,
+        error: v.errorColor.var,
+      }),
       input: {
         border: `1px solid ${v.inputBorder.var}`,
         borderRadius: t.radius.md,
@@ -69,14 +66,6 @@ export const textAreaField = styles.component(
         '&::placeholder': {
           color: v.placeholderColor.var,
         },
-      },
-      description: {
-        fontSize: t.fontSize.sm,
-        color: v.descriptionColor.var,
-      },
-      error: {
-        fontSize: t.fontSize.sm,
-        color: v.errorColor.var,
       },
     };
   },

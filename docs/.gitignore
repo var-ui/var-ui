@@ -1,0 +1,6 @@
+.content-collections
+dist
+.output
+node_modules
+.content-collections/slugs
+src/generated/props

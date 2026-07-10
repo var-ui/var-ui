@@ -1,0 +1,22 @@
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+/* Offset fixed docs header when following in-page anchor links. */
+article :is(h2, h3)[id] {
+  scroll-margin-top: calc(var(--docs-header-height, 3.5rem) + 1rem);
+}

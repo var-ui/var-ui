@@ -1,0 +1,45 @@
+{
+  "name": "@var-ui/icons",
+  "version": "0.0.1",
+  "description": "Optional default icon glyphs for the var-ui design system",
+  "homepage": "https://github.com/var-ui/var-ui/tree/main/packages/icons#readme",
+  "bugs": "https://github.com/var-ui/var-ui/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/var-ui/var-ui.git",
+    "directory": "packages/icons"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "pack": "vp pack",
+    "dev": "vp pack --watch"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@var-ui/core": "workspace:*",
+    "react": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "@var-ui/core": "workspace:^",
+    "react": "catalog:"
+  }
+}

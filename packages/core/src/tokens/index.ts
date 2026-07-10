@@ -16,7 +16,6 @@ import {
   transitionValues,
 } from './primitive';
 
-export type { DesignCodeBlockValues } from './component';
 export type {
   DesignBorderWidthValues,
   DesignFontFamilyValues,

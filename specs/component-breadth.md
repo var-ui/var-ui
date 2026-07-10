@@ -186,7 +186,7 @@ by react, so tree-shaking stays predictable).
 #### Core (`@var-ui/core`)
 
 - **`icon` recipe** — styling only: size steps, color via `c.vars()` tied to
-  semantic icon tokens (`--example-ds-color-icon-primary`, accent/success/
+  semantic icon tokens (`--var-ui-color-icon-primary`, accent/success/
   warning/danger for status glyphs). No SVG markup in core.
 - **`IconName` type** — closed union of **semantic names** var-ui components
   reference internally (`close`, `chevronDown`, `check`, `search`, …).

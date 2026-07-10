@@ -2,7 +2,6 @@ export {
   designTokens,
   defaultTheme,
   type DesignColorValues,
-  type DesignCodeBlockValues,
   type DesignFontFamilyValues,
   type DesignFontSizeValues,
   type DesignFontWeightValues,

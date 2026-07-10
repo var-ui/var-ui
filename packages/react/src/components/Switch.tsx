@@ -3,6 +3,7 @@ import { Switch as AriaSwitch, type SwitchProps as RACSwitchProps } from 'react-
 import { switchStyles } from '@var-ui/core';
 
 export type SwitchProps = Omit<RACSwitchProps, 'children'> & {
+  /** Label rendered beside the switch control. */
   children?: ReactNode;
 };
 

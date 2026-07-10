@@ -6,6 +6,7 @@ import {
 import { checkbox } from '@var-ui/core';
 
 export type CheckboxProps = Omit<RACCheckboxProps, 'children'> & {
+  /** Label rendered beside the checkbox control. */
   children?: ReactNode;
 };
 
