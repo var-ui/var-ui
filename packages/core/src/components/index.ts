@@ -1,3 +1,4 @@
+export * from './chat';
 export { proseContent } from './proseContent';
 export { codeHljsScope } from './codeHighlight';
 export { layout, text } from './styles';

@@ -1,0 +1,1 @@
+export { chatMessageBubble } from './chatMessageBubble';

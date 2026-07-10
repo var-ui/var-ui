@@ -1,3 +1,4 @@
+export * from './chat';
 export { Button, type ButtonProps } from './Button';
 export { Link, type LinkProps } from './Link';
 export { TextField, type TextFieldProps } from './TextField';
