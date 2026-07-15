@@ -281,5 +281,4 @@ Phase 3 P1 is done when:
 
 - Breadth inventory & phase table: `specs/component-breadth.md`
 - Tracking: `ROADMAP.md` V6 Phase 3
-- Implementation plan (next): `plans/YYYY-MM-DD-phase-3-overlays-p1.md` after
-  this design is accepted for planning
+- Implementation plan: `plans/2026-07-15-phase-3-overlays-p1.md`
