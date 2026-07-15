@@ -71,7 +71,7 @@ const chatSystemMessageRecipe = styles.component(
       },
       variants: {
         tone: {
-          neutral: {},
+          neutral: { root: {} },
           accent: tonePaint(v, 'accent'),
           success: tonePaint(v, 'success'),
           warning: tonePaint(v, 'warning'),
