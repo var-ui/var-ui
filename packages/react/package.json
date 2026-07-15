@@ -37,6 +37,7 @@
     "typestyles": "catalog:"
   },
   "devDependencies": {
+    "@internationalized/date": "catalog:",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/react": "catalog:",
@@ -51,6 +52,7 @@
     "vite-plus": "catalog:"
   },
   "peerDependencies": {
+    "@internationalized/date": "catalog:",
     "@var-ui/core": "workspace:^",
     "@var-ui/icons": "workspace:^",
     "react": "catalog:",

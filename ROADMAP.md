@@ -113,7 +113,24 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
         Thumbnail, Timestamp; registry icons wired into Alert, Select, Dialog,
         CodeBlock. Remaining before closing the phase: visual QA pass across all
         8 themes in the example app.
-  - [ ] Phase 2 — actions, menus, and form expansion
+  - [x] **Phase 2 — actions, menus, and form expansion** — shipped: IconButton,
+        ButtonGroup, SegmentedControl, ToggleButton, DropdownMenu, ContextMenu,
+        MoreMenu, Slider, NumberInput, Toolbar, FileInput, InputGroup/
+        InputGroupText, CheckboxGroup, Calendar, DateInput, DateRangeInput,
+        DateTimeInput, TimeInput, Typeahead, Tokenizer, MultiSelector.
+        `RadioGroup` (shipped in Phase 0/1) already fulfills the spec's
+        "RadioList" line item — no separate component needed. Astryx's
+        `Selector` turned out to be functionally redundant with var-ui's
+        existing `Select` (RAC `Select`+`ListBox` already covers its
+        static-list model); its extras — nullable/clear, sections/dividers,
+        inline filter, start icon — are candidates for a future `Select`
+        polish pass rather than a new component. `PowerSearch` is deferred:
+        it's a bespoke filter-bar/query-builder composed from Typeahead/
+        Tokenizer/Selector/date inputs, not a primitive itself, and is
+        better scoped once there's a real consumer need. Remaining
+        nice-to-haves: `InputGroupText` prefix/suffix polish pass,
+        `CheckboxList`/`RadioList`-style per-item description/disabled
+        support if a consumer need appears.
   - [x] **Phase 3 P1 — overlays and command surfaces** — Toast (hybrid provider),
         Tooltip/Popover/HoverCard, AlertDialog, CommandPalette. Spec:
         `specs/phase-3-overlays-p1.md`. Plan:

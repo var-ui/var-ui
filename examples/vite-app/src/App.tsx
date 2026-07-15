@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { getLocalTimeZone, today } from '@internationalized/date';
 import { ChatDemo } from './ChatDemo';
 import { kbd, skeleton, statusDot, SURFACE_ATTRIBUTE } from '@var-ui/core';
 import { defaultIcons } from '@var-ui/icons';
@@ -10,22 +11,32 @@ import {
   Badge,
   Banner,
   Button,
+  Calendar,
   Card,
   Carousel,
+  CheckboxGroup,
   ClickableCard,
   CommandPalette,
+  DateInput,
+  DateRangeInput,
+  DateTimeInput,
   DesignSystemProvider,
   Dialog,
   Divider,
   EmptyState,
   HoverCard,
   Field,
+  FileInput,
   Grid,
   Heading,
   HStack,
   Icon,
   IconProvider,
+  InputGroup,
+  InputGroupInput,
+  InputGroupText,
   LayerProvider,
+  MultiSelector,
   Popover,
   ProgressBar,
   Section,
@@ -35,9 +46,13 @@ import {
   Text,
   TextField,
   Thumbnail,
+  TimeInput,
   Timestamp,
   ToastProvider,
+  Tokenizer,
+  Toolbar,
   Tooltip,
+  Typeahead,
   useDesignSystemTheme,
   useToast,
 } from '@var-ui/react';
@@ -178,9 +193,39 @@ function ContainerSection() {
   );
 }
 
+const FRUIT_OPTIONS = [
+  { id: 'apple', label: 'Apple' },
+  { id: 'apricot', label: 'Apricot' },
+  { id: 'plum', label: 'Plum' },
+  { id: 'peach', label: 'Peach' },
+  { id: 'pear', label: 'Pear' },
+];
+
 function FormsSection() {
+  const [notifications, setNotifications] = useState(['email']);
+  const [price, setPrice] = useState('49.00');
+  const [resume, setResume] = useState<File | null>(null);
+  const [reviewers, setReviewers] = useState<typeof FRUIT_OPTIONS>([FRUIT_OPTIONS[0]]);
+  const [labels, setLabels] = useState<string[]>(['apricot']);
+
   return (
     <Section title="Forms">
+      <Toolbar
+        label="Table actions"
+        startContent={
+          <>
+            <Button size="sm">New</Button>
+            <Button size="sm" intent="ghost">
+              Import
+            </Button>
+          </>
+        }
+        endContent={
+          <Button size="sm" intent="ghost">
+            Export
+          </Button>
+        }
+      />
       <Grid columns={2} gap="lg">
         <TextField label="Project name" description="Shown on the dashboard." />
         <Select
@@ -198,6 +243,62 @@ function FormsSection() {
       >
         <input id="custom-range" type="range" />
       </Field>
+      <InputGroup label="Price">
+        <InputGroupText>$</InputGroupText>
+        <InputGroupInput
+          aria-label="Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+        <InputGroupText>USD</InputGroupText>
+      </InputGroup>
+      <CheckboxGroup
+        label="Notifications"
+        value={notifications}
+        onChange={setNotifications}
+        options={[
+          { value: 'email', label: 'Email' },
+          { value: 'sms', label: 'SMS' },
+          { value: 'push', label: 'Push' },
+        ]}
+      />
+      <FileInput
+        label="Resume"
+        description="PDF or Word document, up to 5MB."
+        value={resume}
+        onChange={(files) => setResume(Array.isArray(files) ? (files[0] ?? null) : files)}
+        accept=".pdf,.doc,.docx"
+        maxSize={5 * 1024 * 1024}
+      />
+      <Grid columns={2} gap="lg">
+        <Typeahead label="Assignee" options={FRUIT_OPTIONS} placeholder="Search people…" />
+        <MultiSelector label="Labels" options={FRUIT_OPTIONS} value={labels} onChange={setLabels} />
+      </Grid>
+      <Tokenizer
+        label="Reviewers"
+        options={FRUIT_OPTIONS}
+        value={reviewers}
+        onChange={setReviewers}
+        placeholder="Add a reviewer…"
+      />
+    </Section>
+  );
+}
+
+function DatesSection() {
+  const [date, setDate] = useState(today(getLocalTimeZone()));
+
+  return (
+    <Section title="Dates & time">
+      <Calendar aria-label="Appointment date" value={date} onChange={setDate} />
+      <Grid columns={2} gap="lg">
+        <DateInput label="Start date" />
+        <DateRangeInput label="Trip dates" />
+      </Grid>
+      <Grid columns={2} gap="lg">
+        <DateTimeInput label="Meeting starts" />
+        <TimeInput label="Reminder time" />
+      </Grid>
     </Section>
   );
 }
@@ -322,6 +423,7 @@ export function App() {
               <ContentSection />
               <ContainerSection />
               <FormsSection />
+              <DatesSection />
               <OverlaysSection />
               <ChatSection />
 

@@ -8,6 +8,7 @@
     "preview": "vp preview"
   },
   "dependencies": {
+    "@internationalized/date": "catalog:",
     "@var-ui/core": "workspace:*",
     "@var-ui/icons": "workspace:*",
     "@var-ui/react": "workspace:*",

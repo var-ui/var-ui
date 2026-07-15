@@ -27,6 +27,7 @@ export { TextAreaField, type TextAreaFieldProps } from './TextAreaField';
 export { Checkbox, type CheckboxProps } from './Checkbox';
 export { Switch, type SwitchProps } from './Switch';
 export { RadioGroup, type RadioGroupOption, type RadioGroupProps } from './RadioGroup';
+export { CheckboxGroup, type CheckboxGroupOption, type CheckboxGroupProps } from './CheckboxGroup';
 export { Select, type SelectOption, type SelectProps } from './Select';
 export { Tabs, type TabsProps } from './Tabs';
 export { Dialog, type DialogProps } from './Dialog';
@@ -79,3 +80,20 @@ export {
   type ToastTone,
   type UseToastReturn,
 } from './Toast';
+export { Toolbar, type ToolbarProps } from './Toolbar';
+export { FileInput, type FileInputProps } from './FileInput';
+export {
+  InputGroup,
+  InputGroupInput,
+  type InputGroupProps,
+  type InputGroupInputProps,
+} from './InputGroup';
+export { InputGroupText, type InputGroupTextProps } from './InputGroupText';
+export { Calendar, type CalendarProps } from './Calendar';
+export { DateInput, type DateInputProps } from './DateInput';
+export { DateRangeInput, type DateRangeInputProps } from './DateRangeInput';
+export { DateTimeInput, type DateTimeInputProps } from './DateTimeInput';
+export { TimeInput, type TimeInputProps } from './TimeInput';
+export { Typeahead, type TypeaheadOption, type TypeaheadProps } from './Typeahead';
+export { Tokenizer, type TokenizerOption, type TokenizerProps } from './Tokenizer';
+export { MultiSelector, type MultiSelectorOption, type MultiSelectorProps } from './MultiSelector';

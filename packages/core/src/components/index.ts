@@ -10,6 +10,17 @@ export { numberInput } from './numberInput';
 export { segmentedControl } from './segmentedControl';
 export { slider } from './slider';
 export { toggleButton } from './toggleButton';
+export { toolbar } from './toolbar';
+export { fileInput } from './fileInput';
+export { inputGroup } from './inputGroup';
+export { calendar } from './calendar';
+export { dateInput } from './dateInput';
+export { dateRangeInput } from './dateRangeInput';
+export { dateTimeInput } from './dateTimeInput';
+export { timeInput } from './timeInput';
+export { typeahead } from './typeahead';
+export { tokenizer } from './tokenizer';
+export { multiSelector } from './multiSelector';
 export { codeBlock } from './codeBlock';
 export { alert } from './alert';
 export { avatar, avatarGroup } from './avatar';
@@ -29,7 +40,15 @@ export { center } from './center';
 export { checkbox } from './checkbox';
 export { divider } from './divider';
 export { emptyState } from './emptyState';
-export { field, fieldChrome, type FieldChromeColors } from './field';
+export {
+  field,
+  fieldChrome,
+  dateFieldChrome,
+  calendarGridChrome,
+  type FieldChromeColors,
+  type DateFieldChromeColors,
+  type CalendarGridChromeColors,
+} from './field';
 export { grid } from './grid';
 export { heading, textBlock } from './typography';
 export { icon } from './icon';

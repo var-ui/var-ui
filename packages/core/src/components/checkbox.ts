@@ -20,9 +20,14 @@ export const checkbox = styles.component(
         syntax: '<color>',
         inherits: false,
       },
+      groupLabelColor: {
+        value: `${t.color.text.primary}`,
+        syntax: '<color>',
+        inherits: false,
+      },
     });
     return {
-      slots: ['root', 'box', 'label'],
+      slots: ['root', 'box', 'label', 'group', 'groupLabel'],
       root: {
         display: 'inline-flex',
         alignItems: 'center',
@@ -48,6 +53,15 @@ export const checkbox = styles.component(
       },
       label: {
         fontSize: t.fontSize.md,
+      },
+      group: {
+        display: 'grid',
+        gap: t.space[1],
+      },
+      groupLabel: {
+        fontSize: t.fontSize.md,
+        fontWeight: t.fontWeight.medium,
+        color: v.groupLabelColor.var,
       },
     };
   },
