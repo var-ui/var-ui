@@ -1,0 +1,42 @@
+---
+title: ChatMessage
+description: Message row with sender alignment, avatar, and metadata slots.
+---
+
+import { Demo } from '../../src/components/Demo';
+import { ChatMessageDemo } from '../../src/demos/ChatMessageDemo';
+
+# ChatMessage
+
+A message row. Provides `sender` and `density` to descendants via context so `ChatMessageBubble` doesn't need every prop repeated.
+
+## Examples
+
+### Default
+
+<Demo code={`import { ChatMessage, ChatMessageBubble, ChatMessageMetadata, Avatar } from '@var-ui/react';
+
+<ChatMessage sender="assistant" name="Navi" avatar={<Avatar name="Navi" />} metadata={<ChatMessageMetadata date={new Date()} format="time" />}>
+  <ChatMessageBubble>Hello! How can I help?</ChatMessageBubble>
+</ChatMessage>`}>
+  <ChatMessageDemo />
+</Demo>
+
+## Metadata
+
+`ChatMessageMetadata` composes the existing `Timestamp` with optional status text — no dedicated recipe.
+
+| Prop        | Type                                           | Default      |
+| ----------- | ---------------------------------------------- | ------------ |
+| `date`      | `Date \| string \| number`                     | (required)   |
+| `format`    | `'relative' \| 'date' \| 'time' \| 'datetime'` | `'relative'` |
+| `status`    | `ReactNode`                                    | —            |
+| `className` | `string`                                       | —            |
+
+## Props
+
+<PropsTable slug="chat-message" />
+
+## Accessibility
+
+User messages align to the end of the row; assistant messages align to the start.

@@ -6,6 +6,7 @@ export const categoryLabels = {
   layout: 'Layout',
   content: 'Content',
   container: 'Container',
+  chat: 'Chat',
 } as const;
 
 export type ComponentCategory = keyof typeof categoryLabels;
@@ -242,5 +243,61 @@ export const componentRegistry: ComponentEntry[] = [
     category: 'container',
     description: 'Horizontally scrollable content strip.',
     importLine: "import { Carousel } from '@var-ui/react';",
+  },
+  {
+    slug: 'chat-layout',
+    name: 'ChatLayout',
+    category: 'chat',
+    description: 'Full chat shell with scrollable messages and a composer dock.',
+    importLine: "import { ChatLayout } from '@var-ui/react';",
+  },
+  {
+    slug: 'chat-message-list',
+    name: 'ChatMessageList',
+    category: 'chat',
+    description: 'Accessible message log region with density-based spacing.',
+    importLine: "import { ChatMessageList } from '@var-ui/react';",
+  },
+  {
+    slug: 'chat-message',
+    name: 'ChatMessage',
+    category: 'chat',
+    description: 'Message row with sender alignment, avatar, and metadata slots.',
+    importLine: "import { ChatMessage } from '@var-ui/react';",
+  },
+  {
+    slug: 'chat-message-bubble',
+    name: 'ChatMessageBubble',
+    category: 'chat',
+    description: 'Styled content bubble that inherits sender from an ancestor message.',
+    importLine: "import { ChatMessageBubble } from '@var-ui/react';",
+  },
+  {
+    slug: 'chat-composer',
+    name: 'ChatComposer',
+    category: 'chat',
+    description: 'Composer chrome around the message input and trailing actions.',
+    importLine: "import { ChatComposer, ChatComposerInput } from '@var-ui/react';",
+  },
+  {
+    slug: 'chat-send-button',
+    name: 'ChatSendButton',
+    category: 'chat',
+    description: 'Send/stop button for a chat composer.',
+    importLine: "import { ChatSendButton } from '@var-ui/react';",
+  },
+  {
+    slug: 'chat-tool-calls',
+    name: 'ChatToolCalls',
+    category: 'chat',
+    description: 'Tool/function call display from an LLM response.',
+    importLine: "import { ChatToolCalls } from '@var-ui/react';",
+  },
+  {
+    slug: 'chat-system-message',
+    name: 'ChatSystemMessage',
+    category: 'chat',
+    description: 'Centered inline system message with semantic tone.',
+    importLine: "import { ChatSystemMessage } from '@var-ui/react';",
   },
 ];

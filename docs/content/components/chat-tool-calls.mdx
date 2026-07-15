@@ -1,0 +1,42 @@
+---
+title: ChatToolCalls
+description: Tool/function call display from an LLM response.
+---
+
+import { Demo } from '../../src/components/Demo';
+import { ChatToolCallsDemo } from '../../src/demos/ChatToolCallsDemo';
+
+# ChatToolCalls
+
+Displays tool/function call invocations from an LLM response. A single call renders inline; two or more collapse into an expandable summary group.
+
+## Examples
+
+### Default
+
+<Demo code={`import { ChatToolCalls } from '@var-ui/react';
+
+<ChatToolCalls calls={[
+  { name: 'read_file', status: 'complete', target: 'App.tsx' },
+  { name: 'run_tests', status: 'running' },
+]} />`}>
+  <ChatToolCallsDemo />
+</Demo>
+
+## ChatToolCallItem
+
+| Field          | Type                                              | Default      |
+| -------------- | ------------------------------------------------- | ------------ |
+| `name`         | `string`                                          | (required)   |
+| `status`       | `'pending' \| 'running' \| 'complete' \| 'error'` | `'complete'` |
+| `target`       | `string`                                          | —            |
+| `duration`     | `string`                                          | —            |
+| `resultDetail` | `ReactNode`                                       | —            |
+
+## Props
+
+<PropsTable slug="chat-tool-calls" />
+
+## Accessibility
+
+Expandable groups use `aria-expanded` on the toggle button.

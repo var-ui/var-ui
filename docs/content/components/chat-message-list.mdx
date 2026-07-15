@@ -1,0 +1,31 @@
+---
+title: ChatMessageList
+description: Accessible message log region with density-based spacing.
+---
+
+import { Demo } from '../../src/components/Demo';
+import { ChatMessageListDemo } from '../../src/demos/ChatMessageListDemo';
+
+# ChatMessageList
+
+Presentational container for chat messages — a `role="log"` / `aria-live="polite"` region with density-based spacing.
+
+## Examples
+
+### Default
+
+<Demo code={`import { ChatMessageList, ChatMessage, ChatMessageBubble } from '@var-ui/react';
+
+<ChatMessageList isStreaming={isStreaming}>
+  <ChatMessage sender="assistant"><ChatMessageBubble>Hello!</ChatMessageBubble></ChatMessage>
+</ChatMessageList>`}>
+  <ChatMessageListDemo />
+</Demo>
+
+## Props
+
+<PropsTable slug="chat-message-list" />
+
+## Accessibility
+
+Sets `aria-busy` on the log region while `isStreaming` is true so assistive tech waits for the full message instead of re-announcing every streamed token.

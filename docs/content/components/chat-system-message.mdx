@@ -1,0 +1,30 @@
+---
+title: ChatSystemMessage
+description: Centered inline system message with semantic tone.
+---
+
+import { Demo } from '../../src/components/Demo';
+import { ChatSystemMessageDemo } from '../../src/demos/ChatSystemMessageDemo';
+
+# ChatSystemMessage
+
+Centered inline system message — presence updates, mode switches, and similar notices. Uses the same tone vocabulary as `Alert` and `Badge`, plus a `neutral` default.
+
+## Examples
+
+### Default
+
+<Demo code={`import { ChatSystemMessage } from '@var-ui/react';
+
+<ChatSystemMessage tone="info">Model switched to GPT-5</ChatSystemMessage>
+<ChatSystemMessage tone="success">Alex joined the conversation</ChatSystemMessage>`}>
+  <ChatSystemMessageDemo />
+</Demo>
+
+## Props
+
+<PropsTable slug="chat-system-message" />
+
+## Accessibility
+
+Rendered with `role="status"`.
