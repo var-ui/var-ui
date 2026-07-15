@@ -13,6 +13,7 @@ import {
   Card,
   Carousel,
   ClickableCard,
+  CommandPalette,
   DesignSystemProvider,
   Dialog,
   Divider,
@@ -230,6 +231,29 @@ function ToastDemo() {
   );
 }
 
+function CommandPaletteDemo() {
+  const [open, setOpen] = useState(false);
+  const [last, setLast] = useState<string | null>(null);
+  return (
+    <>
+      <Button onPress={() => setOpen(true)}>Open command palette</Button>
+      {last ? <Text tone="secondary">Last action: {last}</Text> : null}
+      <CommandPalette
+        isOpen={open}
+        onOpenChange={setOpen}
+        items={[
+          { id: 'theme', title: 'Toggle theme', meta: 'Appearance' },
+          { id: 'docs', title: 'Open docs', keywords: ['help'] },
+        ]}
+        onAction={(id) => {
+          setLast(id);
+          setOpen(false);
+        }}
+      />
+    </>
+  );
+}
+
 function OverlaysSection() {
   return (
     <Section title="Overlays">
@@ -246,6 +270,7 @@ function OverlaysSection() {
             <Text>Richer preview with a link.</Text>
           </HoverCard>
         </HStack>
+        <CommandPaletteDemo />
         <HStack gap="md">
           <AlertDialog
             triggerLabel="Archive item"

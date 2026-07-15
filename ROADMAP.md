@@ -114,7 +114,11 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
         CodeBlock. Remaining before closing the phase: visual QA pass across all
         8 themes in the example app.
   - [ ] Phase 2 — actions, menus, and form expansion
-  - [ ] Phase 3 — overlays and command surfaces
+  - [x] **Phase 3 P1 — overlays and command surfaces** — Toast (hybrid provider),
+        Tooltip/Popover/HoverCard, AlertDialog, CommandPalette. Spec:
+        `specs/phase-3-overlays-p1.md`. Plan:
+        `plans/2026-07-15-phase-3-overlays-p1.md`.
+  - [ ] Phase 3 P2 — Lightbox/Overlay
   - [ ] Phase 4 — lists, tables, and data display
   - [ ] Phase 5 — navigation and app chrome
   - [ ] Phase 6 — layout polish and collapsible regions
