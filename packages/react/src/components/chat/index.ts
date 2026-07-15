@@ -24,3 +24,4 @@ export {
 } from './ChatToolCalls';
 export { ChatComposer, type ChatComposerProps } from './ChatComposer';
 export { ChatComposerInput, type ChatComposerInputProps } from './ChatComposerInput';
+export { ChatSendButton, type ChatSendButtonProps } from './ChatSendButton';
