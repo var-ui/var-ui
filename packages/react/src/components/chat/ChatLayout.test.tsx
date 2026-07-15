@@ -1,7 +1,22 @@
+import { useState } from 'react';
 import { describe, expect, it } from 'vite-plus/test';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { IconProvider } from '../../icons';
 import { ChatLayout } from './ChatLayout';
+
+type ResizeCallback = () => void;
+
+class CountingResizeObserver {
+  static constructedCount = 0;
+  callback: ResizeCallback;
+  constructor(callback: ResizeCallback) {
+    this.callback = callback;
+    CountingResizeObserver.constructedCount += 1;
+  }
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
 
 describe('ChatLayout', () => {
   it('renders children and the composer', () => {
@@ -47,5 +62,37 @@ describe('ChatLayout', () => {
       </IconProvider>,
     );
     expect(screen.getByRole('button', { name: 'Custom' })).toBeTruthy();
+  });
+
+  it('does not recreate the ResizeObserver when an unrelated re-render occurs', () => {
+    const originalResizeObserver = globalThis.ResizeObserver;
+    (globalThis as { ResizeObserver: unknown }).ResizeObserver = CountingResizeObserver;
+    CountingResizeObserver.constructedCount = 0;
+
+    function Harness() {
+      const [tick, setTick] = useState(0);
+      return (
+        <IconProvider icons={{}}>
+          <button type="button" data-testid="bump" onClick={() => setTick((t) => t + 1)}>
+            bump {tick}
+          </button>
+          <ChatLayout composer={<div data-testid="composer" />}>
+            <div data-testid="messages">messages</div>
+          </ChatLayout>
+        </IconProvider>
+      );
+    }
+
+    render(<Harness />);
+
+    expect(CountingResizeObserver.constructedCount).toBe(1);
+
+    fireEvent.click(screen.getByTestId('bump'));
+    fireEvent.click(screen.getByTestId('bump'));
+
+    expect(screen.getByTestId('bump').textContent).toBe('bump 2');
+    expect(CountingResizeObserver.constructedCount).toBe(1);
+
+    (globalThis as { ResizeObserver: unknown }).ResizeObserver = originalResizeObserver;
   });
 });

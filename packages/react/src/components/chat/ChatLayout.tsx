@@ -1,4 +1,4 @@
-import { useRef, type JSX, type ReactNode, type RefObject } from 'react';
+import { useCallback, useRef, type JSX, type ReactNode, type RefObject } from 'react';
 import { chatLayout } from '@var-ui/core';
 import { cx } from '../utils';
 import { Button } from '../Button';
@@ -61,6 +61,14 @@ export function ChatLayout({
     onResize: scroll.scrollIfLocked,
   });
 
+  const setMessageAreaRef = useCallback(
+    (el: HTMLElement | null) => {
+      messageAreaRef.current = el;
+      newMessages.contentRef(el);
+    },
+    [newMessages.contentRef],
+  );
+
   const showButton = scroll.isScrolledUp || newMessages.hasNewMessages;
   const defaultButton = showButton ? (
     <Button
@@ -77,13 +85,7 @@ export function ChatLayout({
 
   return (
     <div className={cx(l.root, className)}>
-      <div
-        className={l.messageArea}
-        ref={(el) => {
-          messageAreaRef.current = el;
-          newMessages.contentRef(el);
-        }}
-      >
+      <div className={l.messageArea} ref={setMessageAreaRef}>
         {hasVisibleContent(children) ? children : (emptyState ?? null)}
       </div>
       <div className={l.dock}>
