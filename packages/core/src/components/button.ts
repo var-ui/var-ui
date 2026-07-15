@@ -78,6 +78,15 @@ export const button = styles.component(
               backgroundColor: t.color.background.subtle,
             },
           },
+          danger: {
+            [v.border.name]: t.color.danger.default,
+            [v.background.name]: t.color.danger.default,
+            [v.foreground.name]: t.color.text.onDanger,
+            '&:hover': {
+              [v.background.name]: t.color.danger.solid,
+              [v.border.name]: t.color.danger.solid,
+            },
+          },
         },
         size: {
           sm: {

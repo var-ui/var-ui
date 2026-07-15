@@ -27,62 +27,90 @@ export const dialog = styles.component(
       },
     });
     return {
-      slots: ['overlay', 'modal', 'content', 'header', 'heading', 'description', 'closeButton'],
-      overlay: {
-        position: 'fixed',
-        inset: 0,
-        backgroundColor: v.overlayBackground.var,
-        display: 'grid',
-        placeItems: 'center',
-        padding: t.space[4],
-      },
-      modal: {
-        width: 'min(480px, 100%)',
-        backgroundColor: v.modalBackground.var,
-        borderRadius: t.radius.lg,
-        border: `1px solid ${v.modalBorder.var}`,
-        boxShadow: t.shadow.md,
-        padding: t.space[4],
-      },
-      content: {
-        display: 'grid',
-        gap: t.space[3],
-      },
-      header: {
-        display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'space-between',
-        gap: t.space[3],
-      },
-      heading: {
-        fontSize: '18px',
-        fontWeight: t.fontWeight.semibold,
-        margin: 0,
-      },
-      closeButton: {
-        appearance: 'none',
-        border: 'none',
-        background: 'transparent',
-        color: t.color.text.secondary,
-        cursor: 'pointer',
-        display: 'inline-flex',
-        padding: t.space[1],
-        marginRight: `calc(${t.space[1]} * -1)`,
-        borderRadius: t.radius.sm,
-        '&:hover': {
-          backgroundColor: t.color.background.subtle,
-          color: t.color.text.primary,
+      slots: [
+        'overlay',
+        'modal',
+        'content',
+        'header',
+        'heading',
+        'description',
+        'closeButton',
+        'actions',
+      ],
+      base: {
+        overlay: {
+          position: 'fixed',
+          inset: 0,
+          backgroundColor: v.overlayBackground.var,
+          display: 'grid',
+          placeItems: 'center',
+          padding: t.space[4],
         },
-        '&:focus-visible': {
-          outline: `2px solid ${t.color.border.focus}`,
-          outlineOffset: '1px',
+        modal: {
+          width: 'min(480px, 100%)',
+          backgroundColor: v.modalBackground.var,
+          borderRadius: t.radius.lg,
+          border: `1px solid ${v.modalBorder.var}`,
+          boxShadow: t.shadow.md,
+          padding: t.space[4],
+        },
+        content: {
+          display: 'grid',
+          gap: t.space[3],
+        },
+        header: {
+          display: 'flex',
+          alignItems: 'flex-start',
+          justifyContent: 'space-between',
+          gap: t.space[3],
+        },
+        heading: {
+          fontSize: '18px',
+          fontWeight: t.fontWeight.semibold,
+          margin: 0,
+        },
+        closeButton: {
+          appearance: 'none',
+          border: 'none',
+          background: 'transparent',
+          color: t.color.text.secondary,
+          cursor: 'pointer',
+          display: 'inline-flex',
+          padding: t.space[1],
+          marginRight: `calc(${t.space[1]} * -1)`,
+          borderRadius: t.radius.sm,
+          '&:hover': {
+            backgroundColor: t.color.background.subtle,
+            color: t.color.text.primary,
+          },
+          '&:focus-visible': {
+            outline: `2px solid ${t.color.border.focus}`,
+            outlineOffset: '1px',
+          },
+        },
+        description: {
+          margin: 0,
+          fontSize: t.fontSize.sm,
+          color: v.descriptionColor.var,
+        },
+        actions: {
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: t.space[2],
+          marginTop: t.space[2],
         },
       },
-      description: {
-        margin: 0,
-        fontSize: t.fontSize.sm,
-        color: v.descriptionColor.var,
+      variants: {
+        role: {
+          dialog: {},
+          alertdialog: {
+            modal: {
+              borderColor: t.color.border.strong,
+            },
+          },
+        },
       },
+      defaultVariants: { role: 'dialog' },
     };
   },
   { layer: 'components' },
