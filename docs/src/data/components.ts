@@ -266,6 +266,13 @@ export const componentRegistry: ComponentEntry[] = [
     importLine: "import { ChatMessage } from '@var-ui/react';",
   },
   {
+    slug: 'chat-message-metadata',
+    name: 'ChatMessageMetadata',
+    category: 'chat',
+    description: 'Timestamp and optional status text for a chat message.',
+    importLine: "import { ChatMessageMetadata } from '@var-ui/react';",
+  },
+  {
     slug: 'chat-message-bubble',
     name: 'ChatMessageBubble',
     category: 'chat',
