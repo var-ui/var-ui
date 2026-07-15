@@ -31,6 +31,11 @@ export { Select, type SelectOption, type SelectProps } from './Select';
 export { Tabs, type TabsProps } from './Tabs';
 export { Dialog, type DialogProps } from './Dialog';
 export { AlertDialog, type AlertDialogProps } from './AlertDialog';
+export {
+  CommandPalette,
+  type CommandPaletteItem,
+  type CommandPaletteProps,
+} from './CommandPalette';
 export { Tooltip, type TooltipProps } from './Tooltip';
 export { Popover, type PopoverProps } from './Popover';
 export { HoverCard, type HoverCardProps } from './HoverCard';
