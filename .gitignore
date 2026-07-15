@@ -5,3 +5,4 @@ dist-types
 *.log
 .DS_Store
 docs/src/pages.gen.ts
+.worktrees/
