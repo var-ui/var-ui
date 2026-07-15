@@ -120,6 +120,18 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
   - [ ] Phase 6 — layout polish and collapsible regions
   - [ ] Phase 7 — chat
 
+## Chat components
+
+- [x] **Chat — "MVP + AI streaming essentials"** — `ChatLayout`,
+      `ChatMessageList`, `ChatMessage`, `ChatMessageBubble`, `ChatComposer`/
+      `ChatComposerInput`, `ChatSendButton`, `ChatToolCalls`,
+      `ChatSystemMessage`, `ChatMessageMetadata`, plus `useChatStreamScroll`/
+      `useChatNewMessages`. Shipped as its own initiative ahead of V6's
+      Phase 2–6 ordering — see `specs/chat-components.md` for the scope
+      decision. Deferred to a later PR: `ChatComposerDrawer`, mention/token
+      composer input, `ChatDictationButton`, `ChatTokenizedText` (tracked
+      under V6 Phase 7 in `specs/component-breadth.md`).
+
 ## Future (unscheduled)
 
 - Per-recipe structured docs for human + AI-agent discovery (colocated
