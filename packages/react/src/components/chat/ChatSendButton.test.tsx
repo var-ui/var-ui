@@ -37,4 +37,18 @@ describe('ChatSendButton', () => {
       true,
     );
   });
+
+  it('ignores isDisabled while streaming (stop stays pressable)', async () => {
+    const onStop = vi.fn();
+    render(
+      <IconProvider icons={{}}>
+        <ChatSendButton isStreaming isDisabled onStop={onStop} />
+      </IconProvider>,
+    );
+    expect(screen.getByRole('button', { name: 'Stop generating' }).hasAttribute('disabled')).toBe(
+      false,
+    );
+    await userEvent.click(screen.getByRole('button', { name: 'Stop generating' }));
+    expect(onStop).toHaveBeenCalledTimes(1);
+  });
 });
