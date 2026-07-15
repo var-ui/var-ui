@@ -32,7 +32,9 @@ import {
   TextField,
   Thumbnail,
   Timestamp,
+  ToastProvider,
   useDesignSystemTheme,
+  useToast,
 } from '@var-ui/react';
 
 const AVATAR_URL =
@@ -203,46 +205,78 @@ function ChatSection() {
   );
 }
 
+function ToastDemo() {
+  const toast = useToast();
+  return (
+    <HStack gap="sm">
+      <Button onPress={() => toast.add({ tone: 'success', title: 'Saved' })}>Success toast</Button>
+      <Button
+        onPress={() =>
+          toast.add({
+            tone: 'danger',
+            title: 'Failed',
+            description: 'Could not save.',
+            durationMs: 0,
+          })
+        }
+      >
+        Persistent danger
+      </Button>
+    </HStack>
+  );
+}
+
+function OverlaysSection() {
+  return (
+    <Section title="Overlays">
+      <ToastDemo />
+    </Section>
+  );
+}
+
 export function App() {
   return (
     <DesignSystemProvider defaultTheme="light">
       <IconProvider icons={defaultIcons}>
-        <LayerProvider>
-          <Stack gap="xl" style={{ padding: '2rem', maxWidth: '56rem', margin: '0 auto' }}>
-            <Stack gap="sm">
-              <Heading level={1} size="display">
-                var-ui
-              </Heading>
-              <Text tone="secondary">
-                Component showcase for the Phase 0–1 breadth work. Everything below is themed by CSS
-                custom properties — no compiler in sight.
-              </Text>
-              <HStack gap="sm">
-                <ThemeToggle />
-                <Dialog
-                  triggerLabel="Open dialog"
-                  title="Icon close button"
-                  description="The dismiss control now uses the registry close glyph."
-                />
-              </HStack>
+        <ToastProvider>
+          <LayerProvider>
+            <Stack gap="xl" style={{ padding: '2rem', maxWidth: '56rem', margin: '0 auto' }}>
+              <Stack gap="sm">
+                <Heading level={1} size="display">
+                  var-ui
+                </Heading>
+                <Text tone="secondary">
+                  Component showcase for the Phase 0–1 breadth work. Everything below is themed by
+                  CSS custom properties — no compiler in sight.
+                </Text>
+                <HStack gap="sm">
+                  <ThemeToggle />
+                  <Dialog
+                    triggerLabel="Open dialog"
+                    title="Icon close button"
+                    description="The dismiss control now uses the registry close glyph."
+                  />
+                </HStack>
+              </Stack>
+
+              <FeedbackSection />
+              <ContentSection />
+              <ContainerSection />
+              <FormsSection />
+              <OverlaysSection />
+              <ChatSection />
+
+              <Section {...{ [SURFACE_ATTRIBUTE]: 'dark' }} title="Fixed dark surface">
+                <Text>
+                  This section keeps the theme&apos;s dark token face while the page stays light.
+                </Text>
+                <Alert variant="info" appearance="subtle" title="Always-dark chrome">
+                  Mark subtrees with <code>{SURFACE_ATTRIBUTE}=&quot;dark&quot;</code>.
+                </Alert>
+              </Section>
             </Stack>
-
-            <FeedbackSection />
-            <ContentSection />
-            <ContainerSection />
-            <FormsSection />
-            <ChatSection />
-
-            <Section {...{ [SURFACE_ATTRIBUTE]: 'dark' }} title="Fixed dark surface">
-              <Text>
-                This section keeps the theme&apos;s dark token face while the page stays light.
-              </Text>
-              <Alert variant="info" appearance="subtle" title="Always-dark chrome">
-                Mark subtrees with <code>{SURFACE_ATTRIBUTE}=&quot;dark&quot;</code>.
-              </Alert>
-            </Section>
-          </Stack>
-        </LayerProvider>
+          </LayerProvider>
+        </ToastProvider>
       </IconProvider>
     </DesignSystemProvider>
   );
