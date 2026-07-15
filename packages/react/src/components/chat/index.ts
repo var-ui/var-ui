@@ -16,3 +16,9 @@ export {
   type ChatSystemMessageProps,
   type ChatSystemMessageTone,
 } from './ChatSystemMessage';
+export {
+  ChatToolCalls,
+  type ChatToolCallItem,
+  type ChatToolCallsProps,
+  type ChatToolCallStatus,
+} from './ChatToolCalls';

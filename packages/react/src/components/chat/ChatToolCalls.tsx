@@ -1,0 +1,130 @@
+import { useState, type JSX, type KeyboardEvent, type ReactNode } from 'react';
+import { chatToolCalls } from '@var-ui/core';
+import { cx } from '../utils';
+import { Icon } from '../../icons';
+import { Spinner } from '../Spinner';
+
+export type ChatToolCallStatus = 'pending' | 'running' | 'complete' | 'error';
+
+export type ChatToolCallItem = {
+  /** Tool/function name. */
+  name: string;
+  /** Current execution status. @default complete */
+  status?: ChatToolCallStatus;
+  /** The target of the action (e.g. "Button.tsx", "yarn test"). */
+  target?: string;
+  /** Duration string (e.g. "1.2s"). Shown when complete. */
+  duration?: string;
+  /** Inline detail content shown when the row is expanded (e.g. a diff or command output). */
+  resultDetail?: ReactNode;
+};
+
+export type ChatToolCallsProps = {
+  /** Tool call data — mirrors the shape LLM APIs (Vercel AI SDK, Anthropic, OpenAI) return. */
+  calls: ChatToolCallItem[];
+  /** Additional CSS class names merged onto the root element. */
+  className?: string;
+};
+
+function StatusIcon({ status }: { status: ChatToolCallStatus }) {
+  if (status === 'running') {
+    return <Spinner size="sm" label="Running" />;
+  }
+  if (status === 'pending') {
+    return <Icon name="clock" size="sm" />;
+  }
+  return <Icon name={status === 'error' ? 'close' : 'check'} size="sm" />;
+}
+
+function ToolCallRow({ call }: { call: ChatToolCallItem }) {
+  const status = call.status ?? 'complete';
+  const [isOpen, setIsOpen] = useState(false);
+  const hasDetail = call.resultDetail != null;
+  const t = chatToolCalls({ status });
+
+  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      setIsOpen((prev) => !prev);
+    }
+  }
+
+  return (
+    <div>
+      <div
+        role={hasDetail ? 'button' : undefined}
+        tabIndex={hasDetail ? 0 : undefined}
+        aria-expanded={hasDetail ? isOpen : undefined}
+        onClick={hasDetail ? () => setIsOpen((prev) => !prev) : undefined}
+        onKeyDown={hasDetail ? handleKeyDown : undefined}
+        className={t.header}
+      >
+        <span className={t.statusIcon}>
+          <StatusIcon status={status} />
+        </span>
+        <span className={t.name}>{call.name}</span>
+        {call.target ? <span className={t.target}>{call.target}</span> : null}
+        {call.duration && status === 'complete' ? (
+          <span className={t.duration}>{call.duration}</span>
+        ) : null}
+      </div>
+      {hasDetail && isOpen ? <div className={t.detail}>{call.resultDetail}</div> : null}
+    </div>
+  );
+}
+
+/**
+ * Displays tool/function call invocations from an LLM response. A single
+ * call renders inline; 2+ calls collapse into an expandable summary group.
+ *
+ * ```tsx
+ * <ChatToolCalls calls={message.toolCalls.map((tc) => ({ name: tc.toolName, status: tc.state }))} />
+ * ```
+ */
+export function ChatToolCalls({ calls, className }: ChatToolCallsProps): JSX.Element | null {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  if (calls.length === 0) {
+    return null;
+  }
+
+  const classes = chatToolCalls({ expanded: isExpanded ? 'true' : 'false' });
+
+  if (calls.length === 1) {
+    return (
+      <div className={cx(classes.root, className)}>
+        <ToolCallRow call={calls[0]} />
+      </div>
+    );
+  }
+
+  const latest = calls[calls.length - 1];
+
+  return (
+    <div className={cx(classes.root, className)}>
+      <button
+        type="button"
+        aria-expanded={isExpanded}
+        onClick={() => setIsExpanded((prev) => !prev)}
+        className={classes.header}
+      >
+        <span className={classes.statusIcon}>
+          <Icon name="wrench" size="sm" />
+        </span>
+        <span className={classes.name}>
+          {isExpanded ? `${calls.length} tool calls` : latest.name}
+        </span>
+        <span className={classes.chevron}>
+          <Icon name="chevronDown" size="sm" />
+        </span>
+      </button>
+      {isExpanded ? (
+        <div className={classes.list}>
+          {calls.map((call, index) => (
+            <ToolCallRow key={`${call.name}-${index}`} call={call} />
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
