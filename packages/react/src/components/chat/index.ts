@@ -22,3 +22,5 @@ export {
   type ChatToolCallsProps,
   type ChatToolCallStatus,
 } from './ChatToolCalls';
+export { ChatComposer, type ChatComposerProps } from './ChatComposer';
+export { ChatComposerInput, type ChatComposerInputProps } from './ChatComposerInput';
