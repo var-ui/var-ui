@@ -44,4 +44,11 @@ export const bundle2Icons: Partial<Record<IconName, ReactNode>> = {
       <path d="M12 7v5l3.5 2" />
     </Glyph>
   ),
+  moreHorizontal: (
+    <Glyph>
+      <circle cx="5" cy="12" r="1" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" />
+      <circle cx="19" cy="12" r="1" fill="currentColor" stroke="none" />
+    </Glyph>
+  ),
 };

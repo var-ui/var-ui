@@ -22,6 +22,7 @@ describe('icon system (core)', () => {
         'stop',
         'wrench',
         'clock',
+        'moreHorizontal',
       ].sort(),
     );
   });

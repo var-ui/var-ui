@@ -79,8 +79,29 @@ export const button = styles.component(
             },
           },
         },
+        size: {
+          sm: {
+            fontSize: t.fontSize.sm,
+            padding: `${t.space[1]} ${t.space[3]}`,
+          },
+          md: {},
+          lg: {
+            fontSize: t.fontSize.lg,
+            padding: `${t.space[3]} ${t.space[5]}`,
+          },
+        },
+        layout: {
+          default: {},
+          icon: {
+            padding: t.space[2],
+            width: '2rem',
+            height: '2rem',
+            minWidth: '2rem',
+            minHeight: '2rem',
+          },
+        },
       },
-      defaultVariants: { intent: 'secondary' },
+      defaultVariants: { intent: 'secondary', size: 'md', layout: 'default' },
     };
   },
   { layer: 'components' },

@@ -1,5 +1,26 @@
 export * from './chat';
 export { Button, type ButtonProps } from './Button';
+export { IconButton, type IconButtonProps } from './IconButton';
+export { ButtonGroup, type ButtonGroupProps } from './ButtonGroup';
+export {
+  SegmentedControl,
+  ToggleButton,
+  type SegmentedControlOption,
+  type SegmentedControlProps,
+  type ToggleButtonProps,
+} from './SegmentedControl';
+export {
+  DropdownMenu,
+  MenuContent,
+  type DropdownMenuProps,
+  type MenuContentProps,
+  type MenuItemDefinition,
+  type MenuSectionDefinition,
+} from './DropdownMenu';
+export { ContextMenu, type ContextMenuProps } from './ContextMenu';
+export { MoreMenu, type MoreMenuProps } from './MoreMenu';
+export { Slider, type SliderProps } from './Slider';
+export { NumberInput, type NumberInputProps } from './NumberInput';
 export { Link, type LinkProps } from './Link';
 export { TextField, type TextFieldProps } from './TextField';
 export { TextAreaField, type TextAreaFieldProps } from './TextAreaField';

@@ -20,6 +20,7 @@ export const iconNameList = [
   'stop',
   'wrench',
   'clock',
+  'moreHorizontal',
 ] as const;
 
 export type IconName = (typeof iconNameList)[number];

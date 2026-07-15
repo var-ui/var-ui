@@ -7,8 +7,15 @@ export type ButtonProps = Omit<RACButtonProps, 'className'> & {
   className?: string;
   /** Visual weight of the button. @default secondary */
   intent?: 'primary' | 'secondary' | 'ghost';
+  /** Control padding and type scale. @default md */
+  size?: 'sm' | 'md' | 'lg';
 };
 
-export function Button({ intent = 'secondary', className, ...props }: ButtonProps): JSX.Element {
-  return <AriaButton {...props} className={`${button({ intent })} ${className || ''}`} />;
+export function Button({
+  intent = 'secondary',
+  size = 'md',
+  className,
+  ...props
+}: ButtonProps): JSX.Element {
+  return <AriaButton {...props} className={`${button({ intent, size })} ${className || ''}`} />;
 }
