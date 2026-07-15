@@ -16,6 +16,7 @@ import {
   Dialog,
   Divider,
   EmptyState,
+  HoverCard,
   Field,
   Grid,
   Heading,
@@ -23,6 +24,7 @@ import {
   Icon,
   IconProvider,
   LayerProvider,
+  Popover,
   ProgressBar,
   Section,
   Select,
@@ -33,6 +35,7 @@ import {
   Thumbnail,
   Timestamp,
   ToastProvider,
+  Tooltip,
   useDesignSystemTheme,
   useToast,
 } from '@var-ui/react';
@@ -229,7 +232,20 @@ function ToastDemo() {
 function OverlaysSection() {
   return (
     <Section title="Overlays">
-      <ToastDemo />
+      <Stack gap="md">
+        <ToastDemo />
+        <HStack gap="md">
+          <Tooltip content="Keyboard shortcut hint">
+            <Button>Tooltip</Button>
+          </Tooltip>
+          <Popover trigger={<Button>Popover</Button>} title="Details">
+            <Text>Interactive content inside a popover.</Text>
+          </Popover>
+          <HoverCard trigger={<Button>Hover card</Button>}>
+            <Text>Richer preview with a link.</Text>
+          </HoverCard>
+        </HStack>
+      </Stack>
     </Section>
   );
 }
