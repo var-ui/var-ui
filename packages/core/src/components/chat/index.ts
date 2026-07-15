@@ -4,3 +4,4 @@ export { chatMessageList } from './chatMessageList';
 export { chatSystemMessage } from './chatSystemMessage';
 export { chatToolCalls } from './chatToolCalls';
 export { chatComposer } from './chatComposer';
+export { chatLayout } from './chatLayout';

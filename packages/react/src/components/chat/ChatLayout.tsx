@@ -1,0 +1,95 @@
+import { useRef, type JSX, type ReactNode, type RefObject } from 'react';
+import { chatLayout } from '@var-ui/core';
+import { cx } from '../utils';
+import { Button } from '../Button';
+import { Icon } from '../../icons';
+import { useChatStreamScroll } from '../../chat/useChatStreamScroll';
+import { useChatNewMessages } from '../../chat/useChatNewMessages';
+
+export type ChatLayoutProps = {
+  /** Message content — typically `ChatMessageList`. */
+  children: ReactNode;
+  /** Composer element, fixed to the bottom dock — typically `ChatComposer`. */
+  composer: ReactNode;
+  /** Content shown when `children` is empty. */
+  emptyState?: ReactNode;
+  /**
+   * Scroll-to-bottom button rendered above the composer. Defaults to a
+   * built-in button wired to `useChatStreamScroll`/`useChatNewMessages`.
+   * Pass a custom node to override, or `null` to hide.
+   */
+  scrollButton?: ReactNode | null;
+  /** External scroll container. When omitted, the message area itself scrolls. */
+  scrollRef?: RefObject<HTMLElement | null>;
+  /** Additional CSS class names merged onto the root element. */
+  className?: string;
+};
+
+function hasVisibleContent(children: ReactNode): boolean {
+  if (children == null || children === false) {
+    return false;
+  }
+  return !(Array.isArray(children) && children.length === 0);
+}
+
+/**
+ * Layout shell for a full chat interface: scrollable messages above a
+ * sticky composer dock, with a default "scroll to bottom / new messages"
+ * button.
+ *
+ * ```tsx
+ * <ChatLayout composer={<ChatComposer>…</ChatComposer>}>
+ *   <ChatMessageList isStreaming={isStreaming}>…</ChatMessageList>
+ * </ChatLayout>
+ * ```
+ */
+export function ChatLayout({
+  children,
+  composer,
+  emptyState,
+  scrollButton,
+  scrollRef: externalScrollRef,
+  className,
+}: ChatLayoutProps): JSX.Element {
+  const messageAreaRef = useRef<HTMLElement | null>(null);
+  const scrollContainerRef = externalScrollRef ?? messageAreaRef;
+  const l = chatLayout();
+
+  const scroll = useChatStreamScroll({ scrollRef: scrollContainerRef });
+  const newMessages = useChatNewMessages({
+    isLocked: scroll.isLocked,
+    onResize: scroll.scrollIfLocked,
+  });
+
+  const showButton = scroll.isScrolledUp || newMessages.hasNewMessages;
+  const defaultButton = showButton ? (
+    <Button
+      intent="secondary"
+      onPress={() => {
+        newMessages.dismiss();
+        scroll.scrollToBottom();
+      }}
+    >
+      <Icon name="chevronDown" size="sm" />
+      {newMessages.hasNewMessages ? 'New messages' : 'Scroll to bottom'}
+    </Button>
+  ) : null;
+
+  return (
+    <div className={cx(l.root, className)}>
+      <div
+        className={l.messageArea}
+        ref={(el) => {
+          messageAreaRef.current = el;
+          newMessages.contentRef(el);
+        }}
+      >
+        {hasVisibleContent(children) ? children : (emptyState ?? null)}
+      </div>
+      <div className={l.dock}>
+        {scrollButton === undefined ? defaultButton : scrollButton}
+        {composer}
+      </div>
+    </div>
+  );
+}
