@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vite-plus/test';
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { IconProvider } from '../icons';
 import { LayerProvider } from '../layers/LayerProvider';
@@ -55,10 +55,11 @@ describe('HoverCard', () => {
     const trigger = screen.getByRole('link', { name: '@user' });
     await userEvent.hover(trigger);
     const dialog = await waitFor(() => screen.getByRole('dialog'));
-    await userEvent.unhover(trigger);
-    await userEvent.hover(dialog);
+    // Synchronous pointer events avoid a race between closeDelay and userEvent's async hover.
+    fireEvent.mouseLeave(trigger);
+    fireEvent.mouseEnter(dialog);
     expect(screen.getByRole('dialog')).toBeTruthy();
-    await userEvent.unhover(dialog);
+    fireEvent.mouseLeave(dialog);
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
   });
 
