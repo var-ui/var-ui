@@ -75,7 +75,15 @@ export function ChatDemo() {
         composer={
           <ChatComposer
             actions={
-              <ChatSendButton isStreaming={isStreaming} onPress={() => handleSubmit(draft)} />
+              <ChatSendButton
+                isStreaming={isStreaming}
+                onPress={() => {
+                  const trimmed = draft.trim();
+                  if (trimmed) {
+                    handleSubmit(trimmed);
+                  }
+                }}
+              />
             }
           >
             <ChatComposerInput
