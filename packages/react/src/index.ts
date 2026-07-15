@@ -65,6 +65,8 @@ export {
   type ButtonProps,
   type CheckboxProps,
   type DialogProps,
+  Tooltip,
+  type TooltipProps,
   type CodeBlockProps,
   type LinkProps,
   type RadioGroupOption,
