@@ -15,6 +15,7 @@ export { alert } from './alert';
 export { avatar, avatarGroup } from './avatar';
 export { badge } from './badge';
 export { banner } from './banner';
+export { toast } from './toast';
 export { card } from './card';
 export { carousel } from './carousel';
 export { namedContainerQuery } from './namedContainerQuery';
