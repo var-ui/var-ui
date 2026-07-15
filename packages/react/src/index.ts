@@ -67,6 +67,8 @@ export {
   type DialogProps,
   Tooltip,
   type TooltipProps,
+  Popover,
+  type PopoverProps,
   type CodeBlockProps,
   type LinkProps,
   type RadioGroupOption,

@@ -17,6 +17,7 @@ export { badge } from './badge';
 export { banner } from './banner';
 export { toast } from './toast';
 export { tooltip } from './tooltip';
+export { popover } from './popover';
 export { card } from './card';
 export { carousel } from './carousel';
 export { namedContainerQuery } from './namedContainerQuery';
