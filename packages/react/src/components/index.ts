@@ -32,6 +32,7 @@ export { Tabs, type TabsProps } from './Tabs';
 export { Dialog, type DialogProps } from './Dialog';
 export { Tooltip, type TooltipProps } from './Tooltip';
 export { Popover, type PopoverProps } from './Popover';
+export { HoverCard, type HoverCardProps } from './HoverCard';
 export { CodeBlock, type CodeBlockProps } from './CodeBlock';
 export { Alert, type AlertAppearance, type AlertProps, type AlertVariant } from './Alert';
 export { Field, type FieldProps } from './Field';

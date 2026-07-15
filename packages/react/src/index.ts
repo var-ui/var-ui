@@ -69,6 +69,8 @@ export {
   type TooltipProps,
   Popover,
   type PopoverProps,
+  HoverCard,
+  type HoverCardProps,
   type CodeBlockProps,
   type LinkProps,
   type RadioGroupOption,
