@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export type UseChatNewMessagesOptions = {
   /** Current lock state from `useChatStreamScroll`. */
@@ -20,6 +20,8 @@ export type UseChatNewMessagesReturn = {
  * Tracks content growth via `ResizeObserver`. While locked, calls
  * `onResize` (typically re-triggering auto-scroll); while unlocked, flags
  * `hasNewMessages` so a caller can surface a "New messages" affordance.
+ * Also clears `hasNewMessages` whenever lock re-engages (e.g. the user
+ * manually scrolls back to the bottom), not just via `dismiss()`.
  */
 export function useChatNewMessages({
   isLocked,
@@ -28,6 +30,14 @@ export function useChatNewMessages({
   const [hasNewMessages, setHasNewMessages] = useState(false);
   const observerRef = useRef<ResizeObserver | null>(null);
   const lastHeightRef = useRef(0);
+  const isLockedRef = useRef(isLocked);
+  isLockedRef.current = isLocked;
+
+  useEffect(() => {
+    if (isLocked) {
+      setHasNewMessages(false);
+    }
+  }, [isLocked]);
 
   const contentRef = useCallback(
     (el: HTMLElement | null) => {
@@ -40,7 +50,7 @@ export function useChatNewMessages({
       const observer = new ResizeObserver(() => {
         const nextHeight = el.scrollHeight;
         if (nextHeight > lastHeightRef.current) {
-          if (isLocked) {
+          if (isLockedRef.current) {
             onResize?.();
           } else {
             setHasNewMessages(true);
@@ -51,7 +61,7 @@ export function useChatNewMessages({
       observer.observe(el);
       observerRef.current = observer;
     },
-    [isLocked, onResize],
+    [onResize],
   );
 
   const dismiss = useCallback(() => setHasNewMessages(false), []);

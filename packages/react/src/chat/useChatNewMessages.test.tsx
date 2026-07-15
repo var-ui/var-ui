@@ -62,4 +62,28 @@ describe('useChatNewMessages', () => {
     });
     expect(result.current.hasNewMessages).toBe(false);
   });
+
+  it('clears hasNewMessages when isLocked transitions to true', () => {
+    (globalThis as { ResizeObserver: unknown }).ResizeObserver = FakeResizeObserver;
+    FakeResizeObserver.instances = [];
+    const { result, rerender } = renderHook(({ isLocked }) => useChatNewMessages({ isLocked }), {
+      initialProps: { isLocked: false },
+    });
+
+    const el = document.createElement('div');
+    Object.defineProperty(el, 'scrollHeight', { value: 100, configurable: true });
+    act(() => {
+      result.current.contentRef(el);
+    });
+
+    Object.defineProperty(el, 'scrollHeight', { value: 200, configurable: true });
+    act(() => {
+      FakeResizeObserver.instances[0].trigger();
+    });
+    expect(result.current.hasNewMessages).toBe(true);
+
+    rerender({ isLocked: true });
+
+    expect(result.current.hasNewMessages).toBe(false);
+  });
 });
