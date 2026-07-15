@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ChatDemo } from './ChatDemo';
 import { kbd, skeleton, statusDot, SURFACE_ATTRIBUTE } from '@var-ui/core';
 import { defaultIcons } from '@var-ui/icons';
 import {
@@ -194,6 +195,14 @@ function FormsSection() {
   );
 }
 
+function ChatSection() {
+  return (
+    <Section title="Chat">
+      <ChatDemo />
+    </Section>
+  );
+}
+
 export function App() {
   return (
     <DesignSystemProvider defaultTheme="light">
@@ -222,6 +231,7 @@ export function App() {
             <ContentSection />
             <ContainerSection />
             <FormsSection />
+            <ChatSection />
 
             <Section {...{ [SURFACE_ATTRIBUTE]: 'dark' }} title="Fixed dark surface">
               <Text>
