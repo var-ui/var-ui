@@ -4,6 +4,7 @@ import { kbd, skeleton, statusDot, SURFACE_ATTRIBUTE } from '@var-ui/core';
 import { defaultIcons } from '@var-ui/icons';
 import {
   Alert,
+  AlertDialog,
   Avatar,
   AvatarGroup,
   Badge,
@@ -244,6 +245,23 @@ function OverlaysSection() {
           <HoverCard trigger={<Button>Hover card</Button>}>
             <Text>Richer preview with a link.</Text>
           </HoverCard>
+        </HStack>
+        <HStack gap="md">
+          <AlertDialog
+            triggerLabel="Archive item"
+            title="Archive this item?"
+            description="You can restore it from the archive at any time."
+            confirmLabel="Archive"
+            onConfirm={() => console.log('archived')}
+          />
+          <AlertDialog
+            triggerLabel="Delete item"
+            title="Delete this item?"
+            description="This action is permanent and cannot be undone."
+            confirmLabel="Delete"
+            isDestructive
+            onConfirm={() => console.log('deleted')}
+          />
         </HStack>
       </Stack>
     </Section>
