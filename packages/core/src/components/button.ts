@@ -79,12 +79,12 @@ export const button = styles.component(
             },
           },
           danger: {
-            [v.border.name]: t.color.danger.default,
-            [v.background.name]: t.color.danger.default,
+            [v.border.name]: t.color.danger.solid,
+            [v.background.name]: t.color.danger.solid,
             [v.foreground.name]: t.color.text.onDanger,
             '&:hover': {
-              [v.background.name]: t.color.danger.solid,
-              [v.border.name]: t.color.danger.solid,
+              [v.background.name]: `color-mix(in oklch, ${t.color.danger.solid} 88%, black)`,
+              [v.border.name]: `color-mix(in oklch, ${t.color.danger.solid} 88%, black)`,
             },
           },
         },
