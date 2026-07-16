@@ -43,8 +43,13 @@ function getVisibleItems(
   if (expanded || maxItems == null || items.length <= maxItems) {
     return items;
   }
-  const leading = items.slice(0, itemsBeforeCollapse);
-  const trailing = items.slice(items.length - itemsAfterCollapse);
+  // Clamp so the leading/trailing windows never overlap (and never exceed
+  // items.length), which would otherwise emit a duplicate item `id` into the
+  // rendered array passed to RAC's `<Breadcrumbs items={...}>`.
+  const before = Math.max(0, Math.min(itemsBeforeCollapse, items.length));
+  const after = Math.max(0, Math.min(itemsAfterCollapse, items.length - before));
+  const leading = items.slice(0, before);
+  const trailing = items.slice(items.length - after);
   return [...leading, { id: ELLIPSIS_ID, label: '…', isEllipsis: true }, ...trailing];
 }
 

@@ -57,6 +57,25 @@ describe('Breadcrumbs', () => {
     expect(screen.getByText('C')).toBeTruthy();
   });
 
+  it('never renders a duplicate item when before/after windows overlap', () => {
+    render(
+      <Breadcrumbs
+        maxItems={3}
+        itemsBeforeCollapse={3}
+        itemsAfterCollapse={2}
+        items={[
+          { id: 'a', label: 'A', href: '/a' },
+          { id: 'b', label: 'B', href: '/a/b' },
+          { id: 'c', label: 'C', href: '/a/b/c' },
+          { id: 'd', label: 'D' },
+        ]}
+      />,
+    );
+    // 4 unique items + 1 ellipsis marker = 5 rendered listitems, no duplicates.
+    expect(screen.getAllByRole('listitem')).toHaveLength(5);
+    expect(screen.getAllByText('C')).toHaveLength(1);
+  });
+
   it('calls onAction with the pressed item id', async () => {
     const onAction = vi.fn();
     render(
