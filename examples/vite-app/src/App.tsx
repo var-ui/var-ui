@@ -10,6 +10,7 @@ import {
   AvatarGroup,
   Badge,
   Banner,
+  Breadcrumbs,
   Button,
   Calendar,
   Card,
@@ -285,6 +286,35 @@ function FormsSection() {
   );
 }
 
+function NavigationSection() {
+  return (
+    <Section title="Navigation">
+      <Stack gap="md">
+        <Breadcrumbs
+          label="Short trail"
+          items={[
+            { id: 'home', label: 'Home', href: '/' },
+            { id: 'settings', label: 'Settings', href: '/settings' },
+            { id: 'profile', label: 'Profile' },
+          ]}
+        />
+        <Breadcrumbs
+          label="Deep trail"
+          maxItems={4}
+          items={[
+            { id: 'home', label: 'Home', href: '/' },
+            { id: 'org', label: 'Acme Corp', href: '/org' },
+            { id: 'team', label: 'Platform Team', href: '/org/team' },
+            { id: 'project', label: 'var-ui', href: '/org/team/project' },
+            { id: 'issue', label: 'Issue #482', href: '/org/team/project/issues/482' },
+            { id: 'comment', label: 'Comment' },
+          ]}
+        />
+      </Stack>
+    </Section>
+  );
+}
+
 function DatesSection() {
   const [date, setDate] = useState(today(getLocalTimeZone()));
 
@@ -423,6 +453,7 @@ export function App() {
               <ContentSection />
               <ContainerSection />
               <FormsSection />
+              <NavigationSection />
               <DatesSection />
               <OverlaysSection />
               <ChatSection />
