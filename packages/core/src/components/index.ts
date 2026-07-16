@@ -55,6 +55,7 @@ export { heading, textBlock } from './typography';
 export { icon } from './icon';
 export { kbd } from './kbd';
 export { overlay } from './overlay';
+export { pagination } from './pagination';
 export { progressBar } from './progressBar';
 export { section } from './section';
 export { skeleton } from './skeleton';
