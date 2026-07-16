@@ -26,6 +26,7 @@ export { alert } from './alert';
 export { avatar, avatarGroup } from './avatar';
 export { badge } from './badge';
 export { banner } from './banner';
+export { breadcrumbs } from './breadcrumbs';
 export { toast } from './toast';
 export { tooltip } from './tooltip';
 export { popover } from './popover';
