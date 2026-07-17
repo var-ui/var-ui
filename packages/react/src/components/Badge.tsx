@@ -1,6 +1,6 @@
 import type { HTMLAttributes, JSX } from 'react';
 import { badge } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
   /** Semantic color treatment. @default neutral */
@@ -15,5 +15,5 @@ export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
  * ```
  */
 export function Badge({ tone = 'neutral', className, ...props }: BadgeProps): JSX.Element {
-  return <span {...props} className={cx(badge({ tone }), className)} />;
+  return <span {...props} {...recipeProps(badge({ tone }), className)} />;
 }

@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { chatComposer } from '@var-ui/core';
-import { cx } from '../utils';
+import { recipeProps } from '../utils';
 
 export type ChatComposerProps = {
   /** Composer input — typically `ChatComposerInput`. */
@@ -23,9 +23,9 @@ export type ChatComposerProps = {
 export function ChatComposer({ children, actions, className }: ChatComposerProps): JSX.Element {
   const c = chatComposer();
   return (
-    <div className={cx(c.root, className)}>
+    <div {...recipeProps(c.root, className)}>
       {children}
-      {actions ? <div className={c.actions}>{actions}</div> : null}
+      {actions ? <div {...recipeProps(c.actions)}>{actions}</div> : null}
     </div>
   );
 }

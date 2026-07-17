@@ -6,6 +6,7 @@ import {
   type CheckboxGroupProps as RACCheckboxGroupProps,
 } from 'react-aria-components';
 import { checkbox } from '@var-ui/core';
+import { recipeProps } from './utils';
 
 export type CheckboxGroupOption = {
   /** Value submitted with the form when this option is selected. */
@@ -24,16 +25,16 @@ export type CheckboxGroupProps = Omit<RACCheckboxGroupProps, 'children'> & {
 export function CheckboxGroup({ label, options, ...props }: CheckboxGroupProps): JSX.Element {
   const r = checkbox();
   return (
-    <AriaCheckboxGroup {...props} className={r.group}>
-      {label ? <Label className={r.groupLabel}>{label}</Label> : null}
+    <AriaCheckboxGroup {...props} {...recipeProps(r.group)}>
+      {label ? <Label {...recipeProps(r.groupLabel)}>{label}</Label> : null}
       {options.map((option) => (
-        <AriaCheckbox key={option.value} value={option.value} className={r.root}>
+        <AriaCheckbox key={option.value} value={option.value} {...recipeProps(r.root)}>
           {({ isSelected }) => (
             <>
-              <span className={r.box} data-selected={isSelected || undefined}>
+              <span {...recipeProps(r.box)} data-selected={isSelected || undefined}>
                 {isSelected ? '✓' : ''}
               </span>
-              <span className={r.label}>{option.label}</span>
+              <span {...recipeProps(r.label)}>{option.label}</span>
             </>
           )}
         </AriaCheckbox>

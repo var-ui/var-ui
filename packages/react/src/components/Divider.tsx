@@ -1,6 +1,6 @@
 import type { HTMLAttributes, JSX } from 'react';
 import { divider } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type DividerProps = HTMLAttributes<HTMLHRElement> & {
   /** Layout direction of the separator line. @default horizontal */
@@ -20,7 +20,7 @@ export function Divider({
     <hr
       {...props}
       aria-orientation={orientation === 'vertical' ? 'vertical' : undefined}
-      className={cx(divider({ orientation }), className)}
+      {...recipeProps(divider({ orientation }), className)}
     />
   );
 }

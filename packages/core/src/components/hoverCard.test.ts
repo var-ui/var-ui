@@ -6,8 +6,8 @@ describe('hoverCard', () => {
   it('registers root, title, and content slots', () => {
     hoverCard();
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-hover-card-root');
-    expect(css).toContain('var-ui-hover-card-title');
-    expect(css).toContain('var-ui-hover-card-content');
+    expect(css).toContain('.var-ui-hover-card');
+    expect(css).toContain('.var-ui-hover-card__title');
+    expect(css).toContain('.var-ui-hover-card__content');
   });
 });

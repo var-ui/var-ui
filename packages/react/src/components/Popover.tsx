@@ -9,6 +9,7 @@ import {
 } from 'react-aria-components';
 import { popover } from '@var-ui/core';
 import { useLayer } from '../layers/LayerProvider';
+import { recipeProps } from './utils';
 
 export type PopoverProps = Omit<DialogTriggerProps, 'children'> & {
   /** Single focusable trigger element. */
@@ -47,14 +48,14 @@ export function Popover({
     <DialogTrigger {...triggerProps}>
       {trigger}
       <AriaPopover
-        className={p.root}
+        {...recipeProps(p.root)}
         placement={placement}
         style={layerStyle}
         UNSTABLE_portalContainer={portalContainer}
       >
-        <Dialog className={p.content}>
+        <Dialog {...recipeProps(p.content)}>
           {title ? (
-            <Heading slot="title" className={p.title}>
+            <Heading slot="title" {...recipeProps(p.title)}>
               {title}
             </Heading>
           ) : null}

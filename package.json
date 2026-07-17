@@ -7,6 +7,7 @@
     "check": "vp check",
     "fmt": "vp fmt",
     "lint": "vp lint",
+    "lint:fix": "vp lint --fix",
     "test": "vp test run",
     "build": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build",
     "pack": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons pack",
@@ -20,7 +21,7 @@
     "@changesets/changelog-github": "^0.6.0",
     "@changesets/cli": "^2.29.8",
     "@types/node": "^24.0.0",
-    "@typestyles/eslint-plugin": "^0.3.0",
+    "@typestyles/eslint-plugin": "^0.3.1",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vite-plus": "catalog:"

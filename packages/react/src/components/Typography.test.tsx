@@ -3,17 +3,18 @@ import { render, screen } from '@testing-library/react';
 import { Heading, Text } from './Typography';
 
 describe('Typography', () => {
-  it('Heading renders the requested level with a size class', () => {
+  it('Heading renders the requested level with a size attr', () => {
     render(
       <Heading level={3} size="lg">
         Title
       </Heading>,
     );
     const h = screen.getByRole('heading', { level: 3, name: 'Title' });
-    expect(h.className).toContain('var-ui-heading-size-lg');
+    expect(h.className).toContain('var-ui-heading');
+    expect(h.getAttribute('data-size')).toBe('lg');
   });
 
-  it('Text renders the requested element with tone class', () => {
+  it('Text renders the requested element with tone attr', () => {
     render(
       <Text as="span" tone="secondary">
         hint
@@ -21,6 +22,6 @@ describe('Typography', () => {
     );
     const el = screen.getByText('hint');
     expect(el.tagName).toBe('SPAN');
-    expect(el.className).toContain('var-ui-text-block-tone-secondary');
+    expect(el.getAttribute('data-tone')).toBe('secondary');
   });
 });

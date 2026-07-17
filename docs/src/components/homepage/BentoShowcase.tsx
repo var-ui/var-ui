@@ -1,8 +1,7 @@
 'use client';
 
-import { useDesignSystemTheme } from '@var-ui/react';
+import { cx, recipeClassName, useDesignSystemTheme } from '@var-ui/react';
 import { useState } from 'react';
-import { cx } from 'typestyles';
 import { homeBento } from '@/styles/homeBento';
 import { BannerTile } from './bentoTiles/BannerTile';
 import { CarouselStripTile } from './bentoTiles/CarouselStripTile';
@@ -27,24 +26,33 @@ export function BentoShowcase({ themeId }: BentoShowcaseProps) {
 
   return (
     <div
-      className={cx(b.showcase, theme.className)}
+      className={cx(recipeClassName(b.showcase), theme.className)}
       data-mode={mode}
       data-testid="bento-showcase"
       ref={setPortalContainer}
     >
-      <div className={b.grid}>
+      <div className={recipeClassName(b.grid)}>
         <QuickActionsTile
-          className={cx(b.tile, b.tileSpan2, b.tileRowSpan2)}
+          className={cx(
+            recipeClassName(b.tile),
+            recipeClassName(b.tileSpan2),
+            recipeClassName(b.tileRowSpan2),
+          )}
           portalContainer={portalContainer ?? undefined}
         />
-        <StatusFeedbackTile className={b.tile} />
-        <SettingsFormTile className={cx(b.tile, b.tileRowSpan2)} />
-        <EmptyStateDialogTile className={b.tile} portalContainer={portalContainer ?? undefined} />
-        <ContentSampleTile className={cx(b.tile, b.tileSpan2)} />
-        <IdentityCardsTile className={b.tile} />
-        <CarouselStripTile className={cx(b.tile, b.tileSpan2)} />
-        <LayoutTabsTile className={cx(b.tile, b.tileSpan2)} />
-        <BannerTile className={cx(b.tile, b.tileSpanFull)} />
+        <StatusFeedbackTile className={recipeClassName(b.tile)} />
+        <SettingsFormTile
+          className={cx(recipeClassName(b.tile), recipeClassName(b.tileRowSpan2))}
+        />
+        <EmptyStateDialogTile
+          className={recipeClassName(b.tile)}
+          portalContainer={portalContainer ?? undefined}
+        />
+        <ContentSampleTile className={cx(recipeClassName(b.tile), recipeClassName(b.tileSpan2))} />
+        <IdentityCardsTile className={recipeClassName(b.tile)} />
+        <CarouselStripTile className={cx(recipeClassName(b.tile), recipeClassName(b.tileSpan2))} />
+        <LayoutTabsTile className={cx(recipeClassName(b.tile), recipeClassName(b.tileSpan2))} />
+        <BannerTile className={cx(recipeClassName(b.tile), recipeClassName(b.tileSpanFull))} />
       </div>
     </div>
   );

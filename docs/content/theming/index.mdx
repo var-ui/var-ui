@@ -1,15 +1,30 @@
 ---
 title: Theming
-description: Learn how var-ui themes, tokens, and color modes work.
+description: Customize var-ui with typed themes, tokens, and component overrides.
 ---
 
 # Theming
 
-var-ui themes are TypeStyles recipes composed into a design system. Switch light and dark mode from the header to preview how tokens respond.
+var-ui themes are TypeStyles surfaces: semantic CSS custom properties, readable
+public class names (plus `data-*` variant attrs), and cascade layers. Switch
+light and dark from the header to see tokens respond.
+
+## How to customize (pick the right layer)
+
+1. **`createDesignTheme({ extend, components })`** — primary path. Mint custom
+   mode-aware tokens and restyle any recipe with full CSS and typed variant
+   names. No class names in your theme code.
+2. **Component CSS variables** — cheapest single-property tweak when a recipe
+   already exposes a `c.vars()` hook (e.g. `--var-ui-button-background`).
+3. **Public classes / `styles.scope()`** — escape hatch for nested conflicting
+   themes (`@scope`) or one-off CSS outside the theme config.
+
+See **[Customize](/theming/customize)** for the full story, **[Themes](/theming/themes)**
+for authoring and applying a theme, and **[Design tokens](/theming/tokens)** for
+the built-in token map.
 
 ## Topics
 
-- **Design tokens** — semantic colors, spacing, and typography scales
-- **Themes** — extending and overriding the default theme
-
-Theming guides and a live theme gallery are planned for a later milestone.
+- [Customize](/theming/customize) — config DX, `overrideComponent`, `extendTokens`
+- [Themes](/theming/themes) — `createDesignTheme`, `DesignSystemProvider`
+- [Design tokens](/theming/tokens) — semantic colors, space, type

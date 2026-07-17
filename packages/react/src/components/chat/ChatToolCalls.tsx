@@ -1,8 +1,8 @@
 import { useState, type JSX, type KeyboardEvent, type ReactNode } from 'react';
 import { chatToolCalls } from '@var-ui/core';
-import { cx } from '../utils';
 import { Icon } from '../../icons';
 import { Spinner } from '../Spinner';
+import { recipeProps } from '../utils';
 
 export type ChatToolCallStatus = 'pending' | 'running' | 'complete' | 'error';
 
@@ -57,18 +57,18 @@ function ToolCallRow({ call }: { call: ChatToolCallItem }) {
         aria-expanded={hasDetail ? isOpen : undefined}
         onClick={hasDetail ? () => setIsOpen((prev) => !prev) : undefined}
         onKeyDown={hasDetail ? handleKeyDown : undefined}
-        className={t.header}
+        {...recipeProps(t.header)}
       >
-        <span className={t.statusIcon}>
+        <span {...recipeProps(t.statusIcon)}>
           <StatusIcon status={status} />
         </span>
-        <span className={t.name}>{call.name}</span>
-        {call.target ? <span className={t.target}>{call.target}</span> : null}
+        <span {...recipeProps(t.name)}>{call.name}</span>
+        {call.target ? <span {...recipeProps(t.target)}>{call.target}</span> : null}
         {call.duration && status === 'complete' ? (
-          <span className={t.duration}>{call.duration}</span>
+          <span {...recipeProps(t.duration)}>{call.duration}</span>
         ) : null}
       </div>
-      {hasDetail && isOpen ? <div className={t.detail}>{call.resultDetail}</div> : null}
+      {hasDetail && isOpen ? <div {...recipeProps(t.detail)}>{call.resultDetail}</div> : null}
     </div>
   );
 }
@@ -92,7 +92,7 @@ export function ChatToolCalls({ calls, className }: ChatToolCallsProps): JSX.Ele
 
   if (calls.length === 1) {
     return (
-      <div className={cx(classes.root, className)}>
+      <div {...recipeProps(classes.root, className)}>
         <ToolCallRow call={calls[0]} />
       </div>
     );
@@ -101,25 +101,25 @@ export function ChatToolCalls({ calls, className }: ChatToolCallsProps): JSX.Ele
   const latest = calls[calls.length - 1];
 
   return (
-    <div className={cx(classes.root, className)}>
+    <div {...recipeProps(classes.root, className)}>
       <button
         type="button"
         aria-expanded={isExpanded}
         onClick={() => setIsExpanded((prev) => !prev)}
-        className={classes.header}
+        {...recipeProps(classes.header)}
       >
-        <span className={classes.statusIcon}>
+        <span {...recipeProps(classes.statusIcon)}>
           <Icon name="wrench" size="sm" />
         </span>
-        <span className={classes.name}>
+        <span {...recipeProps(classes.name)}>
           {isExpanded ? `${calls.length} tool calls` : latest.name}
         </span>
-        <span className={classes.chevron}>
+        <span {...recipeProps(classes.chevron)}>
           <Icon name="chevronDown" size="sm" />
         </span>
       </button>
       {isExpanded ? (
-        <div className={classes.list}>
+        <div {...recipeProps(classes.list)}>
           {calls.map((call, index) => (
             <ToolCallRow key={`${call.name}-${index}`} call={call} />
           ))}

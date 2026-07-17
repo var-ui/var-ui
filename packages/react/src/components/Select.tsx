@@ -11,6 +11,7 @@ import {
 } from 'react-aria-components';
 import { select } from '@var-ui/core';
 import { Icon } from '../icons';
+import { recipeProps } from './utils';
 
 export type SelectOption = {
   /** Unique option identifier passed to the select value. */
@@ -43,18 +44,18 @@ export function Select({
 }: SelectProps): JSX.Element {
   const s = select();
   return (
-    <AriaSelect {...props} className={s.root}>
-      {label ? <Label className={s.label}>{label}</Label> : null}
-      <AriaButton className={s.trigger}>
+    <AriaSelect {...props} {...recipeProps(s.root)}>
+      {label ? <Label {...recipeProps(s.label)}>{label}</Label> : null}
+      <AriaButton {...recipeProps(s.trigger)}>
         <SelectValue>{({ defaultChildren }) => defaultChildren ?? placeholder}</SelectValue>
-        <span className={s.triggerIcon}>
+        <span {...recipeProps(s.triggerIcon)}>
           <Icon name="chevronDown" size="sm" />
         </span>
       </AriaButton>
-      <Popover className={s.popover} UNSTABLE_portalContainer={portalContainer}>
+      <Popover {...recipeProps(s.popover)} UNSTABLE_portalContainer={portalContainer}>
         <ListBox>
           {options.map((option) => (
-            <ListBoxItem key={option.id} id={option.id} className={s.item}>
+            <ListBoxItem key={option.id} id={option.id} {...recipeProps(s.item)}>
               {option.label}
             </ListBoxItem>
           ))}

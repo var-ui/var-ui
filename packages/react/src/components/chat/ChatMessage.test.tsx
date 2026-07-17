@@ -20,11 +20,9 @@ describe('ChatMessage', () => {
     expect(screen.getByText('2:30 PM')).toBeTruthy();
   });
 
-  it('applies the sender variant class to the root', () => {
+  it('applies the sender variant attr to the root', () => {
     const { container } = render(<ChatMessage sender="user">Hi</ChatMessage>);
-    expect((container.firstElementChild as HTMLElement).className).toContain(
-      'var-ui-chat-message-root-sender-user',
-    );
+    expect((container.firstElementChild as HTMLElement).getAttribute('data-sender')).toBe('user');
   });
 
   it('provides sender via ChatMessageContext to descendants', () => {

@@ -6,15 +6,15 @@ describe('pagination', () => {
   it('registers all slots and the size variant', () => {
     pagination({ size: 'sm' });
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-pagination-root');
-    expect(css).toContain('var-ui-pagination-controls');
-    expect(css).toContain('var-ui-pagination-ellipsis');
-    expect(css).toContain('var-ui-pagination-infoText');
-    expect(css).toContain('var-ui-pagination-dotsContainer');
-    expect(css).toContain('var-ui-pagination-dot');
-    expect(css).toContain('var-ui-pagination-dotActive');
-    expect(css).toContain('var-ui-pagination-pageSizeGroup');
-    expect(css).toContain('var-ui-pagination-ellipsis-size-sm');
-    expect(css).toContain('var-ui-pagination-dot-size-sm');
+    expect(css).toContain('.var-ui-pagination');
+    expect(css).toContain('.var-ui-pagination__controls');
+    expect(css).toContain('.var-ui-pagination__ellipsis');
+    expect(css).toContain('.var-ui-pagination__infoText');
+    expect(css).toContain('.var-ui-pagination__dotsContainer');
+    expect(css).toContain('.var-ui-pagination__dot');
+    expect(css).toContain('.var-ui-pagination__dotActive');
+    expect(css).toContain('.var-ui-pagination__pageSizeGroup');
+    expect(css).toContain('.var-ui-pagination__ellipsis[data-size="sm"]');
+    expect(css).toContain('.var-ui-pagination__dot[data-size="sm"]');
   });
 });

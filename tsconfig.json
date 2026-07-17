@@ -10,5 +10,6 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["packages/*/src", "examples/*/src", "vite.config.ts"]
+  "include": ["packages/*/src", "vite.config.ts"],
+  "exclude": ["packages/*/node_modules", "examples"]
 }

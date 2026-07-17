@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, type ButtonProps } from '@var-ui/react';
+import { Button, cx, type ButtonProps, recipeClassName } from '@var-ui/react';
 import type { ReactNode } from 'react';
 import { docsShell } from '@/styles/docsShell';
 
@@ -22,7 +22,7 @@ export function HeaderIconButton({
     <Button
       {...props}
       aria-label={label}
-      className={`${shell.headerIconButton} ${className ?? ''}`}
+      className={cx(recipeClassName(shell.headerIconButton), className)}
       intent={intent}
     >
       {children}

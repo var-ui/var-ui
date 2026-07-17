@@ -1,296 +1,378 @@
 {
   "version": 1,
   "classNames": [
-    "var-ui-alert-action",
-    "var-ui-alert-actionLink",
-    "var-ui-alert-body",
-    "var-ui-alert-content",
-    "var-ui-alert-content-contentGap-flush",
-    "var-ui-alert-content-contentGap-spaced",
-    "var-ui-alert-icon",
-    "var-ui-alert-root",
-    "var-ui-alert-root-appearance-solid",
-    "var-ui-alert-root-appearance-subtle",
-    "var-ui-alert-root-tone-danger",
-    "var-ui-alert-root-tone-info",
-    "var-ui-alert-root-tone-success",
-    "var-ui-alert-root-tone-tip",
-    "var-ui-alert-root-tone-warning",
-    "var-ui-alert-title",
-    "var-ui-alert-title-appearance-solid",
-    "var-ui-aspect-ratio-base",
-    "var-ui-avatar-group-item",
-    "var-ui-avatar-group-overflow",
-    "var-ui-avatar-group-root",
-    "var-ui-avatar-image",
-    "var-ui-avatar-initials",
-    "var-ui-avatar-root",
-    "var-ui-avatar-root-size-lg",
-    "var-ui-avatar-root-size-md",
-    "var-ui-avatar-root-size-sm",
-    "var-ui-avatar-root-size-xl",
-    "var-ui-avatar-root-size-xs",
-    "var-ui-avatar-status",
-    "var-ui-badge-base",
-    "var-ui-badge-tone-accent",
-    "var-ui-badge-tone-danger",
-    "var-ui-badge-tone-neutral",
-    "var-ui-badge-tone-success",
-    "var-ui-badge-tone-tip",
-    "var-ui-badge-tone-warning",
-    "var-ui-banner-actions",
-    "var-ui-banner-content",
-    "var-ui-banner-dismiss",
-    "var-ui-banner-icon",
-    "var-ui-banner-icon-appearance-solid",
-    "var-ui-banner-root",
-    "var-ui-banner-root-appearance-solid",
-    "var-ui-banner-root-appearance-subtle",
-    "var-ui-banner-root-tone-danger",
-    "var-ui-banner-root-tone-info",
-    "var-ui-banner-root-tone-success",
-    "var-ui-banner-root-tone-warning",
-    "var-ui-banner-title",
-    "var-ui-banner-title-appearance-solid",
-    "var-ui-button-base",
-    "var-ui-button-intent-ghost",
-    "var-ui-button-intent-primary",
-    "var-ui-button-intent-secondary",
-    "var-ui-card-body",
-    "var-ui-card-grid",
-    "var-ui-card-linkDescription",
-    "var-ui-card-linkHint",
-    "var-ui-card-linkRoot",
-    "var-ui-card-linkTitle",
-    "var-ui-card-root",
-    "var-ui-card-title",
-    "var-ui-carousel-control",
-    "var-ui-carousel-controls",
-    "var-ui-carousel-item",
-    "var-ui-carousel-root",
-    "var-ui-carousel-viewport",
-    "var-ui-center-base",
-    "var-ui-checkbox-box",
-    "var-ui-checkbox-label",
-    "var-ui-checkbox-root",
-    "var-ui-code-block-actions",
-    "var-ui-code-block-body",
-    "var-ui-code-block-bodyScrollable",
-    "var-ui-code-block-bodyTerminal",
-    "var-ui-code-block-code",
-    "var-ui-code-block-copyButton",
-    "var-ui-code-block-copyButtonCopied",
-    "var-ui-code-block-copyButtonError",
-    "var-ui-code-block-copyButtonIdle",
-    "var-ui-code-block-feedback",
-    "var-ui-code-block-feedbackError",
-    "var-ui-code-block-feedbackInline",
-    "var-ui-code-block-feedbackSuccess",
-    "var-ui-code-block-feedbackToast",
-    "var-ui-code-block-filename",
-    "var-ui-code-block-header",
-    "var-ui-code-block-headerTerminal",
-    "var-ui-code-block-language",
-    "var-ui-code-block-languageTerminal",
-    "var-ui-code-block-line",
-    "var-ui-code-block-lineAdded",
-    "var-ui-code-block-lineContent",
-    "var-ui-code-block-lineDeleted",
-    "var-ui-code-block-lineHighlighted",
-    "var-ui-code-block-lineNumber",
-    "var-ui-code-block-lines",
-    "var-ui-code-block-pre",
-    "var-ui-code-block-preScrollX",
-    "var-ui-code-block-preTerminal",
-    "var-ui-code-block-preWrap",
-    "var-ui-code-block-root",
-    "var-ui-code-block-rootDefault",
-    "var-ui-code-block-rootDiff",
-    "var-ui-code-block-rootInline",
-    "var-ui-code-block-rootTerminal",
-    "var-ui-code-block-title",
-    "var-ui-command-palette-backdrop",
-    "var-ui-command-palette-dialog",
-    "var-ui-command-palette-dialog-open-true",
-    "var-ui-command-palette-empty",
-    "var-ui-command-palette-input",
-    "var-ui-command-palette-inputIcon",
-    "var-ui-command-palette-inputRow",
-    "var-ui-command-palette-mark",
-    "var-ui-command-palette-result",
-    "var-ui-command-palette-resultLink",
-    "var-ui-command-palette-resultLinkActive",
-    "var-ui-command-palette-resultMeta",
-    "var-ui-command-palette-results",
-    "var-ui-command-palette-resultTitle",
-    "var-ui-command-palette-root",
-    "var-ui-command-palette-root-open-true",
-    "var-ui-dialog-closeButton",
-    "var-ui-dialog-content",
-    "var-ui-dialog-description",
-    "var-ui-dialog-header",
-    "var-ui-dialog-heading",
-    "var-ui-dialog-modal",
-    "var-ui-dialog-overlay",
-    "var-ui-divider-base",
-    "var-ui-divider-orientation-horizontal",
-    "var-ui-divider-orientation-vertical",
-    "var-ui-docs-prose-headingAnchor",
-    "var-ui-docs-prose-root",
-    "var-ui-docs-prose-tableWrap",
-    "var-ui-ds-hljs-root",
-    "var-ui-ds-layout-row",
-    "var-ui-ds-layout-section",
-    "var-ui-ds-layout-stack",
+    "var-ui-alert",
+    "var-ui-alert__action",
+    "var-ui-alert__actionLink",
+    "var-ui-alert__body",
+    "var-ui-alert__content",
+    "var-ui-alert__icon",
+    "var-ui-alert__title",
+    "var-ui-aspect-ratio",
+    "var-ui-avatar",
+    "var-ui-avatar__image",
+    "var-ui-avatar__initials",
+    "var-ui-avatar__status",
+    "var-ui-avatar-group",
+    "var-ui-avatar-group__item",
+    "var-ui-avatar-group__overflow",
+    "var-ui-badge",
+    "var-ui-banner",
+    "var-ui-banner__actions",
+    "var-ui-banner__content",
+    "var-ui-banner__dismiss",
+    "var-ui-banner__icon",
+    "var-ui-banner__title",
+    "var-ui-breadcrumbs",
+    "var-ui-breadcrumbs__ellipsisItem",
+    "var-ui-breadcrumbs__item",
+    "var-ui-breadcrumbs__link",
+    "var-ui-breadcrumbs__list",
+    "var-ui-button",
+    "var-ui-button-group",
+    "var-ui-calendar",
+    "var-ui-calendar__cell",
+    "var-ui-calendar__grid",
+    "var-ui-calendar__header",
+    "var-ui-calendar__headerCell",
+    "var-ui-calendar__heading",
+    "var-ui-calendar__navButton",
+    "var-ui-card",
+    "var-ui-card__body",
+    "var-ui-card__grid",
+    "var-ui-card__linkDescription",
+    "var-ui-card__linkHint",
+    "var-ui-card__linkRoot",
+    "var-ui-card__linkTitle",
+    "var-ui-card__title",
+    "var-ui-carousel",
+    "var-ui-carousel__control",
+    "var-ui-carousel__controls",
+    "var-ui-carousel__item",
+    "var-ui-carousel__viewport",
+    "var-ui-center",
+    "var-ui-chat-composer",
+    "var-ui-chat-composer__actions",
+    "var-ui-chat-composer__input",
+    "var-ui-chat-composer__inputRow",
+    "var-ui-chat-layout",
+    "var-ui-chat-layout__dock",
+    "var-ui-chat-layout__messageArea",
+    "var-ui-chat-message",
+    "var-ui-chat-message-bubble",
+    "var-ui-chat-message-list",
+    "var-ui-chat-system-message",
+    "var-ui-chat-system-message__icon",
+    "var-ui-chat-system-message__text",
+    "var-ui-chat-tool-calls",
+    "var-ui-checkbox",
+    "var-ui-checkbox__box",
+    "var-ui-checkbox__group",
+    "var-ui-checkbox__groupLabel",
+    "var-ui-checkbox__label",
+    "var-ui-code-block",
+    "var-ui-code-block__actions",
+    "var-ui-code-block__body",
+    "var-ui-code-block__bodyScrollable",
+    "var-ui-code-block__bodyTerminal",
+    "var-ui-code-block__code",
+    "var-ui-code-block__copyButton",
+    "var-ui-code-block__copyButtonCopied",
+    "var-ui-code-block__copyButtonError",
+    "var-ui-code-block__copyButtonIdle",
+    "var-ui-code-block__feedback",
+    "var-ui-code-block__feedbackError",
+    "var-ui-code-block__feedbackInline",
+    "var-ui-code-block__feedbackSuccess",
+    "var-ui-code-block__feedbackToast",
+    "var-ui-code-block__filename",
+    "var-ui-code-block__header",
+    "var-ui-code-block__headerTerminal",
+    "var-ui-code-block__language",
+    "var-ui-code-block__languageTerminal",
+    "var-ui-code-block__line",
+    "var-ui-code-block__lineAdded",
+    "var-ui-code-block__lineContent",
+    "var-ui-code-block__lineDeleted",
+    "var-ui-code-block__lineHighlighted",
+    "var-ui-code-block__lineNumber",
+    "var-ui-code-block__lines",
+    "var-ui-code-block__pre",
+    "var-ui-code-block__preScrollX",
+    "var-ui-code-block__preTerminal",
+    "var-ui-code-block__preWrap",
+    "var-ui-code-block__rootDefault",
+    "var-ui-code-block__rootDiff",
+    "var-ui-code-block__rootInline",
+    "var-ui-code-block__rootTerminal",
+    "var-ui-code-block__title",
+    "var-ui-command-palette",
+    "var-ui-command-palette__backdrop",
+    "var-ui-command-palette__dialog",
+    "var-ui-command-palette__empty",
+    "var-ui-command-palette__input",
+    "var-ui-command-palette__inputIcon",
+    "var-ui-command-palette__inputRow",
+    "var-ui-command-palette__mark",
+    "var-ui-command-palette__result",
+    "var-ui-command-palette__resultLink",
+    "var-ui-command-palette__resultLinkActive",
+    "var-ui-command-palette__resultMeta",
+    "var-ui-command-palette__results",
+    "var-ui-command-palette__resultTitle",
+    "var-ui-dateInput",
+    "var-ui-dateInput__calendarCell",
+    "var-ui-dateInput__calendarGrid",
+    "var-ui-dateInput__calendarHeader",
+    "var-ui-dateInput__calendarHeaderCell",
+    "var-ui-dateInput__calendarHeading",
+    "var-ui-dateInput__calendarNavButton",
+    "var-ui-dateInput__description",
+    "var-ui-dateInput__error",
+    "var-ui-dateInput__group",
+    "var-ui-dateInput__label",
+    "var-ui-dateInput__popover",
+    "var-ui-dateInput__segment",
+    "var-ui-dateInput__trigger",
+    "var-ui-dateRangeInput",
+    "var-ui-dateRangeInput__calendarCell",
+    "var-ui-dateRangeInput__calendarGrid",
+    "var-ui-dateRangeInput__calendarHeader",
+    "var-ui-dateRangeInput__calendarHeaderCell",
+    "var-ui-dateRangeInput__calendarHeading",
+    "var-ui-dateRangeInput__calendarNavButton",
+    "var-ui-dateRangeInput__description",
+    "var-ui-dateRangeInput__error",
+    "var-ui-dateRangeInput__group",
+    "var-ui-dateRangeInput__label",
+    "var-ui-dateRangeInput__popover",
+    "var-ui-dateRangeInput__segment",
+    "var-ui-dateRangeInput__separator",
+    "var-ui-dateRangeInput__trigger",
+    "var-ui-dateTimeInput",
+    "var-ui-dateTimeInput__calendarCell",
+    "var-ui-dateTimeInput__calendarGrid",
+    "var-ui-dateTimeInput__calendarHeader",
+    "var-ui-dateTimeInput__calendarHeaderCell",
+    "var-ui-dateTimeInput__calendarHeading",
+    "var-ui-dateTimeInput__calendarNavButton",
+    "var-ui-dateTimeInput__description",
+    "var-ui-dateTimeInput__error",
+    "var-ui-dateTimeInput__group",
+    "var-ui-dateTimeInput__label",
+    "var-ui-dateTimeInput__popover",
+    "var-ui-dateTimeInput__segment",
+    "var-ui-dateTimeInput__trigger",
+    "var-ui-dialog__actions",
+    "var-ui-dialog__closeButton",
+    "var-ui-dialog__content",
+    "var-ui-dialog__description",
+    "var-ui-dialog__header",
+    "var-ui-dialog__heading",
+    "var-ui-dialog__modal",
+    "var-ui-dialog__overlay",
+    "var-ui-divider",
+    "var-ui-docs-prose",
+    "var-ui-docs-prose__headingAnchor",
+    "var-ui-docs-prose__tableWrap",
+    "var-ui-ds-hljs",
+    "var-ui-ds-layout",
+    "var-ui-ds-layout--row",
+    "var-ui-ds-layout--section",
+    "var-ui-ds-layout--stack",
     "var-ui-ds-named-cq-body",
     "var-ui-ds-named-cq-root",
-    "var-ui-ds-text-caption",
-    "var-ui-ds-text-label",
-    "var-ui-ds-text-sectionTitle",
-    "var-ui-ds-text-subtitle",
-    "var-ui-ds-text-title",
-    "var-ui-empty-state-action",
-    "var-ui-empty-state-description",
-    "var-ui-empty-state-icon",
-    "var-ui-empty-state-root",
-    "var-ui-empty-state-title",
-    "var-ui-field-description",
-    "var-ui-field-error",
-    "var-ui-field-label",
-    "var-ui-field-root",
-    "var-ui-fileTree-file",
-    "var-ui-fileTree-folder",
-    "var-ui-fileTree-item",
-    "var-ui-fileTree-list",
-    "var-ui-fileTree-listNested",
-    "var-ui-fileTree-root",
-    "var-ui-fileTree-row",
-    "var-ui-grid-base",
-    "var-ui-grid-columns-auto",
-    "var-ui-grid-columns-four",
-    "var-ui-grid-columns-one",
-    "var-ui-grid-columns-three",
-    "var-ui-grid-columns-two",
-    "var-ui-grid-gap-lg",
-    "var-ui-grid-gap-md",
-    "var-ui-grid-gap-none",
-    "var-ui-grid-gap-sm",
-    "var-ui-grid-gap-xl",
-    "var-ui-grid-gap-xs",
-    "var-ui-heading-base",
-    "var-ui-heading-size-display",
-    "var-ui-heading-size-lg",
-    "var-ui-heading-size-md",
-    "var-ui-heading-size-sm",
-    "var-ui-heading-size-xl",
-    "var-ui-heading-size-xs",
-    "var-ui-icon-base",
-    "var-ui-icon-size-inherit",
-    "var-ui-icon-size-lg",
-    "var-ui-icon-size-md",
-    "var-ui-icon-size-sm",
+    "var-ui-ds-text",
+    "var-ui-ds-text--caption",
+    "var-ui-ds-text--label",
+    "var-ui-ds-text--sectionTitle",
+    "var-ui-ds-text--subtitle",
+    "var-ui-ds-text--title",
+    "var-ui-empty-state",
+    "var-ui-empty-state__action",
+    "var-ui-empty-state__description",
+    "var-ui-empty-state__icon",
+    "var-ui-empty-state__title",
+    "var-ui-field",
+    "var-ui-field__description",
+    "var-ui-field__error",
+    "var-ui-field__label",
+    "var-ui-file-input",
+    "var-ui-file-input__clearButton",
+    "var-ui-file-input__description",
+    "var-ui-file-input__dropzone",
+    "var-ui-file-input__error",
+    "var-ui-file-input__fileNameText",
+    "var-ui-file-input__hiddenInput",
+    "var-ui-file-input__icon",
+    "var-ui-file-input__label",
+    "var-ui-file-input__placeholderText",
+    "var-ui-fileTree",
+    "var-ui-fileTree__file",
+    "var-ui-fileTree__folder",
+    "var-ui-fileTree__item",
+    "var-ui-fileTree__list",
+    "var-ui-fileTree__listNested",
+    "var-ui-fileTree__row",
+    "var-ui-grid",
+    "var-ui-heading",
+    "var-ui-hover-card",
+    "var-ui-hover-card__content",
+    "var-ui-hover-card__title",
+    "var-ui-icon",
+    "var-ui-input-group",
+    "var-ui-input-group__description",
+    "var-ui-input-group__error",
+    "var-ui-input-group__group",
+    "var-ui-input-group__input",
+    "var-ui-input-group__label",
+    "var-ui-input-group__text",
+    "var-ui-kbd",
     "var-ui-link",
-    "var-ui-overlay-backdrop",
-    "var-ui-overlay-positioner",
-    "var-ui-progress-bar-fill",
-    "var-ui-progress-bar-fill-indeterminate-true",
-    "var-ui-progress-bar-header",
-    "var-ui-progress-bar-label",
-    "var-ui-progress-bar-root",
-    "var-ui-progress-bar-root-tone-danger",
-    "var-ui-progress-bar-root-tone-success",
-    "var-ui-progress-bar-root-tone-warning",
-    "var-ui-progress-bar-track",
-    "var-ui-progress-bar-valueText",
-    "var-ui-radio-control",
-    "var-ui-radio-group",
-    "var-ui-radio-groupLabel",
-    "var-ui-radio-item",
-    "var-ui-radio-label",
-    "var-ui-section-root",
-    "var-ui-section-title",
-    "var-ui-select-item",
-    "var-ui-select-label",
-    "var-ui-select-popover",
-    "var-ui-select-root",
-    "var-ui-select-trigger",
-    "var-ui-select-triggerIcon",
-    "var-ui-skeleton-base",
-    "var-ui-skeleton-shape-circle",
-    "var-ui-skeleton-shape-rect",
-    "var-ui-skeleton-shape-text",
-    "var-ui-spinner-base",
-    "var-ui-spinner-size-lg",
-    "var-ui-spinner-size-md",
-    "var-ui-spinner-size-sm",
-    "var-ui-spinner-tone-accent",
-    "var-ui-spinner-tone-neutral",
-    "var-ui-stack-align-center",
-    "var-ui-stack-align-end",
-    "var-ui-stack-align-start",
-    "var-ui-stack-align-stretch",
-    "var-ui-stack-base",
-    "var-ui-stack-direction-column",
-    "var-ui-stack-direction-row",
-    "var-ui-stack-gap-lg",
-    "var-ui-stack-gap-md",
-    "var-ui-stack-gap-none",
-    "var-ui-stack-gap-sm",
-    "var-ui-stack-gap-xl",
-    "var-ui-stack-gap-xs",
-    "var-ui-stack-justify-between",
-    "var-ui-stack-justify-center",
-    "var-ui-stack-justify-end",
-    "var-ui-stack-justify-start",
-    "var-ui-stack-wrap-nowrap",
-    "var-ui-stack-wrap-wrap",
-    "var-ui-status-dot-base",
-    "var-ui-status-dot-pulse-false",
-    "var-ui-status-dot-pulse-true",
-    "var-ui-status-dot-tone-accent",
-    "var-ui-status-dot-tone-danger",
-    "var-ui-status-dot-tone-info",
-    "var-ui-status-dot-tone-neutral",
-    "var-ui-status-dot-tone-success",
-    "var-ui-status-dot-tone-warning",
-    "var-ui-steps-root",
-    "var-ui-switch-label",
-    "var-ui-switch-root",
-    "var-ui-switch-thumb",
-    "var-ui-switch-track",
-    "var-ui-tabs-list",
-    "var-ui-tabs-panel",
-    "var-ui-tabs-root",
-    "var-ui-tabs-tab",
-    "var-ui-text-area-field-description",
-    "var-ui-text-area-field-error",
-    "var-ui-text-area-field-input",
-    "var-ui-text-area-field-label",
-    "var-ui-text-area-field-root",
-    "var-ui-text-block-base",
-    "var-ui-text-block-size-lg",
-    "var-ui-text-block-size-md",
-    "var-ui-text-block-size-sm",
-    "var-ui-text-block-tone-primary",
-    "var-ui-text-block-tone-secondary",
-    "var-ui-text-block-weight-medium",
-    "var-ui-text-block-weight-normal",
-    "var-ui-text-block-weight-semibold",
-    "var-ui-text-field-description",
-    "var-ui-text-field-error",
-    "var-ui-text-field-input",
-    "var-ui-text-field-label",
-    "var-ui-text-field-root",
-    "var-ui-thumbnail-dismiss",
-    "var-ui-thumbnail-image",
-    "var-ui-thumbnail-root",
-    "var-ui-thumbnail-root-size-lg",
-    "var-ui-thumbnail-root-size-md",
-    "var-ui-thumbnail-root-size-sm"
+    "var-ui-menu__item",
+    "var-ui-menu__itemCheck",
+    "var-ui-menu__itemDanger",
+    "var-ui-menu__itemLabel",
+    "var-ui-menu__itemShortcut",
+    "var-ui-menu__menu",
+    "var-ui-menu__popover",
+    "var-ui-menu__section",
+    "var-ui-menu__sectionHeader",
+    "var-ui-menu__separator",
+    "var-ui-menu__submenuChevron",
+    "var-ui-multiSelector",
+    "var-ui-multiSelector__item",
+    "var-ui-multiSelector__itemCheckbox",
+    "var-ui-multiSelector__itemLabel",
+    "var-ui-multiSelector__label",
+    "var-ui-multiSelector__popover",
+    "var-ui-multiSelector__trigger",
+    "var-ui-multiSelector__triggerIcon",
+    "var-ui-number-input",
+    "var-ui-number-input__description",
+    "var-ui-number-input__error",
+    "var-ui-number-input__group",
+    "var-ui-number-input__input",
+    "var-ui-number-input__label",
+    "var-ui-number-input__stepper",
+    "var-ui-overlay__backdrop",
+    "var-ui-overlay__positioner",
+    "var-ui-pagination",
+    "var-ui-pagination__controls",
+    "var-ui-pagination__dot",
+    "var-ui-pagination__dotActive",
+    "var-ui-pagination__dotsContainer",
+    "var-ui-pagination__ellipsis",
+    "var-ui-pagination__infoText",
+    "var-ui-pagination__pageSizeGroup",
+    "var-ui-popover",
+    "var-ui-popover__content",
+    "var-ui-popover__title",
+    "var-ui-progress-bar",
+    "var-ui-progress-bar__fill",
+    "var-ui-progress-bar__header",
+    "var-ui-progress-bar__label",
+    "var-ui-progress-bar__track",
+    "var-ui-progress-bar__valueText",
+    "var-ui-radio__control",
+    "var-ui-radio__group",
+    "var-ui-radio__groupLabel",
+    "var-ui-radio__item",
+    "var-ui-radio__label",
+    "var-ui-section",
+    "var-ui-section__title",
+    "var-ui-segmented-control",
+    "var-ui-select",
+    "var-ui-select__item",
+    "var-ui-select__label",
+    "var-ui-select__popover",
+    "var-ui-select__trigger",
+    "var-ui-select__triggerIcon",
+    "var-ui-skeleton",
+    "var-ui-slider",
+    "var-ui-slider__control",
+    "var-ui-slider__description",
+    "var-ui-slider__error",
+    "var-ui-slider__fill",
+    "var-ui-slider__label",
+    "var-ui-slider__output",
+    "var-ui-slider__thumb",
+    "var-ui-slider__track",
+    "var-ui-spinner",
+    "var-ui-stack",
+    "var-ui-status-dot",
+    "var-ui-steps",
+    "var-ui-switch",
+    "var-ui-switch__label",
+    "var-ui-switch__thumb",
+    "var-ui-switch__track",
+    "var-ui-tabs",
+    "var-ui-tabs__list",
+    "var-ui-tabs__panel",
+    "var-ui-tabs__tab",
+    "var-ui-text-area-field",
+    "var-ui-text-area-field__description",
+    "var-ui-text-area-field__error",
+    "var-ui-text-area-field__input",
+    "var-ui-text-area-field__label",
+    "var-ui-text-block",
+    "var-ui-text-field",
+    "var-ui-text-field__description",
+    "var-ui-text-field__error",
+    "var-ui-text-field__input",
+    "var-ui-text-field__label",
+    "var-ui-thumbnail",
+    "var-ui-thumbnail__dismiss",
+    "var-ui-thumbnail__image",
+    "var-ui-timeInput",
+    "var-ui-timeInput__description",
+    "var-ui-timeInput__error",
+    "var-ui-timeInput__group",
+    "var-ui-timeInput__label",
+    "var-ui-timeInput__segment",
+    "var-ui-toast__body",
+    "var-ui-toast__close",
+    "var-ui-toast__description",
+    "var-ui-toast__icon",
+    "var-ui-toast__item",
+    "var-ui-toast__region",
+    "var-ui-toast__title",
+    "var-ui-toggle-button",
+    "var-ui-tokenizer",
+    "var-ui-tokenizer__description",
+    "var-ui-tokenizer__error",
+    "var-ui-tokenizer__group",
+    "var-ui-tokenizer__input",
+    "var-ui-tokenizer__item",
+    "var-ui-tokenizer__label",
+    "var-ui-tokenizer__popover",
+    "var-ui-tokenizer__token",
+    "var-ui-tokenizer__tokenLabel",
+    "var-ui-tokenizer__tokenList",
+    "var-ui-tokenizer__tokenRemoveButton",
+    "var-ui-toolbar",
+    "var-ui-tooltip",
+    "var-ui-typeahead",
+    "var-ui-typeahead__clearButton",
+    "var-ui-typeahead__description",
+    "var-ui-typeahead__error",
+    "var-ui-typeahead__input",
+    "var-ui-typeahead__inputWrapper",
+    "var-ui-typeahead__item",
+    "var-ui-typeahead__label",
+    "var-ui-typeahead__popover"
   ],
   "entries": [
     {
-      "className": "var-ui-alert-action",
+      "className": "var-ui-alert",
+      "kind": "component",
+      "namespace": "alert",
+      "suffix": "base",
+      "file": "src/components/alert.ts",
+      "line": 24
+    },
+    {
+      "className": "var-ui-alert__action",
       "kind": "component",
       "namespace": "alert",
       "suffix": "action",
@@ -298,7 +380,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-alert-actionLink",
+      "className": "var-ui-alert__actionLink",
       "kind": "component",
       "namespace": "alert",
       "suffix": "actionLink",
@@ -306,7 +388,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-alert-body",
+      "className": "var-ui-alert__body",
       "kind": "component",
       "namespace": "alert",
       "suffix": "body",
@@ -314,7 +396,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-alert-content",
+      "className": "var-ui-alert__content",
       "kind": "component",
       "namespace": "alert",
       "suffix": "content",
@@ -322,23 +404,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-alert-content-contentGap-flush",
-      "kind": "component",
-      "namespace": "alert",
-      "suffix": "content-contentGap-flush",
-      "file": "src/components/alert.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-alert-content-contentGap-spaced",
-      "kind": "component",
-      "namespace": "alert",
-      "suffix": "content-contentGap-spaced",
-      "file": "src/components/alert.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-alert-icon",
+      "className": "var-ui-alert__icon",
       "kind": "component",
       "namespace": "alert",
       "suffix": "icon",
@@ -346,71 +412,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-alert-root",
-      "kind": "component",
-      "namespace": "alert",
-      "suffix": "root",
-      "file": "src/components/alert.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-alert-root-appearance-solid",
-      "kind": "component",
-      "namespace": "alert",
-      "suffix": "root-appearance-solid",
-      "file": "src/components/alert.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-alert-root-appearance-subtle",
-      "kind": "component",
-      "namespace": "alert",
-      "suffix": "root-appearance-subtle",
-      "file": "src/components/alert.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-alert-root-tone-danger",
-      "kind": "component",
-      "namespace": "alert",
-      "suffix": "root-tone-danger",
-      "file": "src/components/alert.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-alert-root-tone-info",
-      "kind": "component",
-      "namespace": "alert",
-      "suffix": "root-tone-info",
-      "file": "src/components/alert.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-alert-root-tone-success",
-      "kind": "component",
-      "namespace": "alert",
-      "suffix": "root-tone-success",
-      "file": "src/components/alert.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-alert-root-tone-tip",
-      "kind": "component",
-      "namespace": "alert",
-      "suffix": "root-tone-tip",
-      "file": "src/components/alert.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-alert-root-tone-warning",
-      "kind": "component",
-      "namespace": "alert",
-      "suffix": "root-tone-warning",
-      "file": "src/components/alert.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-alert-title",
+      "className": "var-ui-alert__title",
       "kind": "component",
       "namespace": "alert",
       "suffix": "title",
@@ -418,15 +420,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-alert-title-appearance-solid",
-      "kind": "component",
-      "namespace": "alert",
-      "suffix": "title-appearance-solid",
-      "file": "src/components/alert.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-aspect-ratio-base",
+      "className": "var-ui-aspect-ratio",
       "kind": "component",
       "namespace": "aspect-ratio",
       "suffix": "base",
@@ -434,31 +428,15 @@
       "line": 12
     },
     {
-      "className": "var-ui-avatar-group-item",
+      "className": "var-ui-avatar",
       "kind": "component",
-      "namespace": "avatar-group",
-      "suffix": "item",
+      "namespace": "avatar",
+      "suffix": "base",
       "file": "src/components/avatar.ts",
-      "line": 105
+      "line": 25
     },
     {
-      "className": "var-ui-avatar-group-overflow",
-      "kind": "component",
-      "namespace": "avatar-group",
-      "suffix": "overflow",
-      "file": "src/components/avatar.ts",
-      "line": 105
-    },
-    {
-      "className": "var-ui-avatar-group-root",
-      "kind": "component",
-      "namespace": "avatar-group",
-      "suffix": "root",
-      "file": "src/components/avatar.ts",
-      "line": 105
-    },
-    {
-      "className": "var-ui-avatar-image",
+      "className": "var-ui-avatar__image",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "image",
@@ -466,7 +444,7 @@
       "line": 25
     },
     {
-      "className": "var-ui-avatar-initials",
+      "className": "var-ui-avatar__initials",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "initials",
@@ -474,55 +452,7 @@
       "line": 25
     },
     {
-      "className": "var-ui-avatar-root",
-      "kind": "component",
-      "namespace": "avatar",
-      "suffix": "root",
-      "file": "src/components/avatar.ts",
-      "line": 25
-    },
-    {
-      "className": "var-ui-avatar-root-size-lg",
-      "kind": "component",
-      "namespace": "avatar",
-      "suffix": "root-size-lg",
-      "file": "src/components/avatar.ts",
-      "line": 25
-    },
-    {
-      "className": "var-ui-avatar-root-size-md",
-      "kind": "component",
-      "namespace": "avatar",
-      "suffix": "root-size-md",
-      "file": "src/components/avatar.ts",
-      "line": 25
-    },
-    {
-      "className": "var-ui-avatar-root-size-sm",
-      "kind": "component",
-      "namespace": "avatar",
-      "suffix": "root-size-sm",
-      "file": "src/components/avatar.ts",
-      "line": 25
-    },
-    {
-      "className": "var-ui-avatar-root-size-xl",
-      "kind": "component",
-      "namespace": "avatar",
-      "suffix": "root-size-xl",
-      "file": "src/components/avatar.ts",
-      "line": 25
-    },
-    {
-      "className": "var-ui-avatar-root-size-xs",
-      "kind": "component",
-      "namespace": "avatar",
-      "suffix": "root-size-xs",
-      "file": "src/components/avatar.ts",
-      "line": 25
-    },
-    {
-      "className": "var-ui-avatar-status",
+      "className": "var-ui-avatar__status",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "status",
@@ -530,7 +460,31 @@
       "line": 25
     },
     {
-      "className": "var-ui-badge-base",
+      "className": "var-ui-avatar-group",
+      "kind": "component",
+      "namespace": "avatar-group",
+      "suffix": "base",
+      "file": "src/components/avatar.ts",
+      "line": 105
+    },
+    {
+      "className": "var-ui-avatar-group__item",
+      "kind": "component",
+      "namespace": "avatar-group",
+      "suffix": "item",
+      "file": "src/components/avatar.ts",
+      "line": 105
+    },
+    {
+      "className": "var-ui-avatar-group__overflow",
+      "kind": "component",
+      "namespace": "avatar-group",
+      "suffix": "overflow",
+      "file": "src/components/avatar.ts",
+      "line": 105
+    },
+    {
+      "className": "var-ui-badge",
       "kind": "component",
       "namespace": "badge",
       "suffix": "base",
@@ -538,55 +492,15 @@
       "line": 14
     },
     {
-      "className": "var-ui-badge-tone-accent",
+      "className": "var-ui-banner",
       "kind": "component",
-      "namespace": "badge",
-      "suffix": "tone-accent",
-      "file": "src/components/badge.ts",
-      "line": 14
+      "namespace": "banner",
+      "suffix": "base",
+      "file": "src/components/banner.ts",
+      "line": 19
     },
     {
-      "className": "var-ui-badge-tone-danger",
-      "kind": "component",
-      "namespace": "badge",
-      "suffix": "tone-danger",
-      "file": "src/components/badge.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-badge-tone-neutral",
-      "kind": "component",
-      "namespace": "badge",
-      "suffix": "tone-neutral",
-      "file": "src/components/badge.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-badge-tone-success",
-      "kind": "component",
-      "namespace": "badge",
-      "suffix": "tone-success",
-      "file": "src/components/badge.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-badge-tone-tip",
-      "kind": "component",
-      "namespace": "badge",
-      "suffix": "tone-tip",
-      "file": "src/components/badge.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-badge-tone-warning",
-      "kind": "component",
-      "namespace": "badge",
-      "suffix": "tone-warning",
-      "file": "src/components/badge.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-banner-actions",
+      "className": "var-ui-banner__actions",
       "kind": "component",
       "namespace": "banner",
       "suffix": "actions",
@@ -594,7 +508,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-banner-content",
+      "className": "var-ui-banner__content",
       "kind": "component",
       "namespace": "banner",
       "suffix": "content",
@@ -602,7 +516,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-banner-dismiss",
+      "className": "var-ui-banner__dismiss",
       "kind": "component",
       "namespace": "banner",
       "suffix": "dismiss",
@@ -610,7 +524,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-banner-icon",
+      "className": "var-ui-banner__icon",
       "kind": "component",
       "namespace": "banner",
       "suffix": "icon",
@@ -618,71 +532,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-banner-icon-appearance-solid",
-      "kind": "component",
-      "namespace": "banner",
-      "suffix": "icon-appearance-solid",
-      "file": "src/components/banner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-banner-root",
-      "kind": "component",
-      "namespace": "banner",
-      "suffix": "root",
-      "file": "src/components/banner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-banner-root-appearance-solid",
-      "kind": "component",
-      "namespace": "banner",
-      "suffix": "root-appearance-solid",
-      "file": "src/components/banner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-banner-root-appearance-subtle",
-      "kind": "component",
-      "namespace": "banner",
-      "suffix": "root-appearance-subtle",
-      "file": "src/components/banner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-banner-root-tone-danger",
-      "kind": "component",
-      "namespace": "banner",
-      "suffix": "root-tone-danger",
-      "file": "src/components/banner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-banner-root-tone-info",
-      "kind": "component",
-      "namespace": "banner",
-      "suffix": "root-tone-info",
-      "file": "src/components/banner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-banner-root-tone-success",
-      "kind": "component",
-      "namespace": "banner",
-      "suffix": "root-tone-success",
-      "file": "src/components/banner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-banner-root-tone-warning",
-      "kind": "component",
-      "namespace": "banner",
-      "suffix": "root-tone-warning",
-      "file": "src/components/banner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-banner-title",
+      "className": "var-ui-banner__title",
       "kind": "component",
       "namespace": "banner",
       "suffix": "title",
@@ -690,15 +540,47 @@
       "line": 19
     },
     {
-      "className": "var-ui-banner-title-appearance-solid",
+      "className": "var-ui-breadcrumbs",
       "kind": "component",
-      "namespace": "banner",
-      "suffix": "title-appearance-solid",
-      "file": "src/components/banner.ts",
-      "line": 19
+      "namespace": "breadcrumbs",
+      "suffix": "base",
+      "file": "src/components/breadcrumbs.ts",
+      "line": 14
     },
     {
-      "className": "var-ui-button-base",
+      "className": "var-ui-breadcrumbs__ellipsisItem",
+      "kind": "component",
+      "namespace": "breadcrumbs",
+      "suffix": "ellipsisItem",
+      "file": "src/components/breadcrumbs.ts",
+      "line": 14
+    },
+    {
+      "className": "var-ui-breadcrumbs__item",
+      "kind": "component",
+      "namespace": "breadcrumbs",
+      "suffix": "item",
+      "file": "src/components/breadcrumbs.ts",
+      "line": 14
+    },
+    {
+      "className": "var-ui-breadcrumbs__link",
+      "kind": "component",
+      "namespace": "breadcrumbs",
+      "suffix": "link",
+      "file": "src/components/breadcrumbs.ts",
+      "line": 14
+    },
+    {
+      "className": "var-ui-breadcrumbs__list",
+      "kind": "component",
+      "namespace": "breadcrumbs",
+      "suffix": "list",
+      "file": "src/components/breadcrumbs.ts",
+      "line": 14
+    },
+    {
+      "className": "var-ui-button",
       "kind": "component",
       "namespace": "button",
       "suffix": "base",
@@ -706,31 +588,79 @@
       "line": 5
     },
     {
-      "className": "var-ui-button-intent-ghost",
+      "className": "var-ui-button-group",
       "kind": "component",
-      "namespace": "button",
-      "suffix": "intent-ghost",
-      "file": "src/components/button.ts",
+      "namespace": "button-group",
+      "suffix": "base",
+      "file": "src/components/buttonGroup.ts",
+      "line": 9
+    },
+    {
+      "className": "var-ui-calendar",
+      "kind": "component",
+      "namespace": "calendar",
+      "suffix": "base",
+      "file": "src/components/calendar.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-calendar__cell",
+      "kind": "component",
+      "namespace": "calendar",
+      "suffix": "cell",
+      "file": "src/components/calendar.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-calendar__grid",
+      "kind": "component",
+      "namespace": "calendar",
+      "suffix": "grid",
+      "file": "src/components/calendar.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-calendar__header",
+      "kind": "component",
+      "namespace": "calendar",
+      "suffix": "header",
+      "file": "src/components/calendar.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-calendar__headerCell",
+      "kind": "component",
+      "namespace": "calendar",
+      "suffix": "headerCell",
+      "file": "src/components/calendar.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-calendar__heading",
+      "kind": "component",
+      "namespace": "calendar",
+      "suffix": "heading",
+      "file": "src/components/calendar.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-calendar__navButton",
+      "kind": "component",
+      "namespace": "calendar",
+      "suffix": "navButton",
+      "file": "src/components/calendar.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-card",
+      "kind": "component",
+      "namespace": "card",
+      "suffix": "base",
+      "file": "src/components/card.ts",
       "line": 5
     },
     {
-      "className": "var-ui-button-intent-primary",
-      "kind": "component",
-      "namespace": "button",
-      "suffix": "intent-primary",
-      "file": "src/components/button.ts",
-      "line": 5
-    },
-    {
-      "className": "var-ui-button-intent-secondary",
-      "kind": "component",
-      "namespace": "button",
-      "suffix": "intent-secondary",
-      "file": "src/components/button.ts",
-      "line": 5
-    },
-    {
-      "className": "var-ui-card-body",
+      "className": "var-ui-card__body",
       "kind": "component",
       "namespace": "card",
       "suffix": "body",
@@ -738,7 +668,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card-grid",
+      "className": "var-ui-card__grid",
       "kind": "component",
       "namespace": "card",
       "suffix": "grid",
@@ -746,7 +676,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card-linkDescription",
+      "className": "var-ui-card__linkDescription",
       "kind": "component",
       "namespace": "card",
       "suffix": "linkDescription",
@@ -754,7 +684,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card-linkHint",
+      "className": "var-ui-card__linkHint",
       "kind": "component",
       "namespace": "card",
       "suffix": "linkHint",
@@ -762,7 +692,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card-linkRoot",
+      "className": "var-ui-card__linkRoot",
       "kind": "component",
       "namespace": "card",
       "suffix": "linkRoot",
@@ -770,7 +700,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card-linkTitle",
+      "className": "var-ui-card__linkTitle",
       "kind": "component",
       "namespace": "card",
       "suffix": "linkTitle",
@@ -778,15 +708,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card-root",
-      "kind": "component",
-      "namespace": "card",
-      "suffix": "root",
-      "file": "src/components/card.ts",
-      "line": 5
-    },
-    {
-      "className": "var-ui-card-title",
+      "className": "var-ui-card__title",
       "kind": "component",
       "namespace": "card",
       "suffix": "title",
@@ -794,7 +716,15 @@
       "line": 5
     },
     {
-      "className": "var-ui-carousel-control",
+      "className": "var-ui-carousel",
+      "kind": "component",
+      "namespace": "carousel",
+      "suffix": "base",
+      "file": "src/components/carousel.ts",
+      "line": 15
+    },
+    {
+      "className": "var-ui-carousel__control",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "control",
@@ -802,7 +732,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-carousel-controls",
+      "className": "var-ui-carousel__controls",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "controls",
@@ -810,7 +740,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-carousel-item",
+      "className": "var-ui-carousel__item",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "item",
@@ -818,15 +748,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-carousel-root",
-      "kind": "component",
-      "namespace": "carousel",
-      "suffix": "root",
-      "file": "src/components/carousel.ts",
-      "line": 15
-    },
-    {
-      "className": "var-ui-carousel-viewport",
+      "className": "var-ui-carousel__viewport",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "viewport",
@@ -834,7 +756,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-center-base",
+      "className": "var-ui-center",
       "kind": "component",
       "namespace": "center",
       "suffix": "base",
@@ -842,7 +764,127 @@
       "line": 11
     },
     {
-      "className": "var-ui-checkbox-box",
+      "className": "var-ui-chat-composer",
+      "kind": "component",
+      "namespace": "chat-composer",
+      "suffix": "base",
+      "file": "src/components/chat/chatComposer.ts",
+      "line": 30
+    },
+    {
+      "className": "var-ui-chat-composer__actions",
+      "kind": "component",
+      "namespace": "chat-composer",
+      "suffix": "actions",
+      "file": "src/components/chat/chatComposer.ts",
+      "line": 30
+    },
+    {
+      "className": "var-ui-chat-composer__input",
+      "kind": "component",
+      "namespace": "chat-composer",
+      "suffix": "input",
+      "file": "src/components/chat/chatComposer.ts",
+      "line": 30
+    },
+    {
+      "className": "var-ui-chat-composer__inputRow",
+      "kind": "component",
+      "namespace": "chat-composer",
+      "suffix": "inputRow",
+      "file": "src/components/chat/chatComposer.ts",
+      "line": 30
+    },
+    {
+      "className": "var-ui-chat-layout",
+      "kind": "component",
+      "namespace": "chat-layout",
+      "suffix": "base",
+      "file": "src/components/chat/chatLayout.ts",
+      "line": 26
+    },
+    {
+      "className": "var-ui-chat-layout__dock",
+      "kind": "component",
+      "namespace": "chat-layout",
+      "suffix": "dock",
+      "file": "src/components/chat/chatLayout.ts",
+      "line": 26
+    },
+    {
+      "className": "var-ui-chat-layout__messageArea",
+      "kind": "component",
+      "namespace": "chat-layout",
+      "suffix": "messageArea",
+      "file": "src/components/chat/chatLayout.ts",
+      "line": 26
+    },
+    {
+      "className": "var-ui-chat-message",
+      "kind": "component",
+      "namespace": "chat-message",
+      "suffix": "base",
+      "file": "src/components/chat/chatMessage.ts",
+      "line": 14
+    },
+    {
+      "className": "var-ui-chat-message-bubble",
+      "kind": "component",
+      "namespace": "chat-message-bubble",
+      "suffix": "base",
+      "file": "src/components/chat/chatMessageBubble.ts",
+      "line": 33
+    },
+    {
+      "className": "var-ui-chat-message-list",
+      "kind": "component",
+      "namespace": "chat-message-list",
+      "suffix": "base",
+      "file": "src/components/chat/chatMessageList.ts",
+      "line": 27
+    },
+    {
+      "className": "var-ui-chat-system-message",
+      "kind": "component",
+      "namespace": "chat-system-message",
+      "suffix": "base",
+      "file": "src/components/chat/chatSystemMessage.ts",
+      "line": 43
+    },
+    {
+      "className": "var-ui-chat-system-message__icon",
+      "kind": "component",
+      "namespace": "chat-system-message",
+      "suffix": "icon",
+      "file": "src/components/chat/chatSystemMessage.ts",
+      "line": 43
+    },
+    {
+      "className": "var-ui-chat-system-message__text",
+      "kind": "component",
+      "namespace": "chat-system-message",
+      "suffix": "text",
+      "file": "src/components/chat/chatSystemMessage.ts",
+      "line": 43
+    },
+    {
+      "className": "var-ui-chat-tool-calls",
+      "kind": "component",
+      "namespace": "chat-tool-calls",
+      "suffix": "base",
+      "file": "src/components/chat/chatToolCalls.ts",
+      "line": 44
+    },
+    {
+      "className": "var-ui-checkbox",
+      "kind": "component",
+      "namespace": "checkbox",
+      "suffix": "base",
+      "file": "src/components/checkbox.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-checkbox__box",
       "kind": "component",
       "namespace": "checkbox",
       "suffix": "box",
@@ -850,7 +892,23 @@
       "line": 5
     },
     {
-      "className": "var-ui-checkbox-label",
+      "className": "var-ui-checkbox__group",
+      "kind": "component",
+      "namespace": "checkbox",
+      "suffix": "group",
+      "file": "src/components/checkbox.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-checkbox__groupLabel",
+      "kind": "component",
+      "namespace": "checkbox",
+      "suffix": "groupLabel",
+      "file": "src/components/checkbox.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-checkbox__label",
       "kind": "component",
       "namespace": "checkbox",
       "suffix": "label",
@@ -858,15 +916,15 @@
       "line": 5
     },
     {
-      "className": "var-ui-checkbox-root",
+      "className": "var-ui-code-block",
       "kind": "component",
-      "namespace": "checkbox",
-      "suffix": "root",
-      "file": "src/components/checkbox.ts",
+      "namespace": "code-block",
+      "suffix": "base",
+      "file": "src/components/codeBlock.ts",
       "line": 5
     },
     {
-      "className": "var-ui-code-block-actions",
+      "className": "var-ui-code-block__actions",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "actions",
@@ -874,7 +932,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-body",
+      "className": "var-ui-code-block__body",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "body",
@@ -882,7 +940,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-bodyScrollable",
+      "className": "var-ui-code-block__bodyScrollable",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "bodyScrollable",
@@ -890,7 +948,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-bodyTerminal",
+      "className": "var-ui-code-block__bodyTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "bodyTerminal",
@@ -898,7 +956,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-code",
+      "className": "var-ui-code-block__code",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "code",
@@ -906,7 +964,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-copyButton",
+      "className": "var-ui-code-block__copyButton",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "copyButton",
@@ -914,7 +972,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-copyButtonCopied",
+      "className": "var-ui-code-block__copyButtonCopied",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "copyButtonCopied",
@@ -922,7 +980,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-copyButtonError",
+      "className": "var-ui-code-block__copyButtonError",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "copyButtonError",
@@ -930,7 +988,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-copyButtonIdle",
+      "className": "var-ui-code-block__copyButtonIdle",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "copyButtonIdle",
@@ -938,7 +996,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-feedback",
+      "className": "var-ui-code-block__feedback",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedback",
@@ -946,7 +1004,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-feedbackError",
+      "className": "var-ui-code-block__feedbackError",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedbackError",
@@ -954,7 +1012,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-feedbackInline",
+      "className": "var-ui-code-block__feedbackInline",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedbackInline",
@@ -962,7 +1020,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-feedbackSuccess",
+      "className": "var-ui-code-block__feedbackSuccess",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedbackSuccess",
@@ -970,7 +1028,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-feedbackToast",
+      "className": "var-ui-code-block__feedbackToast",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedbackToast",
@@ -978,7 +1036,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-filename",
+      "className": "var-ui-code-block__filename",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "filename",
@@ -986,7 +1044,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-header",
+      "className": "var-ui-code-block__header",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "header",
@@ -994,7 +1052,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-headerTerminal",
+      "className": "var-ui-code-block__headerTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "headerTerminal",
@@ -1002,7 +1060,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-language",
+      "className": "var-ui-code-block__language",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "language",
@@ -1010,7 +1068,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-languageTerminal",
+      "className": "var-ui-code-block__languageTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "languageTerminal",
@@ -1018,7 +1076,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-line",
+      "className": "var-ui-code-block__line",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "line",
@@ -1026,7 +1084,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-lineAdded",
+      "className": "var-ui-code-block__lineAdded",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineAdded",
@@ -1034,7 +1092,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-lineContent",
+      "className": "var-ui-code-block__lineContent",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineContent",
@@ -1042,7 +1100,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-lineDeleted",
+      "className": "var-ui-code-block__lineDeleted",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineDeleted",
@@ -1050,7 +1108,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-lineHighlighted",
+      "className": "var-ui-code-block__lineHighlighted",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineHighlighted",
@@ -1058,7 +1116,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-lineNumber",
+      "className": "var-ui-code-block__lineNumber",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineNumber",
@@ -1066,7 +1124,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-lines",
+      "className": "var-ui-code-block__lines",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lines",
@@ -1074,7 +1132,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-pre",
+      "className": "var-ui-code-block__pre",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "pre",
@@ -1082,7 +1140,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-preScrollX",
+      "className": "var-ui-code-block__preScrollX",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "preScrollX",
@@ -1090,7 +1148,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-preTerminal",
+      "className": "var-ui-code-block__preTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "preTerminal",
@@ -1098,7 +1156,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-preWrap",
+      "className": "var-ui-code-block__preWrap",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "preWrap",
@@ -1106,15 +1164,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-root",
-      "kind": "component",
-      "namespace": "code-block",
-      "suffix": "root",
-      "file": "src/components/codeBlock.ts",
-      "line": 5
-    },
-    {
-      "className": "var-ui-code-block-rootDefault",
+      "className": "var-ui-code-block__rootDefault",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "rootDefault",
@@ -1122,7 +1172,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-rootDiff",
+      "className": "var-ui-code-block__rootDiff",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "rootDiff",
@@ -1130,7 +1180,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-rootInline",
+      "className": "var-ui-code-block__rootInline",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "rootInline",
@@ -1138,7 +1188,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-rootTerminal",
+      "className": "var-ui-code-block__rootTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "rootTerminal",
@@ -1146,7 +1196,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block-title",
+      "className": "var-ui-code-block__title",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "title",
@@ -1154,7 +1204,15 @@
       "line": 5
     },
     {
-      "className": "var-ui-command-palette-backdrop",
+      "className": "var-ui-command-palette",
+      "kind": "component",
+      "namespace": "command-palette",
+      "suffix": "base",
+      "file": "src/components/commandPalette.ts",
+      "line": 13
+    },
+    {
+      "className": "var-ui-command-palette__backdrop",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "backdrop",
@@ -1162,7 +1220,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-dialog",
+      "className": "var-ui-command-palette__dialog",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "dialog",
@@ -1170,15 +1228,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-dialog-open-true",
-      "kind": "component",
-      "namespace": "command-palette",
-      "suffix": "dialog-open-true",
-      "file": "src/components/commandPalette.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-command-palette-empty",
+      "className": "var-ui-command-palette__empty",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "empty",
@@ -1186,7 +1236,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-input",
+      "className": "var-ui-command-palette__input",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "input",
@@ -1194,7 +1244,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-inputIcon",
+      "className": "var-ui-command-palette__inputIcon",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "inputIcon",
@@ -1202,7 +1252,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-inputRow",
+      "className": "var-ui-command-palette__inputRow",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "inputRow",
@@ -1210,7 +1260,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-mark",
+      "className": "var-ui-command-palette__mark",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "mark",
@@ -1218,7 +1268,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-result",
+      "className": "var-ui-command-palette__result",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "result",
@@ -1226,7 +1276,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-resultLink",
+      "className": "var-ui-command-palette__resultLink",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "resultLink",
@@ -1234,7 +1284,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-resultLinkActive",
+      "className": "var-ui-command-palette__resultLinkActive",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "resultLinkActive",
@@ -1242,7 +1292,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-resultMeta",
+      "className": "var-ui-command-palette__resultMeta",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "resultMeta",
@@ -1250,7 +1300,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-results",
+      "className": "var-ui-command-palette__results",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "results",
@@ -1258,7 +1308,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-resultTitle",
+      "className": "var-ui-command-palette__resultTitle",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "resultTitle",
@@ -1266,23 +1316,359 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette-root",
+      "className": "var-ui-dateInput",
       "kind": "component",
-      "namespace": "command-palette",
-      "suffix": "root",
-      "file": "src/components/commandPalette.ts",
-      "line": 13
+      "namespace": "dateInput",
+      "suffix": "base",
+      "file": "src/components/dateInput.ts",
+      "line": 6
     },
     {
-      "className": "var-ui-command-palette-root-open-true",
+      "className": "var-ui-dateInput__calendarCell",
       "kind": "component",
-      "namespace": "command-palette",
-      "suffix": "root-open-true",
-      "file": "src/components/commandPalette.ts",
-      "line": 13
+      "namespace": "dateInput",
+      "suffix": "calendarCell",
+      "file": "src/components/dateInput.ts",
+      "line": 6
     },
     {
-      "className": "var-ui-dialog-closeButton",
+      "className": "var-ui-dateInput__calendarGrid",
+      "kind": "component",
+      "namespace": "dateInput",
+      "suffix": "calendarGrid",
+      "file": "src/components/dateInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateInput__calendarHeader",
+      "kind": "component",
+      "namespace": "dateInput",
+      "suffix": "calendarHeader",
+      "file": "src/components/dateInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateInput__calendarHeaderCell",
+      "kind": "component",
+      "namespace": "dateInput",
+      "suffix": "calendarHeaderCell",
+      "file": "src/components/dateInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateInput__calendarHeading",
+      "kind": "component",
+      "namespace": "dateInput",
+      "suffix": "calendarHeading",
+      "file": "src/components/dateInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateInput__calendarNavButton",
+      "kind": "component",
+      "namespace": "dateInput",
+      "suffix": "calendarNavButton",
+      "file": "src/components/dateInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateInput__description",
+      "kind": "component",
+      "namespace": "dateInput",
+      "suffix": "description",
+      "file": "src/components/dateInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateInput__error",
+      "kind": "component",
+      "namespace": "dateInput",
+      "suffix": "error",
+      "file": "src/components/dateInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateInput__group",
+      "kind": "component",
+      "namespace": "dateInput",
+      "suffix": "group",
+      "file": "src/components/dateInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateInput__label",
+      "kind": "component",
+      "namespace": "dateInput",
+      "suffix": "label",
+      "file": "src/components/dateInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateInput__popover",
+      "kind": "component",
+      "namespace": "dateInput",
+      "suffix": "popover",
+      "file": "src/components/dateInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateInput__segment",
+      "kind": "component",
+      "namespace": "dateInput",
+      "suffix": "segment",
+      "file": "src/components/dateInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateInput__trigger",
+      "kind": "component",
+      "namespace": "dateInput",
+      "suffix": "trigger",
+      "file": "src/components/dateInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "base",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__calendarCell",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "calendarCell",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__calendarGrid",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "calendarGrid",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__calendarHeader",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "calendarHeader",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__calendarHeaderCell",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "calendarHeaderCell",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__calendarHeading",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "calendarHeading",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__calendarNavButton",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "calendarNavButton",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__description",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "description",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__error",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "error",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__group",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "group",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__label",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "label",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__popover",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "popover",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__segment",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "segment",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__separator",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "separator",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateRangeInput__trigger",
+      "kind": "component",
+      "namespace": "dateRangeInput",
+      "suffix": "trigger",
+      "file": "src/components/dateRangeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "base",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__calendarCell",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "calendarCell",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__calendarGrid",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "calendarGrid",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__calendarHeader",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "calendarHeader",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__calendarHeaderCell",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "calendarHeaderCell",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__calendarHeading",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "calendarHeading",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__calendarNavButton",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "calendarNavButton",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__description",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "description",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__error",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "error",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__group",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "group",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__label",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "label",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__popover",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "popover",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__segment",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "segment",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dateTimeInput__trigger",
+      "kind": "component",
+      "namespace": "dateTimeInput",
+      "suffix": "trigger",
+      "file": "src/components/dateTimeInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-dialog__actions",
+      "kind": "component",
+      "namespace": "dialog",
+      "suffix": "actions",
+      "file": "src/components/dialog.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-dialog__closeButton",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "closeButton",
@@ -1290,7 +1676,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog-content",
+      "className": "var-ui-dialog__content",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "content",
@@ -1298,7 +1684,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog-description",
+      "className": "var-ui-dialog__description",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "description",
@@ -1306,7 +1692,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog-header",
+      "className": "var-ui-dialog__header",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "header",
@@ -1314,7 +1700,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog-heading",
+      "className": "var-ui-dialog__heading",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "heading",
@@ -1322,7 +1708,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog-modal",
+      "className": "var-ui-dialog__modal",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "modal",
@@ -1330,7 +1716,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog-overlay",
+      "className": "var-ui-dialog__overlay",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "overlay",
@@ -1338,7 +1724,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-divider-base",
+      "className": "var-ui-divider",
       "kind": "component",
       "namespace": "divider",
       "suffix": "base",
@@ -1346,23 +1732,15 @@
       "line": 13
     },
     {
-      "className": "var-ui-divider-orientation-horizontal",
+      "className": "var-ui-docs-prose",
       "kind": "component",
-      "namespace": "divider",
-      "suffix": "orientation-horizontal",
-      "file": "src/components/divider.ts",
-      "line": 13
+      "namespace": "docs-prose",
+      "suffix": "base",
+      "file": "src/components/proseContent.ts",
+      "line": 17
     },
     {
-      "className": "var-ui-divider-orientation-vertical",
-      "kind": "component",
-      "namespace": "divider",
-      "suffix": "orientation-vertical",
-      "file": "src/components/divider.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-docs-prose-headingAnchor",
+      "className": "var-ui-docs-prose__headingAnchor",
       "kind": "component",
       "namespace": "docs-prose",
       "suffix": "headingAnchor",
@@ -1370,15 +1748,7 @@
       "line": 17
     },
     {
-      "className": "var-ui-docs-prose-root",
-      "kind": "component",
-      "namespace": "docs-prose",
-      "suffix": "root",
-      "file": "src/components/proseContent.ts",
-      "line": 17
-    },
-    {
-      "className": "var-ui-docs-prose-tableWrap",
+      "className": "var-ui-docs-prose__tableWrap",
       "kind": "component",
       "namespace": "docs-prose",
       "suffix": "tableWrap",
@@ -1386,15 +1756,23 @@
       "line": 17
     },
     {
-      "className": "var-ui-ds-hljs-root",
+      "className": "var-ui-ds-hljs",
       "kind": "component",
       "namespace": "ds-hljs",
-      "suffix": "root",
+      "suffix": "base",
       "file": "src/components/codeHighlight.ts",
       "line": 31
     },
     {
-      "className": "var-ui-ds-layout-row",
+      "className": "var-ui-ds-layout",
+      "kind": "component",
+      "namespace": "ds-layout",
+      "suffix": "base",
+      "file": "src/components/styles.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-ds-layout--row",
       "kind": "component",
       "namespace": "ds-layout",
       "suffix": "row",
@@ -1402,7 +1780,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-ds-layout-section",
+      "className": "var-ui-ds-layout--section",
       "kind": "component",
       "namespace": "ds-layout",
       "suffix": "section",
@@ -1410,7 +1788,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-ds-layout-stack",
+      "className": "var-ui-ds-layout--stack",
       "kind": "component",
       "namespace": "ds-layout",
       "suffix": "stack",
@@ -1432,7 +1810,15 @@
       "line": 14
     },
     {
-      "className": "var-ui-ds-text-caption",
+      "className": "var-ui-ds-text",
+      "kind": "component",
+      "namespace": "ds-text",
+      "suffix": "base",
+      "file": "src/components/styles.ts",
+      "line": 54
+    },
+    {
+      "className": "var-ui-ds-text--caption",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "caption",
@@ -1440,7 +1826,7 @@
       "line": 54
     },
     {
-      "className": "var-ui-ds-text-label",
+      "className": "var-ui-ds-text--label",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "label",
@@ -1448,7 +1834,7 @@
       "line": 54
     },
     {
-      "className": "var-ui-ds-text-sectionTitle",
+      "className": "var-ui-ds-text--sectionTitle",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "sectionTitle",
@@ -1456,7 +1842,7 @@
       "line": 54
     },
     {
-      "className": "var-ui-ds-text-subtitle",
+      "className": "var-ui-ds-text--subtitle",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "subtitle",
@@ -1464,7 +1850,7 @@
       "line": 54
     },
     {
-      "className": "var-ui-ds-text-title",
+      "className": "var-ui-ds-text--title",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "title",
@@ -1472,7 +1858,15 @@
       "line": 54
     },
     {
-      "className": "var-ui-empty-state-action",
+      "className": "var-ui-empty-state",
+      "kind": "component",
+      "namespace": "empty-state",
+      "suffix": "base",
+      "file": "src/components/emptyState.ts",
+      "line": 14
+    },
+    {
+      "className": "var-ui-empty-state__action",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "action",
@@ -1480,7 +1874,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-empty-state-description",
+      "className": "var-ui-empty-state__description",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "description",
@@ -1488,7 +1882,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-empty-state-icon",
+      "className": "var-ui-empty-state__icon",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "icon",
@@ -1496,15 +1890,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-empty-state-root",
-      "kind": "component",
-      "namespace": "empty-state",
-      "suffix": "root",
-      "file": "src/components/emptyState.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-empty-state-title",
+      "className": "var-ui-empty-state__title",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "title",
@@ -1512,39 +1898,127 @@
       "line": 14
     },
     {
-      "className": "var-ui-field-description",
+      "className": "var-ui-field",
+      "kind": "component",
+      "namespace": "field",
+      "suffix": "base",
+      "file": "src/components/field.ts",
+      "line": 200
+    },
+    {
+      "className": "var-ui-field__description",
       "kind": "component",
       "namespace": "field",
       "suffix": "description",
       "file": "src/components/field.ts",
-      "line": 52
+      "line": 200
     },
     {
-      "className": "var-ui-field-error",
+      "className": "var-ui-field__error",
       "kind": "component",
       "namespace": "field",
       "suffix": "error",
       "file": "src/components/field.ts",
-      "line": 52
+      "line": 200
     },
     {
-      "className": "var-ui-field-label",
+      "className": "var-ui-field__label",
       "kind": "component",
       "namespace": "field",
       "suffix": "label",
       "file": "src/components/field.ts",
-      "line": 52
+      "line": 200
     },
     {
-      "className": "var-ui-field-root",
+      "className": "var-ui-file-input",
       "kind": "component",
-      "namespace": "field",
-      "suffix": "root",
-      "file": "src/components/field.ts",
-      "line": 52
+      "namespace": "file-input",
+      "suffix": "base",
+      "file": "src/components/fileInput.ts",
+      "line": 12
     },
     {
-      "className": "var-ui-fileTree-file",
+      "className": "var-ui-file-input__clearButton",
+      "kind": "component",
+      "namespace": "file-input",
+      "suffix": "clearButton",
+      "file": "src/components/fileInput.ts",
+      "line": 12
+    },
+    {
+      "className": "var-ui-file-input__description",
+      "kind": "component",
+      "namespace": "file-input",
+      "suffix": "description",
+      "file": "src/components/fileInput.ts",
+      "line": 12
+    },
+    {
+      "className": "var-ui-file-input__dropzone",
+      "kind": "component",
+      "namespace": "file-input",
+      "suffix": "dropzone",
+      "file": "src/components/fileInput.ts",
+      "line": 12
+    },
+    {
+      "className": "var-ui-file-input__error",
+      "kind": "component",
+      "namespace": "file-input",
+      "suffix": "error",
+      "file": "src/components/fileInput.ts",
+      "line": 12
+    },
+    {
+      "className": "var-ui-file-input__fileNameText",
+      "kind": "component",
+      "namespace": "file-input",
+      "suffix": "fileNameText",
+      "file": "src/components/fileInput.ts",
+      "line": 12
+    },
+    {
+      "className": "var-ui-file-input__hiddenInput",
+      "kind": "component",
+      "namespace": "file-input",
+      "suffix": "hiddenInput",
+      "file": "src/components/fileInput.ts",
+      "line": 12
+    },
+    {
+      "className": "var-ui-file-input__icon",
+      "kind": "component",
+      "namespace": "file-input",
+      "suffix": "icon",
+      "file": "src/components/fileInput.ts",
+      "line": 12
+    },
+    {
+      "className": "var-ui-file-input__label",
+      "kind": "component",
+      "namespace": "file-input",
+      "suffix": "label",
+      "file": "src/components/fileInput.ts",
+      "line": 12
+    },
+    {
+      "className": "var-ui-file-input__placeholderText",
+      "kind": "component",
+      "namespace": "file-input",
+      "suffix": "placeholderText",
+      "file": "src/components/fileInput.ts",
+      "line": 12
+    },
+    {
+      "className": "var-ui-fileTree",
+      "kind": "component",
+      "namespace": "fileTree",
+      "suffix": "base",
+      "file": "src/components/fileTree.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-fileTree__file",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "file",
@@ -1552,7 +2026,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-fileTree-folder",
+      "className": "var-ui-fileTree__folder",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "folder",
@@ -1560,7 +2034,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-fileTree-item",
+      "className": "var-ui-fileTree__item",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "item",
@@ -1568,7 +2042,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-fileTree-list",
+      "className": "var-ui-fileTree__list",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "list",
@@ -1576,7 +2050,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-fileTree-listNested",
+      "className": "var-ui-fileTree__listNested",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "listNested",
@@ -1584,15 +2058,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-fileTree-root",
-      "kind": "component",
-      "namespace": "fileTree",
-      "suffix": "root",
-      "file": "src/components/fileTree.ts",
-      "line": 5
-    },
-    {
-      "className": "var-ui-fileTree-row",
+      "className": "var-ui-fileTree__row",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "row",
@@ -1600,7 +2066,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-grid-base",
+      "className": "var-ui-grid",
       "kind": "component",
       "namespace": "grid",
       "suffix": "base",
@@ -1608,95 +2074,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-grid-columns-auto",
-      "kind": "component",
-      "namespace": "grid",
-      "suffix": "columns-auto",
-      "file": "src/components/grid.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-grid-columns-four",
-      "kind": "component",
-      "namespace": "grid",
-      "suffix": "columns-four",
-      "file": "src/components/grid.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-grid-columns-one",
-      "kind": "component",
-      "namespace": "grid",
-      "suffix": "columns-one",
-      "file": "src/components/grid.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-grid-columns-three",
-      "kind": "component",
-      "namespace": "grid",
-      "suffix": "columns-three",
-      "file": "src/components/grid.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-grid-columns-two",
-      "kind": "component",
-      "namespace": "grid",
-      "suffix": "columns-two",
-      "file": "src/components/grid.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-grid-gap-lg",
-      "kind": "component",
-      "namespace": "grid",
-      "suffix": "gap-lg",
-      "file": "src/components/grid.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-grid-gap-md",
-      "kind": "component",
-      "namespace": "grid",
-      "suffix": "gap-md",
-      "file": "src/components/grid.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-grid-gap-none",
-      "kind": "component",
-      "namespace": "grid",
-      "suffix": "gap-none",
-      "file": "src/components/grid.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-grid-gap-sm",
-      "kind": "component",
-      "namespace": "grid",
-      "suffix": "gap-sm",
-      "file": "src/components/grid.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-grid-gap-xl",
-      "kind": "component",
-      "namespace": "grid",
-      "suffix": "gap-xl",
-      "file": "src/components/grid.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-grid-gap-xs",
-      "kind": "component",
-      "namespace": "grid",
-      "suffix": "gap-xs",
-      "file": "src/components/grid.ts",
-      "line": 14
-    },
-    {
-      "className": "var-ui-heading-base",
+      "className": "var-ui-heading",
       "kind": "component",
       "namespace": "heading",
       "suffix": "base",
@@ -1704,55 +2082,31 @@
       "line": 13
     },
     {
-      "className": "var-ui-heading-size-display",
+      "className": "var-ui-hover-card",
       "kind": "component",
-      "namespace": "heading",
-      "suffix": "size-display",
-      "file": "src/components/typography.ts",
-      "line": 13
+      "namespace": "hover-card",
+      "suffix": "base",
+      "file": "src/components/hoverCard.ts",
+      "line": 15
     },
     {
-      "className": "var-ui-heading-size-lg",
+      "className": "var-ui-hover-card__content",
       "kind": "component",
-      "namespace": "heading",
-      "suffix": "size-lg",
-      "file": "src/components/typography.ts",
-      "line": 13
+      "namespace": "hover-card",
+      "suffix": "content",
+      "file": "src/components/hoverCard.ts",
+      "line": 15
     },
     {
-      "className": "var-ui-heading-size-md",
+      "className": "var-ui-hover-card__title",
       "kind": "component",
-      "namespace": "heading",
-      "suffix": "size-md",
-      "file": "src/components/typography.ts",
-      "line": 13
+      "namespace": "hover-card",
+      "suffix": "title",
+      "file": "src/components/hoverCard.ts",
+      "line": 15
     },
     {
-      "className": "var-ui-heading-size-sm",
-      "kind": "component",
-      "namespace": "heading",
-      "suffix": "size-sm",
-      "file": "src/components/typography.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-heading-size-xl",
-      "kind": "component",
-      "namespace": "heading",
-      "suffix": "size-xl",
-      "file": "src/components/typography.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-heading-size-xs",
-      "kind": "component",
-      "namespace": "heading",
-      "suffix": "size-xs",
-      "file": "src/components/typography.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-icon-base",
+      "className": "var-ui-icon",
       "kind": "component",
       "namespace": "icon",
       "suffix": "base",
@@ -1760,36 +2114,68 @@
       "line": 13
     },
     {
-      "className": "var-ui-icon-size-inherit",
+      "className": "var-ui-input-group",
       "kind": "component",
-      "namespace": "icon",
-      "suffix": "size-inherit",
-      "file": "src/components/icon.ts",
-      "line": 13
+      "namespace": "input-group",
+      "suffix": "base",
+      "file": "src/components/inputGroup.ts",
+      "line": 17
     },
     {
-      "className": "var-ui-icon-size-lg",
+      "className": "var-ui-input-group__description",
       "kind": "component",
-      "namespace": "icon",
-      "suffix": "size-lg",
-      "file": "src/components/icon.ts",
-      "line": 13
+      "namespace": "input-group",
+      "suffix": "description",
+      "file": "src/components/inputGroup.ts",
+      "line": 17
     },
     {
-      "className": "var-ui-icon-size-md",
+      "className": "var-ui-input-group__error",
       "kind": "component",
-      "namespace": "icon",
-      "suffix": "size-md",
-      "file": "src/components/icon.ts",
-      "line": 13
+      "namespace": "input-group",
+      "suffix": "error",
+      "file": "src/components/inputGroup.ts",
+      "line": 17
     },
     {
-      "className": "var-ui-icon-size-sm",
+      "className": "var-ui-input-group__group",
       "kind": "component",
-      "namespace": "icon",
-      "suffix": "size-sm",
-      "file": "src/components/icon.ts",
-      "line": 13
+      "namespace": "input-group",
+      "suffix": "group",
+      "file": "src/components/inputGroup.ts",
+      "line": 17
+    },
+    {
+      "className": "var-ui-input-group__input",
+      "kind": "component",
+      "namespace": "input-group",
+      "suffix": "input",
+      "file": "src/components/inputGroup.ts",
+      "line": 17
+    },
+    {
+      "className": "var-ui-input-group__label",
+      "kind": "component",
+      "namespace": "input-group",
+      "suffix": "label",
+      "file": "src/components/inputGroup.ts",
+      "line": 17
+    },
+    {
+      "className": "var-ui-input-group__text",
+      "kind": "component",
+      "namespace": "input-group",
+      "suffix": "text",
+      "file": "src/components/inputGroup.ts",
+      "line": 17
+    },
+    {
+      "className": "var-ui-kbd",
+      "kind": "component",
+      "namespace": "kbd",
+      "suffix": "base",
+      "file": "src/components/kbd.ts",
+      "line": 12
     },
     {
       "className": "var-ui-link",
@@ -1799,7 +2185,215 @@
       "line": 6
     },
     {
-      "className": "var-ui-overlay-backdrop",
+      "className": "var-ui-menu__item",
+      "kind": "component",
+      "namespace": "menu",
+      "suffix": "item",
+      "file": "src/components/menu.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-menu__itemCheck",
+      "kind": "component",
+      "namespace": "menu",
+      "suffix": "itemCheck",
+      "file": "src/components/menu.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-menu__itemDanger",
+      "kind": "component",
+      "namespace": "menu",
+      "suffix": "itemDanger",
+      "file": "src/components/menu.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-menu__itemLabel",
+      "kind": "component",
+      "namespace": "menu",
+      "suffix": "itemLabel",
+      "file": "src/components/menu.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-menu__itemShortcut",
+      "kind": "component",
+      "namespace": "menu",
+      "suffix": "itemShortcut",
+      "file": "src/components/menu.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-menu__menu",
+      "kind": "component",
+      "namespace": "menu",
+      "suffix": "menu",
+      "file": "src/components/menu.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-menu__popover",
+      "kind": "component",
+      "namespace": "menu",
+      "suffix": "popover",
+      "file": "src/components/menu.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-menu__section",
+      "kind": "component",
+      "namespace": "menu",
+      "suffix": "section",
+      "file": "src/components/menu.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-menu__sectionHeader",
+      "kind": "component",
+      "namespace": "menu",
+      "suffix": "sectionHeader",
+      "file": "src/components/menu.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-menu__separator",
+      "kind": "component",
+      "namespace": "menu",
+      "suffix": "separator",
+      "file": "src/components/menu.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-menu__submenuChevron",
+      "kind": "component",
+      "namespace": "menu",
+      "suffix": "submenuChevron",
+      "file": "src/components/menu.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-multiSelector",
+      "kind": "component",
+      "namespace": "multiSelector",
+      "suffix": "base",
+      "file": "src/components/multiSelector.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-multiSelector__item",
+      "kind": "component",
+      "namespace": "multiSelector",
+      "suffix": "item",
+      "file": "src/components/multiSelector.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-multiSelector__itemCheckbox",
+      "kind": "component",
+      "namespace": "multiSelector",
+      "suffix": "itemCheckbox",
+      "file": "src/components/multiSelector.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-multiSelector__itemLabel",
+      "kind": "component",
+      "namespace": "multiSelector",
+      "suffix": "itemLabel",
+      "file": "src/components/multiSelector.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-multiSelector__label",
+      "kind": "component",
+      "namespace": "multiSelector",
+      "suffix": "label",
+      "file": "src/components/multiSelector.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-multiSelector__popover",
+      "kind": "component",
+      "namespace": "multiSelector",
+      "suffix": "popover",
+      "file": "src/components/multiSelector.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-multiSelector__trigger",
+      "kind": "component",
+      "namespace": "multiSelector",
+      "suffix": "trigger",
+      "file": "src/components/multiSelector.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-multiSelector__triggerIcon",
+      "kind": "component",
+      "namespace": "multiSelector",
+      "suffix": "triggerIcon",
+      "file": "src/components/multiSelector.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-number-input",
+      "kind": "component",
+      "namespace": "number-input",
+      "suffix": "base",
+      "file": "src/components/numberInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-number-input__description",
+      "kind": "component",
+      "namespace": "number-input",
+      "suffix": "description",
+      "file": "src/components/numberInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-number-input__error",
+      "kind": "component",
+      "namespace": "number-input",
+      "suffix": "error",
+      "file": "src/components/numberInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-number-input__group",
+      "kind": "component",
+      "namespace": "number-input",
+      "suffix": "group",
+      "file": "src/components/numberInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-number-input__input",
+      "kind": "component",
+      "namespace": "number-input",
+      "suffix": "input",
+      "file": "src/components/numberInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-number-input__label",
+      "kind": "component",
+      "namespace": "number-input",
+      "suffix": "label",
+      "file": "src/components/numberInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-number-input__stepper",
+      "kind": "component",
+      "namespace": "number-input",
+      "suffix": "stepper",
+      "file": "src/components/numberInput.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-overlay__backdrop",
       "kind": "component",
       "namespace": "overlay",
       "suffix": "backdrop",
@@ -1807,7 +2401,7 @@
       "line": 16
     },
     {
-      "className": "var-ui-overlay-positioner",
+      "className": "var-ui-overlay__positioner",
       "kind": "component",
       "namespace": "overlay",
       "suffix": "positioner",
@@ -1815,7 +2409,103 @@
       "line": 16
     },
     {
-      "className": "var-ui-progress-bar-fill",
+      "className": "var-ui-pagination",
+      "kind": "component",
+      "namespace": "pagination",
+      "suffix": "base",
+      "file": "src/components/pagination.ts",
+      "line": 36
+    },
+    {
+      "className": "var-ui-pagination__controls",
+      "kind": "component",
+      "namespace": "pagination",
+      "suffix": "controls",
+      "file": "src/components/pagination.ts",
+      "line": 36
+    },
+    {
+      "className": "var-ui-pagination__dot",
+      "kind": "component",
+      "namespace": "pagination",
+      "suffix": "dot",
+      "file": "src/components/pagination.ts",
+      "line": 36
+    },
+    {
+      "className": "var-ui-pagination__dotActive",
+      "kind": "component",
+      "namespace": "pagination",
+      "suffix": "dotActive",
+      "file": "src/components/pagination.ts",
+      "line": 36
+    },
+    {
+      "className": "var-ui-pagination__dotsContainer",
+      "kind": "component",
+      "namespace": "pagination",
+      "suffix": "dotsContainer",
+      "file": "src/components/pagination.ts",
+      "line": 36
+    },
+    {
+      "className": "var-ui-pagination__ellipsis",
+      "kind": "component",
+      "namespace": "pagination",
+      "suffix": "ellipsis",
+      "file": "src/components/pagination.ts",
+      "line": 36
+    },
+    {
+      "className": "var-ui-pagination__infoText",
+      "kind": "component",
+      "namespace": "pagination",
+      "suffix": "infoText",
+      "file": "src/components/pagination.ts",
+      "line": 36
+    },
+    {
+      "className": "var-ui-pagination__pageSizeGroup",
+      "kind": "component",
+      "namespace": "pagination",
+      "suffix": "pageSizeGroup",
+      "file": "src/components/pagination.ts",
+      "line": 36
+    },
+    {
+      "className": "var-ui-popover",
+      "kind": "component",
+      "namespace": "popover",
+      "suffix": "base",
+      "file": "src/components/popover.ts",
+      "line": 13
+    },
+    {
+      "className": "var-ui-popover__content",
+      "kind": "component",
+      "namespace": "popover",
+      "suffix": "content",
+      "file": "src/components/popover.ts",
+      "line": 13
+    },
+    {
+      "className": "var-ui-popover__title",
+      "kind": "component",
+      "namespace": "popover",
+      "suffix": "title",
+      "file": "src/components/popover.ts",
+      "line": 13
+    },
+    {
+      "className": "var-ui-progress-bar",
+      "kind": "component",
+      "namespace": "progress-bar",
+      "suffix": "base",
+      "file": "src/components/progressBar.ts",
+      "line": 15
+    },
+    {
+      "className": "var-ui-progress-bar__fill",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "fill",
@@ -1823,15 +2513,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-progress-bar-fill-indeterminate-true",
-      "kind": "component",
-      "namespace": "progress-bar",
-      "suffix": "fill-indeterminate-true",
-      "file": "src/components/progressBar.ts",
-      "line": 15
-    },
-    {
-      "className": "var-ui-progress-bar-header",
+      "className": "var-ui-progress-bar__header",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "header",
@@ -1839,7 +2521,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-progress-bar-label",
+      "className": "var-ui-progress-bar__label",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "label",
@@ -1847,39 +2529,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-progress-bar-root",
-      "kind": "component",
-      "namespace": "progress-bar",
-      "suffix": "root",
-      "file": "src/components/progressBar.ts",
-      "line": 15
-    },
-    {
-      "className": "var-ui-progress-bar-root-tone-danger",
-      "kind": "component",
-      "namespace": "progress-bar",
-      "suffix": "root-tone-danger",
-      "file": "src/components/progressBar.ts",
-      "line": 15
-    },
-    {
-      "className": "var-ui-progress-bar-root-tone-success",
-      "kind": "component",
-      "namespace": "progress-bar",
-      "suffix": "root-tone-success",
-      "file": "src/components/progressBar.ts",
-      "line": 15
-    },
-    {
-      "className": "var-ui-progress-bar-root-tone-warning",
-      "kind": "component",
-      "namespace": "progress-bar",
-      "suffix": "root-tone-warning",
-      "file": "src/components/progressBar.ts",
-      "line": 15
-    },
-    {
-      "className": "var-ui-progress-bar-track",
+      "className": "var-ui-progress-bar__track",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "track",
@@ -1887,7 +2537,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-progress-bar-valueText",
+      "className": "var-ui-progress-bar__valueText",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "valueText",
@@ -1895,7 +2545,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-radio-control",
+      "className": "var-ui-radio__control",
       "kind": "component",
       "namespace": "radio",
       "suffix": "control",
@@ -1903,7 +2553,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-radio-group",
+      "className": "var-ui-radio__group",
       "kind": "component",
       "namespace": "radio",
       "suffix": "group",
@@ -1911,7 +2561,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-radio-groupLabel",
+      "className": "var-ui-radio__groupLabel",
       "kind": "component",
       "namespace": "radio",
       "suffix": "groupLabel",
@@ -1919,7 +2569,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-radio-item",
+      "className": "var-ui-radio__item",
       "kind": "component",
       "namespace": "radio",
       "suffix": "item",
@@ -1927,7 +2577,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-radio-label",
+      "className": "var-ui-radio__label",
       "kind": "component",
       "namespace": "radio",
       "suffix": "label",
@@ -1935,15 +2585,15 @@
       "line": 5
     },
     {
-      "className": "var-ui-section-root",
+      "className": "var-ui-section",
       "kind": "component",
       "namespace": "section",
-      "suffix": "root",
+      "suffix": "base",
       "file": "src/components/section.ts",
       "line": 14
     },
     {
-      "className": "var-ui-section-title",
+      "className": "var-ui-section__title",
       "kind": "component",
       "namespace": "section",
       "suffix": "title",
@@ -1951,7 +2601,23 @@
       "line": 14
     },
     {
-      "className": "var-ui-select-item",
+      "className": "var-ui-segmented-control",
+      "kind": "component",
+      "namespace": "segmented-control",
+      "suffix": "base",
+      "file": "src/components/segmentedControl.ts",
+      "line": 8
+    },
+    {
+      "className": "var-ui-select",
+      "kind": "component",
+      "namespace": "select",
+      "suffix": "base",
+      "file": "src/components/select.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-select__item",
       "kind": "component",
       "namespace": "select",
       "suffix": "item",
@@ -1959,7 +2625,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-select-label",
+      "className": "var-ui-select__label",
       "kind": "component",
       "namespace": "select",
       "suffix": "label",
@@ -1967,7 +2633,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-select-popover",
+      "className": "var-ui-select__popover",
       "kind": "component",
       "namespace": "select",
       "suffix": "popover",
@@ -1975,15 +2641,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-select-root",
-      "kind": "component",
-      "namespace": "select",
-      "suffix": "root",
-      "file": "src/components/select.ts",
-      "line": 6
-    },
-    {
-      "className": "var-ui-select-trigger",
+      "className": "var-ui-select__trigger",
       "kind": "component",
       "namespace": "select",
       "suffix": "trigger",
@@ -1991,7 +2649,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-select-triggerIcon",
+      "className": "var-ui-select__triggerIcon",
       "kind": "component",
       "namespace": "select",
       "suffix": "triggerIcon",
@@ -1999,7 +2657,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-skeleton-base",
+      "className": "var-ui-skeleton",
       "kind": "component",
       "namespace": "skeleton",
       "suffix": "base",
@@ -2007,31 +2665,79 @@
       "line": 19
     },
     {
-      "className": "var-ui-skeleton-shape-circle",
+      "className": "var-ui-slider",
       "kind": "component",
-      "namespace": "skeleton",
-      "suffix": "shape-circle",
-      "file": "src/components/skeleton.ts",
-      "line": 19
+      "namespace": "slider",
+      "suffix": "base",
+      "file": "src/components/slider.ts",
+      "line": 6
     },
     {
-      "className": "var-ui-skeleton-shape-rect",
+      "className": "var-ui-slider__control",
       "kind": "component",
-      "namespace": "skeleton",
-      "suffix": "shape-rect",
-      "file": "src/components/skeleton.ts",
-      "line": 19
+      "namespace": "slider",
+      "suffix": "control",
+      "file": "src/components/slider.ts",
+      "line": 6
     },
     {
-      "className": "var-ui-skeleton-shape-text",
+      "className": "var-ui-slider__description",
       "kind": "component",
-      "namespace": "skeleton",
-      "suffix": "shape-text",
-      "file": "src/components/skeleton.ts",
-      "line": 19
+      "namespace": "slider",
+      "suffix": "description",
+      "file": "src/components/slider.ts",
+      "line": 6
     },
     {
-      "className": "var-ui-spinner-base",
+      "className": "var-ui-slider__error",
+      "kind": "component",
+      "namespace": "slider",
+      "suffix": "error",
+      "file": "src/components/slider.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-slider__fill",
+      "kind": "component",
+      "namespace": "slider",
+      "suffix": "fill",
+      "file": "src/components/slider.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-slider__label",
+      "kind": "component",
+      "namespace": "slider",
+      "suffix": "label",
+      "file": "src/components/slider.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-slider__output",
+      "kind": "component",
+      "namespace": "slider",
+      "suffix": "output",
+      "file": "src/components/slider.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-slider__thumb",
+      "kind": "component",
+      "namespace": "slider",
+      "suffix": "thumb",
+      "file": "src/components/slider.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-slider__track",
+      "kind": "component",
+      "namespace": "slider",
+      "suffix": "track",
+      "file": "src/components/slider.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-spinner",
       "kind": "component",
       "namespace": "spinner",
       "suffix": "base",
@@ -2039,79 +2745,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-spinner-size-lg",
-      "kind": "component",
-      "namespace": "spinner",
-      "suffix": "size-lg",
-      "file": "src/components/spinner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-spinner-size-md",
-      "kind": "component",
-      "namespace": "spinner",
-      "suffix": "size-md",
-      "file": "src/components/spinner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-spinner-size-sm",
-      "kind": "component",
-      "namespace": "spinner",
-      "suffix": "size-sm",
-      "file": "src/components/spinner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-spinner-tone-accent",
-      "kind": "component",
-      "namespace": "spinner",
-      "suffix": "tone-accent",
-      "file": "src/components/spinner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-spinner-tone-neutral",
-      "kind": "component",
-      "namespace": "spinner",
-      "suffix": "tone-neutral",
-      "file": "src/components/spinner.ts",
-      "line": 19
-    },
-    {
-      "className": "var-ui-stack-align-center",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "align-center",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-align-end",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "align-end",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-align-start",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "align-start",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-align-stretch",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "align-stretch",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-base",
+      "className": "var-ui-stack",
       "kind": "component",
       "namespace": "stack",
       "suffix": "base",
@@ -2119,119 +2753,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-stack-direction-column",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "direction-column",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-direction-row",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "direction-row",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-gap-lg",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "gap-lg",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-gap-md",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "gap-md",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-gap-none",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "gap-none",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-gap-sm",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "gap-sm",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-gap-xl",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "gap-xl",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-gap-xs",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "gap-xs",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-justify-between",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "justify-between",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-justify-center",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "justify-center",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-justify-end",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "justify-end",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-justify-start",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "justify-start",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-wrap-nowrap",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "wrap-nowrap",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-stack-wrap-wrap",
-      "kind": "component",
-      "namespace": "stack",
-      "suffix": "wrap-wrap",
-      "file": "src/components/stack.ts",
-      "line": 13
-    },
-    {
-      "className": "var-ui-status-dot-base",
+      "className": "var-ui-status-dot",
       "kind": "component",
       "namespace": "status-dot",
       "suffix": "base",
@@ -2239,79 +2761,23 @@
       "line": 24
     },
     {
-      "className": "var-ui-status-dot-pulse-false",
-      "kind": "component",
-      "namespace": "status-dot",
-      "suffix": "pulse-false",
-      "file": "src/components/statusDot.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-status-dot-pulse-true",
-      "kind": "component",
-      "namespace": "status-dot",
-      "suffix": "pulse-true",
-      "file": "src/components/statusDot.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-status-dot-tone-accent",
-      "kind": "component",
-      "namespace": "status-dot",
-      "suffix": "tone-accent",
-      "file": "src/components/statusDot.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-status-dot-tone-danger",
-      "kind": "component",
-      "namespace": "status-dot",
-      "suffix": "tone-danger",
-      "file": "src/components/statusDot.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-status-dot-tone-info",
-      "kind": "component",
-      "namespace": "status-dot",
-      "suffix": "tone-info",
-      "file": "src/components/statusDot.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-status-dot-tone-neutral",
-      "kind": "component",
-      "namespace": "status-dot",
-      "suffix": "tone-neutral",
-      "file": "src/components/statusDot.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-status-dot-tone-success",
-      "kind": "component",
-      "namespace": "status-dot",
-      "suffix": "tone-success",
-      "file": "src/components/statusDot.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-status-dot-tone-warning",
-      "kind": "component",
-      "namespace": "status-dot",
-      "suffix": "tone-warning",
-      "file": "src/components/statusDot.ts",
-      "line": 24
-    },
-    {
-      "className": "var-ui-steps-root",
+      "className": "var-ui-steps",
       "kind": "component",
       "namespace": "steps",
-      "suffix": "root",
+      "suffix": "base",
       "file": "src/components/steps.ts",
       "line": 5
     },
     {
-      "className": "var-ui-switch-label",
+      "className": "var-ui-switch",
+      "kind": "component",
+      "namespace": "switch",
+      "suffix": "base",
+      "file": "src/components/switch.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-switch__label",
       "kind": "component",
       "namespace": "switch",
       "suffix": "label",
@@ -2319,15 +2785,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-switch-root",
-      "kind": "component",
-      "namespace": "switch",
-      "suffix": "root",
-      "file": "src/components/switch.ts",
-      "line": 5
-    },
-    {
-      "className": "var-ui-switch-thumb",
+      "className": "var-ui-switch__thumb",
       "kind": "component",
       "namespace": "switch",
       "suffix": "thumb",
@@ -2335,7 +2793,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-switch-track",
+      "className": "var-ui-switch__track",
       "kind": "component",
       "namespace": "switch",
       "suffix": "track",
@@ -2343,7 +2801,15 @@
       "line": 5
     },
     {
-      "className": "var-ui-tabs-list",
+      "className": "var-ui-tabs",
+      "kind": "component",
+      "namespace": "tabs",
+      "suffix": "base",
+      "file": "src/components/tabs.ts",
+      "line": 5
+    },
+    {
+      "className": "var-ui-tabs__list",
       "kind": "component",
       "namespace": "tabs",
       "suffix": "list",
@@ -2351,7 +2817,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-tabs-panel",
+      "className": "var-ui-tabs__panel",
       "kind": "component",
       "namespace": "tabs",
       "suffix": "panel",
@@ -2359,15 +2825,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-tabs-root",
-      "kind": "component",
-      "namespace": "tabs",
-      "suffix": "root",
-      "file": "src/components/tabs.ts",
-      "line": 5
-    },
-    {
-      "className": "var-ui-tabs-tab",
+      "className": "var-ui-tabs__tab",
       "kind": "component",
       "namespace": "tabs",
       "suffix": "tab",
@@ -2375,7 +2833,15 @@
       "line": 5
     },
     {
-      "className": "var-ui-text-area-field-description",
+      "className": "var-ui-text-area-field",
+      "kind": "component",
+      "namespace": "text-area-field",
+      "suffix": "base",
+      "file": "src/components/textAreaField.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-text-area-field__description",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "description",
@@ -2383,7 +2849,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-area-field-error",
+      "className": "var-ui-text-area-field__error",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "error",
@@ -2391,7 +2857,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-area-field-input",
+      "className": "var-ui-text-area-field__input",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "input",
@@ -2399,7 +2865,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-area-field-label",
+      "className": "var-ui-text-area-field__label",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "label",
@@ -2407,15 +2873,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-area-field-root",
-      "kind": "component",
-      "namespace": "text-area-field",
-      "suffix": "root",
-      "file": "src/components/textAreaField.ts",
-      "line": 6
-    },
-    {
-      "className": "var-ui-text-block-base",
+      "className": "var-ui-text-block",
       "kind": "component",
       "namespace": "text-block",
       "suffix": "base",
@@ -2423,71 +2881,15 @@
       "line": 55
     },
     {
-      "className": "var-ui-text-block-size-lg",
+      "className": "var-ui-text-field",
       "kind": "component",
-      "namespace": "text-block",
-      "suffix": "size-lg",
-      "file": "src/components/typography.ts",
-      "line": 55
+      "namespace": "text-field",
+      "suffix": "base",
+      "file": "src/components/textField.ts",
+      "line": 6
     },
     {
-      "className": "var-ui-text-block-size-md",
-      "kind": "component",
-      "namespace": "text-block",
-      "suffix": "size-md",
-      "file": "src/components/typography.ts",
-      "line": 55
-    },
-    {
-      "className": "var-ui-text-block-size-sm",
-      "kind": "component",
-      "namespace": "text-block",
-      "suffix": "size-sm",
-      "file": "src/components/typography.ts",
-      "line": 55
-    },
-    {
-      "className": "var-ui-text-block-tone-primary",
-      "kind": "component",
-      "namespace": "text-block",
-      "suffix": "tone-primary",
-      "file": "src/components/typography.ts",
-      "line": 55
-    },
-    {
-      "className": "var-ui-text-block-tone-secondary",
-      "kind": "component",
-      "namespace": "text-block",
-      "suffix": "tone-secondary",
-      "file": "src/components/typography.ts",
-      "line": 55
-    },
-    {
-      "className": "var-ui-text-block-weight-medium",
-      "kind": "component",
-      "namespace": "text-block",
-      "suffix": "weight-medium",
-      "file": "src/components/typography.ts",
-      "line": 55
-    },
-    {
-      "className": "var-ui-text-block-weight-normal",
-      "kind": "component",
-      "namespace": "text-block",
-      "suffix": "weight-normal",
-      "file": "src/components/typography.ts",
-      "line": 55
-    },
-    {
-      "className": "var-ui-text-block-weight-semibold",
-      "kind": "component",
-      "namespace": "text-block",
-      "suffix": "weight-semibold",
-      "file": "src/components/typography.ts",
-      "line": 55
-    },
-    {
-      "className": "var-ui-text-field-description",
+      "className": "var-ui-text-field__description",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "description",
@@ -2495,7 +2897,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-field-error",
+      "className": "var-ui-text-field__error",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "error",
@@ -2503,7 +2905,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-field-input",
+      "className": "var-ui-text-field__input",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "input",
@@ -2511,7 +2913,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-field-label",
+      "className": "var-ui-text-field__label",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "label",
@@ -2519,15 +2921,15 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-field-root",
+      "className": "var-ui-thumbnail",
       "kind": "component",
-      "namespace": "text-field",
-      "suffix": "root",
-      "file": "src/components/textField.ts",
-      "line": 6
+      "namespace": "thumbnail",
+      "suffix": "base",
+      "file": "src/components/thumbnail.ts",
+      "line": 21
     },
     {
-      "className": "var-ui-thumbnail-dismiss",
+      "className": "var-ui-thumbnail__dismiss",
       "kind": "component",
       "namespace": "thumbnail",
       "suffix": "dismiss",
@@ -2535,7 +2937,7 @@
       "line": 21
     },
     {
-      "className": "var-ui-thumbnail-image",
+      "className": "var-ui-thumbnail__image",
       "kind": "component",
       "namespace": "thumbnail",
       "suffix": "image",
@@ -2543,36 +2945,300 @@
       "line": 21
     },
     {
-      "className": "var-ui-thumbnail-root",
+      "className": "var-ui-timeInput",
       "kind": "component",
-      "namespace": "thumbnail",
-      "suffix": "root",
-      "file": "src/components/thumbnail.ts",
+      "namespace": "timeInput",
+      "suffix": "base",
+      "file": "src/components/timeInput.ts",
       "line": 21
     },
     {
-      "className": "var-ui-thumbnail-root-size-lg",
+      "className": "var-ui-timeInput__description",
       "kind": "component",
-      "namespace": "thumbnail",
-      "suffix": "root-size-lg",
-      "file": "src/components/thumbnail.ts",
+      "namespace": "timeInput",
+      "suffix": "description",
+      "file": "src/components/timeInput.ts",
       "line": 21
     },
     {
-      "className": "var-ui-thumbnail-root-size-md",
+      "className": "var-ui-timeInput__error",
       "kind": "component",
-      "namespace": "thumbnail",
-      "suffix": "root-size-md",
-      "file": "src/components/thumbnail.ts",
+      "namespace": "timeInput",
+      "suffix": "error",
+      "file": "src/components/timeInput.ts",
       "line": 21
     },
     {
-      "className": "var-ui-thumbnail-root-size-sm",
+      "className": "var-ui-timeInput__group",
       "kind": "component",
-      "namespace": "thumbnail",
-      "suffix": "root-size-sm",
-      "file": "src/components/thumbnail.ts",
+      "namespace": "timeInput",
+      "suffix": "group",
+      "file": "src/components/timeInput.ts",
       "line": 21
+    },
+    {
+      "className": "var-ui-timeInput__label",
+      "kind": "component",
+      "namespace": "timeInput",
+      "suffix": "label",
+      "file": "src/components/timeInput.ts",
+      "line": 21
+    },
+    {
+      "className": "var-ui-timeInput__segment",
+      "kind": "component",
+      "namespace": "timeInput",
+      "suffix": "segment",
+      "file": "src/components/timeInput.ts",
+      "line": 21
+    },
+    {
+      "className": "var-ui-toast__body",
+      "kind": "component",
+      "namespace": "toast",
+      "suffix": "body",
+      "file": "src/components/toast.ts",
+      "line": 18
+    },
+    {
+      "className": "var-ui-toast__close",
+      "kind": "component",
+      "namespace": "toast",
+      "suffix": "close",
+      "file": "src/components/toast.ts",
+      "line": 18
+    },
+    {
+      "className": "var-ui-toast__description",
+      "kind": "component",
+      "namespace": "toast",
+      "suffix": "description",
+      "file": "src/components/toast.ts",
+      "line": 18
+    },
+    {
+      "className": "var-ui-toast__icon",
+      "kind": "component",
+      "namespace": "toast",
+      "suffix": "icon",
+      "file": "src/components/toast.ts",
+      "line": 18
+    },
+    {
+      "className": "var-ui-toast__item",
+      "kind": "component",
+      "namespace": "toast",
+      "suffix": "item",
+      "file": "src/components/toast.ts",
+      "line": 18
+    },
+    {
+      "className": "var-ui-toast__region",
+      "kind": "component",
+      "namespace": "toast",
+      "suffix": "region",
+      "file": "src/components/toast.ts",
+      "line": 18
+    },
+    {
+      "className": "var-ui-toast__title",
+      "kind": "component",
+      "namespace": "toast",
+      "suffix": "title",
+      "file": "src/components/toast.ts",
+      "line": 18
+    },
+    {
+      "className": "var-ui-toggle-button",
+      "kind": "component",
+      "namespace": "toggle-button",
+      "suffix": "base",
+      "file": "src/components/toggleButton.ts",
+      "line": 7
+    },
+    {
+      "className": "var-ui-tokenizer",
+      "kind": "component",
+      "namespace": "tokenizer",
+      "suffix": "base",
+      "file": "src/components/tokenizer.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-tokenizer__description",
+      "kind": "component",
+      "namespace": "tokenizer",
+      "suffix": "description",
+      "file": "src/components/tokenizer.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-tokenizer__error",
+      "kind": "component",
+      "namespace": "tokenizer",
+      "suffix": "error",
+      "file": "src/components/tokenizer.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-tokenizer__group",
+      "kind": "component",
+      "namespace": "tokenizer",
+      "suffix": "group",
+      "file": "src/components/tokenizer.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-tokenizer__input",
+      "kind": "component",
+      "namespace": "tokenizer",
+      "suffix": "input",
+      "file": "src/components/tokenizer.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-tokenizer__item",
+      "kind": "component",
+      "namespace": "tokenizer",
+      "suffix": "item",
+      "file": "src/components/tokenizer.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-tokenizer__label",
+      "kind": "component",
+      "namespace": "tokenizer",
+      "suffix": "label",
+      "file": "src/components/tokenizer.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-tokenizer__popover",
+      "kind": "component",
+      "namespace": "tokenizer",
+      "suffix": "popover",
+      "file": "src/components/tokenizer.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-tokenizer__token",
+      "kind": "component",
+      "namespace": "tokenizer",
+      "suffix": "token",
+      "file": "src/components/tokenizer.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-tokenizer__tokenLabel",
+      "kind": "component",
+      "namespace": "tokenizer",
+      "suffix": "tokenLabel",
+      "file": "src/components/tokenizer.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-tokenizer__tokenList",
+      "kind": "component",
+      "namespace": "tokenizer",
+      "suffix": "tokenList",
+      "file": "src/components/tokenizer.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-tokenizer__tokenRemoveButton",
+      "kind": "component",
+      "namespace": "tokenizer",
+      "suffix": "tokenRemoveButton",
+      "file": "src/components/tokenizer.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-toolbar",
+      "kind": "component",
+      "namespace": "toolbar",
+      "suffix": "base",
+      "file": "src/components/toolbar.ts",
+      "line": 23
+    },
+    {
+      "className": "var-ui-tooltip",
+      "kind": "component",
+      "namespace": "tooltip",
+      "suffix": "base",
+      "file": "src/components/tooltip.ts",
+      "line": 13
+    },
+    {
+      "className": "var-ui-typeahead",
+      "kind": "component",
+      "namespace": "typeahead",
+      "suffix": "base",
+      "file": "src/components/typeahead.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-typeahead__clearButton",
+      "kind": "component",
+      "namespace": "typeahead",
+      "suffix": "clearButton",
+      "file": "src/components/typeahead.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-typeahead__description",
+      "kind": "component",
+      "namespace": "typeahead",
+      "suffix": "description",
+      "file": "src/components/typeahead.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-typeahead__error",
+      "kind": "component",
+      "namespace": "typeahead",
+      "suffix": "error",
+      "file": "src/components/typeahead.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-typeahead__input",
+      "kind": "component",
+      "namespace": "typeahead",
+      "suffix": "input",
+      "file": "src/components/typeahead.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-typeahead__inputWrapper",
+      "kind": "component",
+      "namespace": "typeahead",
+      "suffix": "inputWrapper",
+      "file": "src/components/typeahead.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-typeahead__item",
+      "kind": "component",
+      "namespace": "typeahead",
+      "suffix": "item",
+      "file": "src/components/typeahead.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-typeahead__label",
+      "kind": "component",
+      "namespace": "typeahead",
+      "suffix": "label",
+      "file": "src/components/typeahead.ts",
+      "line": 6
+    },
+    {
+      "className": "var-ui-typeahead__popover",
+      "kind": "component",
+      "namespace": "typeahead",
+      "suffix": "popover",
+      "file": "src/components/typeahead.ts",
+      "line": 6
     }
   ]
 }

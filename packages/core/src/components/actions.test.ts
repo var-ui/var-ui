@@ -12,8 +12,8 @@ describe('button layout variants', () => {
   it('registers icon layout and size variants', () => {
     button({ layout: 'icon', size: 'sm', intent: 'ghost' });
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-button-layout-icon');
-    expect(css).toContain('var-ui-button-size-sm');
+    expect(css).toContain('.var-ui-button[data-layout="icon"]');
+    expect(css).toContain('.var-ui-button[data-size="sm"]');
   });
 });
 
@@ -21,7 +21,7 @@ describe('buttonGroup', () => {
   it('registers grouped button root slot', () => {
     buttonGroup();
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-button-group-root');
+    expect(css).toContain('.var-ui-button-group');
   });
 });
 
@@ -29,7 +29,7 @@ describe('toggleButton', () => {
   it('registers selected-state styling', () => {
     toggleButton({ size: 'sm' });
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-toggle-button-base');
+    expect(css).toContain('.var-ui-toggle-button');
     expect(css).toContain('[data-selected]');
   });
 });
@@ -38,7 +38,7 @@ describe('segmentedControl', () => {
   it('registers track root slot', () => {
     segmentedControl();
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-segmented-control-root');
+    expect(css).toContain('.var-ui-segmented-control');
   });
 });
 
@@ -46,9 +46,9 @@ describe('menu', () => {
   it('registers popover and item slots', () => {
     menu();
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-menu-popover');
-    expect(css).toContain('var-ui-menu-item');
-    expect(css).toContain('var-ui-menu-itemDanger');
+    expect(css).toContain('.var-ui-menu__popover');
+    expect(css).toContain('.var-ui-menu__item');
+    expect(css).toContain('.var-ui-menu__itemDanger');
   });
 });
 

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vite-plus/test';
-import { act, render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook } from '@testing-library/react';
 import { DesignSystemProvider, getThemeInitScript, useDesignSystemTheme } from './theme';
 
 function stubMatchMedia(initialMatches: boolean) {
@@ -130,6 +130,17 @@ describe('useDesignSystemTheme storageKey persistence', () => {
       result.current.setTheme('dark');
     });
     expect(localStorage.getItem('test-color-mode')).toBeNull();
+  });
+
+  it('applies customTheme className instead of the default theme class', () => {
+    const { container } = render(
+      <DesignSystemProvider defaultTheme="light" customTheme={{ className: 'theme-fixture' }}>
+        <span>child</span>
+      </DesignSystemProvider>,
+    );
+    const wrapper = container.firstElementChild;
+    expect(wrapper?.className).toContain('theme-fixture');
+    expect(wrapper?.className).not.toContain('theme-var-ui-default');
   });
 });
 

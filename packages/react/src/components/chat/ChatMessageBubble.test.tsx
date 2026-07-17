@@ -9,28 +9,25 @@ describe('ChatMessageBubble', () => {
     expect(screen.getByText('Hello there')).toBeTruthy();
   });
 
-  it('applies the sender class from context', () => {
+  it('applies the sender attr from context', () => {
     const { container } = render(
       <ChatMessageContext.Provider value={{ sender: 'user', density: 'balanced' }}>
         <ChatMessageBubble>Hi</ChatMessageBubble>
       </ChatMessageContext.Provider>,
     );
-    expect((container.firstElementChild as HTMLElement).className).toContain(
-      'var-ui-chat-message-bubble-root-sender-user',
-    );
+    const root = container.firstElementChild as HTMLElement;
+    expect(root.getAttribute('data-sender')).toBe('user');
   });
 
   it('defaults to assistant sender outside context', () => {
     const { container } = render(<ChatMessageBubble>Hi</ChatMessageBubble>);
-    expect((container.firstElementChild as HTMLElement).className).toContain(
-      'var-ui-chat-message-bubble-root-sender-assistant',
+    expect((container.firstElementChild as HTMLElement).getAttribute('data-sender')).toBe(
+      'assistant',
     );
   });
 
   it('maps group to the "none" default when omitted', () => {
     const { container } = render(<ChatMessageBubble>Hi</ChatMessageBubble>);
-    expect((container.firstElementChild as HTMLElement).className).toContain(
-      'var-ui-chat-message-bubble-root-group-none',
-    );
+    expect((container.firstElementChild as HTMLElement).getAttribute('data-group')).toBe('none');
   });
 });

@@ -3,6 +3,7 @@ import { cloneElement, useState } from 'react';
 import { MenuTrigger, Popover, Pressable } from 'react-aria-components';
 import { menu } from '@var-ui/core';
 import { MenuContent, type MenuContentProps } from './DropdownMenu';
+import { recipeProps } from './utils';
 
 export type ContextMenuProps = MenuContentProps & {
   /** A single host element (e.g. `<div>`) — `Pressable` requires a DOM element it can forward a ref to. */
@@ -26,7 +27,7 @@ export function ContextMenu({ children, sections }: ContextMenuProps): JSX.Eleme
   return (
     <MenuTrigger isOpen={open} onOpenChange={setOpen}>
       <Pressable>{trigger}</Pressable>
-      <Popover className={m.popover}>
+      <Popover {...recipeProps(m.popover)}>
         <MenuContent sections={sections} />
       </Popover>
     </MenuTrigger>

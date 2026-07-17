@@ -8,10 +8,11 @@ import {
   UNSTABLE_ToastQueue,
   UNSTABLE_ToastRegion as AriaToastRegion,
 } from 'react-aria-components';
+import type { ComponentAttrsResult } from 'typestyles';
 import { toast as toastRecipe, type IconName } from '@var-ui/core';
 import { Icon } from '../icons';
 import { useLayer } from '../layers/LayerProvider';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type ToastTone = 'info' | 'success' | 'warning' | 'danger';
 export type ToastContentData = {
@@ -35,10 +36,8 @@ type ToastSlot = 'region' | 'item' | 'icon' | 'body' | 'title' | 'description' |
 type ToastRecipeFn = (args?: {
   tone?: ToastTone;
   placement?: ToastPlacement;
-}) => Record<ToastSlot, string>;
-// `toast` resolves to `styles`'s dimensioned-variant overload at the type level (returns `string`)
-// instead of its slot overload, even though it returns a per-slot class map at runtime — see
-// packages/core/src/components/toast.ts. Recast until that recipe's overload resolution is fixed upstream.
+}) => Record<ToastSlot, ComponentAttrsResult>;
+// Slot recipe resolves to flat ComponentAttrsResult at the type level — see packages/core/src/components/toast.ts.
 const toastSlots = toastRecipe as unknown as ToastRecipeFn;
 
 type ToastContextValue = {
@@ -80,16 +79,16 @@ export function Toast({
 }: ToastProps): JSX.Element {
   const t = toastSlots({ tone });
   return (
-    <div className={cx(t.item, className)} role="status">
-      <span className={t.icon}>
+    <div {...recipeProps(t.item, className)} role="status">
+      <span {...recipeProps(t.icon)}>
         <Icon name={toneIcon[tone]} />
       </span>
-      <div className={t.body}>
-        <div className={t.title}>{title}</div>
-        {description ? <div className={t.description}>{description}</div> : null}
+      <div {...recipeProps(t.body)}>
+        <div {...recipeProps(t.title)}>{title}</div>
+        {description ? <div {...recipeProps(t.description)}>{description}</div> : null}
       </div>
       {onDismiss ? (
-        <AriaButton className={t.close} aria-label={dismissLabel} onPress={onDismiss}>
+        <AriaButton {...recipeProps(t.close)} aria-label={dismissLabel} onPress={onDismiss}>
           <Icon name="close" size="sm" />
         </AriaButton>
       ) : null}
@@ -118,27 +117,27 @@ export function ToastRegion({
   const { style: layerStyle } = useLayer();
   const region = toastSlots({ placement });
   return (
-    <AriaToastRegion queue={queue} className={cx(region.region, className)} style={layerStyle}>
+    <AriaToastRegion queue={queue} {...recipeProps(region.region, className)} style={layerStyle}>
       {({ toast: queued }) => {
         const tone = queued.content.tone ?? 'info';
         const t = toastSlots({ tone });
         return (
-          <AriaToast toast={queued} className={t.item}>
-            <span className={t.icon}>
+          <AriaToast toast={queued} {...recipeProps(t.item)}>
+            <span {...recipeProps(t.icon)}>
               <Icon name={toneIcon[tone]} />
             </span>
-            <AriaToastContent className={t.body}>
-              <Text slot="title" className={t.title}>
+            <AriaToastContent {...recipeProps(t.body)}>
+              <Text slot="title" {...recipeProps(t.title)}>
                 {queued.content.title}
               </Text>
               {queued.content.description ? (
-                <Text slot="description" className={t.description}>
+                <Text slot="description" {...recipeProps(t.description)}>
                   {queued.content.description}
                 </Text>
               ) : null}
             </AriaToastContent>
             <AriaButton
-              className={t.close}
+              {...recipeProps(t.close)}
               aria-label="Dismiss"
               onPress={() => queue.close(queued.key)}
             >

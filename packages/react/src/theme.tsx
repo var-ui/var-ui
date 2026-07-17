@@ -1,6 +1,5 @@
 import type { JSX, ReactNode } from 'react';
 import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useState } from 'react';
-import { cx } from 'typestyles';
 import { defaultTheme as baseTheme } from './tokens';
 
 type ThemeName = 'light' | 'dark' | 'system';
@@ -51,6 +50,8 @@ export type DesignSystemProviderProps = {
   theme?: ThemeName;
   onThemeChange?: (theme: ThemeName) => void;
   customThemeClassName?: string;
+  /** Prefer this over `customThemeClassName` when you have a `createDesignTheme` return. */
+  customTheme?: { className: string };
   /**
    * When true, skip applying `defaultTheme` / `data-mode` on the wrapper — use when the theme
    * surface already lives on `document.documentElement` (docs-style appearance bootstrap).
@@ -77,6 +78,7 @@ export function DesignSystemProvider({
   theme: controlledTheme,
   onThemeChange,
   customThemeClassName,
+  customTheme,
   omitWrapperThemeSurface = false,
   storageKey,
 }: DesignSystemProviderProps): JSX.Element {
@@ -128,9 +130,11 @@ export function DesignSystemProvider({
     document.documentElement.style.colorScheme = theme === 'system' ? '' : resolvedTheme;
   }, [omitWrapperThemeSurface, theme, resolvedTheme]);
 
+  const resolvedCustomClassName = customTheme?.className ?? customThemeClassName;
+
   const surfaceClassName = omitWrapperThemeSurface
-    ? customThemeClassName
-    : cx(baseTheme.className, customThemeClassName);
+    ? resolvedCustomClassName
+    : (resolvedCustomClassName ?? baseTheme.className);
 
   return (
     <ThemeContext.Provider value={value}>

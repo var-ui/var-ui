@@ -11,6 +11,7 @@ import { dialog } from '@var-ui/core';
 import { Icon } from '../icons';
 import { useLayer } from '../layers/LayerProvider';
 import { Button } from './Button';
+import { recipeProps } from './utils';
 
 export type DialogProps = {
   /** Label on the button that opens the modal. */
@@ -42,23 +43,27 @@ export function Dialog({
     <DialogTrigger>
       <Button intent="secondary">{triggerLabel}</Button>
       <ModalOverlay
-        className={d.overlay}
+        {...recipeProps(d.overlay)}
         style={layerStyle}
         UNSTABLE_portalContainer={portalContainer}
       >
-        <Modal className={d.modal}>
+        <Modal {...recipeProps(d.modal)}>
           <AriaDialog>
             {({ close }) => (
-              <div className={d.content}>
-                <div className={d.header}>
-                  <Heading slot="title" className={d.heading}>
+              <div {...recipeProps(d.content)}>
+                <div {...recipeProps(d.header)}>
+                  <Heading slot="title" {...recipeProps(d.heading)}>
                     {title}
                   </Heading>
-                  <AriaButton className={d.closeButton} aria-label={closeLabel} onPress={close}>
+                  <AriaButton
+                    {...recipeProps(d.closeButton)}
+                    aria-label={closeLabel}
+                    onPress={close}
+                  >
                     <Icon name="close" size="sm" />
                   </AriaButton>
                 </div>
-                <p className={d.description}>{description}</p>
+                <p {...recipeProps(d.description)}>{description}</p>
                 <Button onPress={close}>{closeLabel}</Button>
               </div>
             )}

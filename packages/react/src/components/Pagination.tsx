@@ -3,7 +3,7 @@ import { Button as AriaButton } from 'react-aria-components';
 import { button, pagination } from '@var-ui/core';
 import { IconButton } from './IconButton';
 import { Select } from './Select';
-import { cx } from './utils';
+import { cx, recipeProps } from './utils';
 
 export type PaginationVariant = 'pages' | 'count' | 'compact' | 'dots' | 'none';
 
@@ -139,7 +139,7 @@ export function Pagination({
           item === '...' ? (
             <span
               key={`ellipsis-${range[index - 1]}-${range[index + 1]}`}
-              className={p.ellipsis}
+              {...recipeProps(p.ellipsis)}
               aria-hidden="true"
             >
               …
@@ -147,7 +147,7 @@ export function Pagination({
           ) : (
             <AriaButton
               key={item}
-              className={button({ intent: item === page ? 'secondary' : 'ghost', size })}
+              {...recipeProps(button({ intent: item === page ? 'secondary' : 'ghost', size }))}
               onPress={() => goTo(item)}
               isDisabled={isDisabled}
               aria-label={`Go to page ${item}`}
@@ -161,21 +161,21 @@ export function Pagination({
 
       case 'count':
         return totalItems == null ? null : (
-          <span className={p.infoText}>
+          <span {...recipeProps(p.infoText)}>
             {rangeStart}–{rangeEnd} of {totalItems}
           </span>
         );
 
       case 'compact':
         return totalPages == null ? null : (
-          <span className={p.infoText}>
+          <span {...recipeProps(p.infoText)}>
             Page {page} of {totalPages}
           </span>
         );
 
       case 'dots':
         return totalPages == null ? null : (
-          <div className={p.dotsContainer} role="group" aria-label="Page indicators">
+          <div {...recipeProps(p.dotsContainer)} role="group" aria-label="Page indicators">
             {Array.from({ length: totalPages }, (_, i) => (
               <button
                 key={i + 1}
@@ -184,7 +184,7 @@ export function Pagination({
                 aria-current={i + 1 === page ? 'page' : undefined}
                 onClick={() => goTo(i + 1)}
                 disabled={isDisabled}
-                className={cx(p.dot, i + 1 === page && p.dotActive)}
+                {...recipeProps(p.dot, cx(i + 1 === page && p.dotActive))}
               />
             ))}
           </div>
@@ -197,9 +197,9 @@ export function Pagination({
   }
 
   return (
-    <nav aria-label={label} className={cx(p.root, className)}>
+    <nav aria-label={label} {...recipeProps(p.root, className)}>
       {pageSizeOptions && pageSizeOptions.length > 0 ? (
-        <div className={p.pageSizeGroup}>
+        <div {...recipeProps(p.pageSizeGroup)}>
           <span>Rows per page</span>
           <Select
             aria-label="Items per page"
@@ -210,7 +210,7 @@ export function Pagination({
           />
         </div>
       ) : null}
-      <div className={p.controls}>
+      <div {...recipeProps(p.controls)}>
         <IconButton
           name="chevronLeft"
           aria-label="Go to previous page"

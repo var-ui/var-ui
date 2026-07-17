@@ -47,12 +47,14 @@ describe('Icon', () => {
     expect(getByRole('img', { name: 'custom' })).toBeTruthy();
   });
 
-  it('applies the icon recipe size class', () => {
+  it('applies the icon recipe size attr', () => {
     const { container } = render(
       <IconProvider icons={{}}>
         <Icon name="close" size="lg" />
       </IconProvider>,
     );
-    expect((container.firstElementChild as HTMLElement).className).toContain('var-ui-icon-size-lg');
+    const el = container.firstElementChild as HTMLElement;
+    expect(el.className).toContain('var-ui-icon');
+    expect(el.getAttribute('data-size')).toBe('lg');
   });
 });

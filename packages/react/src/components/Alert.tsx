@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { alert, type IconName } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type AlertVariant = 'info' | 'success' | 'warning' | 'danger' | 'tip';
 export type AlertAppearance = 'subtle' | 'solid';
@@ -51,24 +51,24 @@ export function Alert({
 
   return (
     <div
-      className={cx(a.root, className)}
+      {...recipeProps(a.root, className)}
       data-alert
       data-alert-variant={variant}
       data-alert-appearance={appearance}
     >
       {resolvedIcon !== null ? (
-        <div className={a.icon} data-alert-icon>
+        <div {...recipeProps(a.icon)} data-alert-icon>
           {resolvedIcon}
         </div>
       ) : null}
-      <div className={a.body}>
-        {title ? <p className={a.title}>{title}</p> : null}
-        <div className={a.content} data-alert-content>
+      <div {...recipeProps(a.body)}>
+        {title ? <p {...recipeProps(a.title)}>{title}</p> : null}
+        <div {...recipeProps(a.content)} data-alert-content>
           {children}
         </div>
         {action ? (
-          <div className={a.action}>
-            <a className={a.actionLink} href={action.href} data-alert-action>
+          <div {...recipeProps(a.action)}>
+            <a {...recipeProps(a.actionLink)} href={action.href} data-alert-action>
               {action.label}
             </a>
           </div>

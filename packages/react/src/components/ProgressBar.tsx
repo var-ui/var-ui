@@ -5,7 +5,7 @@ import {
   type ProgressBarProps as RACProgressBarProps,
 } from 'react-aria-components';
 import { progressBar } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type ProgressBarProps = Omit<RACProgressBarProps, 'children' | 'className'> & {
   /** Label rendered above the track. */
@@ -37,18 +37,18 @@ export function ProgressBar({
   const p = progressBar({ tone, indeterminate: props.isIndeterminate ? 'true' : 'false' });
   const showValue = showValueText && !props.isIndeterminate;
   return (
-    <AriaProgressBar {...props} className={cx(p.root, className)}>
+    <AriaProgressBar {...props} {...recipeProps(p.root, className)}>
       {({ percentage, valueText }) => (
         <>
           {label || showValue ? (
-            <div className={p.header}>
-              {label ? <Label className={p.label}>{label}</Label> : <span />}
-              {showValue ? <span className={p.valueText}>{valueText}</span> : null}
+            <div {...recipeProps(p.header)}>
+              {label ? <Label {...recipeProps(p.label)}>{label}</Label> : <span />}
+              {showValue ? <span {...recipeProps(p.valueText)}>{valueText}</span> : null}
             </div>
           ) : null}
-          <div className={p.track}>
+          <div {...recipeProps(p.track)}>
             <div
-              className={p.fill}
+              {...recipeProps(p.fill)}
               style={props.isIndeterminate ? undefined : { width: `${percentage ?? 0}%` }}
             />
           </div>

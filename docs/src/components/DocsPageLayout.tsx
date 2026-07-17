@@ -1,7 +1,7 @@
 'use client';
 
-import type { ReactNode } from 'react';
-import { useMemo } from 'react';
+import { recipeClassName } from '@var-ui/react';
+import { useMemo, type ReactNode } from 'react';
 import { proseContent } from '@var-ui/core';
 import { MDXContent } from '@content-collections/mdx/react';
 import type { ComponentPropsDoc } from '@/lib/extract-component-props';
@@ -32,16 +32,16 @@ export function DocsPageLayout({ children, headings = [], mdx, propsDoc }: DocPa
 
   return (
     <>
-      <div className={shell.body}>
+      <div className={recipeClassName(shell.body)}>
         <DocsSidebarRail />
-        <main className={shell.main}>
-          <div className={shell.mainInner}>
+        <main className={recipeClassName(shell.main)}>
+          <div className={recipeClassName(shell.mainInner)}>
             {mdx ? (
-              <article className={prose.root}>
+              <article className={recipeClassName(prose.root)}>
                 <MDXContent code={mdx} components={components} />
               </article>
             ) : (
-              <article className={prose.root}>{children}</article>
+              <article className={recipeClassName(prose.root)}>{children}</article>
             )}
           </div>
         </main>

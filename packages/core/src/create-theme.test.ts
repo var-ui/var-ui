@@ -72,4 +72,33 @@ describe('createDesignTheme', () => {
     expect(css).toContain(`${themeClass('system-fixture')}[data-mode="dark"]`);
     expect(css).not.toContain(`${themeClass('system-fixture')}[data-mode="system"]`);
   });
+
+  it('deep-merges partial light/dark onto the default palette', () => {
+    createDesignTheme({
+      name: 'partial-palette',
+      light: {
+        color: {
+          accent: {
+            default: 'oklch(55% 0.2 290)',
+            hover: 'oklch(48% 0.2 290)',
+          },
+        },
+      },
+      dark: {
+        color: {
+          accent: {
+            default: 'oklch(72% 0.16 290)',
+            hover: 'oklch(78% 0.14 290)',
+          },
+        },
+      },
+    });
+
+    const css = getRegisteredCss();
+    // Override applied
+    expect(css).toContain('--var-ui-color-accent-default: oklch(55% 0.2 290)');
+    // Unrelated defaults retained (no consumer spread required)
+    expect(css).toMatch(/--var-ui-color-background-app:\s*#F5F1E9/);
+    expect(css).toMatch(/--var-ui-color-background-app:\s*oklch\(23%/);
+  });
 });

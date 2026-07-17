@@ -1,6 +1,6 @@
 import type { CSSProperties, JSX } from 'react';
 import { spinner } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type SpinnerProps = {
   /** Diameter of the spinner ring. @default md */
@@ -40,7 +40,7 @@ export function Spinner({
 }: SpinnerProps): JSX.Element {
   return (
     <span role="status" className={className}>
-      <span className={cx(spinner({ size, tone }))} aria-hidden="true" />
+      <span {...recipeProps(spinner({ size, tone }))} aria-hidden="true" />
       <span style={visuallyHidden}>{label}</span>
     </span>
   );

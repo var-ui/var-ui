@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { Children, useState } from 'react';
 import { avatar, avatarGroup, statusDot } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -47,17 +47,17 @@ export function Avatar({
   const a = avatar({ size });
   const showImage = Boolean(src) && !errored;
   return (
-    <span className={cx(a.root, className)}>
+    <span {...recipeProps(a.root, className)}>
       {showImage ? (
         <img
-          className={a.image}
+          {...recipeProps(a.image)}
           src={src}
           alt={alt ?? name ?? ''}
           onError={() => setErrored(true)}
         />
       ) : (
         <span
-          className={a.initials}
+          {...recipeProps(a.initials)}
           aria-hidden={alt || name ? undefined : true}
           role={alt || name ? 'img' : undefined}
           aria-label={alt ?? name}
@@ -66,8 +66,8 @@ export function Avatar({
         </span>
       )}
       {status ? (
-        <span className={a.status} data-avatar-status>
-          <span className={statusDot({ tone: status })} />
+        <span {...recipeProps(a.status)} data-avatar-status>
+          <span {...recipeProps(statusDot({ tone: status }))} />
         </span>
       ) : null}
     </span>
@@ -96,13 +96,13 @@ export function AvatarGroup({ children, max = 4, className }: AvatarGroupProps):
   const visible = items.slice(0, max);
   const hidden = items.length - visible.length;
   return (
-    <span className={cx(g.root, className)}>
+    <span {...recipeProps(g.root, className)}>
       {visible.map((child, index) => (
-        <span className={g.item} key={index}>
+        <span {...recipeProps(g.item)} key={index}>
           {child}
         </span>
       ))}
-      {hidden > 0 ? <span className={g.overflow}>+{hidden}</span> : null}
+      {hidden > 0 ? <span {...recipeProps(g.overflow)}>+{hidden}</span> : null}
     </span>
   );
 }

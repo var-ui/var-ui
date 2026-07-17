@@ -1,6 +1,6 @@
 'use client';
 
-import { useDesignSystemTheme } from '@var-ui/react';
+import { useDesignSystemTheme, recipeClassName } from '@var-ui/react';
 import { docsShell } from '@/styles/docsShell';
 import { HeaderIconButton } from './HeaderIconButton';
 
@@ -74,13 +74,15 @@ export function ColorModeSwitcher() {
   const { theme, setTheme } = useDesignSystemTheme();
 
   return (
-    <div className={shell.colorModeGroup}>
+    <div className={recipeClassName(shell.colorModeGroup)}>
       {MODES.map((mode) => {
         const active = theme === mode.id;
         return (
           <HeaderIconButton
             aria-pressed={active}
-            className={active ? shell.colorModeButtonActive : shell.colorModeButton}
+            className={recipeClassName(
+              active ? shell.colorModeButtonActive : shell.colorModeButton,
+            )}
             key={mode.id}
             label={mode.label}
             onPress={() => setTheme(mode.id)}

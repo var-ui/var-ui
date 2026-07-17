@@ -10,7 +10,7 @@ import {
 } from 'react';
 import { fileInput } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type FileInputProps = {
   /** Visible label rendered above the dropzone. */
@@ -223,14 +223,14 @@ export function FileInput({
   }
 
   return (
-    <div className={cx(fi.root, className)}>
-      <label className={fi.label} id={labelId} htmlFor={inputId}>
+    <div {...recipeProps(fi.root, className)}>
+      <label {...recipeProps(fi.label)} id={labelId} htmlFor={inputId}>
         {label}
       </label>
       <div
         role="button"
         tabIndex={isDisabled ? -1 : 0}
-        className={fi.dropzone}
+        {...recipeProps(fi.dropzone)}
         data-drag-over={isDragOver || undefined}
         data-disabled={isDisabled || undefined}
         aria-disabled={isDisabled || undefined}
@@ -243,18 +243,18 @@ export function FileInput({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
       >
-        <span className={fi.icon}>
+        <span {...recipeProps(fi.icon)}>
           <Icon name="arrowUp" />
         </span>
         {hasValue ? (
-          <span className={fi.fileNameText}>{fileNameDisplay}</span>
+          <span {...recipeProps(fi.fileNameText)}>{fileNameDisplay}</span>
         ) : (
-          <span className={fi.placeholderText}>{placeholderLabel}</span>
+          <span {...recipeProps(fi.placeholderText)}>{placeholderLabel}</span>
         )}
         {hasValue ? (
           <button
             type="button"
-            className={fi.clearButton}
+            {...recipeProps(fi.clearButton)}
             aria-label={`Clear ${label}`}
             onClick={handleClear}
           >
@@ -267,7 +267,7 @@ export function FileInput({
           type="file"
           tabIndex={-1}
           aria-hidden="true"
-          className={fi.hiddenInput}
+          {...recipeProps(fi.hiddenInput)}
           accept={accept}
           multiple={multiple}
           disabled={isDisabled}
@@ -275,12 +275,12 @@ export function FileInput({
         />
       </div>
       {description ? (
-        <p className={fi.description} id={descriptionId}>
+        <p {...recipeProps(fi.description)} id={descriptionId}>
           {description}
         </p>
       ) : null}
       {resolvedError ? (
-        <p className={fi.error} id={errorId} role="alert">
+        <p {...recipeProps(fi.error)} id={errorId} role="alert">
           {resolvedError}
         </p>
       ) : null}

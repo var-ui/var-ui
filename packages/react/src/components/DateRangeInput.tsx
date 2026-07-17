@@ -22,7 +22,7 @@ import {
 } from 'react-aria-components';
 import { dateRangeInput } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type DateRangeInputProps<T extends DateValue = DateValue> = Omit<
   RACDateRangePickerProps<T>,
@@ -59,46 +59,48 @@ export function DateRangeInput<T extends DateValue = DateValue>({
 }: DateRangeInputProps<T>): JSX.Element {
   const dr = dateRangeInput();
   return (
-    <AriaDateRangePicker {...props} className={cx(dr.root, className)}>
-      {label ? <Label className={dr.label}>{label}</Label> : null}
-      <Group className={dr.group}>
+    <AriaDateRangePicker {...props} {...recipeProps(dr.root, className)}>
+      {label ? <Label {...recipeProps(dr.label)}>{label}</Label> : null}
+      <Group {...recipeProps(dr.group)}>
         <AriaDateInput slot="start">
-          {(segment) => <DateSegment segment={segment} className={dr.segment} />}
+          {(segment) => <DateSegment segment={segment} {...recipeProps(dr.segment)} />}
         </AriaDateInput>
-        <span className={dr.separator}>–</span>
+        <span {...recipeProps(dr.separator)}>–</span>
         <AriaDateInput slot="end">
-          {(segment) => <DateSegment segment={segment} className={dr.segment} />}
+          {(segment) => <DateSegment segment={segment} {...recipeProps(dr.segment)} />}
         </AriaDateInput>
-        <Button className={dr.trigger}>
+        <Button {...recipeProps(dr.trigger)}>
           <Icon name="chevronDown" size="sm" />
         </Button>
       </Group>
       {description ? (
-        <Text slot="description" className={dr.description}>
+        <Text slot="description" {...recipeProps(dr.description)}>
           {description}
         </Text>
       ) : null}
-      <FieldError className={dr.error}>{errorMessage ?? ''}</FieldError>
-      <Popover className={dr.popover}>
+      <FieldError {...recipeProps(dr.error)}>{errorMessage ?? ''}</FieldError>
+      <Popover {...recipeProps(dr.popover)}>
         <Dialog>
           <RangeCalendar>
-            <header className={dr.calendarHeader}>
-              <Button slot="previous" className={dr.calendarNavButton}>
+            <header {...recipeProps(dr.calendarHeader)}>
+              <Button slot="previous" {...recipeProps(dr.calendarNavButton)}>
                 <Icon name="chevronLeft" size="sm" />
               </Button>
-              <Heading className={dr.calendarHeading} />
-              <Button slot="next" className={dr.calendarNavButton}>
+              <Heading {...recipeProps(dr.calendarHeading)} />
+              <Button slot="next" {...recipeProps(dr.calendarNavButton)}>
                 <Icon name="chevronRight" size="sm" />
               </Button>
             </header>
-            <CalendarGrid className={dr.calendarGrid}>
+            <CalendarGrid {...recipeProps(dr.calendarGrid)}>
               <CalendarGridHeader>
                 {(day) => (
-                  <CalendarHeaderCell className={dr.calendarHeaderCell}>{day}</CalendarHeaderCell>
+                  <CalendarHeaderCell {...recipeProps(dr.calendarHeaderCell)}>
+                    {day}
+                  </CalendarHeaderCell>
                 )}
               </CalendarGridHeader>
               <CalendarGridBody>
-                {(date) => <CalendarCell date={date} className={dr.calendarCell} />}
+                {(date) => <CalendarCell date={date} {...recipeProps(dr.calendarCell)} />}
               </CalendarGridBody>
             </CalendarGrid>
           </RangeCalendar>

@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { emptyState } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type EmptyStateProps = {
   /** Decorative glyph or illustration; consumers pass `<Icon>` or a custom node. */
@@ -37,15 +37,15 @@ export function EmptyState({
 }: EmptyStateProps): JSX.Element {
   const e = emptyState();
   return (
-    <div className={cx(e.root, className)}>
+    <div {...recipeProps(e.root, className)}>
       {icon ? (
-        <div className={e.icon} data-empty-state-icon aria-hidden="true">
+        <div {...recipeProps(e.icon)} data-empty-state-icon aria-hidden="true">
           {icon}
         </div>
       ) : null}
-      <h3 className={e.title}>{title}</h3>
-      {description ? <p className={e.description}>{description}</p> : null}
-      {action ? <div className={e.action}>{action}</div> : null}
+      <h3 {...recipeProps(e.title)}>{title}</h3>
+      {description ? <p {...recipeProps(e.description)}>{description}</p> : null}
+      {action ? <div {...recipeProps(e.action)}>{action}</div> : null}
     </div>
   );
 }

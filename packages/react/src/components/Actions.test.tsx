@@ -27,10 +27,11 @@ function wrap(ui: ReactNode) {
 }
 
 describe('IconButton', () => {
-  it('renders an icon-only button with layout classes', () => {
+  it('renders an icon-only button with layout attrs', () => {
     wrap(<IconButton name="close" aria-label="Close" />);
     const button = screen.getByRole('button', { name: 'Close' });
-    expect(button.className).toContain('var-ui-button-layout-icon');
+    expect(button.className).toContain('var-ui-button');
+    expect(button.getAttribute('data-layout')).toBe('icon');
     expect(screen.getByTestId('close-icon')).toBeTruthy();
   });
 });
@@ -43,7 +44,7 @@ describe('ButtonGroup', () => {
         <Button>Two</Button>
       </ButtonGroup>,
     );
-    expect(screen.getByRole('group').className).toContain('var-ui-button-group-root');
+    expect(screen.getByRole('group').className).toContain('var-ui-button-group');
   });
 });
 

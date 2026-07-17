@@ -1,10 +1,10 @@
 import { useCallback, useRef, type JSX, type ReactNode, type RefObject } from 'react';
 import { chatLayout } from '@var-ui/core';
-import { cx } from '../utils';
 import { Button } from '../Button';
 import { Icon } from '../../icons';
 import { useChatStreamScroll } from '../../chat/useChatStreamScroll';
 import { useChatNewMessages } from '../../chat/useChatNewMessages';
+import { recipeProps } from '../utils';
 
 export type ChatLayoutProps = {
   /** Message content — typically `ChatMessageList`. */
@@ -84,11 +84,11 @@ export function ChatLayout({
   ) : null;
 
   return (
-    <div className={cx(l.root, className)}>
-      <div className={l.messageArea} ref={setMessageAreaRef}>
+    <div {...recipeProps(l.root, className)}>
+      <div {...recipeProps(l.messageArea)} ref={setMessageAreaRef}>
         {hasVisibleContent(children) ? children : (emptyState ?? null)}
       </div>
-      <div className={l.dock}>
+      <div {...recipeProps(l.dock)}>
         {scrollButton === undefined ? defaultButton : scrollButton}
         {composer}
       </div>

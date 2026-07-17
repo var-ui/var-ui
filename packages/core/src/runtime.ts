@@ -7,8 +7,8 @@ import { createTypeStyles } from 'typestyles';
  */
 export const { styles, tokens, global } = createTypeStyles({
   scopeId: 'var-ui',
-  mode: 'semantic',
-  layers: ['tokens', 'components', 'utilities'] as const,
+  mode: 'attribute',
+  layers: ['tokens', 'components', 'overrides', 'utilities'] as const,
   tokenLayer: 'tokens',
   /** Baseline globals (e.g. `body`) share the token layer so they cascade with `:root` theme CSS. */
   globalLayer: 'tokens',

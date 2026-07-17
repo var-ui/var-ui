@@ -15,10 +15,11 @@ deferral is deliberately revisited here: the config-object DX becomes the
 **primary** documented customization surface, with Tiers 1–2 remaining the
 substrate and escape hatch.
 
-**Status: needs TypeStyles engine work first** — `styles.override()` and the
-component metadata contract below are new engine capabilities (TypeStyles
-`IMPROVEMENTS.md` P5 track). var-ui consumes them as a versioned dependency,
-same split as V2–V4.
+**Status: engine + core APIs shipped** — TypeStyles `styles.override` /
+`__tsMeta` and semantic/attribute mode land in typestyles 0.10+; var-ui
+consumes them with `mode: 'attribute'`, an `overrides` layer, and the
+`extend` / `components` / `overrideComponent` / `customTheme` surface.
+Docs: `/theming/customize`. Demo: `examples/vite-app` Acme palette.
 
 ---
 
@@ -48,9 +49,10 @@ export const acme = createDesignTheme({
     },
   },
 
-  // NEW — typed component restyling; `t` = built-in tokens + custom refs
-  components: (t) => ({
-    button: {
+  // NEW — typed component restyling; each entry is `(t) => override` or a plain object
+  // `t` = built-in tokens + custom refs (use DesignThemeTokens<typeof extend> in split files)
+  components: {
+    button: (t) => ({
       base: {
         borderRadius: t.radius.lg,
         boxShadow: t.brand.glow,
@@ -68,9 +70,9 @@ export const acme = createDesignTheme({
           style: { letterSpacing: '0.05em' },
         },
       ],
-    },
-    card: { base: { borderWidth: t.borderWidth.default } },
-  }),
+    }),
+    card: (t) => ({ base: { root: { borderRadius: t.radius.lg } } }),
+  },
 });
 
 // acme.className    → provider class, as today
@@ -82,9 +84,10 @@ Everything is typed end-to-end:
 - `light` / `dark` — existing typed `DesignColorValues` shapes.
 - `extend` — inferred generic; `acme.tokens.brand.glow` is a typed `var()` ref.
 - `components` — keys restricted to the themeable-component registry; each
-  value's variant dimensions and option names come from the recipe's own type;
-  style blocks are full `CSSProperties` (nested selectors, at-rules, token
-  refs — the same style language recipes are written in).
+  value is a factory or plain object; variant dimensions and option names come
+  from the recipe's own type; style blocks are full `CSSProperties` (nested
+  selectors, at-rules, token refs — the same style language recipes are written
+  in).
 
 ### Composable primitives (what the sugar compiles to)
 
@@ -134,9 +137,11 @@ styles.override(component, overrideConfig, options?);
   };
   ```
 
-- `options` — `{ scope?: string; layer?: string }`; `scope` is a selector
-  prefix (e.g. `.theme-acme`), `layer` a cascade layer name from the
-  instance's stack.
+- `options` — `{ selectorPrefix?: string; layer?: string }`;
+  `selectorPrefix` is a descendant selector prefix (e.g. `.theme-acme`),
+  `layer` a cascade layer name from the instance's stack. Named
+  `selectorPrefix` (not `scope`) to avoid confusion with `styles.scope()` /
+  CSS `@scope` — see TypeStyles `specs/styles-override-meta.md`.
 
 ### Design point 1 — typing by inference, not registration
 
@@ -160,32 +165,24 @@ styles.override(alert, {
 
 Component functions already expose class names at runtime (`button.base`,
 `button['intent-primary']`), but reconstructing `dimension → option` from
-hyphenated keys is ambiguous (`layout-icon`), and slot recipes expose no
-typed class map at all. So `styles.component()` attaches a **non-enumerable
-`__meta`** to every returned function:
+emitted strings is fragile, slot recipes expose no flat class map, and
+attribute mode has no per-option classes at all. So `styles.component()`
+attaches non-enumerable **`__tsMeta`** (see TypeStyles
+`specs/styles-override-meta.md`): namespace, kind, naming mode, base
+class(es), and per-option **selector fragments** (full class names in class
+modes; `[data-…]` fragments in attribute mode).
 
-```ts
-type ComponentMeta = {
-  namespace: string;
-  kind: 'dimensioned' | 'flat' | 'slot' | 'multi-slot';
-  slots?: readonly string[];
-  /** dimension → option → class name (per slot for slot recipes) */
-  classNames: Record<string, unknown>;
-  baseClassName: string; // or per-slot map
-};
-```
-
-`override()` walks the config against `__meta` and emits selectors from the
-recorded class names. This also formalizes V3's classname-stability contract:
-the metadata **is** the public surface, and the snapshot lint rule defends it.
+`override()` walks the config against meta and emits selectors from those
+fragments. This also formalizes V3's classname-stability contract: the
+metadata **is** the public surface, and the snapshot lint rule defends it.
 
 ### Design point 3 — compound overrides need no new class names
 
-A compound override emits a conjunction selector —
-`.button-intent-primary.button-size-sm { … }` — rather than needing the
+A compound override emits a conjunction selector — e.g. semantic
+`.button--intent-primary.button--size-sm`, attribute
+`.button[data-intent="primary"][data-size="sm"]` — rather than needing the
 recipe's internal compound class. Within the override layer, specificity
-resolves in the expected order automatically: base (1 class) < variant (1
-class, later source order) < compound (2+ classes).
+resolves in the expected order automatically: base < variant < compound.
 
 Emission goes through the normal `insertRules` pipeline, wrapped in `layer`
 and prefixed by `scope`, so overrides participate in dedup, HMR, and SSR
@@ -217,10 +214,10 @@ refShape)` on var-ui's shared runtime — custom property names are
 - Standalone `extendTokens('brand', values)` registers the namespace and
   applies values globally (`:root` + mode rules) instead of under a theme
   class; the returned refs are the same either way.
-- The `createDesignTheme<E>` generic threads through: the `components`
-  callback parameter is `DesignTokens & TokenRefsOf<E>`, and the returned
-  theme carries `.tokens` with the same merged shape. The callback form exists
-  precisely to resolve the custom-tokens-before-components ordering.
+- The `createDesignTheme<E>` generic threads through: each `components` entry
+  factory receives `DesignThemeTokens<E>`, and the returned theme carries
+  `.tokens` with the same merged shape. Hoist `extend` + `DesignThemeTokens`
+  when splitting factories across files.
 
 ### The themeable-component registry
 
@@ -229,11 +226,12 @@ public names to recipe functions (`{ button, card, alert, … }` — every
 published recipe). The `components` map type is derived from it:
 
 - unknown keys are type errors;
-- each value is `OverrideConfigFor<typeof recipe>` (dimensioned, flat, or
-  slot shape as appropriate).
+- each value is `OverrideConfigFor<typeof recipe>` (or `(t) =>` that shape),
+  using TypeStyles `OverrideConfig` / `VariantOptionStyle` (CSS IntelliSense +
+  custom-property assignability as of typestyles@0.11.2).
 
 Each entry compiles to
-`styles.override(recipe, config, { scope: '.theme-<name>', layer: 'overrides' })`.
+`styles.override(recipe, config, { selectorPrefix: '.theme-<name>', layer: 'overrides' })`.
 Adding a recipe to core means adding it to the registry (one line; a unit test
 asserts registry ⊇ public recipe exports).
 

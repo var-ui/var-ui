@@ -2,6 +2,7 @@ import type { JSX, ReactElement, ReactNode } from 'react';
 import { Tooltip as AriaTooltip, TooltipTrigger, type Placement } from 'react-aria-components';
 import { tooltip } from '@var-ui/core';
 import { useLayer } from '../layers/LayerProvider';
+import { recipeProps } from './utils';
 
 export type TooltipProps = {
   /** Tooltip body shown on hover or focus. */
@@ -39,7 +40,7 @@ export function Tooltip({
     <TooltipTrigger delay={delay}>
       {children}
       <AriaTooltip
-        className={tip.root}
+        {...recipeProps(tip.root)}
         placement={placement}
         style={layerStyle}
         UNSTABLE_portalContainer={portalContainer}

@@ -1,6 +1,7 @@
 'use client';
 
 import { proseContent } from '@var-ui/core';
+import { recipeClassName } from '@var-ui/react';
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
 import { ComponentIndex } from '@/components/ComponentIndex';
@@ -20,7 +21,7 @@ function HomePage() {
 
   return (
     <main
-      className={prose.root}
+      className={recipeClassName(prose.root)}
       style={{ maxWidth: '64rem', margin: '2rem auto', padding: '0 1rem' }}
     >
       <h1>Var UI</h1>

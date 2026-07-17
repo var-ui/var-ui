@@ -1,5 +1,5 @@
 import { PALETTE_FAMILIES } from '../tokens/palette';
-export { defaultTheme } from './default';
+export { defaultTheme, defaultLightValues, defaultDarkValues } from './default';
 export { forestTheme } from './forest';
 export { roseTheme } from './rose';
 export { amberTheme } from './amber';

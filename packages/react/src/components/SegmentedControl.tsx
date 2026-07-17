@@ -6,7 +6,7 @@ import {
   type ToggleButtonProps as RACToggleButtonProps,
 } from 'react-aria-components';
 import { segmentedControl, toggleButton } from '@var-ui/core';
-import { cx } from './utils';
+import { cx, recipeProps } from './utils';
 
 export type SegmentedControlOption = {
   id: string;
@@ -43,7 +43,7 @@ export function SegmentedControl({
       className={cx(s.root, className)}
     >
       {options.map((option) => (
-        <AriaToggleButton key={option.id} id={option.id} className={t}>
+        <AriaToggleButton key={option.id} id={option.id} {...recipeProps(t)}>
           {option.label}
         </AriaToggleButton>
       ))}
@@ -65,7 +65,7 @@ export function ToggleButton({
 }: ToggleButtonProps): JSX.Element {
   const t = toggleButton({ size });
   return (
-    <AriaToggleButton {...props} className={cx(t, className)}>
+    <AriaToggleButton {...props} {...recipeProps(t, className)}>
       {children}
     </AriaToggleButton>
   );

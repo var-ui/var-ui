@@ -1,6 +1,6 @@
 import type { HTMLAttributes, JSX } from 'react';
 import { grid } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type GridProps = HTMLAttributes<HTMLDivElement> & {
   /** `auto` packs minmax(240px, 1fr) tracks; numbers give fixed equal tracks. @default auto */
@@ -31,6 +31,6 @@ export function Grid({
   ...props
 }: GridProps): JSX.Element {
   return (
-    <div {...props} className={cx(grid({ columns: columnVariant[columns], gap }), className)} />
+    <div {...props} {...recipeProps(grid({ columns: columnVariant[columns], gap }), className)} />
   );
 }

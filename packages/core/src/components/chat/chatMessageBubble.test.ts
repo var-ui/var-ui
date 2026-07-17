@@ -6,9 +6,9 @@ describe('chatMessageBubble', () => {
   it('registers sender, variant, and group variants', () => {
     chatMessageBubble({ sender: 'user', variant: 'ghost', group: 'first' });
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-chat-message-bubble-root');
-    expect(css).toContain('var-ui-chat-message-bubble-root-sender-user');
-    expect(css).toContain('var-ui-chat-message-bubble-root-variant-ghost');
-    expect(css).toContain('var-ui-chat-message-bubble-root-group-first');
+    expect(css).toContain('.var-ui-chat-message-bubble');
+    expect(css).toContain('.var-ui-chat-message-bubble[data-sender="user"]');
+    expect(css).toContain('.var-ui-chat-message-bubble[data-variant="ghost"]');
+    expect(css).toContain('.var-ui-chat-message-bubble[data-group="first"]');
   });
 });

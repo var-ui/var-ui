@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes, JSX, ReactNode, Ref } from 'react';
 import { useId } from 'react';
 import { inputGroup } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type InputGroupProps = {
   /** Visible label rendered above the group. */
@@ -42,8 +42,8 @@ export function InputGroup({
   const g = inputGroup();
   const labelId = useId();
   return (
-    <div className={cx(g.root, className)}>
-      <span id={labelId} className={g.label}>
+    <div {...recipeProps(g.root, className)}>
+      <span id={labelId} {...recipeProps(g.label)}>
         {label}
       </span>
       <div
@@ -51,13 +51,13 @@ export function InputGroup({
         aria-labelledby={labelId}
         aria-disabled={isDisabled || undefined}
         data-disabled={isDisabled || undefined}
-        className={g.group}
+        {...recipeProps(g.group)}
       >
         {children}
       </div>
-      {description ? <p className={g.description}>{description}</p> : null}
+      {description ? <p {...recipeProps(g.description)}>{description}</p> : null}
       {errorMessage ? (
-        <p className={g.error} role="alert">
+        <p {...recipeProps(g.error)} role="alert">
           {errorMessage}
         </p>
       ) : null}
@@ -76,5 +76,5 @@ export type InputGroupInputProps = InputHTMLAttributes<HTMLInputElement> & {
  */
 export function InputGroupInput({ className, ref, ...props }: InputGroupInputProps): JSX.Element {
   const g = inputGroup();
-  return <input {...props} ref={ref} className={cx(g.input, className)} />;
+  return <input {...props} ref={ref} {...recipeProps(g.input, className)} />;
 }

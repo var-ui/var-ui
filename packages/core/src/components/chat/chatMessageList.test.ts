@@ -6,9 +6,9 @@ describe('chatMessageList', () => {
   it('registers slots and density variants', () => {
     chatMessageList({ density: 'compact' });
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-chat-message-list-root');
-    expect(css).toContain('var-ui-chat-message-list-inner');
-    expect(css).toContain('var-ui-chat-message-list-emptyState');
-    expect(css).toContain('var-ui-chat-message-list-inner-density-compact');
+    expect(css).toContain('.var-ui-chat-message-list');
+    expect(css).toContain('.var-ui-chat-message-list__inner');
+    expect(css).toContain('.var-ui-chat-message-list__emptyState');
+    expect(css).toContain('.var-ui-chat-message-list__inner[data-density="compact"]');
   });
 });

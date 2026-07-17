@@ -9,6 +9,7 @@ import {
 } from 'react-aria-components';
 import { hoverCard } from '@var-ui/core';
 import { useLayer } from '../layers/LayerProvider';
+import { recipeProps } from './utils';
 
 export type HoverCardProps = {
   /** Single focusable trigger element (e.g. a link or avatar). */
@@ -115,7 +116,7 @@ export function HoverCard({
     <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
       {triggerElement}
       <AriaPopover
-        className={hc.root}
+        {...recipeProps(hc.root)}
         placement={placement}
         style={layerStyle}
         isNonModal
@@ -123,7 +124,7 @@ export function HoverCard({
         onMouseEnter={cancelCloseTimer}
         onMouseLeave={scheduleClose}
       >
-        <Dialog className={hc.content}>
+        <Dialog {...recipeProps(hc.content)}>
           {/*
            * `onFocus`/`onBlur` aren't part of RAC's `Dialog`/`Popover` DOM prop allowlist (they're
            * only exposed on focusable elements), so a plain wrapper div carries the panel's
@@ -137,7 +138,7 @@ export function HoverCard({
             onBlur={scheduleClose}
           >
             {title ? (
-              <Heading slot="title" className={hc.title}>
+              <Heading slot="title" {...recipeProps(hc.title)}>
                 {title}
               </Heading>
             ) : null}

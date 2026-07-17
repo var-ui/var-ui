@@ -1,5 +1,6 @@
 'use client';
 
+import { recipeClassName } from '@var-ui/react';
 import { useOptionalMobileNav } from '@/contexts/MobileNavContext';
 import { docsShell } from '@/styles/docsShell';
 import { DocsSidebar } from './DocsSidebar';
@@ -14,11 +15,11 @@ export function DocsMobileNav() {
     <>
       <button
         aria-label="Close navigation"
-        className={shell.mobileNavOverlay}
+        className={recipeClassName(shell.mobileNavOverlay)}
         onClick={mobileNav.close}
         type="button"
       />
-      <div className={shell.mobileNavPanel}>
+      <div className={recipeClassName(shell.mobileNavPanel)}>
         <DocsSidebar onNavigate={mobileNav.close} />
       </div>
     </>
@@ -34,7 +35,7 @@ export function DocsMobileNavButton() {
   return (
     <button
       aria-label="Open navigation"
-      className={shell.headerMenuButton}
+      className={recipeClassName(shell.headerMenuButton)}
       onClick={mobileNav.open}
       type="button"
     >

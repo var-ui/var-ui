@@ -7,6 +7,7 @@ import {
   type TabsProps as RACTabsProps,
 } from 'react-aria-components';
 import { tabs as tabsStyles } from '@var-ui/core';
+import { recipeProps } from './utils';
 
 type TabDefinition = {
   id: string;
@@ -22,16 +23,16 @@ export type TabsProps = Omit<RACTabsProps, 'children'> & {
 export function Tabs({ tabs, ...props }: TabsProps): JSX.Element {
   const t = tabsStyles();
   return (
-    <AriaTabs {...props} className={t.root}>
-      <TabList className={t.list}>
+    <AriaTabs {...props} {...recipeProps(t.root)}>
+      <TabList {...recipeProps(t.list)}>
         {tabs.map((tab) => (
-          <Tab key={tab.id} id={tab.id} className={t.tab}>
+          <Tab key={tab.id} id={tab.id} {...recipeProps(t.tab)}>
             {tab.label}
           </Tab>
         ))}
       </TabList>
       {tabs.map((tab) => (
-        <TabPanel key={tab.id} id={tab.id} className={t.panel}>
+        <TabPanel key={tab.id} id={tab.id} {...recipeProps(t.panel)}>
           {tab.content}
         </TabPanel>
       ))}

@@ -5,6 +5,25 @@ description: Semantic tokens that power var-ui components and layouts.
 
 # Design tokens
 
-var-ui exposes semantic tokens for color, spacing, typography, and elevation. Components reference tokens instead of hard-coded values so themes can swap palettes without touching component code.
+var-ui exposes semantic tokens for color, spacing, typography, motion, and
+elevation. Components reference tokens (e.g. `t.color.accent.default`) instead
+of hard-coded values so themes can swap palettes without touching recipes.
 
-Token reference tables will be generated from the core package in a follow-up.
+Import the shared refs from core:
+
+```ts
+import { designTokens } from '@var-ui/core';
+
+designTokens.color.text.primary; // var(--var-ui-color-text-primary)
+designTokens.space[4];
+designTokens.fontSize.md;
+```
+
+Theme `light` / `dark` objects assign concrete values to those custom
+properties under the theme class. Custom namespaces from
+`createDesignTheme({ extend })` or `extendTokens` appear on the theme's
+`.tokens` object alongside `designTokens`.
+
+Token reference tables generated from the core package are planned for a
+follow-up. Until then, see `packages/core/src/tokens/` and the built-in theme
+files under `packages/core/src/themes/`.

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import { ChatDemo } from './ChatDemo';
-import { kbd, skeleton, statusDot, SURFACE_ATTRIBUTE } from '@var-ui/core';
+import { acmeTheme } from './acmeTheme';
+import { defaultTheme, kbd, skeleton, statusDot, SURFACE_ATTRIBUTE } from '@var-ui/core';
 import { defaultIcons } from '@var-ui/icons';
 import {
   Alert,
@@ -41,6 +42,7 @@ import {
   Pagination,
   Popover,
   ProgressBar,
+  recipeClassName,
   Section,
   Select,
   Spinner,
@@ -62,10 +64,39 @@ import {
 const AVATAR_URL =
   'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" fill="%236c8"/%3E%3C/svg%3E';
 
+type ShowcasePalette = 'default' | 'acme';
+
 function ThemeToggle() {
   const { theme, toggleTheme } = useDesignSystemTheme();
   return (
     <Button onPress={toggleTheme}>Switch to {theme === 'dark' ? 'light' : 'dark'} mode</Button>
+  );
+}
+
+function PaletteSwitcher({
+  selected,
+  onSelect,
+}: {
+  selected: ShowcasePalette;
+  onSelect: (id: ShowcasePalette) => void;
+}) {
+  return (
+    <HStack gap="xs">
+      <Button
+        intent={selected === 'default' ? 'primary' : 'secondary'}
+        onPress={() => onSelect('default')}
+        aria-pressed={selected === 'default'}
+      >
+        Default
+      </Button>
+      <Button
+        intent={selected === 'acme' ? 'primary' : 'secondary'}
+        onPress={() => onSelect('acme')}
+        aria-pressed={selected === 'acme'}
+      >
+        Acme (V7 demo)
+      </Button>
+    </HStack>
   );
 }
 
@@ -95,13 +126,13 @@ function FeedbackSection() {
         <Spinner label="Loading results" />
         <Spinner size="lg" tone="neutral" />
         <HStack gap="xs">
-          <span className={statusDot({ tone: 'success', pulse: 'true' })} />
+          <span className={recipeClassName(statusDot({ tone: 'success', pulse: 'true' }))} />
           <Text as="span" size="sm">
             Operational
           </Text>
         </HStack>
         <HStack gap="xs">
-          <span className={statusDot({ tone: 'danger' })} />
+          <span className={recipeClassName(statusDot({ tone: 'danger' }))} />
           <Text as="span" size="sm" tone="secondary">
             Incident
           </Text>
@@ -110,9 +141,9 @@ function FeedbackSection() {
       <ProgressBar label="Uploading assets" value={64} />
       <ProgressBar label="Reindexing" isIndeterminate />
       <Stack gap="xs" aria-hidden style={{ maxWidth: '320px' }}>
-        <div className={skeleton({ shape: 'text' })} style={{ width: '60%' }} />
-        <div className={skeleton({ shape: 'text' })} style={{ width: '90%' }} />
-        <div className={skeleton({ shape: 'rect' })} style={{ height: '48px' }} />
+        <div className={recipeClassName(skeleton({ shape: 'text' }))} style={{ width: '60%' }} />
+        <div className={recipeClassName(skeleton({ shape: 'text' }))} style={{ width: '90%' }} />
+        <div className={recipeClassName(skeleton({ shape: 'rect' }))} style={{ height: '48px' }} />
       </Stack>
     </Section>
   );
@@ -128,8 +159,8 @@ function ContentSection() {
         Small heading
       </Heading>
       <Text>
-        Body text with a <kbd className={kbd()}>⌘K</kbd> shortcut hint and a relative{' '}
-        <Timestamp date={new Date(Date.now() - 5 * 60_000)} /> timestamp.
+        Body text with a <kbd className={recipeClassName(kbd())}>⌘K</kbd> shortcut hint and a
+        relative <Timestamp date={new Date(Date.now() - 5 * 60_000)} /> timestamp.
       </Text>
       <Text tone="secondary" size="sm">
         Secondary small text — published <Timestamp date="2026-01-15T12:00:00Z" format="date" />.
@@ -459,8 +490,11 @@ function OverlaysSection() {
 }
 
 export function App() {
+  const [palette, setPalette] = useState<ShowcasePalette>('default');
+  const activeTheme = palette === 'acme' ? acmeTheme : defaultTheme;
+
   return (
-    <DesignSystemProvider defaultTheme="light">
+    <DesignSystemProvider defaultTheme="light" customTheme={activeTheme}>
       <IconProvider icons={defaultIcons}>
         <ToastProvider>
           <LayerProvider>
@@ -470,9 +504,16 @@ export function App() {
                   var-ui
                 </Heading>
                 <Text tone="secondary">
-                  Component showcase for the Phase 0–1 breadth work. Everything below is themed by
-                  CSS custom properties — no compiler in sight.
+                  Component showcase. Switch to <strong>Acme</strong> to preview V7 typed theming —
+                  custom brand tokens, pill buttons with glow, and uppercase primary labels — via
+                  <code> createDesignTheme({'{ extend, components }'})</code>.
                 </Text>
+                <Stack gap="xs">
+                  <Text as="span" size="sm" tone="secondary">
+                    Theme palette
+                  </Text>
+                  <PaletteSwitcher selected={palette} onSelect={setPalette} />
+                </Stack>
                 <HStack gap="sm">
                   <ThemeToggle />
                   <Dialog

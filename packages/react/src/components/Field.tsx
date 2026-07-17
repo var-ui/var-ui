@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { field } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type FieldProps = {
   /** Visible label rendered above the control. */
@@ -37,16 +37,16 @@ export function Field({
 }: FieldProps): JSX.Element {
   const f = field();
   return (
-    <div className={cx(f.root, className)}>
+    <div {...recipeProps(f.root, className)}>
       {label ? (
-        <label className={f.label} htmlFor={htmlFor}>
+        <label {...recipeProps(f.label)} htmlFor={htmlFor}>
           {label}
         </label>
       ) : null}
       {children}
-      {description ? <p className={f.description}>{description}</p> : null}
+      {description ? <p {...recipeProps(f.description)}>{description}</p> : null}
       {errorMessage ? (
-        <p className={f.error} role="alert">
+        <p {...recipeProps(f.error)} role="alert">
           {errorMessage}
         </p>
       ) : null}

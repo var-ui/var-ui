@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { toolbar } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type ToolbarProps = {
   /** Content aligned to the start (leading) edge. */
@@ -51,11 +51,11 @@ export function Toolbar({
       role="toolbar"
       aria-label={label}
       aria-orientation={orientation}
-      className={cx(s.root, className)}
+      {...recipeProps(s.root, className)}
     >
-      {startContent != null ? <div className={s.startSlot}>{startContent}</div> : null}
-      {centerContent != null ? <div className={s.centerSlot}>{centerContent}</div> : null}
-      {endContent != null ? <div className={s.endSlot}>{endContent}</div> : null}
+      {startContent != null ? <div {...recipeProps(s.startSlot)}>{startContent}</div> : null}
+      {centerContent != null ? <div {...recipeProps(s.centerSlot)}>{centerContent}</div> : null}
+      {endContent != null ? <div {...recipeProps(s.endSlot)}>{endContent}</div> : null}
     </div>
   );
 }

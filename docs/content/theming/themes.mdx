@@ -1,10 +1,80 @@
 ---
 title: Themes
-description: Create and apply custom var-ui themes.
+description: Create and apply custom var-ui themes with createDesignTheme.
 ---
 
 # Themes
 
-Themes bundle token overrides and component recipe tweaks. Wrap your app in `DesignSystemProvider` and pass a theme object to opt into a custom look.
+A theme is a named TypeStyles surface: light/dark (and optional fixed
+`data-surface`) token values, optional custom token namespaces (`extend`), and
+optional typed component overrides (`components`).
 
-Examples for authoring themes and previewing them in Storybook-style sandboxes will be added here.
+## Authoring
+
+```ts
+import { createDesignTheme } from '@var-ui/core';
+
+export const forest = createDesignTheme({
+  name: 'forest',
+  light: {
+    color: {
+      /* DesignColorValues */
+    } /* … */,
+  },
+  dark: {
+    color: {
+      /* … */
+    },
+  },
+  surfaces: {
+    // Optional fixed-tone faces for marked subtrees
+    dark: {
+      color: {
+        /* always-dark toast, etc. */
+      },
+    },
+  },
+  extend: {
+    /* optional custom tokens — see Customize */
+  },
+  components: {
+    /* optional — each key is `(t) => override` or a plain object; see Customize */
+  },
+});
+```
+
+Built-in themes (`defaultTheme`, `forestTheme`, `roseTheme`, …) ship from
+`@var-ui/core`. For custom themes, pass partial `light` / `dark` overrides —
+`createDesignTheme` deep-merges them onto the default palette.
+
+## Applying a theme
+
+Wrap the app in `DesignSystemProvider` and pass the theme object:
+
+```tsx
+import { DesignSystemProvider } from '@var-ui/react';
+import { forestTheme } from '@var-ui/core';
+
+export function App() {
+  return (
+    <DesignSystemProvider defaultTheme="system" customTheme={forestTheme}>
+      {/* … */}
+    </DesignSystemProvider>
+  );
+}
+```
+
+- `customTheme` — preferred; pass the `createDesignTheme` return directly.
+- `customThemeClassName` — string escape hatch if you only have the class name.
+- When `customTheme` / `customThemeClassName` is set, it **replaces** the built-in
+  default surface class on the provider wrapper (it does not stack both).
+- `defaultTheme` / controlled `theme` — light / dark / system color mode via
+  `data-mode` (independent of which palette theme class is applied).
+
+For SSR without a flash of wrong mode, see `getThemeInitScript` and
+`omitWrapperThemeSurface` when the theme class lives on `document.documentElement`.
+
+## Next
+
+- [Customize](/theming/customize) — `extend`, `components`, `overrideComponent`
+- [Design tokens](/theming/tokens) — what `light` / `dark` override

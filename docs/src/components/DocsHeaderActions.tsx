@@ -1,6 +1,6 @@
 'use client';
 
-import { HStack, Link } from '@var-ui/react';
+import { HStack, Link, recipeClassName } from '@var-ui/react';
 import { githubUrl } from '@/data/navigation';
 import { docsShell } from '@/styles/docsShell';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
@@ -28,7 +28,7 @@ export function DocsHeaderActions() {
       <ColorModeSwitcher />
       <Link
         aria-label="View source on GitHub"
-        className={shell.headerIconButton}
+        className={recipeClassName(shell.headerIconButton)}
         href={githubUrl}
         rel="noopener noreferrer"
         target="_blank"

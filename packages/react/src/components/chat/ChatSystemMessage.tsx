@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { chatSystemMessage } from '@var-ui/core';
-import { cx } from '../utils';
+import { recipeProps } from '../utils';
 
 export type ChatSystemMessageTone =
   | 'neutral'
@@ -36,9 +36,9 @@ export function ChatSystemMessage({
 }: ChatSystemMessageProps): JSX.Element {
   const s = chatSystemMessage({ tone });
   return (
-    <div className={cx(s.root, className)} role="status">
-      {icon ? <span className={s.icon}>{icon}</span> : null}
-      <span className={s.text}>{children}</span>
+    <div {...recipeProps(s.root, className)} role="status">
+      {icon ? <span {...recipeProps(s.icon)}>{icon}</span> : null}
+      <span {...recipeProps(s.text)}>{children}</span>
     </div>
   );
 }

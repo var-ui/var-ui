@@ -6,11 +6,11 @@ describe('breadcrumbs', () => {
   it('registers root, list, item, ellipsisItem, and link slots', () => {
     breadcrumbs();
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-breadcrumbs-root');
-    expect(css).toContain('var-ui-breadcrumbs-list');
-    expect(css).toContain('var-ui-breadcrumbs-item');
-    expect(css).toContain('var-ui-breadcrumbs-ellipsisItem');
-    expect(css).toContain('var-ui-breadcrumbs-link');
+    expect(css).toContain('.var-ui-breadcrumbs');
+    expect(css).toContain('.var-ui-breadcrumbs__list');
+    expect(css).toContain('.var-ui-breadcrumbs__item');
+    expect(css).toContain('.var-ui-breadcrumbs__ellipsisItem');
+    expect(css).toContain('.var-ui-breadcrumbs__link');
   });
 
   it('renders the default separator as a themeable custom property', () => {

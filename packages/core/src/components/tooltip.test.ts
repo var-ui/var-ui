@@ -5,6 +5,6 @@ import { tooltip } from './tooltip';
 describe('tooltip', () => {
   it('registers root styles', () => {
     tooltip();
-    expect(getRegisteredCss()).toContain('var-ui-tooltip-root');
+    expect(getRegisteredCss()).toContain('.var-ui-tooltip');
   });
 });

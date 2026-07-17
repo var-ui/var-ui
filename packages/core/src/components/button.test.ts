@@ -7,9 +7,11 @@ describe('button', () => {
     button({ intent: 'primary' });
     button({ intent: 'danger' });
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-button-intent-primary');
-    expect(css).toContain('var-ui-button-intent-danger');
+    expect(css).toContain('.var-ui-button[data-intent="primary"]');
+    expect(css).toContain('.var-ui-button[data-intent="danger"]');
     expect(css).toContain('var(--var-ui-color-danger-solid)');
-    expect(css).not.toMatch(/var-ui-button-intent-danger[^}]*var\(--var-ui-color-danger-default\)/);
+    expect(css).not.toMatch(
+      /\.var-ui-button\[data-intent="danger"\][^}]*var\(--var-ui-color-danger-default\)/,
+    );
   });
 });

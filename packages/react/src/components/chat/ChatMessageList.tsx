@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { chatMessageList } from '@var-ui/core';
-import { cx } from '../utils';
 import { ChatListContext, type ChatDensity } from './ChatContext';
+import { recipeProps } from '../utils';
 
 export type ChatMessageListProps = {
   /** Message elements — typically `ChatMessage`. */
@@ -52,13 +52,13 @@ export function ChatMessageList({
         role="log"
         aria-live="polite"
         aria-busy={isStreaming || undefined}
-        className={cx(l.root, className)}
+        {...recipeProps(l.root, className)}
       >
-        <div className={l.inner}>
+        <div {...recipeProps(l.inner)}>
           {hasVisibleContent(children) ? (
             children
           ) : emptyState ? (
-            <div className={l.emptyState}>{emptyState}</div>
+            <div {...recipeProps(l.emptyState)}>{emptyState}</div>
           ) : null}
         </div>
       </div>

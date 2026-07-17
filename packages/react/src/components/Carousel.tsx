@@ -3,7 +3,7 @@ import { Children, useRef } from 'react';
 import { Button as AriaButton } from 'react-aria-components';
 import { carousel } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type CarouselProps = {
   /** Slides to render inside the scroll viewport. */
@@ -37,25 +37,25 @@ export function Carousel({ children, label, itemWidth, className }: CarouselProp
   };
 
   return (
-    <section className={cx(s.root, className)} role="region" aria-label={label}>
+    <section {...recipeProps(s.root, className)} role="region" aria-label={label}>
       <div
         ref={viewportRef}
-        className={s.viewport}
+        {...recipeProps(s.viewport)}
         data-carousel-viewport
         tabIndex={0}
         style={itemWidth ? { gridAutoColumns: itemWidth } : undefined}
       >
         {Children.map(children, (child) => (
-          <div className={s.item} data-carousel-item>
+          <div {...recipeProps(s.item)} data-carousel-item>
             {child}
           </div>
         ))}
       </div>
-      <div className={s.controls}>
-        <AriaButton className={s.control} aria-label="Previous" onPress={() => nudge(-1)}>
+      <div {...recipeProps(s.controls)}>
+        <AriaButton {...recipeProps(s.control)} aria-label="Previous" onPress={() => nudge(-1)}>
           <Icon name="chevronLeft" size="sm" />
         </AriaButton>
-        <AriaButton className={s.control} aria-label="Next" onPress={() => nudge(1)}>
+        <AriaButton {...recipeProps(s.control)} aria-label="Next" onPress={() => nudge(1)}>
           <Icon name="chevronRight" size="sm" />
         </AriaButton>
       </div>

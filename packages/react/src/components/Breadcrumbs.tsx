@@ -2,7 +2,7 @@ import type { CSSProperties, JSX, ReactNode } from 'react';
 import { useState } from 'react';
 import { Breadcrumb, Breadcrumbs as AriaBreadcrumbs, Link } from 'react-aria-components';
 import { breadcrumbs as breadcrumbsStyles } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type BreadcrumbItemData = {
   /** Stable identifier, passed to `onAction` when the item is pressed. */
@@ -90,19 +90,19 @@ export function Breadcrumbs({
     : undefined;
 
   return (
-    <nav aria-label={label} className={cx(b.root, className)} style={style}>
+    <nav aria-label={label} {...recipeProps(b.root, className)} style={style}>
       <AriaBreadcrumbs
         items={visibleItems}
         onAction={onAction ? (key) => onAction(String(key)) : undefined}
         aria-label={label}
-        className={b.list}
+        {...recipeProps(b.list)}
       >
         {(item: VisibleItem) =>
           item.isEllipsis ? (
-            <Breadcrumb id={item.id} className={b.ellipsisItem}>
+            <Breadcrumb id={item.id} {...recipeProps(b.ellipsisItem)}>
               <button
                 type="button"
-                className={b.link}
+                {...recipeProps(b.link)}
                 onClick={() => setExpanded(true)}
                 aria-label="Show all breadcrumbs"
               >
@@ -110,14 +110,14 @@ export function Breadcrumbs({
               </button>
             </Breadcrumb>
           ) : (
-            <Breadcrumb id={item.id} className={b.item}>
+            <Breadcrumb id={item.id} {...recipeProps(b.item)}>
               {/*
                 Spread `href` conditionally: RAC's Link treats `href` as present whenever the
                 key exists on props (even set to `undefined`), resolving it to `''` and warning
                 when downgraded to a `<span>` for the current item. Omitting the key entirely
                 for href-less items avoids that without reintroducing manual current-item logic.
               */}
-              <Link {...(item.href ? { href: item.href } : {})} className={b.link}>
+              <Link {...(item.href ? { href: item.href } : {})} {...recipeProps(b.link)}>
                 {item.label}
               </Link>
             </Breadcrumb>

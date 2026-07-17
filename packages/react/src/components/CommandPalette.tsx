@@ -10,10 +10,11 @@ import {
   ModalOverlay,
   TextField,
 } from 'react-aria-components';
+import type { ComponentAttrsResult } from 'typestyles';
 import { commandPalette } from '@var-ui/core';
 import { Icon } from '../icons';
 import { useLayer } from '../layers/LayerProvider';
-import { cx } from './utils';
+import { cx, recipeProps } from './utils';
 
 export type CommandPaletteItem = {
   /** Unique item identifier passed to `onAction`. */
@@ -66,11 +67,9 @@ type CommandPaletteSlot =
   | 'resultMeta'
   | 'mark'
   | 'empty';
-type CommandPaletteRecipeFn = (args?: { open?: boolean }) => Record<CommandPaletteSlot, string>;
-// `commandPalette` resolves to `styles`'s dimensioned-variant overload at the type level (returns
-// `string`) instead of its slot overload, even though it returns a per-slot class map at runtime —
-// see packages/core/src/components/commandPalette.ts. Recast until that recipe's overload
-// resolution is fixed upstream.
+type CommandPaletteRecipeFn = (args?: {
+  open?: boolean;
+}) => Record<CommandPaletteSlot, ComponentAttrsResult>;
 const commandPaletteSlots = commandPalette as unknown as CommandPaletteRecipeFn;
 
 function defaultFilter(item: CommandPaletteItem, query: string): boolean {
@@ -127,39 +126,39 @@ export function CommandPalette({
     <ModalOverlay
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      className={cp.root}
+      {...recipeProps(cp.root)}
       style={layerStyle}
       UNSTABLE_portalContainer={portalContainer}
     >
-      <div className={cp.backdrop} />
-      <Modal className={cp.dialog}>
+      <div {...recipeProps(cp.backdrop)} />
+      <Modal {...recipeProps(cp.dialog)}>
         <AriaDialog aria-label={placeholder}>
           <Autocomplete inputValue={query} onInputChange={setQuery}>
-            <div className={cp.inputRow}>
-              <span className={cp.inputIcon}>
+            <div {...recipeProps(cp.inputRow)}>
+              <span {...recipeProps(cp.inputIcon)}>
                 <Icon name="search" />
               </span>
               <TextField aria-label={placeholder} style={{ display: 'flex', flex: 1, minWidth: 0 }}>
-                <Input className={cp.input} placeholder={placeholder} autoFocus />
+                <Input {...recipeProps(cp.input)} placeholder={placeholder} autoFocus />
               </TextField>
             </div>
             <ListBox
               items={visibleItems}
-              className={cp.results}
+              {...recipeProps(cp.results)}
               aria-label={placeholder}
-              renderEmptyState={() => <div className={cp.empty}>{emptyLabel}</div>}
+              renderEmptyState={() => <div {...recipeProps(cp.empty)}>{emptyLabel}</div>}
             >
               {(item) => (
                 <ListBoxItem
                   id={item.id}
                   textValue={item.title}
-                  className={cp.result}
+                  {...recipeProps(cp.result)}
                   onAction={() => onAction(item.id)}
                 >
                   {({ isFocused }) => (
-                    <span className={cx(cp.resultLink, isFocused && cp.resultLinkActive)}>
-                      <span className={cp.resultTitle}>{item.title}</span>
-                      {item.meta ? <span className={cp.resultMeta}>{item.meta}</span> : null}
+                    <span {...recipeProps(cp.resultLink, cx(isFocused && cp.resultLinkActive))}>
+                      <span {...recipeProps(cp.resultTitle)}>{item.title}</span>
+                      {item.meta ? <span {...recipeProps(cp.resultMeta)}>{item.meta}</span> : null}
                     </span>
                   )}
                 </ListBoxItem>

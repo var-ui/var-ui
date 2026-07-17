@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { chatMessageBubble } from '@var-ui/core';
-import { cx } from '../utils';
 import { useChatMessageContext } from './ChatContext';
+import { recipeProps } from '../utils';
 
 export type ChatMessageBubbleProps = {
   /** Bubble content — plain text or a consumer-rendered markdown tree. */
@@ -33,5 +33,5 @@ export function ChatMessageBubble({
   const context = useChatMessageContext();
   const sender = context?.sender ?? 'assistant';
   const b = chatMessageBubble({ sender, variant, group: group ?? 'none' });
-  return <div className={cx(b.root, className)}>{children}</div>;
+  return <div {...recipeProps(b.root, className)}>{children}</div>;
 }

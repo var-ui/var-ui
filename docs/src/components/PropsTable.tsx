@@ -1,5 +1,6 @@
 import type { ComponentPropsDoc } from '@/lib/extract-component-props';
 import { proseContent } from '@var-ui/core';
+import { recipeClassName } from '@var-ui/react';
 
 type PropsTableProps = {
   /** Component slug from the registry, e.g. `button`. */
@@ -90,13 +91,17 @@ export function PropsTable({ slug, doc }: PropsTableProps) {
 
   return (
     <>
-      <PropsTableSection title="Props" props={varUiProps} tableWrapClass={prose.tableWrap} />
+      <PropsTableSection
+        title="Props"
+        props={varUiProps}
+        tableWrapClass={recipeClassName(prose.tableWrap)}
+      />
       {reactAriaProps.length > 0 ? (
         <PropsTableSection
           title="React Aria props"
           props={reactAriaProps}
           id="react-aria-props"
-          tableWrapClass={prose.tableWrap}
+          tableWrapClass={recipeClassName(prose.tableWrap)}
         />
       ) : null}
       {domProps.length > 0 ? (
@@ -106,7 +111,7 @@ export function PropsTable({ slug, doc }: PropsTableProps) {
             title="DOM props"
             props={domProps}
             id="dom-props"
-            tableWrapClass={prose.tableWrap}
+            tableWrapClass={recipeClassName(prose.tableWrap)}
             showTitle={false}
           />
         </details>

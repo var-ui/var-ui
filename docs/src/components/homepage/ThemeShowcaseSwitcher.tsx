@@ -1,5 +1,6 @@
 'use client';
 
+import { recipeClassName } from '@var-ui/react';
 import {
   aiGlowTheme,
   amberTheme,
@@ -60,19 +61,22 @@ export function ThemeShowcaseSwitcher({ selected, onSelect }: ThemeShowcaseSwitc
   const b = homeBento();
 
   return (
-    <div className={b.switcher} role="radiogroup" aria-label="Preview theme">
+    <div className={recipeClassName(b.switcher)} role="radiogroup" aria-label="Preview theme">
       {SHOWCASE_THEMES.map((theme) => {
         const isActive = theme.id === selected;
         return (
           <button
             key={theme.id}
             aria-checked={isActive}
-            className={isActive ? b.switcherPillActive : b.switcherPill}
+            className={recipeClassName(isActive ? b.switcherPillActive : b.switcherPill)}
             onClick={() => onSelect(theme.id)}
             role="radio"
             type="button"
           >
-            <span className={b.switcherSwatch} style={{ backgroundColor: theme.swatch }} />
+            <span
+              className={recipeClassName(b.switcherSwatch)}
+              style={{ backgroundColor: theme.swatch }}
+            />
             {theme.label}
           </button>
         );

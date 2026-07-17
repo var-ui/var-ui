@@ -7,31 +7,31 @@ import { Section } from './Section';
 import { HStack, Stack } from './Stack';
 
 describe('Stack', () => {
-  it('applies variant classes for gap and direction', () => {
+  it('applies variant attrs for gap and direction', () => {
     const { container } = render(
       <Stack direction="row" gap="lg">
         <span>a</span>
       </Stack>,
     );
     const el = container.firstElementChild as HTMLElement;
-    expect(el.className).toContain('var-ui-stack-direction-row');
-    expect(el.className).toContain('var-ui-stack-gap-lg');
+    expect(el.className).toContain('var-ui-stack');
+    expect(el.getAttribute('data-direction')).toBe('row');
+    expect(el.getAttribute('data-gap')).toBe('lg');
   });
 
   it('HStack defaults to row with centered cross axis', () => {
     const { container } = render(<HStack>x</HStack>);
     const el = container.firstElementChild as HTMLElement;
-    expect(el.className).toContain('var-ui-stack-direction-row');
-    expect(el.className).toContain('var-ui-stack-align-center');
+    expect(el.getAttribute('data-direction')).toBe('row');
+    expect(el.getAttribute('data-align')).toBe('center');
   });
 });
 
 describe('Grid', () => {
   it('maps numeric columns onto named variants', () => {
     const { container } = render(<Grid columns={3}>x</Grid>);
-    expect((container.firstElementChild as HTMLElement).className).toContain(
-      'var-ui-grid-columns-three',
-    );
+    const el = container.firstElementChild as HTMLElement;
+    expect(el.getAttribute('data-columns')).toBe('three');
   });
 });
 
@@ -40,7 +40,7 @@ describe('Divider', () => {
     render(<Divider orientation="vertical" />);
     const hr = document.querySelector('hr') as HTMLHRElement;
     expect(hr.getAttribute('aria-orientation')).toBe('vertical');
-    expect(hr.className).toContain('var-ui-divider-orientation-vertical');
+    expect(hr.getAttribute('data-orientation')).toBe('vertical');
   });
 });
 
@@ -48,7 +48,7 @@ describe('Section', () => {
   it('renders a section element with an optional heading', () => {
     render(<Section title="Forms">body</Section>);
     expect(screen.getByRole('heading', { name: 'Forms' }).className).toContain(
-      'var-ui-section-title',
+      'var-ui-section__title',
     );
   });
 });

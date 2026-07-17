@@ -9,6 +9,7 @@ import {
 import { dialog } from '@var-ui/core';
 import { useLayer } from '../layers/LayerProvider';
 import { Button } from './Button';
+import { recipeProps } from './utils';
 
 export type AlertDialogProps = {
   /** Dialog heading shown in the modal header. */
@@ -53,17 +54,17 @@ export function AlertDialog({
   const { style: layerStyle } = useLayer();
 
   const modal = (
-    <Modal className={d.modal}>
+    <Modal {...recipeProps(d.modal)}>
       <AriaDialog role="alertdialog">
         {({ close }) => (
-          <div className={d.content}>
-            <div className={d.header}>
-              <Heading slot="title" className={d.heading}>
+          <div {...recipeProps(d.content)}>
+            <div {...recipeProps(d.header)}>
+              <Heading slot="title" {...recipeProps(d.heading)}>
                 {title}
               </Heading>
             </div>
-            <p className={d.description}>{description}</p>
-            <div className={d.actions}>
+            <p {...recipeProps(d.description)}>{description}</p>
+            <div {...recipeProps(d.actions)}>
               <Button intent="secondary" autoFocus={isDestructive} onPress={close}>
                 {cancelLabel}
               </Button>
@@ -88,7 +89,7 @@ export function AlertDialog({
       <DialogTrigger isOpen={isOpen} onOpenChange={onOpenChange}>
         <Button intent="secondary">{triggerLabel}</Button>
         <ModalOverlay
-          className={d.overlay}
+          {...recipeProps(d.overlay)}
           style={layerStyle}
           UNSTABLE_portalContainer={portalContainer}
         >
@@ -102,7 +103,7 @@ export function AlertDialog({
     <ModalOverlay
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      className={d.overlay}
+      {...recipeProps(d.overlay)}
       style={layerStyle}
       UNSTABLE_portalContainer={portalContainer}
     >

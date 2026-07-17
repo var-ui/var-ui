@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { icon, type IconName } from '@var-ui/core';
-import { cx } from '../components/utils';
+import { recipeProps } from '../components/utils';
 import { emptyFallback } from './emptyFallback';
 import { useIcons } from './IconProvider';
 
@@ -34,7 +34,7 @@ export function Icon({
   const glyph = children ?? (name ? icons[name] : undefined) ?? emptyFallback;
   return (
     <span
-      className={cx(icon({ size }), className)}
+      {...recipeProps(icon({ size }), className)}
       aria-hidden={ariaLabel ? undefined : true}
       aria-label={ariaLabel}
       role={ariaLabel ? 'img' : undefined}

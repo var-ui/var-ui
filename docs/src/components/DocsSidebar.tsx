@@ -1,5 +1,6 @@
 'use client';
 
+import { cx, recipeClassName } from '@var-ui/react';
 import { Link, useRouterState } from '@tanstack/react-router';
 import type { DocHeading } from '@/lib/extract-headings';
 import { sidebar } from '@/data/navigation';
@@ -44,7 +45,7 @@ function SidebarLink({
 
   return (
     <Link
-      className={active ? shell.sidebarLinkActive : shell.sidebarLink}
+      className={recipeClassName(active ? shell.sidebarLinkActive : shell.sidebarLink)}
       onClick={onNavigate}
       to={href}
     >
@@ -60,8 +61,8 @@ export function DocsSidebar({ onNavigate }: DocsSidebarProps) {
 
   if (!isGroupedSidebar(section)) {
     return (
-      <nav aria-label="Section" className={shell.sidebarInner}>
-        <ul className={shell.sidebarList}>
+      <nav aria-label="Section" className={recipeClassName(shell.sidebarInner)}>
+        <ul className={recipeClassName(shell.sidebarList)}>
           {section.map((item) => (
             <li key={item.link}>
               <SidebarLink
@@ -78,11 +79,11 @@ export function DocsSidebar({ onNavigate }: DocsSidebarProps) {
   }
 
   return (
-    <nav aria-label="Section" className={shell.sidebarInner}>
+    <nav aria-label="Section" className={recipeClassName(shell.sidebarInner)}>
       {section.map((group) => (
-        <div className={shell.sidebarGroup} key={group.text}>
-          <p className={shell.sidebarGroupLabel}>{group.text}</p>
-          <ul className={shell.sidebarList}>
+        <div className={recipeClassName(shell.sidebarGroup)} key={group.text}>
+          <p className={recipeClassName(shell.sidebarGroupLabel)}>{group.text}</p>
+          <ul className={recipeClassName(shell.sidebarList)}>
             {group.items.map((item) => (
               <li key={item.link}>
                 <SidebarLink
@@ -104,7 +105,7 @@ export function DocsSidebarRail(props: DocsSidebarProps) {
   const shell = docsShell();
 
   return (
-    <aside className={shell.sidebar}>
+    <aside className={recipeClassName(shell.sidebar)}>
       <DocsSidebar {...props} />
     </aside>
   );
@@ -120,15 +121,17 @@ export function DocsToc({ headings }: DocsTocProps) {
   if (headings.length === 0) return null;
 
   return (
-    <aside className={shell.toc}>
-      <div className={shell.tocInner}>
-        <p className={shell.tocTitle}>On this page</p>
-        <ul className={shell.tocList}>
+    <aside className={recipeClassName(shell.toc)}>
+      <div className={recipeClassName(shell.tocInner)}>
+        <p className={recipeClassName(shell.tocTitle)}>On this page</p>
+        <ul className={recipeClassName(shell.tocList)}>
           {headings.map((heading) => (
             <li key={heading.id}>
               <a
                 className={
-                  heading.level === 3 ? `${shell.tocLink} ${shell.tocLinkNested}` : shell.tocLink
+                  heading.level === 3
+                    ? cx(recipeClassName(shell.tocLink), recipeClassName(shell.tocLinkNested))
+                    : recipeClassName(shell.tocLink)
                 }
                 href={`#${heading.id}`}
               >

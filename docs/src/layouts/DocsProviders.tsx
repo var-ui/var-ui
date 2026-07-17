@@ -2,7 +2,7 @@
 
 import { codeHljsScope } from '@var-ui/core';
 import { defaultIcons } from '@var-ui/icons';
-import { DesignSystemProvider, IconProvider, LayerProvider } from '@var-ui/react';
+import { DesignSystemProvider, IconProvider, LayerProvider, recipeClassName } from '@var-ui/react';
 import { useRouterState } from '@tanstack/react-router';
 import type { ReactNode } from 'react';
 import { DocsHeader } from '@/components/DocsHeader';
@@ -31,9 +31,9 @@ export function DocsProviders({ children }: { children: ReactNode }) {
     >
       <IconProvider icons={defaultIcons}>
         <LayerProvider>
-          <div className={shell.root}>
+          <div className={recipeClassName(shell.root)}>
             <DocsHeader showMobileNav={isDocsSection} />
-            <div className={codeHljsScope().root}>{children}</div>
+            <div className={recipeClassName(codeHljsScope().root)}>{children}</div>
           </div>
         </LayerProvider>
       </IconProvider>

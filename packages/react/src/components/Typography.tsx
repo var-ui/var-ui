@@ -1,7 +1,7 @@
 import type { HTMLAttributes, JSX } from 'react';
 import { createElement } from 'react';
 import { heading, textBlock } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {
   /** Semantic heading level (document outline). @default 2 */
@@ -23,7 +23,10 @@ export function Heading({
   className,
   ...props
 }: HeadingProps): JSX.Element {
-  return createElement(`h${level}`, { ...props, className: cx(heading({ size }), className) });
+  return createElement(`h${level}`, {
+    ...props,
+    ...recipeProps(heading({ size }), className),
+  });
 }
 
 export type TextProps = HTMLAttributes<HTMLElement> & {
@@ -54,6 +57,6 @@ export function Text({
 }: TextProps): JSX.Element {
   return createElement(as, {
     ...props,
-    className: cx(textBlock({ size, tone, weight }), className),
+    ...recipeProps(textBlock({ size, tone, weight }), className),
   });
 }

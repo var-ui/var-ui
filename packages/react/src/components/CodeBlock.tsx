@@ -2,7 +2,7 @@ import type { JSX } from 'react';
 import { useMemo, useState } from 'react';
 import { codeBlock } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx } from './utils';
+import { cx, recipeClassName, recipeProps } from './utils';
 
 type CodeBlockVariant = 'default' | 'inline' | 'diff' | 'terminal';
 type FeedbackTone = 'success' | 'error' | null;
@@ -50,10 +50,10 @@ export function CodeBlock({
 }: CodeBlockProps): JSX.Element {
   const cb = codeBlock();
   const variantRootClass: Record<CodeBlockVariant, string> = {
-    default: cb.rootDefault,
-    inline: cb.rootInline,
-    diff: cb.rootDiff,
-    terminal: cb.rootTerminal,
+    default: recipeClassName(cb.rootDefault),
+    inline: recipeClassName(cb.rootInline),
+    diff: recipeClassName(cb.rootDiff),
+    terminal: recipeClassName(cb.rootTerminal),
   };
 
   const [isCopied, setIsCopied] = useState(false);
@@ -67,10 +67,10 @@ export function CodeBlock({
   const inline = variant === 'inline';
 
   const feedbackClassName = cx(
-    cb.feedback,
-    cb.feedbackInline,
-    feedbackTone === 'success' && cb.feedbackSuccess,
-    feedbackTone === 'error' && cb.feedbackError,
+    recipeClassName(cb.feedback),
+    recipeClassName(cb.feedbackInline),
+    feedbackTone === 'success' && recipeClassName(cb.feedbackSuccess),
+    feedbackTone === 'error' && recipeClassName(cb.feedbackError),
   );
 
   const resetCopyState = () => {
@@ -99,30 +99,45 @@ export function CodeBlock({
 
   if (inline) {
     return (
-      <code className={cx(cb.root, variantRootClass[variant], cb.code, className)} data-codeblock>
+      <code
+        {...recipeProps(
+          cb.root,
+          cx(variantRootClass[variant], recipeClassName(cb.code), className),
+        )}
+        data-codeblock
+      >
         {code}
       </code>
     );
   }
 
   return (
-    <div className={cx(cb.root, variantRootClass[variant], className)} data-codeblock>
-      <div className={cx(cb.header, terminal && cb.headerTerminal)} data-codeblock-header>
-        <div className={cb.title}>
-          {filename ? <span className={cb.filename}>{filename}</span> : null}
+    <div {...recipeProps(cb.root, cx(variantRootClass[variant], className))} data-codeblock>
+      <div
+        {...recipeProps(cb.header, cx(terminal && recipeClassName(cb.headerTerminal)))}
+        data-codeblock-header
+      >
+        <div {...recipeProps(cb.title)}>
+          {filename ? <span {...recipeProps(cb.filename)}>{filename}</span> : null}
           {language ? (
-            <span className={cx(cb.language, terminal && cb.languageTerminal)}>{language}</span>
+            <span
+              {...recipeProps(cb.language, cx(terminal && recipeClassName(cb.languageTerminal)))}
+            >
+              {language}
+            </span>
           ) : null}
         </div>
         {copyable ? (
-          <div className={cb.actions}>
+          <div {...recipeProps(cb.actions)}>
             <button
               type="button"
-              className={cx(
+              {...recipeProps(
                 cb.copyButton,
-                !isCopied && !hasError && cb.copyButtonIdle,
-                isCopied && cb.copyButtonCopied,
-                hasError && cb.copyButtonError,
+                cx(
+                  !isCopied && !hasError && recipeClassName(cb.copyButtonIdle),
+                  isCopied && recipeClassName(cb.copyButtonCopied),
+                  hasError && recipeClassName(cb.copyButtonError),
+                ),
               )}
               data-copied={isCopied || undefined}
               data-error={hasError || undefined}
@@ -140,36 +155,44 @@ export function CodeBlock({
       </div>
 
       <div
-        className={cx(cb.body, cb.bodyScrollable, terminal && cb.bodyTerminal)}
+        {...recipeProps(
+          cb.body,
+          cx(recipeClassName(cb.bodyScrollable), terminal && recipeClassName(cb.bodyTerminal)),
+        )}
         data-codeblock-body
       >
         <pre
-          className={cx(
+          {...recipeProps(
             cb.pre,
-            wrapLongLines ? cb.preWrap : cb.preScrollX,
-            terminal && cb.preTerminal,
+            cx(
+              wrapLongLines ? recipeClassName(cb.preWrap) : recipeClassName(cb.preScrollX),
+              terminal && recipeClassName(cb.preTerminal),
+            ),
           )}
           data-codeblock-pre
         >
           {showLineNumbers ? (
-            <code className={cx(cb.code, cb.lines)}>
+            <code {...recipeProps(cb.code, recipeClassName(cb.lines))}>
               {lines.map((line, index) => {
                 const lineNumber = index + 1;
                 return (
                   <span
                     key={lineNumber}
-                    className={cx(cb.line, highlightedSet.has(lineNumber) && cb.lineHighlighted)}
+                    {...recipeProps(
+                      cb.line,
+                      cx(highlightedSet.has(lineNumber) && recipeClassName(cb.lineHighlighted)),
+                    )}
                   >
-                    <span className={cb.lineNumber} aria-hidden="true">
+                    <span {...recipeProps(cb.lineNumber)} aria-hidden="true">
                       {lineNumber}
                     </span>
-                    <span className={cb.lineContent}>{line || ' '}</span>
+                    <span {...recipeProps(cb.lineContent)}>{line || ' '}</span>
                   </span>
                 );
               })}
             </code>
           ) : (
-            <code className={cb.code}>{code}</code>
+            <code {...recipeProps(cb.code)}>{code}</code>
           )}
         </pre>
       </div>

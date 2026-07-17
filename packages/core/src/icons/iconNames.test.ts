@@ -30,8 +30,8 @@ describe('icon system (core)', () => {
   it('registers size variants and color var', () => {
     icon({ size: 'md' });
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-icon-base');
-    expect(css).toContain('var-ui-icon-size-md');
+    expect(css).toContain('.var-ui-icon');
+    expect(css).toContain('.var-ui-icon[data-size="md"]');
     expect(css).toMatch(/--var-ui-icon-[\w-]*color/);
   });
 });

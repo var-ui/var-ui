@@ -2,7 +2,7 @@ import type { JSX, ReactNode } from 'react';
 import { Button as AriaButton } from 'react-aria-components';
 import { banner, type IconName } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type BannerTone = 'info' | 'success' | 'warning' | 'danger';
 
@@ -58,17 +58,17 @@ export function Banner({
   const glyph = icon === undefined ? <Icon name={toneIcon[tone]} /> : icon;
   return (
     <div
-      className={cx(b.root, className)}
+      {...recipeProps(b.root, className)}
       role={tone === 'warning' || tone === 'danger' ? 'alert' : 'status'}
     >
-      {glyph !== null ? <span className={b.icon}>{glyph}</span> : null}
-      <div className={b.content}>
-        {title ? <span className={b.title}>{title}</span> : null}
+      {glyph !== null ? <span {...recipeProps(b.icon)}>{glyph}</span> : null}
+      <div {...recipeProps(b.content)}>
+        {title ? <span {...recipeProps(b.title)}>{title}</span> : null}
         <span>{children}</span>
       </div>
-      {actions ? <div className={b.actions}>{actions}</div> : null}
+      {actions ? <div {...recipeProps(b.actions)}>{actions}</div> : null}
       {onDismiss ? (
-        <AriaButton className={b.dismiss} aria-label={dismissLabel} onPress={onDismiss}>
+        <AriaButton {...recipeProps(b.dismiss)} aria-label={dismissLabel} onPress={onDismiss}>
           <Icon name="close" size="sm" />
         </AriaButton>
       ) : null}

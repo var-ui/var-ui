@@ -15,7 +15,7 @@ import {
 } from 'react-aria-components';
 import { tokenizer } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type TokenizerOption = {
   /** Unique option identifier — also used as the token's key once selected. */
@@ -76,23 +76,23 @@ export function Tokenizer({
   }
 
   return (
-    <div className={cx(tk.root, className)}>
-      {label ? <Label className={tk.label}>{label}</Label> : null}
-      <Group className={tk.group} isDisabled={isDisabled}>
+    <div {...recipeProps(tk.root, className)}>
+      {label ? <Label {...recipeProps(tk.label)}>{label}</Label> : null}
+      <Group {...recipeProps(tk.group)} isDisabled={isDisabled}>
         <TagGroup
           aria-label={label ?? 'Selected'}
-          className={tk.tokenList}
+          {...recipeProps(tk.tokenList)}
           onRemove={(keys) => {
             for (const key of keys) removeToken(String(key));
           }}
         >
-          <TagList items={value} className={tk.tokenList}>
+          <TagList items={value} {...recipeProps(tk.tokenList)}>
             {(item) => (
-              <Tag id={item.id} className={tk.token} textValue={item.label}>
-                <span className={tk.tokenLabel}>{item.label}</span>
+              <Tag id={item.id} {...recipeProps(tk.token)} textValue={item.label}>
+                <span {...recipeProps(tk.tokenLabel)}>{item.label}</span>
                 <Button
                   slot="remove"
-                  className={tk.tokenRemoveButton}
+                  {...recipeProps(tk.tokenRemoveButton)}
                   aria-label={`Remove ${item.label}`}
                 >
                   <Icon name="close" size="sm" />
@@ -111,14 +111,14 @@ export function Tokenizer({
           }}
         >
           <Input
-            className={tk.input}
+            {...recipeProps(tk.input)}
             placeholder={value.length === 0 ? placeholder : ''}
             onKeyDown={handleInputKeyDown}
           />
-          <Popover className={tk.popover}>
+          <Popover {...recipeProps(tk.popover)}>
             <ListBox items={available}>
               {(option) => (
-                <ListBoxItem id={option.id} textValue={option.label} className={tk.item}>
+                <ListBoxItem id={option.id} textValue={option.label} {...recipeProps(tk.item)}>
                   {option.label}
                 </ListBoxItem>
               )}
@@ -126,8 +126,8 @@ export function Tokenizer({
           </Popover>
         </AriaComboBox>
       </Group>
-      {description ? <p className={tk.description}>{description}</p> : null}
-      {errorMessage ? <p className={tk.error}>{errorMessage}</p> : null}
+      {description ? <p {...recipeProps(tk.description)}>{description}</p> : null}
+      {errorMessage ? <p {...recipeProps(tk.error)}>{errorMessage}</p> : null}
     </div>
   );
 }

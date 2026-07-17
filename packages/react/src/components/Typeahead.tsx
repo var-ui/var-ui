@@ -15,7 +15,7 @@ import {
 } from 'react-aria-components';
 import { typeahead } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx } from './utils';
+import { recipeClassName, recipeProps } from './utils';
 
 export type TypeaheadOption = {
   /** Unique option identifier passed to the combobox value. */
@@ -89,22 +89,22 @@ export function Typeahead({
 }: TypeaheadProps): JSX.Element {
   const ta = typeahead();
   return (
-    <AriaComboBox {...props} className={cx(ta.root, className)}>
-      {label ? <Label className={ta.label}>{label}</Label> : null}
-      <Group className={ta.inputWrapper}>
-        <Input className={ta.input} placeholder={placeholder} />
-        <ClearButton className={ta.clearButton} />
+    <AriaComboBox {...props} {...recipeProps(ta.root, className)}>
+      {label ? <Label {...recipeProps(ta.label)}>{label}</Label> : null}
+      <Group {...recipeProps(ta.inputWrapper)}>
+        <Input {...recipeProps(ta.input)} placeholder={placeholder} />
+        <ClearButton className={recipeClassName(ta.clearButton)} />
       </Group>
       {description ? (
-        <Text slot="description" className={ta.description}>
+        <Text slot="description" {...recipeProps(ta.description)}>
           {description}
         </Text>
       ) : null}
-      <FieldError className={ta.error}>{errorMessage ?? ''}</FieldError>
-      <Popover className={ta.popover}>
+      <FieldError {...recipeProps(ta.error)}>{errorMessage ?? ''}</FieldError>
+      <Popover {...recipeProps(ta.popover)}>
         <ListBox items={options}>
           {(option) => (
-            <ListBoxItem id={option.id} textValue={option.label} className={ta.item}>
+            <ListBoxItem id={option.id} textValue={option.label} {...recipeProps(ta.item)}>
               {option.label}
             </ListBoxItem>
           )}

@@ -1,7 +1,7 @@
 'use client';
 
 import { dialog } from '@var-ui/core';
-import { Button, HStack, Icon, Text, useLayer } from '@var-ui/react';
+import { Button, HStack, Icon, Text, recipeClassName, useLayer } from '@var-ui/react';
 import { useState } from 'react';
 import {
   Button as AriaButton,
@@ -21,20 +21,24 @@ export function DialogDemo() {
     <HStack gap="md" wrap align="center">
       <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
         <Button intent="secondary">Open dialog</Button>
-        <ModalOverlay className={d.overlay} style={layerStyle}>
-          <Modal className={d.modal}>
+        <ModalOverlay className={recipeClassName(d.overlay)} style={layerStyle}>
+          <Modal className={recipeClassName(d.modal)}>
             <AriaDialog>
               {({ close }) => (
-                <div className={d.content}>
-                  <div className={d.header}>
-                    <Heading slot="title" className={d.heading}>
+                <div className={recipeClassName(d.content)}>
+                  <div className={recipeClassName(d.header)}>
+                    <Heading slot="title" className={recipeClassName(d.heading)}>
                       Icon close button
                     </Heading>
-                    <AriaButton className={d.closeButton} aria-label="Close" onPress={close}>
+                    <AriaButton
+                      className={recipeClassName(d.closeButton)}
+                      aria-label="Close"
+                      onPress={close}
+                    >
                       <Icon name="close" size="sm" />
                     </AriaButton>
                   </div>
-                  <p className={d.description}>
+                  <p className={recipeClassName(d.description)}>
                     The dismiss control now uses the registry close glyph.
                   </p>
                   <Button onPress={close}>Close</Button>

@@ -9,7 +9,7 @@ import {
   type NumberFieldProps as RACNumberFieldProps,
 } from 'react-aria-components';
 import { numberInput } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 import type { FieldMeta } from './utils';
 
 export type NumberInputProps = Omit<RACNumberFieldProps, 'className'> &
@@ -28,11 +28,11 @@ export function NumberInput({
 }: NumberInputProps): JSX.Element {
   const n = numberInput();
   return (
-    <AriaNumberField {...props} className={cx(n.root, className)}>
-      {label ? <Label className={n.label}>{label}</Label> : null}
-      <Group className={n.group}>
-        <Input className={n.input} placeholder={placeholder} />
-        <div className={n.stepper}>
+    <AriaNumberField {...props} {...recipeProps(n.root, className)}>
+      {label ? <Label {...recipeProps(n.label)}>{label}</Label> : null}
+      <Group {...recipeProps(n.group)}>
+        <Input {...recipeProps(n.input)} placeholder={placeholder} />
+        <div {...recipeProps(n.stepper)}>
           <StepperButton slot="decrement" aria-label="Decrease">
             −
           </StepperButton>
@@ -41,8 +41,8 @@ export function NumberInput({
           </StepperButton>
         </div>
       </Group>
-      {description ? <p className={n.description}>{description}</p> : null}
-      <FieldError className={n.error}>{errorMessage ?? ''}</FieldError>
+      {description ? <p {...recipeProps(n.description)}>{description}</p> : null}
+      <FieldError {...recipeProps(n.error)}>{errorMessage ?? ''}</FieldError>
     </AriaNumberField>
   );
 }

@@ -9,7 +9,7 @@ import {
 } from 'react-aria-components';
 import { multiSelector } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type MultiSelectorOption = {
   /** Unique option identifier passed to the selected value array. */
@@ -59,26 +59,26 @@ export function MultiSelector({
   }
 
   return (
-    <div className={cx(ms.root, className)}>
+    <div {...recipeProps(ms.root, className)}>
       {label ? (
-        <Label id={labelId} className={ms.label}>
+        <Label id={labelId} {...recipeProps(ms.label)}>
           {label}
         </Label>
       ) : null}
       <AriaButton
         ref={triggerRef}
-        className={ms.trigger}
+        {...recipeProps(ms.trigger)}
         isDisabled={isDisabled}
         aria-labelledby={label ? `${labelId} ${triggerTextId}` : undefined}
         onPress={() => setIsOpen((open) => !open)}
       >
         <span id={triggerTextId}>{triggerText}</span>
-        <span className={ms.triggerIcon}>
+        <span {...recipeProps(ms.triggerIcon)}>
           <Icon name="chevronDown" size="sm" />
         </span>
       </AriaButton>
       <Popover
-        className={ms.popover}
+        {...recipeProps(ms.popover)}
         triggerRef={triggerRef}
         isOpen={isOpen}
         onOpenChange={setIsOpen}
@@ -91,13 +91,13 @@ export function MultiSelector({
           aria-labelledby={label ? labelId : undefined}
         >
           {(option) => (
-            <ListBoxItem id={option.id} textValue={option.label} className={ms.item}>
+            <ListBoxItem id={option.id} textValue={option.label} {...recipeProps(ms.item)}>
               {({ isSelected }) => (
                 <>
-                  <span className={ms.itemCheckbox} data-selected={isSelected || undefined}>
+                  <span {...recipeProps(ms.itemCheckbox)} data-selected={isSelected || undefined}>
                     {isSelected ? <Icon name="check" size="sm" /> : null}
                   </span>
-                  <span className={ms.itemLabel}>{option.label}</span>
+                  <span {...recipeProps(ms.itemLabel)}>{option.label}</span>
                 </>
               )}
             </ListBoxItem>

@@ -1,6 +1,6 @@
 'use client';
 
-import { HStack, Text } from '@var-ui/react';
+import { HStack, Text, recipeClassName } from '@var-ui/react';
 import { Link as RouterLink, useRouterState } from '@tanstack/react-router';
 import { topNav } from '@/data/navigation';
 import { docsShell } from '@/styles/docsShell';
@@ -21,24 +21,31 @@ export function DocsHeader({ showMobileNav = false }: DocsHeaderProps) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   return (
-    <header className={shell.header}>
-      <HStack align="center" className={shell.headerInner} gap="lg" justify="between">
+    <header className={recipeClassName(shell.header)}>
+      <HStack
+        align="center"
+        className={recipeClassName(shell.headerInner)}
+        gap="lg"
+        justify="between"
+      >
         <HStack align="center" gap="lg">
           {showMobileNav ? <DocsMobileNavButton /> : null}
 
-          <RouterLink aria-label="Var UI home" className={shell.headerLogo} to="/">
-            <Text className={shell.headerLogoText}>{'var(--ui)'}</Text>
+          <RouterLink aria-label="Var UI home" className={recipeClassName(shell.headerLogo)} to="/">
+            <Text className={recipeClassName(shell.headerLogoText)}>{'var(--ui)'}</Text>
           </RouterLink>
 
           <nav aria-label="Primary">
-            <ul className={shell.headerNav}>
+            <ul className={recipeClassName(shell.headerNav)}>
               {topNav.map((item) => {
                 const active = isNavActive(pathname, item);
                 return (
                   <li key={item.link}>
                     <RouterLink
                       aria-current={active ? 'page' : undefined}
-                      className={active ? shell.headerNavLinkActive : shell.headerNavLink}
+                      className={recipeClassName(
+                        active ? shell.headerNavLinkActive : shell.headerNavLink,
+                      )}
                       to={item.link}
                     >
                       {item.text}

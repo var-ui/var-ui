@@ -2,7 +2,7 @@ import type { JSX, ReactNode } from 'react';
 import { Button as AriaButton, type ButtonProps as RACButtonProps } from 'react-aria-components';
 import { button, type IconName } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type IconButtonProps = Omit<RACButtonProps, 'className' | 'children'> & {
   /** Accessible label — required because the control has no visible text. */
@@ -32,7 +32,7 @@ export function IconButton({
   ...props
 }: IconButtonProps): JSX.Element {
   return (
-    <AriaButton {...props} className={cx(button({ intent, size, layout: 'icon' }), className)}>
+    <AriaButton {...props} {...recipeProps(button({ intent, size, layout: 'icon' }), className)}>
       {icon ?? <Icon name={name} size={size === 'lg' ? 'lg' : size === 'sm' ? 'sm' : 'md'} />}
     </AriaButton>
   );

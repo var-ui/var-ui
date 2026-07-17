@@ -6,30 +6,30 @@ describe('dialog', () => {
   it('registers existing slots by default', () => {
     dialog();
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-dialog-overlay');
-    expect(css).toContain('var-ui-dialog-modal');
-    expect(css).toContain('var-ui-dialog-content');
-    expect(css).toContain('var-ui-dialog-header');
-    expect(css).toContain('var-ui-dialog-heading');
-    expect(css).toContain('var-ui-dialog-description');
-    expect(css).toContain('var-ui-dialog-closeButton');
+    expect(css).toContain('.var-ui-dialog__overlay');
+    expect(css).toContain('.var-ui-dialog__modal');
+    expect(css).toContain('.var-ui-dialog__content');
+    expect(css).toContain('.var-ui-dialog__header');
+    expect(css).toContain('.var-ui-dialog__heading');
+    expect(css).toContain('.var-ui-dialog__description');
+    expect(css).toContain('.var-ui-dialog__closeButton');
   });
 
   it('registers an actions slot', () => {
     dialog();
     const css = getRegisteredCss();
-    expect(css).toContain('var-ui-dialog-actions');
+    expect(css).toContain('.var-ui-dialog__actions');
   });
 
   it('registers an alertdialog role variant', () => {
     dialog({ role: 'alertdialog' });
     const css = getRegisteredCss();
-    expect(css).toMatch(/var-ui-dialog-\w+-role-alertdialog/);
+    expect(css).toContain('.var-ui-dialog__modal[data-role="alertdialog"]');
   });
 
   it('defaults to the dialog role', () => {
     const classes = dialog();
     const defaultClasses = dialog({ role: 'dialog' });
-    expect(classes.modal).toBe(defaultClasses.modal);
+    expect(classes.modal.props).toEqual(defaultClasses.modal.props);
   });
 });

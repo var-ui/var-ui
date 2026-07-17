@@ -1,6 +1,6 @@
 import type { HTMLAttributes, JSX } from 'react';
 import { stack } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type StackProps = HTMLAttributes<HTMLDivElement> & {
   /** Flex direction. @default column */
@@ -34,7 +34,7 @@ export function Stack({
   return (
     <div
       {...props}
-      className={cx(
+      {...recipeProps(
         stack({ direction, gap, align, justify, wrap: wrap ? 'wrap' : 'nowrap' }),
         className,
       )}

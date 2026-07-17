@@ -2,7 +2,7 @@ import type { JSX } from 'react';
 import { Button as AriaButton } from 'react-aria-components';
 import { thumbnail } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 
 export type ThumbnailProps = {
   /** Image URL for the preview. */
@@ -36,10 +36,10 @@ export function Thumbnail({
 }: ThumbnailProps): JSX.Element {
   const s = thumbnail({ size });
   return (
-    <span className={cx(s.root, className)}>
-      <img className={s.image} src={src} alt={alt} />
+    <span {...recipeProps(s.root, className)}>
+      <img {...recipeProps(s.image)} src={src} alt={alt} />
       {onDismiss ? (
-        <AriaButton className={s.dismiss} aria-label={dismissLabel} onPress={onDismiss}>
+        <AriaButton {...recipeProps(s.dismiss)} aria-label={dismissLabel} onPress={onDismiss}>
           <Icon name="close" size="sm" />
         </AriaButton>
       ) : null}

@@ -26,8 +26,9 @@ export const docsSidebar = [
 
 export const themingSidebar = [
   { text: 'Overview', link: '/theming' },
-  { text: 'Design tokens', link: '/theming/tokens' },
+  { text: 'Customize', link: '/theming/customize' },
   { text: 'Themes', link: '/theming/themes' },
+  { text: 'Design tokens', link: '/theming/tokens' },
 ];
 
 export const sidebar = {

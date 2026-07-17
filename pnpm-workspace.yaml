@@ -14,8 +14,8 @@ catalog:
   vite: npm:@voidzero-dev/vite-plus-core@0.2.2
   vite-plus: 0.2.2
   typescript: ^6.0.0
-  typestyles: ^0.8.2
-  '@typestyles/vite': ^0.4.3
+  typestyles: ^0.11.2
+  '@typestyles/vite': ^0.4.4
   react: ^19.0.0
   react-dom: ^19.0.0
   react-aria-components: ^1.19.0

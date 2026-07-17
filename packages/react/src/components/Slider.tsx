@@ -9,7 +9,7 @@ import {
   type SliderProps as RACSliderProps,
 } from 'react-aria-components';
 import { slider } from '@var-ui/core';
-import { cx } from './utils';
+import { recipeProps } from './utils';
 import type { FieldMeta } from './utils';
 
 export type SliderProps = Omit<RACSliderProps, 'className'> &
@@ -29,29 +29,29 @@ export function Slider({
 }: SliderProps): JSX.Element {
   const s = slider();
   return (
-    <AriaSlider {...props} className={cx(s.root, className)}>
+    <AriaSlider {...props} {...recipeProps(s.root, className)}>
       {label ? (
-        <Label className={s.label}>
+        <Label {...recipeProps(s.label)}>
           <span>{label}</span>
-          {showOutput ? <SliderOutput className={s.output} /> : null}
+          {showOutput ? <SliderOutput {...recipeProps(s.output)} /> : null}
         </Label>
       ) : null}
-      <SliderTrack className={s.control}>
+      <SliderTrack {...recipeProps(s.control)}>
         {({ state }) => (
           <>
-            <div className={s.track} />
+            <div {...recipeProps(s.track)} />
             <SliderFill
-              className={s.fill}
+              {...recipeProps(s.fill)}
               style={{
                 width: `${state.getThumbPercent(0) * 100}%`,
               }}
             />
-            <SliderThumb className={s.thumb} />
+            <SliderThumb {...recipeProps(s.thumb)} />
           </>
         )}
       </SliderTrack>
-      {description ? <p className={s.description}>{description}</p> : null}
-      {errorMessage ? <p className={s.error}>{errorMessage}</p> : null}
+      {description ? <p {...recipeProps(s.description)}>{description}</p> : null}
+      {errorMessage ? <p {...recipeProps(s.error)}>{errorMessage}</p> : null}
     </AriaSlider>
   );
 }

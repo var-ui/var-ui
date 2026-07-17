@@ -10,7 +10,7 @@ describe('Field', () => {
       </Field>,
     );
     expect(screen.getByLabelText('Amount')).toBeTruthy();
-    expect(screen.getByText('In USD').className).toContain('var-ui-field-description');
+    expect(screen.getByText('In USD').className).toContain('var-ui-field__description');
     expect(screen.getByRole('alert').textContent).toBe('Required');
   });
 

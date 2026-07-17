@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { Button as AriaButton, type ButtonProps as RACButtonProps } from 'react-aria-components';
 import { button } from '@var-ui/core';
+import { recipeProps } from './utils';
 
 export type ButtonProps = Omit<RACButtonProps, 'className'> & {
   /** Additional CSS class names merged onto the root element. */
@@ -17,5 +18,5 @@ export function Button({
   className,
   ...props
 }: ButtonProps): JSX.Element {
-  return <AriaButton {...props} className={`${button({ intent, size })} ${className || ''}`} />;
+  return <AriaButton {...props} {...recipeProps(button({ intent, size }), className)} />;
 }
