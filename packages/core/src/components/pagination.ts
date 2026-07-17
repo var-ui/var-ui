@@ -1,5 +1,20 @@
+import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { styles } from '../runtime';
 import { designTokens as t } from '../tokens';
+
+type PaginationSlots = readonly [
+  'root',
+  'controls',
+  'ellipsis',
+  'infoText',
+  'dotsContainer',
+  'dot',
+  'dotActive',
+  'pageSizeGroup',
+];
+type PaginationVariants = {
+  size: Record<'sm' | 'md', SlotStyles<PaginationSlots[number]>>;
+};
 
 /**
  * Pagination chrome. Page-number and prev/next buttons reuse the existing
@@ -12,7 +27,12 @@ import { designTokens as t } from '../tokens';
  * <nav className={p.root}>…</nav>
  * ```
  */
-export const pagination = styles.component(
+// Overload pinning: none of this recipe's slot names collide with a known CSS
+// property, so TypeScript resolves the config against typestyles' flat-variant
+// overload and types the call as a class string. Runtime behavior is correct
+// (typestyles branches on `slots` at runtime); assert the slot signature until
+// typestyles' ComponentConfig forbids `slots` the way FlatComponentConfig does.
+const paginationRecipe = styles.component(
   'pagination',
   (c) => {
     const v = c.vars({
@@ -108,3 +128,8 @@ export const pagination = styles.component(
   },
   { layer: 'components' },
 );
+
+export const pagination = paginationRecipe as unknown as SlotComponentFunction<
+  PaginationSlots,
+  PaginationVariants
+>;

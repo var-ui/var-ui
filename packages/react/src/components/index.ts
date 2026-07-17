@@ -98,3 +98,9 @@ export { TimeInput, type TimeInputProps } from './TimeInput';
 export { Typeahead, type TypeaheadOption, type TypeaheadProps } from './Typeahead';
 export { Tokenizer, type TokenizerOption, type TokenizerProps } from './Tokenizer';
 export { MultiSelector, type MultiSelectorOption, type MultiSelectorProps } from './MultiSelector';
+export {
+  Pagination,
+  generatePageRange,
+  type PaginationProps,
+  type PaginationVariant,
+} from './Pagination';
