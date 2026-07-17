@@ -44,6 +44,7 @@ import { popover } from './components/popover';
 import { progressBar } from './components/progressBar';
 import { proseContent } from './components/proseContent';
 import { radio } from './components/radio';
+import { resizeHandle } from './components/resizeHandle';
 import { section } from './components/section';
 import { segmentedControl } from './components/segmentedControl';
 import { select } from './components/select';
@@ -121,6 +122,7 @@ export const themeableComponents = {
   progressBar,
   proseContent,
   radio,
+  resizeHandle,
   section,
   segmentedControl,
   select,

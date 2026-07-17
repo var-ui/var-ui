@@ -106,6 +106,7 @@ export {
   type RecipeClass,
 } from './utils';
 export { MultiSelector, type MultiSelectorOption, type MultiSelectorProps } from './MultiSelector';
+export { ResizeHandle, type ResizeHandleProps } from './ResizeHandle';
 export {
   Pagination,
   generatePageRange,

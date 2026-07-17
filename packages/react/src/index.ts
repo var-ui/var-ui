@@ -96,6 +96,8 @@ export {
   MultiSelector,
   type MultiSelectorOption,
   type MultiSelectorProps,
+  ResizeHandle,
+  type ResizeHandleProps,
   Pagination,
   generatePageRange,
   type PaginationProps,

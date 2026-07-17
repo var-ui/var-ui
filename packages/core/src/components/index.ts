@@ -56,6 +56,7 @@ export { icon } from './icon';
 export { kbd } from './kbd';
 export { overlay } from './overlay';
 export { pagination } from './pagination';
+export { resizeHandle } from './resizeHandle';
 export { progressBar } from './progressBar';
 export { section } from './section';
 export { skeleton } from './skeleton';
