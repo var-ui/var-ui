@@ -48,6 +48,7 @@ import { resizeHandle } from './components/resizeHandle';
 import { section } from './components/section';
 import { segmentedControl } from './components/segmentedControl';
 import { select } from './components/select';
+import { sideNav } from './components/sideNav';
 import { skeleton } from './components/skeleton';
 import { slider } from './components/slider';
 import { spinner } from './components/spinner';
@@ -126,6 +127,7 @@ export const themeableComponents = {
   section,
   segmentedControl,
   select,
+  sideNav,
   skeleton,
   slider,
   spinner,
