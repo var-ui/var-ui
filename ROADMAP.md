@@ -39,6 +39,7 @@ them. See TypeStyles' `IMPROVEMENTS.md` P5 section for that side of the work.
 | `typestyles/token-scale` (geometric/linear scale + duration-band generators) | **Shipped** (0.8) | V2 ready — spec: `type-motion-radius-scale-generation.md` |
 | `styles.scope()` + classname-stability contract + lint rule                  | **Shipped** (0.8) | V3 ready — spec: `component-override-contract.md`         |
 | `descendant` scope on the theme condition engine                             | **Shipped** (0.8) | V4 ready — spec: `surface-tone-override.md`               |
+| `styles.override()` + `__meta` component metadata contract                   | **Not started**   | V7 blocked — spec: `typed-component-theming.md`           |
 
 Don't re-derive these designs here — when picking up a blocked item, check
 TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
@@ -147,6 +148,18 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
   - [ ] Phase 5 P3 — Outline, AppShell, NavIcon/NavMenu
   - [ ] Phase 6 — layout polish and collapsible regions
   - [ ] Phase 7 — chat
+
+## V7 — Typed theming & component overrides
+
+- [ ] **V7 — Recipe-shaped typed customization DX** — consumers restyle any
+      component (`base`/`variants`/`compoundVariants`, full CSS properties,
+      variant names typed from the recipe, zero class names) and mint custom
+      mode-aware tokens, via an extended `createDesignTheme` config plus
+      `overrideComponent`/`extendTokens` primitives. Revisits V3's "bulk
+      override configs — out of scope" deferral and makes the config DX the
+      primary customization surface (tiers 1–2 remain the substrate). Blocked
+      on TypeStyles engine work (`styles.override()` + `__meta` metadata
+      contract). Spec: `specs/typed-component-theming.md`.
 
 ## Chat components
 
