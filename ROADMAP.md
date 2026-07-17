@@ -137,7 +137,14 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
         `plans/2026-07-15-phase-3-overlays-p1.md`.
   - [ ] Phase 3 P2 — Lightbox/Overlay
   - [ ] Phase 4 — lists, tables, and data display
-  - [ ] Phase 5 — navigation and app chrome
+  - [x] **Phase 5 P1 — Breadcrumbs and Pagination** — shipped: `Breadcrumbs`
+        (item-array API, click-to-expand overflow collapse), `Pagination`
+        (`pages`/`count`/`compact`/`dots`/`none` variants + page-size
+        selector). Spec: `specs/phase-5-navigation-p1.md`. Plan:
+        `plans/2026-07-15-phase-5-navigation-p1.md`.
+  - [ ] Phase 5 P2 — SideNav, TopNav, MobileNav, Tabs vs. TabList/Tab/TabMenu
+        merge evaluation
+  - [ ] Phase 5 P3 — Outline, AppShell, NavIcon/NavMenu
   - [ ] Phase 6 — layout polish and collapsible regions
   - [ ] Phase 7 — chat
 

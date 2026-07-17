@@ -38,6 +38,7 @@ import {
   InputGroupText,
   LayerProvider,
   MultiSelector,
+  Pagination,
   Popover,
   ProgressBar,
   Section,
@@ -286,6 +287,38 @@ function FormsSection() {
   );
 }
 
+function PaginationDemo() {
+  const [pagesPage, setPagesPage] = useState(1);
+  const [countPage, setCountPage] = useState(2);
+  const [compactPage, setCompactPage] = useState(2);
+  const [dotsPage, setDotsPage] = useState(1);
+  const [sizedPage, setSizedPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  return (
+    <Stack gap="md">
+      <Pagination page={pagesPage} onChange={setPagesPage} totalPages={12} />
+      <Pagination
+        page={countPage}
+        onChange={setCountPage}
+        totalItems={45}
+        pageSize={10}
+        variant="count"
+      />
+      <Pagination page={compactPage} onChange={setCompactPage} totalPages={6} variant="compact" />
+      <Pagination page={dotsPage} onChange={setDotsPage} totalPages={5} variant="dots" />
+      <Pagination
+        page={sizedPage}
+        onChange={setSizedPage}
+        totalItems={230}
+        pageSize={pageSize}
+        pageSizeOptions={[10, 25, 50]}
+        onPageSizeChange={setPageSize}
+      />
+    </Stack>
+  );
+}
+
 function NavigationSection() {
   return (
     <Section title="Navigation">
@@ -310,6 +343,7 @@ function NavigationSection() {
             { id: 'comment', label: 'Comment' },
           ]}
         />
+        <PaginationDemo />
       </Stack>
     </Section>
   );
