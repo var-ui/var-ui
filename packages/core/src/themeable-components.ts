@@ -73,6 +73,7 @@ import { toast } from './components/toast';
 import { toggleButton } from './components/toggleButton';
 import { tokenizer } from './components/tokenizer';
 import { toolbar } from './components/toolbar';
+import { tree } from './components/tree';
 import { tooltip } from './components/tooltip';
 import { typeahead } from './components/typeahead';
 import { heading, textBlock } from './components/typography';
@@ -161,6 +162,7 @@ export const themeableComponents = {
   toggleButton,
   tokenizer,
   toolbar,
+  tree,
   tooltip,
   typeahead,
 } as const;

@@ -73,6 +73,7 @@ export { dialog } from './dialog';
 export { link } from './link';
 export { list } from './list';
 export { table } from './table';
+export { tree } from './tree';
 export { radio } from './radio';
 export { select } from './select';
 export { switchStyles } from './switch';
