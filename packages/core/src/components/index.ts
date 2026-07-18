@@ -23,6 +23,7 @@ export { tokenizer } from './tokenizer';
 export { multiSelector } from './multiSelector';
 export { codeBlock } from './codeBlock';
 export { alert } from './alert';
+export { appShell } from './appShell';
 export { avatar, avatarGroup } from './avatar';
 export { badge } from './badge';
 export { banner } from './banner';

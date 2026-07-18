@@ -1,4 +1,5 @@
 import { alert } from './components/alert';
+import { appShell } from './components/appShell';
 import { aspectRatio } from './components/aspectRatio';
 import { avatar, avatarGroup } from './components/avatar';
 import { badge } from './components/badge';
@@ -77,6 +78,7 @@ import { heading, textBlock } from './components/typography';
  */
 export const themeableComponents = {
   alert,
+  appShell,
   aspectRatio,
   avatar,
   avatarGroup,

@@ -1,0 +1,171 @@
+import { styles } from '../runtime';
+import { designTokens as t } from '../tokens';
+
+/**
+ * Application chrome shell: optional banner, top nav, side nav, and main
+ * content in a CSS grid layout. Pair with the React `AppShell` compound,
+ * which sets `data-mobile` on the root below the breakpoint and drives
+ * `contentPadding` via the exposed custom property.
+ *
+ * ```tsx
+ * const s = appShell({ height: 'fill', variant: 'surface' });
+ * <div className={s.root} data-mobile={isMobile || undefined}>
+ *   <a className={s.skipLink} href="#var-ui-app-shell-main">Skip to content</a>
+ *   <div className={s.banner}>…</div>
+ *   <div className={s.frame}>
+ *     <header className={s.topNav}>…</header>
+ *     <nav className={s.sideNav}>…</nav>
+ *     <main className={s.main} id="var-ui-app-shell-main">…</main>
+ *   </div>
+ * </div>
+ * ```
+ */
+export const appShell = styles.component(
+  'app-shell',
+  (c) => {
+    const v = c.vars({
+      background: {
+        value: `${t.color.background.app}`,
+        syntax: '<color>',
+        inherits: false,
+      },
+      border: {
+        value: `${t.color.border.default}`,
+        syntax: '<color>',
+        inherits: false,
+      },
+      contentPadding: {
+        value: '0px',
+        syntax: '<length>',
+        inherits: false,
+      },
+    });
+    return {
+      slots: ['root', 'banner', 'frame', 'topNav', 'sideNav', 'main', 'skipLink'],
+      base: {
+        root: {
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          minWidth: 0,
+          backgroundColor: v.background.var,
+        },
+        skipLink: {
+          position: 'absolute',
+          width: '1px',
+          height: '1px',
+          padding: 0,
+          margin: '-1px',
+          overflow: 'hidden',
+          clip: 'rect(0, 0, 0, 0)',
+          whiteSpace: 'nowrap',
+          border: 0,
+          '&:focus-visible': {
+            position: 'fixed',
+            top: t.space[2],
+            insetInlineStart: t.space[2],
+            zIndex: 9999,
+            width: 'auto',
+            height: 'auto',
+            margin: 0,
+            padding: `${t.space[2]} ${t.space[3]}`,
+            overflow: 'visible',
+            clip: 'auto',
+            whiteSpace: 'normal',
+            borderRadius: t.radius.md,
+            backgroundColor: t.color.background.surface,
+            color: t.color.text.primary,
+            boxShadow: t.shadow.md,
+            outline: `2px solid ${t.color.border.focus}`,
+            outlineOffset: '2px',
+            textDecoration: 'none',
+            fontSize: t.fontSize.sm,
+            fontWeight: t.fontWeight.medium,
+          },
+        },
+        banner: {
+          flexShrink: 0,
+        },
+        frame: {
+          display: 'grid',
+          flex: '1 1 auto',
+          minHeight: 0,
+          minWidth: 0,
+          gridTemplateAreas: '"top top" "side main"',
+          gridTemplateColumns: 'auto 1fr',
+          gridTemplateRows: 'auto 1fr',
+          '[data-mobile] &': {
+            gridTemplateAreas: '"top" "main"',
+            gridTemplateColumns: '1fr',
+          },
+        },
+        topNav: {
+          gridArea: 'top',
+          minWidth: 0,
+        },
+        sideNav: {
+          gridArea: 'side',
+          minHeight: 0,
+          minWidth: 0,
+          '[data-mobile] &': {
+            display: 'none',
+          },
+        },
+        main: {
+          gridArea: 'main',
+          minHeight: 0,
+          minWidth: 0,
+          overflow: 'auto',
+          padding: v.contentPadding.var,
+        },
+      },
+      variants: {
+        height: {
+          fill: {
+            root: {
+              minHeight: '100dvh',
+              height: '100%',
+            },
+          },
+          auto: {
+            root: {
+              minHeight: 'auto',
+              height: 'auto',
+            },
+          },
+        },
+        variant: {
+          wash: {
+            root: {
+              [v.background.name]: t.color.background.app,
+            },
+          },
+          surface: {
+            root: {
+              [v.background.name]: t.color.background.surface,
+            },
+          },
+          section: {
+            root: {
+              [v.background.name]: t.color.background.surface,
+              border: `1px solid ${v.border.var}`,
+              borderRadius: t.radius.lg,
+              boxShadow: t.shadow.xs,
+            },
+          },
+          elevated: {
+            root: {
+              [v.background.name]: t.color.background.elevated,
+              boxShadow: t.shadow.sm,
+            },
+          },
+        },
+      },
+      defaultVariants: {
+        height: 'fill',
+        variant: 'wash',
+      },
+    };
+  },
+  { layer: 'components' },
+);
