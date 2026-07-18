@@ -70,6 +70,26 @@ export {
   type OverflowListItemProps,
   type OverflowListProps,
 } from './OverflowList';
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableRow,
+  TableColumn,
+  TableCell,
+  TableCaption,
+  type TableColumnAlign,
+  type TableColumnDef,
+  type TableProps,
+  type TableColumnProps,
+  type TableHeaderProps,
+  type TableBodyProps,
+  type TableFooterProps,
+  type TableRowProps,
+  type TableCellProps,
+  type TableCaptionProps,
+} from './Table';
 export { Divider, type DividerProps } from './Divider';
 export { Grid, type GridProps } from './Grid';
 export { Section, type SectionProps } from './Section';

@@ -17,6 +17,7 @@ import {
   Calendar,
   Card,
   Carousel,
+  Checkbox,
   CheckboxGroup,
   ClickableCard,
   CommandPalette,
@@ -53,6 +54,7 @@ import {
   SideNav,
   Spinner,
   Stack,
+  Table,
   TabList,
   Text,
   TextField,
@@ -66,6 +68,9 @@ import {
   TopNav,
   Typeahead,
   useDesignSystemTheme,
+  useTablePagination,
+  useTableSelection,
+  useTableSort,
   useToast,
 } from '@var-ui/react';
 
@@ -733,6 +738,7 @@ function DataDisplaySection() {
           ]}
         />
         <OverflowListDemo />
+        <TableDemo />
       </Stack>
     </Section>
   );
@@ -769,6 +775,113 @@ function OverflowListDemo() {
           </Popover>
         )}
       />
+    </Stack>
+  );
+}
+
+type ServerRow = {
+  id: string;
+  name: string;
+  status: 'Online' | 'Degraded' | 'Offline';
+  region: string;
+};
+
+const SERVER_ROWS: ServerRow[] = [
+  { id: 'srv-1', name: 'api-gateway-01', status: 'Online', region: 'us-west-2' },
+  { id: 'srv-2', name: 'api-gateway-02', status: 'Online', region: 'us-west-2' },
+  { id: 'srv-3', name: 'worker-queue-01', status: 'Degraded', region: 'us-east-1' },
+  { id: 'srv-4', name: 'worker-queue-02', status: 'Online', region: 'us-east-1' },
+  { id: 'srv-5', name: 'cache-primary', status: 'Offline', region: 'eu-central-1' },
+  { id: 'srv-6', name: 'cache-replica', status: 'Online', region: 'eu-central-1' },
+  { id: 'srv-7', name: 'db-primary', status: 'Online', region: 'us-west-2' },
+  { id: 'srv-8', name: 'db-replica', status: 'Online', region: 'us-west-2' },
+  { id: 'srv-9', name: 'ingest-pipeline', status: 'Degraded', region: 'us-east-1' },
+];
+
+const SERVER_STATUS_TONE: Record<ServerRow['status'], 'success' | 'warning' | 'danger'> = {
+  Online: 'success',
+  Degraded: 'warning',
+  Offline: 'danger',
+};
+
+function TableDemo() {
+  const { sortedData, sortDescriptor, onSortChange } = useTableSort<ServerRow>({
+    data: SERVER_ROWS,
+    defaultSort: { column: 'name', direction: 'ascending' },
+  });
+  const { pageData, page, setPage, totalPages } = useTablePagination({
+    data: sortedData,
+    pageSize: 4,
+  });
+  const selection = useTableSelection({
+    data: pageData,
+    getRowId: (row) => row.id,
+    mode: 'multiple',
+  });
+
+  const columnSort = (column: string) => ({
+    allowsSorting: true as const,
+    sortDirection: sortDescriptor?.column === column ? sortDescriptor.direction : ('none' as const),
+    onSort: () =>
+      onSortChange({
+        column,
+        direction:
+          sortDescriptor?.column === column && sortDescriptor.direction === 'ascending'
+            ? 'descending'
+            : 'ascending',
+      }),
+  });
+
+  const allOnPageSelected =
+    pageData.length > 0 && pageData.every((row) => selection.isSelected(row.id));
+
+  return (
+    <Stack gap="sm">
+      <Text size="sm" weight="medium">
+        Servers
+      </Text>
+      <Table density="compact" dividers="rows" hasHover stickyHeader>
+        <Table.Header>
+          <Table.Row>
+            <Table.Column width="2.5rem">
+              <Checkbox
+                aria-label="Select all rows on this page"
+                isSelected={allOnPageSelected}
+                onChange={() => (allOnPageSelected ? selection.clear() : selection.selectAll())}
+              />
+            </Table.Column>
+            <Table.Column isRowHeader {...columnSort('name')}>
+              Name
+            </Table.Column>
+            <Table.Column {...columnSort('status')}>Status</Table.Column>
+            <Table.Column align="end">Region</Table.Column>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {pageData.map((row) => (
+            <Table.Row key={row.id} isSelected={selection.isSelected(row.id)}>
+              <Table.Cell>
+                <Checkbox
+                  aria-label={`Select ${row.name}`}
+                  isSelected={selection.isSelected(row.id)}
+                  onChange={() => selection.toggle(row.id)}
+                />
+              </Table.Cell>
+              <Table.Cell isRowHeader>{row.name}</Table.Cell>
+              <Table.Cell>
+                <Badge tone={SERVER_STATUS_TONE[row.status]}>{row.status}</Badge>
+              </Table.Cell>
+              <Table.Cell align="end">{row.region}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+      <HStack gap="sm" align="center" justify="between">
+        <Text size="sm" tone="secondary">
+          {selection.selectedKeys.size} of {sortedData.length} selected
+        </Text>
+        <Pagination page={page} onChange={setPage} totalPages={totalPages} size="sm" />
+      </HStack>
     </Stack>
   );
 }
