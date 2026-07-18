@@ -113,3 +113,18 @@ export {
   type PaginationProps,
   type PaginationVariant,
 } from './Pagination';
+export {
+  SideNav,
+  SideNavCollapseButton,
+  SideNavHeading,
+  SideNavItem,
+  SideNavSection,
+  type SideNavCollapseButtonProps,
+  type SideNavCollapseHandle,
+  type SideNavCollapsibleConfig,
+  type SideNavHeadingProps,
+  type SideNavIcon,
+  type SideNavItemProps,
+  type SideNavProps,
+  type SideNavSectionProps,
+} from './SideNav';

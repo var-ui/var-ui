@@ -45,6 +45,7 @@ import {
   recipeClassName,
   Section,
   Select,
+  SideNav,
   Spinner,
   Stack,
   Text,
@@ -350,10 +351,85 @@ function PaginationDemo() {
   );
 }
 
+function SideNavDemo() {
+  const [selected, setSelected] = useState('dashboard');
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  return (
+    <div style={{ display: 'flex', height: '22rem', borderRadius: '0.75rem', overflow: 'hidden' }}>
+      <SideNav
+        header={<SideNav.Heading heading="Acme" superheading="Workspace" icon="search" />}
+        topContent={
+          <Button size="sm" onPress={() => setSelected('dashboard')}>
+            New project
+          </Button>
+        }
+        footerIcons={
+          <Button aria-label="More options" intent="ghost" size="sm">
+            <Icon name="moreHorizontal" />
+          </Button>
+        }
+        collapsible={{ isCollapsed, onCollapsedChange: setIsCollapsed }}
+        resizable
+      >
+        <SideNav.Section title="Main">
+          <SideNav.Item
+            label="Dashboard"
+            icon="search"
+            isSelected={selected === 'dashboard'}
+            onPress={() => setSelected('dashboard')}
+          />
+          <SideNav.Item
+            label="Projects"
+            icon="clock"
+            collapsible
+            isSelected={selected === 'projects'}
+            onPress={() => setSelected('projects')}
+          >
+            <SideNav.Item
+              label="Alpha"
+              isSelected={selected === 'alpha'}
+              onPress={() => setSelected('alpha')}
+            />
+            <SideNav.Item
+              label="Beta"
+              isSelected={selected === 'beta'}
+              onPress={() => setSelected('beta')}
+            />
+          </SideNav.Item>
+        </SideNav.Section>
+        <SideNav.Section title="Settings" subtitle="Workspace preferences">
+          <SideNav.Item
+            label="Preferences"
+            icon="wrench"
+            isSelected={selected === 'preferences'}
+            onPress={() => setSelected('preferences')}
+          />
+        </SideNav.Section>
+      </SideNav>
+      <div
+        style={{
+          flex: '1 1 auto',
+          padding: '1.5rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.5rem',
+        }}
+      >
+        <Text weight="semibold">Selected: {selected}</Text>
+        <Text size="sm" tone="secondary">
+          Drag the handle to resize, or use the footer button to collapse to icons only.
+        </Text>
+      </div>
+    </div>
+  );
+}
+
 function NavigationSection() {
   return (
     <Section title="Navigation">
       <Stack gap="md">
+        <SideNavDemo />
         <Breadcrumbs
           label="Short trail"
           items={[
