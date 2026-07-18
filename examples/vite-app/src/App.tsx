@@ -7,6 +7,7 @@ import { defaultIcons } from '@var-ui/icons';
 import {
   Alert,
   AlertDialog,
+  AppShell,
   Avatar,
   AvatarGroup,
   Badge,
@@ -551,6 +552,90 @@ function TopNavDemo() {
   );
 }
 
+const ADMIN_NAV_ITEMS = [
+  { id: 'overview', label: 'Overview', icon: 'search' },
+  { id: 'projects', label: 'Projects', icon: 'clock' },
+  { id: 'settings', label: 'Settings', icon: 'wrench' },
+] as const;
+
+function AdminShellDemo() {
+  const [selected, setSelected] = useState<(typeof ADMIN_NAV_ITEMS)[number]['id']>('overview');
+
+  function renderAdminNavSection() {
+    return (
+      <SideNav.Section title="Workspace">
+        {ADMIN_NAV_ITEMS.map((item) => (
+          <SideNav.Item
+            key={item.id}
+            label={item.label}
+            icon={item.icon}
+            isSelected={selected === item.id}
+            onPress={() => setSelected(item.id)}
+          />
+        ))}
+      </SideNav.Section>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        height: '32rem',
+        display: 'flex',
+        borderRadius: '0.75rem',
+        overflow: 'hidden',
+        border: '1px solid rgba(128, 128, 128, 0.3)',
+      }}
+    >
+      <AppShell
+        height="auto"
+        variant="surface"
+        contentPadding={5}
+        topNav={
+          <TopNav
+            heading={<TopNav.Heading heading="Acme Admin" icon="search" />}
+            endContent={
+              <HStack gap="sm" align="center">
+                <MobileNav.Toggle />
+                <Avatar name="Jamie Rivera" src={AVATAR_URL} size="sm" />
+              </HStack>
+            }
+          />
+        }
+        sideNav={
+          <SideNav header={<SideNav.Heading heading="Acme Admin" />} collapsible resizable>
+            {renderAdminNavSection()}
+          </SideNav>
+        }
+        mobileNav={<MobileNav header="Acme Admin">{renderAdminNavSection()}</MobileNav>}
+      >
+        <Stack gap="sm">
+          <Heading level={2} size="md">
+            {ADMIN_NAV_ITEMS.find((item) => item.id === selected)?.label}
+          </Heading>
+          <Text tone="secondary">
+            Shrink this pane below 768px to see the side nav swap for the hamburger-triggered mobile
+            drawer — both render the same `SideNav.Section` tree.
+          </Text>
+        </Stack>
+      </AppShell>
+    </div>
+  );
+}
+
+function AdminShellSection() {
+  return (
+    <Section title="Admin shell (AppShell demo)">
+      <Text tone="secondary" size="sm">
+        Composes `TopNav` + collapsible/resizable `SideNav` + `MobileNav` + main content via
+        `AppShell`. The hamburger toggle and drawer share open state through the provider `AppShell`
+        wraps around its slots.
+      </Text>
+      <AdminShellDemo />
+    </Section>
+  );
+}
+
 function NavigationSection() {
   return (
     <Section title="Navigation">
@@ -733,6 +818,7 @@ export function App() {
               <ContainerSection />
               <FormsSection />
               <NavigationSection />
+              <AdminShellSection />
               <DatesSection />
               <OverlaysSection />
               <ChatSection />

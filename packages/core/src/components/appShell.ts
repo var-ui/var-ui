@@ -1,5 +1,39 @@
+import type { CSSProperties } from 'typestyles';
 import { styles } from '../runtime';
 import { designTokens as t } from '../tokens';
+
+/**
+ * Isolates the custom-property override in its own explicitly-typed object so it can be
+ * spread alongside plain CSS properties without widening the enclosing literal's inferred
+ * type (a raw computed key mixed into the same literal as named properties can make the
+ * slot-with-variants config fail `VariantOptionStyle` assignability and fall through to the
+ * flat single-slot overload).
+ */
+function backgroundVar(name: string, value: string): CSSProperties {
+  return { [name]: value } as unknown as CSSProperties;
+}
+
+const APP_SHELL_SLOTS = [
+  'root',
+  'banner',
+  'frame',
+  'topNav',
+  'sideNav',
+  'main',
+  'skipLink',
+] as const;
+
+/**
+ * Explicit variant-dimension shape (values left as `{}` — only the keys matter for the
+ * `styles.component` call signature). None of these slot names happen to collide with a
+ * strictly-typed CSS property, so `styles.component`'s overload inference can't rule out the
+ * flat single-slot config on its own and silently picks it over the slot-with-variants one —
+ * passing `Slots`/`V` as explicit type arguments below pins the correct overload.
+ */
+type AppShellVariantDefs = {
+  height: { fill: object; auto: object };
+  variant: { wash: object; surface: object; section: object; elevated: object };
+};
 
 /**
  * Application chrome shell: optional banner, top nav, side nav, and main
@@ -20,7 +54,7 @@ import { designTokens as t } from '../tokens';
  * </div>
  * ```
  */
-export const appShell = styles.component(
+export const appShell = styles.component<typeof APP_SHELL_SLOTS, AppShellVariantDefs>(
   'app-shell',
   (c) => {
     const v = c.vars({
@@ -41,7 +75,7 @@ export const appShell = styles.component(
       },
     });
     return {
-      slots: ['root', 'banner', 'frame', 'topNav', 'sideNav', 'main', 'skipLink'],
+      slots: APP_SHELL_SLOTS,
       base: {
         root: {
           position: 'relative',
@@ -136,18 +170,14 @@ export const appShell = styles.component(
         },
         variant: {
           wash: {
-            root: {
-              [v.background.name]: t.color.background.app,
-            },
+            root: backgroundVar(v.background.name, t.color.background.app),
           },
           surface: {
-            root: {
-              [v.background.name]: t.color.background.surface,
-            },
+            root: backgroundVar(v.background.name, t.color.background.surface),
           },
           section: {
             root: {
-              [v.background.name]: t.color.background.surface,
+              ...backgroundVar(v.background.name, t.color.background.surface),
               border: `1px solid ${v.border.var}`,
               borderRadius: t.radius.lg,
               boxShadow: t.shadow.xs,
@@ -155,7 +185,7 @@ export const appShell = styles.component(
           },
           elevated: {
             root: {
-              [v.background.name]: t.color.background.elevated,
+              ...backgroundVar(v.background.name, t.color.background.elevated),
               boxShadow: t.shadow.sm,
             },
           },

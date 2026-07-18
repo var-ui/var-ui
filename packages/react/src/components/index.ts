@@ -159,3 +159,4 @@ export {
   type MobileNavProviderProps,
   type MobileNavToggleProps,
 } from './MobileNav';
+export { AppShell, APP_SHELL_MAIN_ID, type AppShellProps } from './AppShell';
