@@ -89,4 +89,12 @@ describe('useTableSort', () => {
     );
     expect(result.current.sortedData.map((r) => r.v)).toEqual([1, 2, null, undefined]);
   });
+
+  it('handles null/undefined values by sorting them to the end (descending)', () => {
+    const rows = [{ v: 2 }, { v: null }, { v: 1 }, { v: undefined }];
+    const { result } = renderHook(() =>
+      useTableSort({ data: rows, defaultSort: { column: 'v', direction: 'descending' } }),
+    );
+    expect(result.current.sortedData.map((r) => r.v)).toEqual([2, 1, null, undefined]);
+  });
 });

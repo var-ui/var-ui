@@ -26,15 +26,7 @@ function defaultGetSortValue<T>(
   return (row as Record<string, unknown>)[column] as string | number | boolean | null | undefined;
 }
 
-function compareValues(
-  a: string | number | boolean | null | undefined,
-  b: string | number | boolean | null | undefined,
-): number {
-  const aNullish = a === null || a === undefined;
-  const bNullish = b === null || b === undefined;
-  if (aNullish && bNullish) return 0;
-  if (aNullish) return 1;
-  if (bNullish) return -1;
+function compareValues(a: string | number | boolean, b: string | number | boolean): number {
   if (typeof a === 'number' && typeof b === 'number') return a - b;
   return String(a).localeCompare(String(b));
 }
@@ -69,9 +61,16 @@ export function useTableSort<T>(options: UseTableSortOptions<T>): UseTableSortRe
     if (!resolvedSort) return data;
     const { column, direction } = resolvedSort;
     const sign = direction === 'ascending' ? 1 : -1;
-    return [...data].sort(
-      (a, b) => sign * compareValues(getSortValue(a, column), getSortValue(b, column)),
-    );
+    return [...data].sort((a, b) => {
+      const va = getSortValue(a, column);
+      const vb = getSortValue(b, column);
+      const aNullish = va === null || va === undefined;
+      const bNullish = vb === null || vb === undefined;
+      if (aNullish && bNullish) return 0;
+      if (aNullish) return 1;
+      if (bNullish) return -1;
+      return sign * compareValues(va, vb);
+    });
   }, [data, resolvedSort, getSortValue]);
 
   return { sortedData, sortDescriptor: resolvedSort, onSortChange: handleSortChange };
