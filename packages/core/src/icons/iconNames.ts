@@ -17,6 +17,8 @@ export const iconNameList = [
   'warning',
   'error',
   'arrowUp',
+  'arrowDown',
+  'arrowsUpDown',
   'stop',
   'wrench',
   'clock',

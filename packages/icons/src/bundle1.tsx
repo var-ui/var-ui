@@ -84,4 +84,15 @@ export const bundle1Icons: Partial<Record<IconName, ReactNode>> = {
       <path d="M12 7.5v5.5M12 16.5h.01" />
     </Glyph>
   ),
+  arrowDown: (
+    <Glyph>
+      <path d="M12 5v14M6 13l6 6 6-6" />
+    </Glyph>
+  ),
+  arrowsUpDown: (
+    <Glyph>
+      <path d="M12 5v5M8 9l4-4 4 4" />
+      <path d="M12 19v-5M8 15l4 4 4-4" />
+    </Glyph>
+  ),
 };

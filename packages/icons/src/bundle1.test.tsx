@@ -14,6 +14,8 @@ const BUNDLE_1_NAMES = [
   'search',
   'success',
   'warning',
+  'arrowDown',
+  'arrowsUpDown',
 ] as const;
 
 describe('@var-ui/icons bundle 1', () => {
