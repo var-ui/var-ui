@@ -7,10 +7,10 @@ import { BentoShowcase } from './BentoShowcase';
 
 function renderShowcase(
   themeId: Parameters<typeof BentoShowcase>[0]['themeId'],
-  defaultTheme: 'light' | 'dark' | 'system' = 'light',
+  defaultColorMode: 'light' | 'dark' | 'system' = 'light',
 ) {
   return render(
-    <DesignSystemProvider defaultTheme={defaultTheme}>
+    <DesignSystemProvider defaultColorMode={defaultColorMode}>
       <IconProvider icons={defaultIcons}>
         <LayerProvider>
           <BentoShowcase themeId={themeId} />

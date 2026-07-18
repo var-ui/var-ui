@@ -9,6 +9,12 @@ describe('globalBody', () => {
     expect(css).toContain('JetBrains Mono');
   });
 
+  it('applies app background and text color tokens to the document body', () => {
+    const css = getRegisteredCss();
+    expect(css).toMatch(/body[^{]*\{[^}]*background/);
+    expect(css).toMatch(/body[^{]*\{[^}]*color/);
+  });
+
   it('resets form-control fonts so buttons/inputs inherit the theme font', () => {
     const css = getRegisteredCss();
     expect(css).toMatch(/button,\s*input,\s*select,\s*textarea/);

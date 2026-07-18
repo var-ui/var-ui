@@ -95,6 +95,9 @@ export {
   ClickableCard,
   type CardProps,
   type ClickableCardProps,
+  ColorModeToggle,
+  type ColorModeToggleAppearance,
+  type ColorModeToggleProps,
   Carousel,
   type CarouselProps,
   Thumbnail,
@@ -272,13 +275,14 @@ export {
   type DesignShadowValues,
   type DesignSpaceValues,
 } from './tokens';
+export { DesignSystemProvider, type DesignSystemProviderProps } from './DesignSystemProvider';
 export {
-  DesignSystemProvider,
-  useDesignSystemTheme,
-  getThemeInitScript,
-  type DesignSystemProviderProps,
-  type GetThemeInitScriptOptions,
-} from './theme';
+  useColorMode,
+  getColorModeInitScript,
+  type ColorMode,
+  type ResolvedColorMode,
+  type GetColorModeInitScriptOptions,
+} from './color-mode';
 export { layout, text } from './styles';
 export {
   Icon,

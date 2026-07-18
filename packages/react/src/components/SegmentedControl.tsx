@@ -11,6 +11,8 @@ import { cx, recipeProps } from './utils';
 export type SegmentedControlOption = {
   id: string;
   label: ReactNode;
+  /** Accessible name when `label` is not plain text (e.g. icon-only segments). */
+  'aria-label'?: string;
 };
 
 export type SegmentedControlProps = Omit<RACToggleButtonGroupProps, 'children' | 'className'> & {
@@ -43,7 +45,12 @@ export function SegmentedControl({
       className={cx(s.root, className)}
     >
       {options.map((option) => (
-        <AriaToggleButton key={option.id} id={option.id} {...recipeProps(t)}>
+        <AriaToggleButton
+          key={option.id}
+          id={option.id}
+          aria-label={option['aria-label']}
+          {...recipeProps(t)}
+        >
           {option.label}
         </AriaToggleButton>
       ))}

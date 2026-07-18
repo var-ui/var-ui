@@ -24,6 +24,9 @@ export const iconNameList = [
   'clock',
   'menu',
   'moreHorizontal',
+  'colorModeLight',
+  'colorModeDark',
+  'colorModeSystem',
 ] as const;
 
 export type IconName = (typeof iconNameList)[number];

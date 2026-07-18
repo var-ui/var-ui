@@ -14,24 +14,24 @@ by `localStorage`, with zero-flash first paint.
 
 ## Design
 
-### Shared library: `packages/react/src/theme.tsx`
+### Shared library: `packages/react/src/color-mode.tsx` + `DesignSystemProvider.tsx`
 
-- `ThemeName` widens from `'light' | 'dark'` to `'light' | 'dark' | 'system'`.
-- `useDesignSystemTheme()` returns `{ theme, resolvedTheme, setTheme, toggleTheme }`:
-  - `theme` — the raw preference, including `'system'`.
-  - `resolvedTheme: 'light' | 'dark'` — what `'system'` currently resolves
+- `ColorMode` widens from `'light' | 'dark'` to `'light' | 'dark' | 'system'`.
+- `useColorMode()` returns `{ colorMode, resolvedColorMode, setColorMode, toggleColorMode }`:
+  - `colorMode` — the raw preference, including `'system'`.
+  - `resolvedColorMode: 'light' | 'dark'` — what `'system'` currently resolves
     to. Tracked via a `matchMedia('(prefers-color-scheme: dark)')`
     listener so it updates live if the OS preference changes while the tab
     is open.
-  - `toggleTheme` cycles `light → dark → system → light`, kept for
+  - `toggleColorMode` cycles `light → dark → system → light`, kept for
     back-compat. The docs switcher does not use it — each of its three
-    buttons calls `setTheme` directly.
+    buttons calls `setColorMode` directly.
 - New optional `DesignSystemProviderProps.storageKey?: string`. When set,
-  and the provider is uncontrolled (no `theme` prop passed in), the
+  and the provider is uncontrolled (no `colorMode` prop passed in), the
   provider:
-  - reads `localStorage[storageKey]` on mount as the initial theme
-    (falling back to `defaultTheme` if unset or invalid),
-  - writes to `localStorage[storageKey]` on every `setTheme` call.
+  - reads `localStorage[storageKey]` on mount as the initial color mode
+    (falling back to `defaultColorMode` if unset or invalid),
+  - writes to `localStorage[storageKey]` on every `setColorMode` call.
   - Opt-in only — omitting `storageKey` leaves existing consumers'
     behavior unchanged.
 - `data-mode` is written as the literal preference value, including
@@ -43,16 +43,16 @@ by `localStorage`, with zero-flash first paint.
   `@media (prefers-color-scheme: dark) AND [data-mode="light"]` override
   rules. `data-mode="system"` matches neither override rule, so the plain
   media-query rule governs — exactly the desired system behavior.
-- When `omitWrapperThemeSurface` is `true` (the docs case), the provider
+- When `applyToDocument` is `true` (the docs case), the provider
   no longer has a wrapper `div` to carry `data-mode`. It instead gains a
   `useEffect` that imperatively sets `document.documentElement`'s
   `data-mode` attribute and `style.colorScheme` (`'light'`, `'dark'`, or
   cleared for `'system'`, letting the static `color-scheme: light dark` in
-  `root.css` govern) on every `theme`/`resolvedTheme` change.
-- New exported `getThemeInitScript({ storageKey, defaultTheme })` returns a
+  `root.css` govern) on every `colorMode`/`resolvedColorMode` change.
+- New exported `getColorModeInitScript({ storageKey, defaultColorMode })` returns a
   plain JS string (no React, no imports) implementing the identical
   resolution logic used by the provider's mount effect: read
-  `localStorage[storageKey]`, fall back to `defaultTheme`, resolve
+  `localStorage[storageKey]`, fall back to `defaultColorMode`, resolve
   `'system'` via `matchMedia`, then set `document.documentElement`'s
   `data-mode` and `style.colorScheme`. Both the provider and this function
   call one shared internal resolver so they cannot drift apart.
@@ -60,7 +60,7 @@ by `localStorage`, with zero-flash first paint.
 ### FOUC prevention: docs wiring
 
 - `docs/src/routes/__root.tsx`'s `RootDocument` renders
-  `<script dangerouslySetInnerHTML={{ __html: getThemeInitScript({ storageKey: 'var-ui-docs-color-mode', defaultTheme: 'system' }) }} />`
+  `<script dangerouslySetInnerHTML={{ __html: getColorModeInitScript({ storageKey: 'var-ui-docs-color-mode', defaultColorMode: 'system' }) }} />`
   as the **first child of `<head>`**, before `<HeadContent />`. Being
   inline and early, it runs synchronously while `<html>` is still being
   parsed — before first paint — so the correct `data-mode`/`color-scheme`
@@ -70,8 +70,8 @@ by `localStorage`, with zero-flash first paint.
   the provider's effect), there is nothing for React to reconcile a
   mismatch against — no hydration warnings.
 - `docs/src/layouts/DocsProviders.tsx` passes
-  `storageKey="var-ui-docs-color-mode"`, `defaultTheme="system"`, and
-  `omitWrapperThemeSurface` to `DesignSystemProvider` (the last of these
+  `storageKey="var-ui-docs-color-mode"`, `defaultColorMode="system"`, and
+  `applyToDocument` to `DesignSystemProvider` (the last of these
   previously unused in docs), so the provider manages `<html>`'s
   `data-mode` instead of a wrapper `div`, matching what the bootstrap
   script targets.
@@ -87,8 +87,8 @@ by `localStorage`, with zero-flash first paint.
 - `docs/src/components/ThemeToggleIcon.tsx` is replaced by
   `docs/src/components/ColorModeSwitcher.tsx`: a segmented group of three
   `HeaderIconButton`s (Sun / Moon / Monitor), each calling
-  `setTheme('light' | 'dark' | 'system')` directly. The button matching
-  the current `theme` (the raw preference, not `resolvedTheme`) gets
+  `setColorMode('light' | 'dark' | 'system')` directly. The button matching
+  the current `colorMode` (the raw preference, not `resolvedColorMode`) gets
   `aria-pressed="true"` and an active style.
 - `docsShell.ts` gains a small active-state style for the segmented group,
   extending the existing `headerIconButton`, plus a shared
@@ -98,21 +98,22 @@ by `localStorage`, with zero-flash first paint.
 - `docs/src/components/DocsHeaderActions.tsx` swaps `<ThemeToggleIcon />`
   for `<ColorModeSwitcher />`.
 - `docs/src/components/homepage/BentoShowcase.tsx` keeps using
-  `useDesignSystemTheme().theme` for its own `data-mode` (now potentially
+  `useColorMode().colorMode` for its own `data-mode` (now potentially
   `'system'`) — correct per the CSS fallback behavior above, no logic
   change needed beyond the widened type.
 
 ## Files touched
 
-- `packages/react/src/theme.tsx` — `ThemeName`, `storageKey`,
-  `resolvedTheme`, `getThemeInitScript`, `omitWrapperThemeSurface` sync
+- `packages/react/src/color-mode.tsx` — `ColorMode`, `storageKey` helpers,
+  `resolvedColorMode`, `getColorModeInitScript`.
+- `packages/react/src/DesignSystemProvider.tsx` — provider + `applyToDocument` sync
   effect.
 - `packages/core/src/create-theme.test.ts` — add a test confirming
   `data-mode="system"` falls through to the plain media-query rule (no
   change expected in `create-theme.ts` itself).
 - `docs/src/routes/__root.tsx` — inline bootstrap script.
 - `docs/src/layouts/DocsProviders.tsx` — `storageKey`,
-  `defaultTheme="system"`, `omitWrapperThemeSurface`.
+  `defaultColorMode="system"`, `applyToDocument`.
 - `docs/src/components/ColorModeSwitcher.tsx` — new, replaces
   `ThemeToggleIcon.tsx`.
 - `docs/src/components/DocsHeaderActions.tsx`
@@ -122,11 +123,11 @@ by `localStorage`, with zero-flash first paint.
 
 ## Testing
 
-- Unit tests for `getThemeInitScript`'s resolution logic: stored light,
+- Unit tests for `getColorModeInitScript`'s resolution logic: stored light,
   stored dark, stored system, missing key (defaults to system), invalid
   value, `matchMedia` mocked both ways.
-- Unit tests for the provider's `resolvedTheme` tracking, including a
-  simulated `matchMedia` `change` event while `theme === 'system'`.
+- Unit tests for the provider's `resolvedColorMode` tracking, including a
+  simulated `matchMedia` `change` event while `colorMode === 'system'`.
 - A docs-level test that `ColorModeSwitcher` writes the clicked preference
   to `localStorage` and updates `document.documentElement`'s `data-mode`.
 - Existing `BentoShowcase.test.tsx` gains a `'system'` case alongside its

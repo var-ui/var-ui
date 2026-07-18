@@ -49,7 +49,7 @@ Default, Forest, Rose, Amber, AI Glow, New Wave, Windows 95, Classic System.
 Light/dark mode is **not** part of this switcher — it's already handled by
 the existing global `ThemeToggleIcon` in the docs header
 (`docs/src/components/DocsHeaderActions.tsx`), which controls
-`useDesignSystemTheme()`'s `theme`/`data-mode` for the whole site. The bento
+`useColorMode()`'s `colorMode`/`data-mode` for the whole site. The bento
 showcase reads that same global mode and combines it with whichever named
 theme is locally selected, so flipping the header's light/dark toggle also
 flips the showcase, whatever theme is active there.

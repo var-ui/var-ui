@@ -10,6 +10,11 @@ export {
   type ToggleButtonProps,
 } from './SegmentedControl';
 export {
+  ColorModeToggle,
+  type ColorModeToggleAppearance,
+  type ColorModeToggleProps,
+} from './ColorModeToggle';
+export {
   DropdownMenu,
   MenuContent,
   type DropdownMenuProps,

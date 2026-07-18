@@ -26,6 +26,9 @@ describe('icon system (core)', () => {
         'clock',
         'menu',
         'moreHorizontal',
+        'colorModeLight',
+        'colorModeDark',
+        'colorModeSystem',
       ].sort(),
     );
   });

@@ -16,6 +16,9 @@ const BUNDLE_1_NAMES = [
   'warning',
   'arrowDown',
   'arrowsUpDown',
+  'colorModeLight',
+  'colorModeDark',
+  'colorModeSystem',
 ] as const;
 
 describe('@var-ui/icons bundle 1', () => {

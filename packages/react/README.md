@@ -29,7 +29,7 @@ import { Button, DesignSystemProvider, layout, text } from '@var-ui/react';
 
 export function App() {
   return (
-    <DesignSystemProvider>
+    <DesignSystemProvider applyToDocument>
       <main className={layout({ stack: true })}>
         <h1 className={text({ title: true })}>Hello</h1>
         <Button intent="primary">Click me</Button>
@@ -125,7 +125,7 @@ for your own UI, or `<Icon>{node}</Icon>` for one-off custom glyphs.
 | **Hooks**            | `useMediaQuery`, `useScrollLock`                                                                      |
 | **Layout utilities** | `layout`, `text` — re-exported from `@var-ui/core`                                                    |
 | **Tokens**           | `designTokens`, `defaultTheme`, typed value exports                                                   |
-| **Theming**          | `DesignSystemProvider`, `useDesignSystemTheme`                                                        |
+| **Theming**          | `DesignSystemProvider`, `useColorMode`, `ColorModeToggle`                                             |
 
 Core-only recipes without wrappers (use the class helpers from `@var-ui/core`):
 `skeleton`, `statusDot`, `kbd`, `overlay`, plus everything in the core README's
@@ -143,7 +143,8 @@ src/
   hooks/          # useMediaQuery, useScrollLock, …
   styles.ts       # re-exports layout + text from @var-ui/core
   tokens.ts       # Re-exports / aliases @var-ui/core tokens
-  theme.tsx       # DesignSystemProvider
+  color-mode.tsx            # useColorMode, getColorModeInitScript
+  DesignSystemProvider.tsx  # DesignSystemProvider
   globalBody.ts   # Document/reset registrations
   index.ts        # Public API
 ```

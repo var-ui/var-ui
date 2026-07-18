@@ -68,7 +68,7 @@ import {
   Tooltip,
   TopNav,
   Typeahead,
-  useDesignSystemTheme,
+  ColorModeToggle,
   useTablePagination,
   useTableSelection,
   useTableSort,
@@ -79,13 +79,6 @@ const AVATAR_URL =
   'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" fill="%236c8"/%3E%3C/svg%3E';
 
 type ShowcasePalette = 'default' | 'acme';
-
-function ThemeToggle() {
-  const { theme, toggleTheme } = useDesignSystemTheme();
-  return (
-    <Button onPress={toggleTheme}>Switch to {theme === 'dark' ? 'light' : 'dark'} mode</Button>
-  );
-}
 
 function PaletteSwitcher({
   selected,
@@ -1086,7 +1079,7 @@ export function App() {
   const activeTheme = palette === 'acme' ? acmeTheme : defaultTheme;
 
   return (
-    <DesignSystemProvider defaultTheme="light" customTheme={activeTheme}>
+    <DesignSystemProvider applyToDocument defaultColorMode="light" customTheme={activeTheme}>
       <IconProvider icons={defaultIcons}>
         <ToastProvider>
           <LayerProvider>
@@ -1107,7 +1100,7 @@ export function App() {
                   <PaletteSwitcher selected={palette} onSelect={setPalette} />
                 </Stack>
                 <HStack gap="sm">
-                  <ThemeToggle />
+                  <ColorModeToggle includeSystem />
                   <Dialog
                     triggerLabel="Open dialog"
                     title="Icon close button"

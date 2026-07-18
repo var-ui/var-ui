@@ -25,8 +25,8 @@ export function DocsProviders({ children }: { children: ReactNode }) {
 
   const content = (
     <DesignSystemProvider
-      defaultTheme="system"
-      omitWrapperThemeSurface
+      applyToDocument
+      defaultColorMode="system"
       storageKey={COLOR_MODE_STORAGE_KEY}
     >
       <IconProvider icons={defaultIcons}>

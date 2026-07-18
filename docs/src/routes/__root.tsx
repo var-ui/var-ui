@@ -1,14 +1,15 @@
 import type { ReactNode } from 'react';
 import { defaultTheme } from '@var-ui/core';
-import { getThemeInitScript } from '@var-ui/react';
+import { getColorModeInitScript } from '@var-ui/react';
 import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router';
 import { DocsProviders } from '@/layouts/DocsProviders';
 import { COLOR_MODE_STORAGE_KEY } from '@/lib/color-mode';
 import rootCss from '@/styles/root.css?url';
 
-const themeInitScript = getThemeInitScript({
+const colorModeInitScript = getColorModeInitScript({
   storageKey: COLOR_MODE_STORAGE_KEY,
-  defaultTheme: 'system',
+  defaultColorMode: 'system',
+  themeClassName: defaultTheme.className,
 });
 
 export const Route = createRootRoute({
@@ -42,10 +43,10 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html className={defaultTheme.className} lang="en">
+    <html lang="en">
       <head>
         {/* Must run before HeadContent/CSS so the correct color mode is on <html> before first paint. */}
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: colorModeInitScript }} />
         <HeadContent />
       </head>
       <body>

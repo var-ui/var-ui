@@ -57,7 +57,7 @@ import { forestTheme } from '@var-ui/core';
 
 export function App() {
   return (
-    <DesignSystemProvider defaultTheme="system" customTheme={forestTheme}>
+    <DesignSystemProvider applyToDocument defaultColorMode="system" customTheme={forestTheme}>
       {/* … */}
     </DesignSystemProvider>
   );
@@ -71,8 +71,9 @@ export function App() {
 - `defaultTheme` / controlled `theme` — light / dark / system color mode via
   `data-mode` (independent of which palette theme class is applied).
 
-For SSR without a flash of wrong mode, see `getThemeInitScript` and
-`omitWrapperThemeSurface` when the theme class lives on `document.documentElement`.
+For SPA / full-page apps, pass `applyToDocument` so the theme class and `data-mode`
+live on `<html>` and `body` picks up tokenized background/text from `globalBody`.
+For SSR without a flash of wrong mode, also use `getColorModeInitScript`.
 
 ## Next
 
