@@ -57,6 +57,7 @@ import {
   Tokenizer,
   Toolbar,
   Tooltip,
+  TopNav,
   Typeahead,
   useDesignSystemTheme,
   useToast,
@@ -425,10 +426,97 @@ function SideNavDemo() {
   );
 }
 
+function TopNavDemo() {
+  const [selected, setSelected] = useState('home');
+
+  return (
+    <TopNav
+      heading={<TopNav.Heading heading="Acme" icon="search" headingHref="/" />}
+      centerContent={
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '0.375rem 0.75rem',
+            borderRadius: '999px',
+            border: '1px solid currentColor',
+            opacity: 0.6,
+          }}
+        >
+          <Icon name="search" size="sm" />
+          <Text as="span" size="sm" tone="secondary">
+            Search…
+          </Text>
+        </div>
+      }
+      endContent={<Avatar name="Jamie Rivera" src={AVATAR_URL} size="sm" />}
+    >
+      <TopNav.Item
+        label="Home"
+        isSelected={selected === 'home'}
+        onPress={() => setSelected('home')}
+      />
+      <TopNav.Item
+        label="Docs"
+        isSelected={selected === 'docs'}
+        onPress={() => setSelected('docs')}
+      />
+      <TopNav.Menu
+        label="Products"
+        items={[
+          {
+            id: 'analytics',
+            title: 'Analytics',
+            description: 'Track usage across your org',
+            icon: 'clock',
+          },
+          {
+            id: 'billing',
+            title: 'Billing',
+            description: 'Plans, invoices, and usage',
+            icon: 'wrench',
+            href: '/billing',
+          },
+        ]}
+      />
+      <TopNav.MegaMenu
+        label="Solutions"
+        items={[
+          {
+            id: 'startups',
+            title: 'For startups',
+            description: 'Ship faster with sane defaults',
+            icon: 'arrowUp',
+          },
+          {
+            id: 'enterprise',
+            title: 'For enterprise',
+            description: 'Governance and audit at scale',
+            icon: 'stop',
+          },
+        ]}
+        featured={
+          <TopNav.MegaMenu.FeaturedCard
+            title="What's new"
+            description="See the latest release notes and roadmap."
+            action={
+              <Button size="sm" intent="ghost">
+                Read more
+              </Button>
+            }
+          />
+        }
+      />
+    </TopNav>
+  );
+}
+
 function NavigationSection() {
   return (
     <Section title="Navigation">
       <Stack gap="md">
+        <TopNavDemo />
         <SideNavDemo />
         <Breadcrumbs
           label="Short trail"

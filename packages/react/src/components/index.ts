@@ -128,3 +128,24 @@ export {
   type SideNavProps,
   type SideNavSectionProps,
 } from './SideNav';
+export {
+  TopNav,
+  TopNavHeading,
+  TopNavItem,
+  TopNavMenu,
+  renderTopNavIcon,
+  type TopNavHeadingProps,
+  type TopNavIcon,
+  type TopNavItemProps,
+  type TopNavMenuProps,
+  type TopNavProps,
+  type TopNavRichItem,
+} from './TopNav';
+export {
+  TopNavMegaMenu,
+  TopNavMegaMenuFeaturedCard,
+  TopNavMegaMenuItem,
+  type TopNavMegaMenuFeaturedCardProps,
+  type TopNavMegaMenuItemProps,
+  type TopNavMegaMenuProps,
+} from './TopNavMegaMenu';
