@@ -239,6 +239,50 @@ describe('Tree', () => {
     expect(screen.getByRole('link')).toHaveProperty('href', expect.stringContaining('/docs'));
   });
 
+  it('does not select a row on click when it has an href (link handles navigation, not selection)', async () => {
+    const onSelectionChange = vi.fn();
+    render(
+      <Tree
+        aria-label="Nav"
+        selectionMode="single"
+        onSelectionChange={onSelectionChange}
+        items={[{ id: 'docs', label: 'Docs', href: '/docs' }]}
+      />,
+    );
+    const row = screen.getByRole('treeitem', { name: 'Docs' });
+    await userEvent.click(row);
+    expect(onSelectionChange).not.toHaveBeenCalled();
+    expect(row.getAttribute('aria-selected')).toBe('false');
+  });
+
+  it('does not toggle expansion on row click when it has an href (chevron still expands)', async () => {
+    render(
+      <Tree
+        aria-label="Nav"
+        items={[
+          { id: 'docs', label: 'Docs', href: '/docs', children: [{ id: 'guide', label: 'Guide' }] },
+        ]}
+      />,
+    );
+    const row = screen.getByRole('treeitem', { name: 'Docs' });
+    await userEvent.click(row);
+    expect(row.getAttribute('aria-expanded')).toBe('false');
+    expect(screen.queryByRole('treeitem', { name: 'Guide' })).toBeNull();
+
+    const toggle = row.querySelector('button')!;
+    await userEvent.click(toggle);
+    expect(row.getAttribute('aria-expanded')).toBe('true');
+    expect(screen.getByRole('treeitem', { name: 'Guide' })).toBeTruthy();
+  });
+
+  it('nests the group DOM-inside its owning treeitem, not as a sibling under role="none"', () => {
+    render(<Tree aria-label="Files" items={FILE_TREE_ITEMS} defaultExpandedKeys={['src']} />);
+    const row = treeitem('src');
+    const group = screen.getByRole('group');
+    expect(row.contains(group)).toBe(true);
+    expect(document.querySelector('[role="none"]')).toBeNull();
+  });
+
   it('expands href branch on chevron click without selecting; link stays on label', async () => {
     const onSelectionChange = vi.fn();
     render(

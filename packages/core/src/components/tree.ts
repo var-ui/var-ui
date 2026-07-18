@@ -23,11 +23,17 @@ type TreeVariants = {
  * `data-expanded` on toggles, `data-selected` / `data-disabled` on rows, and
  * nests child items inside the `group` slot.
  *
+ * `item` (the `<li role="treeitem">`) owns focus — `tabIndex` and the click
+ * handler both live there, not on `row` — so a nested `group` stays a real
+ * DOM descendant of its owning treeitem for assistive tech, while `row`
+ * stays a plain visual box scoping hover/selected/disabled paint to just
+ * that row (not the expanded subtree beneath it).
+ *
  * ```tsx
  * const s = tree({ density: 'compact' });
  * <ul className={s.root.className} {...s.root.attrs} role="tree">
- *   <li className={s.item.className} role="treeitem">
- *     <div className={s.row.className} tabIndex={0}>
+ *   <li className={s.item.className} role="treeitem" tabIndex={0}>
+ *     <div className={s.row.className}>
  *       <button className={s.toggle.className} data-expanded type="button" />
  *       <span className={s.start.className}>…</span>
  *       <span className={s.label.className}>src</span>
@@ -73,6 +79,12 @@ const treeRecipe = styles.component(
           listStyle: 'none',
           margin: 0,
           padding: 0,
+          outline: 'none',
+          '&:focus-visible': {
+            outline: `2px solid ${t.color.border.focus}`,
+            outlineOffset: '2px',
+            borderRadius: t.radius.md,
+          },
         },
         row: {
           display: 'flex',
@@ -82,7 +94,6 @@ const treeRecipe = styles.component(
           borderRadius: t.radius.md,
           color: v.labelColor.var,
           cursor: 'default',
-          outline: 'none',
           minWidth: 0,
           '&:hover': { backgroundColor: v.hoverBg.var },
           '&[data-selected]': {
@@ -90,10 +101,6 @@ const treeRecipe = styles.component(
             fontWeight: t.fontWeight.medium,
           },
           '&[data-disabled]': { opacity: 0.5, pointerEvents: 'none' },
-          '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus}`,
-            outlineOffset: '2px',
-          },
         },
         toggle: {
           display: 'inline-flex',

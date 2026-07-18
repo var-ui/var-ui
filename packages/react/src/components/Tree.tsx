@@ -1,4 +1,4 @@
-import type { FocusEvent, JSX, KeyboardEvent, ReactNode } from 'react';
+import type { FocusEvent, JSX, KeyboardEvent, MouseEvent, ReactNode } from 'react';
 import {
   Children,
   createContext,
@@ -159,6 +159,8 @@ type TreeRowContentProps = {
   startContent?: ReactNode;
   endContent?: ReactNode;
   className?: string;
+  /** `role="group"` subtree (or `null`) — rendered as a DOM child of this `treeitem`, not a sibling. */
+  groupContent?: ReactNode;
 };
 
 function TreeRowContent({
@@ -173,6 +175,7 @@ function TreeRowContent({
   startContent,
   endContent,
   className,
+  groupContent,
 }: TreeRowContentProps): JSX.Element {
   const ctx = useTreeContext();
   const s = ctx.styles;
@@ -186,8 +189,15 @@ function TreeRowContent({
     ctx.toggleExpand(id);
   };
 
-  const handleRowClick = () => {
-    if (isDisabled) return;
+  const handleRowClick = (event: MouseEvent<HTMLLIElement>) => {
+    // Stop first: the group subtree now lives inside this `<li>`, so without
+    // this a click on a nested row would bubble up and also fire every
+    // ancestor row's click handler.
+    event.stopPropagation();
+    // `href` wins: the overlay `<a>` already handles navigation, and calling
+    // toggleSelect/toggleExpand here too would double up on every click
+    // (expand still works via the chevron button, which stops propagation).
+    if (isDisabled || href != null) return;
     if (ctx.selectionMode !== 'none') {
       ctx.toggleSelect(id);
     } else if (hasChildren) {
@@ -196,57 +206,68 @@ function TreeRowContent({
   };
 
   return (
-    <div
+    <li
       {...{ [DATA_ID_ATTR]: id }}
       role="treeitem"
       aria-level={level}
       aria-expanded={hasChildren ? isExpanded : undefined}
       aria-selected={ctx.selectionMode !== 'none' ? isSelected : undefined}
       aria-disabled={isDisabled ? true : undefined}
+      // Explicit name, not "from contents" — the nested `group` (a DOM child of
+      // this `<li>` per APG) would otherwise fold its descendants' labels in too.
+      aria-label={isLinkLabelString ? (label as string) : undefined}
+      aria-labelledby={isLinkLabelString ? undefined : labelId}
       data-disabled={isDisabled ? '' : undefined}
       data-has-children={hasChildren ? '' : undefined}
       data-selected={isSelected ? '' : undefined}
       tabIndex={isRovingTarget ? 0 : -1}
-      style={{ position: 'relative' }}
-      {...recipeProps(s.row, className)}
+      {...recipeProps(s.item)}
       onClick={handleRowClick}
     >
-      {hasChildren ? (
-        <button
-          type="button"
-          {...recipeProps(s.toggle)}
-          data-expanded={isExpanded ? '' : undefined}
-          tabIndex={-1}
-          aria-hidden="true"
-          style={toggleButtonStyle}
-          onClick={(event) => {
-            event.stopPropagation();
-            handleToggleClick();
-          }}
-        >
-          <Icon name="chevronRight" size="sm" />
-        </button>
-      ) : (
-        <span {...recipeProps(s.toggle)} aria-hidden="true" style={{ visibility: 'hidden' }}>
-          <Icon name="chevronRight" size="sm" />
+      <div
+        style={{ position: 'relative' }}
+        data-disabled={isDisabled ? '' : undefined}
+        data-selected={isSelected ? '' : undefined}
+        {...recipeProps(s.row, className)}
+      >
+        {hasChildren ? (
+          <button
+            type="button"
+            {...recipeProps(s.toggle)}
+            data-expanded={isExpanded ? '' : undefined}
+            tabIndex={-1}
+            aria-hidden="true"
+            style={toggleButtonStyle}
+            onClick={(event) => {
+              event.stopPropagation();
+              handleToggleClick();
+            }}
+          >
+            <Icon name="chevronRight" size="sm" />
+          </button>
+        ) : (
+          <span {...recipeProps(s.toggle)} aria-hidden="true" style={{ visibility: 'hidden' }}>
+            <Icon name="chevronRight" size="sm" />
+          </span>
+        )}
+        {startContent != null ? <span {...recipeProps(s.start)}>{startContent}</span> : null}
+        <span id={isLinkLabelString ? undefined : labelId} {...recipeProps(s.label)}>
+          {label}
         </span>
-      )}
-      {startContent != null ? <span {...recipeProps(s.start)}>{startContent}</span> : null}
-      <span id={href != null && !isLinkLabelString ? labelId : undefined} {...recipeProps(s.label)}>
-        {label}
-      </span>
-      {description != null ? <span {...recipeProps(s.description)}>{description}</span> : null}
-      {endContent != null ? <span {...recipeProps(s.end)}>{endContent}</span> : null}
-      {href != null && !isDisabled ? (
-        <a
-          href={href}
-          tabIndex={-1}
-          aria-label={isLinkLabelString ? (label as string) : undefined}
-          aria-labelledby={isLinkLabelString ? undefined : labelId}
-          style={hasChildren ? overlayLinkStyleAfterToggle : overlayLinkStyleFullRow}
-        />
-      ) : null}
-    </div>
+        {description != null ? <span {...recipeProps(s.description)}>{description}</span> : null}
+        {endContent != null ? <span {...recipeProps(s.end)}>{endContent}</span> : null}
+        {href != null && !isDisabled ? (
+          <a
+            href={href}
+            tabIndex={-1}
+            aria-label={isLinkLabelString ? (label as string) : undefined}
+            aria-labelledby={isLinkLabelString ? undefined : labelId}
+            style={hasChildren ? overlayLinkStyleAfterToggle : overlayLinkStyleFullRow}
+          />
+        ) : null}
+      </div>
+      {groupContent}
+    </li>
   );
 }
 
@@ -258,25 +279,26 @@ function TreeItemsGroup({ items, level }: { items: TreeItemData[]; level: number
         const hasChildren = item.children != null && item.children.length > 0;
         const isExpanded = hasChildren && ctx.isExpanded(item.id);
         return (
-          <li key={item.id} role="none" {...recipeProps(ctx.styles.item)}>
-            <TreeRowContent
-              id={item.id}
-              label={item.label}
-              description={item.description}
-              isDisabled={item.isDisabled}
-              href={item.href}
-              hasChildren={hasChildren}
-              isExpanded={isExpanded}
-              level={level}
-              startContent={ctx.renderStart?.(item)}
-              endContent={ctx.renderEnd?.(item)}
-            />
-            {hasChildren && isExpanded ? (
-              <ul role="group" {...recipeProps(ctx.styles.group)}>
-                <TreeItemsGroup items={item.children ?? []} level={level + 1} />
-              </ul>
-            ) : null}
-          </li>
+          <TreeRowContent
+            key={item.id}
+            id={item.id}
+            label={item.label}
+            description={item.description}
+            isDisabled={item.isDisabled}
+            href={item.href}
+            hasChildren={hasChildren}
+            isExpanded={isExpanded}
+            level={level}
+            startContent={ctx.renderStart?.(item)}
+            endContent={ctx.renderEnd?.(item)}
+            groupContent={
+              hasChildren && isExpanded ? (
+                <ul role="group" {...recipeProps(ctx.styles.group)}>
+                  <TreeItemsGroup items={item.children ?? []} level={level + 1} />
+                </ul>
+              ) : null
+            }
+          />
         );
       })}
     </>
@@ -301,28 +323,28 @@ export function TreeItem({
   const isExpanded = hasChildren && ctx.isExpanded(id);
 
   return (
-    <li role="none" {...recipeProps(ctx.styles.item)}>
-      <TreeRowContent
-        id={id}
-        label={label}
-        description={description}
-        isDisabled={isDisabled}
-        href={href}
-        hasChildren={hasChildren}
-        isExpanded={isExpanded}
-        level={level}
-        startContent={startContent}
-        endContent={endContent}
-        className={className}
-      />
-      {hasChildren && isExpanded ? (
-        <TreeLevelContext.Provider value={level + 1}>
-          <ul role="group" {...recipeProps(ctx.styles.group)}>
-            {children}
-          </ul>
-        </TreeLevelContext.Provider>
-      ) : null}
-    </li>
+    <TreeRowContent
+      id={id}
+      label={label}
+      description={description}
+      isDisabled={isDisabled}
+      href={href}
+      hasChildren={hasChildren}
+      isExpanded={isExpanded}
+      level={level}
+      startContent={startContent}
+      endContent={endContent}
+      className={className}
+      groupContent={
+        hasChildren && isExpanded ? (
+          <TreeLevelContext.Provider value={level + 1}>
+            <ul role="group" {...recipeProps(ctx.styles.group)}>
+              {children}
+            </ul>
+          </TreeLevelContext.Provider>
+        ) : null
+      }
+    />
   );
 }
 
