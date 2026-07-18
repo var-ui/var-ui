@@ -17,6 +17,7 @@ export { calendar } from './calendar';
 export { dateInput } from './dateInput';
 export { dateRangeInput } from './dateRangeInput';
 export { dateTimeInput } from './dateTimeInput';
+export { descriptionList } from './descriptionList';
 export { timeInput } from './timeInput';
 export { typeahead } from './typeahead';
 export { tokenizer } from './tokenizer';

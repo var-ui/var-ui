@@ -24,6 +24,7 @@ import { commandPalette } from './components/commandPalette';
 import { dateInput } from './components/dateInput';
 import { dateRangeInput } from './components/dateRangeInput';
 import { dateTimeInput } from './components/dateTimeInput';
+import { descriptionList } from './components/descriptionList';
 import { dialog } from './components/dialog';
 import { divider } from './components/divider';
 import { emptyState } from './components/emptyState';
@@ -106,6 +107,7 @@ export const themeableComponents = {
   dateInput,
   dateRangeInput,
   dateTimeInput,
+  descriptionList,
   dialog,
   divider,
   emptyState,
