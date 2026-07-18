@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useId } from 'react';
 import { list as listStyles } from '@var-ui/core';
 import { recipeProps } from './utils';
 
@@ -27,11 +27,20 @@ export type ListProps = {
   onAction?: (id: string) => void;
 };
 
+/**
+ * Props for a row within {@link List}.
+ *
+ * When `href` or `onPress` is set, the row uses an invisible overlay as the sole
+ * hit target — `startContent` and `endContent` must be non-interactive (decorative
+ * or static content only; no links, buttons, or other controls).
+ */
 export type ListItemProps = {
   id?: string;
   label: ReactNode;
   description?: ReactNode;
+  /** Leading slot. Must not contain interactive elements when `href` / `onPress` is set. */
   startContent?: ReactNode;
+  /** Trailing slot. Must not contain interactive elements when `href` / `onPress` is set. */
   endContent?: ReactNode;
   href?: string;
   onPress?: () => void;
@@ -41,7 +50,12 @@ export type ListItemProps = {
 
 type ListStyleSlots = ReturnType<typeof listStyles>;
 
-const ListContext = createContext<ListStyleSlots | null>(null);
+type ListContextValue = {
+  styles: ListStyleSlots;
+  listId: string;
+};
+
+const ListContext = createContext<ListContextValue | null>(null);
 
 const interactiveOverlayStyle = {
   position: 'absolute',
@@ -61,15 +75,16 @@ function ariaLabelFromNode(node: ReactNode): string | undefined {
   return undefined;
 }
 
-function useListStyles(): ListStyleSlots {
-  const styles = useContext(ListContext);
-  if (styles == null) {
+function useListContext(): ListContextValue {
+  const context = useContext(ListContext);
+  if (context == null) {
     throw new Error('List.Item must be used within List');
   }
-  return styles;
+  return context;
 }
 
 type ListItemContentProps = {
+  itemId?: string;
   label: ReactNode;
   description?: ReactNode;
   startContent?: ReactNode;
@@ -81,6 +96,7 @@ type ListItemContentProps = {
 };
 
 function ListItemContent({
+  itemId,
   label,
   description,
   startContent,
@@ -90,9 +106,11 @@ function ListItemContent({
   isDisabled = false,
   className,
 }: ListItemContentProps): JSX.Element {
-  const s = useListStyles();
+  const { styles: s, listId } = useListContext();
+  const fallbackId = useId();
+  const labelId = itemId != null ? `${listId}-${itemId}-label` : `${listId}-${fallbackId}-label`;
   const isInteractive = !isDisabled && (href != null || onPress != null);
-  const ariaLabel = ariaLabelFromNode(label);
+  const stringLabel = ariaLabelFromNode(label);
 
   return (
     <li
@@ -101,16 +119,24 @@ function ListItemContent({
       data-disabled={isDisabled ? '' : undefined}
     >
       {startContent != null ? <span {...recipeProps(s.start)}>{startContent}</span> : null}
-      <span {...recipeProps(s.label)}>{label}</span>
+      <span id={isInteractive ? labelId : undefined} {...recipeProps(s.label)}>
+        {label}
+      </span>
       {description != null ? <span {...recipeProps(s.description)}>{description}</span> : null}
       {endContent != null ? <span {...recipeProps(s.end)}>{endContent}</span> : null}
       {isInteractive && href != null ? (
-        <a href={href} aria-label={ariaLabel} style={interactiveOverlayStyle} />
+        <a
+          href={href}
+          aria-label={stringLabel}
+          aria-labelledby={stringLabel == null ? labelId : undefined}
+          style={interactiveOverlayStyle}
+        />
       ) : null}
       {isInteractive && href == null && onPress != null ? (
         <button
           type="button"
-          aria-label={ariaLabel}
+          aria-label={stringLabel}
+          aria-labelledby={stringLabel == null ? labelId : undefined}
           style={interactiveOverlayStyle}
           onClick={onPress}
         />
@@ -122,6 +148,10 @@ function ListItemContent({
 /**
  * Generic vertical list for settings rows, member lists, and static content.
  * Supports compound `List.Item` children or an `items` array with optional render props.
+ *
+ * Interactive rows (`href` / `onPress` / `onAction`) use an invisible overlay as the
+ * sole hit target — `startContent`, `endContent`, and `renderStart` / `renderEnd` output
+ * must be non-interactive on those rows (no nested links or buttons).
  *
  * ```tsx
  * <List density="compact" hasDividers header="Members">
@@ -142,12 +172,14 @@ export function List({
   onAction,
 }: ListProps): JSX.Element {
   const s = listStyles({ density, listStyle, hasDividers: hasDividers ? true : false });
+  const listId = useId();
   const RootTag = listStyle === 'decimal' ? 'ol' : 'ul';
 
   const itemNodes =
     items?.map((item) => (
       <ListItemContent
         key={item.id}
+        itemId={item.id}
         label={item.label}
         description={item.description}
         startContent={renderStart?.(item) ?? item.startContent}
@@ -163,7 +195,7 @@ export function List({
     )) ?? null;
 
   return (
-    <ListContext.Provider value={s}>
+    <ListContext.Provider value={{ styles: s, listId }}>
       <RootTag {...recipeProps(s.root, className)}>
         {header != null ? <li {...recipeProps(s.header)}>{header}</li> : null}
         {children ?? itemNodes}
@@ -174,6 +206,7 @@ export function List({
 
 /** Row within a `List` — link or button overlay when `href` / `onPress` is set. */
 export function ListItem({
+  id,
   label,
   description,
   startContent,
@@ -185,6 +218,7 @@ export function ListItem({
 }: ListItemProps): JSX.Element {
   return (
     <ListItemContent
+      itemId={id}
       label={label}
       description={description}
       startContent={startContent}

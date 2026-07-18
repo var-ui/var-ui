@@ -48,4 +48,29 @@ describe('List', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Ada' }));
     expect(onAction).toHaveBeenCalledWith('a');
   });
+
+  it('names interactive overlay via aria-labelledby for JSX labels', () => {
+    render(
+      <List
+        items={[
+          {
+            id: 'a',
+            label: (
+              <span data-testid="label-content">
+                Ada <strong>Lovelace</strong>
+              </span>
+            ),
+            href: '/u/ada',
+          },
+        ]}
+      />,
+    );
+    const link = screen.getByRole('link', { name: /Ada Lovelace/i });
+    const labelledBy = link.getAttribute('aria-labelledby');
+    expect(labelledBy).toBeTruthy();
+    expect(labelledBy).toMatch(/-a-label$/);
+    const labelHost = document.getElementById(labelledBy!);
+    expect(labelHost).toBeTruthy();
+    expect(labelHost!.contains(screen.getByTestId('label-content'))).toBe(true);
+  });
 });
