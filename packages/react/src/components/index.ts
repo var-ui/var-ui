@@ -30,6 +30,16 @@ export { RadioGroup, type RadioGroupOption, type RadioGroupProps } from './Radio
 export { CheckboxGroup, type CheckboxGroupOption, type CheckboxGroupProps } from './CheckboxGroup';
 export { Select, type SelectOption, type SelectProps } from './Select';
 export { Tabs, type TabsProps } from './Tabs';
+export {
+  TabList,
+  TabListMenu,
+  TabListTab,
+  type TabListIcon,
+  type TabListMenuOption,
+  type TabListMenuProps,
+  type TabListProps,
+  type TabListTabProps,
+} from './TabList';
 export { Dialog, type DialogProps } from './Dialog';
 export { AlertDialog, type AlertDialogProps } from './AlertDialog';
 export {
