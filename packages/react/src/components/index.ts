@@ -64,6 +64,12 @@ export {
   type DescriptionListItemProps,
   type DescriptionListProps,
 } from './DescriptionList';
+export {
+  OverflowList,
+  OverflowListItem,
+  type OverflowListItemProps,
+  type OverflowListProps,
+} from './OverflowList';
 export { Divider, type DividerProps } from './Divider';
 export { Grid, type GridProps } from './Grid';
 export { Section, type SectionProps } from './Section';

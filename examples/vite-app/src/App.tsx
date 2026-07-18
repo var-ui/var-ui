@@ -43,6 +43,7 @@ import {
   List,
   MobileNav,
   MultiSelector,
+  OverflowList,
   Pagination,
   Popover,
   ProgressBar,
@@ -731,8 +732,44 @@ function DataDisplaySection() {
             { id: 'storage', label: 'Storage', value: '42 GB' },
           ]}
         />
+        <OverflowListDemo />
       </Stack>
     </Section>
+  );
+}
+
+function OverflowListDemo() {
+  const tags = [
+    { id: 'design', label: 'Design' },
+    { id: 'frontend', label: 'Frontend' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'performance', label: 'Performance' },
+    { id: 'react', label: 'React' },
+    { id: 'design-system', label: 'Design system' },
+  ];
+
+  return (
+    <Stack gap="sm">
+      <Text size="sm" weight="medium">
+        Overflow list
+      </Text>
+      <OverflowList
+        items={tags}
+        gap="sm"
+        renderItem={(tag) => <Badge>{tag.label}</Badge>}
+        renderOverflow={(hidden) => (
+          <Popover trigger={<Button size="sm">+{hidden.length}</Button>}>
+            <Stack gap="xs">
+              {(hidden as typeof tags).map((tag) => (
+                <Text key={tag.id} size="sm">
+                  {tag.label}
+                </Text>
+              ))}
+            </Stack>
+          </Popover>
+        )}
+      />
+    </Stack>
   );
 }
 
