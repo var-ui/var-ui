@@ -115,13 +115,15 @@ const listRecipe = styles.component(
         density: {
           compact: {
             item: {
-              padding: `${t.space[1]} ${t.space[2]}`,
+              [v.itemPaddingY.name]: t.space[1],
+              [v.itemPaddingX.name]: t.space[2],
             },
           },
           balanced: {},
           spacious: {
             item: {
-              padding: `${t.space[3]} ${t.space[4]}`,
+              [v.itemPaddingY.name]: t.space[3],
+              [v.itemPaddingX.name]: t.space[4],
             },
           },
         },
