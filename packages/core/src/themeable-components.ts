@@ -36,6 +36,7 @@ import { inputGroup } from './components/inputGroup';
 import { kbd } from './components/kbd';
 import { link } from './components/link';
 import { menu } from './components/menu';
+import { mobileNav } from './components/mobileNav';
 import { multiSelector } from './components/multiSelector';
 import { numberInput } from './components/numberInput';
 import { overlay } from './components/overlay';
@@ -116,6 +117,7 @@ export const themeableComponents = {
   link,
   linkButton,
   menu,
+  mobileNav,
   multiSelector,
   numberInput,
   overlay,

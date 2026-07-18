@@ -20,6 +20,7 @@ export const iconNameList = [
   'stop',
   'wrench',
   'clock',
+  'menu',
   'moreHorizontal',
 ] as const;
 

@@ -3,7 +3,7 @@ import { isValidElement } from 'react';
 import { bundle2Icons } from './bundle2';
 import { defaultIcons } from './index';
 
-const BUNDLE_2_NAMES = ['arrowUp', 'stop', 'wrench', 'clock'] as const;
+const BUNDLE_2_NAMES = ['arrowUp', 'stop', 'wrench', 'clock', 'menu', 'moreHorizontal'] as const;
 
 describe('@var-ui/icons bundle 2 (chat)', () => {
   it('maps every bundle-2 name to a React element', () => {
