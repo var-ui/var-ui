@@ -38,6 +38,7 @@ import {
   InputGroupInput,
   InputGroupText,
   LayerProvider,
+  MobileNav,
   MultiSelector,
   Pagination,
   Popover,
@@ -426,6 +427,44 @@ function SideNavDemo() {
   );
 }
 
+function MobileNavDemo() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState('dashboard');
+
+  return (
+    <Stack gap="sm">
+      <HStack gap="sm" align="center">
+        <MobileNav.Toggle isOpen={isOpen} onPress={() => setIsOpen(true)} />
+        <Text size="sm" tone="secondary">
+          Narrow-viewport drawer — click the hamburger to open.
+        </Text>
+      </HStack>
+      <MobileNav isOpen={isOpen} onOpenChange={setIsOpen} header="Acme" width={280}>
+        <SideNav.Section title="Main">
+          <SideNav.Item
+            label="Dashboard"
+            icon="search"
+            isSelected={selected === 'dashboard'}
+            onPress={() => setSelected('dashboard')}
+          />
+          <SideNav.Item
+            label="Projects"
+            icon="clock"
+            isSelected={selected === 'projects'}
+            onPress={() => setSelected('projects')}
+          />
+          <SideNav.Item
+            label="Settings"
+            icon="wrench"
+            isSelected={selected === 'settings'}
+            onPress={() => setSelected('settings')}
+          />
+        </SideNav.Section>
+      </MobileNav>
+    </Stack>
+  );
+}
+
 function TopNavDemo() {
   const [selected, setSelected] = useState('home');
 
@@ -518,6 +557,7 @@ function NavigationSection() {
       <Stack gap="md">
         <TopNavDemo />
         <SideNavDemo />
+        <MobileNavDemo />
         <Breadcrumbs
           label="Short trail"
           items={[
