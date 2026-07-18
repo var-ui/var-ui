@@ -60,6 +60,7 @@ export { resizeHandle } from './resizeHandle';
 export { progressBar } from './progressBar';
 export { section } from './section';
 export { sideNav } from './sideNav';
+export { topNav } from './topNav';
 export { skeleton } from './skeleton';
 export { spinner } from './spinner';
 export { stack } from './stack';

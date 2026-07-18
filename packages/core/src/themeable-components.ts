@@ -49,6 +49,7 @@ import { section } from './components/section';
 import { segmentedControl } from './components/segmentedControl';
 import { select } from './components/select';
 import { sideNav } from './components/sideNav';
+import { topNav } from './components/topNav';
 import { skeleton } from './components/skeleton';
 import { slider } from './components/slider';
 import { spinner } from './components/spinner';
@@ -128,6 +129,7 @@ export const themeableComponents = {
   segmentedControl,
   select,
   sideNav,
+  topNav,
   skeleton,
   slider,
   spinner,
