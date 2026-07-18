@@ -39,6 +39,7 @@ import {
   InputGroupInput,
   InputGroupText,
   LayerProvider,
+  DescriptionList,
   List,
   MobileNav,
   MultiSelector,
@@ -709,6 +710,27 @@ function DataDisplaySection() {
             Selected: {selectedSetting}
           </Text>
         ) : null}
+        <DescriptionList
+          columns="single"
+          labelPosition="start"
+          maxItems={4}
+          title="Project details"
+        >
+          <DescriptionList.Item label="Owner">Ada Lovelace</DescriptionList.Item>
+          <DescriptionList.Item label="Region">us-west-2</DescriptionList.Item>
+          <DescriptionList.Item label="Environment">Production</DescriptionList.Item>
+          <DescriptionList.Item label="Created">2024-03-15</DescriptionList.Item>
+          <DescriptionList.Item label="Last deploy">2 hours ago</DescriptionList.Item>
+        </DescriptionList>
+        <DescriptionList
+          columns={3}
+          items={[
+            { id: 'status', label: 'Status', value: 'Active' },
+            { id: 'tier', label: 'Tier', value: 'Enterprise' },
+            { id: 'users', label: 'Users', value: '128' },
+            { id: 'storage', label: 'Storage', value: '42 GB' },
+          ]}
+        />
       </Stack>
     </Section>
   );
