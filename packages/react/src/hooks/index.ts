@@ -20,3 +20,9 @@ export {
   type UseTablePaginationOptions,
   type UseTablePaginationResult,
 } from './useTablePagination';
+export {
+  useTreeFocus,
+  type TreeFocusItem,
+  type UseTreeFocusOptions,
+  type UseTreeFocusResult,
+} from './useTreeFocus';

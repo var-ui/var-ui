@@ -57,6 +57,7 @@ import {
   Table,
   TabList,
   Text,
+  Tree,
   TextField,
   Thumbnail,
   TimeInput,
@@ -739,8 +740,59 @@ function DataDisplaySection() {
         />
         <OverflowListDemo />
         <TableDemo />
+        <TreeDemo />
       </Stack>
     </Section>
+  );
+}
+
+function TreeDemo() {
+  const [expanded, setExpanded] = useState<Set<string>>(new Set(['src', 'src/components']));
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+
+  return (
+    <Stack gap="sm">
+      <Text size="sm" weight="medium">
+        Tree
+      </Text>
+      <Tree
+        aria-label="Project files"
+        density="compact"
+        expandedKeys={expanded}
+        onExpandedChange={setExpanded}
+        selectionMode="single"
+        selectedKeys={selected}
+        onSelectionChange={setSelected}
+        items={[
+          {
+            id: 'src',
+            label: 'src',
+            children: [
+              {
+                id: 'src/components',
+                label: 'components',
+                children: [
+                  { id: 'src/components/App.tsx', label: 'App.tsx' },
+                  { id: 'src/components/Button.tsx', label: 'Button.tsx' },
+                ],
+              },
+              { id: 'src/index.ts', label: 'index.ts' },
+            ],
+          },
+          { id: 'package.json', label: 'package.json' },
+          {
+            id: 'node_modules',
+            label: 'node_modules',
+            description: 'Ignored',
+            isDisabled: true,
+            children: [{ id: 'node_modules/react', label: 'react' }],
+          },
+        ]}
+      />
+      <Text size="sm" tone="secondary">
+        Selected: {selected.size > 0 ? Array.from(selected).join(', ') : 'none'}
+      </Text>
+    </Stack>
   );
 }
 

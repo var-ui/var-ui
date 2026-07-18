@@ -1,0 +1,501 @@
+import type { FocusEvent, JSX, KeyboardEvent, ReactNode } from 'react';
+import {
+  Children,
+  createContext,
+  isValidElement,
+  useCallback,
+  useContext,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { tree as treeStyles } from '@var-ui/core';
+import { Icon } from '../icons';
+import { useTreeFocus, type TreeFocusItem } from '../hooks/useTreeFocus';
+import { recipeProps } from './utils';
+
+export type TreeItemData = {
+  id: string;
+  label: ReactNode;
+  description?: ReactNode;
+  children?: TreeItemData[];
+  isDisabled?: boolean;
+  href?: string;
+};
+
+export type TreeSelectionMode = 'none' | 'single' | 'multiple';
+
+export type TreeProps = {
+  items?: TreeItemData[];
+  children?: ReactNode;
+  density?: 'compact' | 'balanced' | 'spacious';
+  expandedKeys?: Iterable<string>;
+  defaultExpandedKeys?: Iterable<string>;
+  onExpandedChange?: (keys: Set<string>) => void;
+  selectedKeys?: Iterable<string>;
+  defaultSelectedKeys?: Iterable<string>;
+  onSelectionChange?: (keys: Set<string>) => void;
+  selectionMode?: TreeSelectionMode;
+  renderStart?: (item: TreeItemData) => ReactNode;
+  renderEnd?: (item: TreeItemData) => ReactNode;
+  className?: string;
+  'aria-label'?: string;
+};
+
+export type TreeItemProps = {
+  id: string;
+  label: ReactNode;
+  description?: ReactNode;
+  isDisabled?: boolean;
+  href?: string;
+  /** Seeds the initial (uncontrolled) expanded set — ignored once `expandedKeys` is controlled. */
+  defaultExpanded?: boolean;
+  children?: ReactNode;
+  startContent?: ReactNode;
+  endContent?: ReactNode;
+  className?: string;
+};
+
+const DATA_ID_ATTR = 'data-tree-item-id';
+
+const overlayLinkStyle = {
+  position: 'absolute',
+  inset: 0,
+  zIndex: 1,
+  margin: 0,
+  padding: 0,
+  border: 'none',
+  background: 'transparent',
+  textDecoration: 'none',
+} as const;
+
+type TreeStyleSlots = ReturnType<typeof treeStyles>;
+
+type TreeContextValue = {
+  styles: TreeStyleSlots;
+  selectionMode: TreeSelectionMode;
+  isExpanded: (id: string) => boolean;
+  toggleExpand: (id: string) => void;
+  isSelected: (id: string) => boolean;
+  toggleSelect: (id: string) => void;
+  focusedId: string | null;
+  renderStart?: (item: TreeItemData) => ReactNode;
+  renderEnd?: (item: TreeItemData) => ReactNode;
+};
+
+const TreeContext = createContext<TreeContextValue | null>(null);
+
+function useTreeContext(): TreeContextValue {
+  const context = useContext(TreeContext);
+  if (context == null) {
+    throw new Error('Tree.Item must be used within Tree');
+  }
+  return context;
+}
+
+/** Nesting depth (1-indexed, per `aria-level`) — incremented by each `Tree.Item` for its own children. */
+const TreeLevelContext = createContext(1);
+
+function useControlledKeySet(options: {
+  value?: Iterable<string>;
+  defaultValue?: Iterable<string>;
+  onChange?: (keys: Set<string>) => void;
+}): [Set<string>, (next: Set<string>) => void] {
+  const { value, defaultValue, onChange } = options;
+  const isControlled = value !== undefined;
+  const [internal, setInternal] = useState<Set<string>>(() => new Set(defaultValue ?? []));
+  const resolved = isControlled ? new Set(value) : internal;
+
+  const commit = useCallback(
+    (next: Set<string>) => {
+      if (!isControlled) setInternal(next);
+      onChange?.(next);
+    },
+    [isControlled, onChange],
+  );
+
+  return [resolved, commit];
+}
+
+/** Recursively collects `Tree.Item` ids with `defaultExpanded` set — used once to seed uncontrolled expand state. */
+function collectDefaultExpandedIds(node: ReactNode, acc: Set<string>): void {
+  Children.forEach(node, (child) => {
+    if (!isValidElement(child) || child.type !== TreeItem) return;
+    const props = child.props as TreeItemProps;
+    if (props.defaultExpanded) acc.add(props.id);
+    if (props.children != null) collectDefaultExpandedIds(props.children, acc);
+  });
+}
+
+type TreeRowContentProps = {
+  id: string;
+  label: ReactNode;
+  description?: ReactNode;
+  isDisabled?: boolean;
+  href?: string;
+  hasChildren: boolean;
+  isExpanded: boolean;
+  level: number;
+  startContent?: ReactNode;
+  endContent?: ReactNode;
+  className?: string;
+};
+
+function TreeRowContent({
+  id,
+  label,
+  description,
+  isDisabled = false,
+  href,
+  hasChildren,
+  isExpanded,
+  level,
+  startContent,
+  endContent,
+  className,
+}: TreeRowContentProps): JSX.Element {
+  const ctx = useTreeContext();
+  const s = ctx.styles;
+  const isSelected = ctx.selectionMode !== 'none' && ctx.isSelected(id);
+  const isRovingTarget = ctx.focusedId === id;
+  const labelId = useId();
+  const isLinkLabelString = typeof label === 'string';
+
+  const handleToggleClick = () => {
+    if (isDisabled) return;
+    ctx.toggleExpand(id);
+  };
+
+  const handleRowClick = () => {
+    if (isDisabled) return;
+    if (ctx.selectionMode !== 'none') {
+      ctx.toggleSelect(id);
+    } else if (hasChildren) {
+      ctx.toggleExpand(id);
+    }
+  };
+
+  return (
+    <div
+      {...{ [DATA_ID_ATTR]: id }}
+      role="treeitem"
+      aria-level={level}
+      aria-expanded={hasChildren ? isExpanded : undefined}
+      aria-selected={ctx.selectionMode !== 'none' ? isSelected : undefined}
+      aria-disabled={isDisabled ? true : undefined}
+      data-disabled={isDisabled ? '' : undefined}
+      data-has-children={hasChildren ? '' : undefined}
+      data-selected={isSelected ? '' : undefined}
+      tabIndex={isRovingTarget ? 0 : -1}
+      style={{ position: 'relative' }}
+      {...recipeProps(s.row, className)}
+      onClick={handleRowClick}
+    >
+      {hasChildren ? (
+        <button
+          type="button"
+          {...recipeProps(s.toggle)}
+          data-expanded={isExpanded ? '' : undefined}
+          tabIndex={-1}
+          aria-hidden="true"
+          onClick={(event) => {
+            event.stopPropagation();
+            handleToggleClick();
+          }}
+        >
+          <Icon name="chevronRight" size="sm" />
+        </button>
+      ) : (
+        <span {...recipeProps(s.toggle)} aria-hidden="true" style={{ visibility: 'hidden' }}>
+          <Icon name="chevronRight" size="sm" />
+        </span>
+      )}
+      {startContent != null ? <span {...recipeProps(s.start)}>{startContent}</span> : null}
+      <span id={href != null && !isLinkLabelString ? labelId : undefined} {...recipeProps(s.label)}>
+        {label}
+      </span>
+      {description != null ? <span {...recipeProps(s.description)}>{description}</span> : null}
+      {endContent != null ? <span {...recipeProps(s.end)}>{endContent}</span> : null}
+      {href != null && !isDisabled ? (
+        <a
+          href={href}
+          tabIndex={-1}
+          aria-label={isLinkLabelString ? (label as string) : undefined}
+          aria-labelledby={isLinkLabelString ? undefined : labelId}
+          style={overlayLinkStyle}
+        />
+      ) : null}
+    </div>
+  );
+}
+
+function TreeItemsGroup({ items, level }: { items: TreeItemData[]; level: number }): JSX.Element {
+  const ctx = useTreeContext();
+  return (
+    <>
+      {items.map((item) => {
+        const hasChildren = item.children != null && item.children.length > 0;
+        const isExpanded = hasChildren && ctx.isExpanded(item.id);
+        return (
+          <li key={item.id} role="none" {...recipeProps(ctx.styles.item)}>
+            <TreeRowContent
+              id={item.id}
+              label={item.label}
+              description={item.description}
+              isDisabled={item.isDisabled}
+              href={item.href}
+              hasChildren={hasChildren}
+              isExpanded={isExpanded}
+              level={level}
+              startContent={ctx.renderStart?.(item)}
+              endContent={ctx.renderEnd?.(item)}
+            />
+            {hasChildren && isExpanded ? (
+              <ul role="group" {...recipeProps(ctx.styles.group)}>
+                <TreeItemsGroup items={item.children ?? []} level={level + 1} />
+              </ul>
+            ) : null}
+          </li>
+        );
+      })}
+    </>
+  );
+}
+
+/** Row within a `Tree` — nest `Tree.Item` children to build a subtree. */
+export function TreeItem({
+  id,
+  label,
+  description,
+  isDisabled,
+  href,
+  children,
+  startContent,
+  endContent,
+  className,
+}: TreeItemProps): JSX.Element {
+  const level = useContext(TreeLevelContext);
+  const ctx = useTreeContext();
+  const hasChildren = children != null;
+  const isExpanded = hasChildren && ctx.isExpanded(id);
+
+  return (
+    <li role="none" {...recipeProps(ctx.styles.item)}>
+      <TreeRowContent
+        id={id}
+        label={label}
+        description={description}
+        isDisabled={isDisabled}
+        href={href}
+        hasChildren={hasChildren}
+        isExpanded={isExpanded}
+        level={level}
+        startContent={startContent}
+        endContent={endContent}
+        className={className}
+      />
+      {hasChildren && isExpanded ? (
+        <TreeLevelContext.Provider value={level + 1}>
+          <ul role="group" {...recipeProps(ctx.styles.group)}>
+            {children}
+          </ul>
+        </TreeLevelContext.Provider>
+      ) : null}
+    </li>
+  );
+}
+
+/**
+ * Hierarchical expandable list with APG tree keyboard behavior (`useTreeFocus`
+ * internally). Supports compound `Tree.Item` children (nest freely) or an
+ * `items` array with recursive `children`. Controlled/uncontrolled
+ * `expandedKeys` and `selectedKeys`; `selectionMode` defaults to `'none'`.
+ *
+ * Clicking a row selects it when `selectionMode !== 'none'`; otherwise a
+ * click toggles expansion (as does the chevron button, always).
+ *
+ * ```tsx
+ * <Tree selectionMode="single" selectedKeys={selected} onSelectionChange={setSelected}>
+ *   <Tree.Item id="src" label="src" defaultExpanded>
+ *     <Tree.Item id="app" label="App.tsx" />
+ *   </Tree.Item>
+ * </Tree>
+ * ```
+ */
+export function Tree({
+  items,
+  children,
+  density = 'balanced',
+  expandedKeys,
+  defaultExpandedKeys,
+  onExpandedChange,
+  selectedKeys,
+  defaultSelectedKeys,
+  onSelectionChange,
+  selectionMode = 'none',
+  renderStart,
+  renderEnd,
+  className,
+  'aria-label': ariaLabel,
+}: TreeProps): JSX.Element {
+  const s = treeStyles({ density });
+  const rootRef = useRef<HTMLUListElement>(null);
+  const [focusedId, setFocusedId] = useState<string | null>(null);
+
+  // Computed once, at mount, for uncontrolled default expand state only.
+  const initialExpandedIds = useMemo(() => {
+    const ids = new Set(defaultExpandedKeys ?? []);
+    if (children != null) collectDefaultExpandedIds(children, ids);
+    return ids;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const [expandedSet, commitExpanded] = useControlledKeySet({
+    value: expandedKeys,
+    defaultValue: initialExpandedIds,
+    onChange: onExpandedChange,
+  });
+  const [selectedSet, commitSelected] = useControlledKeySet({
+    value: selectedKeys,
+    defaultValue: defaultSelectedKeys,
+    onChange: onSelectionChange,
+  });
+
+  const isExpanded = useCallback((id: string) => expandedSet.has(id), [expandedSet]);
+  const toggleExpand = useCallback(
+    (id: string) => {
+      const next = new Set(expandedSet);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      commitExpanded(next);
+    },
+    [expandedSet, commitExpanded],
+  );
+  const expand = useCallback(
+    (id: string) => {
+      if (expandedSet.has(id)) return;
+      commitExpanded(new Set(expandedSet).add(id));
+    },
+    [expandedSet, commitExpanded],
+  );
+  const collapse = useCallback(
+    (id: string) => {
+      if (!expandedSet.has(id)) return;
+      const next = new Set(expandedSet);
+      next.delete(id);
+      commitExpanded(next);
+    },
+    [expandedSet, commitExpanded],
+  );
+
+  const isSelected = useCallback((id: string) => selectedSet.has(id), [selectedSet]);
+  const toggleSelect = useCallback(
+    (id: string) => {
+      if (selectionMode === 'none') return;
+      if (selectionMode === 'single') {
+        commitSelected(selectedSet.has(id) ? new Set<string>() : new Set([id]));
+        return;
+      }
+      const next = new Set(selectedSet);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      commitSelected(next);
+    },
+    [selectionMode, selectedSet, commitSelected],
+  );
+
+  const getItems = useCallback((): TreeFocusItem[] => {
+    const root = rootRef.current;
+    if (!root) return [];
+    return Array.from(root.querySelectorAll<HTMLElement>('[role="treeitem"]')).map((element) => ({
+      id: element.getAttribute(DATA_ID_ATTR) ?? '',
+      element,
+      isDisabled: element.hasAttribute('data-disabled'),
+      hasChildren: element.hasAttribute('data-has-children'),
+      isExpanded: element.getAttribute('aria-expanded') === 'true',
+    }));
+  }, []);
+
+  const { onKeyDown, tabIndex: rootTabIndex } = useTreeFocus({
+    getItems,
+    onExpand: expand,
+    onCollapse: collapse,
+    onSelect: selectionMode !== 'none' ? toggleSelect : undefined,
+  });
+
+  // Keeps the roving tabindex pointed at a real, enabled row after expand/collapse
+  // or data changes make the previous target disappear (or on first mount).
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const rows = Array.from(root.querySelectorAll<HTMLElement>('[role="treeitem"]'));
+    const stillValid =
+      focusedId != null &&
+      rows.some(
+        (row) => row.getAttribute(DATA_ID_ATTR) === focusedId && !row.hasAttribute('data-disabled'),
+      );
+    if (stillValid) return;
+    const first = rows.find((row) => !row.hasAttribute('data-disabled'));
+    const nextId = first?.getAttribute(DATA_ID_ATTR);
+    if (nextId != null && nextId !== focusedId) setFocusedId(nextId);
+  });
+
+  const handleFocus = useCallback((event: FocusEvent<HTMLUListElement>) => {
+    const id = (event.target as HTMLElement).getAttribute(DATA_ID_ATTR);
+    if (id != null) setFocusedId(id);
+  }, []);
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLUListElement>) => onKeyDown(event.nativeEvent),
+    [onKeyDown],
+  );
+
+  const contextValue = useMemo<TreeContextValue>(
+    () => ({
+      styles: s,
+      selectionMode,
+      isExpanded,
+      toggleExpand,
+      isSelected,
+      toggleSelect,
+      focusedId,
+      renderStart,
+      renderEnd,
+    }),
+    [
+      s,
+      selectionMode,
+      isExpanded,
+      toggleExpand,
+      isSelected,
+      toggleSelect,
+      focusedId,
+      renderStart,
+      renderEnd,
+    ],
+  );
+
+  const content = children ?? (items != null ? <TreeItemsGroup items={items} level={1} /> : null);
+
+  return (
+    <TreeContext.Provider value={contextValue}>
+      <TreeLevelContext.Provider value={1}>
+        <ul
+          ref={rootRef}
+          role="tree"
+          aria-label={ariaLabel}
+          tabIndex={rootTabIndex}
+          onKeyDown={handleKeyDown}
+          onFocus={handleFocus}
+          {...recipeProps(s.root, className)}
+        >
+          {content}
+        </ul>
+      </TreeLevelContext.Provider>
+    </TreeContext.Provider>
+  );
+}
+
+Tree.Item = TreeItem;
