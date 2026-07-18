@@ -60,15 +60,33 @@ export type TreeItemProps = {
 
 const DATA_ID_ATTR = 'data-tree-item-id';
 
-const overlayLinkStyle = {
+const overlayLinkBaseStyle = {
   position: 'absolute',
-  inset: 0,
+  top: 0,
+  right: 0,
+  bottom: 0,
   zIndex: 1,
   margin: 0,
   padding: 0,
   border: 'none',
   background: 'transparent',
   textDecoration: 'none',
+} as const;
+
+/** Chevron icon (sm) + row gap (`space.2`) — keeps the overlay off the expand toggle column. */
+const overlayLinkStyleAfterToggle = {
+  ...overlayLinkBaseStyle,
+  left: 'calc(14px + 8px)',
+} as const;
+
+const overlayLinkStyleFullRow = {
+  ...overlayLinkBaseStyle,
+  left: 0,
+} as const;
+
+const toggleButtonStyle = {
+  position: 'relative',
+  zIndex: 2,
 } as const;
 
 type TreeStyleSlots = ReturnType<typeof treeStyles>;
@@ -200,6 +218,7 @@ function TreeRowContent({
           data-expanded={isExpanded ? '' : undefined}
           tabIndex={-1}
           aria-hidden="true"
+          style={toggleButtonStyle}
           onClick={(event) => {
             event.stopPropagation();
             handleToggleClick();
@@ -224,7 +243,7 @@ function TreeRowContent({
           tabIndex={-1}
           aria-label={isLinkLabelString ? (label as string) : undefined}
           aria-labelledby={isLinkLabelString ? undefined : labelId}
-          style={overlayLinkStyle}
+          style={hasChildren ? overlayLinkStyleAfterToggle : overlayLinkStyleFullRow}
         />
       ) : null}
     </div>

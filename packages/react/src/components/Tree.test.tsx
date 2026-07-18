@@ -239,6 +239,38 @@ describe('Tree', () => {
     expect(screen.getByRole('link')).toHaveProperty('href', expect.stringContaining('/docs'));
   });
 
+  it('expands href branch on chevron click without selecting; link stays on label', async () => {
+    const onSelectionChange = vi.fn();
+    render(
+      <Tree
+        aria-label="Nav"
+        selectionMode="single"
+        onSelectionChange={onSelectionChange}
+        items={[
+          {
+            id: 'docs',
+            label: 'Docs',
+            href: '/docs',
+            children: [{ id: 'guide', label: 'Guide' }],
+          },
+        ]}
+      />,
+    );
+    const row = screen.getByRole('treeitem', { name: /Docs/ });
+    const toggle = row.querySelector('button')!;
+    const link = screen.getByRole('link', { name: 'Docs' });
+
+    expect(toggle.style.zIndex).toBe('2');
+    expect(link.style.left).toBe('calc(22px)');
+
+    await userEvent.click(toggle);
+    expect(row.getAttribute('aria-expanded')).toBe('true');
+    expect(screen.getByRole('treeitem', { name: 'Guide' })).toBeTruthy();
+    expect(onSelectionChange).not.toHaveBeenCalled();
+
+    expect(link).toHaveProperty('href', expect.stringContaining('/docs'));
+  });
+
   it('renders renderStart/renderEnd output for items-array rows', () => {
     render(
       <Tree
