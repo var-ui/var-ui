@@ -140,7 +140,8 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
   - [ ] **Phase 4 — lists, tables, and data display** — `List`, `Table`,
         `DescriptionList`, `OverflowList`, `Tree`, plus headless
         `useTableSort` / `useTableSelection` / `useTablePagination` (filter /
-        column resize deferred). Spec: `specs/phase-4-lists-tables.md`.
+        column resize deferred). Spec: `specs/phase-4-lists-tables.md`. Plan:
+        `plans/2026-07-17-phase-4-lists-tables.md`.
   - [x] **Phase 5 P1 — Breadcrumbs and Pagination** — shipped: `Breadcrumbs`
         (item-array API, click-to-expand overflow collapse), `Pagination`
         (`pages`/`count`/`compact`/`dots`/`none` variants + page-size
