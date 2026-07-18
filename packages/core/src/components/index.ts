@@ -57,6 +57,7 @@ export { heading, textBlock } from './typography';
 export { icon } from './icon';
 export { kbd } from './kbd';
 export { overlay } from './overlay';
+export { overflowList } from './overflowList';
 export { pagination } from './pagination';
 export { resizeHandle } from './resizeHandle';
 export { progressBar } from './progressBar';

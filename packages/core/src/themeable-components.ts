@@ -42,6 +42,7 @@ import { menu } from './components/menu';
 import { mobileNav } from './components/mobileNav';
 import { multiSelector } from './components/multiSelector';
 import { numberInput } from './components/numberInput';
+import { overflowList } from './components/overflowList';
 import { overlay } from './components/overlay';
 import { pagination } from './components/pagination';
 import { popover } from './components/popover';
@@ -127,6 +128,7 @@ export const themeableComponents = {
   mobileNav,
   multiSelector,
   numberInput,
+  overflowList,
   overlay,
   pagination,
   popover,
