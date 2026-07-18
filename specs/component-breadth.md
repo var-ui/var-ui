@@ -499,17 +499,18 @@ palette are usable in the example app.
 
 ### Phase 4 — Lists, tables, and data display (~10 families)
 
-| Priority | Astryx reference           | var-ui deliverable                                                                                                                 |
-| -------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| P1       | `List`, `ListItem`, `Item` | `List` / `List.Item` — dual API (items + compound), no public shared `Item`                                                        |
-| P1       | `Table` + subcomponents    | Semantic HTML `Table` + parts; sticky header via CSS; no RAC Table                                                                 |
-| P2       | `MetadataList`             | `DescriptionList` / `DescriptionList.Item` (semantic `<dl>`)                                                                       |
-| P2       | `OverflowList`             | `OverflowList` + `useOverflow`; overflow UI via render prop                                                                        |
-| P2       | `TreeList`                 | `Tree` / `Tree.Item` + `useTreeFocus` (APG hand-roll)                                                                              |
-| P3       | Table plugins              | Headless hooks only: `useTableSort`, `useTableSelection`, `useTablePagination` — filter/resize deferred; **no** `plugins` registry |
+| Priority | Astryx reference           | var-ui deliverable                                                                                                                               |
+| -------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| P1       | `List`, `ListItem`, `Item` | **Shipped** — `List` / `List.Item` — dual API (items + compound), no public shared `Item`                                                        |
+| P1       | `Table` + subcomponents    | **Shipped** — semantic HTML `Table` + parts; sticky header via CSS; no RAC Table                                                                 |
+| P2       | `MetadataList`             | **Shipped** — `DescriptionList` / `DescriptionList.Item` (semantic `<dl>`)                                                                       |
+| P2       | `OverflowList`             | **Shipped** — `OverflowList` + `useOverflow`; overflow UI via render prop                                                                        |
+| P2       | `TreeList`                 | **Shipped** — `Tree` / `Tree.Item` + `useTreeFocus` (APG hand-roll)                                                                              |
+| P3       | Table plugins              | **Shipped** — headless hooks only: `useTableSort`, `useTableSelection`, `useTablePagination` — filter/resize deferred; **no** `plugins` registry |
 
 **Phase 4 done when:** Table and List cover admin UI needs; sort + selection +
-pagination hooks ship. Spec: `specs/phase-4-lists-tables.md`.
+pagination hooks ship. **Met** — shipped on branch `phase-4-lists-tables`. Spec:
+`specs/phase-4-lists-tables.md`.
 
 ### Phase 5 — Navigation and app chrome (~15 families)
 
