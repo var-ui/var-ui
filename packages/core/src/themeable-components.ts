@@ -63,6 +63,7 @@ import { stack } from './components/stack';
 import { statusDot } from './components/statusDot';
 import { steps } from './components/steps';
 import { switchStyles } from './components/switch';
+import { table } from './components/table';
 import { tabs } from './components/tabs';
 import { textAreaField } from './components/textAreaField';
 import { textField } from './components/textField';
@@ -149,6 +150,7 @@ export const themeableComponents = {
   statusDot,
   steps,
   switchStyles,
+  table,
   tabs,
   textAreaField,
   textBlock,
