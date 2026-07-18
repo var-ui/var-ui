@@ -69,6 +69,7 @@ export { stack } from './stack';
 export { statusDot } from './statusDot';
 export { dialog } from './dialog';
 export { link } from './link';
+export { list } from './list';
 export { radio } from './radio';
 export { select } from './select';
 export { switchStyles } from './switch';

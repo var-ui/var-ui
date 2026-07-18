@@ -36,6 +36,7 @@ import { icon } from './components/icon';
 import { inputGroup } from './components/inputGroup';
 import { kbd } from './components/kbd';
 import { link } from './components/link';
+import { list } from './components/list';
 import { menu } from './components/menu';
 import { mobileNav } from './components/mobileNav';
 import { multiSelector } from './components/multiSelector';
@@ -119,6 +120,7 @@ export const themeableComponents = {
   kbd,
   link,
   linkButton,
+  list,
   menu,
   mobileNav,
   multiSelector,
