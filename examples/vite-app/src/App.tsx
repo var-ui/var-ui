@@ -39,6 +39,7 @@ import {
   InputGroupInput,
   InputGroupText,
   LayerProvider,
+  List,
   MobileNav,
   MultiSelector,
   Pagination,
@@ -661,6 +662,58 @@ function TabListDemo() {
   );
 }
 
+function DataDisplaySection() {
+  const [selectedSetting, setSelectedSetting] = useState<string | null>(null);
+
+  return (
+    <Section title="Data display">
+      <Stack gap="md">
+        <List density="compact" hasDividers header="Team members">
+          <List.Item
+            label="Ada Lovelace"
+            description="Admin"
+            startContent={<Avatar name="Ada Lovelace" size="sm" />}
+            endContent={<Badge tone="accent">You</Badge>}
+            href="#ada"
+          />
+          <List.Item
+            label="Grace Hopper"
+            description="Editor"
+            startContent={<Avatar name="Grace Hopper" size="sm" />}
+            href="#grace"
+          />
+        </List>
+        <List
+          listStyle="disc"
+          items={[
+            { id: 'docs', label: 'Documentation', href: '#docs' },
+            { id: 'changelog', label: 'Changelog', href: '#changelog' },
+          ]}
+        />
+        <List
+          hasDividers
+          items={[
+            { id: 'general', label: 'General settings', description: 'Workspace defaults' },
+            {
+              id: 'billing',
+              label: 'Billing',
+              description: 'Plans and invoices',
+              isDisabled: true,
+            },
+            { id: 'notifications', label: 'Notifications', description: 'Email and push' },
+          ]}
+          onAction={setSelectedSetting}
+        />
+        {selectedSetting ? (
+          <Text size="sm" tone="secondary">
+            Selected: {selectedSetting}
+          </Text>
+        ) : null}
+      </Stack>
+    </Section>
+  );
+}
+
 function NavigationSection() {
   return (
     <Section title="Navigation">
@@ -844,6 +897,7 @@ export function App() {
               <ContainerSection />
               <FormsSection />
               <NavigationSection />
+              <DataDisplaySection />
               <AdminShellSection />
               <DatesSection />
               <OverlaysSection />

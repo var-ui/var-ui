@@ -56,6 +56,7 @@ export { Field, type FieldProps } from './Field';
 export { AspectRatio, type AspectRatioProps } from './AspectRatio';
 export { Center, type CenterProps } from './Center';
 export { Breadcrumbs, type BreadcrumbItemData, type BreadcrumbsProps } from './Breadcrumbs';
+export { List, ListItem, type ListItemData, type ListItemProps, type ListProps } from './List';
 export { Divider, type DividerProps } from './Divider';
 export { Grid, type GridProps } from './Grid';
 export { Section, type SectionProps } from './Section';
