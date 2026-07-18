@@ -137,7 +137,10 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
         `specs/phase-3-overlays-p1.md`. Plan:
         `plans/2026-07-15-phase-3-overlays-p1.md`.
   - [ ] Phase 3 P2 — Lightbox/Overlay
-  - [ ] Phase 4 — lists, tables, and data display
+  - [ ] **Phase 4 — lists, tables, and data display** — `List`, `Table`,
+        `DescriptionList`, `OverflowList`, `Tree`, plus headless
+        `useTableSort` / `useTableSelection` / `useTablePagination` (filter /
+        column resize deferred). Spec: `specs/phase-4-lists-tables.md`.
   - [x] **Phase 5 P1 — Breadcrumbs and Pagination** — shipped: `Breadcrumbs`
         (item-array API, click-to-expand overflow collapse), `Pagination`
         (`pages`/`count`/`compact`/`dots`/`none` variants + page-size

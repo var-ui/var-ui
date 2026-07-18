@@ -499,17 +499,17 @@ palette are usable in the example app.
 
 ### Phase 4 — Lists, tables, and data display (~10 families)
 
-| Priority | Astryx reference           | var-ui deliverable                                                                                                                              |
-| -------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| P1       | `List`, `ListItem`, `Item` | Generic list primitives                                                                                                                         |
-| P1       | `Table` + subcomponents    | Table recipe with sticky header option                                                                                                          |
-| P2       | `MetadataList`             | Key/value display                                                                                                                               |
-| P2       | `OverflowList`             | Collapsing horizontal list                                                                                                                      |
-| P2       | `TreeList`                 | Hierarchical list (needs tree focus hook)                                                                                                       |
-| P3       | Table plugins              | Hooks only: sort, filter, pagination, selection, column resize — mirror Astryx's `useTable*` pattern as `@var-ui/react` hooks, not core recipes |
+| Priority | Astryx reference           | var-ui deliverable                                                                                                                 |
+| -------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| P1       | `List`, `ListItem`, `Item` | `List` / `List.Item` — dual API (items + compound), no public shared `Item`                                                        |
+| P1       | `Table` + subcomponents    | Semantic HTML `Table` + parts; sticky header via CSS; no RAC Table                                                                 |
+| P2       | `MetadataList`             | `DescriptionList` / `DescriptionList.Item` (semantic `<dl>`)                                                                       |
+| P2       | `OverflowList`             | `OverflowList` + `useOverflow`; overflow UI via render prop                                                                        |
+| P2       | `TreeList`                 | `Tree` / `Tree.Item` + `useTreeFocus` (APG hand-roll)                                                                              |
+| P3       | Table plugins              | Headless hooks only: `useTableSort`, `useTableSelection`, `useTablePagination` — filter/resize deferred; **no** `plugins` registry |
 
-**Phase 4 done when:** Table and List cover admin UI needs; at least one
-table plugin hook ships as proof of extensibility.
+**Phase 4 done when:** Table and List cover admin UI needs; sort + selection +
+pagination hooks ship. Spec: `specs/phase-4-lists-tables.md`.
 
 ### Phase 5 — Navigation and app chrome (~15 families)
 
@@ -671,8 +671,12 @@ Record answers here as they are made:
    stays for in-page content switching; nav `TabList` / `Tab` / `TabMenu`
    ships separately for view switching with optional `href`s and overflow
    menu. See `specs/phase-5-navigation-p2.md`.
-3. **Table strategy:** full RAC Table vs. semantic HTML table styled by
-   recipes (Astryx uses composable table parts + plugin hooks)?
+3. **Table strategy:** **Decided** — semantic HTML `<table>` parts + recipes +
+   headless hooks (`useTableSort` / `useTableSelection` / `useTablePagination`);
+   no RAC `Table`, no Astryx-style `plugins` registry. Renames for clarity:
+   `DescriptionList` (not MetadataList), `Tree` (not TreeList). Dual API with
+   namespaced subcomponents (`List.Item`, `Table.Row`, …). See
+   `specs/phase-4-lists-tables.md`.
 4. **Chat scope:** full Astryx parity vs. slimmer "message list + composer"
    MVP for v1 of Phase 7?
 5. **Lab package timing:** introduce `@var-ui/lab` at first chart/experimental
