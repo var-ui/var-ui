@@ -513,20 +513,22 @@ table plugin hook ships as proof of extensibility.
 
 ### Phase 5 — Navigation and app chrome (~15 families)
 
-| Priority | Astryx reference                   | var-ui deliverable                         |
-| -------- | ---------------------------------- | ------------------------------------------ |
-| P1       | `Breadcrumbs`                      | RAC Breadcrumbs                            |
-| P1       | `Pagination`                       | Page control                               |
-| P2       | `SideNav` + subcomponents          | Collapsible sections                       |
-| P2       | `TopNav` + mega menu subcomponents | App header chrome                          |
-| P2       | `MobileNav`                        | Drawer-style nav                           |
-| P2       | `TabList` / `Tab` / `TabMenu`      | Evaluate merge with existing Tabs or alias |
-| P3       | `Outline`                          | In-page TOC nav                            |
-| P3       | `AppShell`                         | Composes SideNav + TopNav + Layout         |
-| P3       | `NavIcon`, `NavMenu`               | Nav-specific icon/menu helpers             |
+| Priority | Astryx reference                   | var-ui deliverable                          |
+| -------- | ---------------------------------- | ------------------------------------------- |
+| P1       | `Breadcrumbs`                      | RAC Breadcrumbs                             |
+| P1       | `Pagination`                       | Page control                                |
+| P2       | `SideNav` + subcomponents          | **Shipped** — collapsible + resizable       |
+| P2       | `TopNav` + mega menu subcomponents | **Shipped** — Menu + MegaMenu               |
+| P2       | `MobileNav`                        | **Shipped** — drawer + Toggle/Provider      |
+| P2       | `TabList` / `Tab` / `TabMenu`      | **Shipped** — keep separate from panel Tabs |
+| P2       | `AppShell` (pulled from P3)        | **Shipped** — minimal shell + mobile ctx    |
+| P2       | `Resizable` (pulled from Phase 6)  | **Shipped** — single-region + ResizeHandle  |
+| P3       | `Outline`                          | In-page TOC nav                             |
+| P3       | `NavIcon`, `NavMenu`               | Nav-specific icon/menu helpers              |
 
 **Phase 5 done when:** a full admin shell demo exists in the example app
-(SideNav + TopNav + AppShell).
+(SideNav + TopNav + AppShell). **P2 met that bar**; P3 finishes Outline /
+NavIcon / NavMenu.
 
 ### Phase 6 — Layout polish and collapsible regions (~8 families)
 
@@ -665,8 +667,10 @@ Record answers here as they are made:
 
 1. **Icon set:** **Decided** — `@var-ui/icons` optional package + `IconProvider`
    (provider-only resolution); single empty fallback in `@var-ui/react`. See §0.4.
-2. **Tabs vs TabList:** merge into one API or keep separate (Astryx has both
-   `TabList` and patterns overlapping with var-ui `Tabs`)?
+2. **Tabs vs TabList:** **Decided** — keep both. Panel `Tabs` (RAC + panels)
+   stays for in-page content switching; nav `TabList` / `Tab` / `TabMenu`
+   ships separately for view switching with optional `href`s and overflow
+   menu. See `specs/phase-5-navigation-p2.md`.
 3. **Table strategy:** full RAC Table vs. semantic HTML table styled by
    recipes (Astryx uses composable table parts + plugin hooks)?
 4. **Chat scope:** full Astryx parity vs. slimmer "message list + composer"

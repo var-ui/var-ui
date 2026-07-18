@@ -143,10 +143,17 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
         (`pages`/`count`/`compact`/`dots`/`none` variants + page-size
         selector). Spec: `specs/phase-5-navigation-p1.md`. Plan:
         `plans/2026-07-15-phase-5-navigation-p1.md`.
-  - [ ] Phase 5 P2 — SideNav, TopNav, MobileNav, Tabs vs. TabList/Tab/TabMenu
-        merge evaluation
-  - [ ] Phase 5 P3 — Outline, AppShell, NavIcon/NavMenu
-  - [ ] Phase 6 — layout polish and collapsible regions
+  - [x] **Phase 5 P2 — SideNav, TopNav, MobileNav, AppShell, TabList** —
+        shipped: `Resizable`/`ResizeHandle`/`useResizable` (pulled forward
+        from Phase 6 for SideNav), `SideNav` (zones + collapse + resize),
+        `TopNav` (+ Menu / MegaMenu), `MobileNav` (+ Toggle / Provider),
+        minimal `AppShell` (pulled forward from P3), nav `TabList` /
+        `TabList.Tab` / `TabList.Menu` kept **separate** from panel `Tabs`.
+        Spec: `specs/phase-5-navigation-p2.md`. Plan:
+        `plans/2026-07-17-phase-5-navigation-p2.md`.
+  - [ ] Phase 5 P3 — Outline, NavIcon/NavMenu
+  - [ ] Phase 6 — layout polish and collapsible regions (`Resizable` single-
+        region already shipped in P2; deepen multi-region / `Layout*` here)
   - [ ] Phase 7 — chat
 
 ## V7 — Typed theming & component overrides
