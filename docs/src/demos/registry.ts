@@ -32,6 +32,8 @@ import { snippets as radioGroupDefaultSnippets } from './radio-group/default/sni
 import { snippets as switchDefaultSnippets } from './switch/default/snippets';
 import { snippets as selectDefaultSnippets } from './select/default/snippets';
 import { snippets as selectOptionsSnippets } from './select/options/snippets';
+import { snippets as tabsDefaultSnippets } from './tabs/default/snippets';
+import { snippets as dialogDefaultSnippets } from './dialog/default/snippets';
 
 export type { DemoEntry, DemoId, DemoSnippets };
 
@@ -69,6 +71,8 @@ export const DEMO_IDS = [
   'switch.default',
   'select.default',
   'select.options',
+  'tabs.default',
+  'dialog.default',
 ] as const satisfies readonly DemoId[];
 
 export const demoSnippets: Record<DemoId, DemoSnippets> = {
@@ -105,6 +109,8 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'switch.default': switchDefaultSnippets,
   'select.default': selectDefaultSnippets,
   'select.options': selectOptionsSnippets,
+  'tabs.default': tabsDefaultSnippets,
+  'dialog.default': dialogDefaultSnippets,
 };
 
 export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
@@ -141,6 +147,8 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'switch.default': () => import('./switch/default/react'),
   'select.default': () => import('./select/default/react'),
   'select.options': () => import('./select/options/react'),
+  'tabs.default': () => import('./tabs/default/react'),
+  'dialog.default': () => import('./dialog/default/react'),
 };
 
 export const demoRegistry: Record<DemoId, DemoEntry> = {
@@ -308,6 +316,16 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'select.options',
     snippets: demoSnippets['select.options'],
     react: reactDemoLoaders['select.options'],
+  },
+  'tabs.default': {
+    id: 'tabs.default',
+    snippets: demoSnippets['tabs.default'],
+    react: reactDemoLoaders['tabs.default'],
+  },
+  'dialog.default': {
+    id: 'dialog.default',
+    snippets: demoSnippets['dialog.default'],
+    react: reactDemoLoaders['dialog.default'],
   },
 };
 

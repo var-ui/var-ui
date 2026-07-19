@@ -1,7 +1,5 @@
-'use client';
-
 import { dialog } from '@var-ui/core';
-import { Button, HStack, Icon, Text, recipeClassName, useLayer } from '@var-ui/react';
+import { Button, HStack, Icon, Text, recipeProps, useLayer } from '@var-ui/react';
 import { useState } from 'react';
 import {
   Button as AriaButton,
@@ -12,7 +10,7 @@ import {
   ModalOverlay,
 } from 'react-aria-components';
 
-export function DialogDemo() {
+export default function Preview() {
   const [isOpen, setIsOpen] = useState(false);
   const d = dialog();
   const { style: layerStyle } = useLayer();
@@ -21,24 +19,20 @@ export function DialogDemo() {
     <HStack gap="md" wrap align="center">
       <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
         <Button intent="secondary">Open dialog</Button>
-        <ModalOverlay className={recipeClassName(d.overlay)} style={layerStyle}>
-          <Modal className={recipeClassName(d.modal)}>
+        <ModalOverlay {...recipeProps(d.overlay)} style={layerStyle}>
+          <Modal {...recipeProps(d.modal)}>
             <AriaDialog>
               {({ close }) => (
-                <div className={recipeClassName(d.content)}>
-                  <div className={recipeClassName(d.header)}>
-                    <Heading slot="title" className={recipeClassName(d.heading)}>
+                <div {...recipeProps(d.content)}>
+                  <div {...recipeProps(d.header)}>
+                    <Heading slot="title" {...recipeProps(d.heading)}>
                       Icon close button
                     </Heading>
-                    <AriaButton
-                      className={recipeClassName(d.closeButton)}
-                      aria-label="Close"
-                      onPress={close}
-                    >
+                    <AriaButton {...recipeProps(d.closeButton)} aria-label="Close" onPress={close}>
                       <Icon name="close" size="sm" />
                     </AriaButton>
                   </div>
-                  <p className={recipeClassName(d.description)}>
+                  <p {...recipeProps(d.description)}>
                     The dismiss control now uses the registry close glyph.
                   </p>
                   <Button onPress={close}>Close</Button>

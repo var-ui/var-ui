@@ -32,6 +32,8 @@ import RadioGroupDefault from './radio-group/default/astro.astro';
 import SwitchDefault from './switch/default/astro.astro';
 import SelectDefault from './select/default/astro.astro';
 import SelectOptions from './select/options/astro.astro';
+import TabsDefault from './tabs/default/astro.astro';
+import DialogDefault from './dialog/default/astro.astro';
 
 /** Static Astro preview map — DemoHost imports this (Astro cannot dynamic-import by string). */
 export const astroDemoMap = {
@@ -68,6 +70,8 @@ export const astroDemoMap = {
   'switch.default': SwitchDefault,
   'select.default': SelectDefault,
   'select.options': SelectOptions,
+  'tabs.default': TabsDefault,
+  'dialog.default': DialogDefault,
 } as const satisfies Record<DemoId, unknown>;
 
 export const astroDemoIds = Object.keys(astroDemoMap) as DemoId[];

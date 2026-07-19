@@ -34,7 +34,9 @@ export type DemoId =
   | 'radio-group.default'
   | 'switch.default'
   | 'select.default'
-  | 'select.options';
+  | 'select.options'
+  | 'tabs.default'
+  | 'dialog.default';
 
 export type DemoSnippets = Record<DocsFramework, string>;
 

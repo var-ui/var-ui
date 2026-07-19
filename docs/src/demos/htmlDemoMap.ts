@@ -32,6 +32,8 @@ import { render as renderRadioGroupDefault } from './radio-group/default/html';
 import { render as renderSwitchDefault } from './switch/default/html';
 import { render as renderSelectDefault } from './select/default/html';
 import { render as renderSelectOptions } from './select/options/html';
+import { render as renderTabsDefault } from './tabs/default/html';
+import { render as renderDialogDefault } from './dialog/default/html';
 
 /** Static HTML preview renderers keyed by demo id — consumed by DemoHost. */
 export const htmlDemoMap = {
@@ -68,6 +70,8 @@ export const htmlDemoMap = {
   'switch.default': renderSwitchDefault,
   'select.default': renderSelectDefault,
   'select.options': renderSelectOptions,
+  'tabs.default': renderTabsDefault,
+  'dialog.default': renderDialogDefault,
 } as const satisfies Record<DemoId, () => string>;
 
 export const htmlDemoIds = Object.keys(htmlDemoMap) as DemoId[];

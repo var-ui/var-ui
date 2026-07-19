@@ -42,6 +42,8 @@ describe('navigation (Astro foundation slice)', () => {
       '/components/radio-group',
       '/components/switch',
       '/components/select',
+      '/components/tabs',
+      '/components/dialog',
     ]);
   });
 });

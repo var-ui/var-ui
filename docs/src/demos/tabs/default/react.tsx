@@ -1,8 +1,6 @@
-'use client';
-
 import { Tabs, Text } from '@var-ui/react';
 
-export function TabsDemo() {
+export default function Preview() {
   return (
     <Tabs
       tabs={[

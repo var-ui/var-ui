@@ -43,6 +43,8 @@ export const componentSidebar = [
   { text: 'RadioGroup', link: '/components/radio-group' },
   { text: 'Switch', link: '/components/switch' },
   { text: 'Select', link: '/components/select' },
+  { text: 'Tabs', link: '/components/tabs' },
+  { text: 'Dialog', link: '/components/dialog' },
 ] as const;
 
 export const sidebar = {
