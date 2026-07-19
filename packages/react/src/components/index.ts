@@ -121,6 +121,16 @@ export { Carousel, type CarouselProps } from './Carousel';
 export { Thumbnail, type ThumbnailProps } from './Thumbnail';
 export { Timestamp, type TimestampProps } from './Timestamp';
 export { EmptyState, type EmptyStateProps } from './EmptyState';
+export {
+  FileTree,
+  type FileTreeFileProps,
+  type FileTreeFolderProps,
+  type FileTreeProps,
+} from './FileTree';
+export { Kbd, type KbdProps } from './Kbd';
+export { Skeleton, type SkeletonProps } from './Skeleton';
+export { StatusDot, type StatusDotProps } from './StatusDot';
+export { Steps, type StepsProps } from './Steps';
 export { ProgressBar, type ProgressBarProps } from './ProgressBar';
 export { Spinner, type SpinnerProps } from './Spinner';
 export { Heading, Text, type HeadingProps, type TextProps } from './Typography';

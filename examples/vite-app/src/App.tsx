@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import { ChatDemo } from './ChatDemo';
 import { acmeTheme } from './acmeTheme';
-import { defaultTheme, kbd, skeleton, statusDot, SURFACE_ATTRIBUTE } from '@var-ui/core';
+import { defaultTheme, SURFACE_ATTRIBUTE } from '@var-ui/core';
 import { defaultIcons } from '@var-ui/icons';
 import {
   Alert,
@@ -28,6 +28,7 @@ import {
   Dialog,
   Divider,
   EmptyState,
+  FileTree,
   HoverCard,
   Field,
   FileInput,
@@ -39,6 +40,7 @@ import {
   InputGroup,
   InputGroupInput,
   InputGroupText,
+  Kbd,
   LayerProvider,
   DescriptionList,
   List,
@@ -48,12 +50,14 @@ import {
   Pagination,
   Popover,
   ProgressBar,
-  recipeClassName,
   Section,
   Select,
   SideNav,
+  Skeleton,
   Spinner,
   Stack,
+  StatusDot,
+  Steps,
   Table,
   TabList,
   Text,
@@ -133,13 +137,13 @@ function FeedbackSection() {
         <Spinner label="Loading results" />
         <Spinner size="lg" tone="neutral" />
         <HStack gap="xs">
-          <span className={recipeClassName(statusDot({ tone: 'success', pulse: 'true' }))} />
+          <StatusDot tone="success" pulse />
           <Text as="span" size="sm">
             Operational
           </Text>
         </HStack>
         <HStack gap="xs">
-          <span className={recipeClassName(statusDot({ tone: 'danger' }))} />
+          <StatusDot tone="danger" />
           <Text as="span" size="sm" tone="secondary">
             Incident
           </Text>
@@ -148,9 +152,9 @@ function FeedbackSection() {
       <ProgressBar label="Uploading assets" value={64} />
       <ProgressBar label="Reindexing" isIndeterminate />
       <Stack gap="xs" aria-hidden style={{ maxWidth: '320px' }}>
-        <div className={recipeClassName(skeleton({ shape: 'text' }))} style={{ width: '60%' }} />
-        <div className={recipeClassName(skeleton({ shape: 'text' }))} style={{ width: '90%' }} />
-        <div className={recipeClassName(skeleton({ shape: 'rect' }))} style={{ height: '48px' }} />
+        <Skeleton shape="text" style={{ width: '60%' }} />
+        <Skeleton shape="text" style={{ width: '90%' }} />
+        <Skeleton shape="rect" style={{ height: '48px' }} />
       </Stack>
     </Section>
   );
@@ -166,12 +170,25 @@ function ContentSection() {
         Small heading
       </Heading>
       <Text>
-        Body text with a <kbd className={recipeClassName(kbd())}>⌘K</kbd> shortcut hint and a
-        relative <Timestamp date={new Date(Date.now() - 5 * 60_000)} /> timestamp.
+        Body text with a <Kbd>⌘K</Kbd> shortcut hint and a relative{' '}
+        <Timestamp date={new Date(Date.now() - 5 * 60_000)} /> timestamp.
       </Text>
       <Text tone="secondary" size="sm">
         Secondary small text — published <Timestamp date="2026-01-15T12:00:00Z" format="date" />.
       </Text>
+      <Steps>
+        <li>Install the package.</li>
+        <li>
+          Import components from <Kbd>@var-ui/react</Kbd>.
+        </li>
+      </Steps>
+      <FileTree>
+        <FileTree.Folder name="packages">
+          <FileTree.Folder name="react">
+            <FileTree.File name="index.ts" />
+          </FileTree.Folder>
+        </FileTree.Folder>
+      </FileTree>
       <Divider />
       <EmptyState
         icon={<Icon name="search" size="lg" />}
