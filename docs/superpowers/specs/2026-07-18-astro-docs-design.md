@@ -41,21 +41,21 @@ surface; depends on `@var-ui/astro` (`2026-07-18-var-ui-astro-design.md`)
 
 ## Locked decisions
 
-| Topic | Choice |
-| --- | --- |
-| Site framework | Astro |
-| Docs chrome | `@var-ui/astro` |
-| v1 frameworks | React, Astro, HTML/CSS |
-| Live demos | Real per-framework preview (not snippet-only) |
-| HTML surface | Core-only hand-written markup |
-| Switcher | Site-wide header control; cookie-persisted |
-| Default framework | React (when no cookie) |
-| Authoring | Shared demo registry; MDX uses `<Demo id="…" />` |
-| Rendering | Cookie-keyed SSR; React island only when React selected |
-| Deploy mode | Astro on-demand rendering via `@astrojs/netlify` (Netlify Functions). Prefer `output: 'static'` + `prerender = false` on cookie-aware routes, or `output: 'server'`. Pure static multi-build is out of scope |
-| Migration | Full cutover gate before removing TanStack stack |
-| Cookie name | `var-ui-framework` ∈ `react` \| `astro` \| `html` |
-| React-only components | Astro/HTML demos use core recipe markup (+ native HTML where applicable); visual parity required; React Aria–level behavior not required until those components exist in `@var-ui/astro` |
+| Topic                 | Choice                                                                                                                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Site framework        | Astro                                                                                                                                                                                                        |
+| Docs chrome           | `@var-ui/astro`                                                                                                                                                                                              |
+| v1 frameworks         | React, Astro, HTML/CSS                                                                                                                                                                                       |
+| Live demos            | Real per-framework preview (not snippet-only)                                                                                                                                                                |
+| HTML surface          | Core-only hand-written markup                                                                                                                                                                                |
+| Switcher              | Site-wide header control; cookie-persisted                                                                                                                                                                   |
+| Default framework     | React (when no cookie)                                                                                                                                                                                       |
+| Authoring             | Shared demo registry; MDX uses `<Demo id="…" />`                                                                                                                                                             |
+| Rendering             | Cookie-keyed SSR; React island only when React selected                                                                                                                                                      |
+| Deploy mode           | Astro on-demand rendering via `@astrojs/netlify` (Netlify Functions). Prefer `output: 'static'` + `prerender = false` on cookie-aware routes, or `output: 'server'`. Pure static multi-build is out of scope |
+| Migration             | Full cutover gate before removing TanStack stack                                                                                                                                                             |
+| Cookie name           | `var-ui-framework` ∈ `react` \| `astro` \| `html`                                                                                                                                                            |
+| React-only components | Astro/HTML demos use core recipe markup (+ native HTML where applicable); visual parity required; React Aria–level behavior not required until those components exist in `@var-ui/astro`                     |
 
 ---
 
@@ -265,6 +265,9 @@ long-lived docs package beside TanStack.
 
 ## Follow-ups (explicitly later)
 
+- **Homepage bento:** Re-port the TanStack homepage showcase from commit
+  `c293d6b` (`docs/src/components/homepage/**`, `docs/src/styles/homeBento.ts`).
+  Task 7 removed it with the Start shell; Astro search chrome is not wired yet.
 - Additional frameworks in the switcher (Vue, Svelte, etc.).
 - Optional `@var-ui/html` helpers if core class-name DX proves painful.
 - Client-side instant switch without reload (if cookie+SSR UX is insufficient).
