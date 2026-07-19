@@ -87,6 +87,33 @@ describe('AppShell', () => {
     vi.unstubAllGlobals();
   });
 
+  it('renders aside content in the aside slot', () => {
+    stubMatchMedia(false);
+    wrap(
+      <AppShell aside={<span>TOC</span>} sideNav={<span>Side</span>}>
+        Main
+      </AppShell>,
+    );
+    expect(screen.getByText('TOC')).toBeTruthy();
+    vi.unstubAllGlobals();
+  });
+
+  it('sets data-aside on the root when aside is provided', () => {
+    stubMatchMedia(false);
+    const { container } = wrap(<AppShell aside={<span>TOC</span>}>Main</AppShell>);
+    const root = container.firstElementChild as HTMLElement;
+    expect(root.getAttribute('data-aside')).toBe('');
+    vi.unstubAllGlobals();
+  });
+
+  it('does not set data-aside when aside is omitted', () => {
+    stubMatchMedia(false);
+    const { container } = wrap(<AppShell>Main</AppShell>);
+    const root = container.firstElementChild as HTMLElement;
+    expect(root.hasAttribute('data-aside')).toBe(false);
+    vi.unstubAllGlobals();
+  });
+
   it('shares mobile-nav open state so a Toggle inside AppShell opens a MobileNav also inside AppShell', async () => {
     stubMatchMedia(false);
     wrap(

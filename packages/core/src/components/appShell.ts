@@ -20,6 +20,7 @@ const APP_SHELL_SLOTS = [
   'topNav',
   'sideNav',
   'main',
+  'aside',
   'skipLink',
 ] as const;
 
@@ -36,20 +37,22 @@ type AppShellVariantDefs = {
 };
 
 /**
- * Application chrome shell: optional banner, top nav, side nav, and main
- * content in a CSS grid layout. Pair with the React `AppShell` compound,
- * which sets `data-mobile` on the root below the breakpoint and drives
- * `contentPadding` via the exposed custom property.
+ * Application chrome shell: optional banner, top nav, side nav, main, and
+ * aside content in a CSS grid layout. Pair with the React `AppShell`
+ * compound, which sets `data-mobile` on the root below the breakpoint and
+ * `data-aside` when aside content is provided, and drives `contentPadding`
+ * via the exposed custom property.
  *
  * ```tsx
  * const s = appShell({ height: 'fill', variant: 'surface' });
- * <div className={s.root} data-mobile={isMobile || undefined}>
+ * <div className={s.root} data-mobile={isMobile || undefined} data-aside={hasAside ? '' : undefined}>
  *   <a className={s.skipLink} href="#var-ui-app-shell-main">Skip to content</a>
  *   <div className={s.banner}>…</div>
  *   <div className={s.frame}>
  *     <header className={s.topNav}>…</header>
  *     <nav className={s.sideNav}>…</nav>
  *     <main className={s.main} id="var-ui-app-shell-main">…</main>
+ *     <aside className={s.aside}>…</aside>
  *   </div>
  * </div>
  * ```
@@ -70,6 +73,11 @@ export const appShell = styles.component<typeof APP_SHELL_SLOTS, AppShellVariant
       },
       contentPadding: {
         value: '0px',
+        syntax: '<length>',
+        inherits: false,
+      },
+      asideWidth: {
+        value: '12.5rem',
         syntax: '<length>',
         inherits: false,
       },
@@ -128,6 +136,10 @@ export const appShell = styles.component<typeof APP_SHELL_SLOTS, AppShellVariant
           gridTemplateAreas: '"top top" "side main"',
           gridTemplateColumns: 'auto 1fr',
           gridTemplateRows: 'auto 1fr',
+          '[data-aside] &': {
+            gridTemplateAreas: '"top top top" "side main aside"',
+            gridTemplateColumns: `auto 1fr ${v.asideWidth.var}`,
+          },
           '[data-mobile] &': {
             gridTemplateAreas: '"top" "main"',
             gridTemplateColumns: '1fr',
@@ -151,6 +163,19 @@ export const appShell = styles.component<typeof APP_SHELL_SLOTS, AppShellVariant
           minWidth: 0,
           overflow: 'auto',
           padding: v.contentPadding.var,
+        },
+        aside: {
+          gridArea: 'aside',
+          minHeight: 0,
+          minWidth: 0,
+          overflow: 'auto',
+          position: 'sticky',
+          top: 0,
+          alignSelf: 'start',
+          maxHeight: '100%',
+          '[data-mobile] &': {
+            display: 'none',
+          },
         },
       },
       variants: {

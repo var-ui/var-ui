@@ -30,6 +30,8 @@ export type AppShellProps = {
   mobileNav?: ReactNode;
   /** Full-width banner above the top nav / content frame. */
   banner?: ReactNode;
+  /** Optional right rail (e.g. an `Outline`). Hidden below `mobileBreakpoint`. */
+  aside?: ReactNode;
   /** @default 'fill' */
   height?: 'fill' | 'auto';
   /** @default 'elevated' */
@@ -48,17 +50,18 @@ function resolveContentPadding(padding: number | undefined): string | undefined 
 }
 
 /**
- * Application chrome: optional banner, top nav, side nav, and main content in
- * a CSS grid layout, plus a skip-to-content link and the mobile breakpoint
- * that hides the persistent side nav. Wraps its slots in a `MobileNavProvider`
- * so a `MobileNav` + `MobileNav.Toggle` placed anywhere inside stay in sync —
- * `AppShell` itself never renders a toggle.
+ * Application chrome: optional banner, top nav, side nav, main content, and
+ * aside rail in a CSS grid layout, plus a skip-to-content link and the mobile
+ * breakpoint that hides the persistent side nav and aside. Wraps its slots in
+ * a `MobileNavProvider` so a `MobileNav` + `MobileNav.Toggle` placed anywhere
+ * inside stay in sync — `AppShell` itself never renders a toggle.
  *
  * ```tsx
  * <AppShell
  *   topNav={<TopNav endContent={<MobileNav.Toggle />}>…</TopNav>}
  *   sideNav={<SideNav>…</SideNav>}
  *   mobileNav={<MobileNav header="Menu"><SideNav.Section>…</SideNav.Section></MobileNav>}
+ *   aside={<Outline items={[…]} />}
  * >
  *   <p>Main content</p>
  * </AppShell>
@@ -70,6 +73,7 @@ export function AppShell({
   sideNav,
   mobileNav,
   banner,
+  aside,
   height = 'fill',
   variant = 'elevated',
   contentPadding,
@@ -85,7 +89,11 @@ export function AppShell({
 
   return (
     <MobileNavProvider>
-      <div {...recipeProps(s.root, className)} data-mobile={isMobile ? '' : undefined}>
+      <div
+        {...recipeProps(s.root, className)}
+        data-mobile={isMobile ? '' : undefined}
+        data-aside={aside ? '' : undefined}
+      >
         <a href={`#${APP_SHELL_MAIN_ID}`} {...recipeProps(s.skipLink)}>
           Skip to content
         </a>
@@ -96,6 +104,7 @@ export function AppShell({
           <main id={APP_SHELL_MAIN_ID} {...recipeProps(s.main)} style={mainStyle}>
             {children}
           </main>
+          {aside ? <aside {...recipeProps(s.aside)}>{aside}</aside> : null}
         </div>
         {mobileNav}
       </div>

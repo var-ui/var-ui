@@ -46,6 +46,7 @@ import {
   List,
   MobileNav,
   MultiSelector,
+  Outline,
   OverflowList,
   Pagination,
   Popover,
@@ -628,15 +629,36 @@ function AdminShellDemo() {
           </SideNav>
         }
         mobileNav={<MobileNav header="Acme Admin">{renderAdminNavSection()}</MobileNav>}
+        aside={
+          <Outline
+            items={[
+              { id: 'admin-summary', text: 'Summary', level: 2 },
+              { id: 'admin-activity', text: 'Recent activity', level: 2 },
+            ]}
+            activeId="admin-summary"
+            scrollSpy={false}
+          />
+        }
       >
-        <Stack gap="sm">
-          <Heading level={2} size="md">
-            {ADMIN_NAV_ITEMS.find((item) => item.id === selected)?.label}
-          </Heading>
-          <Text tone="secondary">
-            Shrink this pane below 768px to see the side nav swap for the hamburger-triggered mobile
-            drawer — both render the same `SideNav.Section` tree.
-          </Text>
+        <Stack gap="lg">
+          <Stack gap="sm">
+            <Heading id="admin-summary" level={2} size="md">
+              {ADMIN_NAV_ITEMS.find((item) => item.id === selected)?.label}
+            </Heading>
+            <Text tone="secondary">
+              Shrink this pane below 768px to see the side nav and outline swap for the
+              hamburger-triggered mobile drawer — both render the same `SideNav.Section` tree.
+            </Text>
+          </Stack>
+          <Stack gap="sm">
+            <Heading id="admin-activity" level={2} size="md">
+              Recent activity
+            </Heading>
+            <Text tone="secondary">
+              The `aside` slot renders an `Outline` here as a right-rail table of contents — it
+              hides alongside `sideNav` below the mobile breakpoint.
+            </Text>
+          </Stack>
         </Stack>
       </AppShell>
     </div>
