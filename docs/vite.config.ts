@@ -7,7 +7,18 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const docsRoot = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'vitest-stub-astro',
+      enforce: 'pre',
+      load(id) {
+        if (id.endsWith('.astro')) {
+          return 'export default function AstroStub() { return null; }';
+        }
+      },
+    },
+  ],
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
