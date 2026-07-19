@@ -1,0 +1,43 @@
+---
+import { ThemeScript, ColorModeToggle } from '@var-ui/astro';
+import { defaultTheme } from '@var-ui/core';
+import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
+
+const { title = 'Var UI' } = Astro.props;
+const framework = Astro.locals.framework;
+---
+
+<html lang="en" class={defaultTheme.className} data-framework={framework}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/typestyles.css" />
+    <ThemeScript themeClass={defaultTheme.className} />
+  </head>
+  <body>
+    <header class="site-header">
+      <FrameworkSwitcher />
+      <ColorModeToggle includeSystem appearance="labels" />
+    </header>
+    <main class="site-main">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .site-main {
+    padding: 0 1.5rem 3rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+</style>
