@@ -73,4 +73,20 @@ describe('DocsChrome', () => {
     expect(screen.getByText('⌘K')).toBeTruthy();
     vi.unstubAllGlobals();
   });
+
+  it('shows MobileNav.Toggle below the md breakpoint', async () => {
+    stubMatchMedia(true);
+    await renderDocsChrome();
+
+    expect(screen.getByRole('button', { name: 'Open navigation' })).toBeTruthy();
+    vi.unstubAllGlobals();
+  });
+
+  it('hides MobileNav.Toggle above the md breakpoint', async () => {
+    stubMatchMedia(false);
+    await renderDocsChrome();
+
+    expect(screen.queryByRole('button', { name: 'Open navigation' })).toBeNull();
+    vi.unstubAllGlobals();
+  });
 });

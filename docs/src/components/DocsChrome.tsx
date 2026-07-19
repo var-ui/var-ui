@@ -9,6 +9,7 @@ import {
   Outline,
   SideNav,
   TopNav,
+  useMediaQuery,
   useMobileNav,
 } from '@var-ui/react';
 import type { ReactNode } from 'react';
@@ -16,6 +17,9 @@ import { githubUrl, sidebar, topNav } from '@/data/navigation';
 import type { DocHeading } from '@/lib/extract-headings';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { DocsSearch } from './DocsSearch';
+
+/** Matches AppShell `mobileBreakpoint="md"`. */
+const APP_SHELL_MD_QUERY = '(max-width: 768px)';
 
 type SidebarSection = (typeof sidebar)[keyof typeof sidebar];
 type NavigateFn = ReturnType<typeof useNavigate>;
@@ -55,10 +59,11 @@ function GitHubIcon() {
 }
 
 function DocsEndContent({ showMobileToggle }: { showMobileToggle: boolean }) {
+  const isMobile = useMediaQuery(APP_SHELL_MD_QUERY);
   return (
     <HStack align="center" gap="xs">
       <DocsSearch />
-      {showMobileToggle ? <MobileNav.Toggle /> : null}
+      {showMobileToggle && isMobile ? <MobileNav.Toggle /> : null}
       <ColorModeSwitcher />
       <Link
         aria-label="View source on GitHub"
