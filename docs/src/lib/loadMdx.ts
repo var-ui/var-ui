@@ -3,7 +3,8 @@ type MdxModule = {
     title: string;
     description?: string;
   };
-  Content: unknown;
+  // MDX `Content` is an Astro component factory; keep a callable shape for `astro check`.
+  Content: (props?: { components?: Record<string, unknown> }) => unknown;
 };
 
 /** Resolve a glob key ending with `/{slug}.mdx`. */

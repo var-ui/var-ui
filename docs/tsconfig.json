@@ -7,18 +7,9 @@
       "@var-ui/core": ["../packages/core/src/index.ts"],
       "@var-ui/react": ["../packages/react/src/index.ts"],
       "@var-ui/icons": ["../packages/icons/src/index.ts"],
-      "@var-ui/astro": ["../packages/astro/index.ts"],
-      "content-collections": ["./.content-collections/generated"]
+      "@var-ui/astro": ["../packages/astro/index.ts"]
     }
   },
-  "include": [
-    "src",
-    "astro.config.mjs",
-    "content-collections.ts",
-    "vite.config.ts",
-    "typestyles-entry.ts",
-    ".content-collections/generated",
-    "scripts"
-  ],
+  "include": ["src", "astro.config.mjs", "vite.config.ts", "typestyles-entry.ts", "scripts"],
   "exclude": ["dist", "node_modules", ".astro"]
 }

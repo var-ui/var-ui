@@ -12,9 +12,8 @@ verdict:
 2. **var-ui.com is a separate site from TypeStyles' docs**, and doesn't exist
    yet. The old plan (reuse TypeStyles docs' `LiveDemo.astro` component)
    assumed same-repo access to that Astro codebase. It isn't reusable
-   directly — var-ui needs its own site, built with whatever stack var-ui.com
-   ends up using (not yet decided; this repo's tooling is Vite+/Oxc, not
-   necessarily Astro).
+   directly — var-ui's site framework is Astro (Netlify) under `docs/`; the
+   gallery still needs its own comparison UI on that stack.
 
 ---
 
@@ -60,16 +59,13 @@ which site framework ends up hosting it):
 **What can't carry over:** the interactive comparison UI itself
 (`LiveDemo.astro`'s variant-toggle-plus-DOM/CSS/usage-panels pattern) is an
 Astro component living in TypeStyles' own docs codebase. It was never
-published as a reusable package, and even if it had been, var-ui.com's
-framework isn't decided yet. Building the gallery page requires — in order:
+published as a reusable package. Building the gallery page requires — in order:
 
-1. Deciding var-ui.com's site framework (own task, own spec — out of scope
-   here; note it as the actual prerequisite rather than assuming Astro or
-   any other stack).
+1. ~~Deciding var-ui.com's site framework~~ — done: Astro + Netlify under `docs/`.
 2. Building (or re-deriving, informed by `LiveDemo.astro`'s design but not
-   copying its Astro-specific implementation) an equivalent variant-toggle
-   comparison component for whatever that stack turns out to be.
-3. The gallery page itself, once 1 and 2 exist.
+   copying its TypeStyles-specific implementation) an equivalent variant-toggle
+   comparison component for the Astro docs site.
+3. The gallery page itself, once 2 exists.
 
 ---
 
@@ -86,12 +82,7 @@ framework isn't decided yet. Building the gallery page requires — in order:
 
 ### Task 1 — Decide var-ui.com's site framework
 
-Not detailed here — a separate decision/spec. Options include reusing
-Astro (matching TypeStyles' docs, at the cost of a second Astro codebase to
-maintain) or something else entirely, given this repo's Vite+/Oxc-based
-tooling. Write a short spec once there's a real direction.
-
-**Done when:** a framework is chosen and a minimal site skeleton exists.
+**Done:** Astro + Netlify under `docs/` (see Astro docs foundation plan).
 
 ### Task 2 — Build the comparison component
 

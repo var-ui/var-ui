@@ -84,8 +84,9 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
       compare all 8 built-in themes side by side (light/dark faces together, once
       V4 lands), decide on standalone `@var-ui/theme-*` packages now that
       publishing is real, and build the actual var-ui.com site this lives on
-      (separate from TypeStyles' own docs site — nothing here can reuse that
-      site's `LiveDemo` component directly). Spec: `specs/theme-gallery.md`.
+      (site framework: **Astro + Netlify** in `docs/`; separate from TypeStyles'
+      own docs site — nothing here can reuse that site's `LiveDemo` component
+      directly). Spec: `specs/theme-gallery.md`.
 
 ## V6 — Component breadth (Astryx core parity)
 
@@ -198,7 +199,8 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
 
 - **`@var-ui/astro`** — Astro bindings (v0.1 docs/content kit shipped / in progress).
   Progressive interactivity (native HTML → Zag later). Spec:
-  `docs/superpowers/specs/2026-07-18-var-ui-astro-design.md`.
+  `docs/superpowers/specs/2026-07-18-var-ui-astro-design.md`. Docs site
+  framework is Astro (Netlify adapter) under `docs/`.
 - Per-recipe structured docs for human + AI-agent discovery (colocated
   `.doc.ts` files per component, a CLI or editor-integration delivery
   vehicle). Originally scoped as TypeStyles P5.8; moved here since it's about
