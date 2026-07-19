@@ -69,6 +69,7 @@ export {
   type DescriptionListItemProps,
   type DescriptionListProps,
 } from './DescriptionList';
+export { Outline, type OutlineItemData, type OutlineItemProps, type OutlineProps } from './Outline';
 export {
   OverflowList,
   OverflowListItem,
