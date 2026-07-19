@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
@@ -28,9 +29,12 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@typestyles/vite": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
     "jsdom": "^26.0.0",
     "typescript": "catalog:",
     "vite": "catalog:",
