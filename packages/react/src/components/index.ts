@@ -71,6 +71,12 @@ export {
 } from './DescriptionList';
 export { Outline, type OutlineItemData, type OutlineItemProps, type OutlineProps } from './Outline';
 export {
+  Collapsible,
+  CollapsibleGroup,
+  type CollapsibleGroupProps,
+  type CollapsibleProps,
+} from './Collapsible';
+export {
   OverflowList,
   OverflowListItem,
   type OverflowListItemProps,

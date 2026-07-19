@@ -20,6 +20,7 @@ import { chatSystemMessage } from './components/chat/chatSystemMessage';
 import { chatToolCalls } from './components/chat/chatToolCalls';
 import { checkbox } from './components/checkbox';
 import { codeBlock } from './components/codeBlock';
+import { collapsible } from './components/collapsible';
 import { commandPalette } from './components/commandPalette';
 import { dateInput } from './components/dateInput';
 import { dateRangeInput } from './components/dateRangeInput';
@@ -107,6 +108,7 @@ export const themeableComponents = {
   chatToolCalls,
   checkbox,
   codeBlock,
+  collapsible,
   commandPalette,
   dateInput,
   dateRangeInput,

@@ -20,6 +20,8 @@ import {
   Checkbox,
   CheckboxGroup,
   ClickableCard,
+  Collapsible,
+  CollapsibleGroup,
   CommandPalette,
   DateInput,
   DateRangeInput,
@@ -197,6 +199,19 @@ function ContentSection() {
         description="Try a different filter, or clear the search."
         action={<Button intent="primary">Clear filters</Button>}
       />
+      <CollapsibleGroup>
+        <Collapsible id="install" title="Install" variant="bordered">
+          <Text as="span" size="sm">
+            <Kbd>pnpm add @var-ui/react</Kbd>
+          </Text>
+        </Collapsible>
+        <Collapsible id="usage" title="Usage" variant="bordered">
+          <Text as="span" size="sm">
+            Wrap the app in <Kbd>DesignSystemProvider</Kbd> and import components from{' '}
+            <Kbd>@var-ui/react</Kbd>.
+          </Text>
+        </Collapsible>
+      </CollapsibleGroup>
     </Section>
   );
 }

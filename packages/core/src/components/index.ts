@@ -57,6 +57,7 @@ export { heading, textBlock } from './typography';
 export { icon } from './icon';
 export { kbd } from './kbd';
 export { outline } from './outline';
+export { collapsible } from './collapsible';
 export { overflowList } from './overflowList';
 export { overlay } from './overlay';
 export { pagination } from './pagination';
