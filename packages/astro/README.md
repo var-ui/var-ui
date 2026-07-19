@@ -66,3 +66,31 @@ import { Collapsible } from '@var-ui/astro';
 ```
 
 v0.1 omits controlled `isExpanded` / `onExpandedChange` and `CollapsibleGroup`; use multiple standalone `Collapsible` instances or add client-side state in your app if you need accordion behavior.
+
+## Tabs
+
+Tabbed panels with a small vanilla controller for click and keyboard selection (ArrowLeft/Right, Home/End). No React Aria.
+
+The first tab panel is visible without JavaScript via the native `hidden` attribute; other panels start hidden.
+
+```astro
+---
+import { Tabs } from '@var-ui/astro';
+---
+<Tabs tabs={[{ id: 'overview', label: 'Overview' }, { id: 'api', label: 'API' }]}>
+  <Fragment slot="overview">
+    <p>Overview content</p>
+  </Fragment>
+  <Fragment slot="api">
+    <p>API reference</p>
+  </Fragment>
+</Tabs>
+```
+
+Props:
+
+- `tabs` (required) — `{ id: string; label: string }[]`
+- `defaultSelectedId` (optional) — tab `id` selected on load; defaults to the first tab
+- `className` (optional)
+
+Panel content uses **named slots** matching each tab `id` (e.g. `slot="overview"`). Pass `defaultSelectedId` to change which panel is shown before the client script runs.

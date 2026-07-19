@@ -29,6 +29,7 @@ export { default as CodeBlock } from './src/components/CodeBlock.astro';
 export { default as Steps } from './src/components/Steps.astro';
 export { default as Breadcrumbs } from './src/components/Breadcrumbs.astro';
 export { default as Collapsible } from './src/components/Collapsible.astro';
+export { default as Tabs } from './src/components/Tabs.astro';
 export type { ColorMode, ResolvedColorMode } from './src/scripts/colorMode';
 export { copyText, initCodeBlockCopy } from './src/scripts/codeBlockCopy';
 export {

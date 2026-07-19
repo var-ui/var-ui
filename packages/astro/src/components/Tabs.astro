@@ -1,0 +1,68 @@
+---
+import { Fragment } from 'astro/jsx-runtime';
+import { tabs as tabsRecipe } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type TabDef = { id: string; label: string };
+
+type Props = {
+  tabs: TabDef[];
+  defaultSelectedId?: string;
+  className?: string;
+};
+
+const { tabs, defaultSelectedId, className } = Astro.props;
+const selected = defaultSelectedId ?? tabs[0]?.id;
+const t = tabsRecipe();
+
+const panelSlots = await Promise.all(
+  tabs.map(async (tab) => ({
+    id: tab.id,
+    content: Astro.slots.has(tab.id) ? await Astro.slots.render(tab.id) : null,
+  })),
+);
+---
+
+<div data-var-ui-tabs {...recipeProps(t.root, className)}>
+  <div role="tablist" {...recipeProps(t.list)}>
+    {
+      tabs.map((tab) => (
+        <button
+          type="button"
+          role="tab"
+          id={`tab-${tab.id}`}
+          aria-controls={`panel-${tab.id}`}
+          aria-selected={tab.id === selected ? 'true' : 'false'}
+          tabindex={tab.id === selected ? 0 : -1}
+          data-selected={tab.id === selected ? '' : undefined}
+          {...recipeProps(t.tab)}
+        >
+          {tab.label}
+        </button>
+      ))
+    }
+  </div>
+  {
+    tabs.map((tab) => {
+      const slotContent = panelSlots.find((panel) => panel.id === tab.id)?.content;
+      return (
+        <div
+          role="tabpanel"
+          id={`panel-${tab.id}`}
+          aria-labelledby={`tab-${tab.id}`}
+          hidden={tab.id !== selected ? true : undefined}
+          {...recipeProps(t.panel)}
+        >
+          {slotContent ? <Fragment set:html={slotContent} /> : null}
+        </div>
+      );
+    })
+  }
+</div>
+
+<script>
+  import { createTabsController } from '../scripts/tabs';
+  document.querySelectorAll('[data-var-ui-tabs]').forEach((root) => {
+    createTabsController(root as HTMLElement);
+  });
+</script>
