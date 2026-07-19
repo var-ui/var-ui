@@ -1,0 +1,56 @@
+---
+import { progressBar } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  value?: number;
+  minValue?: number;
+  maxValue?: number;
+  isIndeterminate?: boolean;
+  label?: string;
+  tone?: 'accent' | 'success' | 'warning' | 'danger';
+  showValueText?: boolean;
+  className?: string;
+};
+
+const {
+  value = 0,
+  minValue = 0,
+  maxValue = 100,
+  isIndeterminate = false,
+  label,
+  tone = 'accent',
+  showValueText = true,
+  className,
+} = Astro.props;
+
+const p = progressBar({ tone, indeterminate: isIndeterminate ? 'true' : 'false' });
+const showValue = showValueText && !isIndeterminate;
+const percentage =
+  maxValue === minValue ? 0 : ((value - minValue) / (maxValue - minValue)) * 100;
+const valueText = `${Math.round(percentage)}%`;
+const showHeader = Boolean(label) || showValue;
+---
+<div
+  {...recipeProps(p.root, className)}
+  role="progressbar"
+  aria-label={label}
+  aria-valuemin={isIndeterminate ? undefined : minValue}
+  aria-valuemax={isIndeterminate ? undefined : maxValue}
+  aria-valuenow={isIndeterminate ? undefined : value}
+>
+  {
+    showHeader ? (
+      <div {...recipeProps(p.header)}>
+        {label ? <span {...recipeProps(p.label)}>{label}</span> : <span />}
+        {showValue ? <span {...recipeProps(p.valueText)}>{valueText}</span> : null}
+      </div>
+    ) : null
+  }
+  <div {...recipeProps(p.track)}>
+    <div
+      {...recipeProps(p.fill)}
+      style={isIndeterminate ? undefined : { width: `${percentage}%` }}
+    />
+  </div>
+</div>

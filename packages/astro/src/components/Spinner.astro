@@ -1,0 +1,28 @@
+---
+import { spinner } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  size?: 'sm' | 'md' | 'lg';
+  tone?: 'accent' | 'neutral';
+  label?: string;
+  className?: string;
+};
+
+const { size = 'md', tone = 'accent', label = 'Loading', className } = Astro.props;
+const visuallyHidden = {
+  position: 'absolute',
+  width: '1px',
+  height: '1px',
+  padding: '0',
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0 0 0 0)',
+  whiteSpace: 'nowrap',
+  border: '0',
+} as const;
+---
+<span role="status" class={className}>
+  <span {...recipeProps(spinner({ size, tone }))} aria-hidden="true" />
+  <span style={visuallyHidden}>{label}</span>
+</span>

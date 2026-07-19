@@ -1,0 +1,14 @@
+---
+import { skeleton } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  shape?: 'text' | 'rect' | 'circle';
+  className?: string;
+  style?: string;
+};
+
+const { shape = 'text', className, style } = Astro.props;
+const rp = recipeProps(skeleton({ shape }), className);
+---
+<div {...rp} aria-hidden="true" style={style} />

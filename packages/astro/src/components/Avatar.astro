@@ -1,0 +1,65 @@
+---
+import { avatar, statusDot } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  src?: string;
+  alt?: string;
+  name?: string;
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  status?: 'success' | 'warning' | 'danger' | 'neutral';
+  className?: string;
+};
+
+function initialsOf(name: string): string {
+  return name
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word[0] ?? '')
+    .join('');
+}
+
+const { src, alt, name, size = 'md', status, className } = Astro.props;
+const a = avatar({ size });
+const accessibleName = alt ?? name;
+const showImage = Boolean(src);
+---
+<span {...recipeProps(a.root, className)}>
+  {
+    showImage ? (
+      <>
+        <img
+          {...recipeProps(a.image)}
+          src={src}
+          alt={accessibleName ?? ''}
+          onerror="this.hidden=true;this.nextElementSibling.hidden=false"
+        />
+        <span
+          {...recipeProps(a.initials)}
+          hidden
+          aria-hidden={accessibleName ? undefined : true}
+          role={accessibleName ? 'img' : undefined}
+          aria-label={accessibleName}
+        >
+          {name ? initialsOf(name) : '?'}
+        </span>
+      </>
+    ) : (
+      <span
+        {...recipeProps(a.initials)}
+        aria-hidden={accessibleName ? undefined : true}
+        role={accessibleName ? 'img' : undefined}
+        aria-label={accessibleName}
+      >
+        {name ? initialsOf(name) : '?'}
+      </span>
+    )
+  }
+  {
+    status ? (
+      <span {...recipeProps(a.status)} data-avatar-status>
+        <span {...recipeProps(statusDot({ tone: status }))} />
+      </span>
+    ) : null
+  }
+</span>

@@ -1,0 +1,20 @@
+---
+import { card } from '@var-ui/core';
+import { cx, recipeProps } from '../utils';
+
+type Props = {
+  title: string;
+  description?: string;
+  hint?: string;
+  href: string;
+  className?: string;
+};
+
+const { title, description, hint, href, className } = Astro.props;
+const c = card();
+---
+<a href={href} class={cx(c.root, c.linkRoot, className)}>
+  <span {...recipeProps(c.linkTitle)}>{title}</span>
+  {description ? <p {...recipeProps(c.linkDescription)}>{description}</p> : null}
+  {hint ? <span {...recipeProps(c.linkHint)}>{hint}</span> : null}
+</a>

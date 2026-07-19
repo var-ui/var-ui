@@ -1,0 +1,17 @@
+---
+import { textBlock } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  as?: 'p' | 'span' | 'div';
+  size?: 'sm' | 'md' | 'lg';
+  tone?: 'primary' | 'secondary';
+  weight?: 'normal' | 'medium' | 'semibold';
+  className?: string;
+};
+
+const { as = 'p', size = 'md', tone = 'primary', weight = 'normal', className } = Astro.props;
+const rp = recipeProps(textBlock({ size, tone, weight }), className);
+const TextTag = as;
+---
+<TextTag {...rp}><slot /></TextTag>

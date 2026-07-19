@@ -1,0 +1,24 @@
+---
+import { statusDot } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  tone?: 'neutral' | 'accent' | 'success' | 'warning' | 'danger' | 'info';
+  pulse?: boolean;
+  'aria-label'?: string;
+  className?: string;
+};
+
+const {
+  tone = 'neutral',
+  pulse = false,
+  'aria-label': ariaLabel,
+  className,
+} = Astro.props;
+---
+<span
+  {...recipeProps(statusDot({ tone, pulse: pulse ? 'true' : 'false' }), className)}
+  aria-label={ariaLabel}
+  role={ariaLabel ? 'img' : undefined}
+  aria-hidden={ariaLabel ? undefined : true}
+/>

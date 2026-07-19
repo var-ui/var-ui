@@ -1,0 +1,12 @@
+---
+import { kbd } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  className?: string;
+};
+
+const { className } = Astro.props;
+const rp = recipeProps(kbd(), className);
+---
+<kbd {...rp}><slot /></kbd>

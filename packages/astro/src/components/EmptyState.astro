@@ -1,0 +1,33 @@
+---
+import { emptyState } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  title: string;
+  description?: string;
+  className?: string;
+};
+
+const { title, description, className } = Astro.props;
+const e = emptyState();
+const hasIcon = Astro.slots.has('icon');
+const hasAction = Astro.slots.has('action');
+---
+<div {...recipeProps(e.root, className)}>
+  {
+    hasIcon ? (
+      <div {...recipeProps(e.icon)} data-empty-state-icon aria-hidden="true">
+        <slot name="icon" />
+      </div>
+    ) : null
+  }
+  <h3 {...recipeProps(e.title)}>{title}</h3>
+  {description ? <p {...recipeProps(e.description)}>{description}</p> : null}
+  {
+    hasAction ? (
+      <div {...recipeProps(e.action)}>
+        <slot name="action" />
+      </div>
+    ) : null
+  }
+</div>
