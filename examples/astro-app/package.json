@@ -1,0 +1,22 @@
+{
+  "name": "@var-ui/example-astro-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "check": "astro check",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@var-ui/astro": "workspace:*",
+    "@var-ui/core": "workspace:*",
+    "astro": "catalog:"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@typestyles/vite": "catalog:",
+    "typescript": "catalog:",
+    "typestyles": "catalog:"
+  }
+}

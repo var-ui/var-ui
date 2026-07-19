@@ -7,5 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@var-ui/example-vite-app", "@var-ui/docs"]
+  "ignore": ["@var-ui/example-vite-app", "@var-ui/example-astro-app", "@var-ui/docs"]
 }

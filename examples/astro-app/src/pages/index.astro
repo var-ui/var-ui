@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  Alert,
+  Avatar,
+  Badge,
+  Banner,
+  Breadcrumbs,
+  Button,
+  Card,
+  CodeBlock,
+  Collapsible,
+  Divider,
+  EmptyState,
+  Heading,
+  HStack,
+  Kbd,
+  Link,
+  ProgressBar,
+  Section,
+  Skeleton,
+  Spinner,
+  Stack,
+  StatusDot,
+  Steps,
+  Tabs,
+  Text,
+} from '@var-ui/astro';
+
+const breadcrumbItems = [
+  { id: 'home', label: 'Home', href: '/' },
+  { id: 'examples', label: 'Examples', href: '#' },
+  { id: 'astro', label: 'Astro playground' },
+];
+
+const tabDefs = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'api', label: 'API' },
+  { id: 'tokens', label: 'Tokens' },
+];
+---
+
+<BaseLayout title="var-ui Astro playground">
+  <Stack gap="xl">
+    <Stack gap="sm">
+      <Heading level={1}>var-ui Astro playground</Heading>
+      <Text tone="secondary">
+        Zero React — workspace <Kbd>@var-ui/astro</Kbd> + <Kbd>@var-ui/core</Kbd> with TypeStyles
+        extraction.
+      </Text>
+      <Breadcrumbs items={breadcrumbItems} />
+    </Stack>
+
+    <Banner tone="info" title="Static site friendly">
+      This gallery exercises v0.1 Astro components with vanilla scripts for tabs, color mode, and
+      copy-to-clipboard.
+    </Banner>
+
+    <Section title="Actions">
+      <HStack gap="sm" wrap>
+        <Button intent="primary">Primary</Button>
+        <Button intent="secondary">Secondary</Button>
+        <Button intent="ghost">Ghost</Button>
+        <Button intent="danger">Danger</Button>
+        <Button intent="primary" size="sm">Small</Button>
+        <Button intent="secondary" disabled>Disabled</Button>
+      </HStack>
+      <HStack gap="sm" wrap>
+        <Badge tone="accent">Beta</Badge>
+        <Badge tone="success">Stable</Badge>
+        <Badge tone="warning">Preview</Badge>
+        <Badge tone="danger">Deprecated</Badge>
+        <Link href="https://github.com/var-ui/var-ui">GitHub</Link>
+      </HStack>
+    </Section>
+
+    <Section title="Feedback">
+      <Stack gap="md">
+        <Alert variant="info" title="Info alert">
+          Alerts support optional titles, actions, and icon slots.
+        </Alert>
+        <Alert variant="success" appearance="solid" title="Success">
+          Deploy finished in 42s.
+        </Alert>
+        <Alert
+          variant="warning"
+          title="Action required"
+          action={{ href: '#', label: 'Review changes' }}
+        >
+          Three pending approvals before release.
+        </Alert>
+        <HStack gap="lg" wrap>
+          <Spinner label="Loading" />
+          <HStack gap="xs">
+            <StatusDot tone="success" pulse />
+            <Text as="span" size="sm">Operational</Text>
+          </HStack>
+          <HStack gap="xs">
+            <StatusDot tone="danger" />
+            <Text as="span" size="sm" tone="secondary">Incident</Text>
+          </HStack>
+        </HStack>
+        <ProgressBar label="Uploading assets" value={64} />
+        <ProgressBar label="Reindexing" isIndeterminate />
+        <div style="max-width: 320px;">
+          <Stack gap="xs">
+            <Skeleton shape="text" style="width: 60%;" />
+            <Skeleton shape="text" style="width: 90%;" />
+            <Skeleton shape="rect" style="height: 48px;" />
+          </Stack>
+        </div>
+      </Stack>
+    </Section>
+
+    <Section title="Content">
+      <Stack gap="md">
+        <Heading level={2} size="display">Display heading</Heading>
+        <Text>
+          Body text with a <Kbd>⌘K</Kbd> shortcut hint and inline{' '}
+          <CodeBlock code="pnpm add @var-ui/astro" variant="inline" copyable={false} /> snippet.
+        </Text>
+        <Steps>
+          <li>Install <Kbd>@var-ui/astro</Kbd> and <Kbd>@var-ui/core</Kbd>.</li>
+          <li>Add <Kbd>ThemeScript</Kbd> in the document head.</li>
+          <li>Compose components — no React runtime required.</li>
+        </Steps>
+        <CodeBlock
+          code={`import { Button } from '@var-ui/astro';\n\n<Button intent="primary">Launch</Button>`}
+          language="astro"
+          filename="index.astro"
+        />
+        <Divider />
+        <EmptyState title="No results" description="Try a different filter or clear the search.">
+          <Button slot="action" intent="primary">Clear filters</Button>
+        </EmptyState>
+      </Stack>
+    </Section>
+
+    <Section title="Containers">
+      <Stack gap="md">
+        <Card title="Static card">Plain content surface with a title and body slot.</Card>
+        <HStack gap="lg" wrap>
+          <Avatar name="Ada Lovelace" />
+          <Avatar name="Grace Hopper" status="success" />
+        </HStack>
+      </Stack>
+    </Section>
+
+    <Section title="Tabs">
+      <Tabs tabs={tabDefs} defaultSelectedId="overview">
+        <div slot="overview">
+          <Text>Overview panel — selected by default via <Kbd>defaultSelectedId</Kbd>.</Text>
+        </div>
+        <div slot="api">
+          <Text>API reference panel with keyboard navigation (Arrow keys, Home/End).</Text>
+        </div>
+        <div slot="tokens">
+          <Text>Design tokens panel — theme class on <Kbd>&lt;html&gt;</Kbd> drives CSS variables.</Text>
+        </div>
+      </Tabs>
+    </Section>
+
+    <Section title="Collapsible">
+      <Stack gap="sm">
+        <Collapsible title="Install" variant="bordered">
+          <Text as="span" size="sm"><Kbd>pnpm add @var-ui/astro @var-ui/core</Kbd></Text>
+        </Collapsible>
+        <Collapsible title="Configure TypeStyles" variant="bordered" defaultExpanded>
+          <Text as="span" size="sm">
+            Add <Kbd>@typestyles/vite</Kbd> to <Kbd>astro.config.mjs</Kbd> with a
+            <Kbd>typestyles-entry.ts</Kbd> side-effect import of <Kbd>@var-ui/core</Kbd>.
+          </Text>
+        </Collapsible>
+      </Stack>
+    </Section>
+  </Stack>
+</BaseLayout>
