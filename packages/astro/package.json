@@ -1,0 +1,45 @@
+{
+  "name": "@var-ui/astro",
+  "version": "0.0.1",
+  "description": "Astro components for the var-ui design system",
+  "keywords": [
+    "astro-component",
+    "design-system",
+    "var-ui",
+    "withastro"
+  ],
+  "homepage": "https://github.com/var-ui/var-ui/tree/main/packages/astro#readme",
+  "bugs": "https://github.com/var-ui/var-ui/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/var-ui/var-ui.git",
+    "directory": "packages/astro"
+  },
+  "files": [
+    "index.ts",
+    "src",
+    "README.md"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "vp test run"
+  },
+  "devDependencies": {
+    "@var-ui/core": "workspace:*",
+    "astro": "catalog:",
+    "typestyles": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "@var-ui/core": "workspace:^",
+    "astro": "catalog:"
+  }
+}
