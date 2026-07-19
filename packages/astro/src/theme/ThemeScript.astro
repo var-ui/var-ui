@@ -1,0 +1,23 @@
+---
+type Props = {
+  themeClass: string;
+  storageKey?: string;
+};
+const { themeClass, storageKey = 'theme-mode' } = Astro.props;
+---
+<script is:inline define:vars={{ themeClass, storageKey }}>
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = localStorage.getItem(storageKey);
+  const mode =
+    stored === 'light' || stored === 'dark' || stored === 'system'
+      ? stored
+      : prefersDark
+        ? 'dark'
+        : 'light';
+  document.documentElement.classList.add(themeClass);
+  if (mode === 'system') {
+    document.documentElement.removeAttribute('data-mode');
+  } else {
+    document.documentElement.setAttribute('data-mode', mode);
+  }
+</script>

@@ -23,7 +23,9 @@
   ],
   "type": "module",
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.ts",
+    "./ThemeScript": "./src/theme/ThemeScript.astro",
+    "./ColorModeToggle": "./src/theme/ColorModeToggle.astro"
   },
   "publishConfig": {
     "access": "public"
@@ -34,6 +36,7 @@
   "devDependencies": {
     "@var-ui/core": "workspace:*",
     "astro": "catalog:",
+    "jsdom": "^26.0.0",
     "typestyles": "catalog:",
     "vite": "catalog:",
     "vite-plus": "catalog:"

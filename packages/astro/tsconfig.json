@@ -8,5 +8,5 @@
     "noEmit": true,
     "types": ["vite/client"]
   },
-  "include": ["index.ts", "src/**/*.ts", "src/**/*.astro"]
+  "include": ["index.ts", "src/**/*.ts", "src/**/*.astro", "src/env.d.ts"]
 }
