@@ -1,8 +1,6 @@
-'use client';
-
 import { TextField } from '@var-ui/react';
 
-export function TextFieldDemo() {
+export default function Preview() {
   return (
     <TextField
       label="Project name"

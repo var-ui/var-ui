@@ -26,7 +26,15 @@ export type DemoId =
   | 'clickable-card.default'
   | 'carousel.default'
   | 'thumbnail.default'
-  | 'timestamp.default';
+  | 'timestamp.default'
+  | 'field.default'
+  | 'text-field.default'
+  | 'text-area-field.default'
+  | 'checkbox.default'
+  | 'radio-group.default'
+  | 'switch.default'
+  | 'select.default'
+  | 'select.options';
 
 export type DemoSnippets = Record<DocsFramework, string>;
 

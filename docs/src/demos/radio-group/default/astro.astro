@@ -1,0 +1,28 @@
+---
+import { radio } from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+const r = radio();
+const options = [
+  { value: 'free', label: 'Free' },
+  { value: 'pro', label: 'Pro' },
+];
+---
+
+<div {...recipeProps(r.group)} role="radiogroup" aria-labelledby="plan-label">
+  <span {...recipeProps(r.groupLabel)} id="plan-label">Plan</span>
+  {
+    options.map((option) => (
+      <label {...recipeProps(r.item)}>
+        <input
+          type="radio"
+          name="plan"
+          value={option.value}
+          style="position:absolute;width:1px;height:1px;opacity:0"
+        />
+        <span {...recipeProps(r.control)} />
+        <span {...recipeProps(r.label)}>{option.label}</span>
+      </label>
+    ))
+  }
+</div>

@@ -1,0 +1,26 @@
+---
+import { checkbox } from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+const cb = checkbox();
+---
+
+<label {...recipeProps(cb.root)}>
+  <input type="checkbox" class="sr-only" />
+  <span {...recipeProps(cb.box)}></span>
+  <span {...recipeProps(cb.label)}>Accept terms</span>
+</label>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

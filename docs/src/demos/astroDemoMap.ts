@@ -24,6 +24,14 @@ import StackDefault from './stack/default/astro.astro';
 import TextDefault from './text/default/astro.astro';
 import ThumbnailDefault from './thumbnail/default/astro.astro';
 import TimestampDefault from './timestamp/default/astro.astro';
+import FieldDefault from './field/default/astro.astro';
+import TextFieldDefault from './text-field/default/astro.astro';
+import TextAreaFieldDefault from './text-area-field/default/astro.astro';
+import CheckboxDefault from './checkbox/default/astro.astro';
+import RadioGroupDefault from './radio-group/default/astro.astro';
+import SwitchDefault from './switch/default/astro.astro';
+import SelectDefault from './select/default/astro.astro';
+import SelectOptions from './select/options/astro.astro';
 
 /** Static Astro preview map — DemoHost imports this (Astro cannot dynamic-import by string). */
 export const astroDemoMap = {
@@ -52,6 +60,14 @@ export const astroDemoMap = {
   'carousel.default': CarouselDefault,
   'thumbnail.default': ThumbnailDefault,
   'timestamp.default': TimestampDefault,
+  'field.default': FieldDefault,
+  'text-field.default': TextFieldDefault,
+  'text-area-field.default': TextAreaFieldDefault,
+  'checkbox.default': CheckboxDefault,
+  'radio-group.default': RadioGroupDefault,
+  'switch.default': SwitchDefault,
+  'select.default': SelectDefault,
+  'select.options': SelectOptions,
 } as const satisfies Record<DemoId, unknown>;
 
 export const astroDemoIds = Object.keys(astroDemoMap) as DemoId[];

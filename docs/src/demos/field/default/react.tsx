@@ -1,8 +1,6 @@
-'use client';
-
 import { Field } from '@var-ui/react';
 
-export function FieldDemo() {
+export default function Preview() {
   return (
     <Field
       label="Custom control"

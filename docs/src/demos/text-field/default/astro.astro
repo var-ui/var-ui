@@ -1,0 +1,17 @@
+---
+import { textField } from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+const tf = textField();
+---
+
+<div {...recipeProps(tf.root)}>
+  <label {...recipeProps(tf.label)} for="project-name">Project name</label>
+  <input
+    {...recipeProps(tf.input)}
+    id="project-name"
+    type="text"
+    placeholder="My project"
+  />
+  <p {...recipeProps(tf.description)}>Shown on the dashboard.</p>
+</div>

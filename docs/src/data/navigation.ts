@@ -36,6 +36,13 @@ export const componentSidebar = [
   { text: 'Carousel', link: '/components/carousel' },
   { text: 'Thumbnail', link: '/components/thumbnail' },
   { text: 'Timestamp', link: '/components/timestamp' },
+  { text: 'Field', link: '/components/field' },
+  { text: 'TextField', link: '/components/text-field' },
+  { text: 'TextAreaField', link: '/components/text-area-field' },
+  { text: 'Checkbox', link: '/components/checkbox' },
+  { text: 'RadioGroup', link: '/components/radio-group' },
+  { text: 'Switch', link: '/components/switch' },
+  { text: 'Select', link: '/components/select' },
 ] as const;
 
 export const sidebar = {

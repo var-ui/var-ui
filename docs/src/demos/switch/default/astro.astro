@@ -1,0 +1,18 @@
+---
+import { switchStyles } from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+const sw = switchStyles();
+---
+
+<label {...recipeProps(sw.root)}>
+  <input
+    type="checkbox"
+    role="switch"
+    style="position:absolute;width:1px;height:1px;opacity:0"
+  />
+  <span {...recipeProps(sw.track)}>
+    <span {...recipeProps(sw.thumb)}></span>
+  </span>
+  <span {...recipeProps(sw.label)}>Enable notifications</span>
+</label>

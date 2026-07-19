@@ -1,7 +1,5 @@
-'use client';
-
 import { Checkbox } from '@var-ui/react';
 
-export function CheckboxDemo() {
+export default function Preview() {
   return <Checkbox>Accept terms</Checkbox>;
 }

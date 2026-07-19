@@ -1,0 +1,11 @@
+---
+import { textAreaField } from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+const taf = textAreaField();
+---
+
+<div {...recipeProps(taf.root)}>
+  <label {...recipeProps(taf.label)} for="notes">Notes</label>
+  <textarea {...recipeProps(taf.input)} id="notes" placeholder="Add a note…"></textarea>
+</div>

@@ -1,0 +1,12 @@
+---
+import { field } from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+const f = field();
+---
+
+<div {...recipeProps(f.root)}>
+  <label {...recipeProps(f.label)} for="custom-range">Custom control</label>
+  <input id="custom-range" type="range" />
+  <p {...recipeProps(f.description)}>Any input composes the shared field chrome.</p>
+</div>

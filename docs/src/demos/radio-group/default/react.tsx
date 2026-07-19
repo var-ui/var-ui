@@ -1,8 +1,6 @@
-'use client';
-
 import { RadioGroup } from '@var-ui/react';
 
-export function RadioGroupDemo() {
+export default function Preview() {
   return (
     <RadioGroup
       label="Plan"

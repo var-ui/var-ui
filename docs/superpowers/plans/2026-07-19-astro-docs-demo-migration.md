@@ -160,9 +160,9 @@ All listed have `@var-ui/astro` counterparts (prefer them for Astro previews).
 
 No Astro form counterparts — Astro/HTML are core-recipe / native controls; snippets honest about HTML/API differences (`isDisabled` → `disabled`, etc.).
 
-- [ ] **Step 1: Migrate per playbook**
-- [ ] **Step 2: Tests + build**
-- [ ] **Step 3: Commit** `feat(docs): migrate form demos to DemoHost`
+- [x] **Step 1: Migrate per playbook**
+- [x] **Step 2: Tests + build**
+- [x] **Step 3: Commit** `feat(docs): migrate form demos to DemoHost`
 
 ---
 

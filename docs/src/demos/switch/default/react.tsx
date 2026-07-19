@@ -1,7 +1,5 @@
-'use client';
-
 import { Switch } from '@var-ui/react';
 
-export function SwitchDemo() {
+export default function Preview() {
   return <Switch>Enable notifications</Switch>;
 }

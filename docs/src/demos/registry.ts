@@ -24,6 +24,14 @@ import { snippets as stackDefaultSnippets } from './stack/default/snippets';
 import { snippets as textDefaultSnippets } from './text/default/snippets';
 import { snippets as thumbnailDefaultSnippets } from './thumbnail/default/snippets';
 import { snippets as timestampDefaultSnippets } from './timestamp/default/snippets';
+import { snippets as fieldDefaultSnippets } from './field/default/snippets';
+import { snippets as textFieldDefaultSnippets } from './text-field/default/snippets';
+import { snippets as textAreaFieldDefaultSnippets } from './text-area-field/default/snippets';
+import { snippets as checkboxDefaultSnippets } from './checkbox/default/snippets';
+import { snippets as radioGroupDefaultSnippets } from './radio-group/default/snippets';
+import { snippets as switchDefaultSnippets } from './switch/default/snippets';
+import { snippets as selectDefaultSnippets } from './select/default/snippets';
+import { snippets as selectOptionsSnippets } from './select/options/snippets';
 
 export type { DemoEntry, DemoId, DemoSnippets };
 
@@ -53,6 +61,14 @@ export const DEMO_IDS = [
   'carousel.default',
   'thumbnail.default',
   'timestamp.default',
+  'field.default',
+  'text-field.default',
+  'text-area-field.default',
+  'checkbox.default',
+  'radio-group.default',
+  'switch.default',
+  'select.default',
+  'select.options',
 ] as const satisfies readonly DemoId[];
 
 export const demoSnippets: Record<DemoId, DemoSnippets> = {
@@ -81,6 +97,14 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'carousel.default': carouselDefaultSnippets,
   'thumbnail.default': thumbnailDefaultSnippets,
   'timestamp.default': timestampDefaultSnippets,
+  'field.default': fieldDefaultSnippets,
+  'text-field.default': textFieldDefaultSnippets,
+  'text-area-field.default': textAreaFieldDefaultSnippets,
+  'checkbox.default': checkboxDefaultSnippets,
+  'radio-group.default': radioGroupDefaultSnippets,
+  'switch.default': switchDefaultSnippets,
+  'select.default': selectDefaultSnippets,
+  'select.options': selectOptionsSnippets,
 };
 
 export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
@@ -109,6 +133,14 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'carousel.default': () => import('./carousel/default/react'),
   'thumbnail.default': () => import('./thumbnail/default/react'),
   'timestamp.default': () => import('./timestamp/default/react'),
+  'field.default': () => import('./field/default/react'),
+  'text-field.default': () => import('./text-field/default/react'),
+  'text-area-field.default': () => import('./text-area-field/default/react'),
+  'checkbox.default': () => import('./checkbox/default/react'),
+  'radio-group.default': () => import('./radio-group/default/react'),
+  'switch.default': () => import('./switch/default/react'),
+  'select.default': () => import('./select/default/react'),
+  'select.options': () => import('./select/options/react'),
 };
 
 export const demoRegistry: Record<DemoId, DemoEntry> = {
@@ -236,6 +268,46 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'timestamp.default',
     snippets: demoSnippets['timestamp.default'],
     react: reactDemoLoaders['timestamp.default'],
+  },
+  'field.default': {
+    id: 'field.default',
+    snippets: demoSnippets['field.default'],
+    react: reactDemoLoaders['field.default'],
+  },
+  'text-field.default': {
+    id: 'text-field.default',
+    snippets: demoSnippets['text-field.default'],
+    react: reactDemoLoaders['text-field.default'],
+  },
+  'text-area-field.default': {
+    id: 'text-area-field.default',
+    snippets: demoSnippets['text-area-field.default'],
+    react: reactDemoLoaders['text-area-field.default'],
+  },
+  'checkbox.default': {
+    id: 'checkbox.default',
+    snippets: demoSnippets['checkbox.default'],
+    react: reactDemoLoaders['checkbox.default'],
+  },
+  'radio-group.default': {
+    id: 'radio-group.default',
+    snippets: demoSnippets['radio-group.default'],
+    react: reactDemoLoaders['radio-group.default'],
+  },
+  'switch.default': {
+    id: 'switch.default',
+    snippets: demoSnippets['switch.default'],
+    react: reactDemoLoaders['switch.default'],
+  },
+  'select.default': {
+    id: 'select.default',
+    snippets: demoSnippets['select.default'],
+    react: reactDemoLoaders['select.default'],
+  },
+  'select.options': {
+    id: 'select.options',
+    snippets: demoSnippets['select.options'],
+    react: reactDemoLoaders['select.options'],
   },
 };
 

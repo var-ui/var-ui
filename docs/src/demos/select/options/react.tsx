@@ -1,5 +1,3 @@
-'use client';
-
 import { Grid, Select } from '@var-ui/react';
 
 const FRUIT_OPTIONS = [
@@ -9,19 +7,7 @@ const FRUIT_OPTIONS = [
   { id: 'grape', label: 'Grape' },
 ];
 
-export function SelectDemo() {
-  return (
-    <Select
-      label="Fruit"
-      options={[
-        { id: 'apple', label: 'Apple' },
-        { id: 'plum', label: 'Plum' },
-      ]}
-    />
-  );
-}
-
-export function SelectOptionsDemo() {
+export default function Preview() {
   return (
     <Grid columns={2} gap="lg">
       <Select label="Fruit" options={FRUIT_OPTIONS} />

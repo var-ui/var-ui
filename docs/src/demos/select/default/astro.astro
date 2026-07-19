@@ -1,0 +1,18 @@
+---
+import { select } from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+const s = select();
+const options = [
+  { id: 'apple', label: 'Apple' },
+  { id: 'plum', label: 'Plum' },
+];
+---
+
+<div {...recipeProps(s.root)}>
+  <label {...recipeProps(s.label)} for="fruit">Fruit</label>
+  <select {...recipeProps(s.trigger)} id="fruit">
+    <option value="" disabled selected>Select…</option>
+    {options.map((option) => <option value={option.id}>{option.label}</option>)}
+  </select>
+</div>
