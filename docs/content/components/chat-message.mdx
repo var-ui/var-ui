@@ -1,0 +1,35 @@
+---
+title: ChatMessage
+description: Message row with sender alignment, avatar, and metadata slots.
+---
+
+# ChatMessage
+
+A message row. Provides `sender` and `density` to descendants via context so `ChatMessageBubble` doesn't need every prop repeated.
+
+## Examples
+
+### Default
+
+There is no `@var-ui/astro` ChatMessage — Astro and HTML previews approximate the row with core recipes.
+
+<Demo id="chat-message.default" />
+
+## Metadata
+
+`ChatMessageMetadata` composes the existing `Timestamp` with optional status text — no dedicated recipe.
+
+| Prop        | Type                                           | Default      |
+| ----------- | ---------------------------------------------- | ------------ |
+| `date`      | `Date \| string \| number`                     | (required)   |
+| `format`    | `'relative' \| 'date' \| 'time' \| 'datetime'` | `'relative'` |
+| `status`    | `ReactNode`                                    | —            |
+| `className` | `string`                                       | —            |
+
+## Props
+
+Props table wiring for the Astro docs site is deferred; use the React package types in the meantime.
+
+## Accessibility
+
+User messages align to the end of the row; assistant messages align to the start.

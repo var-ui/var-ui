@@ -1,0 +1,23 @@
+---
+import { button } from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+// No @var-ui/astro ChatSendButton — static Button chrome (send state only).
+const send = button({ intent: 'primary' });
+---
+
+<button type="button" {...recipeProps(send)} aria-label="Send message">
+  <svg
+    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 19V5M5 12l7-7 7 7"></path>
+  </svg>
+</button>

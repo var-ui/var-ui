@@ -1,0 +1,40 @@
+---
+import { avatar, chatMessage, chatMessageBubble, stack, textBlock } from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+// No @var-ui/astro ChatMessage — core recipe row approximating React layout.
+const m = chatMessage({ sender: 'assistant' });
+const bubble = chatMessageBubble({ sender: 'assistant', variant: 'filled', group: 'none' });
+const a = avatar({ size: 'sm' });
+const metaRow = stack({
+  direction: 'row',
+  gap: 'xs',
+  align: 'center',
+  justify: 'start',
+  wrap: 'nowrap',
+});
+const time = textBlock({ size: 'sm', tone: 'secondary' });
+---
+
+<div {...recipeProps(m.root)}>
+  <div {...recipeProps(m.avatar)}>
+    <span {...recipeProps(a.root)}>
+      <span {...recipeProps(a.initials)} role="img" aria-label="Navi">N</span>
+    </span>
+  </div>
+  <div {...recipeProps(m.content)}>
+    <div {...recipeProps(m.header)}>
+      <span {...recipeProps(m.name)}>Navi</span>
+    </div>
+    <div {...recipeProps(bubble.root)}>Hello! How can I help?</div>
+    <div {...recipeProps(m.metadata)}>
+      <div {...recipeProps(metaRow)}>
+        <time
+          {...recipeProps(time)}
+          datetime="2026-07-19T21:35:00.000Z"
+          title="Jul 19, 2026, 2:35 PM">2:35 PM</time
+        >
+      </div>
+    </div>
+  </div>
+</div>

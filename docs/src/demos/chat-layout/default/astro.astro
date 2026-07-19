@@ -1,0 +1,75 @@
+---
+import {
+  avatar,
+  button,
+  chatComposer,
+  chatLayout,
+  chatMessage,
+  chatMessageBubble,
+  chatMessageList,
+} from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+// No @var-ui/astro ChatLayout — static core-recipe shell (scroll/send are React-only).
+const l = chatLayout();
+const list = chatMessageList({ density: 'balanced' });
+const m = chatMessage({ sender: 'assistant' });
+const bubble = chatMessageBubble({ sender: 'assistant', variant: 'filled', group: 'none' });
+const a = avatar({ size: 'sm' });
+const c = chatComposer();
+const send = button({ intent: 'primary' });
+---
+
+<div style="height: 280px">
+  <div {...recipeProps(l.root)}>
+    <div {...recipeProps(l.messageArea)}>
+      <div {...recipeProps(list.root)} role="log" aria-live="polite">
+        <div {...recipeProps(list.inner)}>
+          <div {...recipeProps(m.root)}>
+            <div {...recipeProps(m.avatar)}>
+              <span {...recipeProps(a.root)}>
+                <span {...recipeProps(a.initials)} role="img" aria-label="Assistant">A</span>
+              </span>
+            </div>
+            <div {...recipeProps(m.content)}>
+              <div {...recipeProps(m.header)}>
+                <span {...recipeProps(m.name)}>Assistant</span>
+              </div>
+              <div {...recipeProps(bubble.root)}>Hello! How can I help?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div {...recipeProps(l.dock)}>
+      <div {...recipeProps(c.root)}>
+        <div {...recipeProps(c.inputRow)}>
+          <textarea
+            {...recipeProps(c.input)}
+            rows="1"
+            placeholder="Type a message…"
+            aria-label="Message"
+            disabled></textarea
+          >
+        </div>
+        <div {...recipeProps(c.actions)}>
+          <button type="button" {...recipeProps(send)} aria-label="Send message" disabled>
+            <svg
+              viewBox="0 0 24 24"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 19V5M5 12l7-7 7 7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

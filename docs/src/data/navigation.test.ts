@@ -44,6 +44,15 @@ describe('navigation (Astro foundation slice)', () => {
       '/components/select',
       '/components/tabs',
       '/components/dialog',
+      '/components/chat-layout',
+      '/components/chat-message-list',
+      '/components/chat-message',
+      '/components/chat-message-bubble',
+      '/components/chat-message-metadata',
+      '/components/chat-composer',
+      '/components/chat-send-button',
+      '/components/chat-system-message',
+      '/components/chat-tool-calls',
     ]);
   });
 });

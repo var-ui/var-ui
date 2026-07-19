@@ -34,6 +34,15 @@ import { snippets as selectDefaultSnippets } from './select/default/snippets';
 import { snippets as selectOptionsSnippets } from './select/options/snippets';
 import { snippets as tabsDefaultSnippets } from './tabs/default/snippets';
 import { snippets as dialogDefaultSnippets } from './dialog/default/snippets';
+import { snippets as chatLayoutDefaultSnippets } from './chat-layout/default/snippets';
+import { snippets as chatMessageListDefaultSnippets } from './chat-message-list/default/snippets';
+import { snippets as chatMessageDefaultSnippets } from './chat-message/default/snippets';
+import { snippets as chatMessageBubbleDefaultSnippets } from './chat-message-bubble/default/snippets';
+import { snippets as chatMessageMetadataDefaultSnippets } from './chat-message-metadata/default/snippets';
+import { snippets as chatComposerDefaultSnippets } from './chat-composer/default/snippets';
+import { snippets as chatSendButtonDefaultSnippets } from './chat-send-button/default/snippets';
+import { snippets as chatSystemMessageDefaultSnippets } from './chat-system-message/default/snippets';
+import { snippets as chatToolCallsDefaultSnippets } from './chat-tool-calls/default/snippets';
 
 export type { DemoEntry, DemoId, DemoSnippets };
 
@@ -73,6 +82,15 @@ export const DEMO_IDS = [
   'select.options',
   'tabs.default',
   'dialog.default',
+  'chat-layout.default',
+  'chat-message-list.default',
+  'chat-message.default',
+  'chat-message-bubble.default',
+  'chat-message-metadata.default',
+  'chat-composer.default',
+  'chat-send-button.default',
+  'chat-system-message.default',
+  'chat-tool-calls.default',
 ] as const satisfies readonly DemoId[];
 
 export const demoSnippets: Record<DemoId, DemoSnippets> = {
@@ -111,6 +129,15 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'select.options': selectOptionsSnippets,
   'tabs.default': tabsDefaultSnippets,
   'dialog.default': dialogDefaultSnippets,
+  'chat-layout.default': chatLayoutDefaultSnippets,
+  'chat-message-list.default': chatMessageListDefaultSnippets,
+  'chat-message.default': chatMessageDefaultSnippets,
+  'chat-message-bubble.default': chatMessageBubbleDefaultSnippets,
+  'chat-message-metadata.default': chatMessageMetadataDefaultSnippets,
+  'chat-composer.default': chatComposerDefaultSnippets,
+  'chat-send-button.default': chatSendButtonDefaultSnippets,
+  'chat-system-message.default': chatSystemMessageDefaultSnippets,
+  'chat-tool-calls.default': chatToolCallsDefaultSnippets,
 };
 
 export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
@@ -149,6 +176,15 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'select.options': () => import('./select/options/react'),
   'tabs.default': () => import('./tabs/default/react'),
   'dialog.default': () => import('./dialog/default/react'),
+  'chat-layout.default': () => import('./chat-layout/default/react'),
+  'chat-message-list.default': () => import('./chat-message-list/default/react'),
+  'chat-message.default': () => import('./chat-message/default/react'),
+  'chat-message-bubble.default': () => import('./chat-message-bubble/default/react'),
+  'chat-message-metadata.default': () => import('./chat-message-metadata/default/react'),
+  'chat-composer.default': () => import('./chat-composer/default/react'),
+  'chat-send-button.default': () => import('./chat-send-button/default/react'),
+  'chat-system-message.default': () => import('./chat-system-message/default/react'),
+  'chat-tool-calls.default': () => import('./chat-tool-calls/default/react'),
 };
 
 export const demoRegistry: Record<DemoId, DemoEntry> = {
@@ -326,6 +362,51 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'dialog.default',
     snippets: demoSnippets['dialog.default'],
     react: reactDemoLoaders['dialog.default'],
+  },
+  'chat-layout.default': {
+    id: 'chat-layout.default',
+    snippets: demoSnippets['chat-layout.default'],
+    react: reactDemoLoaders['chat-layout.default'],
+  },
+  'chat-message-list.default': {
+    id: 'chat-message-list.default',
+    snippets: demoSnippets['chat-message-list.default'],
+    react: reactDemoLoaders['chat-message-list.default'],
+  },
+  'chat-message.default': {
+    id: 'chat-message.default',
+    snippets: demoSnippets['chat-message.default'],
+    react: reactDemoLoaders['chat-message.default'],
+  },
+  'chat-message-bubble.default': {
+    id: 'chat-message-bubble.default',
+    snippets: demoSnippets['chat-message-bubble.default'],
+    react: reactDemoLoaders['chat-message-bubble.default'],
+  },
+  'chat-message-metadata.default': {
+    id: 'chat-message-metadata.default',
+    snippets: demoSnippets['chat-message-metadata.default'],
+    react: reactDemoLoaders['chat-message-metadata.default'],
+  },
+  'chat-composer.default': {
+    id: 'chat-composer.default',
+    snippets: demoSnippets['chat-composer.default'],
+    react: reactDemoLoaders['chat-composer.default'],
+  },
+  'chat-send-button.default': {
+    id: 'chat-send-button.default',
+    snippets: demoSnippets['chat-send-button.default'],
+    react: reactDemoLoaders['chat-send-button.default'],
+  },
+  'chat-system-message.default': {
+    id: 'chat-system-message.default',
+    snippets: demoSnippets['chat-system-message.default'],
+    react: reactDemoLoaders['chat-system-message.default'],
+  },
+  'chat-tool-calls.default': {
+    id: 'chat-tool-calls.default',
+    snippets: demoSnippets['chat-tool-calls.default'],
+    react: reactDemoLoaders['chat-tool-calls.default'],
   },
 };
 

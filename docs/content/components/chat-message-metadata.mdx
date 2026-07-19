@@ -1,0 +1,24 @@
+---
+title: ChatMessageMetadata
+description: Timestamp and optional status text for a chat message.
+---
+
+# ChatMessageMetadata
+
+Thin composition of the existing `Timestamp` with optional status content (e.g. "Read") — no dedicated recipe. Typically passed to `ChatMessage`'s `metadata` prop. See [ChatMessage](/components/chat-message) for the full message wiring.
+
+## Examples
+
+### Default
+
+There is no `@var-ui/astro` ChatMessageMetadata — Astro and HTML show `Timestamp` + status via core recipes.
+
+<Demo id="chat-message-metadata.default" />
+
+## Props
+
+Props table wiring for the Astro docs site is deferred; use the React package types in the meantime.
+
+## Accessibility
+
+The timestamp and status are rendered as plain text content, so they're exposed to assistive technology in the same way as any other inline text within the message row.

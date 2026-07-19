@@ -1,0 +1,24 @@
+---
+title: ChatSendButton
+description: Send/stop button for a chat composer.
+---
+
+# ChatSendButton
+
+Send/stop button for a chat composer. Reuses the existing `Button` and `Icon` rather than a dedicated recipe. See [ChatComposer](/components/chat-composer) for the full composer wiring.
+
+## Examples
+
+### Default
+
+There is no `@var-ui/astro` ChatSendButton — Astro and HTML show a static send-state button; the streaming send/stop toggle is React-only.
+
+<Demo id="chat-send-button.default" />
+
+## Props
+
+Props table wiring for the Astro docs site is deferred; use the React package types in the meantime.
+
+## Accessibility
+
+`aria-label` switches between "Send message" and "Stop generating" based on `isStreaming`.

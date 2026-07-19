@@ -1,0 +1,21 @@
+---
+import { stack, textBlock } from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+// No @var-ui/astro ChatMessageMetadata — Timestamp + status via core recipes.
+const row = stack({
+  direction: 'row',
+  gap: 'xs',
+  align: 'center',
+  justify: 'start',
+  wrap: 'nowrap',
+});
+const time = textBlock({ size: 'sm', tone: 'secondary' });
+---
+
+<div {...recipeProps(row)}>
+  <time {...recipeProps(time)} datetime="2026-07-19T21:35:00.000Z" title="Jul 19, 2026, 2:35 PM"
+    >2:35 PM</time
+  >
+  Read
+</div>

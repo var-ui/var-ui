@@ -1,0 +1,26 @@
+---
+title: ChatMessageBubble
+description: Styled content bubble that inherits sender from an ancestor message.
+---
+
+# ChatMessageBubble
+
+The chat bubble — a styled content container that reads `sender` from an ancestor `ChatMessage` to auto-style its background and text color. var-ui does zero markdown parsing; pass plain text or your own rendered tree as `children`.
+
+## Examples
+
+### Default
+
+There is no `@var-ui/astro` ChatMessageBubble — Astro and HTML previews use the core bubble recipe (pass `sender` explicitly).
+
+<Demo id="chat-message-bubble.default" />
+
+Use `group` when rendering several consecutive bubbles from the same sender, to tighten the corners between them.
+
+## Props
+
+Props table wiring for the Astro docs site is deferred; use the React package types in the meantime.
+
+## Accessibility
+
+Content is rendered as-is — wire your own markdown renderer with accessible semantics if needed.

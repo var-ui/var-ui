@@ -36,7 +36,16 @@ export type DemoId =
   | 'select.default'
   | 'select.options'
   | 'tabs.default'
-  | 'dialog.default';
+  | 'dialog.default'
+  | 'chat-layout.default'
+  | 'chat-message-list.default'
+  | 'chat-message.default'
+  | 'chat-message-bubble.default'
+  | 'chat-message-metadata.default'
+  | 'chat-composer.default'
+  | 'chat-send-button.default'
+  | 'chat-system-message.default'
+  | 'chat-tool-calls.default';
 
 export type DemoSnippets = Record<DocsFramework, string>;
 

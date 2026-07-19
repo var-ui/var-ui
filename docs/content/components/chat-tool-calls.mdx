@@ -1,0 +1,34 @@
+---
+title: ChatToolCalls
+description: Tool/function call display from an LLM response.
+---
+
+# ChatToolCalls
+
+Displays tool/function call invocations from an LLM response. A single call renders inline; two or more collapse into an expandable summary group.
+
+## Examples
+
+### Default
+
+There is no `@var-ui/astro` ChatToolCalls — Astro and HTML show a static collapsed group; expand/collapse is React-only.
+
+<Demo id="chat-tool-calls.default" />
+
+## ChatToolCallItem
+
+| Field          | Type                                              | Default      |
+| -------------- | ------------------------------------------------- | ------------ |
+| `name`         | `string`                                          | (required)   |
+| `status`       | `'pending' \| 'running' \| 'complete' \| 'error'` | `'complete'` |
+| `target`       | `string`                                          | —            |
+| `duration`     | `string`                                          | —            |
+| `resultDetail` | `ReactNode`                                       | —            |
+
+## Props
+
+Props table wiring for the Astro docs site is deferred; use the React package types in the meantime.
+
+## Accessibility
+
+Expandable groups use `aria-expanded` on the toggle button.

@@ -34,6 +34,15 @@ import SelectDefault from './select/default/astro.astro';
 import SelectOptions from './select/options/astro.astro';
 import TabsDefault from './tabs/default/astro.astro';
 import DialogDefault from './dialog/default/astro.astro';
+import ChatLayoutDefault from './chat-layout/default/astro.astro';
+import ChatMessageListDefault from './chat-message-list/default/astro.astro';
+import ChatMessageDefault from './chat-message/default/astro.astro';
+import ChatMessageBubbleDefault from './chat-message-bubble/default/astro.astro';
+import ChatMessageMetadataDefault from './chat-message-metadata/default/astro.astro';
+import ChatComposerDefault from './chat-composer/default/astro.astro';
+import ChatSendButtonDefault from './chat-send-button/default/astro.astro';
+import ChatSystemMessageDefault from './chat-system-message/default/astro.astro';
+import ChatToolCallsDefault from './chat-tool-calls/default/astro.astro';
 
 /** Static Astro preview map — DemoHost imports this (Astro cannot dynamic-import by string). */
 export const astroDemoMap = {
@@ -72,6 +81,15 @@ export const astroDemoMap = {
   'select.options': SelectOptions,
   'tabs.default': TabsDefault,
   'dialog.default': DialogDefault,
+  'chat-layout.default': ChatLayoutDefault,
+  'chat-message-list.default': ChatMessageListDefault,
+  'chat-message.default': ChatMessageDefault,
+  'chat-message-bubble.default': ChatMessageBubbleDefault,
+  'chat-message-metadata.default': ChatMessageMetadataDefault,
+  'chat-composer.default': ChatComposerDefault,
+  'chat-send-button.default': ChatSendButtonDefault,
+  'chat-system-message.default': ChatSystemMessageDefault,
+  'chat-tool-calls.default': ChatToolCallsDefault,
 } as const satisfies Record<DemoId, unknown>;
 
 export const astroDemoIds = Object.keys(astroDemoMap) as DemoId[];

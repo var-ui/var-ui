@@ -34,6 +34,15 @@ import { render as renderSelectDefault } from './select/default/html';
 import { render as renderSelectOptions } from './select/options/html';
 import { render as renderTabsDefault } from './tabs/default/html';
 import { render as renderDialogDefault } from './dialog/default/html';
+import { render as renderChatLayoutDefault } from './chat-layout/default/html';
+import { render as renderChatMessageListDefault } from './chat-message-list/default/html';
+import { render as renderChatMessageDefault } from './chat-message/default/html';
+import { render as renderChatMessageBubbleDefault } from './chat-message-bubble/default/html';
+import { render as renderChatMessageMetadataDefault } from './chat-message-metadata/default/html';
+import { render as renderChatComposerDefault } from './chat-composer/default/html';
+import { render as renderChatSendButtonDefault } from './chat-send-button/default/html';
+import { render as renderChatSystemMessageDefault } from './chat-system-message/default/html';
+import { render as renderChatToolCallsDefault } from './chat-tool-calls/default/html';
 
 /** Static HTML preview renderers keyed by demo id — consumed by DemoHost. */
 export const htmlDemoMap = {
@@ -72,6 +81,15 @@ export const htmlDemoMap = {
   'select.options': renderSelectOptions,
   'tabs.default': renderTabsDefault,
   'dialog.default': renderDialogDefault,
+  'chat-layout.default': renderChatLayoutDefault,
+  'chat-message-list.default': renderChatMessageListDefault,
+  'chat-message.default': renderChatMessageDefault,
+  'chat-message-bubble.default': renderChatMessageBubbleDefault,
+  'chat-message-metadata.default': renderChatMessageMetadataDefault,
+  'chat-composer.default': renderChatComposerDefault,
+  'chat-send-button.default': renderChatSendButtonDefault,
+  'chat-system-message.default': renderChatSystemMessageDefault,
+  'chat-tool-calls.default': renderChatToolCallsDefault,
 } as const satisfies Record<DemoId, () => string>;
 
 export const htmlDemoIds = Object.keys(htmlDemoMap) as DemoId[];

@@ -1,0 +1,24 @@
+---
+title: ChatLayout
+description: Full chat shell with scrollable messages and a composer dock.
+---
+
+# ChatLayout
+
+Full chat shell with a scrollable message area above a sticky composer dock. Includes a default scroll-to-bottom / new-messages button wired to `useChatStreamScroll` and `useChatNewMessages`.
+
+## Examples
+
+### Default
+
+There is no `@var-ui/astro` ChatLayout — Astro and HTML previews show a static core-recipe shell; scroll and send behavior are React-only.
+
+<Demo id="chat-layout.default" />
+
+## Props
+
+Props table wiring for the Astro docs site is deferred; use the React package types in the meantime.
+
+## Accessibility
+
+The message list uses `role="log"` with `aria-live="polite"`. Pass `isStreaming` to `ChatMessageList` so screen readers announce completed messages once during streaming.

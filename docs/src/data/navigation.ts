@@ -45,6 +45,15 @@ export const componentSidebar = [
   { text: 'Select', link: '/components/select' },
   { text: 'Tabs', link: '/components/tabs' },
   { text: 'Dialog', link: '/components/dialog' },
+  { text: 'ChatLayout', link: '/components/chat-layout' },
+  { text: 'ChatMessageList', link: '/components/chat-message-list' },
+  { text: 'ChatMessage', link: '/components/chat-message' },
+  { text: 'ChatMessageBubble', link: '/components/chat-message-bubble' },
+  { text: 'ChatMessageMetadata', link: '/components/chat-message-metadata' },
+  { text: 'ChatComposer', link: '/components/chat-composer' },
+  { text: 'ChatSendButton', link: '/components/chat-send-button' },
+  { text: 'ChatSystemMessage', link: '/components/chat-system-message' },
+  { text: 'ChatToolCalls', link: '/components/chat-tool-calls' },
 ] as const;
 
 export const sidebar = {

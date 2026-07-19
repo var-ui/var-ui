@@ -1,0 +1,24 @@
+---
+title: ChatMessageList
+description: Accessible message log region with density-based spacing.
+---
+
+# ChatMessageList
+
+Presentational container for chat messages — a `role="log"` / `aria-live="polite"` region with density-based spacing.
+
+## Examples
+
+### Default
+
+There is no `@var-ui/astro` ChatMessageList — Astro and HTML previews use the core recipe log markup.
+
+<Demo id="chat-message-list.default" />
+
+## Props
+
+Props table wiring for the Astro docs site is deferred; use the React package types in the meantime.
+
+## Accessibility
+
+Sets `aria-busy` on the log region while `isStreaming` is true so assistive tech waits for the full message instead of re-announcing every streamed token.
