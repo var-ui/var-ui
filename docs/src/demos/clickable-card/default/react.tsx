@@ -1,8 +1,6 @@
-'use client';
-
 import { ClickableCard } from '@var-ui/react';
 
-export function ClickableCardDemo() {
+export default function Preview() {
   return (
     <ClickableCard
       href="#"

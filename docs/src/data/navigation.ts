@@ -31,6 +31,11 @@ export const componentSidebar = [
   { text: 'ProgressBar', link: '/components/progress-bar' },
   { text: 'EmptyState', link: '/components/empty-state' },
   { text: 'Avatar', link: '/components/avatar' },
+  { text: 'Card', link: '/components/card' },
+  { text: 'ClickableCard', link: '/components/clickable-card' },
+  { text: 'Carousel', link: '/components/carousel' },
+  { text: 'Thumbnail', link: '/components/thumbnail' },
+  { text: 'Timestamp', link: '/components/timestamp' },
 ] as const;
 
 export const sidebar = {

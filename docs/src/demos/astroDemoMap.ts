@@ -7,7 +7,10 @@ import BannerDefault from './banner/default/astro.astro';
 import ButtonDefault from './button/default/astro.astro';
 import ButtonDisabled from './button/disabled/astro.astro';
 import ButtonVariants from './button/variants/astro.astro';
+import CardDefault from './card/default/astro.astro';
+import CarouselDefault from './carousel/default/astro.astro';
 import CenterDefault from './center/default/astro.astro';
+import ClickableCardDefault from './clickable-card/default/astro.astro';
 import CodeBlockDefault from './code-block/default/astro.astro';
 import DividerDefault from './divider/default/astro.astro';
 import EmptyStateDefault from './empty-state/default/astro.astro';
@@ -19,6 +22,8 @@ import SectionDefault from './section/default/astro.astro';
 import SpinnerDefault from './spinner/default/astro.astro';
 import StackDefault from './stack/default/astro.astro';
 import TextDefault from './text/default/astro.astro';
+import ThumbnailDefault from './thumbnail/default/astro.astro';
+import TimestampDefault from './timestamp/default/astro.astro';
 
 /** Static Astro preview map — DemoHost imports this (Astro cannot dynamic-import by string). */
 export const astroDemoMap = {
@@ -42,6 +47,11 @@ export const astroDemoMap = {
   'progress-bar.default': ProgressBarDefault,
   'empty-state.default': EmptyStateDefault,
   'avatar.default': AvatarDefault,
+  'card.default': CardDefault,
+  'clickable-card.default': ClickableCardDefault,
+  'carousel.default': CarouselDefault,
+  'thumbnail.default': ThumbnailDefault,
+  'timestamp.default': TimestampDefault,
 } as const satisfies Record<DemoId, unknown>;
 
 export const astroDemoIds = Object.keys(astroDemoMap) as DemoId[];

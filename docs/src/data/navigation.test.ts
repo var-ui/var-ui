@@ -30,6 +30,11 @@ describe('navigation (Astro foundation slice)', () => {
       '/components/progress-bar',
       '/components/empty-state',
       '/components/avatar',
+      '/components/card',
+      '/components/clickable-card',
+      '/components/carousel',
+      '/components/thumbnail',
+      '/components/timestamp',
     ]);
   });
 });

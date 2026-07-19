@@ -21,7 +21,12 @@ export type DemoId =
   | 'spinner.default'
   | 'progress-bar.default'
   | 'empty-state.default'
-  | 'avatar.default';
+  | 'avatar.default'
+  | 'card.default'
+  | 'clickable-card.default'
+  | 'carousel.default'
+  | 'thumbnail.default'
+  | 'timestamp.default';
 
 export type DemoSnippets = Record<DocsFramework, string>;
 

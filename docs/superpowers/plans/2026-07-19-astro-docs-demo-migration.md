@@ -147,9 +147,9 @@ All listed have `@var-ui/astro` counterparts (prefer them for Astro previews).
 
 `card` / `clickable-card` → `@var-ui/astro`. Others → core HTML with reduced interactivity.
 
-- [ ] **Step 1: Migrate per playbook**
-- [ ] **Step 2: Tests + build**
-- [ ] **Step 3: Commit** `feat(docs): migrate container demos to DemoHost`
+- [x] **Step 1: Migrate per playbook**
+- [x] **Step 2: Tests + build**
+- [x] **Step 3: Commit** `feat(docs): migrate container demos to DemoHost`
 
 ---
 

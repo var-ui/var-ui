@@ -1,8 +1,6 @@
-'use client';
-
 import { Card, Carousel } from '@var-ui/react';
 
-export function CarouselDemo() {
+export default function Preview() {
   return (
     <Carousel label="Featured themes" itemWidth="220px">
       <Card title="Default">Scroll-snap slide.</Card>
