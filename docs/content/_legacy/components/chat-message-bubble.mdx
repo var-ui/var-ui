@@ -1,0 +1,33 @@
+---
+title: ChatMessageBubble
+description: Styled content bubble that inherits sender from an ancestor message.
+---
+
+import { Demo } from '../../../src/components/_legacy/Demo';
+import { ChatMessageBubbleDemo } from '../../../src/demos/_legacy/ChatMessageBubbleDemo';
+
+# ChatMessageBubble
+
+The chat bubble — a styled content container that reads `sender` from an ancestor `ChatMessage` to auto-style its background and text color. var-ui does zero markdown parsing; pass plain text or your own rendered tree as `children`.
+
+## Examples
+
+### Default
+
+<Demo code={`import { ChatMessage, ChatMessageBubble } from '@var-ui/react';
+
+<ChatMessage sender="assistant" name="Navi">
+  <ChatMessageBubble>Hello! How can I help?</ChatMessageBubble>
+</ChatMessage>`}>
+  <ChatMessageBubbleDemo />
+</Demo>
+
+Use `group` when rendering several consecutive bubbles from the same sender, to tighten the corners between them.
+
+## Props
+
+<PropsTable slug="chat-message-bubble" />
+
+## Accessibility
+
+Content is rendered as-is — wire your own markdown renderer with accessible semantics if needed.

@@ -1,0 +1,32 @@
+---
+title: Stack
+description: Flex stack primitive (HStack / VStack).
+---
+
+import { Demo } from '../../../src/components/_legacy/Demo';
+import { StackDemo } from '../../../src/demos/_legacy/StackDemo';
+
+# Stack
+
+Flex stack primitive (HStack / VStack).
+
+## Examples
+
+### Default
+
+<Demo code={`import { Button, HStack } from '@var-ui/react';
+
+<HStack gap="sm">
+  <Button intent="secondary">Cancel</Button>
+  <Button>Save</Button>
+</HStack>`}>
+  <StackDemo />
+</Demo>
+
+## Props
+
+<PropsTable slug="stack" />
+
+## Accessibility
+
+Built on React Aria Components where applicable.

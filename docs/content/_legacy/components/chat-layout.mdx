@@ -1,0 +1,31 @@
+---
+title: ChatLayout
+description: Full chat shell with scrollable messages and a composer dock.
+---
+
+import { Demo } from '../../../src/components/_legacy/Demo';
+import { ChatLayoutDemo } from '../../../src/demos/_legacy/ChatLayoutDemo';
+
+# ChatLayout
+
+Full chat shell with a scrollable message area above a sticky composer dock. Includes a default scroll-to-bottom / new-messages button wired to `useChatStreamScroll` and `useChatNewMessages`.
+
+## Examples
+
+### Default
+
+<Demo code={`import { ChatLayout, ChatMessageList, ChatComposer, ChatComposerInput, ChatSendButton } from '@var-ui/react';
+
+<ChatLayout composer={<ChatComposer actions={<ChatSendButton onPress={send} />}><ChatComposerInput value={value} onChange={setValue} onSubmit={send} /></ChatComposer>}>
+  <ChatMessageList isStreaming={isStreaming}>…</ChatMessageList>
+</ChatLayout>`}>
+  <ChatLayoutDemo />
+</Demo>
+
+## Props
+
+<PropsTable slug="chat-layout" />
+
+## Accessibility
+
+The message list uses `role="log"` with `aria-live="polite"`. Pass `isStreaming` to `ChatMessageList` so screen readers announce completed messages once during streaming.

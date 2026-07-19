@@ -26,18 +26,8 @@ const labels: Record<DocsFramework, string> = {
 </div>
 
 <script>
-  import { applyFrameworkChoice } from '../scripts/frameworkSwitcher';
-  import type { DocsFramework } from '../lib/framework';
-
-  const root = document.currentScript?.previousElementSibling;
-  if (root instanceof HTMLElement) {
-    root.addEventListener('click', (event) => {
-      const target = (event.target as HTMLElement | null)?.closest('[data-framework]');
-      if (!(target instanceof HTMLElement)) return;
-      const framework = target.dataset.framework as DocsFramework | undefined;
-      if (framework) applyFrameworkChoice(framework);
-    });
-  }
+  import { initFrameworkSwitcher } from '../scripts/frameworkSwitcher';
+  initFrameworkSwitcher();
 </script>
 
 <style>

@@ -1,0 +1,29 @@
+---
+title: ChatMessageMetadata
+description: Timestamp and optional status text for a chat message.
+---
+
+import { Demo } from '../../../src/components/_legacy/Demo';
+import { ChatMessageMetadataDemo } from '../../../src/demos/_legacy/ChatMessageMetadataDemo';
+
+# ChatMessageMetadata
+
+Thin composition of the existing `Timestamp` with optional status content (e.g. "Read") — no dedicated recipe. Typically passed to `ChatMessage`'s `metadata` prop. See [ChatMessage](/components/chat-message) for the full message wiring.
+
+## Examples
+
+### Default
+
+<Demo code={`import { ChatMessageMetadata } from '@var-ui/react';
+
+<ChatMessageMetadata date={new Date()} format="time" status="Read" />`}>
+  <ChatMessageMetadataDemo />
+</Demo>
+
+## Props
+
+<PropsTable slug="chat-message-metadata" />
+
+## Accessibility
+
+The timestamp and status are rendered as plain text content, so they're exposed to assistive technology in the same way as any other inline text within the message row.
