@@ -1,0 +1,39 @@
+---
+import { Card, CodeBlock, Collapsible, Heading, VStack } from '@var-ui/astro';
+
+type Props = {
+  code: string;
+  language?: string;
+  title?: string;
+};
+
+const { code, language = 'tsx', title } = Astro.props;
+---
+
+<VStack gap="sm" className="demo-chrome">
+  {
+    title ? (
+      <Heading level={4} size="sm">
+        {title}
+      </Heading>
+    ) : null
+  }
+  <Card>
+    <div class="demo-chrome__preview">
+      <slot />
+    </div>
+  </Card>
+  <Collapsible title="Show code" defaultExpanded={false}>
+    <CodeBlock code={code} language={language} />
+  </Collapsible>
+</VStack>
+
+<style>
+  .demo-chrome {
+    margin-block: 1.5rem;
+  }
+
+  .demo-chrome__preview {
+    padding: 1.25rem;
+  }
+</style>
