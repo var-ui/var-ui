@@ -19,6 +19,17 @@ describe('navigation (Astro foundation slice)', () => {
       '/components/section',
       '/components/divider',
       '/components/aspect-ratio',
+      '/components/heading',
+      '/components/text',
+      '/components/link',
+      '/components/code-block',
+      '/components/alert',
+      '/components/banner',
+      '/components/badge',
+      '/components/spinner',
+      '/components/progress-bar',
+      '/components/empty-state',
+      '/components/avatar',
     ]);
   });
 });

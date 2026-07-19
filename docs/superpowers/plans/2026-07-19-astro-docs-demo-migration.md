@@ -27,11 +27,11 @@
 
 Most legacy pages have one Default demo → `{slug}.default`. Exceptions:
 
-| Slug | Demo ids |
-| --- | --- |
-| `button` (done) | `button.default`, `button.variants`, `button.disabled` |
-| `select` | `select.default`, `select.options` |
-| all other `_legacy` component pages | `{slug}.default` |
+| Slug                                | Demo ids                                               |
+| ----------------------------------- | ------------------------------------------------------ |
+| `button` (done)                     | `button.default`, `button.variants`, `button.disabled` |
+| `select`                            | `select.default`, `select.options`                     |
+| all other `_legacy` component pages | `{slug}.default`                                       |
 
 Active content today: only `docs/content/components/button.mdx` (+ `index.mdx` if present). Everything else is under `docs/content/_legacy/components/`.
 
@@ -135,9 +135,9 @@ git commit -m "test(docs): add MDX demo completeness gate"
 
 All listed have `@var-ui/astro` counterparts (prefer them for Astro previews).
 
-- [ ] **Step 1: Migrate per playbook**
-- [ ] **Step 2: Tests + build**
-- [ ] **Step 3: Commit** `feat(docs): migrate content and feedback demos to DemoHost`
+- [x] **Step 1: Migrate per playbook**
+- [x] **Step 2: Tests + build**
+- [x] **Step 3: Commit** `feat(docs): migrate content and feedback demos to DemoHost`
 
 ---
 
@@ -197,8 +197,8 @@ None in `@var-ui/astro` — React islands for real behavior; Astro/HTML use core
 - Delete: remaining `_legacy/components` / `_legacy` demo files if any leftover; keep README explaining quarantine is closed if empty
 
 - [ ] **Step 1: Assert `_legacy/components` is empty of MDX (or only README)**
-- [ ] **Step 2: Remove whitelist; nav lists all components
-- [ ] **Step 3: Completeness gate + build green
+- [ ] \*\*Step 2: Remove whitelist; nav lists all components
+- [ ] \*\*Step 3: Completeness gate + build green
 - [ ] **Step 4: Commit** `feat(docs): open all component MDX routes after demo migration`
 
 ---
@@ -213,7 +213,7 @@ None in `@var-ui/astro` — React islands for real behavior; Astro/HTML use core
 - Wire `typestyles-entry.ts` to import `homeBento` again
 
 - [ ] **Step 1: Restore + adapt homepage island**
-- [ ] **Step 2: Manual/dev smoke of `/` with theme switcher
+- [ ] \*\*Step 2: Manual/dev smoke of `/` with theme switcher
 - [ ] **Step 3: Build + commit** `feat(docs): restore homepage bento as React island`
 
 ---
@@ -233,7 +233,7 @@ None in `@var-ui/astro` — React islands for real behavior; Astro/HTML use core
 - `html`: public class names / data attributes from recipes (manual tables or generated from recipe metadata where cheap)
 
 - [ ] **Step 1: Implementation + Button page first**
-- [ ] **Step 2: Roll PropsTable into migrated MDX pages (batch script OK)
+- [ ] \*\*Step 2: Roll PropsTable into migrated MDX pages (batch script OK)
 - [ ] **Step 3: Tests if extractors change; build; commit** `feat(docs): add framework-aware PropsTable`
 
 ---

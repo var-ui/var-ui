@@ -10,7 +10,18 @@ export type DemoId =
   | 'center.default'
   | 'section.default'
   | 'divider.default'
-  | 'aspect-ratio.default';
+  | 'aspect-ratio.default'
+  | 'heading.default'
+  | 'text.default'
+  | 'link.default'
+  | 'code-block.default'
+  | 'alert.default'
+  | 'banner.default'
+  | 'badge.default'
+  | 'spinner.default'
+  | 'progress-bar.default'
+  | 'empty-state.default'
+  | 'avatar.default';
 
 export type DemoSnippets = Record<DocsFramework, string>;
 

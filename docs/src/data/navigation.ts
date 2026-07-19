@@ -20,6 +20,17 @@ export const componentSidebar = [
   { text: 'Section', link: '/components/section' },
   { text: 'Divider', link: '/components/divider' },
   { text: 'AspectRatio', link: '/components/aspect-ratio' },
+  { text: 'Heading', link: '/components/heading' },
+  { text: 'Text', link: '/components/text' },
+  { text: 'Link', link: '/components/link' },
+  { text: 'CodeBlock', link: '/components/code-block' },
+  { text: 'Alert', link: '/components/alert' },
+  { text: 'Banner', link: '/components/banner' },
+  { text: 'Badge', link: '/components/badge' },
+  { text: 'Spinner', link: '/components/spinner' },
+  { text: 'ProgressBar', link: '/components/progress-bar' },
+  { text: 'EmptyState', link: '/components/empty-state' },
+  { text: 'Avatar', link: '/components/avatar' },
 ] as const;
 
 export const sidebar = {
