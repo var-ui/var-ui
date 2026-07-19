@@ -51,3 +51,18 @@ import { recipeProps, recipeClassName, cx } from '@var-ui/astro';
 ```
 
 See `@var-ui/core` for theme tokens and component recipes used by Astro components.
+
+## Collapsible
+
+Expand/collapse panel built on native `<details>` / `<summary>` (no React Aria).
+
+```astro
+---
+import { Collapsible } from '@var-ui/astro';
+---
+<Collapsible title="Show code" defaultExpanded={false}>
+  <pre>…</pre>
+</Collapsible>
+```
+
+v0.1 omits controlled `isExpanded` / `onExpandedChange` and `CollapsibleGroup`; use multiple standalone `Collapsible` instances or add client-side state in your app if you need accordion behavior.

@@ -1,0 +1,166 @@
+---
+import { codeBlock } from '@var-ui/core';
+import { cx, recipeClassName, recipeProps } from '../utils';
+
+type CodeBlockVariant = 'default' | 'inline' | 'diff' | 'terminal';
+
+type Props = {
+  code: string;
+  language?: string;
+  filename?: string;
+  className?: string;
+  copyable?: boolean;
+  variant?: CodeBlockVariant;
+  wrapLongLines?: boolean;
+  showLineNumbers?: boolean;
+  highlightedLines?: number[];
+  copyLabel?: string;
+  copiedLabel?: string;
+  copyErrorLabel?: string;
+};
+
+const {
+  code,
+  language,
+  filename,
+  className,
+  copyable = true,
+  variant = 'default',
+  wrapLongLines = false,
+  showLineNumbers = false,
+  highlightedLines = [],
+  copyLabel = 'Copy code',
+  copiedLabel = 'Copied',
+  copyErrorLabel = 'Copy failed',
+} = Astro.props;
+
+const cb = codeBlock();
+const variantRootClass: Record<CodeBlockVariant, string> = {
+  default: recipeClassName(cb.rootDefault),
+  inline: recipeClassName(cb.rootInline),
+  diff: recipeClassName(cb.rootDiff),
+  terminal: recipeClassName(cb.rootTerminal),
+};
+
+const highlightedSet = new Set(highlightedLines);
+const lines = code.replace(/\n$/, '').split('\n');
+const terminal = variant === 'terminal';
+const inline = variant === 'inline';
+
+const feedbackClassName = cx(
+  recipeClassName(cb.feedback),
+  recipeClassName(cb.feedbackInline),
+);
+
+const copyIcon =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M15 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h1"></path></svg>';
+---
+
+{
+  inline ? (
+    <code
+      {...recipeProps(
+        cb.root,
+        cx(variantRootClass[variant], recipeClassName(cb.code), className),
+      )}
+      data-codeblock
+    >
+      {code}
+    </code>
+  ) : (
+    <div {...recipeProps(cb.root, cx(variantRootClass[variant], className))} data-codeblock>
+      <div
+        {...recipeProps(cb.header, cx(terminal && recipeClassName(cb.headerTerminal)))}
+        data-codeblock-header
+      >
+        <div {...recipeProps(cb.title)}>
+          {filename ? <span {...recipeProps(cb.filename)}>{filename}</span> : null}
+          {language ? (
+            <span
+              {...recipeProps(cb.language, cx(terminal && recipeClassName(cb.languageTerminal)))}
+            >
+              {language}
+            </span>
+          ) : null}
+        </div>
+        {copyable ? (
+          <div {...recipeProps(cb.actions)}>
+            <button
+              type="button"
+              {...recipeProps(
+                cb.copyButton,
+                cx(recipeClassName(cb.copyButtonIdle)),
+              )}
+              data-var-ui-code-copy
+              data-code={code}
+              data-copy-label={copyLabel}
+              data-copied-label={copiedLabel}
+              data-copy-error-label={copyErrorLabel}
+              aria-label={copyLabel}
+            >
+              <span set:html={copyIcon} />
+              Copy
+            </button>
+            <span
+              class={feedbackClassName}
+              data-codeblock-feedback
+              role="status"
+              aria-live="polite"
+            />
+          </div>
+        ) : null}
+      </div>
+
+      <div
+        {...recipeProps(
+          cb.body,
+          cx(recipeClassName(cb.bodyScrollable), terminal && recipeClassName(cb.bodyTerminal)),
+        )}
+        data-codeblock-body
+      >
+        <pre
+          {...recipeProps(
+            cb.pre,
+            cx(
+              wrapLongLines ? recipeClassName(cb.preWrap) : recipeClassName(cb.preScrollX),
+              terminal && recipeClassName(cb.preTerminal),
+            ),
+          )}
+          data-codeblock-pre
+        >
+          {showLineNumbers ? (
+            <code {...recipeProps(cb.code, recipeClassName(cb.lines))}>
+              {lines.map((line, index) => {
+                const lineNumber = index + 1;
+                return (
+                  <span
+                    {...recipeProps(
+                      cb.line,
+                      cx(highlightedSet.has(lineNumber) && recipeClassName(cb.lineHighlighted)),
+                    )}
+                  >
+                    <span {...recipeProps(cb.lineNumber)} aria-hidden="true">
+                      {lineNumber}
+                    </span>
+                    <span {...recipeProps(cb.lineContent)}>{line || ' '}</span>
+                  </span>
+                );
+              })}
+            </code>
+          ) : (
+            <code {...recipeProps(cb.code)}>{code}</code>
+          )}
+        </pre>
+      </div>
+    </div>
+  )
+}
+
+{
+  !inline && copyable ? (
+    <script>
+      import { initCodeBlockCopy } from '../scripts/codeBlockCopy';
+      initCodeBlockCopy();
+    </script>
+  ) : null
+}
