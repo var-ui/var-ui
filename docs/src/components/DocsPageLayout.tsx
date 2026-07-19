@@ -6,9 +6,8 @@ import { proseContent } from '@var-ui/core';
 import { MDXContent } from '@content-collections/mdx/react';
 import type { ComponentPropsDoc } from '@/lib/extract-component-props';
 import type { DocHeading } from '@/lib/extract-headings';
-import { docsShell } from '@/styles/docsShell';
-import { DocsMobileNav } from './DocsMobileNav';
-import { DocsSidebarRail, DocsToc } from './DocsSidebar';
+import { docsContent } from '@/styles/docsContent';
+import { DocsChrome } from './DocsChrome';
 import { mdxComponents } from './mdx-components';
 import { PropsTable } from './PropsTable';
 
@@ -20,7 +19,7 @@ type DocPageProps = {
 };
 
 export function DocsPageLayout({ children, headings = [], mdx, propsDoc }: DocPageProps) {
-  const shell = docsShell();
+  const content = docsContent();
   const prose = proseContent();
   const components = useMemo(
     () => ({
@@ -31,23 +30,16 @@ export function DocsPageLayout({ children, headings = [], mdx, propsDoc }: DocPa
   );
 
   return (
-    <>
-      <div className={recipeClassName(shell.body)}>
-        <DocsSidebarRail />
-        <main className={recipeClassName(shell.main)}>
-          <div className={recipeClassName(shell.mainInner)}>
-            {mdx ? (
-              <article className={recipeClassName(prose.root)}>
-                <MDXContent code={mdx} components={components} />
-              </article>
-            ) : (
-              <article className={recipeClassName(prose.root)}>{children}</article>
-            )}
-          </div>
-        </main>
-        <DocsToc headings={headings} />
+    <DocsChrome headings={headings}>
+      <div className={recipeClassName(content.article)}>
+        {mdx ? (
+          <article className={recipeClassName(prose.root)}>
+            <MDXContent code={mdx} components={components} />
+          </article>
+        ) : (
+          <article className={recipeClassName(prose.root)}>{children}</article>
+        )}
       </div>
-      <DocsMobileNav />
-    </>
+    </DocsChrome>
   );
 }

@@ -4,7 +4,7 @@
 // of every `styles.component()` / `styles.class()` registration that the docs
 // site can render: everything inside `@var-ui/core` and `@var-ui/react`, plus
 // every docs-owned module outside the `@var-ui/*` packages that calls
-// `styles.component` directly (`docsShell`, `homeBento`).
+// `styles.component` directly (`docsContent`, `homeBento`).
 //
 // Deliberately plain side-effect imports (not `import * as x from ...`
 // namespace re-exports). Namespace-import-and-re-export was the exact pattern
@@ -15,5 +15,5 @@
 // the clearest way to express "run this module for its registrations."
 import '@var-ui/core';
 import '@var-ui/react';
-import './src/styles/docsShell';
+import './src/styles/docsContent';
 import './src/styles/homeBento';
