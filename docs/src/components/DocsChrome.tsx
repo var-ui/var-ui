@@ -15,6 +15,7 @@ import type { ReactNode } from 'react';
 import { githubUrl, sidebar, topNav } from '@/data/navigation';
 import type { DocHeading } from '@/lib/extract-headings';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
+import { DocsSearch } from './DocsSearch';
 
 type SidebarSection = (typeof sidebar)[keyof typeof sidebar];
 type NavigateFn = ReturnType<typeof useNavigate>;
@@ -56,7 +57,7 @@ function GitHubIcon() {
 function DocsEndContent({ showMobileToggle }: { showMobileToggle: boolean }) {
   return (
     <HStack align="center" gap="xs">
-      {/* Room for CommandPalette search (Task 5) */}
+      <DocsSearch />
       {showMobileToggle ? <MobileNav.Toggle /> : null}
       <ColorModeSwitcher />
       <Link

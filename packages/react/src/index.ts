@@ -2,6 +2,8 @@ import './globalBody';
 
 export {
   Button,
+  IconButton,
+  type IconButtonProps,
   Link,
   List,
   ListItem,

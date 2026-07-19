@@ -64,4 +64,13 @@ describe('DocsChrome', () => {
     expect(screen.getByRole('main')).toBeTruthy();
     vi.unstubAllGlobals();
   });
+
+  it('exposes a search trigger in the top nav end content', async () => {
+    stubMatchMedia(false);
+    await renderDocsChrome();
+
+    expect(screen.getByRole('button', { name: 'Search docs' })).toBeTruthy();
+    expect(screen.getByText('⌘K')).toBeTruthy();
+    vi.unstubAllGlobals();
+  });
 });
