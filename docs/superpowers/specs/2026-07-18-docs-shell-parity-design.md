@@ -4,7 +4,7 @@ Make `@var-ui/react` sufficient for documentation-site chrome so the Var UI
 docs app uses package components instead of a parallel custom shell.
 
 **Date:** 2026-07-18  
-**Status:** Approved (design)  
+**Status:** Shipped  
 **Parent:** `specs/component-breadth.md` (Phase 5 P3 Outline; Phase 6
 Collapsible pulled forward); docs readiness review
 

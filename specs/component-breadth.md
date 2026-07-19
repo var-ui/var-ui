@@ -42,12 +42,12 @@ navigation, overlays, tables, feedback, and chat. Lab-tier visualization
 | ------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | **Action**          | Button, Link                                              | No IconButton, ButtonGroup, menus, SegmentedControl, ToggleButton, Toolbar                          |
 | **Data input**      | TextField, TextAreaField, Checkbox, Switch, Radio, Select | No Field wrapper, Calendar, date/time pickers, Slider, NumberInput, FileInput, Typeahead, Tokenizer |
-| **Feedback**        | Alert, Badge                                              | No Banner, ProgressBar, Spinner, Skeleton, StatusDot                                                |
+| **Feedback**        | Alert, Badge, Skeleton, StatusDot                         | No Banner, ProgressBar, Spinner                                                                     |
 | **Overlay**         | Dialog, CommandPalette (recipe only)                      | No Toast, Popover, Tooltip, HoverCard, AlertDialog, Lightbox, LayerProvider                         |
-| **Navigation**      | Tabs                                                      | No Breadcrumbs, Pagination, SideNav, TopNav, MobileNav, Outline                                     |
+| **Navigation**      | Tabs, Outline                                             | No Breadcrumbs, Pagination, SideNav, TopNav, MobileNav, NavIcon, NavMenu                            |
 | **Table & list**    | —                                                         | No Table, List, TreeList, MetadataList, OverflowList                                                |
-| **Layout**          | `layout`/`text` utilities                                 | No AppShell, Grid, Stack primitives, Resizable, Collapsible, FormLayout, Section                    |
-| **Content**         | CodeBlock, prose/steps/fileTree (docs)                    | No Avatar, EmptyState, Heading/Text components, Icon, Kbd, Markdown, Thumbnail                      |
+| **Layout**          | `layout`/`text` utilities, Collapsible                    | No AppShell, Grid, Stack primitives, Resizable, FormLayout, Section                                 |
+| **Content**         | CodeBlock, Kbd, Steps, FileTree, prose                    | No Avatar, EmptyState, Heading/Text components, Icon, Markdown, Thumbnail                           |
 | **Container**       | Card (recipe only)                                        | No ClickableCard, SelectableCard, Carousel                                                          |
 | **Chat**            | —                                                         | Full Chat suite in Astryx                                                                           |
 | **Utility / infra** | DesignSystemProvider, semanticTone                        | No LayerProvider, SizeContext, shared focus/scroll hooks                                            |
@@ -514,31 +514,31 @@ pagination hooks ship. **Met** — shipped on branch `phase-4-lists-tables`. Spe
 
 ### Phase 5 — Navigation and app chrome (~15 families)
 
-| Priority | Astryx reference                   | var-ui deliverable                          |
-| -------- | ---------------------------------- | ------------------------------------------- |
-| P1       | `Breadcrumbs`                      | RAC Breadcrumbs                             |
-| P1       | `Pagination`                       | Page control                                |
-| P2       | `SideNav` + subcomponents          | **Shipped** — collapsible + resizable       |
-| P2       | `TopNav` + mega menu subcomponents | **Shipped** — Menu + MegaMenu               |
-| P2       | `MobileNav`                        | **Shipped** — drawer + Toggle/Provider      |
-| P2       | `TabList` / `Tab` / `TabMenu`      | **Shipped** — keep separate from panel Tabs |
-| P2       | `AppShell` (pulled from P3)        | **Shipped** — minimal shell + mobile ctx    |
-| P2       | `Resizable` (pulled from Phase 6)  | **Shipped** — single-region + ResizeHandle  |
-| P3       | `Outline`                          | In-page TOC nav                             |
-| P3       | `NavIcon`, `NavMenu`               | Nav-specific icon/menu helpers              |
+| Priority | Astryx reference                   | var-ui deliverable                                         |
+| -------- | ---------------------------------- | ---------------------------------------------------------- |
+| P1       | `Breadcrumbs`                      | RAC Breadcrumbs                                            |
+| P1       | `Pagination`                       | Page control                                               |
+| P2       | `SideNav` + subcomponents          | **Shipped** — collapsible + resizable                      |
+| P2       | `TopNav` + mega menu subcomponents | **Shipped** — Menu + MegaMenu                              |
+| P2       | `MobileNav`                        | **Shipped** — drawer + Toggle/Provider                     |
+| P2       | `TabList` / `Tab` / `TabMenu`      | **Shipped** — keep separate from panel Tabs                |
+| P2       | `AppShell` (pulled from P3)        | **Shipped** — minimal shell + mobile ctx                   |
+| P2       | `Resizable` (pulled from Phase 6)  | **Shipped** — single-region + ResizeHandle                 |
+| P3       | `Outline`                          | **Shipped** — in-page TOC + scroll-spy (docs shell parity) |
+| P3       | `NavIcon`, `NavMenu`               | Nav-specific icon/menu helpers (deferred)                  |
 
 **Phase 5 done when:** a full admin shell demo exists in the example app
-(SideNav + TopNav + AppShell). **P2 met that bar**; P3 finishes Outline /
-NavIcon / NavMenu.
+(SideNav + TopNav + AppShell). **P2 met that bar**; P3 `Outline` shipped;
+`NavIcon` / `NavMenu` remain.
 
 ### Phase 6 — Layout polish and collapsible regions (~8 families)
 
-| Priority | Astryx reference                                                         | var-ui deliverable                                                 |
-| -------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| P2       | `Collapsible`, `CollapsibleGroup`                                        | Expand/collapse panels                                             |
-| P2       | `Resizable`, `ResizeHandle`                                              | Split pane layout                                                  |
-| P2       | `Layout`, `LayoutHeader`, `LayoutFooter`, `LayoutContent`, `LayoutPanel` | Page regions                                                       |
-| P3       | `Blockquote`, `Citation`, `Code`, `Markdown`, `VisuallyHidden`           | Content (some overlap with proseContent — extend, don't duplicate) |
+| Priority | Astryx reference                                                         | var-ui deliverable                                                          |
+| -------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| P2       | `Collapsible`, `CollapsibleGroup`                                        | **Shipped** — expand/collapse panels (pulled forward via docs shell parity) |
+| P2       | `Resizable`, `ResizeHandle`                                              | Split pane layout                                                           |
+| P2       | `Layout`, `LayoutHeader`, `LayoutFooter`, `LayoutContent`, `LayoutPanel` | Page regions                                                                |
+| P3       | `Blockquote`, `Citation`, `Code`, `Markdown`, `VisuallyHidden`           | Content (some overlap with proseContent — extend, don't duplicate)          |
 
 **Phase 6 done when:** layout primitives match Astryx's page-building story;
 proseContent and new content components share token paths.
