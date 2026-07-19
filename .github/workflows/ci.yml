@@ -23,3 +23,5 @@ jobs:
       - run: vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build
       - run: vp check
       - run: vp test run
+      - run: vp run @var-ui/example-astro-app#check
+      - run: vp run @var-ui/example-astro-app#build
