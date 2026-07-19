@@ -1,0 +1,25 @@
+---
+import { stack } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  gap?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  align?: 'start' | 'center' | 'end' | 'stretch';
+  justify?: 'start' | 'center' | 'end' | 'between';
+  wrap?: boolean;
+  className?: string;
+};
+
+const {
+  gap = 'md',
+  align = 'stretch',
+  justify = 'start',
+  wrap = false,
+  className,
+} = Astro.props;
+const rp = recipeProps(
+  stack({ direction: 'column', gap, align, justify, wrap: wrap ? 'wrap' : 'nowrap' }),
+  className,
+);
+---
+<div {...rp}><slot /></div>

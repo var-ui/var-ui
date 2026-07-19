@@ -1,0 +1,16 @@
+---
+import { divider } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  orientation?: 'horizontal' | 'vertical';
+  className?: string;
+};
+
+const { orientation = 'horizontal', className } = Astro.props;
+const rp = recipeProps(divider({ orientation }), className);
+---
+<hr
+  {...rp}
+  aria-orientation={orientation === 'vertical' ? 'vertical' : undefined}
+/>
