@@ -1,8 +1,6 @@
-'use client';
-
 import { AspectRatio } from '@var-ui/react';
 
-export function AspectRatioDemo() {
+export default function Preview() {
   return (
     <AspectRatio
       ratio={16 / 9}

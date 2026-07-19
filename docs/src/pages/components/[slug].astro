@@ -5,8 +5,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import DemoHost from '../../components/DemoHost.astro';
 import { findMdxModule } from '../../lib/loadMdx';
 
-/** Foundation slice: only Button MDX is id-based / DemoHost-ready. */
-const READY_COMPONENT_SLUGS = new Set(['button']);
+/** Foundation slice: only DemoHost-ready component MDX is routed. */
+const READY_COMPONENT_SLUGS = new Set([
+  'button',
+  'stack',
+  'grid',
+  'center',
+  'section',
+  'divider',
+  'aspect-ratio',
+]);
 
 const slug = Astro.params.slug;
 if (!slug || !READY_COMPONENT_SLUGS.has(slug)) {

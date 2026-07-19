@@ -12,7 +12,15 @@ export const docsSidebar = [{ text: 'Getting started', link: '/docs/getting-star
 /** Empty until theming pages ship in the Astro foundation slice. */
 export const themingSidebar = [] as const;
 
-export const componentSidebar = [{ text: 'Button', link: '/components/button' }] as const;
+export const componentSidebar = [
+  { text: 'Button', link: '/components/button' },
+  { text: 'Stack', link: '/components/stack' },
+  { text: 'Grid', link: '/components/grid' },
+  { text: 'Center', link: '/components/center' },
+  { text: 'Section', link: '/components/section' },
+  { text: 'Divider', link: '/components/divider' },
+  { text: 'AspectRatio', link: '/components/aspect-ratio' },
+] as const;
 
 export const sidebar = {
   '/components': componentSidebar,

@@ -11,6 +11,14 @@ describe('navigation (Astro foundation slice)', () => {
 
   it('limits sidebars to shipped pages', () => {
     expect(docsSidebar.map((item) => item.link)).toEqual(['/docs/getting-started']);
-    expect(componentSidebar.map((item) => item.link)).toEqual(['/components/button']);
+    expect(componentSidebar.map((item) => item.link)).toEqual([
+      '/components/button',
+      '/components/stack',
+      '/components/grid',
+      '/components/center',
+      '/components/section',
+      '/components/divider',
+      '/components/aspect-ratio',
+    ]);
   });
 });

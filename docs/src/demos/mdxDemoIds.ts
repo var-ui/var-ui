@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -6,12 +6,17 @@ const DEMO_ID_RE = /<Demo\s+id=["']([^"']+)["']/g;
 const LEGACY_PATH = '/_legacy/';
 
 function getContentRoot(): string {
+  const candidates: string[] = [];
   try {
-    const docsRoot = fileURLToPath(new URL('../..', import.meta.url));
-    return path.join(docsRoot, 'content');
+    candidates.push(fileURLToPath(new URL('../../content', import.meta.url)));
   } catch {
-    return path.join(process.cwd(), 'docs/content');
+    // Vitest may provide a non-file import.meta.url — fall through to cwd candidates.
   }
+  candidates.push(path.join(process.cwd(), 'content'), path.join(process.cwd(), 'docs/content'));
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) return candidate;
+  }
+  return candidates[candidates.length - 1]!;
 }
 
 function walkMdxFiles(dir: string, files: string[]): void {

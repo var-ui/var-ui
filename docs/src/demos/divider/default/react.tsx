@@ -1,8 +1,6 @@
-'use client';
-
 import { Divider, Text } from '@var-ui/react';
 
-export function DividerDemo() {
+export default function Preview() {
   return (
     <>
       <Text>Above</Text>
