@@ -5,53 +5,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import DemoHost from '../../components/DemoHost.astro';
 import { findMdxModule } from '../../lib/loadMdx';
 
-/** Foundation slice: only DemoHost-ready component MDX is routed. */
-const READY_COMPONENT_SLUGS = new Set([
-  'button',
-  'stack',
-  'grid',
-  'center',
-  'section',
-  'divider',
-  'aspect-ratio',
-  'heading',
-  'text',
-  'link',
-  'code-block',
-  'alert',
-  'banner',
-  'badge',
-  'spinner',
-  'progress-bar',
-  'empty-state',
-  'avatar',
-  'card',
-  'clickable-card',
-  'carousel',
-  'thumbnail',
-  'timestamp',
-  'field',
-  'text-field',
-  'text-area-field',
-  'checkbox',
-  'radio-group',
-  'switch',
-  'select',
-  'tabs',
-  'dialog',
-  'chat-layout',
-  'chat-message-list',
-  'chat-message',
-  'chat-message-bubble',
-  'chat-message-metadata',
-  'chat-composer',
-  'chat-send-button',
-  'chat-system-message',
-  'chat-tool-calls',
-]);
-
 const slug = Astro.params.slug;
-if (!slug || !READY_COMPONENT_SLUGS.has(slug)) {
+if (!slug || slug === 'index') {
   return new Response(null, { status: 404, statusText: 'Not Found' });
 }
 

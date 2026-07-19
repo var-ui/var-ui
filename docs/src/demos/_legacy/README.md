@@ -1,4 +1,4 @@
-# Legacy React demos (quarantined)
+# Legacy React demos (quarantine closed)
 
-`*Demo.tsx` files for the old MDX `<Demo>` stack. Not referenced by the Button
-DemoHost registry (`button/`, `registry.ts`, `*DemoMap.ts`).
+All component demos now live under `src/demos/{slug}/` and are loaded via
+DemoHost (`registry.ts`, `*DemoMap.ts`). This folder is kept as a tombstone only.
