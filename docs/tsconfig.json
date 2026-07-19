@@ -1,26 +1,24 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "strict": true,
-    "skipLibCheck": true,
-    "noEmit": true,
-    "isolatedModules": true,
     "paths": {
       "@/*": ["./src/*"],
+      "@var-ui/core": ["../packages/core/src/index.ts"],
+      "@var-ui/react": ["../packages/react/src/index.ts"],
+      "@var-ui/icons": ["../packages/icons/src/index.ts"],
+      "@var-ui/astro": ["../packages/astro/index.ts"],
       "content-collections": ["./.content-collections/generated"]
     }
   },
   "include": [
     "src",
+    "astro.config.mjs",
     "content-collections.ts",
     "vite.config.ts",
     "typestyles-entry.ts",
     ".content-collections/generated",
     "scripts"
-  ]
+  ],
+  "exclude": ["dist", "node_modules", ".astro"]
 }
