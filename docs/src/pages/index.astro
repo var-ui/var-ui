@@ -1,7 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { componentSidebar, docsSidebar } from '../data/navigation';
 ---
 
 <BaseLayout title="Var UI">
   <h1>Var UI docs (Astro)</h1>
+  <p>Foundation slice — framework switcher + Button demos via MDX.</p>
+  <ul>
+    {docsSidebar.map((item) => <li><a href={item.link}>{item.text}</a></li>)}
+    {componentSidebar.map((item) => <li><a href={item.link}>{item.text}</a></li>)}
+  </ul>
 </BaseLayout>

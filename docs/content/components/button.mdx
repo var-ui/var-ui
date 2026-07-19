@@ -3,13 +3,6 @@ title: Button
 description: Triggers an action or event.
 ---
 
-import { Demo } from '../../src/components/Demo';
-import {
-  ButtonDefaultDemo,
-  ButtonDisabledDemo,
-  ButtonVariantsDemo,
-} from '../../src/demos/ButtonDemo';
-
 # Button
 
 Triggers an action or event.
@@ -18,44 +11,23 @@ Triggers an action or event.
 
 ### Default
 
-<Demo code={`import { Button } from '@var-ui/react';
-
-<Button>Click me</Button>`}>
-  <ButtonDefaultDemo />
-</Demo>
+<Demo id="button.default" />
 
 ### Variants
 
 Use the `intent` prop to change visual weight. Group related actions in an `HStack`.
 
-<Demo code={`import { Button, HStack } from '@var-ui/react';
-
-<HStack gap="sm" wrap>
-  <Button intent="primary">Primary</Button>
-  <Button intent="secondary">Secondary</Button>
-  <Button intent="ghost">Ghost</Button>
-</HStack>`}>
-  <ButtonVariantsDemo />
-</Demo>
+<Demo id="button.variants" />
 
 ### Disabled
 
 Pass `isDisabled` to remove the button from the tab order and block press events.
 
-<Demo code={`import { Button, HStack } from '@var-ui/react';
-
-<HStack gap="sm" wrap>
-  <Button isDisabled>Disabled</Button>
-  <Button intent="primary" isDisabled>
-    Disabled primary
-  </Button>
-</HStack>`}>
-  <ButtonDisabledDemo />
-</Demo>
+<Demo id="button.disabled" />
 
 ## Props
 
-<PropsTable slug="button" />
+Props table wiring for the Astro docs site is deferred; use the React package types for `Button` props in the meantime.
 
 ## Accessibility
 

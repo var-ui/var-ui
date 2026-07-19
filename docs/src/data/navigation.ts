@@ -1,38 +1,17 @@
-import { categoryLabels, componentRegistry } from './components';
+/** Minimal nav for the Astro foundation slice — only routes that render today. */
 
 export const githubUrl = 'https://github.com/var-ui/var-ui';
 
 export const topNav = [
-  { text: 'Docs', link: '/docs', match: '/docs' },
-  { text: 'Components', link: '/components', match: '/components' },
-  { text: 'Theming', link: '/theming', match: '/theming' },
+  { text: 'Docs', link: '/docs/getting-started', match: '/docs' },
+  { text: 'Components', link: '/components/button', match: '/components' },
 ] as const;
 
-export const componentSidebar = Object.entries(categoryLabels).map(([category, label]) => ({
-  text: label,
-  items: componentRegistry
-    .filter((c) => c.category === category)
-    .map((c) => ({
-      text: c.name,
-      link: `/components/${c.slug}`,
-    })),
-}));
+export const docsSidebar = [{ text: 'Getting started', link: '/docs/getting-started' }] as const;
 
-export const docsSidebar = [
-  { text: 'Introduction', link: '/docs' },
-  { text: 'Getting started', link: '/docs/getting-started' },
-  { text: 'Installation', link: '/docs/installation' },
-];
-
-export const themingSidebar = [
-  { text: 'Overview', link: '/theming' },
-  { text: 'Customize', link: '/theming/customize' },
-  { text: 'Themes', link: '/theming/themes' },
-  { text: 'Design tokens', link: '/theming/tokens' },
-];
+export const componentSidebar = [{ text: 'Button', link: '/components/button' }] as const;
 
 export const sidebar = {
   '/components': componentSidebar,
   '/docs': docsSidebar,
-  '/theming': themingSidebar,
 } as const;

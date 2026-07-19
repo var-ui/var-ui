@@ -1,0 +1,60 @@
+---
+export const prerender = false;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DemoHost from '../../components/DemoHost.astro';
+import { findMdxModule } from '../../lib/loadMdx';
+
+/** Foundation slice: only Button MDX is id-based / DemoHost-ready. */
+const READY_COMPONENT_SLUGS = new Set(['button']);
+
+const slug = Astro.params.slug;
+if (!slug || !READY_COMPONENT_SLUGS.has(slug)) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+const modules = import.meta.glob('../../../content/components/*.mdx');
+const loader = findMdxModule(modules, slug);
+if (!loader) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+const { Content, frontmatter } = await loader();
+---
+
+<BaseLayout title={`${frontmatter.title} · Var UI`}>
+  <article class="docs-article">
+    <Content components={{ Demo: DemoHost }} />
+  </article>
+</BaseLayout>
+
+<style>
+  .docs-article {
+    max-width: 48rem;
+  }
+
+  .docs-article :global(h1) {
+    margin-block: 0 0.5rem;
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .docs-article :global(h2) {
+    margin-block: 2rem 0.75rem;
+    font-size: 1.35rem;
+  }
+
+  .docs-article :global(h3) {
+    margin-block: 1.5rem 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .docs-article :global(p) {
+    margin-block: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .docs-article :global(code) {
+    font-size: 0.9em;
+  }
+</style>

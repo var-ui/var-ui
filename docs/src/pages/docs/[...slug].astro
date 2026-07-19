@@ -1,0 +1,52 @@
+---
+export const prerender = false;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { findMdxModule } from '../../lib/loadMdx';
+
+/** Foundation slice: getting-started (+ docs index) only. */
+const READY_DOC_SLUGS = new Set(['getting-started', 'index']);
+
+const raw = Astro.params.slug;
+const slug = !raw || raw === '' ? 'index' : raw;
+
+if (!READY_DOC_SLUGS.has(slug)) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+const modules = import.meta.glob('../../../content/docs/*.mdx');
+const loader = findMdxModule(modules, slug);
+if (!loader) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+const { Content, frontmatter } = await loader();
+---
+
+<BaseLayout title={`${frontmatter.title} · Var UI`}>
+  <article class="docs-article">
+    <Content />
+  </article>
+</BaseLayout>
+
+<style>
+  .docs-article {
+    max-width: 48rem;
+  }
+
+  .docs-article :global(h1) {
+    margin-block: 0 0.5rem;
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .docs-article :global(h2) {
+    margin-block: 2rem 0.75rem;
+    font-size: 1.35rem;
+  }
+
+  .docs-article :global(p) {
+    margin-block: 0.75rem;
+    line-height: 1.6;
+  }
+</style>

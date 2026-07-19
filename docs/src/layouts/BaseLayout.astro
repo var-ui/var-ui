@@ -2,9 +2,11 @@
 import { ThemeScript, ColorModeToggle } from '@var-ui/astro';
 import { defaultTheme } from '@var-ui/core';
 import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
+import { topNav } from '../data/navigation';
 
 const { title = 'Var UI' } = Astro.props;
 const framework = Astro.locals.framework;
+const pathname = Astro.url.pathname;
 ---
 
 <html lang="en" class={defaultTheme.className} data-framework={framework}>
@@ -17,8 +19,25 @@ const framework = Astro.locals.framework;
   </head>
   <body>
     <header class="site-header">
-      <FrameworkSwitcher />
-      <ColorModeToggle includeSystem appearance="labels" />
+      <div class="site-header__brand">
+        <a class="site-logo" href="/">Var UI</a>
+        <nav class="site-nav" aria-label="Primary">
+          {
+            topNav.map((item) => (
+              <a
+                href={item.link}
+                aria-current={pathname.startsWith(item.match) ? 'page' : undefined}
+              >
+                {item.text}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+      <div class="site-header__tools">
+        <FrameworkSwitcher />
+        <ColorModeToggle includeSystem appearance="labels" />
+      </div>
     </header>
     <main class="site-main">
       <slot />
@@ -31,6 +50,42 @@ const framework = Astro.locals.framework;
     padding: 1rem 1.5rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .site-header__brand {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .site-logo {
+    font-weight: 650;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .site-nav {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .site-nav a {
+    text-decoration: none;
+    color: inherit;
+    opacity: 0.75;
+  }
+
+  .site-nav a[aria-current='page'] {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .site-header__tools {
+    display: flex;
     align-items: center;
     gap: 1rem;
   }
