@@ -96,14 +96,19 @@ const copyIcon =
               data-copy-label={copyLabel}
               data-copied-label={copiedLabel}
               data-copy-error-label={copyErrorLabel}
+              data-class-idle={recipeClassName(cb.copyButtonIdle)}
+              data-class-copied={recipeClassName(cb.copyButtonCopied)}
+              data-class-error={recipeClassName(cb.copyButtonError)}
               aria-label={copyLabel}
             >
-              <span set:html={copyIcon} />
-              Copy
+              <span data-codeblock-copy-icon set:html={copyIcon} />
+              <span data-codeblock-copy-text>Copy</span>
             </button>
             <span
               class={feedbackClassName}
               data-codeblock-feedback
+              data-class-success={recipeClassName(cb.feedbackSuccess)}
+              data-class-error={recipeClassName(cb.feedbackError)}
               role="status"
               aria-live="polite"
             />
