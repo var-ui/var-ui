@@ -1,0 +1,73 @@
+---
+import { banner } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type BannerTone = 'info' | 'success' | 'warning' | 'danger';
+
+type Props = {
+  tone?: BannerTone;
+  appearance?: 'subtle' | 'solid';
+  title?: string;
+  dismissible?: boolean;
+  dismissLabel?: string;
+  className?: string;
+};
+
+const {
+  tone = 'info',
+  appearance = 'subtle',
+  title,
+  dismissible = false,
+  dismissLabel = 'Dismiss',
+  className,
+} = Astro.props;
+
+const b = banner({ tone, appearance });
+const hasIcon = Astro.slots.has('icon');
+const hasActions = Astro.slots.has('actions');
+const role = tone === 'warning' || tone === 'danger' ? 'alert' : 'status';
+
+const closeIcon =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"></path></svg>';
+---
+
+<div {...recipeProps(b.root, className)} data-banner role={role}>
+  {
+    hasIcon ? (
+      <span {...recipeProps(b.icon)}>
+        <slot name="icon" />
+      </span>
+    ) : null
+  }
+  <div {...recipeProps(b.content)}>
+    {title ? <span {...recipeProps(b.title)}>{title}</span> : null}
+    <span><slot /></span>
+  </div>
+  {
+    hasActions ? (
+      <div {...recipeProps(b.actions)}>
+        <slot name="actions" />
+      </div>
+    ) : null
+  }
+  {
+    dismissible ? (
+      <button
+        type="button"
+        {...recipeProps(b.dismiss)}
+        aria-label={dismissLabel}
+        data-var-ui-banner-dismiss
+        set:html={closeIcon}
+      />
+    ) : null
+  }
+</div>
+
+{
+  dismissible ? (
+    <script>
+      import { initDismissibleBanner } from '../scripts/bannerDismiss';
+      initDismissibleBanner();
+    </script>
+  ) : null
+}

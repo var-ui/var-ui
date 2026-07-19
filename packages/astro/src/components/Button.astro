@@ -1,0 +1,17 @@
+---
+import { button } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  intent?: 'primary' | 'secondary' | 'ghost' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+};
+
+const { intent = 'secondary', size = 'md', className, type = 'button', disabled } = Astro.props;
+const rp = recipeProps(button({ intent, size }), className);
+---
+
+<button type={type} disabled={disabled} {...rp}><slot /></button>

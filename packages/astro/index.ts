@@ -21,6 +21,10 @@ export { default as StatusDot } from './src/components/StatusDot.astro';
 export { default as Card } from './src/components/Card.astro';
 export { default as ClickableCard } from './src/components/ClickableCard.astro';
 export { default as EmptyState } from './src/components/EmptyState.astro';
+export { default as Button } from './src/components/Button.astro';
+export { default as Link } from './src/components/Link.astro';
+export { default as Alert } from './src/components/Alert.astro';
+export { default as Banner } from './src/components/Banner.astro';
 export type { ColorMode, ResolvedColorMode } from './src/scripts/colorMode';
 export {
   applyColorModeToDocument,

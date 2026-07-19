@@ -1,0 +1,19 @@
+---
+import { link } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  href: string;
+  className?: string;
+  target?: string;
+  rel?: string;
+  download?: string | boolean;
+  hreflang?: string;
+  referrerpolicy?: string;
+  title?: string;
+};
+
+const { href, className, ...rest } = Astro.props;
+---
+
+<a href={href} {...rest} {...recipeProps(link, className)}><slot /></a>
