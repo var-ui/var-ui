@@ -9,6 +9,9 @@ export const topNav = [
 
 export const docsSidebar = [{ text: 'Getting started', link: '/docs/getting-started' }] as const;
 
+/** Empty until theming pages ship in the Astro foundation slice. */
+export const themingSidebar = [] as const;
+
 export const componentSidebar = [{ text: 'Button', link: '/components/button' }] as const;
 
 export const sidebar = {
