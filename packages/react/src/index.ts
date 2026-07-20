@@ -300,6 +300,7 @@ export {
 export { DesignSystemProvider, type DesignSystemProviderProps } from './DesignSystemProvider';
 export {
   useColorMode,
+  readStoredColorMode,
   getColorModeInitScript,
   type ColorMode,
   type ResolvedColorMode,
