@@ -3,6 +3,7 @@ export const prerender = false;
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DemoHost from '../../components/DemoHost.astro';
+import PropsTable from '../../components/PropsTable.astro';
 import { findMdxModule } from '../../lib/loadMdx';
 
 const slug = Astro.params.slug;
@@ -21,7 +22,7 @@ const { Content, frontmatter } = await loader();
 
 <BaseLayout title={`${frontmatter.title} · Var UI`}>
   <article class="docs-article">
-    <Content components={{ Demo: DemoHost }} />
+    <Content components={{ Demo: DemoHost, PropsTable }} />
   </article>
 </BaseLayout>
 

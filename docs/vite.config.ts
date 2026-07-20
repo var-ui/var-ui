@@ -13,7 +13,8 @@ export default defineConfig({
       name: 'vitest-stub-astro',
       enforce: 'pre',
       load(id) {
-        if (id.endsWith('.astro')) {
+        // Keep `?raw` imports intact for Astro Props/slots extraction in tests.
+        if (id.includes('.astro') && !id.includes('?raw') && !id.includes('&raw')) {
           return 'export default function AstroStub() { return null; }';
         }
       },

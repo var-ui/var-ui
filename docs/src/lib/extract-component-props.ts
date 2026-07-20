@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
-import { componentRegistry } from '../data/components';
+import { componentRegistry } from '../data/components.ts';
 
 export type PropDoc = {
   name: string;

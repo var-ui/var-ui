@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { writeComponentProps } from '../src/lib/extract-component-props';
+import { writeComponentProps } from '../src/lib/extract-component-props.ts';
 
 const docsRoot = path.dirname(fileURLToPath(import.meta.url));
 const outputDir = path.join(docsRoot, '../src/generated/props');

@@ -1,0 +1,172 @@
+---
+import { proseContent } from '@var-ui/core';
+import { PropsTable as ReactPropsTable } from './PropsTable';
+import { getAstroComponentDoc, hasAstroBinding } from '../lib/astro-component-docs';
+import { getHtmlApiDoc } from '../lib/html-api-docs';
+import { loadReactPropsDoc } from '../lib/load-react-props';
+import { recipeProps } from '../lib/recipeProps';
+
+type Props = {
+  /** Component slug from the docs registry, e.g. `button`. */
+  slug: string;
+};
+
+const { slug } = Astro.props;
+const framework = Astro.locals.framework;
+const tableWrap = recipeProps(proseContent().tableWrap);
+
+const reactDoc = framework === 'react' ? loadReactPropsDoc(slug) : null;
+const astroDoc = framework === 'astro' ? getAstroComponentDoc(slug) : null;
+const htmlDoc = framework === 'html' ? getHtmlApiDoc(slug) : null;
+const astroBound = framework === 'astro' ? hasAstroBinding(slug) : false;
+---
+
+{
+  framework === 'react' && <ReactPropsTable slug={slug} doc={reactDoc} />
+}
+
+{
+  framework === 'astro' &&
+    (!astroBound || !astroDoc ? (
+      <p>
+        No Astro binding — use the HTML/core recipe markup for this component, or switch the site
+        framework to React.
+      </p>
+    ) : (
+      <div>
+        {
+          astroDoc.props.length > 0 ? (
+            <div {...tableWrap}>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Prop</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    astroDoc.props.map((prop) => (
+                      <tr>
+                        <td>
+                          <code>{prop.name}</code>
+                          {prop.required ? null : <span aria-hidden="true"> ?</span>}
+                        </td>
+                        <td>
+                          <code>{prop.type}</code>
+                        </td>
+                        <td>{prop.default ? <code>{prop.default}</code> : '—'}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p>
+              <em>
+                <code>@var-ui/astro</code> <code>{astroDoc.componentName}</code> has no documented{' '}
+                <code>Props</code> type.
+              </em>
+            </p>
+          )
+        }
+        {
+          astroDoc.slots.length > 0 ? (
+            <div>
+              <h3 id="astro-slots">Slots</h3>
+              <div {...tableWrap}>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Slot</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      astroDoc.slots.map((slot) => (
+                        <tr>
+                          <td>
+                            <code>{slot.name}</code>
+                          </td>
+                          <td>{slot.description ?? '—'}</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ) : null
+        }
+      </div>
+    ))
+}
+
+{
+  framework === 'html' &&
+    (htmlDoc ? (
+      <div>
+        <p>
+          Public classes and data attributes from <code>@var-ui/core</code>{' '}
+          <code>{htmlDoc.recipeName}()</code>.
+        </p>
+        {
+          htmlDoc.parts.map((part) => (
+            <div>
+              {htmlDoc.parts.length > 1 ? <h3 id={`html-${part.part}`}>{part.part}</h3> : null}
+              <div {...tableWrap}>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Example</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      part.className ? (
+                        <tr>
+                          <td>
+                            <code>class</code>
+                          </td>
+                          <td>
+                            <code>{part.className}</code>
+                          </td>
+                          <td>Root / part class name</td>
+                        </tr>
+                      ) : null
+                    }
+                    {
+                      part.attributes.map((attr) => (
+                        <tr>
+                          <td>
+                            <code>{attr.name}</code>
+                          </td>
+                          <td>{attr.example ? <code>{attr.example}</code> : '—'}</td>
+                          <td>{attr.description ?? '—'}</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))
+        }
+        {htmlDoc.note ? (
+          <p>
+            <em>{htmlDoc.note}</em>
+          </p>
+        ) : null}
+      </div>
+    ) : (
+      <p>
+        No dedicated HTML class / attribute table for <code>{slug}</code>. Use the HTML demo markup
+        and <code>@var-ui/core</code> recipes.
+      </p>
+    ))
+}
