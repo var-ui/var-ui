@@ -8,17 +8,25 @@ Framework selection is SSR cookie-driven (`var-ui-framework` ∈ `react` \| `ast
 
 ## Commands
 
-| Command                       | Description                       |
-| ----------------------------- | --------------------------------- |
-| `vp run @var-ui/docs#dev`     | Start Astro dev server            |
-| `vp run @var-ui/docs#build`   | Build for Netlify to `docs/dist/` |
-| `vp run @var-ui/docs#preview` | Preview production build          |
-| `vp run @var-ui/docs#check`   | Astro / TypeScript check          |
-| `vp run @var-ui/docs#test`    | Docs unit tests (Vitest)          |
+| Command                     | Description                       |
+| --------------------------- | --------------------------------- |
+| `vp run @var-ui/docs#dev`   | Start Astro dev server            |
+| `vp run @var-ui/docs#build` | Build for Netlify to `docs/dist/` |
+| `vp run @var-ui/docs#check` | Astro / TypeScript check          |
+| `vp run @var-ui/docs#test`  | Docs unit tests (Vitest)          |
 
-From the repo root you can also use `vp run docs:dev` / `docs:build` / `docs:preview`.
+From the repo root you can also use `vp run docs:dev` / `docs:build`.
 
-> Note: `@astrojs/netlify` does not support `astro preview`. Use `astro dev` (or Netlify CLI) for SSR smoke checks.
+### Local development vs preview
+
+This site uses `output: 'server'` with `@astrojs/netlify`, so routes are rendered by the SSR function — not as static HTML in `dist/`.
+
+- **Use `vp run @var-ui/docs#dev`** to browse the site locally. Framework switching, demos, and PropsTable all work here.
+- **`vp run @var-ui/docs#preview` is not supported** for SSR Netlify builds; it only serves static assets and returns 404 for app routes. For a production-like smoke test, deploy a preview on Netlify or run `netlify dev` after `build`.
+
+### Troubleshooting
+
+- **`astro check` errors on `waku/router` in `src/pages.gen.ts`:** Delete `docs/src/pages.gen.ts`. It is a leftover from the pre-Astro docs stack (gitignored) and is not used by the Astro site.
 
 ## Testing / completeness
 

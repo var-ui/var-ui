@@ -487,7 +487,7 @@ export function ${demoComponentName(name)}() {
 }
 
 function renderMdxFile(component) {
-  const { slug: _slug, name, description, codeExample } = component;
+  const { slug, name, description, codeExample } = component;
   const demoName = demoComponentName(name);
   const escapedCode = escapeTemplateLiteral(codeExample);
 

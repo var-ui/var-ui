@@ -53,7 +53,7 @@ function getJsDocTag(symbol: ts.Symbol, tagName: string): string | undefined {
   return undefined;
 }
 
-function isPropertyRequired(prop: ts.Symbol, propType: ts.Type, checker: ts.TypeChecker): boolean {
+function isPropertyRequired(prop: ts.Symbol, propType: ts.Type, _checker: ts.TypeChecker): boolean {
   if (prop.flags & ts.SymbolFlags.Optional) {
     return false;
   }
