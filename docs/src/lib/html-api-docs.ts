@@ -42,6 +42,10 @@ function attrsFromResult(result: ComponentAttrsResult): HtmlAttrDoc[] {
 }
 
 function partsFromRecipeResult(result: unknown): HtmlPartDoc[] {
+  if (typeof result === 'string') {
+    return [{ part: 'root', className: result, attributes: [] }];
+  }
+
   const simple = asAttrsResult(result);
   if (simple) {
     return [
@@ -57,6 +61,11 @@ function partsFromRecipeResult(result: unknown): HtmlPartDoc[] {
 
   const parts: HtmlPartDoc[] = [];
   for (const [part, value] of Object.entries(result as Record<string, unknown>)) {
+    if (typeof value === 'string') {
+      parts.push({ part, className: value, attributes: [] });
+      continue;
+    }
+
     const slot = asAttrsResult(value);
     if (!slot) continue;
     parts.push({
