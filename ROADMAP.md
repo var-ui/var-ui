@@ -197,10 +197,11 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
 
 ## Future (unscheduled)
 
-- **`@var-ui/astro`** — Astro bindings (v0.1 docs/content kit shipped / in progress).
-  Progressive interactivity (native HTML → Zag later). Spec:
-  `docs/superpowers/specs/2026-07-18-var-ui-astro-design.md`. Docs site
-  framework is Astro (Netlify adapter) under `docs/`.
+- **`@var-ui/astro`** — Astro bindings (v0.1 docs/content kit shipped). Docs site
+  DemoHost cutover is complete (framework cookie SSR, completeness gate green
+  for all live MDX demos). Progressive interactivity (native HTML → Zag later)
+  remains open. Spec: `docs/superpowers/specs/2026-07-18-var-ui-astro-design.md`.
+  Docs site framework is Astro (Netlify adapter) under `docs/`.
 - Per-recipe structured docs for human + AI-agent discovery (colocated
   `.doc.ts` files per component, a CLI or editor-integration delivery
   vehicle). Originally scoped as TypeStyles P5.8; moved here since it's about
