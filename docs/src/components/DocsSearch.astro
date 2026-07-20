@@ -1,0 +1,168 @@
+---
+import { buildDocsSearchIndex } from '../lib/search-index';
+
+const index = buildDocsSearchIndex();
+const indexJson = JSON.stringify(index);
+---
+
+<div class="docs-search" data-docs-search>
+  <button type="button" class="docs-search__trigger" data-docs-search-open aria-label="Search docs">
+    <span class="docs-search__trigger-label">Search</span>
+    <kbd class="docs-search__kbd" aria-hidden="true">⌘K</kbd>
+  </button>
+
+  <dialog class="docs-search__dialog" data-docs-search-dialog aria-label="Search docs">
+    <div class="docs-search__panel">
+      <input
+        class="docs-search__input"
+        type="search"
+        data-docs-search-input
+        placeholder="Search docs…"
+        autocomplete="off"
+        spellcheck="false"
+        role="combobox"
+        aria-autocomplete="list"
+        aria-controls="docs-search-results"
+        aria-expanded="true"
+      />
+      <div
+        class="docs-search__results"
+        id="docs-search-results"
+        data-docs-search-results
+        role="listbox"
+      >
+      </div>
+    </div>
+  </dialog>
+
+  <script type="application/json" data-docs-search-index set:html={indexJson} />
+</div>
+
+<script>
+  import { initDocsSearch } from '../scripts/docsSearch';
+  initDocsSearch();
+</script>
+
+<style>
+  .docs-search {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .docs-search__trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--color-border, #ccc);
+    border-radius: 0.375rem;
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+  }
+
+  .docs-search__trigger-label {
+    opacity: 0.75;
+  }
+
+  .docs-search__kbd {
+    font: inherit;
+    font-size: 0.75rem;
+    opacity: 0.55;
+    border: 1px solid var(--color-border, #ccc);
+    border-radius: 0.25rem;
+    padding: 0.1rem 0.35rem;
+  }
+
+  .docs-search__dialog {
+    width: min(32rem, calc(100vw - 2rem));
+    max-height: min(28rem, calc(100vh - 4rem));
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--color-border, #ccc);
+    border-radius: 0.75rem;
+    background: var(--color-bg, #fff);
+    color: inherit;
+    box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 0.18);
+  }
+
+  .docs-search__dialog::backdrop {
+    background: rgb(0 0 0 / 0.35);
+  }
+
+  .docs-search__panel {
+    display: flex;
+    flex-direction: column;
+    max-height: min(28rem, calc(100vh - 4rem));
+  }
+
+  .docs-search__input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-bottom: 1px solid var(--color-border, #ccc);
+    padding: 0.875rem 1rem;
+    font: inherit;
+    font-size: 1rem;
+    background: transparent;
+    color: inherit;
+    outline: none;
+  }
+
+  .docs-search__results {
+    overflow: auto;
+    padding: 0.5rem;
+  }
+
+  .docs-search__group + .docs-search__group {
+    margin-top: 0.5rem;
+  }
+
+  .docs-search__group-label {
+    margin: 0;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+
+  .docs-search__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.55rem 0.65rem;
+    border-radius: 0.45rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .docs-search__item.is-active,
+  .docs-search__item:hover {
+    background: var(--color-accent, #333);
+    color: var(--color-accent-foreground, #fff);
+  }
+
+  .docs-search__title {
+    font-weight: 550;
+  }
+
+  .docs-search__meta {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+
+  .docs-search__empty {
+    margin: 0;
+    padding: 1rem 0.65rem;
+    opacity: 0.65;
+  }
+
+  @media (max-width: 768px) {
+    .docs-search__kbd {
+      display: none;
+    }
+  }
+</style>

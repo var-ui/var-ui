@@ -1,6 +1,7 @@
 ---
 import { ThemeScript, ColorModeToggle } from '@var-ui/astro';
 import { defaultTheme } from '@var-ui/core';
+import DocsSearch from '../components/DocsSearch.astro';
 import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
 import { topNav } from '../data/navigation';
 
@@ -35,6 +36,7 @@ const pathname = Astro.url.pathname;
         </nav>
       </div>
       <div class="site-header__tools">
+        <DocsSearch />
         <FrameworkSwitcher />
         <ColorModeToggle includeSystem appearance="labels" />
       </div>
