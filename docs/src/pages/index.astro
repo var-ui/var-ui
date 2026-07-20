@@ -1,13 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { componentSidebar, docsSidebar } from '../data/navigation';
+import HomepageIsland from '../components/homepage/HomepageIsland';
 ---
 
+<!--
+  Homepage bento is product theater with @var-ui/react (client:load island).
+  Framework cookie does not switch tile implementations — DemoHost registry is for /components.
+-->
 <BaseLayout title="Var UI">
-  <h1>Var UI docs (Astro)</h1>
-  <p>Foundation slice — framework switcher + Button demos via MDX.</p>
+  <h1>Var UI</h1>
+  <p>
+    An open-source design system built on TypeStyles and React Aria Components. Explore the
+    docs, browse components, or learn about theming from the navigation above.
+  </p>
+
+  <HomepageIsland client:load />
+
+  <h2>Explore</h2>
   <ul>
-    {docsSidebar.map((item) => <li><a href={item.link}>{item.text}</a></li>)}
-    {componentSidebar.map((item) => <li><a href={item.link}>{item.text}</a></li>)}
+    <li>
+      <a href="/docs">Documentation</a> — installation and getting started guides
+    </li>
+    <li>
+      <a href="/components">Components</a> — live demos for every exported component
+    </li>
+    <li>
+      <a href="/theming">Theming</a> — tokens, themes, and color modes
+    </li>
   </ul>
 </BaseLayout>

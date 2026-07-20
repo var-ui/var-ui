@@ -2,7 +2,8 @@
 //
 // This module exists purely to give the extraction bundle a complete picture
 // of every `styles.component()` / `styles.class()` registration that the docs
-// site can render: everything inside `@var-ui/core` and `@var-ui/react`.
+// site can render: everything inside `@var-ui/core` and `@var-ui/react`, plus
+// docs-owned modules that call `styles.component` directly (`homeBento`).
 //
 // Deliberately plain side-effect imports (not `import * as x from ...`
 // namespace re-exports). Namespace-import-and-re-export was the exact pattern
@@ -13,3 +14,4 @@
 // the clearest way to express "run this module for its registrations."
 import '@var-ui/core';
 import '@var-ui/react';
+import './src/styles/homeBento';
