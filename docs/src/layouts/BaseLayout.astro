@@ -3,11 +3,28 @@ import { ThemeScript, ColorModeToggle } from '@var-ui/astro';
 import { defaultTheme } from '@var-ui/core';
 import DocsSearch from '../components/DocsSearch.astro';
 import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
-import { topNav } from '../data/navigation';
+import { componentSidebar, themingSidebar, topNav } from '../data/navigation';
 
 const { title = 'Var UI' } = Astro.props;
 const framework = Astro.locals.framework;
 const pathname = Astro.url.pathname;
+
+function normalizePath(path: string): string {
+  return path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
+}
+
+const currentPath = normalizePath(pathname);
+
+const sidebarItems = currentPath.startsWith('/components')
+  ? componentSidebar
+  : currentPath.startsWith('/theming')
+    ? themingSidebar
+    : null;
+
+function isSidebarLinkActive(link: string): boolean {
+  const normalized = normalizePath(link);
+  return currentPath === normalized;
+}
 ---
 
 <html lang="en" class={defaultTheme.className} data-framework={framework}>
@@ -27,7 +44,7 @@ const pathname = Astro.url.pathname;
             topNav.map((item) => (
               <a
                 href={item.link}
-                aria-current={pathname.startsWith(item.match) ? 'page' : undefined}
+                aria-current={currentPath.startsWith(item.match) ? 'page' : undefined}
               >
                 {item.text}
               </a>
@@ -41,8 +58,30 @@ const pathname = Astro.url.pathname;
         <ColorModeToggle includeSystem appearance="labels" />
       </div>
     </header>
-    <main class="site-main">
-      <slot />
+    <main class:list={['site-main', sidebarItems && 'site-main--with-sidebar']}>
+      {
+        sidebarItems && (
+          <aside class="site-sidebar" aria-label="Section">
+            <nav>
+              <ul class="site-sidebar__list">
+                {sidebarItems.map((item) => (
+                  <li>
+                    <a
+                      href={item.link}
+                      aria-current={isSidebarLinkActive(item.link) ? 'page' : undefined}
+                    >
+                      {item.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </aside>
+        )
+      }
+      <div class="site-content">
+        <slot />
+      </div>
     </main>
   </body>
 </html>
@@ -96,5 +135,64 @@ const pathname = Astro.url.pathname;
     padding: 0 1.5rem 3rem;
     max-width: 960px;
     margin: 0 auto;
+  }
+
+  .site-main--with-sidebar {
+    max-width: 72rem;
+    display: grid;
+    grid-template-columns: minmax(10rem, 14rem) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .site-sidebar {
+    position: sticky;
+    top: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow: auto;
+    padding-block: 0.5rem;
+  }
+
+  .site-sidebar__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-sidebar__list a {
+    display: block;
+    padding: 0.25rem 0;
+    text-decoration: none;
+    color: inherit;
+    opacity: 0.75;
+    font-size: 0.95rem;
+  }
+
+  .site-sidebar__list a[aria-current='page'] {
+    opacity: 1;
+    font-weight: 600;
+  }
+
+  .site-content {
+    min-width: 0;
+  }
+
+  @media (max-width: 720px) {
+    .site-main--with-sidebar {
+      grid-template-columns: 1fr;
+    }
+
+    .site-sidebar {
+      position: static;
+      max-height: none;
+      border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+      padding-bottom: 1rem;
+    }
+
+    .site-sidebar__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+    }
   }
 </style>

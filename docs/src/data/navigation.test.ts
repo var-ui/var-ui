@@ -1,12 +1,13 @@
 import { describe, expect, it } from 'vite-plus/test';
 import { componentRegistry } from './components';
-import { componentSidebar, docsSidebar, topNav } from './navigation';
+import { componentSidebar, docsSidebar, themingSidebar, topNav } from './navigation';
 
 describe('navigation', () => {
   it('exposes top-nav destinations', () => {
     expect(topNav.map((item) => item.link)).toEqual([
       '/docs/getting-started',
-      '/components/button',
+      '/components',
+      '/theming',
     ]);
   });
 
@@ -18,5 +19,14 @@ describe('navigation', () => {
         link: `/components/${entry.slug}`,
       })),
     );
+  });
+
+  it('lists theming guide pages', () => {
+    expect(themingSidebar.map((item) => item.link)).toEqual([
+      '/theming',
+      '/theming/customize',
+      '/theming/themes',
+      '/theming/tokens',
+    ]);
   });
 });
