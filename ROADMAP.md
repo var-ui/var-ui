@@ -159,9 +159,11 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
         `TabList.Tab` / `TabList.Menu` kept **separate** from panel `Tabs`.
         Spec: `specs/phase-5-navigation-p2.md`. Plan:
         `plans/2026-07-17-phase-5-navigation-p2.md`.
-  - [ ] **Phase 5 P3 — Outline, NavIcon/NavMenu** — shipped: `Outline`
-        (in-page TOC + scroll-spy, docs shell parity); `NavIcon`/`NavMenu`
-        deferred.
+- [x] **Phase 5 P3 — Outline, NavIcon/NavMenu** — shipped: `Outline`
+      (in-page TOC + scroll-spy, docs shell parity); `NavIcon`/`NavMenu`
+      deferred.
+      Spec: `specs/phase-5-navigation-p2.md`.
+      Plan: `plans/2026-07-17-phase-5-navigation-p2.md`.
   - [ ] **Phase 6 — layout polish and collapsible regions** — shipped:
         `Collapsible`/`CollapsibleGroup` (pulled forward via docs shell parity);
         `Resizable` single-region already shipped in P2; deepen multi-region /
