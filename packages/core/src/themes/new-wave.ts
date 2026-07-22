@@ -1,11 +1,13 @@
 import { color } from 'typestyles/color';
-import { createDesignTheme } from '../create-theme';
+import { createDesignTheme, SURFACE_ATTRIBUTE } from '../create-theme';
+import { tokens } from '../runtime';
 import { designPrimitiveTokens as p } from '../tokens';
 import {
   defaultDarkSyntaxValues,
   defaultLightSyntaxValues,
   type DesignColorValues,
 } from '../tokens/semantic';
+import type { DesignTokenPack } from '../types';
 
 const newWaveLightSyntaxValues = {
   ...defaultLightSyntaxValues,
@@ -137,34 +139,46 @@ const newWavePrimitiveValues = {
   },
 };
 
-const newWaveDarkPrimitiveValues = {
-  ...newWavePrimitiveValues,
-  shadow: {
-    xs: '2px 2px 0 0 #FF4FD8',
-    sm: '3px 3px 0 0 #FF4FD8',
-    md: '6px 6px 0 0 #FF4FD8',
-    lg: '8px 8px 0 0 #FF4FD8',
-    xl: '10px 10px 0 0 #FF4FD8',
-  },
+const newWaveDarkShadow = {
+  xs: '2px 2px 0 0 #FF4FD8',
+  sm: '3px 3px 0 0 #FF4FD8',
+  md: '6px 6px 0 0 #FF4FD8',
+  lg: '8px 8px 0 0 #FF4FD8',
+  xl: '10px 10px 0 0 #FF4FD8',
 };
 
-const newWaveLightValues = {
-  ...newWavePrimitiveValues,
-  color: newWaveLightColorValues,
-  syntax: newWaveLightSyntaxValues,
-};
-const newWaveDarkValues = {
-  ...newWaveDarkPrimitiveValues,
-  color: newWaveDarkColorValues,
-  syntax: newWaveDarkSyntaxValues,
+export const newWaveTokens: DesignTokenPack = {
+  tokens: {
+    ...newWavePrimitiveValues,
+    color: newWaveLightColorValues,
+  },
+  darkColor: newWaveDarkColorValues,
 };
 
 export const newWaveTheme = createDesignTheme({
   name: 'new-wave',
-  light: newWaveLightValues,
-  dark: newWaveDarkValues,
-  surfaces: {
-    light: newWaveLightValues,
-    dark: newWaveDarkValues,
-  },
+  from: newWaveTokens,
+  modes: [
+    {
+      id: 'dark-elevation-shadow',
+      overrides: { shadow: newWaveDarkShadow },
+      when: tokens.when.or(
+        tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
+        tokens.when.and(
+          tokens.when.not(tokens.when.attr('data-mode', 'light', { scope: 'self' })),
+          tokens.when.prefersDark,
+        ),
+      ),
+    },
+    {
+      id: 'surface-dark',
+      overrides: { color: newWaveTokens.darkColor },
+      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
+    },
+    {
+      id: 'surface-light',
+      overrides: { color: newWaveTokens.tokens.color },
+      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'light', { scope: 'descendant' }),
+    },
+  ],
 });

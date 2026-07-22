@@ -1,11 +1,13 @@
 import { color } from 'typestyles/color';
-import { createDesignTheme } from '../create-theme';
+import { createDesignTheme, SURFACE_ATTRIBUTE } from '../create-theme';
+import { tokens } from '../runtime';
 import { designPrimitiveTokens as p } from '../tokens';
 import {
   defaultDarkSyntaxValues,
   defaultLightSyntaxValues,
   type DesignColorValues,
 } from '../tokens/semantic';
+import type { DesignTokenPack } from '../types';
 
 const win95LightSyntaxValues = {
   ...defaultLightSyntaxValues,
@@ -139,34 +141,46 @@ const win95PrimitiveValues = {
   },
 };
 
-const win95DarkPrimitiveValues = {
-  ...win95PrimitiveValues,
-  shadow: {
-    xs: 'inset 1px 1px 0 #808080, inset -1px -1px 0 #000000',
-    sm: 'inset 1px 1px 0 #808080, inset -1px -1px 0 #000000',
-    md: 'inset 2px 2px 0 #808080, inset -2px -2px 0 #000000',
-    lg: 'inset 2px 2px 0 #808080, inset -2px -2px 0 #000000',
-    xl: 'inset 2px 2px 0 #808080, inset -2px -2px 0 #000000',
-  },
+const win95DarkShadow = {
+  xs: 'inset 1px 1px 0 #808080, inset -1px -1px 0 #000000',
+  sm: 'inset 1px 1px 0 #808080, inset -1px -1px 0 #000000',
+  md: 'inset 2px 2px 0 #808080, inset -2px -2px 0 #000000',
+  lg: 'inset 2px 2px 0 #808080, inset -2px -2px 0 #000000',
+  xl: 'inset 2px 2px 0 #808080, inset -2px -2px 0 #000000',
 };
 
-const win95LightValues = {
-  ...win95PrimitiveValues,
-  color: win95LightColorValues,
-  syntax: win95LightSyntaxValues,
-};
-const win95DarkValues = {
-  ...win95DarkPrimitiveValues,
-  color: win95DarkColorValues,
-  syntax: win95DarkSyntaxValues,
+export const windows95Tokens: DesignTokenPack = {
+  tokens: {
+    ...win95PrimitiveValues,
+    color: win95LightColorValues,
+  },
+  darkColor: win95DarkColorValues,
 };
 
 export const windows95Theme = createDesignTheme({
   name: 'windows-95',
-  light: win95LightValues,
-  dark: win95DarkValues,
-  surfaces: {
-    light: win95LightValues,
-    dark: win95DarkValues,
-  },
+  from: windows95Tokens,
+  modes: [
+    {
+      id: 'dark-elevation-shadow',
+      overrides: { shadow: win95DarkShadow },
+      when: tokens.when.or(
+        tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
+        tokens.when.and(
+          tokens.when.not(tokens.when.attr('data-mode', 'light', { scope: 'self' })),
+          tokens.when.prefersDark,
+        ),
+      ),
+    },
+    {
+      id: 'surface-dark',
+      overrides: { color: windows95Tokens.darkColor },
+      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
+    },
+    {
+      id: 'surface-light',
+      overrides: { color: windows95Tokens.tokens.color },
+      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'light', { scope: 'descendant' }),
+    },
+  ],
 });

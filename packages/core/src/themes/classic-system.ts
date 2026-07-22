@@ -1,11 +1,13 @@
 import { color } from 'typestyles/color';
-import { createDesignTheme } from '../create-theme';
+import { createDesignTheme, SURFACE_ATTRIBUTE } from '../create-theme';
+import { tokens } from '../runtime';
 import { designPrimitiveTokens as p } from '../tokens';
 import {
   defaultDarkSyntaxValues,
   defaultLightSyntaxValues,
   type DesignColorValues,
 } from '../tokens/semantic';
+import type { DesignTokenPack } from '../types';
 
 const classicLightColorValues: DesignColorValues = {
   background: {
@@ -119,34 +121,46 @@ const classicPrimitiveValues = {
   },
 };
 
-const classicDarkPrimitiveValues = {
-  ...classicPrimitiveValues,
-  shadow: {
-    xs: '1px 1px 0 0 #FFFFFF',
-    sm: '1px 1px 0 0 #FFFFFF',
-    md: '2px 2px 0 0 #FFFFFF',
-    lg: '3px 3px 0 0 #FFFFFF',
-    xl: '4px 4px 0 0 #FFFFFF',
-  },
+const classicDarkShadow = {
+  xs: '1px 1px 0 0 #FFFFFF',
+  sm: '1px 1px 0 0 #FFFFFF',
+  md: '2px 2px 0 0 #FFFFFF',
+  lg: '3px 3px 0 0 #FFFFFF',
+  xl: '4px 4px 0 0 #FFFFFF',
 };
 
-const classicLightValues = {
-  ...classicPrimitiveValues,
-  color: classicLightColorValues,
-  syntax: defaultLightSyntaxValues,
-};
-const classicDarkValues = {
-  ...classicDarkPrimitiveValues,
-  color: classicDarkColorValues,
-  syntax: defaultDarkSyntaxValues,
+export const classicSystemTokens: DesignTokenPack = {
+  tokens: {
+    ...classicPrimitiveValues,
+    color: classicLightColorValues,
+  },
+  darkColor: classicDarkColorValues,
 };
 
 export const classicSystemTheme = createDesignTheme({
   name: 'classic-system',
-  light: classicLightValues,
-  dark: classicDarkValues,
-  surfaces: {
-    light: classicLightValues,
-    dark: classicDarkValues,
-  },
+  from: classicSystemTokens,
+  modes: [
+    {
+      id: 'dark-elevation-shadow',
+      overrides: { shadow: classicDarkShadow },
+      when: tokens.when.or(
+        tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
+        tokens.when.and(
+          tokens.when.not(tokens.when.attr('data-mode', 'light', { scope: 'self' })),
+          tokens.when.prefersDark,
+        ),
+      ),
+    },
+    {
+      id: 'surface-dark',
+      overrides: { color: classicSystemTokens.darkColor },
+      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
+    },
+    {
+      id: 'surface-light',
+      overrides: { color: classicSystemTokens.tokens.color },
+      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'light', { scope: 'descendant' }),
+    },
+  ],
 });

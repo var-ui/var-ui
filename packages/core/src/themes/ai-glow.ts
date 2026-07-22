@@ -1,11 +1,13 @@
 import { color } from 'typestyles/color';
-import { createDesignTheme } from '../create-theme';
+import { createDesignTheme, SURFACE_ATTRIBUTE } from '../create-theme';
+import { tokens } from '../runtime';
 import { designPrimitiveTokens as p } from '../tokens';
 import {
   defaultDarkSyntaxValues,
   defaultLightSyntaxValues,
   type DesignColorValues,
 } from '../tokens/semantic';
+import type { DesignTokenPack } from '../types';
 
 const aiGlowLightSyntaxValues = {
   ...defaultLightSyntaxValues,
@@ -142,34 +144,46 @@ const aiGlowPrimitiveValues = {
   },
 };
 
-const aiGlowDarkPrimitiveValues = {
-  ...aiGlowPrimitiveValues,
-  shadow: {
-    xs: '0 4px 18px color-mix(in oklch, #67E8F9 18%, transparent)',
-    sm: '0 8px 30px color-mix(in oklch, #F0ABFC 18%, transparent)',
-    md: '0 18px 56px color-mix(in oklch, #67E8F9 22%, transparent), 0 6px 32px color-mix(in oklch, #FDE68A 12%, transparent)',
-    lg: '0 28px 84px color-mix(in oklch, #F0ABFC 22%, transparent), 0 10px 50px color-mix(in oklch, #6EE7B7 16%, transparent)',
-    xl: '0 36px 110px color-mix(in oklch, #67E8F9 22%, transparent), 0 16px 64px color-mix(in oklch, #FDE68A 18%, transparent)',
-  },
+const aiGlowDarkShadow = {
+  xs: '0 4px 18px color-mix(in oklch, #67E8F9 18%, transparent)',
+  sm: '0 8px 30px color-mix(in oklch, #F0ABFC 18%, transparent)',
+  md: '0 18px 56px color-mix(in oklch, #67E8F9 22%, transparent), 0 6px 32px color-mix(in oklch, #FDE68A 12%, transparent)',
+  lg: '0 28px 84px color-mix(in oklch, #F0ABFC 22%, transparent), 0 10px 50px color-mix(in oklch, #6EE7B7 16%, transparent)',
+  xl: '0 36px 110px color-mix(in oklch, #67E8F9 22%, transparent), 0 16px 64px color-mix(in oklch, #FDE68A 18%, transparent)',
 };
 
-const aiGlowLightValues = {
-  ...aiGlowPrimitiveValues,
-  color: aiGlowLightColorValues,
-  syntax: aiGlowLightSyntaxValues,
-};
-const aiGlowDarkValues = {
-  ...aiGlowDarkPrimitiveValues,
-  color: aiGlowDarkColorValues,
-  syntax: aiGlowDarkSyntaxValues,
+export const aiGlowTokens: DesignTokenPack = {
+  tokens: {
+    ...aiGlowPrimitiveValues,
+    color: aiGlowLightColorValues,
+  },
+  darkColor: aiGlowDarkColorValues,
 };
 
 export const aiGlowTheme = createDesignTheme({
   name: 'ai-glow',
-  light: aiGlowLightValues,
-  dark: aiGlowDarkValues,
-  surfaces: {
-    light: aiGlowLightValues,
-    dark: aiGlowDarkValues,
-  },
+  from: aiGlowTokens,
+  modes: [
+    {
+      id: 'dark-elevation-shadow',
+      overrides: { shadow: aiGlowDarkShadow },
+      when: tokens.when.or(
+        tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
+        tokens.when.and(
+          tokens.when.not(tokens.when.attr('data-mode', 'light', { scope: 'self' })),
+          tokens.when.prefersDark,
+        ),
+      ),
+    },
+    {
+      id: 'surface-dark',
+      overrides: { color: aiGlowTokens.darkColor },
+      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
+    },
+    {
+      id: 'surface-light',
+      overrides: { color: aiGlowTokens.tokens.color },
+      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'light', { scope: 'descendant' }),
+    },
+  ],
 });
