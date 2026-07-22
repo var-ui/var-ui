@@ -27,18 +27,22 @@ Docs: `/theming/customize`. Demo: `examples/vite-app` Acme palette.
 
 ### Batteries included — one theme call
 
-`createDesignTheme` keeps its existing config (`name`, `light`, `dark`,
-`surfaces`) and gains two optional fields, fully backward compatible:
+`createDesignTheme` takes a thin config (`name`, optional `from` / `tokens` /
+`colorMode` / `modes`) plus optional `extend` and `components`. Ambient
+light/dark colors go through `colorMode` (or pack `darkColor`); fixed-tone
+surfaces use `modes` + `SURFACE_ATTRIBUTE` (not a `surfaces` key). See
+`docs/superpowers/specs/2026-07-21-theming-dx-design.md`.
 
 ```ts
-import { createDesignTheme } from '@var-ui/core';
+import { createColorTheme, createDesignTheme } from '@var-ui/core';
+
+const colors = createColorTheme({ accent: '#7c3aed' });
 
 export const acme = createDesignTheme({
   name: 'acme',
-  light: acmeLight,
-  dark: acmeDark,
+  colorMode: colors,
 
-  // NEW — custom tokens; leaves are a string or { light, dark }
+  // custom tokens; leaves are a string or { light, dark }
   extend: {
     brand: {
       glow: {
@@ -49,7 +53,7 @@ export const acme = createDesignTheme({
     },
   },
 
-  // NEW — typed component restyling; each entry is `(t) => override` or a plain object
+  // typed component restyling; each entry is `(t) => override` or a plain object
   // `t` = built-in tokens + custom refs (use DesignThemeTokens<typeof extend> in split files)
   components: {
     button: (t) => ({
@@ -81,7 +85,7 @@ export const acme = createDesignTheme({
 
 Everything is typed end-to-end:
 
-- `light` / `dark` — existing typed `DesignColorValues` shapes.
+- `colorMode` / pack colors — typed `DesignColorValues` shapes (incl. `syntax`).
 - `extend` — inferred generic; `acme.tokens.brand.glow` is a typed `var()` ref.
 - `components` — keys restricted to the themeable-component registry; each
   value is a factory or plain object; variant dimensions and option names come
@@ -301,7 +305,8 @@ reserves the `vars` key for it.
   class names/`@scope`"). V3's snapshot lint becomes more load-bearing but is
   **not a blocker** for this work.
 - **V4 (`surface-tone-override.md`):** orthogonal; custom tokens participate
-  in `surfaces` overrides through the same theme machinery.
+  in fixed-tone `modes` (`SURFACE_ATTRIBUTE`) through the same theme machinery.
+  (`surfaces` on `createDesignTheme` was removed in the theming DX cleanup.)
 
 ---
 

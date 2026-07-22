@@ -5,7 +5,7 @@ thin wrapper around engine APIs, Var UI token shape as the theming contract,
 and `createColorTheme` as an optional color helper that plugs into that shape.
 
 **Date:** 2026-07-21  
-**Status:** Approved  
+**Status:** Implemented  
 **Plan:** `docs/superpowers/plans/2026-07-21-theming-dx.md`
 
 **Related:** `ROADMAP.md` (V1 `createColorTheme`, V4 surfaces, V7 typed

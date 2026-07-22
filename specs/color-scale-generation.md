@@ -45,6 +45,27 @@ export type CreateColorThemeResult = {
 export function createColorTheme(input: CreateColorThemeInput): CreateColorThemeResult;
 ```
 
+Each `light` / `dark` map includes **`syntax`** (`defaultLightSyntaxValues` /
+`defaultDarkSyntaxValues` for this pass — no accent-tinted syntax generation yet).
+
+### Consumption via `createDesignTheme`
+
+Primary path — pass the result straight into `colorMode` (same `{ light, dark }`
+shape as `DesignThemeConfig.colorMode`):
+
+```ts
+import { createColorTheme, createDesignTheme } from '@var-ui/core';
+
+export const acme = createDesignTheme({
+  name: 'acme',
+  colorMode: createColorTheme({ accent: '#7c3aed' }),
+});
+```
+
+Optional: start from a pack (`from: forestTokens`) and/or append fixed-tone
+`modes` with `SURFACE_ATTRIBUTE`. See `packages/core/README.md` and
+`docs/superpowers/specs/2026-07-21-theming-dx-design.md`.
+
 ### Algorithm
 
 1. `accentOklch = parseColor(input.accent)` (from `typestyles/color-scale`).

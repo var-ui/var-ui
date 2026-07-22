@@ -7,8 +7,16 @@ condition engine (compiling `.theme-name [data-surface="dark"]`) shipped in
 the consumer-side convention: the attribute name, the tone values, wiring through
 `createDesignTheme`, and rolling it out across all 8 built-in themes.
 
-**Status: ready to implement** — bump the workspace `typestyles` catalog entry
-to `^0.8.0` before starting (same prerequisite as V2/V3).
+**Status: shipped** (see theming DX cleanup). Historical sections below still
+describe the earlier `DesignThemeConfig.surfaces` shape.
+
+> **Migration note:** public `createDesignTheme` no longer accepts `surfaces`
+> (nor top-level `light` / `dark`). Fixed-tone faces are TypeStyles `modes`
+> using `tokens.when.attr(SURFACE_ATTRIBUTE, 'light'|'dark', { scope:
+'descendant' })` and `overrides: { color: … }`. Ambient color still comes from
+> `colorMode` / pack `darkColor`. See
+> `docs/superpowers/specs/2026-07-21-theming-dx-design.md` and
+> `packages/core/README.md`.
 
 ---
 
