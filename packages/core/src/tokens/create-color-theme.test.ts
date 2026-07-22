@@ -53,6 +53,22 @@ function assertDesignColorShape(values: DesignColorValues): void {
   });
   expect(values.info).toMatchObject({ default: expect.any(String), onSolid: expect.any(String) });
   expect(values.overlay).toMatchObject({ default: expect.any(String) });
+  expect(values.syntax).toMatchObject({
+    base: expect.any(String),
+    keyword: expect.any(String),
+    title: expect.any(String),
+    attr: expect.any(String),
+    string: expect.any(String),
+    builtIn: expect.any(String),
+    comment: expect.any(String),
+    name: expect.any(String),
+    section: expect.any(String),
+    bullet: expect.any(String),
+    addition: expect.any(String),
+    additionBackground: expect.any(String),
+    deletion: expect.any(String),
+    deletionBackground: expect.any(String),
+  });
 }
 
 describe('palette extraction', () => {
