@@ -17,8 +17,9 @@ export function ContentSampleTile({ className }: ContentSampleTileProps) {
           Published <Timestamp date="2026-06-30T12:00:00Z" format="date" />
         </Text>
         <Text>
-          Themes now expose a <code>surfaces</code> option for fixed-tone subtrees. See{' '}
-          <Link href="/theming">the theming guide</Link> for details.
+          Themes pin fixed-tone subtrees with modes and <code>data-surface</code> (
+          <code>SURFACE_ATTRIBUTE</code>). See <Link href="/theming">the theming guide</Link> for
+          details.
         </Text>
         <CodeBlock code={"import { Button } from '@var-ui/react';"} language="tsx" />
       </VStack>

@@ -15,8 +15,7 @@ function scopeSelectorList(list: string): string {
 }
 
 /**
- * Maps semantic `codeSyntax` tokens to highlight.js class names (see README).
- * Light values live on `:root`; dark is applied via `darkThemeClass` overrides.
+ * Maps semantic `--var-ui-color-syntax-*` tokens to highlight.js class names (see README).
  *
  * HLJS token colors intentionally reference syntax tokens directly — not component-scoped
  * vars — so themes retune highlighting via `--var-ui-color-syntax-*` overrides only.

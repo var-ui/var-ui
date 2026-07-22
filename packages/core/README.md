@@ -345,7 +345,7 @@ Syntax highlighting reads `designTokens.color.syntax` (`--var-ui-color-syntax-*`
 | `addition` / `additionBackground` | Diff additions (foreground / wash)                   |
 | `deletion` / `deletionBackground` | Diff deletions (foreground / wash)                   |
 
-Defaults: `defaultLightSyntaxValues` / `defaultDarkSyntaxValues` (also attached by `createColorTheme`). Override via theme `colorMode` / pack `color.syntax`.
+Defaults are bundled with `createColorTheme` and the built-in packs. Override via theme `colorMode` / pack `color.syntax`.
 
 ### highlight.js class mapping
 

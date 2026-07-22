@@ -12,10 +12,9 @@ describe the earlier `DesignThemeConfig.surfaces` shape.
 
 > **Migration note:** public `createDesignTheme` no longer accepts `surfaces`
 > (nor top-level `light` / `dark`). Fixed-tone faces are TypeStyles `modes`
-> using `tokens.when.attr(SURFACE_ATTRIBUTE, 'light'|'dark', { scope:
-'descendant' })` and `overrides: { color: … }`. Ambient color still comes from
-> `colorMode` / pack `darkColor`. See
-> `docs/superpowers/specs/2026-07-21-theming-dx-design.md` and
+> via `tokens.when.attr(SURFACE_ATTRIBUTE, …, { scope: 'descendant' })` and
+> `overrides: { color: … }`. Ambient color still comes from `colorMode` / pack
+> `darkColor`. See `docs/superpowers/specs/2026-07-21-theming-dx-design.md` and
 > `packages/core/README.md`.
 
 ---
