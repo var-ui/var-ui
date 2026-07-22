@@ -11,17 +11,17 @@ export const codeBlock = styles.component(
         inherits: false,
       },
       background: {
-        value: `${t.codeBlock.background}`,
+        value: `${t.color.background.surface}`,
         syntax: '<color>',
         inherits: false,
       },
       backgroundInline: {
-        value: `${t.codeBlock.backgroundInline}`,
+        value: `${t.color.background.subtle}`,
         syntax: '<color>',
         inherits: false,
       },
       backgroundHeader: {
-        value: `${t.codeBlock.backgroundHeader}`,
+        value: `${t.color.background.subtle}`,
         syntax: '<color>',
         inherits: false,
       },
@@ -56,7 +56,7 @@ export const codeBlock = styles.component(
         inherits: false,
       },
       lineHighlightBackground: {
-        value: `${t.codeBlock.backgroundLineHighlight}`,
+        value: `${t.color.background.subtle}`,
         syntax: '<color>',
         inherits: false,
       },

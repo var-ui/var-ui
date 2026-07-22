@@ -125,17 +125,6 @@ export const strokeTokens = tokens.create('stroke', {
   strong: `${borderWidthTokens.default} solid ${colorTokens.border.strong}`,
 });
 
-export const syntaxTokens = tokens.create('syntax', emptySyntaxValues);
-
-// remove this only component tokens block
-export const codeBlockTokens = tokens.create('codeBlock', {
-  background: `${colorTokens.background.surface}`,
-  backgroundHeader: `${colorTokens.background.subtle}`,
-  backgroundInline: `${colorTokens.background.subtle}`,
-  backgroundLineHighlight: `${colorTokens.background.subtle}`,
-  border: `${colorTokens.border.default}`,
-});
-
 // Need to define the tokens shape better
 export const designPrimitiveTokens = {
   palette: paletteTokens,
@@ -154,16 +143,10 @@ export const designPrimitiveTokens = {
 
 export const designSemanticTokens = {
   color: colorTokens,
-  syntax: syntaxTokens,
   stroke: strokeTokens,
-} as const;
-
-export const designComponentTokens = {
-  codeBlock: codeBlockTokens,
 } as const;
 
 export const designTokens = {
   ...designPrimitiveTokens,
   ...designSemanticTokens,
-  ...designComponentTokens,
 } as const;

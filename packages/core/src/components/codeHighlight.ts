@@ -2,7 +2,7 @@ import type { SlotComponentFunction, SlotVariantDefinitions } from 'typestyles';
 import { styles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
-const s = t.syntax;
+const s = t.color.syntax;
 
 /** Layout ancestor must include `codeHljsScope.root` so rules match fenced blocks / `Code.astro`. */
 const cb = '[data-codeblock]';
@@ -19,7 +19,7 @@ function scopeSelectorList(list: string): string {
  * Light values live on `:root`; dark is applied via `darkThemeClass` overrides.
  *
  * HLJS token colors intentionally reference syntax tokens directly — not component-scoped
- * vars — so themes retune highlighting via `--syntax-*` overrides only.
+ * vars — so themes retune highlighting via `--var-ui-color-syntax-*` overrides only.
  *
  * Compose **`codeHljsScope.root`** on a page shell (e.g. docs layout root) so selectors apply
  * inside `[data-codeblock]` wrappers.
