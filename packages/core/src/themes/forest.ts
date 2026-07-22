@@ -1,11 +1,13 @@
 import { color } from 'typestyles/color';
-import { createDesignTheme } from '../create-theme';
+import { createDesignTheme, SURFACE_ATTRIBUTE } from '../create-theme';
+import { tokens } from '../runtime';
 import { designPrimitiveTokens as p } from '../tokens';
 import {
   defaultDarkSyntaxValues,
   defaultLightSyntaxValues,
   type DesignColorValues,
 } from '../tokens/semantic';
+import type { DesignTokenPack } from '../types';
 import {
   neoBrutalistBorderDarkDefault,
   neoBrutalistBorderDarkStrong,
@@ -74,28 +76,27 @@ const forestDarkColorValues: DesignColorValues = {
   syntax: defaultDarkSyntaxValues,
 };
 
+export const forestTokens: DesignTokenPack = {
+  tokens: {
+    color: forestLightColorValues,
+    shadow: neoBrutalistShadow,
+  },
+  darkColor: forestDarkColorValues,
+};
+
 export const forestTheme = createDesignTheme({
   name: 'forest',
-  light: {
-    color: forestLightColorValues,
-    syntax: defaultLightSyntaxValues,
-    shadow: neoBrutalistShadow,
-  },
-  dark: {
-    color: forestDarkColorValues,
-    syntax: defaultDarkSyntaxValues,
-    shadow: neoBrutalistShadow,
-  },
-  surfaces: {
-    light: {
-      color: forestLightColorValues,
-      syntax: defaultLightSyntaxValues,
-      shadow: neoBrutalistShadow,
+  from: forestTokens,
+  modes: [
+    {
+      id: 'surface-dark',
+      overrides: { color: forestTokens.darkColor },
+      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
     },
-    dark: {
-      color: forestDarkColorValues,
-      syntax: defaultDarkSyntaxValues,
-      shadow: neoBrutalistShadow,
+    {
+      id: 'surface-light',
+      overrides: { color: forestTokens.tokens.color },
+      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'light', { scope: 'descendant' }),
     },
-  },
+  ],
 });

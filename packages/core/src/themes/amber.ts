@@ -1,11 +1,13 @@
 import { color } from 'typestyles/color';
-import { createDesignTheme } from '../create-theme';
+import { createDesignTheme, SURFACE_ATTRIBUTE } from '../create-theme';
+import { tokens } from '../runtime';
 import { designPrimitiveTokens as p } from '../tokens';
 import {
   defaultDarkSyntaxValues,
   defaultLightSyntaxValues,
   type DesignColorValues,
 } from '../tokens/semantic';
+import type { DesignTokenPack } from '../types';
 import {
   neoBrutalistBorderDarkDefault,
   neoBrutalistBorderDarkStrong,
@@ -74,28 +76,27 @@ const amberDarkColorValues: DesignColorValues = {
   syntax: defaultDarkSyntaxValues,
 };
 
+export const amberTokens: DesignTokenPack = {
+  tokens: {
+    color: amberLightColorValues,
+    shadow: neoBrutalistShadow,
+  },
+  darkColor: amberDarkColorValues,
+};
+
 export const amberTheme = createDesignTheme({
   name: 'amber',
-  light: {
-    color: amberLightColorValues,
-    syntax: defaultLightSyntaxValues,
-    shadow: neoBrutalistShadow,
-  },
-  dark: {
-    color: amberDarkColorValues,
-    syntax: defaultDarkSyntaxValues,
-    shadow: neoBrutalistShadow,
-  },
-  surfaces: {
-    light: {
-      color: amberLightColorValues,
-      syntax: defaultLightSyntaxValues,
-      shadow: neoBrutalistShadow,
+  from: amberTokens,
+  modes: [
+    {
+      id: 'surface-dark',
+      overrides: { color: amberTokens.darkColor },
+      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
     },
-    dark: {
-      color: amberDarkColorValues,
-      syntax: defaultDarkSyntaxValues,
-      shadow: neoBrutalistShadow,
+    {
+      id: 'surface-light',
+      overrides: { color: amberTokens.tokens.color },
+      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'light', { scope: 'descendant' }),
     },
-  },
+  ],
 });
