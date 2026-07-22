@@ -1,6 +1,10 @@
 import { color } from 'typestyles/color';
 import { contrastRatio, generateRamp, parseColor } from 'typestyles/color-scale';
-import type { DesignColorValues } from './semantic';
+import {
+  defaultDarkSyntaxValues,
+  defaultLightSyntaxValues,
+  type DesignColorValues,
+} from './semantic';
 import { FAMILY_SPECS } from './palette';
 import {
   neoBrutalistShadowOffsetDark,
@@ -31,7 +35,6 @@ export type CreateColorThemeResult = {
  * - `ACCENT_CHROMA_MIN = 0.08` keeps near-gray accents visible without oversaturating hues.
  */
 const ACCENT_CHROMA_MIN = 0.08;
-
 const NEUTRAL_CHROMA = 0.015;
 const WHITE = color.oklch('100%', 0, 0);
 
@@ -142,6 +145,7 @@ function mapLightColors(
       onSolid: WHITE,
     },
     overlay: { default: color.alpha(rampAt(neutral, 10), 0.55, 'oklch') },
+    syntax: defaultLightSyntaxValues,
   };
 }
 
@@ -200,10 +204,15 @@ function mapDarkColors(
       onSolid: WHITE,
     },
     overlay: { default: color.alpha(rampAt(neutral, m(10)), 0.7, 'oklch') },
+    syntax: defaultDarkSyntaxValues,
   };
 }
 
 type ContrastPair = readonly [label: string, foreground: string, background: string];
+
+function asColorString(value: DesignColorValues['text']['primary']): string {
+  return String(value);
+}
 
 function validateContrast(
   mode: 'light' | 'dark',
@@ -213,10 +222,26 @@ function validateContrast(
   if (process.env.NODE_ENV === 'production') return;
 
   const pairs: ContrastPair[] = [
-    ['text.primary / background.app', colors.text.primary, colors.background.app],
-    ['text.secondary / background.app', colors.text.secondary, colors.background.app],
-    ['text.onAccent / accent.default', colors.text.onAccent, colors.accent.default],
-    ['text.onDanger / danger.solid', colors.text.onDanger, colors.danger.solid],
+    [
+      'text.primary / background.app',
+      asColorString(colors.text.primary),
+      asColorString(colors.background.app),
+    ],
+    [
+      'text.secondary / background.app',
+      asColorString(colors.text.secondary),
+      asColorString(colors.background.app),
+    ],
+    [
+      'text.onAccent / accent.default',
+      asColorString(colors.text.onAccent),
+      asColorString(colors.accent.default),
+    ],
+    [
+      'text.onDanger / danger.solid',
+      asColorString(colors.text.onDanger),
+      asColorString(colors.danger.solid),
+    ],
   ];
 
   for (const [label, foreground, background] of pairs) {

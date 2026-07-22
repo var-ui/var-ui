@@ -43,6 +43,7 @@ const roseLightColorValues: DesignColorValues = {
   warning: { default: p.palette['amber-7'], onSolid: p.palette['stone-10'] },
   info: { default: p.palette['plum-7'], onSolid: p.palette['neutral-1'] },
   overlay: { default: color.alpha(p.palette['rose-10'], 0.55, 'oklch') },
+  syntax: defaultLightSyntaxValues,
 };
 
 const roseDarkColorValues: DesignColorValues = {
@@ -70,6 +71,7 @@ const roseDarkColorValues: DesignColorValues = {
   warning: { default: p.palette['amber-4'], onSolid: p.palette['stone-10'] },
   info: { default: p.palette['plum-4'], onSolid: p.palette['neutral-1'] },
   overlay: { default: color.alpha(p.palette['rose-10'], 0.7, 'oklch') },
+  syntax: defaultDarkSyntaxValues,
 };
 
 export const roseTheme = createDesignTheme({

@@ -1,4 +1,27 @@
-export type DesignColorValues = {
+export type DesignTokenLeaf = string | number;
+
+export type WithTokenLeaves<T> = {
+  [K in keyof T]: T[K] extends string | number ? DesignTokenLeaf : WithTokenLeaves<T[K]>;
+};
+
+export type DesignSyntaxValues = {
+  base: string;
+  keyword: string;
+  title: string;
+  attr: string;
+  string: string;
+  builtIn: string;
+  comment: string;
+  name: string;
+  section: string;
+  bullet: string;
+  addition: string;
+  additionBackground: string;
+  deletion: string;
+  deletionBackground: string;
+};
+
+export type DesignColorValues = WithTokenLeaves<{
   background: {
     app: string;
     surface: string;
@@ -19,7 +42,8 @@ export type DesignColorValues = {
   warning: { default: string; onSolid: string };
   info: { default: string; onSolid: string };
   overlay: { default: string };
-};
+  syntax: DesignSyntaxValues;
+}>;
 
 export type DesignColorRefs = DesignColorValues & {
   text: DesignColorValues['text'] & { disabled: string; placeholder: string };
@@ -29,23 +53,6 @@ export type DesignColorRefs = DesignColorValues & {
   warning: DesignColorValues['warning'] & { subtle: string; border: string };
   info: DesignColorValues['info'] & { subtle: string; border: string };
   overlay: DesignColorValues['overlay'] & { backdrop: string };
-};
-
-export type DesignSyntaxValues = {
-  base: string;
-  keyword: string;
-  title: string;
-  attr: string;
-  string: string;
-  builtIn: string;
-  comment: string;
-  name: string;
-  section: string;
-  bullet: string;
-  addition: string;
-  additionBackground: string;
-  deletion: string;
-  deletionBackground: string;
 };
 
 export const defaultLightSyntaxValues: DesignSyntaxValues = {

@@ -44,6 +44,7 @@ export const defaultLightColorValues: DesignColorValues = {
   warning: { default: p.palette['amber-7'], onSolid: p.palette['stone-10'] },
   info: { default: p.palette['violet-7'], onSolid: p.palette['neutral-1'] },
   overlay: { default: color.alpha(p.palette['slate-10'], 0.55, 'oklch') },
+  syntax: defaultLightSyntaxValues,
 };
 
 export const defaultDarkColorValues: DesignColorValues = {
@@ -72,6 +73,7 @@ export const defaultDarkColorValues: DesignColorValues = {
   warning: { default: p.palette['amber-4'], onSolid: p.palette['stone-10'] },
   info: { default: p.palette['violet-4'], onSolid: p.palette['neutral-1'] },
   overlay: { default: color.alpha(p.palette['slate-10'], 0.7, 'oklch') },
+  syntax: defaultDarkSyntaxValues,
 };
 
 export const defaultLightValues = {

@@ -41,6 +41,23 @@ export const durationTokens = tokens.create('duration', durationValues);
 export const easingTokens = tokens.create('easing', easingValues);
 export const transitionTokens = tokens.create('transition', transitionValues);
 
+const emptySyntaxValues: DesignSyntaxValues = {
+  base: '',
+  keyword: '',
+  title: '',
+  attr: '',
+  string: '',
+  builtIn: '',
+  comment: '',
+  name: '',
+  section: '',
+  bullet: '',
+  addition: '',
+  additionBackground: '',
+  deletion: '',
+  deletionBackground: '',
+};
+
 const emptyThemeColorValues: DesignColorValues = {
   background: { app: '', surface: '', subtle: '', elevated: '' },
   text: { primary: '', secondary: '', onAccent: '', onDanger: '' },
@@ -52,6 +69,7 @@ const emptyThemeColorValues: DesignColorValues = {
   warning: { default: '', onSolid: '' },
   info: { default: '', onSolid: '' },
   overlay: { default: '' },
+  syntax: emptySyntaxValues,
 };
 
 // this
@@ -106,23 +124,6 @@ export const strokeTokens = tokens.create('stroke', {
   default: `${borderWidthTokens.default} solid ${colorTokens.border.default}`,
   strong: `${borderWidthTokens.default} solid ${colorTokens.border.strong}`,
 });
-
-const emptySyntaxValues: DesignSyntaxValues = {
-  base: '',
-  keyword: '',
-  title: '',
-  attr: '',
-  string: '',
-  builtIn: '',
-  comment: '',
-  name: '',
-  section: '',
-  bullet: '',
-  addition: '',
-  additionBackground: '',
-  deletion: '',
-  deletionBackground: '',
-};
 
 export const syntaxTokens = tokens.create('syntax', emptySyntaxValues);
 

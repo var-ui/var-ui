@@ -7,6 +7,26 @@ import {
   type DesignColorValues,
 } from '../tokens/semantic';
 
+const win95LightSyntaxValues = {
+  ...defaultLightSyntaxValues,
+  keyword: '#000080',
+  title: '#800080',
+  attr: '#5F4F00',
+  string: '#004F00',
+  builtIn: '#800000',
+  comment: '#303030',
+};
+
+const win95DarkSyntaxValues = {
+  ...defaultDarkSyntaxValues,
+  keyword: '#38A8F0',
+  title: '#F0F0F0',
+  attr: '#FFFF80',
+  string: '#80FF80',
+  builtIn: '#FF8080',
+  comment: '#B0B0B0',
+};
+
 const win95LightColorValues: DesignColorValues = {
   background: {
     app: '#C0C0C0',
@@ -32,6 +52,7 @@ const win95LightColorValues: DesignColorValues = {
   warning: { default: '#808000', onSolid: '#000000' },
   info: { default: '#000080', onSolid: '#FFFFFF' },
   overlay: { default: color.alpha('#000000', 0.5, 'srgb') },
+  syntax: win95LightSyntaxValues,
 };
 
 const win95DarkColorValues: DesignColorValues = {
@@ -59,6 +80,7 @@ const win95DarkColorValues: DesignColorValues = {
   warning: { default: p.palette['amber-4'], onSolid: '#000000' },
   info: { default: '#38A8F0', onSolid: '#000000' },
   overlay: { default: color.alpha('#000000', 0.7, 'srgb') },
+  syntax: win95DarkSyntaxValues,
 };
 
 const win95PrimitiveValues = {
@@ -126,26 +148,6 @@ const win95DarkPrimitiveValues = {
     lg: 'inset 2px 2px 0 #808080, inset -2px -2px 0 #000000',
     xl: 'inset 2px 2px 0 #808080, inset -2px -2px 0 #000000',
   },
-};
-
-const win95LightSyntaxValues = {
-  ...defaultLightSyntaxValues,
-  keyword: '#000080',
-  title: '#800080',
-  attr: '#5F4F00',
-  string: '#004F00',
-  builtIn: '#800000',
-  comment: '#303030',
-};
-
-const win95DarkSyntaxValues = {
-  ...defaultDarkSyntaxValues,
-  keyword: '#38A8F0',
-  title: '#F0F0F0',
-  attr: '#FFFF80',
-  string: '#80FF80',
-  builtIn: '#FF8080',
-  comment: '#B0B0B0',
 };
 
 const win95LightValues = {

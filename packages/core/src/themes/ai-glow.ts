@@ -7,6 +7,28 @@ import {
   type DesignColorValues,
 } from '../tokens/semantic';
 
+const aiGlowLightSyntaxValues = {
+  ...defaultLightSyntaxValues,
+  keyword: '#7C3AED',
+  title: '#2563EB',
+  attr: '#B45309',
+  string: '#047857',
+  builtIn: '#DB2777',
+  comment: '#786D98',
+  section: '#0891B2',
+};
+
+const aiGlowDarkSyntaxValues = {
+  ...defaultDarkSyntaxValues,
+  keyword: '#C4B5FD',
+  title: '#93C5FD',
+  attr: '#FCD34D',
+  string: '#6EE7B7',
+  builtIn: '#F0ABFC',
+  comment: '#AFA5CF',
+  section: '#67E8F9',
+};
+
 const aiGlowLightColorValues: DesignColorValues = {
   background: {
     app: '#F8F5FF',
@@ -32,6 +54,7 @@ const aiGlowLightColorValues: DesignColorValues = {
   warning: { default: '#B45309', onSolid: '#FFFFFF' },
   info: { default: '#2563EB', onSolid: '#FFFFFF' },
   overlay: { default: color.alpha('#201A3D', 0.42, 'oklch') },
+  syntax: aiGlowLightSyntaxValues,
 };
 
 const aiGlowDarkColorValues: DesignColorValues = {
@@ -59,28 +82,7 @@ const aiGlowDarkColorValues: DesignColorValues = {
   warning: { default: '#FCD34D', onSolid: '#211400' },
   info: { default: '#67E8F9', onSolid: '#08111A' },
   overlay: { default: color.alpha('#05040F', 0.76, 'oklch') },
-};
-
-const aiGlowLightSyntaxValues = {
-  ...defaultLightSyntaxValues,
-  keyword: '#7C3AED',
-  title: '#2563EB',
-  attr: '#B45309',
-  string: '#047857',
-  builtIn: '#DB2777',
-  comment: '#786D98',
-  section: '#0891B2',
-};
-
-const aiGlowDarkSyntaxValues = {
-  ...defaultDarkSyntaxValues,
-  keyword: '#C4B5FD',
-  title: '#93C5FD',
-  attr: '#FCD34D',
-  string: '#6EE7B7',
-  builtIn: '#F0ABFC',
-  comment: '#AFA5CF',
-  section: '#67E8F9',
+  syntax: aiGlowDarkSyntaxValues,
 };
 
 const aiGlowPrimitiveValues = {

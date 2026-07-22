@@ -32,6 +32,7 @@ const classicLightColorValues: DesignColorValues = {
   warning: { default: '#000000', onSolid: '#FFFFFF' },
   info: { default: '#000000', onSolid: '#FFFFFF' },
   overlay: { default: color.alpha('#000000', 0.45, 'srgb') },
+  syntax: defaultLightSyntaxValues,
 };
 
 const classicDarkColorValues: DesignColorValues = {
@@ -59,6 +60,7 @@ const classicDarkColorValues: DesignColorValues = {
   warning: { default: p.palette['amber-3'], onSolid: '#000000' },
   info: { default: '#FFFFFF', onSolid: '#000000' },
   overlay: { default: color.alpha('#000000', 0.72, 'srgb') },
+  syntax: defaultDarkSyntaxValues,
 };
 
 const classicPrimitiveValues = {

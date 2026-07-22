@@ -43,6 +43,7 @@ const amberLightColorValues: DesignColorValues = {
   warning: { default: p.palette['amber-7'], onSolid: p.palette['stone-10'] },
   info: { default: p.palette['orange-7'], onSolid: p.palette['neutral-1'] },
   overlay: { default: color.alpha(p.palette['sand-10'], 0.55, 'oklch') },
+  syntax: defaultLightSyntaxValues,
 };
 
 const amberDarkColorValues: DesignColorValues = {
@@ -70,6 +71,7 @@ const amberDarkColorValues: DesignColorValues = {
   warning: { default: p.palette['amber-4'], onSolid: p.palette['stone-10'] },
   info: { default: p.palette['orange-4'], onSolid: p.palette['neutral-1'] },
   overlay: { default: color.alpha(p.palette['sand-10'], 0.7, 'oklch') },
+  syntax: defaultDarkSyntaxValues,
 };
 
 export const amberTheme = createDesignTheme({

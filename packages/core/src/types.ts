@@ -1,7 +1,12 @@
 import type { ThemeOverrides, ThemeSurface } from 'typestyles';
 import type { ExtendTokenValues, TokenRefsOf } from './extend-tokens';
 import type { designTokens } from './tokens';
-import type { DesignColorValues, DesignSyntaxValues } from './tokens/semantic';
+import type {
+  DesignColorValues,
+  DesignSyntaxValues,
+  DesignTokenLeaf,
+  WithTokenLeaves,
+} from './tokens/semantic';
 import type {
   DesignDurationValues,
   DesignEasingValues,
@@ -30,7 +35,6 @@ export type {
 
 export type DesignSemanticValues = {
   color: DesignColorValues;
-  syntax: DesignSyntaxValues;
 };
 
 export type DesignPrimitiveOverrides = {
@@ -113,4 +117,4 @@ export type DesignTheme<E extends ExtendMap = Record<string, never>> = ThemeSurf
   tokens: DesignThemeTokens<E>;
 };
 
-export type { DesignColorValues, DesignSyntaxValues };
+export type { DesignColorValues, DesignSyntaxValues, DesignTokenLeaf, WithTokenLeaves };

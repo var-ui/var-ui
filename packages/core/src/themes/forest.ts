@@ -43,6 +43,7 @@ const forestLightColorValues: DesignColorValues = {
   warning: { default: p.palette['amber-7'], onSolid: p.palette['stone-10'] },
   info: { default: p.palette['jade-7'], onSolid: p.palette['neutral-1'] },
   overlay: { default: color.alpha(p.palette['sage-10'], 0.55, 'oklch') },
+  syntax: defaultLightSyntaxValues,
 };
 
 const forestDarkColorValues: DesignColorValues = {
@@ -70,6 +71,7 @@ const forestDarkColorValues: DesignColorValues = {
   warning: { default: p.palette['amber-4'], onSolid: p.palette['stone-10'] },
   info: { default: p.palette['jade-4'], onSolid: p.palette['neutral-1'] },
   overlay: { default: color.alpha(p.palette['sage-10'], 0.7, 'oklch') },
+  syntax: defaultDarkSyntaxValues,
 };
 
 export const forestTheme = createDesignTheme({

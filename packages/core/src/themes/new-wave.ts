@@ -7,6 +7,24 @@ import {
   type DesignColorValues,
 } from '../tokens/semantic';
 
+const newWaveLightSyntaxValues = {
+  ...defaultLightSyntaxValues,
+  keyword: '#D934B6',
+  title: '#243CFF',
+  string: '#00845F',
+  builtIn: '#F06C00',
+  section: '#5D5FEF',
+};
+
+const newWaveDarkSyntaxValues = {
+  ...defaultDarkSyntaxValues,
+  keyword: '#FF7FE6',
+  title: '#8BFF5C',
+  string: '#70F7D3',
+  builtIn: '#FFF45C',
+  section: '#00D7FF',
+};
+
 const newWaveLightColorValues: DesignColorValues = {
   background: {
     app: '#FFF45C',
@@ -32,6 +50,7 @@ const newWaveLightColorValues: DesignColorValues = {
   warning: { default: '#F06C00', onSolid: '#151329' },
   info: { default: '#5D5FEF', onSolid: p.palette['neutral-1'] },
   overlay: { default: color.alpha('#151329', 0.55, 'oklch') },
+  syntax: newWaveLightSyntaxValues,
 };
 
 const newWaveDarkColorValues: DesignColorValues = {
@@ -59,24 +78,7 @@ const newWaveDarkColorValues: DesignColorValues = {
   warning: { default: '#FFF45C', onSolid: '#151329' },
   info: { default: '#00D7FF', onSolid: '#151329' },
   overlay: { default: color.alpha('#05040F', 0.78, 'oklch') },
-};
-
-const newWaveLightSyntaxValues = {
-  ...defaultLightSyntaxValues,
-  keyword: '#D934B6',
-  title: '#243CFF',
-  string: '#00845F',
-  builtIn: '#F06C00',
-  section: '#5D5FEF',
-};
-
-const newWaveDarkSyntaxValues = {
-  ...defaultDarkSyntaxValues,
-  keyword: '#FF7FE6',
-  title: '#8BFF5C',
-  string: '#70F7D3',
-  builtIn: '#FFF45C',
-  section: '#00D7FF',
+  syntax: newWaveDarkSyntaxValues,
 };
 
 const newWavePrimitiveValues = {
