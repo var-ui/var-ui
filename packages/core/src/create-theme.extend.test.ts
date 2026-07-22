@@ -5,7 +5,7 @@ import { extendTokens, resetExtendTokenRegistry } from './extend-tokens';
 import { overrideComponent } from './override-component';
 import { button } from './components/button';
 import { badge } from './components/badge';
-import { defaultDarkValues, defaultLightValues } from './themes/default';
+import { defaultTokens } from './themes/default-values';
 
 const themeClass = (name: string) => `.theme-var-ui-${name}`;
 
@@ -37,8 +37,7 @@ describe('extendTokens + createDesignTheme extend/components', () => {
   it('createDesignTheme extend merges refs onto theme.tokens and scopes values', () => {
     const acme = createDesignTheme({
       name: 'acme-extend',
-      light: defaultLightValues,
-      dark: defaultDarkValues,
+      from: defaultTokens,
       extend: {
         brand: {
           glow: {
@@ -64,8 +63,7 @@ describe('extendTokens + createDesignTheme extend/components', () => {
 
     createDesignTheme({
       name: 'acme-components',
-      light: defaultLightValues,
-      dark: defaultDarkValues,
+      from: defaultTokens,
       components: {
         button: (t) => ({
           base: {

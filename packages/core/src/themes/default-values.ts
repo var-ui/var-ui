@@ -5,6 +5,7 @@ import {
   defaultLightSyntaxValues,
   type DesignColorValues,
 } from '../tokens/semantic';
+import type { DesignTokenPack } from '../types';
 import {
   neoBrutalistBorderDarkDefault,
   neoBrutalistBorderDarkStrong,
@@ -76,14 +77,10 @@ export const defaultDarkColorValues: DesignColorValues = {
   syntax: defaultDarkSyntaxValues,
 };
 
-export const defaultLightValues = {
-  color: defaultLightColorValues,
-  syntax: defaultLightSyntaxValues,
-  shadow: neoBrutalistShadow,
-};
-
-export const defaultDarkValues = {
-  color: defaultDarkColorValues,
-  syntax: defaultDarkSyntaxValues,
-  shadow: neoBrutalistShadow,
+export const defaultTokens: DesignTokenPack = {
+  tokens: {
+    color: defaultLightColorValues,
+    shadow: neoBrutalistShadow,
+  },
+  darkColor: defaultDarkColorValues,
 };

@@ -1,4 +1,4 @@
-import type { ThemeOverrides, ThemeSurface } from 'typestyles';
+import type { ThemeModeDefinition, ThemeSurface } from 'typestyles';
 import type { ExtendTokenValues, TokenRefsOf } from './extend-tokens';
 import type { designTokens } from './tokens';
 import type {
@@ -8,6 +8,7 @@ import type {
   WithTokenLeaves,
 } from './tokens/semantic';
 import type {
+  DesignBorderWidthValues,
   DesignDurationValues,
   DesignEasingValues,
   DesignFontFamilyValues,
@@ -55,6 +56,39 @@ type DesignTokenBag = typeof designTokens;
 type ExtendMap = Record<string, ExtendTokenValues>;
 
 /**
+ * Deep partial that widens primitive leaves to `DesignTokenLeaf` so string
+ * literals from `typeof` values and token refs both remain assignable.
+ */
+export type DeepPartialKeepingLeaves<T> = T extends string | number
+  ? DesignTokenLeaf
+  : T extends readonly (infer U)[]
+    ? readonly DeepPartialKeepingLeaves<U>[]
+    : T extends object
+      ? { [K in keyof T]?: DeepPartialKeepingLeaves<T[K]> }
+      : T;
+
+export type DesignThemeTokenValues = {
+  color: DesignColorValues;
+  /** Optional namespaces may be partial (e.g. style themes override only `duration.fast`). */
+  space?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignSpaceValues>>;
+  radius?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignRadiusValues>>;
+  fontFamily?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignFontFamilyValues>>;
+  fontSize?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignFontSizeValues>>;
+  fontWeight?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignFontWeightValues>>;
+  lineHeight?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignLineHeightValues>>;
+  shadow?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignShadowValues>>;
+  duration?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignDurationValues>>;
+  easing?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignEasingValues>>;
+  transition?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignTransitionValues>>;
+  borderWidth?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignBorderWidthValues>>;
+};
+
+export type DesignTokenPack = {
+  tokens: DesignThemeTokenValues;
+  darkColor: DesignColorValues;
+};
+
+/**
  * Built-in design tokens plus refs from an `extend` map.
  * Hoist `extend` into a leaf module and use this for per-file component overrides
  * without circular imports (`typeof theme.tokens` would cycle).
@@ -80,29 +114,24 @@ export type ThemeComponentsConfig<TTokens = DesignThemeTokens> = {
 };
 
 /**
- * Palette config aligned with `tokens.createTheme`: `base` is the light surface;
- * `dark` is the dark-mode override layer (same shape as `ThemeOverrides`).
+ * Thin theme config: pack + mode-invariant token patches + colorMode + extra modes.
  */
 export type DesignThemeConfig<E extends ExtendMap = Record<string, never>> = {
   name: string;
+  /** Token pack to merge onto. Defaults to `defaultTokens`. */
+  from?: DesignTokenPack;
+  /** Mode-invariant patches + optional light `color` overrides. */
+  tokens?: DeepPartialKeepingLeaves<DesignThemeTokenValues>;
   /**
-   * Partial light-face overrides. Deep-merged onto `defaultLightValues`
-   * (omit or `{}` to keep the built-in light palette).
+   * Ambient light/dark color slices (Var UI color tree only).
+   * Same shape as `createColorTheme`'s return value.
    */
-  light?: ThemeOverrides;
-  /**
-   * Partial dark-face overrides. Deep-merged onto `defaultDarkValues`
-   * (omit or `{}` to keep the built-in dark palette).
-   */
-  dark?: ThemeOverrides;
-  /**
-   * Fixed-tone overrides for elements marked with `data-surface`, regardless of ambient mode.
-   * Each face is deep-merged onto the resolved light/dark palette for that theme.
-   */
-  surfaces?: {
-    light?: ThemeOverrides;
-    dark?: ThemeOverrides;
+  colorMode?: {
+    light?: DeepPartialKeepingLeaves<DesignColorValues>;
+    dark?: DeepPartialKeepingLeaves<DesignColorValues>;
   };
+  /** Additional TypeStyles modes (surfaces, custom conditions). */
+  modes?: ThemeModeDefinition[];
   /** Custom token namespaces; leaves are a string or `{ light, dark }`. */
   extend?: E;
   /**

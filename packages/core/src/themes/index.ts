@@ -1,12 +1,12 @@
 import { PALETTE_FAMILIES } from '../tokens/palette';
-export { defaultTheme, defaultLightValues, defaultDarkValues } from './default';
-export { forestTheme } from './forest';
-export { roseTheme } from './rose';
-export { amberTheme } from './amber';
-export { aiGlowTheme } from './ai-glow';
-export { newWaveTheme } from './new-wave';
-export { windows95Theme } from './windows-95';
-export { classicSystemTheme } from './classic-system';
+export { defaultTheme, defaultTokens } from './default';
+export { forestTheme, forestTokens } from './forest';
+export { roseTheme, roseTokens } from './rose';
+export { amberTheme, amberTokens } from './amber';
+export { aiGlowTheme, aiGlowTokens } from './ai-glow';
+export { newWaveTheme, newWaveTokens } from './new-wave';
+export { windows95Theme, windows95Tokens } from './windows-95';
+export { classicSystemTheme, classicSystemTokens } from './classic-system';
 
 export type DesignPaletteId = 'default' | 'forest' | 'rose' | 'amber';
 

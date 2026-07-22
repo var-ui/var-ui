@@ -1,11 +1,16 @@
-import type { ThemeModeDefinition, ThemeOverrides } from 'typestyles';
+import type { ThemeOverrides } from 'typestyles';
 import { registerExtendMap, type ExtendTokenValues } from './extend-tokens';
 import { overrideComponent } from './override-component';
 import { tokens } from './runtime';
 import { themeableComponents } from './themeable-components';
-import { defaultDarkValues, defaultLightValues } from './themes/default-values';
+import { defaultTokens } from './themes/default-values';
 import { designTokens } from './tokens';
-import type { DesignTheme, DesignThemeConfig } from './types';
+import type {
+  DesignColorValues,
+  DesignTheme,
+  DesignThemeConfig,
+  DesignThemeTokenValues,
+} from './types';
 
 /** Canonical attribute for fixed-tone subtrees (`data-surface="light"|"dark"`). */
 export const SURFACE_ATTRIBUTE = 'data-surface';
@@ -35,74 +40,77 @@ export function deepMergeThemeOverrides(
   return out as ThemeOverrides;
 }
 
+function deepMergeColor(base: DesignColorValues, patch?: DeepPartialColor): DesignColorValues {
+  return deepMergeThemeOverrides(
+    { color: base } as ThemeOverrides,
+    patch ? ({ color: patch } as ThemeOverrides) : undefined,
+  ).color as DesignColorValues;
+}
+
+type DeepPartialColor = NonNullable<NonNullable<DesignThemeConfig['colorMode']>['light']>;
+
+function omitColor(values: DesignThemeTokenValues): Omit<DesignThemeTokenValues, 'color'> {
+  const { color: _color, ...rest } = values;
+  return rest;
+}
+
 /**
- * One place for the design-system palette pattern: `base` + shared `data-mode` / system
- * color mode, plus optional fixed-tone descendant surfaces via `SURFACE_ATTRIBUTE`.
- * Optional `extend` registers custom tokens; optional `components` (per-key object or
- * `(t) => override`) compiles to `styles.override`.
- *
- * `light` / `dark` (and surface faces) are deep-merged onto the built-in default palette,
- * so partial accent/border overrides do not need to spread `defaultLightValues`.
+ * Thin wrapper: merge a token pack + patches, compile ambient colorMode, append modes.
+ * Optional `extend` registers custom tokens; optional `components` compiles to `styles.override`.
  */
 export function createDesignTheme<const E extends ExtendMap = Record<string, never>>(
   config: DesignThemeConfig<E>,
 ): DesignTheme<E> {
-  const { light, dark, surfaces, extend, components } = config;
+  const { from, tokens: tokenOverrides, colorMode, modes, extend, components } = config;
 
   const extendResult = extend ? registerExtendMap(extend) : undefined;
-  const mergedTokens = {
+  const mergedTokensRefs = {
     ...designTokens,
     ...(extendResult?.refs ?? {}),
   } as DesignTheme<E>['tokens'];
 
-  const lightMerged = deepMergeThemeOverrides(defaultLightValues, light);
-  const darkMerged = deepMergeThemeOverrides(defaultDarkValues, dark);
+  const pack = from ?? defaultTokens;
+  const mergedTokens = deepMergeThemeOverrides(
+    pack.tokens as ThemeOverrides,
+    (tokenOverrides ?? {}) as ThemeOverrides,
+  ) as DesignThemeTokenValues;
+  const lightColor = deepMergeColor(mergedTokens.color, colorMode?.light);
+  const darkColor = deepMergeColor(pack.darkColor, colorMode?.dark);
 
-  const lightWithExtend = (
-    extendResult ? { ...lightMerged, ...extendResult.lightOverrides } : lightMerged
-  ) as ThemeOverrides;
-  const darkWithExtend = (
-    extendResult ? { ...darkMerged, ...extendResult.darkOverrides } : darkMerged
-  ) as ThemeOverrides;
+  const base = {
+    ...omitColor(mergedTokens),
+    color: lightColor,
+    ...(extendResult?.lightOverrides ?? {}),
+  } as ThemeOverrides;
 
-  const ambientModes = tokens.colorMode.systemWithLightDarkOverride({
+  const ambient = tokens.colorMode.systemWithLightDarkOverride({
     attribute: 'data-mode',
     values: { light: 'light', dark: 'dark' },
     scope: 'self',
-    light: lightWithExtend,
-    dark: darkWithExtend,
+    light: {
+      color: lightColor,
+      ...(extendResult?.lightOverrides ?? {}),
+    } as ThemeOverrides,
+    dark: {
+      color: darkColor,
+      ...(extendResult?.darkOverrides ?? {}),
+    } as ThemeOverrides,
   });
 
-  const surfaceModes: ThemeModeDefinition[] = [];
-  if (surfaces?.dark) {
-    surfaceModes.push({
-      id: 'surface-dark',
-      overrides: deepMergeThemeOverrides(darkWithExtend, surfaces.dark),
-      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
-    });
-  }
-  if (surfaces?.light) {
-    surfaceModes.push({
-      id: 'surface-light',
-      overrides: deepMergeThemeOverrides(lightWithExtend, surfaces.light),
-      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'light', { scope: 'descendant' }),
-    });
-  }
-
   const theme = tokens.createTheme(config.name, {
-    base: lightWithExtend,
-    modes: [...ambientModes, ...surfaceModes],
+    base,
+    modes: [...ambient, ...(modes ?? [])],
   });
 
   if (components) {
     for (const [name, entry] of Object.entries(components)) {
       if (entry == null) continue;
-      const overrideConfig = typeof entry === 'function' ? entry(mergedTokens) : entry;
+      const overrideConfig = typeof entry === 'function' ? entry(mergedTokensRefs) : entry;
       const recipe = themeableComponents[name as keyof typeof themeableComponents];
       if (!recipe) continue;
       overrideComponent(recipe as object, overrideConfig, { theme });
     }
   }
 
-  return Object.assign(theme, { tokens: mergedTokens });
+  return Object.assign(theme, { tokens: mergedTokensRefs });
 }
