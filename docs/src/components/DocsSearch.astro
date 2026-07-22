@@ -1,36 +1,86 @@
 ---
+import type { ComponentAttrsResult } from 'typestyles';
+import { button, commandPalette, kbd } from '@var-ui/core';
+import { recipeClassName, recipeProps } from '@var-ui/astro';
 import { buildDocsSearchIndex } from '../lib/search-index';
 
 const index = buildDocsSearchIndex();
 const indexJson = JSON.stringify(index);
+
+type CommandPaletteSlot =
+  | 'root'
+  | 'dialog'
+  | 'inputRow'
+  | 'inputIcon'
+  | 'input'
+  | 'results'
+  | 'resultLink'
+  | 'resultLinkActive'
+  | 'resultTitle'
+  | 'resultMeta'
+  | 'empty';
+type CommandPaletteSlots = Record<CommandPaletteSlot, ComponentAttrsResult>;
+type CommandPaletteRecipeFn = (args?: { open?: boolean }) => CommandPaletteSlots;
+const cp = (commandPalette as unknown as CommandPaletteRecipeFn)({ open: false });
+const triggerRecipe = recipeProps(button({ intent: 'secondary', size: 'md' }));
+const kbdRecipe = recipeProps(kbd());
+const rootRecipe = recipeProps(cp.root, 'docs-search__root');
+const dialogClass = recipeClassName(cp.dialog);
+const inputRowRecipe = recipeProps(cp.inputRow);
+const inputIconRecipe = recipeProps(cp.inputIcon);
+const inputRecipe = recipeProps(cp.input);
+const resultsRecipe = recipeProps(cp.results);
+const resultLinkClass = recipeClassName(cp.resultLink);
+const resultLinkActiveClass = recipeClassName(cp.resultLinkActive);
+const resultTitleClass = recipeClassName(cp.resultTitle);
+const resultMetaClass = recipeClassName(cp.resultMeta);
+const emptyClass = recipeClassName(cp.empty);
 ---
 
-<div class="docs-search" data-docs-search>
-  <button type="button" class="docs-search__trigger" data-docs-search-open aria-label="Search docs">
-    <span class="docs-search__trigger-label">Search</span>
-    <kbd class="docs-search__kbd" aria-hidden="true">⌘K</kbd>
+<div
+  class="docs-search"
+  data-docs-search
+  data-class-result-link={resultLinkClass}
+  data-class-result-link-active={resultLinkActiveClass}
+  data-class-result-title={resultTitleClass}
+  data-class-result-meta={resultMetaClass}
+  data-class-empty={emptyClass}
+>
+  <button type="button" data-docs-search-open aria-label="Search docs" {...triggerRecipe}>
+    <span>Search</span>
+    <kbd {...kbdRecipe} aria-hidden="true">⌘K</kbd>
   </button>
 
-  <dialog class="docs-search__dialog" data-docs-search-dialog aria-label="Search docs">
-    <div class="docs-search__panel">
-      <input
-        class="docs-search__input"
-        type="search"
-        data-docs-search-input
-        placeholder="Search docs…"
-        autocomplete="off"
-        spellcheck="false"
-        role="combobox"
-        aria-autocomplete="list"
-        aria-controls="docs-search-results"
-        aria-expanded="true"
-      />
-      <div
-        class="docs-search__results"
-        id="docs-search-results"
-        data-docs-search-results
-        role="listbox"
-      >
+  <dialog data-docs-search-dialog aria-label="Search docs">
+    <div {...rootRecipe}>
+      <div class:list={[dialogClass, 'docs-search__panel']} data-docs-search-panel>
+        <div {...inputRowRecipe}>
+          <span {...inputIconRecipe} aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M16.5 16.5L21 21"></path>
+            </svg>
+          </span>
+          <input
+            {...inputRecipe}
+            type="search"
+            data-docs-search-input
+            placeholder="Search docs…"
+            autocomplete="off"
+            spellcheck="false"
+            role="combobox"
+            aria-autocomplete="list"
+            aria-controls="docs-search-results"
+            aria-expanded="true"
+          />
+        </div>
+        <div
+          {...resultsRecipe}
+          id="docs-search-results"
+          data-docs-search-results
+          role="listbox"
+        >
+        </div>
       </div>
     </div>
   </dialog>
@@ -49,119 +99,137 @@ const indexJson = JSON.stringify(index);
     align-items: center;
   }
 
-  .docs-search__trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.375rem 0.75rem;
-    border: 1px solid var(--color-border, #ccc);
-    border-radius: 0.375rem;
+  /* Reset native <dialog> chrome so theme tokens paint the panel, not UA canvas colors. */
+  .docs-search [data-docs-search-dialog] {
+    border: none;
+    margin: 0;
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    height: 100%;
+    padding: max(12vh, 72px) var(--var-ui-space-4) var(--var-ui-space-5);
     background: transparent;
-    cursor: pointer;
-    font: inherit;
     color: inherit;
+    overflow: visible;
+    box-sizing: border-box;
   }
 
-  .docs-search__trigger-label {
-    opacity: 0.75;
+  .docs-search [data-docs-search-dialog]:not([open]) {
+    display: none;
   }
 
-  .docs-search__kbd {
-    font: inherit;
-    font-size: 0.75rem;
-    opacity: 0.55;
-    border: 1px solid var(--color-border, #ccc);
-    border-radius: 0.25rem;
-    padding: 0.1rem 0.35rem;
+  .docs-search [data-docs-search-dialog][open] {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
   }
 
-  .docs-search__dialog {
-    width: min(32rem, calc(100vw - 2rem));
-    max-height: min(28rem, calc(100vh - 4rem));
-    margin: auto;
+  .docs-search__root {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    display: block;
+    width: min(640px, 100%);
     padding: 0;
-    border: 1px solid var(--color-border, #ccc);
-    border-radius: 0.75rem;
-    background: var(--color-bg, #fff);
-    color: inherit;
-    box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 0.18);
-  }
-
-  .docs-search__dialog::backdrop {
-    background: rgb(0 0 0 / 0.35);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .docs-search__panel {
     display: flex;
     flex-direction: column;
-    max-height: min(28rem, calc(100vh - 4rem));
-  }
-
-  .docs-search__input {
     width: 100%;
-    box-sizing: border-box;
-    border: 0;
-    border-bottom: 1px solid var(--color-border, #ccc);
-    padding: 0.875rem 1rem;
-    font: inherit;
-    font-size: 1rem;
-    background: transparent;
-    color: inherit;
-    outline: none;
+    max-height: min(72vh, 560px);
+    opacity: 1;
+    border-radius: 0;
+    background-color: var(--var-ui-color-background-elevated);
+    border: var(--var-ui-borderWidth-default) solid var(--var-ui-color-border-default);
+    box-shadow: var(--var-ui-shadow-lg);
   }
 
-  .docs-search__results {
-    overflow: auto;
-    padding: 0.5rem;
+  .docs-search :global(.var-ui-command-palette__inputRow) {
+    padding: 1rem 1.25rem;
+    gap: 0.75rem;
+    border-bottom: var(--var-ui-borderWidth-default) solid var(--var-ui-color-border-default);
   }
 
-  .docs-search__group + .docs-search__group {
+  .docs-search :global(.var-ui-command-palette__inputIcon) {
+    color: var(--var-ui-color-text-secondary);
+  }
+
+  .docs-search :global(.var-ui-command-palette__input) {
+    font-size: var(--var-ui-fontSize-lg);
+    line-height: 1.4;
+  }
+
+  .docs-search :global(.var-ui-command-palette__results) {
+    padding: 0.375rem 0 0.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--var-ui-color-border-default) transparent;
+  }
+
+  .docs-search :global(.var-ui-command-palette__resultLink) {
+    padding: 0.625rem 1.25rem;
+    border-left: 2px solid transparent;
+  }
+
+  .docs-search :global(.var-ui-command-palette__resultLink:hover),
+  .docs-search :global(.var-ui-command-palette__resultLinkActive) {
+    background-color: var(--var-ui-color-background-subtle);
+    border-left-color: var(--var-ui-color-accent-default);
+  }
+
+  .docs-search :global(.var-ui-command-palette__resultTitle) {
+    font-size: var(--var-ui-fontSize-md);
+    font-weight: var(--var-ui-fontWeight-semibold);
+    line-height: 1.35;
+    margin-bottom: 0.125rem;
+  }
+
+  .docs-search :global(.var-ui-command-palette__resultMeta) {
+    font-size: var(--var-ui-fontSize-sm);
+    line-height: 1.3;
+  }
+
+  .docs-search :global(.var-ui-command-palette__empty) {
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  /* Result groups are rendered client-side without Astro scope attributes. */
+  .docs-search :global(.docs-search__group) {
+    padding-top: 0.375rem;
+  }
+
+  .docs-search :global(.docs-search__group + .docs-search__group) {
     margin-top: 0.5rem;
+    padding-top: 0.625rem;
+    border-top: var(--var-ui-borderWidth-default) solid var(--var-ui-color-border-default);
   }
 
-  .docs-search__group-label {
+  .docs-search :global(.docs-search__group-label) {
     margin: 0;
-    padding: 0.35rem 0.5rem;
-    font-size: 0.7rem;
-    font-weight: 650;
-    letter-spacing: 0.04em;
+    padding: 0.25rem 1.25rem 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: var(--var-ui-fontWeight-semibold);
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    opacity: 0.55;
+    color: var(--var-ui-color-text-secondary);
   }
 
-  .docs-search__item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    padding: 0.55rem 0.65rem;
-    border-radius: 0.45rem;
-    text-decoration: none;
-    color: inherit;
+  .docs-search [data-docs-search-dialog]::backdrop {
+    background: color-mix(in oklch, var(--var-ui-color-overlay-default) 42%, transparent);
   }
 
-  .docs-search__item.is-active,
-  .docs-search__item:hover {
-    background: var(--color-accent, #333);
-    color: var(--color-accent-foreground, #fff);
-  }
-
-  .docs-search__title {
-    font-weight: 550;
-  }
-
-  .docs-search__meta {
-    font-size: 0.8rem;
-    opacity: 0.7;
-  }
-
-  .docs-search__empty {
-    margin: 0;
-    padding: 1rem 0.65rem;
-    opacity: 0.65;
+  @supports (backdrop-filter: blur(1px)) {
+    .docs-search [data-docs-search-dialog]::backdrop {
+      backdrop-filter: blur(14px) saturate(0.85);
+    }
   }
 
   @media (max-width: 768px) {
-    .docs-search__kbd {
+    .docs-search kbd {
       display: none;
     }
   }

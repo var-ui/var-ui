@@ -1,7 +1,7 @@
 import { FRAMEWORK_COOKIE, type DocsFramework } from '../lib/framework';
 
 const ONE_YEAR = 60 * 60 * 24 * 365;
-const ROOT_SELECTOR = '.framework-switcher';
+const ROOT_SELECTOR = '[data-framework-switcher]';
 const INITIALIZED_ATTR = 'data-framework-switcher-initialized';
 
 export function frameworkCookieWriteValue(framework: DocsFramework): string {
@@ -17,7 +17,7 @@ function isDocsFramework(value: string | undefined): value is DocsFramework {
   return value === 'react' || value === 'astro' || value === 'html';
 }
 
-/** Bind click handlers on every `.framework-switcher` root (Astro module scripts). */
+/** Bind click handlers on every `[data-framework-switcher]` root (Astro module scripts). */
 export function initFrameworkSwitcher(): void {
   document.querySelectorAll(ROOT_SELECTOR).forEach((root) => {
     if (!(root instanceof HTMLElement)) return;

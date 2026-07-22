@@ -1,0 +1,21 @@
+---
+import { sideNav } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  className?: string;
+  label?: string;
+};
+
+const { className, label } = Astro.props;
+const s = sideNav();
+---
+
+<button
+  type="button"
+  data-var-ui-side-nav-collapse
+  aria-label={label ?? 'Collapse navigation'}
+  {...recipeProps(s.collapseButton, className)}
+>
+  <slot />
+</button>

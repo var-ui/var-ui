@@ -1,53 +1,50 @@
 ---
-import { DOCS_FRAMEWORKS, type DocsFramework } from '../lib/framework';
+import { segmentedControl, toggleButton } from '@var-ui/core';
+import { recipeClassName, recipeProps } from '@var-ui/astro';
+import { DOCS_FRAMEWORKS } from '../lib/framework';
+import { FRAMEWORK_META } from '../lib/framework-icons';
 
 const framework = Astro.locals.framework;
 
-const labels: Record<DocsFramework, string> = {
-  react: 'React',
-  astro: 'Astro',
-  html: 'HTML',
-};
+const s = segmentedControl();
+const t = toggleButton({ size: 'sm' });
+const rootClass = recipeClassName(s.root);
+const buttonRecipe = recipeProps(t);
 ---
 
-<div class="framework-switcher" role="group" aria-label="Documentation framework">
+<div
+  class={rootClass}
+  role="group"
+  aria-label="Documentation framework"
+  data-framework-switcher
+>
   {
-    DOCS_FRAMEWORKS.map((value) => (
-      <button
-        type="button"
-        class="framework-switcher__option"
-        data-framework={value}
-        aria-pressed={framework === value ? 'true' : 'false'}
-      >
-        {labels[value]}
-      </button>
-    ))
+    DOCS_FRAMEWORKS.map((value) => {
+      const meta = FRAMEWORK_META[value];
+      return (
+        <button
+          type="button"
+          {...buttonRecipe}
+          data-framework={value}
+          aria-label={meta.label}
+          aria-pressed={framework === value ? 'true' : 'false'}
+          {...(framework === value ? { 'data-selected': '' } : {})}
+          set:html={meta.iconSvg}
+        />
+      );
+    })
   }
 </div>
+
+<style>
+  [data-framework-switcher] :global(svg) {
+    display: block;
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+</style>
 
 <script>
   import { initFrameworkSwitcher } from '../scripts/frameworkSwitcher';
   initFrameworkSwitcher();
 </script>
-
-<style>
-  .framework-switcher {
-    display: inline-flex;
-    gap: 0.25rem;
-  }
-
-  .framework-switcher__option {
-    padding: 0.375rem 0.75rem;
-    border: 1px solid var(--color-border, #ccc);
-    border-radius: 0.375rem;
-    background: transparent;
-    cursor: pointer;
-    font: inherit;
-  }
-
-  .framework-switcher__option[aria-pressed='true'] {
-    background: var(--color-accent, #333);
-    color: var(--color-accent-foreground, #fff);
-    border-color: transparent;
-  }
-</style>

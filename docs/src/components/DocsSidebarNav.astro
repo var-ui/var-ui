@@ -1,0 +1,27 @@
+---
+import { SideNavItem, SideNavSection } from '@var-ui/astro';
+import type { SidebarSection } from '../data/navigation';
+
+type Props = {
+  sections: readonly SidebarSection[];
+  isLinkActive: (link: string) => boolean;
+};
+
+const { sections, isLinkActive } = Astro.props;
+---
+
+{
+  sections.map((section) => (
+    <SideNavSection title={section.title}>
+      {
+        section.items.map((item) => (
+          <SideNavItem
+            label={item.text}
+            href={item.link}
+            isSelected={isLinkActive(item.link)}
+          />
+        ))
+      }
+    </SideNavSection>
+  ))
+}

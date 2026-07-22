@@ -1,0 +1,90 @@
+---
+import { sideNav } from '@var-ui/core';
+import SideNavCollapseButton from './SideNavCollapseButton.astro';
+import ResizeHandle from './ResizeHandle.astro';
+import { recipeProps } from '../utils';
+
+type SideNavCollapsibleConfig = {
+  defaultIsCollapsed?: boolean;
+  hasButton?: boolean;
+  buttonLabel?: string;
+};
+
+type ResizableConfig = {
+  defaultWidth?: number;
+  minWidth?: number;
+  maxWidth?: number;
+  autoSaveId?: string;
+  collapsible?: boolean;
+  collapsedSize?: number;
+};
+
+type Props = {
+  label?: string;
+  collapsible?: boolean | SideNavCollapsibleConfig;
+  resizable?: boolean | ResizableConfig;
+  className?: string;
+};
+
+const { label = 'Side navigation', collapsible, resizable, className } = Astro.props;
+const s = sideNav();
+
+const collapsibleEnabled = Boolean(collapsible);
+const collapsibleConfig =
+  collapsible && typeof collapsible === 'object' ? collapsible : ({} as SideNavCollapsibleConfig);
+const resizableEnabled = Boolean(resizable);
+const resizableConfig =
+  resizable && typeof resizable === 'object' ? resizable : ({} as ResizableConfig);
+const hasCollapseButton = collapsibleEnabled && (collapsibleConfig.hasButton ?? true);
+
+const hasHeader = Astro.slots.has('header');
+const hasTopContent = Astro.slots.has('topContent');
+const hasFooter = Astro.slots.has('footer');
+const hasFooterIcons = Astro.slots.has('footerIcons');
+const hasFooterZone = hasFooter || hasFooterIcons || hasCollapseButton;
+---
+
+<nav
+  aria-label={label}
+  data-var-ui-side-nav
+  data-collapsible={collapsibleEnabled || undefined}
+  data-resizable={resizableEnabled || undefined}
+  data-collapsible-config={collapsibleEnabled ? JSON.stringify(collapsibleConfig) : undefined}
+  data-resizable-config={resizableEnabled ? JSON.stringify(resizableConfig) : undefined}
+  {...recipeProps(s.root, className)}
+>
+  {
+    (hasHeader || hasTopContent) && (
+      <div {...recipeProps(s.stickyTop)}>
+        {hasHeader && <div {...recipeProps(s.heading)}><slot name="header" /></div>}
+        {hasTopContent && <div {...recipeProps(s.topContent)}><slot name="topContent" /></div>}
+      </div>
+    )
+  }
+  <div {...recipeProps(s.scrollable)}><slot /></div>
+  {
+    hasFooterZone && (
+      <div {...recipeProps(s.footer)}>
+        {hasFooterIcons && <div {...recipeProps(s.footerIcons)}><slot name="footerIcons" /></div>}
+        {hasFooter && <slot name="footer" />}
+        {
+          hasCollapseButton ? (
+            <SideNavCollapseButton label={collapsibleConfig.buttonLabel} />
+          ) : null
+        }
+      </div>
+    )
+  }
+  {resizableEnabled && <ResizeHandle />}
+</nav>
+
+<style>
+  nav[data-collapsed] :global(.side-nav-heading__text) {
+    display: none;
+  }
+</style>
+
+<script>
+  import { initSideNavs } from '../scripts/sideNav';
+  initSideNavs();
+</script>

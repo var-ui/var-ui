@@ -20,6 +20,13 @@ describe('sideNav', () => {
     expect(css).toContain('.var-ui-side-nav__collapseButton');
   });
 
+  it('defines component vars on the root class rule', () => {
+    sideNav();
+    const css = getRegisteredCss();
+    expect(css).toContain('--var-ui-side-nav-itemselectedbackground:');
+    expect(css).toContain('--var-ui-side-nav-itemselectedcolor:');
+  });
+
   it('themes background, item, and accent colors via custom properties', () => {
     sideNav();
     const css = getRegisteredCss();
@@ -39,5 +46,6 @@ describe('sideNav', () => {
     sideNav();
     const css = getRegisteredCss();
     expect(css).toContain('[data-collapsed]');
+    expect(css).toContain('width: 3.5rem');
   });
 });

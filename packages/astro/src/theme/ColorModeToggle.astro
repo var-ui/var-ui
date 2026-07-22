@@ -1,5 +1,5 @@
 ---
-import { segmentedControl, toggleButton } from '@var-ui/core';
+import { icon, segmentedControl, toggleButton } from '@var-ui/core';
 import { recipeClassName, recipeProps } from '../utils';
 
 type ColorModeToggleAppearance = 'icons' | 'labels' | 'iconsAndLabels';
@@ -25,31 +25,25 @@ const {
 const modes = (includeSystem ? ['light', 'dark', 'system'] : ['light', 'dark']) as const;
 const s = segmentedControl();
 const t = toggleButton({ size });
+const i = icon({ size: 'md' });
 const rootClass = recipeClassName(s.root, className);
 const buttonRecipe = recipeProps(t);
+const iconRecipe = recipeProps(i);
 
 const MODE_META = {
-  light: { label: 'Light' },
-  dark: { label: 'Dark' },
-  system: { label: 'System' },
+  light: { label: 'Light', icon: 'colorModeLight' },
+  dark: { label: 'Dark', icon: 'colorModeDark' },
+  system: { label: 'System', icon: 'colorModeSystem' },
 } as const;
 
-function iconSvg(mode: (typeof modes)[number]): string {
-  if (mode === 'light') {
-    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>';
-  }
-  if (mode === 'dark') {
-    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg>';
-  }
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect height="12" rx="1.5" width="18" x="3" y="4"></rect><path d="M8 20h8M12 16v4"></path></svg>';
-}
-
-function segmentLabel(mode: (typeof modes)[number]): string {
-  const meta = MODE_META[mode];
-  if (appearance === 'labels') return meta.label;
-  if (appearance === 'iconsAndLabels') return `${iconSvg(mode)} ${meta.label}`;
-  return iconSvg(mode);
-}
+const ICON_SVG = {
+  colorModeLight:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>',
+  colorModeDark:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg>',
+  colorModeSystem:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect height="12" rx="1.5" width="18" x="3" y="4"></rect><path d="M8 20h8M12 16v4"></path></svg>',
+} as const;
 ---
 
 <div
@@ -63,7 +57,6 @@ function segmentLabel(mode: (typeof modes)[number]): string {
   {
     modes.map((mode) => {
       const meta = MODE_META[mode];
-      const label = segmentLabel(mode);
       const ariaLabelProp = appearance === 'icons' ? { 'aria-label': meta.label } : {};
       return (
         <button
@@ -72,8 +65,18 @@ function segmentLabel(mode: (typeof modes)[number]): string {
           aria-pressed="false"
           {...buttonRecipe}
           {...ariaLabelProp}
-          set:html={label}
-        />
+        >
+          {appearance === 'labels' ? (
+            meta.label
+          ) : appearance === 'iconsAndLabels' ? (
+            <>
+              <span {...iconRecipe} set:html={ICON_SVG[meta.icon]} />
+              {meta.label}
+            </>
+          ) : (
+            <span {...iconRecipe} set:html={ICON_SVG[meta.icon]} />
+          )}
+        </button>
       );
     })
   }

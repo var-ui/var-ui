@@ -24,6 +24,8 @@ This site uses `output: 'server'` with `@astrojs/netlify`, so routes are rendere
 - **Use `vp run @var-ui/docs#dev`** to browse the site locally. Framework switching, demos, and PropsTable all work here.
 - **`vp run @var-ui/docs#preview` is not supported** for SSR Netlify builds; it only serves static assets and returns 404 for app routes. For a production-like smoke test, deploy a preview on Netlify or run `netlify dev` after `build`.
 
+Docs pins **Vite 6** (Astro 5’s supported bundler). `@astrojs/netlify`’s dev middleware uses Rolldown for dependency pre-bundling; if you see `Invalid key: "jsx"` warnings after upgrading React/Vite plugins, ensure `rolldownJsxOptionsCompat` remains wired in `astro.config.mjs`.
+
 ### Troubleshooting
 
 - **`astro check` errors on `waku/router` in `src/pages.gen.ts`:** Delete `docs/src/pages.gen.ts`. It is a leftover from the pre-Astro docs stack (gitignored) and is not used by the Astro site.

@@ -10,7 +10,7 @@ import {
   useState,
 } from 'react';
 import { Button as AriaButton, Link as AriaLink } from 'react-aria-components';
-import { iconNameList, sideNav, type IconName } from '@var-ui/core';
+import { iconNameList, sideNav, SIDE_NAV_COLLAPSED_WIDTH, type IconName } from '@var-ui/core';
 import { Icon } from '../icons';
 import { useResizable, type ResizableConfig } from '../hooks';
 import { IconButton } from './IconButton';
@@ -449,13 +449,14 @@ export function SideNav({
   );
 
   const hasFooter = Boolean(footer || footerIcons || hasCollapseButton);
+  const navWidth = isCollapsed ? SIDE_NAV_COLLAPSED_WIDTH : resizableEnabled ? width : undefined;
 
   return (
     <SideNavContext.Provider value={contextValue}>
       <nav
         aria-label={label}
         data-collapsed={isCollapsed ? '' : undefined}
-        style={resizableEnabled ? { width } : undefined}
+        style={navWidth != null ? { width: navWidth } : undefined}
         {...recipeProps(s.root, className)}
       >
         {header != null || topContent != null ? (

@@ -33,13 +33,17 @@ export function initDocsSearch(): void {
     node.setAttribute(INITIALIZED_ATTR, '');
 
     const dialogEl = node.querySelector<HTMLDialogElement>('[data-docs-search-dialog]');
+    const rootEl = node.querySelector<HTMLElement>('.docs-search__root');
+    const panelEl = node.querySelector<HTMLElement>('[data-docs-search-panel]');
     const inputEl = node.querySelector<HTMLInputElement>('[data-docs-search-input]');
     const resultsEl = node.querySelector<HTMLElement>('[data-docs-search-results]');
     const openButtons = node.querySelectorAll('[data-docs-search-open]');
-    if (!dialogEl || !inputEl || !resultsEl) return;
+    if (!dialogEl || !rootEl || !panelEl || !inputEl || !resultsEl) return;
 
     // Narrowed locals so nested handlers see non-null elements.
     const dialog: HTMLDialogElement = dialogEl;
+    const root: HTMLElement = rootEl;
+    const panel: HTMLElement = panelEl;
     const input: HTMLInputElement = inputEl;
     const results: HTMLElement = resultsEl;
 
@@ -47,13 +51,23 @@ export function initDocsSearch(): void {
     let activeIndex = -1;
     let flatItems: DocsSearchItem[] = [];
 
+    const resultLinkClass = node.dataset.classResultLink ?? 'docs-search__item';
+    const resultLinkActiveClass = node.dataset.classResultLinkActive ?? 'is-active';
+    const resultTitleClass = node.dataset.classResultTitle ?? 'docs-search__title';
+    const resultMetaClass = node.dataset.classResultMeta ?? 'docs-search__meta';
+    const emptyClass = node.dataset.classEmpty ?? 'docs-search__empty';
+
     function setOpen(open: boolean): void {
       if (open) {
         if (!dialog.open) dialog.showModal();
+        root.setAttribute('data-open', '');
+        panel.setAttribute('data-open', '');
         input.value = '';
         render('');
         queueMicrotask(() => input.focus());
       } else if (dialog.open) {
+        root.removeAttribute('data-open');
+        panel.removeAttribute('data-open');
         dialog.close();
       }
     }
@@ -65,7 +79,7 @@ export function initDocsSearch(): void {
       activeIndex = flatItems.length > 0 ? 0 : -1;
 
       if (groups.length === 0) {
-        results.innerHTML = `<p class="docs-search__empty" data-docs-search-empty>No results</p>`;
+        results.innerHTML = `<p class="${emptyClass}" data-docs-search-empty>No results</p>`;
         return;
       }
 
@@ -75,18 +89,18 @@ export function initDocsSearch(): void {
           const itemsHtml = group.items
             .map((item) => {
               const optionIndex = flatIdx++;
-              const active = optionIndex === activeIndex ? ' is-active' : '';
+              const active = optionIndex === activeIndex ? ` ${resultLinkActiveClass}` : '';
               const meta = item.meta
-                ? `<span class="docs-search__meta">${escapeHtml(item.meta)}</span>`
+                ? `<span class="${resultMetaClass}">${escapeHtml(item.meta)}</span>`
                 : '';
               return `<a
-                class="docs-search__item${active}"
+                class="${resultLinkClass}${active}"
                 href="${escapeAttr(item.id)}"
                 role="option"
                 data-docs-search-item
                 data-index="${optionIndex}"
                 id="docs-search-option-${optionIndex}"
-              ><span class="docs-search__title">${escapeHtml(item.title)}</span>${meta}</a>`;
+              ><span class="${resultTitleClass}">${escapeHtml(item.title)}</span>${meta}</a>`;
             })
             .join('');
           return `<section class="docs-search__group" data-group="${group.id}">
@@ -103,7 +117,7 @@ export function initDocsSearch(): void {
       results.querySelectorAll<HTMLElement>('[data-docs-search-item]').forEach((el) => {
         const idx = Number(el.dataset.index);
         const isActive = idx === activeIndex;
-        el.classList.toggle('is-active', isActive);
+        el.classList.toggle(resultLinkActiveClass, isActive);
         el.setAttribute('aria-selected', isActive ? 'true' : 'false');
       });
       input.setAttribute(
@@ -130,6 +144,8 @@ export function initDocsSearch(): void {
     });
 
     dialog.addEventListener('close', () => {
+      root.removeAttribute('data-open');
+      panel.removeAttribute('data-open');
       activeIndex = -1;
       flatItems = [];
     });

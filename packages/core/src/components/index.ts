@@ -64,7 +64,7 @@ export { pagination } from './pagination';
 export { resizeHandle } from './resizeHandle';
 export { progressBar } from './progressBar';
 export { section } from './section';
-export { sideNav } from './sideNav';
+export { sideNav, SIDE_NAV_COLLAPSED_WIDTH } from './sideNav';
 export { mobileNav } from './mobileNav';
 export { topNav } from './topNav';
 export { skeleton } from './skeleton';

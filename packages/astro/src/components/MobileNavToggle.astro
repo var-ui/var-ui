@@ -1,0 +1,27 @@
+---
+import { mobileNav } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  label?: string;
+  className?: string;
+};
+
+const { label = 'Open navigation', className } = Astro.props;
+const s = mobileNav();
+---
+
+<button
+  type="button"
+  data-var-ui-mobile-nav-toggle
+  aria-label={label}
+  aria-expanded="false"
+  {...recipeProps(s.toggle, className)}
+>
+  <slot />
+</button>
+
+<script>
+  import { initMobileNavToggles } from '../scripts/mobileNav';
+  initMobileNavToggles();
+</script>

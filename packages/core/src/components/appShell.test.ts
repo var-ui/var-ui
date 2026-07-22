@@ -26,6 +26,7 @@ describe('appShell', () => {
     appShell({ height: 'fill', variant: 'elevated' });
     const css = getRegisteredCss();
     expect(css).toContain('100dvh');
+    expect(css).toContain('overflow: hidden');
     expect(css).toContain('box-shadow');
   });
 

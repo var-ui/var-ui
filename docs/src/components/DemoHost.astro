@@ -1,10 +1,9 @@
 ---
-import type { ComponentType } from 'react';
 import DemoChrome from './DemoChrome.astro';
 import DemoReactIsland from './DemoReactIsland';
 import { astroDemoMap } from '../demos/astroDemoMap';
 import { htmlDemoMap } from '../demos/htmlDemoMap';
-import { demoSnippets, reactDemoLoaders, type DemoId } from '../demos/registry';
+import { demoSnippets, type DemoId } from '../demos/registry';
 
 type Props = {
   id: DemoId;
@@ -16,21 +15,12 @@ const framework = Astro.locals.framework;
 const code = demoSnippets[id][framework];
 const language = framework === 'react' ? 'tsx' : 'html';
 
-let ReactPreview: ComponentType | undefined;
-if (framework === 'react') {
-  ReactPreview = (await reactDemoLoaders[id]()).default;
-}
-
 const AstroPreview = framework === 'astro' ? astroDemoMap[id] : undefined;
 const htmlMarkup = framework === 'html' ? htmlDemoMap[id]() : undefined;
 ---
 
 <DemoChrome code={code} language={language} title={title}>
-  {
-    framework === 'react' && ReactPreview ? (
-      <DemoReactIsland client:load Preview={ReactPreview} />
-    ) : null
-  }
+  {framework === 'react' ? <DemoReactIsland client:load id={id} /> : null}
   {framework === 'astro' && AstroPreview ? <AstroPreview /> : null}
   {framework === 'html' && htmlMarkup != null ? <Fragment set:html={htmlMarkup} /> : null}
 </DemoChrome>

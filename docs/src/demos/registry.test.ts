@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vite-plus/test';
 import { astroDemoIds, astroDemoMap } from './astroDemoMap';
 import { htmlDemoIds, htmlDemoMap } from './htmlDemoMap';
+import { reactDemoIds, reactDemoMap } from './reactDemoMap';
 import {
   DEMO_IDS,
   assertDemoComplete,
@@ -23,11 +24,13 @@ describe('demo registry completeness', () => {
     }
   });
 
-  it('keeps astro/html map keys in sync with DEMO_IDS', () => {
+  it('keeps astro/html/react map keys in sync with DEMO_IDS', () => {
     expect([...astroDemoIds].sort()).toEqual([...DEMO_IDS].sort());
     expect([...htmlDemoIds].sort()).toEqual([...DEMO_IDS].sort());
+    expect([...reactDemoIds].sort()).toEqual([...DEMO_IDS].sort());
     expect(Object.keys(astroDemoMap).sort()).toEqual([...DEMO_IDS].sort());
     expect(Object.keys(htmlDemoMap).sort()).toEqual([...DEMO_IDS].sort());
+    expect(Object.keys(reactDemoMap).sort()).toEqual([...DEMO_IDS].sort());
   });
 
   it('serializes HTML button previews with class + data attrs', () => {

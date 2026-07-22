@@ -1,0 +1,64 @@
+---
+import { mobileNav } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  header?: string;
+  width?: number;
+  side?: 'start' | 'end' | 'auto';
+  closeLabel?: string;
+  label?: string;
+  className?: string;
+};
+
+const {
+  header,
+  width = 320,
+  side = 'auto',
+  closeLabel = 'Close navigation',
+  label = 'Navigation',
+  className,
+} = Astro.props;
+
+const s = mobileNav();
+const resolvedSide = side === 'auto' ? 'start' : side;
+const panelStyle = `--var-ui-mobile-nav-panelwidth: ${width}px`;
+const hasHeaderSlot = Astro.slots.has('header');
+---
+
+<div data-var-ui-mobile-nav>
+  <div data-var-ui-mobile-nav-overlay {...recipeProps(s.overlay)}></div>
+  <div
+    data-var-ui-mobile-nav-panel
+    data-side={resolvedSide}
+    role="dialog"
+    aria-label={label}
+    tabindex="-1"
+    style={panelStyle}
+    {...recipeProps(s.panel, className)}
+  >
+    <div {...recipeProps(s.header)}>
+      <div class="mobile-nav__header-content">
+        {hasHeaderSlot ? <slot name="header" /> : header}
+      </div>
+      <button
+        type="button"
+        data-var-ui-mobile-nav-close
+        aria-label={closeLabel}
+        {...recipeProps(s.closeButton)}
+      ></button>
+    </div>
+    <slot />
+  </div>
+</div>
+
+<style>
+  .mobile-nav__header-content {
+    min-width: 0;
+  }
+</style>
+
+<script>
+  import { initMobileNavs } from '../scripts/mobileNav';
+  initMobileNavs();
+</script>

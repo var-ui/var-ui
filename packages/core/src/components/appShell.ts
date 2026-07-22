@@ -133,6 +133,7 @@ export const appShell = styles.component<typeof APP_SHELL_SLOTS, AppShellVariant
           flex: '1 1 auto',
           minHeight: 0,
           minWidth: 0,
+          overflow: 'hidden',
           gridTemplateAreas: '"top top" "side main"',
           gridTemplateColumns: 'auto 1fr',
           gridTemplateRows: 'auto 1fr',
@@ -148,11 +149,16 @@ export const appShell = styles.component<typeof APP_SHELL_SLOTS, AppShellVariant
         topNav: {
           gridArea: 'top',
           minWidth: 0,
+          zIndex: 2,
+          flexShrink: 0,
         },
         sideNav: {
           gridArea: 'side',
+          display: 'flex',
+          flexDirection: 'column',
           minHeight: 0,
           minWidth: 0,
+          overflow: 'hidden',
           '[data-mobile] &': {
             display: 'none',
           },
@@ -183,7 +189,9 @@ export const appShell = styles.component<typeof APP_SHELL_SLOTS, AppShellVariant
           fill: {
             root: {
               minHeight: '100dvh',
-              height: '100%',
+              height: '100dvh',
+              maxHeight: '100dvh',
+              overflow: 'hidden',
             },
           },
           auto: {

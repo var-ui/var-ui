@@ -1,0 +1,46 @@
+---
+import { topNav } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  label: string;
+  href?: string;
+  isSelected?: boolean;
+  isDisabled?: boolean;
+  isIconOnly?: boolean;
+  className?: string;
+};
+
+const {
+  label,
+  href,
+  isSelected = false,
+  isDisabled = false,
+  isIconOnly = false,
+  className,
+} = Astro.props;
+const s = topNav();
+const sharedProps = {
+  ...recipeProps(s.item, className),
+  'data-selected': isSelected || undefined,
+  'data-disabled': isDisabled || undefined,
+  'aria-current': isSelected ? ('page' as const) : undefined,
+  'aria-label': isIconOnly ? label : undefined,
+};
+---
+
+{
+  href ? (
+    <a href={href} {...sharedProps}>
+      <slot name="icon" />
+      {!isIconOnly ? <span>{label}</span> : null}
+      {!isIconOnly && Astro.slots.has('end') ? <slot name="end" /> : null}
+    </a>
+  ) : (
+    <button type="button" disabled={isDisabled} {...sharedProps}>
+      <slot name="icon" />
+      {!isIconOnly ? <span>{label}</span> : null}
+      {!isIconOnly && Astro.slots.has('end') ? <slot name="end" /> : null}
+    </button>
+  )
+}

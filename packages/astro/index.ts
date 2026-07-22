@@ -30,7 +30,32 @@ export { default as Steps } from './src/components/Steps.astro';
 export { default as Breadcrumbs } from './src/components/Breadcrumbs.astro';
 export { default as Collapsible } from './src/components/Collapsible.astro';
 export { default as Tabs } from './src/components/Tabs.astro';
+export { default as AppShell } from './src/components/AppShell.astro';
+export { default as TopNav } from './src/components/TopNav.astro';
+export { default as TopNavHeading } from './src/components/TopNavHeading.astro';
+export { default as TopNavItem } from './src/components/TopNavItem.astro';
+export { default as SideNav } from './src/components/SideNav.astro';
+export { default as SideNavHeading } from './src/components/SideNavHeading.astro';
+export { default as SideNavSection } from './src/components/SideNavSection.astro';
+export { default as SideNavSectionHeader } from './src/components/SideNavSectionHeader.astro';
+export { default as SideNavItem } from './src/components/SideNavItem.astro';
+export { default as SideNavCollapseButton } from './src/components/SideNavCollapseButton.astro';
+export { default as ResizeHandle } from './src/components/ResizeHandle.astro';
+export { default as MobileNav } from './src/components/MobileNav.astro';
+export { default as MobileNavToggle } from './src/components/MobileNavToggle.astro';
 export type { ColorMode, ResolvedColorMode } from './src/scripts/colorMode';
+export { APP_SHELL_MAIN_ID, initAppShell, initAppShells } from './src/scripts/appShell';
+export {
+  getMobileNavProvider,
+  initMobileNav,
+  initMobileNavChrome,
+  initMobileNavProvider,
+  initMobileNavs,
+  initMobileNavToggle,
+  initMobileNavToggles,
+} from './src/scripts/mobileNav';
+export { initSideNav, initSideNavs } from './src/scripts/sideNav';
+export { createResizeHandle } from './src/scripts/resizeHandle';
 export { copyText, initCodeBlockCopy } from './src/scripts/codeBlockCopy';
 export {
   applyColorModeToDocument,

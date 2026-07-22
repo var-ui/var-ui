@@ -16,9 +16,9 @@ describe('initFrameworkSwitcher', () => {
     vi.restoreAllMocks();
   });
 
-  it('binds clicks on .framework-switcher roots via querySelectorAll', () => {
+  it('binds clicks on [data-framework-switcher] roots via querySelectorAll', () => {
     document.body.innerHTML = `
-      <div class="framework-switcher">
+      <div data-framework-switcher>
         <button type="button" data-framework="html">HTML</button>
       </div>
     `;
@@ -28,7 +28,7 @@ describe('initFrameworkSwitcher', () => {
 
     initFrameworkSwitcher();
 
-    const root = document.querySelector('.framework-switcher');
+    const root = document.querySelector('[data-framework-switcher]');
     expect(root?.hasAttribute('data-framework-switcher-initialized')).toBe(true);
 
     document.querySelector<HTMLButtonElement>('[data-framework="html"]')?.click();
@@ -39,7 +39,7 @@ describe('initFrameworkSwitcher', () => {
 
   it('does not double-bind the same root', () => {
     document.body.innerHTML = `
-      <div class="framework-switcher">
+      <div data-framework-switcher>
         <button type="button" data-framework="astro">Astro</button>
       </div>
     `;

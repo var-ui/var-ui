@@ -1,9 +1,24 @@
 ---
-import { ThemeScript, ColorModeToggle } from '@var-ui/astro';
+import {
+  AppShell,
+  ColorModeToggle,
+  MobileNav,
+  MobileNavToggle,
+  SideNav,
+  ThemeScript,
+  TopNav,
+  TopNavHeading,
+  TopNavItem,
+} from '@var-ui/astro';
 import { defaultTheme } from '@var-ui/core';
 import DocsSearch from '../components/DocsSearch.astro';
+import DocsSidebarNav from '../components/DocsSidebarNav.astro';
 import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
-import { componentSidebar, themingSidebar, topNav } from '../data/navigation';
+import {
+  componentSidebarSections,
+  themingSidebarSections,
+  topNav as topNavItems,
+} from '../data/navigation';
 
 const { title = 'Var UI' } = Astro.props;
 const framework = Astro.locals.framework;
@@ -15,15 +30,14 @@ function normalizePath(path: string): string {
 
 const currentPath = normalizePath(pathname);
 
-const sidebarItems = currentPath.startsWith('/components')
-  ? componentSidebar
+const sidebarSections = currentPath.startsWith('/components')
+  ? componentSidebarSections
   : currentPath.startsWith('/theming')
-    ? themingSidebar
+    ? themingSidebarSections
     : null;
 
 function isSidebarLinkActive(link: string): boolean {
-  const normalized = normalizePath(link);
-  return currentPath === normalized;
+  return currentPath === normalizePath(link);
 }
 ---
 
@@ -35,164 +49,77 @@ function isSidebarLinkActive(link: string): boolean {
     <ThemeScript themeClass={defaultTheme.className} />
     <link rel="stylesheet" href="/typestyles.css" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="site-header__brand">
-        <a class="site-logo" href="/">Var UI</a>
-        <nav class="site-nav" aria-label="Primary">
-          {
-            topNav.map((item) => (
-              <a
-                href={item.link}
-                aria-current={currentPath.startsWith(item.match) ? 'page' : undefined}
-              >
-                {item.text}
-              </a>
-            ))
-          }
-        </nav>
-      </div>
-      <div class="site-header__tools">
-        <DocsSearch />
-        <FrameworkSwitcher />
-        <ColorModeToggle includeSystem appearance="labels" />
-      </div>
-    </header>
-    <main class:list={['site-main', sidebarItems && 'site-main--with-sidebar']}>
+  <body class="docs-body">
+    <AppShell variant="wash" height="fill" contentPadding={6} mobileBreakpoint="md">
+      <TopNav slot="topNav">
+        <TopNavHeading slot="heading" heading="Var UI" headingHref="/" />
+        {
+          topNavItems.map((item) => (
+            <TopNavItem
+              label={item.text}
+              href={item.link}
+              isSelected={currentPath.startsWith(item.match)}
+            />
+          ))
+        }
+        <div slot="end" class="docs-top-nav__tools">
+          {sidebarSections ? <MobileNavToggle /> : null}
+          <DocsSearch />
+          <FrameworkSwitcher />
+          <ColorModeToggle includeSystem size="sm" />
+        </div>
+      </TopNav>
+
       {
-        sidebarItems && (
-          <aside class="site-sidebar" aria-label="Section">
-            <nav>
-              <ul class="site-sidebar__list">
-                {sidebarItems.map((item) => (
-                  <li>
-                    <a
-                      href={item.link}
-                      aria-current={isSidebarLinkActive(item.link) ? 'page' : undefined}
-                    >
-                      {item.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
+        sidebarSections && (
+          <SideNav
+            slot="sideNav"
+            label="Section"
+            collapsible
+            resizable={{ autoSaveId: 'docs-sidebar' }}
+          >
+            <DocsSidebarNav sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
+          </SideNav>
         )
       }
-      <div class="site-content">
+
+      {
+        sidebarSections && (
+          <MobileNav slot="mobileNav" header="Menu">
+            <DocsSidebarNav sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
+          </MobileNav>
+        )
+      }
+
+      <div class="docs-content">
         <slot />
       </div>
-    </main>
+    </AppShell>
   </body>
 </html>
 
+<style is:global>
+  html,
+  body.docs-body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body.docs-body {
+    overflow: hidden;
+  }
+</style>
+
 <style>
-  .site-header {
-    padding: 1rem 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .site-header__brand {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-  }
-
-  .site-logo {
-    font-weight: 650;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .site-nav {
-    display: flex;
-    gap: 0.75rem;
-  }
-
-  .site-nav a {
-    text-decoration: none;
-    color: inherit;
-    opacity: 0.75;
-  }
-
-  .site-nav a[aria-current='page'] {
-    opacity: 1;
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
-  }
-
-  .site-header__tools {
+  .docs-top-nav__tools {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
 
-  .site-main {
-    padding: 0 1.5rem 3rem;
-    max-width: 960px;
+  .docs-content {
+    max-width: 60rem;
     margin: 0 auto;
-  }
-
-  .site-main--with-sidebar {
-    max-width: 72rem;
-    display: grid;
-    grid-template-columns: minmax(10rem, 14rem) minmax(0, 1fr);
-    gap: 2rem;
-    align-items: start;
-  }
-
-  .site-sidebar {
-    position: sticky;
-    top: 1rem;
-    max-height: calc(100vh - 2rem);
-    overflow: auto;
-    padding-block: 0.5rem;
-  }
-
-  .site-sidebar__list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .site-sidebar__list a {
-    display: block;
-    padding: 0.25rem 0;
-    text-decoration: none;
-    color: inherit;
-    opacity: 0.75;
-    font-size: 0.95rem;
-  }
-
-  .site-sidebar__list a[aria-current='page'] {
-    opacity: 1;
-    font-weight: 600;
-  }
-
-  .site-content {
-    min-width: 0;
-  }
-
-  @media (max-width: 720px) {
-    .site-main--with-sidebar {
-      grid-template-columns: 1fr;
-    }
-
-    .site-sidebar {
-      position: static;
-      max-height: none;
-      border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
-      padding-bottom: 1rem;
-    }
-
-    .site-sidebar__list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-    }
+    padding-bottom: 3rem;
   }
 </style>

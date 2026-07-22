@@ -1,0 +1,76 @@
+---
+type Props = {
+  heading: string;
+  headingHref?: string;
+  superheading?: string;
+  subheading?: string;
+  className?: string;
+};
+
+const { heading, headingHref, superheading, subheading, className } = Astro.props;
+---
+
+<div class:list={['side-nav-heading', className]}>
+  {
+    headingHref ? (
+      <a href={headingHref} class="side-nav-heading__brand">
+        <slot name="icon" />
+        <span class="side-nav-heading__text">
+          {superheading != null ? <span class="side-nav-heading__super">{superheading}</span> : null}
+          <span class="side-nav-heading__title">{heading}</span>
+          {subheading != null ? <span class="side-nav-heading__sub">{subheading}</span> : null}
+        </span>
+      </a>
+    ) : (
+      <span class="side-nav-heading__brand">
+        <slot name="icon" />
+        <span class="side-nav-heading__text">
+          {superheading != null ? <span class="side-nav-heading__super">{superheading}</span> : null}
+          <span class="side-nav-heading__title">{heading}</span>
+          {subheading != null ? <span class="side-nav-heading__sub">{subheading}</span> : null}
+        </span>
+      </span>
+    )
+  }
+  {Astro.slots.has('menu') ? <slot name="menu" /> : null}
+</div>
+
+<style>
+  .side-nav-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .side-nav-heading__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .side-nav-heading__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .side-nav-heading__super,
+  .side-nav-heading__sub,
+  .side-nav-heading__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .side-nav-heading__super,
+  .side-nav-heading__sub {
+    font-size: 0.875rem;
+    color: var(--var-ui-color-text-secondary);
+  }
+</style>

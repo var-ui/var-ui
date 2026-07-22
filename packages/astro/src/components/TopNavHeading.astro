@@ -1,0 +1,34 @@
+---
+type Props = {
+  heading: string;
+  headingHref?: string;
+  className?: string;
+};
+
+const { heading, headingHref, className } = Astro.props;
+---
+
+{
+  headingHref ? (
+    <a href={headingHref} class:list={['top-nav-heading', className]}>
+      <slot name="icon" />
+      <span>{heading}</span>
+    </a>
+  ) : (
+    <span class:list={['top-nav-heading', className]}>
+      <slot name="icon" />
+      <span>{heading}</span>
+    </span>
+  )
+}
+
+<style>
+  .top-nav-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
+  }
+</style>

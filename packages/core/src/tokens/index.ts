@@ -27,6 +27,7 @@ export type {
   DesignSpaceValues,
 } from './primitive';
 
+// There are too many exports here
 export const paletteTokens = tokens.create('palette', basePaletteTokenValues);
 export const spaceTokens = tokens.create('space', spaceValues);
 export const radiusTokens = tokens.create('radius', radiusValues);
@@ -53,6 +54,7 @@ const emptyThemeColorValues: DesignColorValues = {
   overlay: { default: '' },
 };
 
+// this
 const colorCssNs = scopedTokenNamespace(tokens.scopeId?.trim() || undefined, 'color');
 const cref = (path: string) => `var(--${colorCssNs}-${path})`;
 
@@ -124,6 +126,7 @@ const emptySyntaxValues: DesignSyntaxValues = {
 
 export const syntaxTokens = tokens.create('syntax', emptySyntaxValues);
 
+// remove this only component tokens block
 export const codeBlockTokens = tokens.create('codeBlock', {
   background: `${colorTokens.background.surface}`,
   backgroundHeader: `${colorTokens.background.subtle}`,
@@ -132,6 +135,7 @@ export const codeBlockTokens = tokens.create('codeBlock', {
   border: `${colorTokens.border.default}`,
 });
 
+// Need to define the tokens shape better
 export const designPrimitiveTokens = {
   palette: paletteTokens,
   space: spaceTokens,

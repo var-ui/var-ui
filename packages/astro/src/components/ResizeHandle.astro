@@ -1,0 +1,20 @@
+---
+import { resizeHandle } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  className?: string;
+  label?: string;
+};
+
+const { className, label = 'Resize side navigation' } = Astro.props;
+const s = resizeHandle();
+---
+
+<div
+  data-var-ui-side-nav-resize
+  aria-label={label}
+  {...recipeProps(s.root, className)}
+>
+  <div {...recipeProps(s.pill)}></div>
+</div>

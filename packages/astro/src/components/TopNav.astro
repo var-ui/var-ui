@@ -1,0 +1,25 @@
+---
+import { topNav } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  label?: string;
+  className?: string;
+};
+
+const { label = 'Top navigation', className } = Astro.props;
+const s = topNav();
+const hasCenter = Astro.slots.has('center');
+const hasStart = Astro.slots.has('default');
+---
+
+<nav
+  aria-label={label}
+  data-layout={hasCenter ? 'grid' : undefined}
+  {...recipeProps(s.root, className)}
+>
+  {Astro.slots.has('heading') && <div {...recipeProps(s.heading)}><slot name="heading" /></div>}
+  {hasStart && <div {...recipeProps(s.start)}><slot /></div>}
+  {hasCenter && <div {...recipeProps(s.center)}><slot name="center" /></div>}
+  {Astro.slots.has('end') && <div {...recipeProps(s.end)}><slot name="end" /></div>}
+</nav>

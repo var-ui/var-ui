@@ -1,0 +1,62 @@
+---
+import { appShell, designTokens as t } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  height?: 'fill' | 'auto';
+  variant?: 'wash' | 'surface' | 'section' | 'elevated';
+  contentPadding?: number;
+  mobileBreakpoint?: 'sm' | 'md' | 'lg' | 'none';
+  className?: string;
+};
+
+function resolveContentPadding(padding: number | undefined): string | undefined {
+  if (padding == null) return undefined;
+  const space = t.space as Record<number, string>;
+  return space[padding] ?? `${padding}px`;
+}
+
+const {
+  height = 'fill',
+  variant = 'elevated',
+  contentPadding,
+  mobileBreakpoint = 'md',
+  className,
+} = Astro.props;
+
+const s = appShell({ height, variant });
+const resolvedPadding = resolveContentPadding(contentPadding);
+const mainStyle = resolvedPadding
+  ? `--var-ui-app-shell-contentpadding: ${resolvedPadding}`
+  : undefined;
+const hasAside = Astro.slots.has('aside');
+const hasSideNav = Astro.slots.has('sideNav');
+const hasTopNav = Astro.slots.has('topNav');
+const hasBanner = Astro.slots.has('banner');
+const hasMobileNav = Astro.slots.has('mobileNav');
+---
+
+<div
+  {...recipeProps(s.root, className)}
+  data-var-ui-app-shell
+  data-var-ui-mobile-nav-provider
+  data-mobile-breakpoint={mobileBreakpoint}
+  data-aside={hasAside || undefined}
+>
+  <a href="#var-ui-app-shell-main" {...recipeProps(s.skipLink)}>Skip to content</a>
+  {hasBanner && <div {...recipeProps(s.banner)}><slot name="banner" /></div>}
+  <div {...recipeProps(s.frame)}>
+    {hasTopNav && <header {...recipeProps(s.topNav)}><slot name="topNav" /></header>}
+    {hasSideNav && <div {...recipeProps(s.sideNav)}><slot name="sideNav" /></div>}
+    <main id="var-ui-app-shell-main" {...recipeProps(s.main)} style={mainStyle}><slot /></main>
+    {hasAside && <aside {...recipeProps(s.aside)}><slot name="aside" /></aside>}
+  </div>
+  {hasMobileNav && <slot name="mobileNav" />}
+</div>
+
+<script>
+  import { initAppShells } from '../scripts/appShell';
+  import { initMobileNavChrome } from '../scripts/mobileNav';
+  initAppShells();
+  initMobileNavChrome();
+</script>
