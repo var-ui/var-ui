@@ -42,10 +42,43 @@ emits stable public class names.
 
 Tokens are grouped for clarity; recipes consume the flat `designTokens` object.
 
-| Export                  | Role                                                     | CSS namespaces                                                                |
-| ----------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `designPrimitiveTokens` | Spacing, radii, typography scale, shadows, motion curves | `palette`, `space`, `radius`, `shadow`, `duration`, `easing`, `transition`, … |
-| `designSemanticTokens`  | Product colors (including syntax) + stroke helpers       | `color` (incl. `color.syntax`), `stroke`                                      |
+Tokens are registered from the default theme pack. Recipes consume `designTokens` refs.
+
+| Export         | Role                                                                 |
+| -------------- | -------------------------------------------------------------------- |
+| `designTokens` | All registered token refs (`palette`, `space`, `color`, `stroke`, …) |
+| `color`        | Typed declare handle for `color.*` refs + `@property` declarations   |
+
+### Token namespaces (expanded)
+
+| Namespace                    | Keys (indicative)                 | Notes                                                                                                   |
+| ---------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `palette`                    | 39 families × 10 steps            | Fixed primitive ramp                                                                                    |
+| `space`                      | `0`–`20` (non-contiguous)         | Layout spacing                                                                                          |
+| `size.control` / `size.icon` | `sm`, `md`, `lg`                  | Control heights + icon box                                                                              |
+| `breakpoint`                 | `sm`–`xl`                         | Mode-invariant media-query widths                                                                       |
+| `zIndex`                     | `base` … `max`                    | Stacking scale                                                                                          |
+| `opacity`                    | `disabled`, `muted`               | Shared opacity semantics                                                                                |
+| `letterSpacing`              | `tight`, `normal`, `wide`, `caps` | Typography rhythm                                                                                       |
+| `color.*`                    | semantic UI colors                | Full tree via `tokens.declare('color')`; derived leaves use `color.*` refs in `defaultColorTokenValues` |
+| `shadow.elevation`           | `low`, `med`, `high`              | Soft elevation (alongside brutalist `shadow.xs`–`xl`)                                                   |
+| `stroke`                     | `default`, `strong`               | Border shorthand (fixed)                                                                                |
+
+Theme overrides example:
+
+```ts
+createDesignTheme({
+  tokens: {
+    size: { control: { md: '36px' } },
+    zIndex: { toast: 600 },
+    color: {
+      background: { popover: designTokens.palette['sand-1'] },
+    },
+  },
+});
+```
+
+**Non-goals:** no `tokens.components.*`, chart/data palette, or Astryx-style communication hue tables — recipes compose global `color.*` instead.
 
 Theme values accept **token-ref leaves**: raw CSS (`'#0064E0'`, `'16px'`) or refs into registered tokens (`designTokens.palette['sky-7']`, `designTokens.radius.lg`). Refs stringify to `var(--var-ui-…)` in emitted CSS.
 
@@ -56,32 +89,17 @@ Theme values accept **token-ref leaves**: raw CSS (`'#0064E0'`, `'16px'`) or ref
 Themes are thin wrappers around TypeStyles. Ladder:
 
 1. **Token pack** — `defaultTokens`, `forestTokens`, … (`DesignTokenPack`: mode-invariant `tokens` + dark `darkColor`)
-2. **`createDesignTheme`** — merge pack + patches, compile ambient color mode, append `modes`
+2. **`createDesignTheme`** — merge pack + patches, compile ambient color mode, register surface modes
 3. **Optional `createColorTheme`** — accent → `{ light, dark }` color trees for `colorMode`
-4. **`modes` / `extend` / `components`** — surfaces, custom tokens, typed recipe overrides
+4. **`modes` / `extend` / `components`** — extra conditions, custom tokens, typed recipe overrides
 
 ```ts
-import {
-  createColorTheme,
-  createDesignTheme,
-  forestTokens,
-  tokens,
-  SURFACE_ATTRIBUTE,
-} from '@var-ui/core';
-
-const colors = createColorTheme({ accent: '#7c3aed' });
+import { createColorTheme, createDesignTheme, forestTokens } from '@var-ui/core';
 
 export const acme = createDesignTheme({
   name: 'acme',
   from: forestTokens,
-  colorMode: colors,
-  modes: [
-    {
-      id: 'surface-dark',
-      overrides: { color: colors.dark },
-      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
-    },
-  ],
+  colorMode: createColorTheme({ accent: '#7c3aed' }),
 });
 ```
 
@@ -118,10 +136,12 @@ tokens.createTheme(name, {
       light: { color: lightColor },
       dark: { color: darkColor },
     }),
-    ...modes, // e.g. fixed-tone surfaces
+    ...modes, // e.g. dark-elevation-shadow on style themes
   ],
 });
 ```
+
+Surface modes (`data-surface="light"|"dark"`) are registered automatically unless you pass `surfaces: false`.
 
 | Export         | `className`     | Role                      |
 | -------------- | --------------- | ------------------------- |
@@ -142,9 +162,9 @@ the **same element** that carries the theme class. Only the **color** tree (incl
 
 ### Fixed-tone surfaces (`SURFACE_ATTRIBUTE`)
 
-Import `SURFACE_ATTRIBUTE` (`'data-surface'`) from `@var-ui/core`. There is no
-`surfaces` config key — fixed tones are TypeStyles `modes` with
-`tokens.when.attr(SURFACE_ATTRIBUTE, …, { scope: 'descendant' })` (see ladder above).
+Import `SURFACE_ATTRIBUTE` (`'data-surface'`) from `@var-ui/core`. `createDesignTheme`
+registers light/dark surface modes by default (`surfaces: true`). Pass `surfaces: false`
+to omit them or supply custom rules in `modes`.
 Mark a subtree with `data-surface="dark"` or `data-surface="light"` to pin that face
 regardless of ambient mode:
 
@@ -200,7 +220,7 @@ export const acme = createDesignTheme({
 });
 ```
 
-`createColorTheme` returns `{ light, dark }` (`DesignColorValues`, including `syntax`). That shape plugs straight into `colorMode`. For advanced merges, `deepMergeThemeOverrides` is available — it is not a second theme API. Optional `extend` / `components` / `overrideComponent` remain for custom tokens and typed recipe restyles.
+`createColorTheme` returns `{ light, dark }` (`DesignTokens['color']` patches, including `syntax`). That shape plugs straight into `colorMode`. For advanced merges, `deepMergeThemeOverrides` is available — it is not a second theme API. Optional `extend` / `components` / `overrideComponent` remain for custom tokens and typed recipe restyles.
 
 ## Authoring recipes
 
@@ -276,7 +296,7 @@ Adding class names is free; removing or renaming requires a major bump and a del
 
 ## Extending tokens safely
 
-1. **New primitive or semantic keys** — Add values under `src/tokens/` (`primitive.ts`, `semantic.ts`, palette), register with `tokens.create`, and fold into packs / `DesignThemeTokenValues` as needed.
+1. **New primitive or semantic keys** — Add values under `src/tokens/` (`primitive.ts`, `types.ts`, palette), register with `tokens.create`, and extend `DesignTokens` / `DesignThemeTokenValues` as needed.
 2. **Theme-level patches** — Prefer `createDesignTheme({ from, tokens, colorMode, modes })`. Code-block chrome uses Tier 1 `c.vars()` / `components`, not a dedicated token namespace.
 3. **Breaking renames** — Avoid renaming existing CSS custom properties; add aliases if you must migrate consumers gradually.
 
