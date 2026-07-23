@@ -1,17 +1,12 @@
 import { color } from 'typestyles/color';
-import { createDesignTheme, SURFACE_ATTRIBUTE } from '../create-theme';
-import { tokens } from '../runtime';
-import { designPrimitiveTokens as p } from '../tokens';
-import {
-  defaultDarkSyntaxValues,
-  defaultLightSyntaxValues,
-  type DesignColorValues,
-} from '../tokens/semantic';
+import { createDesignTheme } from '../create-theme';
+import { designTokens as p } from '../tokens';
 import type { DesignTokenPack } from '../types';
+import { defaultDarkSyntaxValues, defaultLightSyntaxValues } from './default-values';
 import {
+  createNeoBrutalistShadow,
   neoBrutalistBorderDarkDefault,
   neoBrutalistBorderDarkStrong,
-  neoBrutalistShadow,
   neoBrutalistShadowOffsetDark,
   neoBrutalistShadowOffsetLight,
 } from './neo-brutalist-shadows';
@@ -20,18 +15,23 @@ const amberDarkHue = 65;
 
 const amberLightSubtle = p.palette['sand-2'];
 
-const amberLightColorValues: DesignColorValues = {
+const amberLightColorValues = {
   background: {
     app: p.palette['sand-1'],
     surface: p.palette['neutral-1'],
     subtle: amberLightSubtle,
     elevated: p.palette['neutral-1'],
+    popover: p.palette['neutral-1'],
+    muted: amberLightSubtle,
   },
   text: {
     primary: p.palette['sand-10'],
     secondary: p.palette['sand-7'],
     onAccent: '#000',
     onDanger: p.palette['neutral-1'],
+    onSuccess: p.palette['neutral-1'],
+    onWarning: p.palette['stone-10'],
+    onInfo: p.palette['neutral-1'],
   },
   accent: { default: p.palette['orange-7'], hover: p.palette['orange-8'] },
   border: {
@@ -44,22 +44,31 @@ const amberLightColorValues: DesignColorValues = {
   success: { default: p.palette['green-7'], solid: p.palette['green-8'] },
   warning: { default: p.palette['amber-7'], onSolid: p.palette['stone-10'] },
   info: { default: p.palette['orange-7'], onSolid: p.palette['neutral-1'] },
-  overlay: { default: color.alpha(p.palette['sand-10'], 0.55, 'oklch') },
+  overlay: {
+    default: color.alpha(p.palette['sand-10'], 0.55, 'oklch'),
+    panel: p.palette['neutral-1'],
+  },
+  link: { default: p.palette['orange-7'], hover: p.palette['orange-8'] },
   syntax: defaultLightSyntaxValues,
 };
 
-const amberDarkColorValues: DesignColorValues = {
+const amberDarkColorValues = {
   background: {
     app: color.oklch('23%', 0.016, 65),
     surface: color.oklch('27%', 0.014, 65),
     subtle: color.oklch('31%', 0.013, 65),
     elevated: color.oklch('27%', 0.014, 65),
+    popover: color.oklch('27%', 0.014, 65),
+    muted: color.oklch('31%', 0.013, 65),
   },
   text: {
     primary: p.palette['sand-1'],
     secondary: p.palette['sand-3'],
     onAccent: '#000',
     onDanger: p.palette['neutral-1'],
+    onSuccess: p.palette['neutral-1'],
+    onWarning: p.palette['stone-10'],
+    onInfo: p.palette['neutral-1'],
   },
   accent: { default: p.palette['amber-3'], hover: p.palette['amber-2'] },
   border: {
@@ -72,14 +81,18 @@ const amberDarkColorValues: DesignColorValues = {
   success: { default: p.palette['green-4'], solid: p.palette['green-7'] },
   warning: { default: p.palette['amber-4'], onSolid: p.palette['stone-10'] },
   info: { default: p.palette['orange-4'], onSolid: p.palette['neutral-1'] },
-  overlay: { default: color.alpha(p.palette['sand-10'], 0.7, 'oklch') },
+  overlay: {
+    default: color.alpha(p.palette['sand-10'], 0.7, 'oklch'),
+    panel: color.oklch('27%', 0.014, 65),
+  },
+  link: { default: p.palette['amber-3'], hover: p.palette['amber-2'] },
   syntax: defaultDarkSyntaxValues,
 };
 
 export const amberTokens: DesignTokenPack = {
   tokens: {
     color: amberLightColorValues,
-    shadow: neoBrutalistShadow,
+    shadow: createNeoBrutalistShadow(p.color.shadow.offset),
   },
   darkColor: amberDarkColorValues,
 };
@@ -87,16 +100,4 @@ export const amberTokens: DesignTokenPack = {
 export const amberTheme = createDesignTheme({
   name: 'amber',
   from: amberTokens,
-  modes: [
-    {
-      id: 'surface-dark',
-      overrides: { color: amberTokens.darkColor },
-      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
-    },
-    {
-      id: 'surface-light',
-      overrides: { color: amberTokens.tokens.color },
-      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'light', { scope: 'descendant' }),
-    },
-  ],
 });

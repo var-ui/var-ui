@@ -1,26 +1,27 @@
 import { color } from 'typestyles/color';
-import { createDesignTheme, SURFACE_ATTRIBUTE } from '../create-theme';
+import { createDesignTheme } from '../create-theme';
 import { tokens } from '../runtime';
-import { designPrimitiveTokens as p } from '../tokens';
-import {
-  defaultDarkSyntaxValues,
-  defaultLightSyntaxValues,
-  type DesignColorValues,
-} from '../tokens/semantic';
+import { designTokens as p } from '../tokens';
 import type { DesignTokenPack } from '../types';
+import { defaultDarkSyntaxValues, defaultLightSyntaxValues } from './default-values';
 
-const classicLightColorValues: DesignColorValues = {
+const classicLightColorValues = {
   background: {
     app: '#FFFFFF',
     surface: '#FFFFFF',
     subtle: '#EEEEEE',
     elevated: '#FFFFFF',
+    popover: '#FFFFFF',
+    muted: '#EEEEEE',
   },
   text: {
     primary: '#000000',
     secondary: '#333333',
     onAccent: '#FFFFFF',
     onDanger: '#FFFFFF',
+    onSuccess: '#FFFFFF',
+    onWarning: '#FFFFFF',
+    onInfo: '#FFFFFF',
   },
   accent: { default: '#000000', hover: '#333333' },
   border: {
@@ -33,22 +34,31 @@ const classicLightColorValues: DesignColorValues = {
   success: { default: '#000000', solid: '#000000' },
   warning: { default: '#000000', onSolid: '#FFFFFF' },
   info: { default: '#000000', onSolid: '#FFFFFF' },
-  overlay: { default: color.alpha('#000000', 0.45, 'srgb') },
+  overlay: {
+    default: color.alpha('#000000', 0.45, 'srgb'),
+    panel: '#FFFFFF',
+  },
+  link: { default: '#000000', hover: '#333333' },
   syntax: defaultLightSyntaxValues,
 };
 
-const classicDarkColorValues: DesignColorValues = {
+const classicDarkColorValues = {
   background: {
     app: '#101010',
     surface: '#181818',
     subtle: '#252525',
     elevated: '#202020',
+    popover: '#202020',
+    muted: '#252525',
   },
   text: {
     primary: '#FFFFFF',
     secondary: '#D8D8D8',
     onAccent: '#000000',
     onDanger: '#000000',
+    onSuccess: '#000000',
+    onWarning: '#000000',
+    onInfo: '#000000',
   },
   accent: { default: '#FFFFFF', hover: '#E0E0E0' },
   border: {
@@ -61,7 +71,11 @@ const classicDarkColorValues: DesignColorValues = {
   success: { default: p.palette['green-3'], solid: p.palette['green-3'] },
   warning: { default: p.palette['amber-3'], onSolid: '#000000' },
   info: { default: '#FFFFFF', onSolid: '#000000' },
-  overlay: { default: color.alpha('#000000', 0.72, 'srgb') },
+  overlay: {
+    default: color.alpha('#000000', 0.72, 'srgb'),
+    panel: '#202020',
+  },
+  link: { default: '#FFFFFF', hover: '#E0E0E0' },
   syntax: defaultDarkSyntaxValues,
 };
 
@@ -151,16 +165,6 @@ export const classicSystemTheme = createDesignTheme({
           tokens.when.prefersDark,
         ),
       ),
-    },
-    {
-      id: 'surface-dark',
-      overrides: { color: classicSystemTokens.darkColor },
-      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
-    },
-    {
-      id: 'surface-light',
-      overrides: { color: classicSystemTokens.tokens.color },
-      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'light', { scope: 'descendant' }),
     },
   ],
 });

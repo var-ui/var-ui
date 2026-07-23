@@ -126,6 +126,9 @@ function mapLightColors(
       secondary: rampAt(neutral, slots.text.secondary),
       onAccent: resolveOnAccent(accentDefault, neutral),
       onDanger: WHITE,
+      onSuccess: WHITE,
+      onWarning: rampAt(neutral, 10),
+      onInfo: WHITE,
     },
     accent: {
       default: accentDefault,
@@ -153,7 +156,14 @@ function mapLightColors(
       default: rampAt(info, slots.info.default),
       onSolid: WHITE,
     },
-    overlay: { default: color.alpha(rampAt(neutral, 10), 0.55, 'oklch') },
+    overlay: {
+      default: color.alpha(rampAt(neutral, 10), 0.55, 'oklch'),
+      panel: background.elevated,
+    },
+    link: {
+      default: accentDefault,
+      hover: rampAt(accent, slots.accent.hover),
+    },
     syntax: defaultLightSyntaxValues,
   };
 }
@@ -187,6 +197,9 @@ function mapDarkColors(
       secondary: rampAt(neutral, m(slots.text.secondary)),
       onAccent: resolveOnAccent(accentDefault, neutral),
       onDanger: WHITE,
+      onSuccess: WHITE,
+      onWarning: rampAt(neutral, m(10)),
+      onInfo: WHITE,
     },
     accent: {
       default: accentDefault,
@@ -214,7 +227,14 @@ function mapDarkColors(
       default: rampAt(info, m(slots.info.default)),
       onSolid: WHITE,
     },
-    overlay: { default: color.alpha(rampAt(neutral, m(10)), 0.7, 'oklch') },
+    overlay: {
+      default: color.alpha(rampAt(neutral, m(10)), 0.7, 'oklch'),
+      panel: background.elevated,
+    },
+    link: {
+      default: accentDefault,
+      hover: rampAt(accent, m(slots.accent.hover)),
+    },
     syntax: defaultDarkSyntaxValues,
   };
 }

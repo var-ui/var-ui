@@ -1,13 +1,9 @@
 import { color } from 'typestyles/color';
-import { createDesignTheme, SURFACE_ATTRIBUTE } from '../create-theme';
+import { createDesignTheme } from '../create-theme';
 import { tokens } from '../runtime';
-import { designPrimitiveTokens as p } from '../tokens';
-import {
-  defaultDarkSyntaxValues,
-  defaultLightSyntaxValues,
-  type DesignColorValues,
-} from '../tokens/semantic';
+import { designTokens as p } from '../tokens';
 import type { DesignTokenPack } from '../types';
+import { defaultDarkSyntaxValues, defaultLightSyntaxValues } from './default-values';
 
 const aiGlowLightSyntaxValues = {
   ...defaultLightSyntaxValues,
@@ -31,18 +27,23 @@ const aiGlowDarkSyntaxValues = {
   section: '#67E8F9',
 };
 
-const aiGlowLightColorValues: DesignColorValues = {
+const aiGlowLightColorValues = {
   background: {
     app: '#F8F5FF',
     surface: '#FFFCFF',
     subtle: '#E8F7FF',
     elevated: '#FFFFFF',
+    popover: '#FFFFFF',
+    muted: '#E8F7FF',
   },
   text: {
     primary: '#201A3D',
     secondary: '#5B527B',
     onAccent: '#FFFFFF',
     onDanger: '#FFFFFF',
+    onSuccess: '#FFFFFF',
+    onWarning: '#FFFFFF',
+    onInfo: '#FFFFFF',
   },
   accent: { default: '#0EA5E9', hover: '#7C3AED' },
   border: {
@@ -55,22 +56,31 @@ const aiGlowLightColorValues: DesignColorValues = {
   success: { default: '#0F9F6E', solid: '#047857' },
   warning: { default: '#B45309', onSolid: '#FFFFFF' },
   info: { default: '#2563EB', onSolid: '#FFFFFF' },
-  overlay: { default: color.alpha('#201A3D', 0.42, 'oklch') },
+  overlay: {
+    default: color.alpha('#201A3D', 0.42, 'oklch'),
+    panel: '#FFFFFF',
+  },
+  link: { default: '#0EA5E9', hover: '#7C3AED' },
   syntax: aiGlowLightSyntaxValues,
 };
 
-const aiGlowDarkColorValues: DesignColorValues = {
+const aiGlowDarkColorValues = {
   background: {
     app: '#111025',
     surface: '#1A1733',
     subtle: '#272143',
     elevated: '#211B3B',
+    popover: '#211B3B',
+    muted: '#272143',
   },
   text: {
     primary: '#FAF7FF',
     secondary: '#C9C0EA',
     onAccent: '#FFFFFF',
     onDanger: '#FFFFFF',
+    onSuccess: '#FFFFFF',
+    onWarning: '#211400',
+    onInfo: '#08111A',
   },
   accent: { default: '#67E8F9', hover: '#F0ABFC' },
   border: {
@@ -83,7 +93,11 @@ const aiGlowDarkColorValues: DesignColorValues = {
   success: { default: '#6EE7B7', solid: '#047857' },
   warning: { default: '#FCD34D', onSolid: '#211400' },
   info: { default: '#67E8F9', onSolid: '#08111A' },
-  overlay: { default: color.alpha('#05040F', 0.76, 'oklch') },
+  overlay: {
+    default: color.alpha('#05040F', 0.76, 'oklch'),
+    panel: '#211B3B',
+  },
+  link: { default: '#67E8F9', hover: '#F0ABFC' },
   syntax: aiGlowDarkSyntaxValues,
 };
 
@@ -174,16 +188,6 @@ export const aiGlowTheme = createDesignTheme({
           tokens.when.prefersDark,
         ),
       ),
-    },
-    {
-      id: 'surface-dark',
-      overrides: { color: aiGlowTokens.darkColor },
-      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
-    },
-    {
-      id: 'surface-light',
-      overrides: { color: aiGlowTokens.tokens.color },
-      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'light', { scope: 'descendant' }),
     },
   ],
 });

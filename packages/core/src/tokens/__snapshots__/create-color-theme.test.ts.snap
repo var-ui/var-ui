@@ -28,8 +28,13 @@ exports[`createColorTheme > clamps chroma for a near-gray accent 1`] = `
       "default": "oklch(72.00% 0.189 294)",
       "onSolid": "oklch(100% 0 0)",
     },
+    "link": {
+      "default": "oklch(72.00% 0.069 0)",
+      "hover": "oklch(80.33% 0.05 0)",
+    },
     "overlay": {
       "default": "color-mix(in oklch, oklch(97.00% 0.002 0) 70%, transparent)",
+      "panel": "oklch(22.00% 0.005 0)",
     },
     "shadow": {
       "offset": "oklch(6.5% 0.035 0)",
@@ -57,6 +62,9 @@ exports[`createColorTheme > clamps chroma for a near-gray accent 1`] = `
     "text": {
       "onAccent": "oklch(22.00% 0.005 0)",
       "onDanger": "oklch(100% 0 0)",
+      "onInfo": "oklch(100% 0 0)",
+      "onSuccess": "oklch(100% 0 0)",
+      "onWarning": "oklch(97.00% 0.002 0)",
       "primary": "oklch(97.00% 0.002 0)",
       "secondary": "oklch(72.00% 0.013 0)",
     },
@@ -91,8 +99,13 @@ exports[`createColorTheme > clamps chroma for a near-gray accent 1`] = `
       "default": "oklch(47.00% 0.198 294)",
       "onSolid": "oklch(100% 0 0)",
     },
+    "link": {
+      "default": "oklch(47.00% 0.072 0)",
+      "hover": "oklch(38.67% 0.054 0)",
+    },
     "overlay": {
       "default": "color-mix(in oklch, oklch(22.00% 0.005 0) 55%, transparent)",
+      "panel": "oklch(97.00% 0.002 0)",
     },
     "shadow": {
       "offset": "color-mix(in oklch, oklch(88.67% 0.005 0) 50%, transparent)",
@@ -120,6 +133,9 @@ exports[`createColorTheme > clamps chroma for a near-gray accent 1`] = `
     "text": {
       "onAccent": "oklch(100% 0 0)",
       "onDanger": "oklch(100% 0 0)",
+      "onInfo": "oklch(100% 0 0)",
+      "onSuccess": "oklch(100% 0 0)",
+      "onWarning": "oklch(22.00% 0.005 0)",
       "primary": "oklch(22.00% 0.005 0)",
       "secondary": "oklch(47.00% 0.013 0)",
     },
@@ -159,8 +175,13 @@ exports[`createColorTheme > returns color-shaped light and dark for the default 
       "default": "oklch(72.00% 0.189 294)",
       "onSolid": "oklch(100% 0 0)",
     },
+    "link": {
+      "default": "oklch(72.00% 0.176 258.81008101651366)",
+      "hover": "oklch(80.33% 0.127 258.81008101651366)",
+    },
     "overlay": {
       "default": "color-mix(in oklch, oklch(97.00% 0.002 258.81008101651366) 70%, transparent)",
+      "panel": "oklch(22.00% 0.005 258.81008101651366)",
     },
     "shadow": {
       "offset": "oklch(6.5% 0.035 258.81008101651366)",
@@ -188,6 +209,9 @@ exports[`createColorTheme > returns color-shaped light and dark for the default 
     "text": {
       "onAccent": "oklch(22.00% 0.005 258.81008101651366)",
       "onDanger": "oklch(100% 0 0)",
+      "onInfo": "oklch(100% 0 0)",
+      "onSuccess": "oklch(100% 0 0)",
+      "onWarning": "oklch(97.00% 0.002 258.81008101651366)",
       "primary": "oklch(97.00% 0.002 258.81008101651366)",
       "secondary": "oklch(72.00% 0.013 258.81008101651366)",
     },
@@ -222,8 +246,13 @@ exports[`createColorTheme > returns color-shaped light and dark for the default 
       "default": "oklch(47.00% 0.198 294)",
       "onSolid": "oklch(100% 0 0)",
     },
+    "link": {
+      "default": "oklch(47.00% 0.184 258.81008101651366)",
+      "hover": "oklch(38.67% 0.139 258.81008101651366)",
+    },
     "overlay": {
       "default": "color-mix(in oklch, oklch(22.00% 0.005 258.81008101651366) 55%, transparent)",
+      "panel": "oklch(97.00% 0.002 258.81008101651366)",
     },
     "shadow": {
       "offset": "color-mix(in oklch, oklch(88.67% 0.005 258.81008101651366) 50%, transparent)",
@@ -251,6 +280,9 @@ exports[`createColorTheme > returns color-shaped light and dark for the default 
     "text": {
       "onAccent": "oklch(100% 0 0)",
       "onDanger": "oklch(100% 0 0)",
+      "onInfo": "oklch(100% 0 0)",
+      "onSuccess": "oklch(100% 0 0)",
+      "onWarning": "oklch(22.00% 0.005 258.81008101651366)",
       "primary": "oklch(22.00% 0.005 258.81008101651366)",
       "secondary": "oklch(47.00% 0.013 258.81008101651366)",
     },
@@ -290,8 +322,13 @@ exports[`createColorTheme > returns themes for a saturated pink accent 1`] = `
       "default": "oklch(72.00% 0.189 294)",
       "onSolid": "oklch(100% 0 0)",
     },
+    "link": {
+      "default": "oklch(72.00% 0.225 356.9447697294126)",
+      "hover": "oklch(80.33% 0.162 356.9447697294126)",
+    },
     "overlay": {
       "default": "color-mix(in oklch, oklch(97.00% 0.002 356.9447697294126) 70%, transparent)",
+      "panel": "oklch(22.00% 0.005 356.9447697294126)",
     },
     "shadow": {
       "offset": "oklch(6.5% 0.035 356.9447697294126)",
@@ -319,6 +356,9 @@ exports[`createColorTheme > returns themes for a saturated pink accent 1`] = `
     "text": {
       "onAccent": "oklch(22.00% 0.005 356.9447697294126)",
       "onDanger": "oklch(100% 0 0)",
+      "onInfo": "oklch(100% 0 0)",
+      "onSuccess": "oklch(100% 0 0)",
+      "onWarning": "oklch(97.00% 0.002 356.9447697294126)",
       "primary": "oklch(97.00% 0.002 356.9447697294126)",
       "secondary": "oklch(72.00% 0.013 356.9447697294126)",
     },
@@ -353,8 +393,13 @@ exports[`createColorTheme > returns themes for a saturated pink accent 1`] = `
       "default": "oklch(47.00% 0.198 294)",
       "onSolid": "oklch(100% 0 0)",
     },
+    "link": {
+      "default": "oklch(47.00% 0.235 356.9447697294126)",
+      "hover": "oklch(38.67% 0.178 356.9447697294126)",
+    },
     "overlay": {
       "default": "color-mix(in oklch, oklch(22.00% 0.005 356.9447697294126) 55%, transparent)",
+      "panel": "oklch(97.00% 0.002 356.9447697294126)",
     },
     "shadow": {
       "offset": "color-mix(in oklch, oklch(88.67% 0.005 356.9447697294126) 50%, transparent)",
@@ -382,6 +427,9 @@ exports[`createColorTheme > returns themes for a saturated pink accent 1`] = `
     "text": {
       "onAccent": "oklch(100% 0 0)",
       "onDanger": "oklch(100% 0 0)",
+      "onInfo": "oklch(100% 0 0)",
+      "onSuccess": "oklch(100% 0 0)",
+      "onWarning": "oklch(22.00% 0.005 356.9447697294126)",
       "primary": "oklch(22.00% 0.005 356.9447697294126)",
       "secondary": "oklch(47.00% 0.013 356.9447697294126)",
     },

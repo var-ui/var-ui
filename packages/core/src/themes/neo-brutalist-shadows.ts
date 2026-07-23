@@ -1,6 +1,5 @@
 import { color } from 'typestyles/color';
-import { type DesignShadowValues } from '../tokens/primitive';
-import { colorTokens } from '../tokens';
+import type { DesignTokens } from '../tokens/types';
 
 /** Perceptual mix with page background — tune here for all themes. */
 const shadowOffsetLightAlpha = 0.5;
@@ -29,17 +28,13 @@ export function neoBrutalistShadowOffsetDark(hue: number): string {
   return color.oklch('6.5%', 0.035, hue);
 }
 
-const offsetColor = colorTokens.shadow.offset;
-
-/**
- * Hard-offset neo-brutalist shadows. Color comes from {@link colorTokens.shadow.offset}
- * (`--…-color-shadow-offset`); themes set this via {@link neoBrutalistShadowOffsetLight} /
- * {@link neoBrutalistShadowOffsetDark} (per-theme hue, aligned with `background.app`).
- */
-export const neoBrutalistShadow: DesignShadowValues = {
-  xs: `1px 1px 0 0 ${offsetColor}`,
-  sm: `2px 2px 0 0 ${offsetColor}`,
-  md: `3px 3px 0 0 ${offsetColor}`,
-  lg: `4px 4px 0 0 ${offsetColor}`,
-  xl: `5px 5px 0 0 ${offsetColor}`,
-};
+/** Hard-offset neo-brutalist elevation shadows using the theme's `--color-shadow-offset` token. */
+export function createNeoBrutalistShadow(offsetColor: string): DesignTokens['shadow'] {
+  return {
+    xs: `1px 1px 0 0 ${offsetColor}`,
+    sm: `2px 2px 0 0 ${offsetColor}`,
+    md: `3px 3px 0 0 ${offsetColor}`,
+    lg: `4px 4px 0 0 ${offsetColor}`,
+    xl: `5px 5px 0 0 ${offsetColor}`,
+  };
+}

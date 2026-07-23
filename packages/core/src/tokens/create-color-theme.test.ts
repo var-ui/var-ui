@@ -15,7 +15,7 @@ vi.mock('typestyles/color-scale', async (importOriginal) => {
 
 import { basePaletteTokenValues } from './palette';
 import { createColorTheme } from './create-color-theme';
-import type { DesignColorValues } from './semantic';
+import type { DesignTokenPack } from './types';
 
 /** Snapshot of palette output before the color-scale extraction — guards byte-identical ramps. */
 const PALETTE_BYTE_IDENTICAL_FIXTURE: Record<string, string> = {
@@ -25,18 +25,23 @@ const PALETTE_BYTE_IDENTICAL_FIXTURE: Record<string, string> = {
   'gray-1': 'oklch(97.00% 0.002 264)',
 };
 
-function assertDesignColorShape(values: DesignColorValues): void {
+function assertDesignColorShape(values: DesignTokenPack['darkColor']): void {
   expect(values.background).toMatchObject({
     app: expect.any(String),
     surface: expect.any(String),
     subtle: expect.any(String),
     elevated: expect.any(String),
+    popover: expect.any(String),
+    muted: expect.any(String),
   });
   expect(values.text).toMatchObject({
     primary: expect.any(String),
     secondary: expect.any(String),
     onAccent: expect.any(String),
     onDanger: expect.any(String),
+    onSuccess: expect.any(String),
+    onWarning: expect.any(String),
+    onInfo: expect.any(String),
   });
   expect(values.accent).toMatchObject({ default: expect.any(String), hover: expect.any(String) });
   expect(values.border).toMatchObject({
@@ -52,7 +57,8 @@ function assertDesignColorShape(values: DesignColorValues): void {
     onSolid: expect.any(String),
   });
   expect(values.info).toMatchObject({ default: expect.any(String), onSolid: expect.any(String) });
-  expect(values.overlay).toMatchObject({ default: expect.any(String) });
+  expect(values.overlay).toMatchObject({ default: expect.any(String), panel: expect.any(String) });
+  expect(values.link).toMatchObject({ default: expect.any(String), hover: expect.any(String) });
   expect(values.syntax).toMatchObject({
     base: expect.any(String),
     keyword: expect.any(String),
@@ -92,7 +98,7 @@ describe('createColorTheme', () => {
     vi.restoreAllMocks();
   });
 
-  it('returns DesignColorValues-shaped light and dark for the default accent', () => {
+  it('returns color-shaped light and dark for the default accent', () => {
     const theme = createColorTheme({ accent: '#0064E0' });
     assertDesignColorShape(theme.light);
     assertDesignColorShape(theme.dark);
@@ -109,7 +115,7 @@ describe('createColorTheme', () => {
   it('clamps chroma for a near-gray accent', () => {
     const theme = createColorTheme({ accent: '#808080' });
     assertDesignColorShape(theme.light);
-    expect(theme.light.accent.default).toMatch(/oklch\(/);
+    expect(theme.light.accent!.default).toMatch(/oklch\(/);
     expect(theme).toMatchSnapshot();
   });
 

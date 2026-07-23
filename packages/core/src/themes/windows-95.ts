@@ -1,13 +1,9 @@
 import { color } from 'typestyles/color';
-import { createDesignTheme, SURFACE_ATTRIBUTE } from '../create-theme';
+import { createDesignTheme } from '../create-theme';
 import { tokens } from '../runtime';
-import { designPrimitiveTokens as p } from '../tokens';
-import {
-  defaultDarkSyntaxValues,
-  defaultLightSyntaxValues,
-  type DesignColorValues,
-} from '../tokens/semantic';
+import { designTokens as p } from '../tokens';
 import type { DesignTokenPack } from '../types';
+import { defaultDarkSyntaxValues, defaultLightSyntaxValues } from './default-values';
 
 const win95LightSyntaxValues = {
   ...defaultLightSyntaxValues,
@@ -29,18 +25,23 @@ const win95DarkSyntaxValues = {
   comment: '#B0B0B0',
 };
 
-const win95LightColorValues: DesignColorValues = {
+const win95LightColorValues = {
   background: {
     app: '#C0C0C0',
     surface: '#C0C0C0',
     subtle: '#E0E0E0',
     elevated: '#F0F0F0',
+    popover: '#F0F0F0',
+    muted: '#E0E0E0',
   },
   text: {
     primary: '#000000',
     secondary: '#202020',
     onAccent: '#FFFFFF',
     onDanger: '#FFFFFF',
+    onSuccess: '#FFFFFF',
+    onWarning: '#000000',
+    onInfo: '#FFFFFF',
   },
   accent: { default: '#000080', hover: '#1084D0' },
   border: {
@@ -53,22 +54,31 @@ const win95LightColorValues: DesignColorValues = {
   success: { default: '#008000', solid: '#008000' },
   warning: { default: '#808000', onSolid: '#000000' },
   info: { default: '#000080', onSolid: '#FFFFFF' },
-  overlay: { default: color.alpha('#000000', 0.5, 'srgb') },
+  overlay: {
+    default: color.alpha('#000000', 0.5, 'srgb'),
+    panel: '#F0F0F0',
+  },
+  link: { default: '#000080', hover: '#1084D0' },
   syntax: win95LightSyntaxValues,
 };
 
-const win95DarkColorValues: DesignColorValues = {
+const win95DarkColorValues = {
   background: {
     app: '#000040',
     surface: '#303030',
     subtle: '#454545',
     elevated: '#555555',
+    popover: '#555555',
+    muted: '#454545',
   },
   text: {
     primary: '#F2F2F2',
     secondary: '#CFCFCF',
     onAccent: '#FFFFFF',
     onDanger: '#FFFFFF',
+    onSuccess: '#FFFFFF',
+    onWarning: '#000000',
+    onInfo: '#000000',
   },
   accent: { default: '#1084D0', hover: '#38A8F0' },
   border: {
@@ -81,7 +91,11 @@ const win95DarkColorValues: DesignColorValues = {
   success: { default: p.palette['green-4'], solid: '#008000' },
   warning: { default: p.palette['amber-4'], onSolid: '#000000' },
   info: { default: '#38A8F0', onSolid: '#000000' },
-  overlay: { default: color.alpha('#000000', 0.7, 'srgb') },
+  overlay: {
+    default: color.alpha('#000000', 0.7, 'srgb'),
+    panel: '#555555',
+  },
+  link: { default: '#1084D0', hover: '#38A8F0' },
   syntax: win95DarkSyntaxValues,
 };
 
@@ -171,16 +185,6 @@ export const windows95Theme = createDesignTheme({
           tokens.when.prefersDark,
         ),
       ),
-    },
-    {
-      id: 'surface-dark',
-      overrides: { color: windows95Tokens.darkColor },
-      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
-    },
-    {
-      id: 'surface-light',
-      overrides: { color: windows95Tokens.tokens.color },
-      when: tokens.when.attr(SURFACE_ATTRIBUTE, 'light', { scope: 'descendant' }),
     },
   ],
 });
