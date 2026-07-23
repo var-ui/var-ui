@@ -2,6 +2,7 @@ import { defaultLightColorValues } from '../themes/default-values';
 import { buildColorRegistrationValues } from './color';
 import {
   borderWidthTokens,
+  breakpointTokens,
   durationTokens,
   easingTokens,
   fontFamilyTokens,
@@ -16,6 +17,7 @@ import {
   sizeTokens,
   spaceTokens,
   transitionTokens,
+  zIndexTokens,
 } from './primitives';
 import { tokens } from '../runtime';
 
@@ -46,6 +48,8 @@ export const designTokens = {
   duration: durationTokens,
   easing: easingTokens,
   transition: transitionTokens,
+  breakpoint: breakpointTokens,
+  zIndex: zIndexTokens,
   color: colorTokens,
   stroke: strokeTokens,
 } as const;

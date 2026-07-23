@@ -1,3 +1,4 @@
+import type { breakpointValues, zIndexValues } from './layout';
 import type { basePaletteTokenValues } from './palette';
 import type {
   borderWidthValues,
@@ -53,6 +54,8 @@ export type DesignTokens = {
   duration: WidenLeaves<typeof durationValues>;
   easing: WidenLeaves<typeof easingValues>;
   transition: WidenLeaves<typeof transitionValues>;
+  breakpoint: WidenLeaves<typeof breakpointValues>;
+  zIndex: WidenLeaves<typeof zIndexValues>;
   color: {
     background: {
       app: string;

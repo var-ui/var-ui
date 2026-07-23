@@ -1,7 +1,9 @@
 export type { DesignThemeTokenValues, DesignTokenPack, DesignTokens } from './types';
 export { FAMILY_SPECS, PALETTE_FAMILIES } from './palette';
+export { breakpointValues, zIndexValues } from './layout';
 export {
   borderWidthTokens,
+  breakpointTokens,
   durationTokens,
   easingTokens,
   fontFamilyTokens,
@@ -16,6 +18,7 @@ export {
   sizeTokens,
   spaceTokens,
   transitionTokens,
+  zIndexTokens,
 } from './primitives';
 export { colorTokens, designTokens, strokeTokens } from './register';
 export { createColorTheme } from './create-color-theme';

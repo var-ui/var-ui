@@ -1,4 +1,5 @@
 import { tokens } from '../runtime';
+import { breakpointValues, zIndexValues } from './layout';
 import { basePaletteTokenValues } from './palette';
 import {
   borderWidthValues,
@@ -32,3 +33,5 @@ export const shadowTokens = tokens.create('shadow', shadowValues);
 export const durationTokens = tokens.create('duration', durationValues);
 export const easingTokens = tokens.create('easing', easingValues);
 export const transitionTokens = tokens.create('transition', transitionValues);
+export const breakpointTokens = tokens.create('breakpoint', breakpointValues);
+export const zIndexTokens = tokens.create('zIndex', zIndexValues);
