@@ -12,14 +12,38 @@ function zipPx<T extends string>(names: readonly T[], values: number[]): Record<
 }
 
 export const spaceValues = {
+  0: '0px',
   1: '4px',
   2: '8px',
   3: '12px',
   4: '16px',
   5: '24px',
   6: '32px',
+  7: '28px',
   8: '48px',
+  9: '36px',
+  10: '40px',
+  11: '44px',
   12: '64px',
+  16: '64px',
+  20: '80px',
+} as const;
+
+export const sizeValues = {
+  control: { sm: '28px', md: '32px', lg: '36px' },
+  icon: { sm: '14px', md: '16px', lg: '20px' },
+} as const;
+
+export const opacityValues = {
+  disabled: '0.5',
+  muted: '0.6',
+} as const;
+
+export const letterSpacingValues = {
+  tight: '-0.015em',
+  normal: '0',
+  wide: '0.025em',
+  caps: '0.06em',
 } as const;
 
 // base: 4, multiplier: 0 — brutalist default; all scaled steps stay 0px.
@@ -72,9 +96,8 @@ export const lineHeightValues = {
 } as const;
 
 export type DesignShadowKeys = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type DesignShadowValues = Record<DesignShadowKeys, string>;
 
-export const shadowValues: DesignShadowValues = {
+export const shadowValues: Record<DesignShadowKeys, string> = {
   xs: '1px 1px 0 0 #000',
   sm: '2px 2px 0 0 #000',
   md: '3px 3px 0 0 #000',
@@ -119,30 +142,5 @@ export const transitionValues = {
 export const borderWidthValues = {
   thin: '1px',
   default: '1px',
-  thick: '1px',
+  thick: '2px',
 } as const;
-
-export type DesignSpaceValues = typeof spaceValues;
-export type DesignRadiusValues = typeof radiusValues;
-export type DesignBorderWidthValues = typeof borderWidthValues;
-export type DesignFontFamilyValues = typeof fontFamilyValues;
-export type DesignFontSizeValues = typeof fontSizeValues;
-export type DesignFontWeightValues = typeof fontWeightValues;
-export type DesignLineHeightValues = typeof lineHeightValues;
-export type DesignDurationValues = typeof durationValues;
-export type DesignEasingValues = typeof easingValues;
-export type DesignTransitionValues = typeof transitionValues;
-
-export type DesignPrimitiveValues = {
-  space: DesignSpaceValues;
-  radius: DesignRadiusValues;
-  borderWidth: DesignBorderWidthValues;
-  fontFamily: DesignFontFamilyValues;
-  fontSize: DesignFontSizeValues;
-  fontWeight: DesignFontWeightValues;
-  lineHeight: DesignLineHeightValues;
-  shadow: DesignShadowValues;
-  duration: DesignDurationValues;
-  easing: DesignEasingValues;
-  transition: DesignTransitionValues;
-};

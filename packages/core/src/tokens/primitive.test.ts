@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vite-plus/test';
-import { durationValues, fontSizeValues, radiusValues } from './primitive';
+import {
+  durationValues,
+  fontSizeValues,
+  letterSpacingValues,
+  opacityValues,
+  radiusValues,
+  sizeValues,
+  spaceValues,
+} from './primitive';
 
 describe('primitive token scales', () => {
   it('matches calibrated fontSizeValues snapshot', () => {
@@ -64,5 +72,48 @@ describe('primitive token scales', () => {
       expect(min).toBeLessThan(anchor);
       expect(anchor).toBeLessThan(max);
     }
+  });
+
+  it('includes expanded space scale', () => {
+    expect(spaceValues[0]).toBe('0px');
+    expect(spaceValues[7]).toBe('28px');
+    expect(spaceValues[20]).toBe('80px');
+  });
+
+  it('matches sizeValues snapshot', () => {
+    expect(sizeValues).toMatchInlineSnapshot(`
+      {
+        "control": {
+          "lg": "36px",
+          "md": "32px",
+          "sm": "28px",
+        },
+        "icon": {
+          "lg": "20px",
+          "md": "16px",
+          "sm": "14px",
+        },
+      }
+    `);
+  });
+
+  it('matches opacityValues snapshot', () => {
+    expect(opacityValues).toMatchInlineSnapshot(`
+      {
+        "disabled": "0.5",
+        "muted": "0.6",
+      }
+    `);
+  });
+
+  it('matches letterSpacingValues snapshot', () => {
+    expect(letterSpacingValues).toMatchInlineSnapshot(`
+      {
+        "caps": "0.06em",
+        "normal": "0",
+        "tight": "-0.015em",
+        "wide": "0.025em",
+      }
+    `);
   });
 });
