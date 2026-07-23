@@ -1,4 +1,5 @@
 import { styles } from '../runtime';
+import { designTokens as t } from '../tokens';
 
 /**
  * Styling-only icon shell: sizes the em-box and colors the glyph via
@@ -13,7 +14,7 @@ export const icon = styles.component(
   'icon',
   (c) => {
     const v = c.vars({
-      size: { value: '16px', syntax: '<length>', inherits: false },
+      size: { value: t.size.icon.md, syntax: '<length>', inherits: false },
       color: { value: 'currentColor', syntax: '*', inherits: false },
     });
     return {
@@ -32,9 +33,9 @@ export const icon = styles.component(
       },
       variants: {
         size: {
-          sm: { [v.size.name]: '14px' },
-          md: { [v.size.name]: '16px' },
-          lg: { [v.size.name]: '20px' },
+          sm: { [v.size.name]: t.size.icon.sm },
+          md: { [v.size.name]: t.size.icon.md },
+          lg: { [v.size.name]: t.size.icon.lg },
           inherit: { [v.size.name]: '1em' },
         },
       },

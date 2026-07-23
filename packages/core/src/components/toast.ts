@@ -32,7 +32,7 @@ export const toast = styles.component(
       base: {
         region: {
           position: 'fixed',
-          zIndex: 500,
+          zIndex: t.zIndex.toast,
           display: 'flex',
           flexDirection: 'column',
           gap: t.space[2],

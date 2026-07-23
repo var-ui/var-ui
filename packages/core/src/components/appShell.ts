@@ -106,7 +106,7 @@ export const appShell = styles.component<typeof APP_SHELL_SLOTS, AppShellVariant
             position: 'fixed',
             top: t.space[2],
             insetInlineStart: t.space[2],
-            zIndex: 9999,
+            zIndex: t.zIndex.max,
             width: 'auto',
             height: 'auto',
             margin: 0,

@@ -1,7 +1,7 @@
 import { styles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
-const bp = '@media (max-width: 768px)';
+const bp = `@media (max-width: ${t.breakpoint.md})`;
 
 /**
  * Long-form / markdown prose primitives: blockquote, kbd, inline badges, tables, dividers,
@@ -83,7 +83,7 @@ export const proseContent = styles.component(
           fontStyle: 'italic',
           fontSize: '28px',
           fontWeight: t.fontWeight.bold,
-          letterSpacing: '-0.015em',
+          letterSpacing: t.letterSpacing.tight,
           lineHeight: 1.25,
           marginTop: 0,
           marginBottom: t.space[3],
@@ -102,7 +102,7 @@ export const proseContent = styles.component(
           fontStyle: 'italic',
           fontSize: '24px',
           fontWeight: t.fontWeight.bold,
-          letterSpacing: '-0.015em',
+          letterSpacing: t.letterSpacing.tight,
           lineHeight: 1.25,
           marginTop: t.space[8],
           marginBottom: t.space[3],
@@ -356,7 +356,7 @@ export const proseContent = styles.component(
           fontSize: t.fontSize.xs,
           color: t.color.text.primary,
           textTransform: 'uppercase',
-          letterSpacing: '0.06em',
+          letterSpacing: t.letterSpacing.caps,
           fontFamily: t.fontFamily.mono,
         },
         '& tr:last-child td': {

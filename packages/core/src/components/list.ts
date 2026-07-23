@@ -85,7 +85,7 @@ const listRecipe = styles.component(
           '&[data-interactive]': { cursor: 'pointer' },
           '&[data-interactive]:hover': { backgroundColor: v.hoverBg.var },
           '&[data-interactive]:active': { backgroundColor: v.pressBg.var },
-          '&[data-disabled]': { opacity: 0.5, pointerEvents: 'none' },
+          '&[data-disabled]': { opacity: t.opacity.disabled, pointerEvents: 'none' },
           '[data-has-dividers] >&:not(:last-child)': {
             borderBottom: `1px solid ${v.dividerColor.var}`,
           },

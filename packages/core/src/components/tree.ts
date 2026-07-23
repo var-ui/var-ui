@@ -100,7 +100,7 @@ const treeRecipe = styles.component(
             backgroundColor: v.selectedBg.var,
             fontWeight: t.fontWeight.medium,
           },
-          '&[data-disabled]': { opacity: 0.5, pointerEvents: 'none' },
+          '&[data-disabled]': { opacity: t.opacity.disabled, pointerEvents: 'none' },
         },
         toggle: {
           display: 'inline-flex',

@@ -69,7 +69,7 @@ export const card = styles.component(
         display: 'grid',
         gap: t.space[4],
         gridTemplateColumns: '1fr',
-        '@media (min-width: 640px)': {
+        [`@media (min-width: ${t.breakpoint.sm})`]: {
           gridTemplateColumns: 'repeat(2, 1fr)',
         },
       },

@@ -113,7 +113,7 @@ export const commandPalette = styles.component(
           [v.emptyColor.name]: t.color.text.secondary,
           position: 'fixed',
           inset: 0,
-          zIndex: 450,
+          zIndex: t.zIndex.overlay,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'flex-start',
@@ -134,7 +134,7 @@ export const commandPalette = styles.component(
         },
         dialog: {
           position: 'relative',
-          zIndex: 1,
+          zIndex: t.zIndex.raised,
           width: 'min(560px, 100%)',
           maxHeight: 'min(72vh, 640px)',
           display: 'flex',

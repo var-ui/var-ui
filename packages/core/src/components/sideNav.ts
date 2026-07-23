@@ -232,7 +232,7 @@ export const sideNav = styles.component(
         },
         '&[data-disabled]': {
           color: v.itemColor.var,
-          opacity: 0.5,
+          opacity: t.opacity.disabled,
           cursor: 'not-allowed',
           pointerEvents: 'none',
         },
