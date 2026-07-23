@@ -26,7 +26,7 @@ export const semanticTone = {
   success: {
     semantic: t.color.success.default,
     solidBg: t.color.success.solid,
-    solidFg: '#ffffff',
+    solidFg: t.color.text.onSuccess,
   },
   warning: {
     semantic: t.color.warning.default,
@@ -36,12 +36,12 @@ export const semanticTone = {
   danger: {
     semantic: t.color.danger.default,
     solidBg: t.color.danger.solid,
-    solidFg: '#ffffff',
+    solidFg: t.color.text.onDanger,
   },
   info: {
     semantic: t.color.info.default,
     solidBg: t.color.info.default,
-    solidFg: t.color.info.onSolid,
+    solidFg: t.color.text.onInfo,
   },
 } as const satisfies Record<
   SemanticToneKey,

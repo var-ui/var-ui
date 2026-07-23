@@ -10,6 +10,8 @@ exports[`createColorTheme > clamps chroma for a near-gray accent 1`] = `
     "background": {
       "app": "oklch(22.00% 0.005 0)",
       "elevated": "oklch(22.00% 0.005 0)",
+      "muted": "oklch(30.33% 0.007 0)",
+      "popover": "oklch(22.00% 0.005 0)",
       "subtle": "oklch(30.33% 0.007 0)",
       "surface": "oklch(22.00% 0.005 0)",
     },
@@ -71,6 +73,8 @@ exports[`createColorTheme > clamps chroma for a near-gray accent 1`] = `
     "background": {
       "app": "oklch(97.00% 0.002 0)",
       "elevated": "oklch(97.00% 0.002 0)",
+      "muted": "oklch(88.67% 0.005 0)",
+      "popover": "oklch(97.00% 0.002 0)",
       "subtle": "oklch(88.67% 0.005 0)",
       "surface": "oklch(97.00% 0.002 0)",
     },
@@ -127,7 +131,7 @@ exports[`createColorTheme > clamps chroma for a near-gray accent 1`] = `
 }
 `;
 
-exports[`createColorTheme > returns DesignColorValues-shaped light and dark for the default accent 1`] = `
+exports[`createColorTheme > returns color-shaped light and dark for the default accent 1`] = `
 {
   "dark": {
     "accent": {
@@ -137,6 +141,8 @@ exports[`createColorTheme > returns DesignColorValues-shaped light and dark for 
     "background": {
       "app": "oklch(22.00% 0.005 258.81008101651366)",
       "elevated": "oklch(22.00% 0.005 258.81008101651366)",
+      "muted": "oklch(30.33% 0.007 258.81008101651366)",
+      "popover": "oklch(22.00% 0.005 258.81008101651366)",
       "subtle": "oklch(30.33% 0.007 258.81008101651366)",
       "surface": "oklch(22.00% 0.005 258.81008101651366)",
     },
@@ -198,6 +204,8 @@ exports[`createColorTheme > returns DesignColorValues-shaped light and dark for 
     "background": {
       "app": "oklch(97.00% 0.002 258.81008101651366)",
       "elevated": "oklch(97.00% 0.002 258.81008101651366)",
+      "muted": "oklch(88.67% 0.005 258.81008101651366)",
+      "popover": "oklch(97.00% 0.002 258.81008101651366)",
       "subtle": "oklch(88.67% 0.005 258.81008101651366)",
       "surface": "oklch(97.00% 0.002 258.81008101651366)",
     },
@@ -264,6 +272,8 @@ exports[`createColorTheme > returns themes for a saturated pink accent 1`] = `
     "background": {
       "app": "oklch(22.00% 0.005 356.9447697294126)",
       "elevated": "oklch(22.00% 0.005 356.9447697294126)",
+      "muted": "oklch(30.33% 0.007 356.9447697294126)",
+      "popover": "oklch(22.00% 0.005 356.9447697294126)",
       "subtle": "oklch(30.33% 0.007 356.9447697294126)",
       "surface": "oklch(22.00% 0.005 356.9447697294126)",
     },
@@ -325,6 +335,8 @@ exports[`createColorTheme > returns themes for a saturated pink accent 1`] = `
     "background": {
       "app": "oklch(97.00% 0.002 356.9447697294126)",
       "elevated": "oklch(97.00% 0.002 356.9447697294126)",
+      "muted": "oklch(88.67% 0.005 356.9447697294126)",
+      "popover": "oklch(97.00% 0.002 356.9447697294126)",
       "subtle": "oklch(88.67% 0.005 356.9447697294126)",
       "surface": "oklch(97.00% 0.002 356.9447697294126)",
     },

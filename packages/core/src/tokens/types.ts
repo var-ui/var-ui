@@ -62,12 +62,17 @@ export type DesignTokens = {
       surface: string;
       subtle: string;
       elevated: string;
+      popover: string;
+      muted: string;
     };
     text: {
       primary: string;
       secondary: string;
       onAccent: string;
       onDanger: string;
+      onSuccess: string;
+      onWarning: string;
+      onInfo: string;
       disabled: string;
       placeholder: string;
     };
@@ -78,7 +83,17 @@ export type DesignTokens = {
     success: { default: string; solid: string; subtle: string; border: string };
     warning: { default: string; onSolid: string; subtle: string; border: string };
     info: { default: string; onSolid: string; subtle: string; border: string };
-    overlay: { default: string; backdrop: string };
+    link: { default: string; hover: string };
+    ring: { default: string };
+    overlay: {
+      default: string;
+      backdrop: string;
+      panel: string;
+      hover: string;
+      pressed: string;
+    };
+    skeleton: { default: string };
+    track: { default: string };
     syntax: {
       base: string;
       keyword: string;

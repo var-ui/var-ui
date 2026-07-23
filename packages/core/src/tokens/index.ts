@@ -20,6 +20,7 @@ export {
   transitionTokens,
   zIndexTokens,
 } from './primitives';
+export { color } from './color';
 export { colorTokens, designTokens, strokeTokens } from './register';
 export { createColorTheme } from './create-color-theme';
 export type {

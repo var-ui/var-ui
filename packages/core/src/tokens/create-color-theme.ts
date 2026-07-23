@@ -1,10 +1,7 @@
 import { color } from 'typestyles/color';
 import { contrastRatio, generateRamp, parseColor } from 'typestyles/color-scale';
-import {
-  defaultDarkSyntaxValues,
-  defaultLightSyntaxValues,
-  type DesignColorValues,
-} from './semantic';
+import { defaultDarkSyntaxValues, defaultLightSyntaxValues } from '../themes/default-values';
+import type { DesignTokenPack, DesignTokens } from './types';
 import { FAMILY_SPECS } from './palette';
 import {
   neoBrutalistShadowOffsetDark,
@@ -21,8 +18,8 @@ export type CreateColorThemeInput = {
 };
 
 export type CreateColorThemeResult = {
-  light: DesignColorValues;
-  dark: DesignColorValues;
+  light: DesignTokenPack['darkColor'];
+  dark: DesignTokenPack['darkColor'];
 };
 
 /**
@@ -40,15 +37,25 @@ const WHITE = color.oklch('100%', 0, 0);
 
 type Ramp = readonly string[];
 
+/**
+ * Color leaves sourced from palette ramp steps in light/dark mapping.
+ * Derived tokens (`onAccent`, `shadow`, `syntax`, …) are computed separately.
+ */
+type RampMappedColor = {
+  background: DesignTokens['color']['background'];
+  text: Pick<DesignTokens['color']['text'], 'primary' | 'secondary'>;
+  accent: Pick<DesignTokens['color']['accent'], 'default' | 'hover'>;
+  border: DesignTokens['color']['border'];
+  danger: Pick<DesignTokens['color']['danger'], 'default' | 'solid'>;
+  success: Pick<DesignTokens['color']['success'], 'default' | 'solid'>;
+  warning: Pick<DesignTokens['color']['warning'], 'default'>;
+  info: Pick<DesignTokens['color']['info'], 'default'>;
+};
+
 type LightSlotMap = {
-  background: { app: number; surface: number; subtle: number; elevated: number };
-  text: { primary: number; secondary: number };
-  accent: { default: number; hover: number };
-  border: { default: number; strong: number; focus: number };
-  danger: { default: number; solid: number };
-  success: { default: number; solid: number };
-  warning: { default: number };
-  info: { default: number };
+  [K in keyof RampMappedColor]: {
+    [P in keyof RampMappedColor[K]]: number;
+  };
 };
 
 /**
@@ -56,8 +63,8 @@ type LightSlotMap = {
  * theme accent `#0064E0` / sky-7 family. Dark mode mirrors via `mirrorStep`, except
  * `danger.solid` / `success.solid` which use step 7 (matches default/forest/rose themes).
  */
-const LIGHT_SLOTS: LightSlotMap = {
-  background: { app: 1, surface: 1, subtle: 2, elevated: 1 },
+const LIGHT_SLOTS = {
+  background: { app: 1, surface: 1, subtle: 2, elevated: 1, popover: 1, muted: 2 },
   text: { primary: 10, secondary: 7 },
   accent: { default: 7, hover: 8 },
   border: { default: 4, strong: 6, focus: 5 },
@@ -65,7 +72,7 @@ const LIGHT_SLOTS: LightSlotMap = {
   success: { default: 7, solid: 8 },
   warning: { default: 7 },
   info: { default: 7 },
-};
+} satisfies LightSlotMap;
 
 function rampAt(ramp: Ramp, step: number): string {
   return ramp[step - 1];
@@ -99,13 +106,15 @@ function mapLightColors(
   success: Ramp,
   warning: Ramp,
   info: Ramp,
-): DesignColorValues {
+) {
   const slots = LIGHT_SLOTS;
   const background = {
     app: rampAt(neutral, slots.background.app),
     surface: rampAt(neutral, slots.background.surface),
     subtle: rampAt(neutral, slots.background.subtle),
     elevated: rampAt(neutral, slots.background.elevated),
+    popover: rampAt(neutral, slots.background.popover),
+    muted: rampAt(neutral, slots.background.muted),
   };
 
   const accentDefault = rampAt(accent, slots.accent.default);
@@ -157,7 +166,7 @@ function mapDarkColors(
   warning: Ramp,
   info: Ramp,
   neutralHue: number,
-): DesignColorValues {
+) {
   const m = mirrorStep;
   const slots = LIGHT_SLOTS;
   const background = {
@@ -165,6 +174,8 @@ function mapDarkColors(
     surface: rampAt(neutral, m(slots.background.surface)),
     subtle: rampAt(neutral, m(slots.background.subtle)),
     elevated: rampAt(neutral, m(slots.background.elevated)),
+    popover: rampAt(neutral, m(slots.background.popover)),
+    muted: rampAt(neutral, m(slots.background.muted)),
   };
 
   const accentDefault = rampAt(accent, m(slots.accent.default));
@@ -210,13 +221,15 @@ function mapDarkColors(
 
 type ContrastPair = readonly [label: string, foreground: string, background: string];
 
-function asColorString(value: DesignColorValues['text']['primary']): string {
+function asColorString(value: DesignTokens['color']['text']['primary']): string {
   return String(value);
 }
 
+type GeneratedColorFace = ReturnType<typeof mapLightColors>;
+
 function validateContrast(
   mode: 'light' | 'dark',
-  colors: DesignColorValues,
+  colors: GeneratedColorFace,
   threshold: number,
 ): void {
   if (process.env.NODE_ENV === 'production') return;

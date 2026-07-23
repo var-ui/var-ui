@@ -1,5 +1,4 @@
-import { defaultLightColorValues } from '../themes/default-values';
-import { buildColorRegistrationValues } from './color';
+import { defaultColorTokenValues } from './default-color-values';
 import {
   borderWidthTokens,
   breakpointTokens,
@@ -21,10 +20,7 @@ import {
 } from './primitives';
 import { tokens } from '../runtime';
 
-export const colorTokens = tokens.create(
-  'color',
-  buildColorRegistrationValues(defaultLightColorValues),
-);
+export const colorTokens = tokens.create('color', defaultColorTokenValues);
 
 /** Full `border` / `border-*` shorthand built from width + semantic border color. */
 export const strokeTokens = tokens.create('stroke', {
