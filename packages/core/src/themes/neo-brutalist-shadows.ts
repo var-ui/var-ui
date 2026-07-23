@@ -1,4 +1,5 @@
 import { color } from 'typestyles/color';
+import { shadowElevationValues } from '../tokens/primitive';
 import type { DesignTokens } from '../tokens/types';
 
 /** Perceptual mix with page background — tune here for all themes. */
@@ -36,5 +37,6 @@ export function createNeoBrutalistShadow(offsetColor: string): DesignTokens['sha
     md: `3px 3px 0 0 ${offsetColor}`,
     lg: `4px 4px 0 0 ${offsetColor}`,
     xl: `5px 5px 0 0 ${offsetColor}`,
+    elevation: shadowElevationValues,
   };
 }

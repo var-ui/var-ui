@@ -97,12 +97,21 @@ export const lineHeightValues = {
 
 export type DesignShadowKeys = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export const shadowValues: Record<DesignShadowKeys, string> = {
+export const shadowElevationValues = {
+  low: '0 1px 2px color-mix(in oklch, var(--var-ui-color-text-primary) 8%, transparent)',
+  med: '0 4px 12px color-mix(in oklch, var(--var-ui-color-text-primary) 12%, transparent)',
+  high: '0 12px 32px color-mix(in oklch, var(--var-ui-color-text-primary) 16%, transparent)',
+} as const;
+
+export const shadowValues: Record<DesignShadowKeys, string> & {
+  elevation: typeof shadowElevationValues;
+} = {
   xs: '1px 1px 0 0 #000',
   sm: '2px 2px 0 0 #000',
   md: '3px 3px 0 0 #000',
   lg: '4px 4px 0 0 #000',
   xl: '5px 5px 0 0 #000',
+  elevation: shadowElevationValues,
 };
 
 // ratio: 0.75, roundTo: 5 (TypeStyles default) — bands for motion recipes.

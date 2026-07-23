@@ -5,6 +5,7 @@ import {
   letterSpacingValues,
   opacityValues,
   radiusValues,
+  shadowValues,
   sizeValues,
   spaceValues,
 } from './primitive';
@@ -115,5 +116,11 @@ describe('primitive token scales', () => {
         "wide": "0.025em",
       }
     `);
+  });
+
+  it('includes soft elevation shadows', () => {
+    expect(shadowValues.elevation.low).toMatch(/color-mix/);
+    expect(shadowValues.elevation.med).toMatch(/0 4px 12px/);
+    expect(shadowValues.elevation.high).toMatch(/0 12px 32px/);
   });
 });

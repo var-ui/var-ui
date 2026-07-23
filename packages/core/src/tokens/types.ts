@@ -78,7 +78,7 @@ export type DesignTokens = {
     };
     accent: { default: string; hover: string; subtle: string };
     border: { default: string; strong: string; focus: string };
-    shadow: { offset: string };
+    shadow: { offset: string; color: string };
     danger: { default: string; solid: string; subtle: string; border: string };
     success: { default: string; solid: string; subtle: string; border: string };
     warning: { default: string; onSolid: string; subtle: string; border: string };

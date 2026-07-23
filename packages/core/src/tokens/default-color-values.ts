@@ -40,6 +40,7 @@ export const defaultColorTokenValues = {
   },
   shadow: {
     offset: neoBrutalistShadowOffsetLight(defaultLightSubtle),
+    color: `color-mix(in oklch, ${color.text.primary} 12%, transparent)`,
   },
   danger: {
     default: defaultLightColorValues.danger!.default,
