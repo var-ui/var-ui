@@ -1,12 +1,12 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
-export const radio = styles.component(
+export const radio = typestyles.styles.component(
   'radio',
   (c) => {
     const v = c.vars({
       controlBorder: {
-        value: `${t.color.border.strong}`,
+        value: t.color.border.strong.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -16,7 +16,7 @@ export const radio = styles.component(
         inherits: false,
       },
       groupLabelColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -25,18 +25,18 @@ export const radio = styles.component(
       slots: ['group', 'item', 'control', 'label', 'groupLabel'],
       group: {
         display: 'grid',
-        gap: t.space[1],
+        gap: t.space[1].var,
       },
       item: {
         display: 'inline-flex',
         alignItems: 'center',
-        gap: t.space[2],
+        gap: t.space[2].var,
         cursor: 'pointer',
       },
       control: {
         width: '18px',
         height: '18px',
-        borderRadius: t.radius.full,
+        borderRadius: t.radius.full.var,
         border: `1px solid ${v.controlBorder.var}`,
         display: 'inline-flex',
         alignItems: 'center',
@@ -45,20 +45,20 @@ export const radio = styles.component(
           content: '""',
           width: '8px',
           height: '8px',
-          borderRadius: t.radius.full,
+          borderRadius: t.radius.full.var,
           backgroundColor: v.indicatorBackground.var,
           transition: 'background-color 120ms ease',
         },
         '&[data-selected]::before': {
-          [v.indicatorBackground.name]: t.color.accent.default,
+          [v.indicatorBackground.name]: t.color.accent.default.var,
         },
       },
       label: {
-        fontSize: t.fontSize.md,
+        fontSize: t.fontSize.md.var,
       },
       groupLabel: {
-        fontSize: t.fontSize.md,
-        fontWeight: t.fontWeight.medium,
+        fontSize: t.fontSize.md.var,
+        fontWeight: t.fontWeight.medium.var,
         color: v.groupLabelColor.var,
       },
     };

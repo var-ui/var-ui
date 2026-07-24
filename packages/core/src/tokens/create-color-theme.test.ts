@@ -59,7 +59,7 @@ function assertDesignColorShape(values: DesignTokenPack['darkColor']): void {
   expect(values.info).toMatchObject({ default: expect.any(String), onSolid: expect.any(String) });
   expect(values.overlay).toMatchObject({ default: expect.any(String), panel: expect.any(String) });
   expect(values.link).toMatchObject({ default: expect.any(String), hover: expect.any(String) });
-  expect(values.syntax).toMatchObject({
+  expect(values.code).toMatchObject({
     base: expect.any(String),
     keyword: expect.any(String),
     title: expect.any(String),

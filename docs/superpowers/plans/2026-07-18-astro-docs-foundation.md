@@ -12,14 +12,14 @@
 
 ## Scope of this plan vs follow-ups
 
-| This plan (foundation) | Follow-up plan(s) |
-| --- | --- |
-| Astro scaffold + Netlify adapter | Migrate all remaining demos (Alert…Chat…) |
-| Framework cookie + header switcher | Framework-aware PropsTable (Astro/HTML) |
-| Demo registry + DemoHost | Homepage bento three-framework completeness |
-| Button page fully migrated (`button.*` ids) | Remove any leftover TanStack-only assets |
-| Minimal routes: home, docs/getting-started, components/button | Port all MDX pages + search parity |
-| Keep React props extraction for Button | ROADMAP V5 site-framework note (can land here if trivial) |
+| This plan (foundation)                                        | Follow-up plan(s)                                         |
+| ------------------------------------------------------------- | --------------------------------------------------------- |
+| Astro scaffold + Netlify adapter                              | Migrate all remaining demos (Alert…Chat…)                 |
+| Framework cookie + header switcher                            | Framework-aware PropsTable (Astro/HTML)                   |
+| Demo registry + DemoHost                                      | Homepage bento three-framework completeness               |
+| Button page fully migrated (`button.*` ids)                   | Remove any leftover TanStack-only assets                  |
+| Minimal routes: home, docs/getting-started, components/button | Port all MDX pages + search parity                        |
+| Keep React props extraction for Button                        | ROADMAP V5 site-framework note (can land here if trivial) |
 
 **Do not merge to main as “docs cutover complete” until the follow-up plan’s completeness gate is green** (every MDX `<Demo id>` has react/astro/html). This branch may replace the TanStack stack in `docs/` while incomplete pages are stubs or omitted.
 
@@ -37,15 +37,15 @@
 
 ### File map
 
-| Area | Path |
-| --- | --- |
-| Package / Astro config | `docs/package.json`, `docs/astro.config.mjs`, `docs/tsconfig.json`, `docs/typestyles-entry.ts` |
-| Framework preference | `docs/src/lib/framework.ts`, `docs/src/lib/framework.test.ts`, `docs/src/middleware.ts` |
-| Chrome | `docs/src/layouts/BaseLayout.astro`, `docs/src/components/FrameworkSwitcher.astro`, `docs/src/components/DocsChrome.astro` |
-| Demo system | `docs/src/components/DemoHost.astro`, `docs/src/components/DemoReactIsland.tsx`, `docs/src/demos/registry.ts`, `docs/src/demos/registry.test.ts`, `docs/src/demos/button/**` |
-| Pages | `docs/src/pages/index.astro`, `docs/src/pages/docs/[...slug].astro`, `docs/src/pages/components/[slug].astro` |
-| Content | `docs/content/components/button.mdx` (id-based), stub getting-started |
-| Remove / stop using | TanStack routes under `docs/src/routes/**`, old `Demo.tsx` children API, `vite.config.ts` TanStack Start plugin (replace with Astro) |
+| Area                   | Path                                                                                                                                                                         |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Package / Astro config | `docs/package.json`, `docs/astro.config.mjs`, `docs/tsconfig.json`, `docs/typestyles-entry.ts`                                                                               |
+| Framework preference   | `docs/src/lib/framework.ts`, `docs/src/lib/framework.test.ts`, `docs/src/middleware.ts`                                                                                      |
+| Chrome                 | `docs/src/layouts/BaseLayout.astro`, `docs/src/components/FrameworkSwitcher.astro`, `docs/src/components/DocsChrome.astro`                                                   |
+| Demo system            | `docs/src/components/DemoHost.astro`, `docs/src/components/DemoReactIsland.tsx`, `docs/src/demos/registry.ts`, `docs/src/demos/registry.test.ts`, `docs/src/demos/button/**` |
+| Pages                  | `docs/src/pages/index.astro`, `docs/src/pages/docs/[...slug].astro`, `docs/src/pages/components/[slug].astro`                                                                |
+| Content                | `docs/content/components/button.mdx` (id-based), stub getting-started                                                                                                        |
+| Remove / stop using    | TanStack routes under `docs/src/routes/**`, old `Demo.tsx` children API, `vite.config.ts` TanStack Start plugin (replace with Astro)                                         |
 
 ---
 
@@ -237,11 +237,7 @@ git commit -m "feat(docs): scaffold Astro + Netlify docs package"
 ```ts
 // docs/src/lib/framework.test.ts
 import { describe, expect, it } from 'vite-plus/test';
-import {
-  FRAMEWORK_COOKIE,
-  parseFrameworkCookie,
-  readFrameworkFromCookieHeader,
-} from './framework';
+import { FRAMEWORK_COOKIE, parseFrameworkCookie, readFrameworkFromCookieHeader } from './framework';
 
 describe('parseFrameworkCookie', () => {
   it('defaults to react when missing or invalid', () => {
@@ -278,7 +274,11 @@ export type DocsFramework = 'react' | 'astro' | 'html';
 
 export const FRAMEWORK_COOKIE = 'var-ui-framework';
 
-export const DOCS_FRAMEWORKS = ['react', 'astro', 'html'] as const satisfies readonly DocsFramework[];
+export const DOCS_FRAMEWORKS = [
+  'react',
+  'astro',
+  'html',
+] as const satisfies readonly DocsFramework[];
 
 export function parseFrameworkCookie(value: string | undefined | null): DocsFramework {
   if (value === 'react' || value === 'astro' || value === 'html') return value;
@@ -287,9 +287,7 @@ export function parseFrameworkCookie(value: string | undefined | null): DocsFram
 
 export function readFrameworkFromCookieHeader(cookieHeader: string | null): DocsFramework {
   if (!cookieHeader) return 'react';
-  const match = cookieHeader.match(
-    new RegExp(`(?:^|;\\s*)${FRAMEWORK_COOKIE}=([^;]*)`),
-  );
+  const match = cookieHeader.match(new RegExp(`(?:^|;\\s*)${FRAMEWORK_COOKIE}=([^;]*)`));
   return parseFrameworkCookie(match?.[1] ? decodeURIComponent(match[1]) : undefined);
 }
 ```
@@ -519,11 +517,7 @@ Variants / disabled: match existing `ButtonDemo.tsx` layout with `HStack` (React
 ```tsx
 import { createElement, type ComponentType } from 'react';
 
-export default function DemoReactIsland({
-  Preview,
-}: {
-  Preview: ComponentType;
-}) {
+export default function DemoReactIsland({ Preview }: { Preview: ComponentType }) {
   return createElement(Preview);
 }
 ```

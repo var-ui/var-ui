@@ -1,5 +1,5 @@
 import { keyframes } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 const slide = keyframes.create('var-ui-progress-slide', {
@@ -11,17 +11,17 @@ const slide = keyframes.create('var-ui-progress-slide', {
  * Linear progress. Fill width is set inline by the React wrapper
  * (percentage); the `indeterminate` variant animates a sliding segment.
  */
-export const progressBar = styles.component(
+export const progressBar = typestyles.styles.component(
   'progress-bar',
   (c) => {
     const v = c.vars({
       trackColor: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       fillColor: {
-        value: `${t.color.accent.default}`,
+        value: t.color.accent.default.var,
         syntax: '<color>',
         inherits: true,
       },
@@ -29,13 +29,13 @@ export const progressBar = styles.component(
     return {
       slots: ['root', 'header', 'label', 'valueText', 'track', 'fill'],
       base: {
-        root: { display: 'grid', gap: t.space[1], minWidth: '160px' },
-        header: { display: 'flex', justifyContent: 'space-between', gap: t.space[3] },
-        label: { fontSize: t.fontSize.sm, fontWeight: t.fontWeight.medium },
-        valueText: { fontSize: t.fontSize.sm, color: t.color.text.secondary },
+        root: { display: 'grid', gap: t.space[1].var, minWidth: '160px' },
+        header: { display: 'flex', justifyContent: 'space-between', gap: t.space[3].var },
+        label: { fontSize: t.fontSize.sm.var, fontWeight: t.fontWeight.medium.var },
+        valueText: { fontSize: t.fontSize.sm.var, color: t.color.text.secondary.var },
         track: {
           height: '6px',
-          borderRadius: t.radius.full,
+          borderRadius: t.radius.full.var,
           backgroundColor: v.trackColor.var,
           overflow: 'hidden',
         },
@@ -43,15 +43,15 @@ export const progressBar = styles.component(
           height: '100%',
           borderRadius: 'inherit',
           backgroundColor: v.fillColor.var,
-          transition: `width ${t.duration.medium} ${t.easing.standard}`,
+          transition: `width ${t.duration.medium.var} ${t.easing.standard.var}`,
         },
       },
       variants: {
         tone: {
           accent: {},
-          success: { root: { [v.fillColor.name]: t.color.success.solid } },
-          warning: { root: { [v.fillColor.name]: t.color.warning.default } },
-          danger: { root: { [v.fillColor.name]: t.color.danger.solid } },
+          success: { root: { [v.fillColor.name]: t.color.success.solid.var } },
+          warning: { root: { [v.fillColor.name]: t.color.warning.default.var } },
+          danger: { root: { [v.fillColor.name]: t.color.danger.solid.var } },
         },
         indeterminate: {
           true: {

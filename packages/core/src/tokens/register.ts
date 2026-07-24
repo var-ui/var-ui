@@ -1,51 +1,18 @@
-import { defaultColorTokenValues } from './default-color-values';
-import {
-  borderWidthTokens,
-  breakpointTokens,
-  durationTokens,
-  easingTokens,
-  fontFamilyTokens,
-  fontSizeTokens,
-  fontWeightTokens,
-  letterSpacingTokens,
-  lineHeightTokens,
-  opacityTokens,
-  paletteTokens,
-  radiusTokens,
-  shadowTokens,
-  sizeTokens,
-  spaceTokens,
-  transitionTokens,
-  zIndexTokens,
-} from './primitives';
-import { tokens } from '../runtime';
+import { tokens } from './declare';
+import { defaultTokenValues } from '../themes/default-values';
+import { typestyles } from '../runtime';
+import { basePaletteTokenValues } from './palette';
 
-export const colorTokens = tokens.create('color', defaultColorTokenValues);
-
-/** Full `border` / `border-*` shorthand built from width + semantic border color. */
-export const strokeTokens = tokens.create('stroke', {
-  default: `${borderWidthTokens.default} solid ${colorTokens.border.default}`,
-  strong: `${borderWidthTokens.default} solid ${colorTokens.border.strong}`,
-});
-
-export const designTokens = {
-  palette: paletteTokens,
-  space: spaceTokens,
-  size: sizeTokens,
-  opacity: opacityTokens,
-  letterSpacing: letterSpacingTokens,
-  radius: radiusTokens,
-  borderWidth: borderWidthTokens,
-  fontFamily: fontFamilyTokens,
-  fontSize: fontSizeTokens,
-  fontWeight: fontWeightTokens,
-  lineHeight: lineHeightTokens,
-  shadow: shadowTokens,
-  duration: durationTokens,
-  easing: easingTokens,
-  transition: transitionTokens,
-  breakpoint: breakpointTokens,
-  zIndex: zIndexTokens,
-  color: colorTokens,
-  stroke: strokeTokens,
-} as const;
+/** Registered design token refs — consumed by recipes and theme surfaces. */
+export const designTokens = typestyles.tokens.create(
+  '',
+  {
+    palette: basePaletteTokenValues,
+    ...defaultTokenValues,
+    stroke: {
+      default: `${tokens.borderWidth.default.var} solid ${tokens.color.border.default.var}`,
+      strong: `${tokens.borderWidth.default.var} solid ${tokens.color.border.strong.var}`,
+    },
+  },
+  { decl: tokens },
+) as unknown as typeof tokens;

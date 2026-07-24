@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -9,11 +9,11 @@ import { designTokens as t } from '../tokens';
  * <hr className={divider()} />
  * ```
  */
-export const divider = styles.component(
+export const divider = typestyles.styles.component(
   'divider',
   (c) => {
     const v = c.vars({
-      color: { value: `${t.color.border.default}`, syntax: '<color>', inherits: false },
+      color: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
     });
     return {
       base: {

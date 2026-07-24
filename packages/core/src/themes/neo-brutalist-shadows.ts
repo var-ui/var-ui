@@ -1,6 +1,13 @@
 import { color } from 'typestyles/color';
-import { shadowElevationValues } from '../tokens/primitive';
+import { tokens } from '../tokens/declare';
 import type { DesignTokens } from '../tokens/types';
+
+/** Soft elevation shadows shared across theme packs (hard neo-brutalist offsets are separate). */
+const shadowElevationValues: DesignTokens['shadow']['elevation'] = {
+  low: `0 1px 2px color-mix(in oklch, ${tokens.color.text.primary.var} 8%, transparent)`,
+  med: `0 4px 12px color-mix(in oklch, ${tokens.color.text.primary.var} 12%, transparent)`,
+  high: `0 12px 32px color-mix(in oklch, ${tokens.color.text.primary.var} 16%, transparent)`,
+};
 
 /** Perceptual mix with page background — tune here for all themes. */
 const shadowOffsetLightAlpha = 0.5;

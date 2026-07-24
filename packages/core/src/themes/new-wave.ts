@@ -1,6 +1,6 @@
 import { color } from 'typestyles/color';
 import { createDesignTheme } from '../create-theme';
-import { tokens } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as p } from '../tokens';
 import type { DesignTokenPack } from '../types';
 import { defaultDarkSyntaxValues, defaultLightSyntaxValues } from './default-values';
@@ -36,10 +36,10 @@ const newWaveLightColorValues = {
     primary: '#151329',
     secondary: '#4F3D7A',
     onAccent: '#151329',
-    onDanger: p.palette['neutral-1'],
-    onSuccess: p.palette['neutral-1'],
+    onDanger: p.palette['neutral-1'].var,
+    onSuccess: p.palette['neutral-1'].var,
     onWarning: '#151329',
-    onInfo: p.palette['neutral-1'],
+    onInfo: p.palette['neutral-1'].var,
   },
   accent: { default: '#FF4FD8', hover: '#D934B6' },
   border: {
@@ -48,16 +48,16 @@ const newWaveLightColorValues = {
     focus: '#00D7FF',
   },
   shadow: { offset: '#00D7FF' },
-  danger: { default: p.palette['red-7'], solid: p.palette['red-8'] },
+  danger: { default: p.palette['red-7'].var, solid: p.palette['red-8'].var },
   success: { default: '#00A878', solid: '#00845F' },
   warning: { default: '#F06C00', onSolid: '#151329' },
-  info: { default: '#5D5FEF', onSolid: p.palette['neutral-1'] },
+  info: { default: '#5D5FEF', onSolid: p.palette['neutral-1'].var },
   overlay: {
     default: color.alpha('#151329', 0.55, 'oklch'),
     panel: '#FFFFFF',
   },
   link: { default: '#FF4FD8', hover: '#D934B6' },
-  syntax: newWaveLightSyntaxValues,
+  code: newWaveLightSyntaxValues,
 };
 
 const newWaveDarkColorValues = {
@@ -73,8 +73,8 @@ const newWaveDarkColorValues = {
     primary: '#FFF8A8',
     secondary: '#B9B0F7',
     onAccent: '#151329',
-    onDanger: p.palette['neutral-1'],
-    onSuccess: p.palette['neutral-1'],
+    onDanger: p.palette['neutral-1'].var,
+    onSuccess: p.palette['neutral-1'].var,
     onWarning: '#151329',
     onInfo: '#151329',
   },
@@ -85,7 +85,7 @@ const newWaveDarkColorValues = {
     focus: '#FF4FD8',
   },
   shadow: { offset: '#FF4FD8' },
-  danger: { default: p.palette['red-4'], solid: p.palette['red-7'] },
+  danger: { default: p.palette['red-4'].var, solid: p.palette['red-7'].var },
   success: { default: '#8BFF5C', solid: '#00A878' },
   warning: { default: '#FFF45C', onSolid: '#151329' },
   info: { default: '#00D7FF', onSolid: '#151329' },
@@ -94,7 +94,7 @@ const newWaveDarkColorValues = {
     panel: '#25204E',
   },
   link: { default: '#8BFF5C', hover: '#B9FF66' },
-  syntax: newWaveDarkSyntaxValues,
+  code: newWaveDarkSyntaxValues,
 };
 
 const newWavePrimitiveValues = {
@@ -176,11 +176,13 @@ export const newWaveTheme = createDesignTheme({
     {
       id: 'dark-elevation-shadow',
       overrides: { shadow: newWaveDarkShadow },
-      when: tokens.when.or(
-        tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
-        tokens.when.and(
-          tokens.when.not(tokens.when.attr('data-mode', 'light', { scope: 'self' })),
-          tokens.when.prefersDark,
+      when: typestyles.tokens.when.or(
+        typestyles.tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
+        typestyles.tokens.when.and(
+          typestyles.tokens.when.not(
+            typestyles.tokens.when.attr('data-mode', 'light', { scope: 'self' }),
+          ),
+          typestyles.tokens.when.prefersDark,
         ),
       ),
     },

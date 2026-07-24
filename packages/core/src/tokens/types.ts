@@ -1,21 +1,4 @@
-import type { breakpointValues, zIndexValues } from './layout';
 import type { basePaletteTokenValues } from './palette';
-import type {
-  borderWidthValues,
-  durationValues,
-  easingValues,
-  fontFamilyValues,
-  fontSizeValues,
-  fontWeightValues,
-  letterSpacingValues,
-  lineHeightValues,
-  opacityValues,
-  radiusValues,
-  shadowValues,
-  sizeValues,
-  spaceValues,
-  transitionValues,
-} from './primitive';
 
 type TokenLeaf = string | number;
 
@@ -36,26 +19,93 @@ type ThemeOverridableNamespace = Exclude<keyof DesignTokens, 'palette' | 'stroke
 
 /**
  * Canonical Var UI token tree — single source of truth for namespace structure.
- * Primitive namespaces mirror `tokens.create` registrations.
+ * Registered under an empty TypeStyles namespace; CSS vars use `scopeId` only (`--var-ui-*`).
  */
 export type DesignTokens = {
   palette: WidenLeaves<typeof basePaletteTokenValues>;
-  space: WidenLeaves<typeof spaceValues>;
-  size: WidenLeaves<typeof sizeValues>;
-  opacity: WidenLeaves<typeof opacityValues>;
-  letterSpacing: WidenLeaves<typeof letterSpacingValues>;
-  radius: WidenLeaves<typeof radiusValues>;
-  borderWidth: WidenLeaves<typeof borderWidthValues>;
-  fontFamily: WidenLeaves<typeof fontFamilyValues>;
-  fontSize: WidenLeaves<typeof fontSizeValues>;
-  fontWeight: WidenLeaves<typeof fontWeightValues>;
-  lineHeight: WidenLeaves<typeof lineHeightValues>;
-  shadow: WidenLeaves<typeof shadowValues>;
-  duration: WidenLeaves<typeof durationValues>;
-  easing: WidenLeaves<typeof easingValues>;
-  transition: WidenLeaves<typeof transitionValues>;
-  breakpoint: WidenLeaves<typeof breakpointValues>;
-  zIndex: WidenLeaves<typeof zIndexValues>;
+  space: {
+    0: string;
+    1: string;
+    2: string;
+    3: string;
+    4: string;
+    5: string;
+    6: string;
+    7: string;
+    8: string;
+    9: string;
+    10: string;
+    11: string;
+    12: string;
+    16: string;
+    20: string;
+  };
+  size: {
+    control: { sm: string; md: string; lg: string };
+    icon: { sm: string; md: string; lg: string };
+  };
+  opacity: { disabled: string; muted: string };
+  letterSpacing: { tight: string; normal: string; wide: string; caps: string };
+  radius: {
+    none: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    full: string;
+  };
+  borderWidth: { thin: string; default: string; thick: string };
+  fontFamily: { display: string; sans: string; mono: string };
+  fontSize: {
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    '2xl': string;
+    '3xl': string;
+  };
+  fontWeight: { normal: string; medium: string; semibold: string; bold: string };
+  lineHeight: { tight: string; normal: string; relaxed: string };
+  shadow: {
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    elevation: { low: string; med: string; high: string };
+  };
+  duration: {
+    fast: string;
+    medium: string;
+    slow: string;
+    'fast-min': string;
+    'fast-max': string;
+    'medium-min': string;
+    'medium-max': string;
+    'slow-min': string;
+    'slow-max': string;
+  };
+  easing: { standard: string; emphasized: string };
+  transition: {
+    overlayFade: string;
+    panelEnter: string;
+    backdrop: string;
+    surfaceFast: string;
+    colorShift: string;
+    controlSurface: string;
+  };
+  breakpoint: { sm: string; md: string; lg: string; xl: string };
+  zIndex: {
+    base: number;
+    raised: number;
+    sticky: number;
+    dropdown: number;
+    overlay: number;
+    toast: number;
+    modal: number;
+    max: number;
+  };
   color: {
     background: {
       app: string;
@@ -94,7 +144,7 @@ export type DesignTokens = {
     };
     skeleton: { default: string };
     track: { default: string };
-    syntax: {
+    code: {
       base: string;
       keyword: string;
       title: string;

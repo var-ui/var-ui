@@ -5,7 +5,7 @@ import { extendTokens, resetExtendTokenRegistry } from './extend-tokens';
 import { overrideComponent } from './override-component';
 import { button } from './components/button';
 import { badge } from './components/badge';
-import { defaultTokens } from './themes/default-values';
+import { defaultTokens } from './themes/default-pack';
 
 const themeClass = (name: string) => `.theme-var-ui-${name}`;
 
@@ -67,7 +67,7 @@ describe('extendTokens + createDesignTheme extend/components', () => {
       components: {
         button: (t) => ({
           base: {
-            borderRadius: t.radius.lg,
+            borderRadius: t.radius.lg.var,
           },
           variants: {
             intent: {

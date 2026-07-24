@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -8,17 +8,17 @@ import { designTokens as t } from '../tokens';
  * <kbd className={kbd()}>⌘K</kbd>
  * ```
  */
-export const kbd = styles.component(
+export const kbd = typestyles.styles.component(
   'kbd',
   (c) => {
     const v = c.vars({
       background: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       border: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -26,16 +26,16 @@ export const kbd = styles.component(
     return {
       base: {
         display: 'inline-block',
-        padding: `1px ${t.space[1]}`,
-        fontFamily: t.fontFamily.mono,
-        fontSize: t.fontSize.xs,
-        fontWeight: t.fontWeight.medium,
-        lineHeight: t.lineHeight.normal,
-        color: t.color.text.secondary,
+        padding: `1px ${t.space[1].var}`,
+        fontFamily: t.fontFamily.mono.var,
+        fontSize: t.fontSize.xs.var,
+        fontWeight: t.fontWeight.medium.var,
+        lineHeight: t.lineHeight.normal.var,
+        color: t.color.text.secondary.var,
         backgroundColor: v.background.var,
         border: `1px solid ${v.border.var}`,
         borderBottomWidth: '2px',
-        borderRadius: t.radius.sm,
+        borderRadius: t.radius.sm.var,
         whiteSpace: 'nowrap',
       },
     };

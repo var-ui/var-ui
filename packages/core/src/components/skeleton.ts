@@ -1,5 +1,5 @@
 import { keyframes } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 const shimmer = keyframes.create('var-ui-shimmer', {
@@ -15,17 +15,17 @@ const shimmer = keyframes.create('var-ui-shimmer', {
  * <div className={skeleton({ shape: 'text' })} style={{ width: '12ch' }} />
  * ```
  */
-export const skeleton = styles.component(
+export const skeleton = typestyles.styles.component(
   'skeleton',
   (c) => {
     const v = c.vars({
       baseColor: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       highlightColor: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -44,8 +44,8 @@ export const skeleton = styles.component(
       },
       variants: {
         shape: {
-          text: { height: '1em', borderRadius: t.radius.sm },
-          rect: { borderRadius: t.radius.md },
+          text: { height: '1em', borderRadius: t.radius.sm.var },
+          rect: { borderRadius: t.radius.md.var },
           circle: { borderRadius: '50%', aspectRatio: '1' },
         },
       },

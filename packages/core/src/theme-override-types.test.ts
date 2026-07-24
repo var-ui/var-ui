@@ -63,7 +63,7 @@ describe('OverrideConfigFor / ThemeComponentsConfig typing', () => {
   it('types createDesignTheme components map per recipe', () => {
     const components: ThemeComponentsConfig = {
       button: (t) => ({
-        base: { boxShadow: t.shadow.md, borderRadius: t.radius.lg },
+        base: { boxShadow: t.shadow.md.var, borderRadius: t.radius.lg.var },
         variants: {
           intent: {
             primary: { textTransform: 'uppercase' },

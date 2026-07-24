@@ -1,6 +1,6 @@
 import { color } from 'typestyles/color';
 import { createDesignTheme } from '../create-theme';
-import { tokens } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as p } from '../tokens';
 import type { DesignTokenPack } from '../types';
 import { defaultDarkSyntaxValues, defaultLightSyntaxValues } from './default-values';
@@ -39,7 +39,7 @@ const classicLightColorValues = {
     panel: '#FFFFFF',
   },
   link: { default: '#000000', hover: '#333333' },
-  syntax: defaultLightSyntaxValues,
+  code: defaultLightSyntaxValues,
 };
 
 const classicDarkColorValues = {
@@ -67,16 +67,16 @@ const classicDarkColorValues = {
     focus: '#FFFFFF',
   },
   shadow: { offset: '#FFFFFF' },
-  danger: { default: p.palette['red-3'], solid: p.palette['red-3'] },
-  success: { default: p.palette['green-3'], solid: p.palette['green-3'] },
-  warning: { default: p.palette['amber-3'], onSolid: '#000000' },
+  danger: { default: p.palette['red-3'].var, solid: p.palette['red-3'].var },
+  success: { default: p.palette['green-3'].var, solid: p.palette['green-3'].var },
+  warning: { default: p.palette['amber-3'].var, onSolid: '#000000' },
   info: { default: '#FFFFFF', onSolid: '#000000' },
   overlay: {
     default: color.alpha('#000000', 0.72, 'srgb'),
     panel: '#202020',
   },
   link: { default: '#FFFFFF', hover: '#E0E0E0' },
-  syntax: defaultDarkSyntaxValues,
+  code: defaultDarkSyntaxValues,
 };
 
 const classicPrimitiveValues = {
@@ -158,11 +158,13 @@ export const classicSystemTheme = createDesignTheme({
     {
       id: 'dark-elevation-shadow',
       overrides: { shadow: classicDarkShadow },
-      when: tokens.when.or(
-        tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
-        tokens.when.and(
-          tokens.when.not(tokens.when.attr('data-mode', 'light', { scope: 'self' })),
-          tokens.when.prefersDark,
+      when: typestyles.tokens.when.or(
+        typestyles.tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
+        typestyles.tokens.when.and(
+          typestyles.tokens.when.not(
+            typestyles.tokens.when.attr('data-mode', 'light', { scope: 'self' }),
+          ),
+          typestyles.tokens.when.prefersDark,
         ),
       ),
     },

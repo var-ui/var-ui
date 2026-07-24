@@ -1,6 +1,6 @@
-import { designTokens, global } from '@var-ui/core';
+import { designTokens, typestyles } from '@var-ui/core';
 
-global.style('body', {
+typestyles.global.style('body', {
   margin: 0,
   minHeight: '100%',
   fontFamily: designTokens.fontFamily.sans,
@@ -17,6 +17,6 @@ global.style('body', {
 // Form controls don't inherit fonts by default (UA styles win), so buttons and
 // inputs would render in the platform font instead of the theme's. Recipes that
 // want a different face (e.g. kbd/code) still override in the components layer.
-global.style('button, input, select, textarea', {
+typestyles.global.style('button, input, select, textarea', {
   font: 'inherit',
 });

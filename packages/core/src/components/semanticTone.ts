@@ -10,38 +10,38 @@ export const subtleMix = {
 } as const;
 
 export function subtleBackgroundColor(driver: string): string {
-  return `color-mix(in srgb, ${driver} ${subtleMix.surface}, ${t.color.background.surface})`;
+  return `color-mix(in srgb, ${driver} ${subtleMix.surface}, ${t.color.background.surface.var})`;
 }
 
 export function subtleBorderColor(driver: string): string {
-  return `color-mix(in srgb, ${driver} ${subtleMix.border}, ${t.color.border.default})`;
+  return `color-mix(in srgb, ${driver} ${subtleMix.border}, ${t.color.border.default.var})`;
 }
 
 export const semanticTone = {
   accent: {
-    semantic: t.color.accent.default,
-    solidBg: t.color.accent.default,
-    solidFg: t.color.text.onAccent,
+    semantic: t.color.accent.default.var,
+    solidBg: t.color.accent.default.var,
+    solidFg: t.color.text.onAccent.var,
   },
   success: {
-    semantic: t.color.success.default,
-    solidBg: t.color.success.solid,
-    solidFg: t.color.text.onSuccess,
+    semantic: t.color.success.default.var,
+    solidBg: t.color.success.solid.var,
+    solidFg: t.color.text.onSuccess.var,
   },
   warning: {
-    semantic: t.color.warning.default,
-    solidBg: t.color.warning.default,
-    solidFg: t.color.warning.onSolid,
+    semantic: t.color.warning.default.var,
+    solidBg: t.color.warning.default.var,
+    solidFg: t.color.warning.onSolid.var,
   },
   danger: {
-    semantic: t.color.danger.default,
-    solidBg: t.color.danger.solid,
-    solidFg: t.color.text.onDanger,
+    semantic: t.color.danger.default.var,
+    solidBg: t.color.danger.solid.var,
+    solidFg: t.color.text.onDanger.var,
   },
   info: {
-    semantic: t.color.info.default,
-    solidBg: t.color.info.default,
-    solidFg: t.color.text.onInfo,
+    semantic: t.color.info.default.var,
+    solidBg: t.color.info.default.var,
+    solidFg: t.color.text.onInfo.var,
   },
 } as const satisfies Record<
   SemanticToneKey,

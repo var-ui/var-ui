@@ -1,11 +1,11 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 const TAB_LIST_SLOTS = ['root', 'tab', 'indicator', 'menu', 'menuTrigger'] as const;
 
 /**
  * Explicit variant-dimension shape (values left as `{}` — only the keys matter for the
- * `styles.component` call signature); see `appShell.ts` for why this pins the
+ * `typestyles.styles.component` call signature); see `appShell.ts` for why this pins the
  * slot-with-variants overload.
  */
 type TabListVariantDefs = {
@@ -32,32 +32,32 @@ type TabListVariantDefs = {
  * </nav>
  * ```
  */
-export const tabList = styles.component<typeof TAB_LIST_SLOTS, TabListVariantDefs>(
+export const tabList = typestyles.styles.component<typeof TAB_LIST_SLOTS, TabListVariantDefs>(
   'tab-list',
   (c) => {
     const v = c.vars({
       tabColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       tabSelectedColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       tabHoverBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       indicatorColor: {
-        value: `${t.color.accent.default}`,
+        value: t.color.accent.default.var,
         syntax: '<color>',
         inherits: false,
       },
       dividerColor: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -70,7 +70,7 @@ export const tabList = styles.component<typeof TAB_LIST_SLOTS, TabListVariantDef
           position: 'relative',
           display: 'inline-flex',
           alignItems: 'stretch',
-          gap: t.space[1],
+          gap: t.space[1].var,
           '&[data-orientation="vertical"]': {
             flexDirection: 'column',
           },
@@ -93,27 +93,27 @@ export const tabList = styles.component<typeof TAB_LIST_SLOTS, TabListVariantDef
           display: 'inline-flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: t.space[2],
+          gap: t.space[2].var,
           border: 'none',
           backgroundColor: 'transparent',
           color: v.tabColor.var,
-          fontSize: t.fontSize.md,
-          fontWeight: t.fontWeight.medium,
+          fontSize: t.fontSize.md.var,
+          fontWeight: t.fontWeight.medium.var,
           textDecoration: 'none',
           cursor: 'pointer',
           outline: 'none',
           whiteSpace: 'nowrap',
-          padding: `${t.space[2]} ${t.space[3]}`,
+          padding: `${t.space[2].var} ${t.space[3].var}`,
           '&:hover': {
             backgroundColor: v.tabHoverBackground.var,
           },
           '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus}`,
+            outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '2px',
           },
           '&[data-selected]': {
             color: v.tabSelectedColor.var,
-            fontWeight: t.fontWeight.semibold,
+            fontWeight: t.fontWeight.semibold.var,
           },
           '&[data-disabled]': {
             color: v.tabColor.var,
@@ -124,22 +124,22 @@ export const tabList = styles.component<typeof TAB_LIST_SLOTS, TabListVariantDef
         },
         indicator: {
           position: 'absolute',
-          insetInlineStart: t.space[2],
-          insetInlineEnd: t.space[2],
+          insetInlineStart: t.space[2].var,
+          insetInlineEnd: t.space[2].var,
           bottom: 0,
           height: '2px',
-          borderRadius: t.radius.sm,
+          borderRadius: t.radius.sm.var,
           backgroundColor: v.indicatorColor.var,
           opacity: 0,
-          transition: `opacity ${t.duration.fast} ${t.easing.standard}`,
+          transition: `opacity ${t.duration.fast.var} ${t.easing.standard.var}`,
           '[data-selected] &': {
             opacity: 1,
           },
           '[data-orientation="vertical"] &': {
             insetInlineStart: 0,
             insetInlineEnd: 'auto',
-            top: t.space[2],
-            bottom: t.space[2],
+            top: t.space[2].var,
+            bottom: t.space[2].var,
             width: '2px',
             height: 'auto',
           },
@@ -150,26 +150,26 @@ export const tabList = styles.component<typeof TAB_LIST_SLOTS, TabListVariantDef
         menuTrigger: {
           display: 'inline-flex',
           alignItems: 'center',
-          gap: t.space[1],
+          gap: t.space[1].var,
           border: 'none',
           backgroundColor: 'transparent',
           color: v.tabColor.var,
-          fontSize: t.fontSize.md,
-          fontWeight: t.fontWeight.medium,
+          fontSize: t.fontSize.md.var,
+          fontWeight: t.fontWeight.medium.var,
           cursor: 'pointer',
           outline: 'none',
           whiteSpace: 'nowrap',
-          padding: `${t.space[2]} ${t.space[3]}`,
+          padding: `${t.space[2].var} ${t.space[3].var}`,
           '&:hover': {
             backgroundColor: v.tabHoverBackground.var,
           },
           '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus}`,
+            outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '2px',
           },
           '&[data-selected]': {
             color: v.tabSelectedColor.var,
-            fontWeight: t.fontWeight.semibold,
+            fontWeight: t.fontWeight.semibold.var,
           },
         },
       },
@@ -178,13 +178,13 @@ export const tabList = styles.component<typeof TAB_LIST_SLOTS, TabListVariantDef
           sm: {
             tab: {
               minHeight: '2rem',
-              fontSize: t.fontSize.sm,
-              padding: `${t.space[1]} ${t.space[2]}`,
+              fontSize: t.fontSize.sm.var,
+              padding: `${t.space[1].var} ${t.space[2].var}`,
             },
             menuTrigger: {
               minHeight: '2rem',
-              fontSize: t.fontSize.sm,
-              padding: `${t.space[1]} ${t.space[2]}`,
+              fontSize: t.fontSize.sm.var,
+              padding: `${t.space[1].var} ${t.space[2].var}`,
             },
           },
           md: {
@@ -194,13 +194,13 @@ export const tabList = styles.component<typeof TAB_LIST_SLOTS, TabListVariantDef
           lg: {
             tab: {
               minHeight: '3rem',
-              fontSize: t.fontSize.lg,
-              padding: `${t.space[3]} ${t.space[4]}`,
+              fontSize: t.fontSize.lg.var,
+              padding: `${t.space[3].var} ${t.space[4].var}`,
             },
             menuTrigger: {
               minHeight: '3rem',
-              fontSize: t.fontSize.lg,
-              padding: `${t.space[3]} ${t.space[4]}`,
+              fontSize: t.fontSize.lg.var,
+              padding: `${t.space[3].var} ${t.space[4].var}`,
             },
           },
         },

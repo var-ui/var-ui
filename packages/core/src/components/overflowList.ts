@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 type OverflowListSlots = readonly ['root', 'item', 'overflow'];
@@ -21,11 +21,11 @@ type OverflowListVariants = {
  * </div>
  * ```
  */
-const overflowListRecipe = styles.component(
+const overflowListRecipe = typestyles.styles.component(
   'overflow-list',
   (c) => {
     const v = c.vars({
-      gap: { value: t.space[3], syntax: '<length>', inherits: false },
+      gap: { value: t.space[3].var, syntax: '<length>', inherits: false },
     });
     return {
       slots: ['root', 'item', 'overflow'],
@@ -53,11 +53,11 @@ const overflowListRecipe = styles.component(
       variants: {
         gap: {
           none: { root: { [v.gap.name]: '0px' } },
-          xs: { root: { [v.gap.name]: t.space[1] } },
-          sm: { root: { [v.gap.name]: t.space[2] } },
-          md: { root: { [v.gap.name]: t.space[3] } },
-          lg: { root: { [v.gap.name]: t.space[5] } },
-          xl: { root: { [v.gap.name]: t.space[8] } },
+          xs: { root: { [v.gap.name]: t.space[1].var } },
+          sm: { root: { [v.gap.name]: t.space[2].var } },
+          md: { root: { [v.gap.name]: t.space[3].var } },
+          lg: { root: { [v.gap.name]: t.space[5].var } },
+          xl: { root: { [v.gap.name]: t.space[8].var } },
         },
         fillParent: {
           true: { root: { width: '100%' } },

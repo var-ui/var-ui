@@ -1,43 +1,43 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { fieldChrome } from './field';
 
-export const textField = styles.component(
+export const textField = typestyles.styles.component(
   'text-field',
   (c) => {
     const v = c.vars({
       labelColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       inputBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       inputBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       inputForeground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       placeholderColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       descriptionColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       errorColor: {
-        value: `${t.color.danger.default}`,
+        value: t.color.danger.default.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -56,15 +56,15 @@ export const textField = styles.component(
       },
       input: {
         border: `1px solid ${v.inputBorder.var}`,
-        borderRadius: t.radius.md,
-        padding: `${t.space[2]} ${t.space[3]}`,
-        fontSize: t.fontSize.md,
+        borderRadius: t.radius.md.var,
+        padding: `${t.space[2].var} ${t.space[3].var}`,
+        fontSize: t.fontSize.md.var,
         backgroundColor: v.inputBackground.var,
         color: v.inputForeground.var,
         '&:focus': {
-          outline: `2px solid ${t.color.border.focus}`,
+          outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '1px',
-          [v.inputBorder.name]: t.color.border.focus,
+          [v.inputBorder.name]: t.color.border.focus.var,
         },
         '&::placeholder': {
           color: v.placeholderColor.var,

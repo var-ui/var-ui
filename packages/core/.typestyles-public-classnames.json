@@ -1,370 +1,458 @@
 {
   "version": 1,
   "classNames": [
-    "var-ui-alert",
-    "var-ui-alert__action",
-    "var-ui-alert__actionLink",
-    "var-ui-alert__body",
-    "var-ui-alert__content",
-    "var-ui-alert__icon",
-    "var-ui-alert__title",
-    "var-ui-aspect-ratio",
-    "var-ui-avatar",
-    "var-ui-avatar__image",
-    "var-ui-avatar__initials",
-    "var-ui-avatar__status",
-    "var-ui-avatar-group",
-    "var-ui-avatar-group__item",
-    "var-ui-avatar-group__overflow",
-    "var-ui-badge",
-    "var-ui-banner",
-    "var-ui-banner__actions",
-    "var-ui-banner__content",
-    "var-ui-banner__dismiss",
-    "var-ui-banner__icon",
-    "var-ui-banner__title",
-    "var-ui-breadcrumbs",
-    "var-ui-breadcrumbs__ellipsisItem",
-    "var-ui-breadcrumbs__item",
-    "var-ui-breadcrumbs__link",
-    "var-ui-breadcrumbs__list",
-    "var-ui-button",
-    "var-ui-button-group",
-    "var-ui-calendar",
-    "var-ui-calendar__cell",
-    "var-ui-calendar__grid",
-    "var-ui-calendar__header",
-    "var-ui-calendar__headerCell",
-    "var-ui-calendar__heading",
-    "var-ui-calendar__navButton",
-    "var-ui-card",
-    "var-ui-card__body",
-    "var-ui-card__grid",
-    "var-ui-card__linkDescription",
-    "var-ui-card__linkHint",
-    "var-ui-card__linkRoot",
-    "var-ui-card__linkTitle",
-    "var-ui-card__title",
-    "var-ui-carousel",
-    "var-ui-carousel__control",
-    "var-ui-carousel__controls",
-    "var-ui-carousel__item",
-    "var-ui-carousel__viewport",
-    "var-ui-center",
-    "var-ui-chat-composer",
-    "var-ui-chat-composer__actions",
-    "var-ui-chat-composer__input",
-    "var-ui-chat-composer__inputRow",
-    "var-ui-chat-layout",
-    "var-ui-chat-layout__dock",
-    "var-ui-chat-layout__messageArea",
-    "var-ui-chat-message",
-    "var-ui-chat-message-bubble",
-    "var-ui-chat-message-list",
-    "var-ui-chat-system-message",
-    "var-ui-chat-system-message__icon",
-    "var-ui-chat-system-message__text",
-    "var-ui-chat-tool-calls",
-    "var-ui-checkbox",
-    "var-ui-checkbox__box",
-    "var-ui-checkbox__group",
-    "var-ui-checkbox__groupLabel",
-    "var-ui-checkbox__label",
-    "var-ui-code-block",
-    "var-ui-code-block__actions",
-    "var-ui-code-block__body",
-    "var-ui-code-block__bodyScrollable",
-    "var-ui-code-block__bodyTerminal",
-    "var-ui-code-block__code",
-    "var-ui-code-block__copyButton",
-    "var-ui-code-block__copyButtonCopied",
-    "var-ui-code-block__copyButtonError",
-    "var-ui-code-block__copyButtonIdle",
-    "var-ui-code-block__feedback",
-    "var-ui-code-block__feedbackError",
-    "var-ui-code-block__feedbackInline",
-    "var-ui-code-block__feedbackSuccess",
-    "var-ui-code-block__feedbackToast",
-    "var-ui-code-block__filename",
-    "var-ui-code-block__header",
-    "var-ui-code-block__headerTerminal",
-    "var-ui-code-block__language",
-    "var-ui-code-block__languageTerminal",
-    "var-ui-code-block__line",
-    "var-ui-code-block__lineAdded",
-    "var-ui-code-block__lineContent",
-    "var-ui-code-block__lineDeleted",
-    "var-ui-code-block__lineHighlighted",
-    "var-ui-code-block__lineNumber",
-    "var-ui-code-block__lines",
-    "var-ui-code-block__pre",
-    "var-ui-code-block__preScrollX",
-    "var-ui-code-block__preTerminal",
-    "var-ui-code-block__preWrap",
-    "var-ui-code-block__rootDefault",
-    "var-ui-code-block__rootDiff",
-    "var-ui-code-block__rootInline",
-    "var-ui-code-block__rootTerminal",
-    "var-ui-code-block__title",
-    "var-ui-command-palette",
-    "var-ui-command-palette__backdrop",
-    "var-ui-command-palette__dialog",
-    "var-ui-command-palette__empty",
-    "var-ui-command-palette__input",
-    "var-ui-command-palette__inputIcon",
-    "var-ui-command-palette__inputRow",
-    "var-ui-command-palette__mark",
-    "var-ui-command-palette__result",
-    "var-ui-command-palette__resultLink",
-    "var-ui-command-palette__resultLinkActive",
-    "var-ui-command-palette__resultMeta",
-    "var-ui-command-palette__results",
-    "var-ui-command-palette__resultTitle",
-    "var-ui-dateInput",
-    "var-ui-dateInput__calendarCell",
-    "var-ui-dateInput__calendarGrid",
-    "var-ui-dateInput__calendarHeader",
-    "var-ui-dateInput__calendarHeaderCell",
-    "var-ui-dateInput__calendarHeading",
-    "var-ui-dateInput__calendarNavButton",
-    "var-ui-dateInput__description",
-    "var-ui-dateInput__error",
-    "var-ui-dateInput__group",
-    "var-ui-dateInput__label",
-    "var-ui-dateInput__popover",
-    "var-ui-dateInput__segment",
-    "var-ui-dateInput__trigger",
-    "var-ui-dateRangeInput",
-    "var-ui-dateRangeInput__calendarCell",
-    "var-ui-dateRangeInput__calendarGrid",
-    "var-ui-dateRangeInput__calendarHeader",
-    "var-ui-dateRangeInput__calendarHeaderCell",
-    "var-ui-dateRangeInput__calendarHeading",
-    "var-ui-dateRangeInput__calendarNavButton",
-    "var-ui-dateRangeInput__description",
-    "var-ui-dateRangeInput__error",
-    "var-ui-dateRangeInput__group",
-    "var-ui-dateRangeInput__label",
-    "var-ui-dateRangeInput__popover",
-    "var-ui-dateRangeInput__segment",
-    "var-ui-dateRangeInput__separator",
-    "var-ui-dateRangeInput__trigger",
-    "var-ui-dateTimeInput",
-    "var-ui-dateTimeInput__calendarCell",
-    "var-ui-dateTimeInput__calendarGrid",
-    "var-ui-dateTimeInput__calendarHeader",
-    "var-ui-dateTimeInput__calendarHeaderCell",
-    "var-ui-dateTimeInput__calendarHeading",
-    "var-ui-dateTimeInput__calendarNavButton",
-    "var-ui-dateTimeInput__description",
-    "var-ui-dateTimeInput__error",
-    "var-ui-dateTimeInput__group",
-    "var-ui-dateTimeInput__label",
-    "var-ui-dateTimeInput__popover",
-    "var-ui-dateTimeInput__segment",
-    "var-ui-dateTimeInput__trigger",
-    "var-ui-dialog__actions",
-    "var-ui-dialog__closeButton",
-    "var-ui-dialog__content",
-    "var-ui-dialog__description",
-    "var-ui-dialog__header",
-    "var-ui-dialog__heading",
-    "var-ui-dialog__modal",
-    "var-ui-dialog__overlay",
-    "var-ui-divider",
-    "var-ui-docs-prose",
-    "var-ui-docs-prose__headingAnchor",
-    "var-ui-docs-prose__tableWrap",
-    "var-ui-ds-hljs",
-    "var-ui-ds-layout",
-    "var-ui-ds-layout--row",
-    "var-ui-ds-layout--section",
-    "var-ui-ds-layout--stack",
-    "var-ui-ds-named-cq-body",
-    "var-ui-ds-named-cq-root",
-    "var-ui-ds-text",
-    "var-ui-ds-text--caption",
-    "var-ui-ds-text--label",
-    "var-ui-ds-text--sectionTitle",
-    "var-ui-ds-text--subtitle",
-    "var-ui-ds-text--title",
-    "var-ui-empty-state",
-    "var-ui-empty-state__action",
-    "var-ui-empty-state__description",
-    "var-ui-empty-state__icon",
-    "var-ui-empty-state__title",
-    "var-ui-field",
-    "var-ui-field__description",
-    "var-ui-field__error",
-    "var-ui-field__label",
-    "var-ui-file-input",
-    "var-ui-file-input__clearButton",
-    "var-ui-file-input__description",
-    "var-ui-file-input__dropzone",
-    "var-ui-file-input__error",
-    "var-ui-file-input__fileNameText",
-    "var-ui-file-input__hiddenInput",
-    "var-ui-file-input__icon",
-    "var-ui-file-input__label",
-    "var-ui-file-input__placeholderText",
-    "var-ui-fileTree",
-    "var-ui-fileTree__file",
-    "var-ui-fileTree__folder",
-    "var-ui-fileTree__item",
-    "var-ui-fileTree__list",
-    "var-ui-fileTree__listNested",
-    "var-ui-fileTree__row",
-    "var-ui-grid",
-    "var-ui-heading",
-    "var-ui-hover-card",
-    "var-ui-hover-card__content",
-    "var-ui-hover-card__title",
-    "var-ui-icon",
-    "var-ui-input-group",
-    "var-ui-input-group__description",
-    "var-ui-input-group__error",
-    "var-ui-input-group__group",
-    "var-ui-input-group__input",
-    "var-ui-input-group__label",
-    "var-ui-input-group__text",
-    "var-ui-kbd",
-    "var-ui-link",
-    "var-ui-menu__item",
-    "var-ui-menu__itemCheck",
-    "var-ui-menu__itemDanger",
-    "var-ui-menu__itemLabel",
-    "var-ui-menu__itemShortcut",
-    "var-ui-menu__menu",
-    "var-ui-menu__popover",
-    "var-ui-menu__section",
-    "var-ui-menu__sectionHeader",
-    "var-ui-menu__separator",
-    "var-ui-menu__submenuChevron",
-    "var-ui-multiSelector",
-    "var-ui-multiSelector__item",
-    "var-ui-multiSelector__itemCheckbox",
-    "var-ui-multiSelector__itemLabel",
-    "var-ui-multiSelector__label",
-    "var-ui-multiSelector__popover",
-    "var-ui-multiSelector__trigger",
-    "var-ui-multiSelector__triggerIcon",
-    "var-ui-number-input",
-    "var-ui-number-input__description",
-    "var-ui-number-input__error",
-    "var-ui-number-input__group",
-    "var-ui-number-input__input",
-    "var-ui-number-input__label",
-    "var-ui-number-input__stepper",
-    "var-ui-overlay__backdrop",
-    "var-ui-overlay__positioner",
-    "var-ui-pagination",
-    "var-ui-pagination__controls",
-    "var-ui-pagination__dot",
-    "var-ui-pagination__dotActive",
-    "var-ui-pagination__dotsContainer",
-    "var-ui-pagination__ellipsis",
-    "var-ui-pagination__infoText",
-    "var-ui-pagination__pageSizeGroup",
-    "var-ui-popover",
-    "var-ui-popover__content",
-    "var-ui-popover__title",
-    "var-ui-progress-bar",
-    "var-ui-progress-bar__fill",
-    "var-ui-progress-bar__header",
-    "var-ui-progress-bar__label",
-    "var-ui-progress-bar__track",
-    "var-ui-progress-bar__valueText",
-    "var-ui-radio__control",
-    "var-ui-radio__group",
-    "var-ui-radio__groupLabel",
-    "var-ui-radio__item",
-    "var-ui-radio__label",
-    "var-ui-section",
-    "var-ui-section__title",
-    "var-ui-segmented-control",
-    "var-ui-select",
-    "var-ui-select__item",
-    "var-ui-select__label",
-    "var-ui-select__popover",
-    "var-ui-select__trigger",
-    "var-ui-select__triggerIcon",
-    "var-ui-skeleton",
-    "var-ui-slider",
-    "var-ui-slider__control",
-    "var-ui-slider__description",
-    "var-ui-slider__error",
-    "var-ui-slider__fill",
-    "var-ui-slider__label",
-    "var-ui-slider__output",
-    "var-ui-slider__thumb",
-    "var-ui-slider__track",
-    "var-ui-spinner",
-    "var-ui-stack",
-    "var-ui-status-dot",
-    "var-ui-steps",
-    "var-ui-switch",
-    "var-ui-switch__label",
-    "var-ui-switch__thumb",
-    "var-ui-switch__track",
-    "var-ui-tabs",
-    "var-ui-tabs__list",
-    "var-ui-tabs__panel",
-    "var-ui-tabs__tab",
-    "var-ui-text-area-field",
-    "var-ui-text-area-field__description",
-    "var-ui-text-area-field__error",
-    "var-ui-text-area-field__input",
-    "var-ui-text-area-field__label",
-    "var-ui-text-block",
-    "var-ui-text-field",
-    "var-ui-text-field__description",
-    "var-ui-text-field__error",
-    "var-ui-text-field__input",
-    "var-ui-text-field__label",
-    "var-ui-thumbnail",
-    "var-ui-thumbnail__dismiss",
-    "var-ui-thumbnail__image",
-    "var-ui-timeInput",
-    "var-ui-timeInput__description",
-    "var-ui-timeInput__error",
-    "var-ui-timeInput__group",
-    "var-ui-timeInput__label",
-    "var-ui-timeInput__segment",
-    "var-ui-toast__body",
-    "var-ui-toast__close",
-    "var-ui-toast__description",
-    "var-ui-toast__icon",
-    "var-ui-toast__item",
-    "var-ui-toast__region",
-    "var-ui-toast__title",
-    "var-ui-toggle-button",
-    "var-ui-tokenizer",
-    "var-ui-tokenizer__description",
-    "var-ui-tokenizer__error",
-    "var-ui-tokenizer__group",
-    "var-ui-tokenizer__input",
-    "var-ui-tokenizer__item",
-    "var-ui-tokenizer__label",
-    "var-ui-tokenizer__popover",
-    "var-ui-tokenizer__token",
-    "var-ui-tokenizer__tokenLabel",
-    "var-ui-tokenizer__tokenList",
-    "var-ui-tokenizer__tokenRemoveButton",
-    "var-ui-toolbar",
-    "var-ui-tooltip",
-    "var-ui-typeahead",
-    "var-ui-typeahead__clearButton",
-    "var-ui-typeahead__description",
-    "var-ui-typeahead__error",
-    "var-ui-typeahead__input",
-    "var-ui-typeahead__inputWrapper",
-    "var-ui-typeahead__item",
-    "var-ui-typeahead__label",
-    "var-ui-typeahead__popover"
+    "alert",
+    "alert__action",
+    "alert__actionLink",
+    "alert__body",
+    "alert__content",
+    "alert__icon",
+    "alert__title",
+    "app-shell",
+    "app-shell__aside",
+    "app-shell__banner",
+    "app-shell__frame",
+    "app-shell__main",
+    "app-shell__sideNav",
+    "app-shell__skipLink",
+    "app-shell__topNav",
+    "aspect-ratio",
+    "avatar",
+    "avatar__image",
+    "avatar__initials",
+    "avatar__status",
+    "avatar-group",
+    "avatar-group__item",
+    "avatar-group__overflow",
+    "badge",
+    "banner",
+    "banner__actions",
+    "banner__content",
+    "banner__dismiss",
+    "banner__icon",
+    "banner__title",
+    "breadcrumbs",
+    "breadcrumbs__ellipsisItem",
+    "breadcrumbs__item",
+    "breadcrumbs__link",
+    "breadcrumbs__list",
+    "button",
+    "button-group",
+    "calendar",
+    "calendar__cell",
+    "calendar__grid",
+    "calendar__header",
+    "calendar__headerCell",
+    "calendar__heading",
+    "calendar__navButton",
+    "card",
+    "card__body",
+    "card__grid",
+    "card__linkDescription",
+    "card__linkHint",
+    "card__linkRoot",
+    "card__linkTitle",
+    "card__title",
+    "carousel",
+    "carousel__control",
+    "carousel__controls",
+    "carousel__item",
+    "carousel__viewport",
+    "center",
+    "chat-composer",
+    "chat-composer__actions",
+    "chat-composer__input",
+    "chat-composer__inputRow",
+    "chat-layout",
+    "chat-layout__dock",
+    "chat-layout__messageArea",
+    "chat-message",
+    "chat-message-bubble",
+    "chat-message-list",
+    "chat-system-message",
+    "chat-system-message__icon",
+    "chat-system-message__text",
+    "chat-tool-calls",
+    "checkbox",
+    "checkbox__box",
+    "checkbox__group",
+    "checkbox__groupLabel",
+    "checkbox__label",
+    "code-block",
+    "code-block__actions",
+    "code-block__body",
+    "code-block__bodyScrollable",
+    "code-block__bodyTerminal",
+    "code-block__code",
+    "code-block__copyButton",
+    "code-block__copyButtonCopied",
+    "code-block__copyButtonError",
+    "code-block__copyButtonIdle",
+    "code-block__feedback",
+    "code-block__feedbackError",
+    "code-block__feedbackInline",
+    "code-block__feedbackSuccess",
+    "code-block__feedbackToast",
+    "code-block__filename",
+    "code-block__header",
+    "code-block__headerTerminal",
+    "code-block__language",
+    "code-block__languageTerminal",
+    "code-block__line",
+    "code-block__lineAdded",
+    "code-block__lineContent",
+    "code-block__lineDeleted",
+    "code-block__lineHighlighted",
+    "code-block__lineNumber",
+    "code-block__lines",
+    "code-block__pre",
+    "code-block__preScrollX",
+    "code-block__preTerminal",
+    "code-block__preWrap",
+    "code-block__rootDefault",
+    "code-block__rootDiff",
+    "code-block__rootInline",
+    "code-block__rootTerminal",
+    "code-block__title",
+    "collapsible",
+    "collapsible__panel",
+    "collapsible__trigger",
+    "collapsible__triggerIcon",
+    "command-palette",
+    "command-palette__backdrop",
+    "command-palette__dialog",
+    "command-palette__empty",
+    "command-palette__input",
+    "command-palette__inputIcon",
+    "command-palette__inputRow",
+    "command-palette__mark",
+    "command-palette__result",
+    "command-palette__resultLink",
+    "command-palette__resultLinkActive",
+    "command-palette__resultMeta",
+    "command-palette__results",
+    "command-palette__resultTitle",
+    "dateInput",
+    "dateInput__calendarCell",
+    "dateInput__calendarGrid",
+    "dateInput__calendarHeader",
+    "dateInput__calendarHeaderCell",
+    "dateInput__calendarHeading",
+    "dateInput__calendarNavButton",
+    "dateInput__description",
+    "dateInput__error",
+    "dateInput__group",
+    "dateInput__label",
+    "dateInput__popover",
+    "dateInput__segment",
+    "dateInput__trigger",
+    "dateRangeInput",
+    "dateRangeInput__calendarCell",
+    "dateRangeInput__calendarGrid",
+    "dateRangeInput__calendarHeader",
+    "dateRangeInput__calendarHeaderCell",
+    "dateRangeInput__calendarHeading",
+    "dateRangeInput__calendarNavButton",
+    "dateRangeInput__description",
+    "dateRangeInput__error",
+    "dateRangeInput__group",
+    "dateRangeInput__label",
+    "dateRangeInput__popover",
+    "dateRangeInput__segment",
+    "dateRangeInput__separator",
+    "dateRangeInput__trigger",
+    "dateTimeInput",
+    "dateTimeInput__calendarCell",
+    "dateTimeInput__calendarGrid",
+    "dateTimeInput__calendarHeader",
+    "dateTimeInput__calendarHeaderCell",
+    "dateTimeInput__calendarHeading",
+    "dateTimeInput__calendarNavButton",
+    "dateTimeInput__description",
+    "dateTimeInput__error",
+    "dateTimeInput__group",
+    "dateTimeInput__label",
+    "dateTimeInput__popover",
+    "dateTimeInput__segment",
+    "dateTimeInput__trigger",
+    "description-list",
+    "description-list__details",
+    "description-list__item",
+    "description-list__term",
+    "description-list__title",
+    "description-list__toggle",
+    "dialog__actions",
+    "dialog__closeButton",
+    "dialog__content",
+    "dialog__description",
+    "dialog__header",
+    "dialog__heading",
+    "dialog__modal",
+    "dialog__overlay",
+    "divider",
+    "docs-prose",
+    "docs-prose__headingAnchor",
+    "docs-prose__tableWrap",
+    "ds-hljs",
+    "ds-layout",
+    "ds-layout--row",
+    "ds-layout--section",
+    "ds-layout--stack",
+    "ds-named-cq-body",
+    "ds-named-cq-root",
+    "ds-text",
+    "ds-text--caption",
+    "ds-text--label",
+    "ds-text--sectionTitle",
+    "ds-text--subtitle",
+    "ds-text--title",
+    "empty-state",
+    "empty-state__action",
+    "empty-state__description",
+    "empty-state__icon",
+    "empty-state__title",
+    "field",
+    "field__description",
+    "field__error",
+    "field__label",
+    "file-input",
+    "file-input__clearButton",
+    "file-input__description",
+    "file-input__dropzone",
+    "file-input__error",
+    "file-input__fileNameText",
+    "file-input__hiddenInput",
+    "file-input__icon",
+    "file-input__label",
+    "file-input__placeholderText",
+    "fileTree",
+    "fileTree__file",
+    "fileTree__folder",
+    "fileTree__item",
+    "fileTree__list",
+    "fileTree__listNested",
+    "fileTree__row",
+    "grid",
+    "heading",
+    "hover-card",
+    "hover-card__content",
+    "hover-card__title",
+    "icon",
+    "input-group",
+    "input-group__description",
+    "input-group__error",
+    "input-group__group",
+    "input-group__input",
+    "input-group__label",
+    "input-group__text",
+    "kbd",
+    "link",
+    "list",
+    "list__description",
+    "list__divider",
+    "list__end",
+    "list__header",
+    "list__item",
+    "list__label",
+    "list__start",
+    "menu__item",
+    "menu__itemCheck",
+    "menu__itemDanger",
+    "menu__itemLabel",
+    "menu__itemShortcut",
+    "menu__menu",
+    "menu__popover",
+    "menu__section",
+    "menu__sectionHeader",
+    "menu__separator",
+    "menu__submenuChevron",
+    "mobile-nav__closeButton",
+    "mobile-nav__header",
+    "mobile-nav__overlay",
+    "mobile-nav__panel",
+    "mobile-nav__toggle",
+    "multiSelector",
+    "multiSelector__item",
+    "multiSelector__itemCheckbox",
+    "multiSelector__itemLabel",
+    "multiSelector__label",
+    "multiSelector__popover",
+    "multiSelector__trigger",
+    "multiSelector__triggerIcon",
+    "number-input",
+    "number-input__description",
+    "number-input__error",
+    "number-input__group",
+    "number-input__input",
+    "number-input__label",
+    "number-input__stepper",
+    "outline",
+    "outline__link",
+    "outline__linkActive",
+    "outline__linkNested",
+    "outline__list",
+    "outline__title",
+    "overflow-list",
+    "overflow-list__item",
+    "overflow-list__overflow",
+    "overlay__backdrop",
+    "overlay__positioner",
+    "pagination",
+    "pagination__controls",
+    "pagination__dot",
+    "pagination__dotActive",
+    "pagination__dotsContainer",
+    "pagination__ellipsis",
+    "pagination__infoText",
+    "pagination__pageSizeGroup",
+    "popover",
+    "popover__content",
+    "popover__title",
+    "progress-bar",
+    "progress-bar__fill",
+    "progress-bar__header",
+    "progress-bar__label",
+    "progress-bar__track",
+    "progress-bar__valueText",
+    "radio__control",
+    "radio__group",
+    "radio__groupLabel",
+    "radio__item",
+    "radio__label",
+    "resize-handle",
+    "resize-handle__pill",
+    "section",
+    "section__title",
+    "segmented-control",
+    "select",
+    "select__item",
+    "select__label",
+    "select__popover",
+    "select__trigger",
+    "select__triggerIcon",
+    "side-nav",
+    "side-nav__collapseButton",
+    "side-nav__footer",
+    "side-nav__footerIcons",
+    "side-nav__heading",
+    "side-nav__item",
+    "side-nav__itemLabel",
+    "side-nav__scrollable",
+    "side-nav__section",
+    "side-nav__sectionTitle",
+    "side-nav__stickyTop",
+    "side-nav__topContent",
+    "skeleton",
+    "slider",
+    "slider__control",
+    "slider__description",
+    "slider__error",
+    "slider__fill",
+    "slider__label",
+    "slider__output",
+    "slider__thumb",
+    "slider__track",
+    "spinner",
+    "stack",
+    "status-dot",
+    "steps",
+    "switch",
+    "switch__label",
+    "switch__thumb",
+    "switch__track",
+    "tab-list",
+    "tab-list__indicator",
+    "tab-list__menu",
+    "tab-list__menuTrigger",
+    "tab-list__tab",
+    "table",
+    "table__body",
+    "table__caption",
+    "table__cell",
+    "table__empty",
+    "table__footer",
+    "table__header",
+    "table__headerCell",
+    "table__row",
+    "table__table",
+    "tabs",
+    "tabs__list",
+    "tabs__panel",
+    "tabs__tab",
+    "text-area-field",
+    "text-area-field__description",
+    "text-area-field__error",
+    "text-area-field__input",
+    "text-area-field__label",
+    "text-block",
+    "text-field",
+    "text-field__description",
+    "text-field__error",
+    "text-field__input",
+    "text-field__label",
+    "thumbnail",
+    "thumbnail__dismiss",
+    "thumbnail__image",
+    "timeInput",
+    "timeInput__description",
+    "timeInput__error",
+    "timeInput__group",
+    "timeInput__label",
+    "timeInput__segment",
+    "toast__body",
+    "toast__close",
+    "toast__description",
+    "toast__icon",
+    "toast__item",
+    "toast__region",
+    "toast__title",
+    "toggle-button",
+    "tokenizer",
+    "tokenizer__description",
+    "tokenizer__error",
+    "tokenizer__group",
+    "tokenizer__input",
+    "tokenizer__item",
+    "tokenizer__label",
+    "tokenizer__popover",
+    "tokenizer__token",
+    "tokenizer__tokenLabel",
+    "tokenizer__tokenList",
+    "tokenizer__tokenRemoveButton",
+    "toolbar",
+    "tooltip",
+    "top-nav",
+    "top-nav__center",
+    "top-nav__end",
+    "top-nav__featuredCard",
+    "top-nav__heading",
+    "top-nav__item",
+    "top-nav__megaItem",
+    "top-nav__megaPanel",
+    "top-nav__menuTrigger",
+    "top-nav__start",
+    "tree",
+    "tree__description",
+    "tree__end",
+    "tree__group",
+    "tree__item",
+    "tree__label",
+    "tree__row",
+    "tree__start",
+    "tree__toggle",
+    "typeahead",
+    "typeahead__clearButton",
+    "typeahead__description",
+    "typeahead__error",
+    "typeahead__input",
+    "typeahead__inputWrapper",
+    "typeahead__item",
+    "typeahead__label",
+    "typeahead__popover"
   ],
   "entries": [
     {
-      "className": "var-ui-alert",
+      "className": "alert",
       "kind": "component",
       "namespace": "alert",
       "suffix": "base",
@@ -372,7 +460,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-alert__action",
+      "className": "alert__action",
       "kind": "component",
       "namespace": "alert",
       "suffix": "action",
@@ -380,7 +468,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-alert__actionLink",
+      "className": "alert__actionLink",
       "kind": "component",
       "namespace": "alert",
       "suffix": "actionLink",
@@ -388,7 +476,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-alert__body",
+      "className": "alert__body",
       "kind": "component",
       "namespace": "alert",
       "suffix": "body",
@@ -396,7 +484,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-alert__content",
+      "className": "alert__content",
       "kind": "component",
       "namespace": "alert",
       "suffix": "content",
@@ -404,7 +492,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-alert__icon",
+      "className": "alert__icon",
       "kind": "component",
       "namespace": "alert",
       "suffix": "icon",
@@ -412,7 +500,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-alert__title",
+      "className": "alert__title",
       "kind": "component",
       "namespace": "alert",
       "suffix": "title",
@@ -420,7 +508,71 @@
       "line": 24
     },
     {
-      "className": "var-ui-aspect-ratio",
+      "className": "app-shell",
+      "kind": "component",
+      "namespace": "app-shell",
+      "suffix": "base",
+      "file": "src/components/appShell.ts",
+      "line": 61
+    },
+    {
+      "className": "app-shell__aside",
+      "kind": "component",
+      "namespace": "app-shell",
+      "suffix": "aside",
+      "file": "src/components/appShell.ts",
+      "line": 61
+    },
+    {
+      "className": "app-shell__banner",
+      "kind": "component",
+      "namespace": "app-shell",
+      "suffix": "banner",
+      "file": "src/components/appShell.ts",
+      "line": 61
+    },
+    {
+      "className": "app-shell__frame",
+      "kind": "component",
+      "namespace": "app-shell",
+      "suffix": "frame",
+      "file": "src/components/appShell.ts",
+      "line": 61
+    },
+    {
+      "className": "app-shell__main",
+      "kind": "component",
+      "namespace": "app-shell",
+      "suffix": "main",
+      "file": "src/components/appShell.ts",
+      "line": 61
+    },
+    {
+      "className": "app-shell__sideNav",
+      "kind": "component",
+      "namespace": "app-shell",
+      "suffix": "sideNav",
+      "file": "src/components/appShell.ts",
+      "line": 61
+    },
+    {
+      "className": "app-shell__skipLink",
+      "kind": "component",
+      "namespace": "app-shell",
+      "suffix": "skipLink",
+      "file": "src/components/appShell.ts",
+      "line": 61
+    },
+    {
+      "className": "app-shell__topNav",
+      "kind": "component",
+      "namespace": "app-shell",
+      "suffix": "topNav",
+      "file": "src/components/appShell.ts",
+      "line": 61
+    },
+    {
+      "className": "aspect-ratio",
       "kind": "component",
       "namespace": "aspect-ratio",
       "suffix": "base",
@@ -428,7 +580,7 @@
       "line": 12
     },
     {
-      "className": "var-ui-avatar",
+      "className": "avatar",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "base",
@@ -436,7 +588,7 @@
       "line": 25
     },
     {
-      "className": "var-ui-avatar__image",
+      "className": "avatar__image",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "image",
@@ -444,7 +596,7 @@
       "line": 25
     },
     {
-      "className": "var-ui-avatar__initials",
+      "className": "avatar__initials",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "initials",
@@ -452,7 +604,7 @@
       "line": 25
     },
     {
-      "className": "var-ui-avatar__status",
+      "className": "avatar__status",
       "kind": "component",
       "namespace": "avatar",
       "suffix": "status",
@@ -460,7 +612,7 @@
       "line": 25
     },
     {
-      "className": "var-ui-avatar-group",
+      "className": "avatar-group",
       "kind": "component",
       "namespace": "avatar-group",
       "suffix": "base",
@@ -468,7 +620,7 @@
       "line": 105
     },
     {
-      "className": "var-ui-avatar-group__item",
+      "className": "avatar-group__item",
       "kind": "component",
       "namespace": "avatar-group",
       "suffix": "item",
@@ -476,7 +628,7 @@
       "line": 105
     },
     {
-      "className": "var-ui-avatar-group__overflow",
+      "className": "avatar-group__overflow",
       "kind": "component",
       "namespace": "avatar-group",
       "suffix": "overflow",
@@ -484,7 +636,7 @@
       "line": 105
     },
     {
-      "className": "var-ui-badge",
+      "className": "badge",
       "kind": "component",
       "namespace": "badge",
       "suffix": "base",
@@ -492,7 +644,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-banner",
+      "className": "banner",
       "kind": "component",
       "namespace": "banner",
       "suffix": "base",
@@ -500,7 +652,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-banner__actions",
+      "className": "banner__actions",
       "kind": "component",
       "namespace": "banner",
       "suffix": "actions",
@@ -508,7 +660,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-banner__content",
+      "className": "banner__content",
       "kind": "component",
       "namespace": "banner",
       "suffix": "content",
@@ -516,7 +668,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-banner__dismiss",
+      "className": "banner__dismiss",
       "kind": "component",
       "namespace": "banner",
       "suffix": "dismiss",
@@ -524,7 +676,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-banner__icon",
+      "className": "banner__icon",
       "kind": "component",
       "namespace": "banner",
       "suffix": "icon",
@@ -532,7 +684,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-banner__title",
+      "className": "banner__title",
       "kind": "component",
       "namespace": "banner",
       "suffix": "title",
@@ -540,7 +692,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-breadcrumbs",
+      "className": "breadcrumbs",
       "kind": "component",
       "namespace": "breadcrumbs",
       "suffix": "base",
@@ -548,7 +700,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-breadcrumbs__ellipsisItem",
+      "className": "breadcrumbs__ellipsisItem",
       "kind": "component",
       "namespace": "breadcrumbs",
       "suffix": "ellipsisItem",
@@ -556,7 +708,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-breadcrumbs__item",
+      "className": "breadcrumbs__item",
       "kind": "component",
       "namespace": "breadcrumbs",
       "suffix": "item",
@@ -564,7 +716,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-breadcrumbs__link",
+      "className": "breadcrumbs__link",
       "kind": "component",
       "namespace": "breadcrumbs",
       "suffix": "link",
@@ -572,7 +724,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-breadcrumbs__list",
+      "className": "breadcrumbs__list",
       "kind": "component",
       "namespace": "breadcrumbs",
       "suffix": "list",
@@ -580,7 +732,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-button",
+      "className": "button",
       "kind": "component",
       "namespace": "button",
       "suffix": "base",
@@ -588,7 +740,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-button-group",
+      "className": "button-group",
       "kind": "component",
       "namespace": "button-group",
       "suffix": "base",
@@ -596,7 +748,7 @@
       "line": 9
     },
     {
-      "className": "var-ui-calendar",
+      "className": "calendar",
       "kind": "component",
       "namespace": "calendar",
       "suffix": "base",
@@ -604,7 +756,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-calendar__cell",
+      "className": "calendar__cell",
       "kind": "component",
       "namespace": "calendar",
       "suffix": "cell",
@@ -612,7 +764,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-calendar__grid",
+      "className": "calendar__grid",
       "kind": "component",
       "namespace": "calendar",
       "suffix": "grid",
@@ -620,7 +772,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-calendar__header",
+      "className": "calendar__header",
       "kind": "component",
       "namespace": "calendar",
       "suffix": "header",
@@ -628,7 +780,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-calendar__headerCell",
+      "className": "calendar__headerCell",
       "kind": "component",
       "namespace": "calendar",
       "suffix": "headerCell",
@@ -636,7 +788,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-calendar__heading",
+      "className": "calendar__heading",
       "kind": "component",
       "namespace": "calendar",
       "suffix": "heading",
@@ -644,7 +796,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-calendar__navButton",
+      "className": "calendar__navButton",
       "kind": "component",
       "namespace": "calendar",
       "suffix": "navButton",
@@ -652,7 +804,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-card",
+      "className": "card",
       "kind": "component",
       "namespace": "card",
       "suffix": "base",
@@ -660,7 +812,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card__body",
+      "className": "card__body",
       "kind": "component",
       "namespace": "card",
       "suffix": "body",
@@ -668,7 +820,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card__grid",
+      "className": "card__grid",
       "kind": "component",
       "namespace": "card",
       "suffix": "grid",
@@ -676,7 +828,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card__linkDescription",
+      "className": "card__linkDescription",
       "kind": "component",
       "namespace": "card",
       "suffix": "linkDescription",
@@ -684,7 +836,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card__linkHint",
+      "className": "card__linkHint",
       "kind": "component",
       "namespace": "card",
       "suffix": "linkHint",
@@ -692,7 +844,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card__linkRoot",
+      "className": "card__linkRoot",
       "kind": "component",
       "namespace": "card",
       "suffix": "linkRoot",
@@ -700,7 +852,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card__linkTitle",
+      "className": "card__linkTitle",
       "kind": "component",
       "namespace": "card",
       "suffix": "linkTitle",
@@ -708,7 +860,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-card__title",
+      "className": "card__title",
       "kind": "component",
       "namespace": "card",
       "suffix": "title",
@@ -716,7 +868,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-carousel",
+      "className": "carousel",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "base",
@@ -724,7 +876,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-carousel__control",
+      "className": "carousel__control",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "control",
@@ -732,7 +884,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-carousel__controls",
+      "className": "carousel__controls",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "controls",
@@ -740,7 +892,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-carousel__item",
+      "className": "carousel__item",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "item",
@@ -748,7 +900,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-carousel__viewport",
+      "className": "carousel__viewport",
       "kind": "component",
       "namespace": "carousel",
       "suffix": "viewport",
@@ -756,7 +908,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-center",
+      "className": "center",
       "kind": "component",
       "namespace": "center",
       "suffix": "base",
@@ -764,7 +916,7 @@
       "line": 11
     },
     {
-      "className": "var-ui-chat-composer",
+      "className": "chat-composer",
       "kind": "component",
       "namespace": "chat-composer",
       "suffix": "base",
@@ -772,7 +924,7 @@
       "line": 30
     },
     {
-      "className": "var-ui-chat-composer__actions",
+      "className": "chat-composer__actions",
       "kind": "component",
       "namespace": "chat-composer",
       "suffix": "actions",
@@ -780,7 +932,7 @@
       "line": 30
     },
     {
-      "className": "var-ui-chat-composer__input",
+      "className": "chat-composer__input",
       "kind": "component",
       "namespace": "chat-composer",
       "suffix": "input",
@@ -788,7 +940,7 @@
       "line": 30
     },
     {
-      "className": "var-ui-chat-composer__inputRow",
+      "className": "chat-composer__inputRow",
       "kind": "component",
       "namespace": "chat-composer",
       "suffix": "inputRow",
@@ -796,7 +948,7 @@
       "line": 30
     },
     {
-      "className": "var-ui-chat-layout",
+      "className": "chat-layout",
       "kind": "component",
       "namespace": "chat-layout",
       "suffix": "base",
@@ -804,7 +956,7 @@
       "line": 26
     },
     {
-      "className": "var-ui-chat-layout__dock",
+      "className": "chat-layout__dock",
       "kind": "component",
       "namespace": "chat-layout",
       "suffix": "dock",
@@ -812,7 +964,7 @@
       "line": 26
     },
     {
-      "className": "var-ui-chat-layout__messageArea",
+      "className": "chat-layout__messageArea",
       "kind": "component",
       "namespace": "chat-layout",
       "suffix": "messageArea",
@@ -820,7 +972,7 @@
       "line": 26
     },
     {
-      "className": "var-ui-chat-message",
+      "className": "chat-message",
       "kind": "component",
       "namespace": "chat-message",
       "suffix": "base",
@@ -828,7 +980,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-chat-message-bubble",
+      "className": "chat-message-bubble",
       "kind": "component",
       "namespace": "chat-message-bubble",
       "suffix": "base",
@@ -836,7 +988,7 @@
       "line": 33
     },
     {
-      "className": "var-ui-chat-message-list",
+      "className": "chat-message-list",
       "kind": "component",
       "namespace": "chat-message-list",
       "suffix": "base",
@@ -844,7 +996,7 @@
       "line": 27
     },
     {
-      "className": "var-ui-chat-system-message",
+      "className": "chat-system-message",
       "kind": "component",
       "namespace": "chat-system-message",
       "suffix": "base",
@@ -852,7 +1004,7 @@
       "line": 43
     },
     {
-      "className": "var-ui-chat-system-message__icon",
+      "className": "chat-system-message__icon",
       "kind": "component",
       "namespace": "chat-system-message",
       "suffix": "icon",
@@ -860,7 +1012,7 @@
       "line": 43
     },
     {
-      "className": "var-ui-chat-system-message__text",
+      "className": "chat-system-message__text",
       "kind": "component",
       "namespace": "chat-system-message",
       "suffix": "text",
@@ -868,7 +1020,7 @@
       "line": 43
     },
     {
-      "className": "var-ui-chat-tool-calls",
+      "className": "chat-tool-calls",
       "kind": "component",
       "namespace": "chat-tool-calls",
       "suffix": "base",
@@ -876,7 +1028,7 @@
       "line": 44
     },
     {
-      "className": "var-ui-checkbox",
+      "className": "checkbox",
       "kind": "component",
       "namespace": "checkbox",
       "suffix": "base",
@@ -884,7 +1036,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-checkbox__box",
+      "className": "checkbox__box",
       "kind": "component",
       "namespace": "checkbox",
       "suffix": "box",
@@ -892,7 +1044,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-checkbox__group",
+      "className": "checkbox__group",
       "kind": "component",
       "namespace": "checkbox",
       "suffix": "group",
@@ -900,7 +1052,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-checkbox__groupLabel",
+      "className": "checkbox__groupLabel",
       "kind": "component",
       "namespace": "checkbox",
       "suffix": "groupLabel",
@@ -908,7 +1060,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-checkbox__label",
+      "className": "checkbox__label",
       "kind": "component",
       "namespace": "checkbox",
       "suffix": "label",
@@ -916,7 +1068,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block",
+      "className": "code-block",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "base",
@@ -924,7 +1076,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__actions",
+      "className": "code-block__actions",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "actions",
@@ -932,7 +1084,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__body",
+      "className": "code-block__body",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "body",
@@ -940,7 +1092,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__bodyScrollable",
+      "className": "code-block__bodyScrollable",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "bodyScrollable",
@@ -948,7 +1100,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__bodyTerminal",
+      "className": "code-block__bodyTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "bodyTerminal",
@@ -956,7 +1108,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__code",
+      "className": "code-block__code",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "code",
@@ -964,7 +1116,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__copyButton",
+      "className": "code-block__copyButton",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "copyButton",
@@ -972,7 +1124,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__copyButtonCopied",
+      "className": "code-block__copyButtonCopied",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "copyButtonCopied",
@@ -980,7 +1132,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__copyButtonError",
+      "className": "code-block__copyButtonError",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "copyButtonError",
@@ -988,7 +1140,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__copyButtonIdle",
+      "className": "code-block__copyButtonIdle",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "copyButtonIdle",
@@ -996,7 +1148,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__feedback",
+      "className": "code-block__feedback",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedback",
@@ -1004,7 +1156,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__feedbackError",
+      "className": "code-block__feedbackError",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedbackError",
@@ -1012,7 +1164,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__feedbackInline",
+      "className": "code-block__feedbackInline",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedbackInline",
@@ -1020,7 +1172,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__feedbackSuccess",
+      "className": "code-block__feedbackSuccess",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedbackSuccess",
@@ -1028,7 +1180,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__feedbackToast",
+      "className": "code-block__feedbackToast",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "feedbackToast",
@@ -1036,7 +1188,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__filename",
+      "className": "code-block__filename",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "filename",
@@ -1044,7 +1196,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__header",
+      "className": "code-block__header",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "header",
@@ -1052,7 +1204,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__headerTerminal",
+      "className": "code-block__headerTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "headerTerminal",
@@ -1060,7 +1212,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__language",
+      "className": "code-block__language",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "language",
@@ -1068,7 +1220,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__languageTerminal",
+      "className": "code-block__languageTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "languageTerminal",
@@ -1076,7 +1228,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__line",
+      "className": "code-block__line",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "line",
@@ -1084,7 +1236,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__lineAdded",
+      "className": "code-block__lineAdded",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineAdded",
@@ -1092,7 +1244,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__lineContent",
+      "className": "code-block__lineContent",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineContent",
@@ -1100,7 +1252,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__lineDeleted",
+      "className": "code-block__lineDeleted",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineDeleted",
@@ -1108,7 +1260,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__lineHighlighted",
+      "className": "code-block__lineHighlighted",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineHighlighted",
@@ -1116,7 +1268,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__lineNumber",
+      "className": "code-block__lineNumber",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lineNumber",
@@ -1124,7 +1276,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__lines",
+      "className": "code-block__lines",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "lines",
@@ -1132,7 +1284,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__pre",
+      "className": "code-block__pre",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "pre",
@@ -1140,7 +1292,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__preScrollX",
+      "className": "code-block__preScrollX",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "preScrollX",
@@ -1148,7 +1300,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__preTerminal",
+      "className": "code-block__preTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "preTerminal",
@@ -1156,7 +1308,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__preWrap",
+      "className": "code-block__preWrap",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "preWrap",
@@ -1164,7 +1316,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__rootDefault",
+      "className": "code-block__rootDefault",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "rootDefault",
@@ -1172,7 +1324,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__rootDiff",
+      "className": "code-block__rootDiff",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "rootDiff",
@@ -1180,7 +1332,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__rootInline",
+      "className": "code-block__rootInline",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "rootInline",
@@ -1188,7 +1340,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__rootTerminal",
+      "className": "code-block__rootTerminal",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "rootTerminal",
@@ -1196,7 +1348,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-code-block__title",
+      "className": "code-block__title",
       "kind": "component",
       "namespace": "code-block",
       "suffix": "title",
@@ -1204,7 +1356,39 @@
       "line": 5
     },
     {
-      "className": "var-ui-command-palette",
+      "className": "collapsible",
+      "kind": "component",
+      "namespace": "collapsible",
+      "suffix": "base",
+      "file": "src/components/collapsible.ts",
+      "line": 25
+    },
+    {
+      "className": "collapsible__panel",
+      "kind": "component",
+      "namespace": "collapsible",
+      "suffix": "panel",
+      "file": "src/components/collapsible.ts",
+      "line": 25
+    },
+    {
+      "className": "collapsible__trigger",
+      "kind": "component",
+      "namespace": "collapsible",
+      "suffix": "trigger",
+      "file": "src/components/collapsible.ts",
+      "line": 25
+    },
+    {
+      "className": "collapsible__triggerIcon",
+      "kind": "component",
+      "namespace": "collapsible",
+      "suffix": "triggerIcon",
+      "file": "src/components/collapsible.ts",
+      "line": 25
+    },
+    {
+      "className": "command-palette",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "base",
@@ -1212,7 +1396,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__backdrop",
+      "className": "command-palette__backdrop",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "backdrop",
@@ -1220,7 +1404,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__dialog",
+      "className": "command-palette__dialog",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "dialog",
@@ -1228,7 +1412,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__empty",
+      "className": "command-palette__empty",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "empty",
@@ -1236,7 +1420,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__input",
+      "className": "command-palette__input",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "input",
@@ -1244,7 +1428,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__inputIcon",
+      "className": "command-palette__inputIcon",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "inputIcon",
@@ -1252,7 +1436,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__inputRow",
+      "className": "command-palette__inputRow",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "inputRow",
@@ -1260,7 +1444,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__mark",
+      "className": "command-palette__mark",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "mark",
@@ -1268,7 +1452,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__result",
+      "className": "command-palette__result",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "result",
@@ -1276,7 +1460,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__resultLink",
+      "className": "command-palette__resultLink",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "resultLink",
@@ -1284,7 +1468,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__resultLinkActive",
+      "className": "command-palette__resultLinkActive",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "resultLinkActive",
@@ -1292,7 +1476,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__resultMeta",
+      "className": "command-palette__resultMeta",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "resultMeta",
@@ -1300,7 +1484,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__results",
+      "className": "command-palette__results",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "results",
@@ -1308,7 +1492,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-command-palette__resultTitle",
+      "className": "command-palette__resultTitle",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "resultTitle",
@@ -1316,7 +1500,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-dateInput",
+      "className": "dateInput",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "base",
@@ -1324,7 +1508,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__calendarCell",
+      "className": "dateInput__calendarCell",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "calendarCell",
@@ -1332,7 +1516,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__calendarGrid",
+      "className": "dateInput__calendarGrid",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "calendarGrid",
@@ -1340,7 +1524,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__calendarHeader",
+      "className": "dateInput__calendarHeader",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "calendarHeader",
@@ -1348,7 +1532,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__calendarHeaderCell",
+      "className": "dateInput__calendarHeaderCell",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "calendarHeaderCell",
@@ -1356,7 +1540,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__calendarHeading",
+      "className": "dateInput__calendarHeading",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "calendarHeading",
@@ -1364,7 +1548,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__calendarNavButton",
+      "className": "dateInput__calendarNavButton",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "calendarNavButton",
@@ -1372,7 +1556,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__description",
+      "className": "dateInput__description",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "description",
@@ -1380,7 +1564,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__error",
+      "className": "dateInput__error",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "error",
@@ -1388,7 +1572,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__group",
+      "className": "dateInput__group",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "group",
@@ -1396,7 +1580,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__label",
+      "className": "dateInput__label",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "label",
@@ -1404,7 +1588,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__popover",
+      "className": "dateInput__popover",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "popover",
@@ -1412,7 +1596,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__segment",
+      "className": "dateInput__segment",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "segment",
@@ -1420,7 +1604,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateInput__trigger",
+      "className": "dateInput__trigger",
       "kind": "component",
       "namespace": "dateInput",
       "suffix": "trigger",
@@ -1428,7 +1612,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput",
+      "className": "dateRangeInput",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "base",
@@ -1436,7 +1620,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__calendarCell",
+      "className": "dateRangeInput__calendarCell",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "calendarCell",
@@ -1444,7 +1628,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__calendarGrid",
+      "className": "dateRangeInput__calendarGrid",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "calendarGrid",
@@ -1452,7 +1636,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__calendarHeader",
+      "className": "dateRangeInput__calendarHeader",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "calendarHeader",
@@ -1460,7 +1644,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__calendarHeaderCell",
+      "className": "dateRangeInput__calendarHeaderCell",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "calendarHeaderCell",
@@ -1468,7 +1652,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__calendarHeading",
+      "className": "dateRangeInput__calendarHeading",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "calendarHeading",
@@ -1476,7 +1660,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__calendarNavButton",
+      "className": "dateRangeInput__calendarNavButton",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "calendarNavButton",
@@ -1484,7 +1668,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__description",
+      "className": "dateRangeInput__description",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "description",
@@ -1492,7 +1676,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__error",
+      "className": "dateRangeInput__error",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "error",
@@ -1500,7 +1684,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__group",
+      "className": "dateRangeInput__group",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "group",
@@ -1508,7 +1692,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__label",
+      "className": "dateRangeInput__label",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "label",
@@ -1516,7 +1700,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__popover",
+      "className": "dateRangeInput__popover",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "popover",
@@ -1524,7 +1708,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__segment",
+      "className": "dateRangeInput__segment",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "segment",
@@ -1532,7 +1716,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__separator",
+      "className": "dateRangeInput__separator",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "separator",
@@ -1540,7 +1724,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateRangeInput__trigger",
+      "className": "dateRangeInput__trigger",
       "kind": "component",
       "namespace": "dateRangeInput",
       "suffix": "trigger",
@@ -1548,7 +1732,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput",
+      "className": "dateTimeInput",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "base",
@@ -1556,7 +1740,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__calendarCell",
+      "className": "dateTimeInput__calendarCell",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "calendarCell",
@@ -1564,7 +1748,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__calendarGrid",
+      "className": "dateTimeInput__calendarGrid",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "calendarGrid",
@@ -1572,7 +1756,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__calendarHeader",
+      "className": "dateTimeInput__calendarHeader",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "calendarHeader",
@@ -1580,7 +1764,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__calendarHeaderCell",
+      "className": "dateTimeInput__calendarHeaderCell",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "calendarHeaderCell",
@@ -1588,7 +1772,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__calendarHeading",
+      "className": "dateTimeInput__calendarHeading",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "calendarHeading",
@@ -1596,7 +1780,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__calendarNavButton",
+      "className": "dateTimeInput__calendarNavButton",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "calendarNavButton",
@@ -1604,7 +1788,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__description",
+      "className": "dateTimeInput__description",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "description",
@@ -1612,7 +1796,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__error",
+      "className": "dateTimeInput__error",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "error",
@@ -1620,7 +1804,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__group",
+      "className": "dateTimeInput__group",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "group",
@@ -1628,7 +1812,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__label",
+      "className": "dateTimeInput__label",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "label",
@@ -1636,7 +1820,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__popover",
+      "className": "dateTimeInput__popover",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "popover",
@@ -1644,7 +1828,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__segment",
+      "className": "dateTimeInput__segment",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "segment",
@@ -1652,7 +1836,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-dateTimeInput__trigger",
+      "className": "dateTimeInput__trigger",
       "kind": "component",
       "namespace": "dateTimeInput",
       "suffix": "trigger",
@@ -1660,7 +1844,55 @@
       "line": 6
     },
     {
-      "className": "var-ui-dialog__actions",
+      "className": "description-list",
+      "kind": "component",
+      "namespace": "description-list",
+      "suffix": "base",
+      "file": "src/components/descriptionList.ts",
+      "line": 29
+    },
+    {
+      "className": "description-list__details",
+      "kind": "component",
+      "namespace": "description-list",
+      "suffix": "details",
+      "file": "src/components/descriptionList.ts",
+      "line": 29
+    },
+    {
+      "className": "description-list__item",
+      "kind": "component",
+      "namespace": "description-list",
+      "suffix": "item",
+      "file": "src/components/descriptionList.ts",
+      "line": 29
+    },
+    {
+      "className": "description-list__term",
+      "kind": "component",
+      "namespace": "description-list",
+      "suffix": "term",
+      "file": "src/components/descriptionList.ts",
+      "line": 29
+    },
+    {
+      "className": "description-list__title",
+      "kind": "component",
+      "namespace": "description-list",
+      "suffix": "title",
+      "file": "src/components/descriptionList.ts",
+      "line": 29
+    },
+    {
+      "className": "description-list__toggle",
+      "kind": "component",
+      "namespace": "description-list",
+      "suffix": "toggle",
+      "file": "src/components/descriptionList.ts",
+      "line": 29
+    },
+    {
+      "className": "dialog__actions",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "actions",
@@ -1668,7 +1900,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog__closeButton",
+      "className": "dialog__closeButton",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "closeButton",
@@ -1676,7 +1908,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog__content",
+      "className": "dialog__content",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "content",
@@ -1684,7 +1916,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog__description",
+      "className": "dialog__description",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "description",
@@ -1692,7 +1924,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog__header",
+      "className": "dialog__header",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "header",
@@ -1700,7 +1932,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog__heading",
+      "className": "dialog__heading",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "heading",
@@ -1708,7 +1940,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog__modal",
+      "className": "dialog__modal",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "modal",
@@ -1716,7 +1948,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-dialog__overlay",
+      "className": "dialog__overlay",
       "kind": "component",
       "namespace": "dialog",
       "suffix": "overlay",
@@ -1724,7 +1956,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-divider",
+      "className": "divider",
       "kind": "component",
       "namespace": "divider",
       "suffix": "base",
@@ -1732,7 +1964,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-docs-prose",
+      "className": "docs-prose",
       "kind": "component",
       "namespace": "docs-prose",
       "suffix": "base",
@@ -1740,7 +1972,7 @@
       "line": 17
     },
     {
-      "className": "var-ui-docs-prose__headingAnchor",
+      "className": "docs-prose__headingAnchor",
       "kind": "component",
       "namespace": "docs-prose",
       "suffix": "headingAnchor",
@@ -1748,7 +1980,7 @@
       "line": 17
     },
     {
-      "className": "var-ui-docs-prose__tableWrap",
+      "className": "docs-prose__tableWrap",
       "kind": "component",
       "namespace": "docs-prose",
       "suffix": "tableWrap",
@@ -1756,15 +1988,15 @@
       "line": 17
     },
     {
-      "className": "var-ui-ds-hljs",
+      "className": "ds-hljs",
       "kind": "component",
       "namespace": "ds-hljs",
       "suffix": "base",
       "file": "src/components/codeHighlight.ts",
-      "line": 31
+      "line": 30
     },
     {
-      "className": "var-ui-ds-layout",
+      "className": "ds-layout",
       "kind": "component",
       "namespace": "ds-layout",
       "suffix": "base",
@@ -1772,7 +2004,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-ds-layout--row",
+      "className": "ds-layout--row",
       "kind": "component",
       "namespace": "ds-layout",
       "suffix": "row",
@@ -1780,7 +2012,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-ds-layout--section",
+      "className": "ds-layout--section",
       "kind": "component",
       "namespace": "ds-layout",
       "suffix": "section",
@@ -1788,7 +2020,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-ds-layout--stack",
+      "className": "ds-layout--stack",
       "kind": "component",
       "namespace": "ds-layout",
       "suffix": "stack",
@@ -1796,21 +2028,21 @@
       "line": 5
     },
     {
-      "className": "var-ui-ds-named-cq-body",
+      "className": "ds-named-cq-body",
       "kind": "class",
       "namespace": "ds-named-cq-body",
       "file": "src/components/namedContainerQuery.ts",
       "line": 28
     },
     {
-      "className": "var-ui-ds-named-cq-root",
+      "className": "ds-named-cq-root",
       "kind": "class",
       "namespace": "ds-named-cq-root",
       "file": "src/components/namedContainerQuery.ts",
       "line": 14
     },
     {
-      "className": "var-ui-ds-text",
+      "className": "ds-text",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "base",
@@ -1818,7 +2050,7 @@
       "line": 54
     },
     {
-      "className": "var-ui-ds-text--caption",
+      "className": "ds-text--caption",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "caption",
@@ -1826,7 +2058,7 @@
       "line": 54
     },
     {
-      "className": "var-ui-ds-text--label",
+      "className": "ds-text--label",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "label",
@@ -1834,7 +2066,7 @@
       "line": 54
     },
     {
-      "className": "var-ui-ds-text--sectionTitle",
+      "className": "ds-text--sectionTitle",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "sectionTitle",
@@ -1842,7 +2074,7 @@
       "line": 54
     },
     {
-      "className": "var-ui-ds-text--subtitle",
+      "className": "ds-text--subtitle",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "subtitle",
@@ -1850,7 +2082,7 @@
       "line": 54
     },
     {
-      "className": "var-ui-ds-text--title",
+      "className": "ds-text--title",
       "kind": "component",
       "namespace": "ds-text",
       "suffix": "title",
@@ -1858,7 +2090,7 @@
       "line": 54
     },
     {
-      "className": "var-ui-empty-state",
+      "className": "empty-state",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "base",
@@ -1866,7 +2098,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-empty-state__action",
+      "className": "empty-state__action",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "action",
@@ -1874,7 +2106,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-empty-state__description",
+      "className": "empty-state__description",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "description",
@@ -1882,7 +2114,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-empty-state__icon",
+      "className": "empty-state__icon",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "icon",
@@ -1890,7 +2122,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-empty-state__title",
+      "className": "empty-state__title",
       "kind": "component",
       "namespace": "empty-state",
       "suffix": "title",
@@ -1898,7 +2130,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-field",
+      "className": "field",
       "kind": "component",
       "namespace": "field",
       "suffix": "base",
@@ -1906,7 +2138,7 @@
       "line": 200
     },
     {
-      "className": "var-ui-field__description",
+      "className": "field__description",
       "kind": "component",
       "namespace": "field",
       "suffix": "description",
@@ -1914,7 +2146,7 @@
       "line": 200
     },
     {
-      "className": "var-ui-field__error",
+      "className": "field__error",
       "kind": "component",
       "namespace": "field",
       "suffix": "error",
@@ -1922,7 +2154,7 @@
       "line": 200
     },
     {
-      "className": "var-ui-field__label",
+      "className": "field__label",
       "kind": "component",
       "namespace": "field",
       "suffix": "label",
@@ -1930,7 +2162,7 @@
       "line": 200
     },
     {
-      "className": "var-ui-file-input",
+      "className": "file-input",
       "kind": "component",
       "namespace": "file-input",
       "suffix": "base",
@@ -1938,7 +2170,7 @@
       "line": 12
     },
     {
-      "className": "var-ui-file-input__clearButton",
+      "className": "file-input__clearButton",
       "kind": "component",
       "namespace": "file-input",
       "suffix": "clearButton",
@@ -1946,7 +2178,7 @@
       "line": 12
     },
     {
-      "className": "var-ui-file-input__description",
+      "className": "file-input__description",
       "kind": "component",
       "namespace": "file-input",
       "suffix": "description",
@@ -1954,7 +2186,7 @@
       "line": 12
     },
     {
-      "className": "var-ui-file-input__dropzone",
+      "className": "file-input__dropzone",
       "kind": "component",
       "namespace": "file-input",
       "suffix": "dropzone",
@@ -1962,7 +2194,7 @@
       "line": 12
     },
     {
-      "className": "var-ui-file-input__error",
+      "className": "file-input__error",
       "kind": "component",
       "namespace": "file-input",
       "suffix": "error",
@@ -1970,7 +2202,7 @@
       "line": 12
     },
     {
-      "className": "var-ui-file-input__fileNameText",
+      "className": "file-input__fileNameText",
       "kind": "component",
       "namespace": "file-input",
       "suffix": "fileNameText",
@@ -1978,7 +2210,7 @@
       "line": 12
     },
     {
-      "className": "var-ui-file-input__hiddenInput",
+      "className": "file-input__hiddenInput",
       "kind": "component",
       "namespace": "file-input",
       "suffix": "hiddenInput",
@@ -1986,7 +2218,7 @@
       "line": 12
     },
     {
-      "className": "var-ui-file-input__icon",
+      "className": "file-input__icon",
       "kind": "component",
       "namespace": "file-input",
       "suffix": "icon",
@@ -1994,7 +2226,7 @@
       "line": 12
     },
     {
-      "className": "var-ui-file-input__label",
+      "className": "file-input__label",
       "kind": "component",
       "namespace": "file-input",
       "suffix": "label",
@@ -2002,7 +2234,7 @@
       "line": 12
     },
     {
-      "className": "var-ui-file-input__placeholderText",
+      "className": "file-input__placeholderText",
       "kind": "component",
       "namespace": "file-input",
       "suffix": "placeholderText",
@@ -2010,7 +2242,7 @@
       "line": 12
     },
     {
-      "className": "var-ui-fileTree",
+      "className": "fileTree",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "base",
@@ -2018,7 +2250,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-fileTree__file",
+      "className": "fileTree__file",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "file",
@@ -2026,7 +2258,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-fileTree__folder",
+      "className": "fileTree__folder",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "folder",
@@ -2034,7 +2266,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-fileTree__item",
+      "className": "fileTree__item",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "item",
@@ -2042,7 +2274,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-fileTree__list",
+      "className": "fileTree__list",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "list",
@@ -2050,7 +2282,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-fileTree__listNested",
+      "className": "fileTree__listNested",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "listNested",
@@ -2058,7 +2290,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-fileTree__row",
+      "className": "fileTree__row",
       "kind": "component",
       "namespace": "fileTree",
       "suffix": "row",
@@ -2066,7 +2298,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-grid",
+      "className": "grid",
       "kind": "component",
       "namespace": "grid",
       "suffix": "base",
@@ -2074,7 +2306,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-heading",
+      "className": "heading",
       "kind": "component",
       "namespace": "heading",
       "suffix": "base",
@@ -2082,7 +2314,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-hover-card",
+      "className": "hover-card",
       "kind": "component",
       "namespace": "hover-card",
       "suffix": "base",
@@ -2090,7 +2322,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-hover-card__content",
+      "className": "hover-card__content",
       "kind": "component",
       "namespace": "hover-card",
       "suffix": "content",
@@ -2098,7 +2330,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-hover-card__title",
+      "className": "hover-card__title",
       "kind": "component",
       "namespace": "hover-card",
       "suffix": "title",
@@ -2106,15 +2338,15 @@
       "line": 15
     },
     {
-      "className": "var-ui-icon",
+      "className": "icon",
       "kind": "component",
       "namespace": "icon",
       "suffix": "base",
       "file": "src/components/icon.ts",
-      "line": 13
+      "line": 14
     },
     {
-      "className": "var-ui-input-group",
+      "className": "input-group",
       "kind": "component",
       "namespace": "input-group",
       "suffix": "base",
@@ -2122,7 +2354,7 @@
       "line": 17
     },
     {
-      "className": "var-ui-input-group__description",
+      "className": "input-group__description",
       "kind": "component",
       "namespace": "input-group",
       "suffix": "description",
@@ -2130,7 +2362,7 @@
       "line": 17
     },
     {
-      "className": "var-ui-input-group__error",
+      "className": "input-group__error",
       "kind": "component",
       "namespace": "input-group",
       "suffix": "error",
@@ -2138,7 +2370,7 @@
       "line": 17
     },
     {
-      "className": "var-ui-input-group__group",
+      "className": "input-group__group",
       "kind": "component",
       "namespace": "input-group",
       "suffix": "group",
@@ -2146,7 +2378,7 @@
       "line": 17
     },
     {
-      "className": "var-ui-input-group__input",
+      "className": "input-group__input",
       "kind": "component",
       "namespace": "input-group",
       "suffix": "input",
@@ -2154,7 +2386,7 @@
       "line": 17
     },
     {
-      "className": "var-ui-input-group__label",
+      "className": "input-group__label",
       "kind": "component",
       "namespace": "input-group",
       "suffix": "label",
@@ -2162,7 +2394,7 @@
       "line": 17
     },
     {
-      "className": "var-ui-input-group__text",
+      "className": "input-group__text",
       "kind": "component",
       "namespace": "input-group",
       "suffix": "text",
@@ -2170,7 +2402,7 @@
       "line": 17
     },
     {
-      "className": "var-ui-kbd",
+      "className": "kbd",
       "kind": "component",
       "namespace": "kbd",
       "suffix": "base",
@@ -2178,14 +2410,78 @@
       "line": 12
     },
     {
-      "className": "var-ui-link",
+      "className": "link",
       "kind": "class",
       "namespace": "link",
       "file": "src/components/link.ts",
       "line": 6
     },
     {
-      "className": "var-ui-menu__item",
+      "className": "list",
+      "kind": "component",
+      "namespace": "list",
+      "suffix": "base",
+      "file": "src/components/list.ts",
+      "line": 39
+    },
+    {
+      "className": "list__description",
+      "kind": "component",
+      "namespace": "list",
+      "suffix": "description",
+      "file": "src/components/list.ts",
+      "line": 39
+    },
+    {
+      "className": "list__divider",
+      "kind": "component",
+      "namespace": "list",
+      "suffix": "divider",
+      "file": "src/components/list.ts",
+      "line": 39
+    },
+    {
+      "className": "list__end",
+      "kind": "component",
+      "namespace": "list",
+      "suffix": "end",
+      "file": "src/components/list.ts",
+      "line": 39
+    },
+    {
+      "className": "list__header",
+      "kind": "component",
+      "namespace": "list",
+      "suffix": "header",
+      "file": "src/components/list.ts",
+      "line": 39
+    },
+    {
+      "className": "list__item",
+      "kind": "component",
+      "namespace": "list",
+      "suffix": "item",
+      "file": "src/components/list.ts",
+      "line": 39
+    },
+    {
+      "className": "list__label",
+      "kind": "component",
+      "namespace": "list",
+      "suffix": "label",
+      "file": "src/components/list.ts",
+      "line": 39
+    },
+    {
+      "className": "list__start",
+      "kind": "component",
+      "namespace": "list",
+      "suffix": "start",
+      "file": "src/components/list.ts",
+      "line": 39
+    },
+    {
+      "className": "menu__item",
       "kind": "component",
       "namespace": "menu",
       "suffix": "item",
@@ -2193,7 +2489,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-menu__itemCheck",
+      "className": "menu__itemCheck",
       "kind": "component",
       "namespace": "menu",
       "suffix": "itemCheck",
@@ -2201,7 +2497,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-menu__itemDanger",
+      "className": "menu__itemDanger",
       "kind": "component",
       "namespace": "menu",
       "suffix": "itemDanger",
@@ -2209,7 +2505,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-menu__itemLabel",
+      "className": "menu__itemLabel",
       "kind": "component",
       "namespace": "menu",
       "suffix": "itemLabel",
@@ -2217,7 +2513,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-menu__itemShortcut",
+      "className": "menu__itemShortcut",
       "kind": "component",
       "namespace": "menu",
       "suffix": "itemShortcut",
@@ -2225,7 +2521,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-menu__menu",
+      "className": "menu__menu",
       "kind": "component",
       "namespace": "menu",
       "suffix": "menu",
@@ -2233,7 +2529,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-menu__popover",
+      "className": "menu__popover",
       "kind": "component",
       "namespace": "menu",
       "suffix": "popover",
@@ -2241,7 +2537,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-menu__section",
+      "className": "menu__section",
       "kind": "component",
       "namespace": "menu",
       "suffix": "section",
@@ -2249,7 +2545,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-menu__sectionHeader",
+      "className": "menu__sectionHeader",
       "kind": "component",
       "namespace": "menu",
       "suffix": "sectionHeader",
@@ -2257,7 +2553,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-menu__separator",
+      "className": "menu__separator",
       "kind": "component",
       "namespace": "menu",
       "suffix": "separator",
@@ -2265,7 +2561,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-menu__submenuChevron",
+      "className": "menu__submenuChevron",
       "kind": "component",
       "namespace": "menu",
       "suffix": "submenuChevron",
@@ -2273,7 +2569,47 @@
       "line": 5
     },
     {
-      "className": "var-ui-multiSelector",
+      "className": "mobile-nav__closeButton",
+      "kind": "component",
+      "namespace": "mobile-nav",
+      "suffix": "closeButton",
+      "file": "src/components/mobileNav.ts",
+      "line": 28
+    },
+    {
+      "className": "mobile-nav__header",
+      "kind": "component",
+      "namespace": "mobile-nav",
+      "suffix": "header",
+      "file": "src/components/mobileNav.ts",
+      "line": 28
+    },
+    {
+      "className": "mobile-nav__overlay",
+      "kind": "component",
+      "namespace": "mobile-nav",
+      "suffix": "overlay",
+      "file": "src/components/mobileNav.ts",
+      "line": 28
+    },
+    {
+      "className": "mobile-nav__panel",
+      "kind": "component",
+      "namespace": "mobile-nav",
+      "suffix": "panel",
+      "file": "src/components/mobileNav.ts",
+      "line": 28
+    },
+    {
+      "className": "mobile-nav__toggle",
+      "kind": "component",
+      "namespace": "mobile-nav",
+      "suffix": "toggle",
+      "file": "src/components/mobileNav.ts",
+      "line": 28
+    },
+    {
+      "className": "multiSelector",
       "kind": "component",
       "namespace": "multiSelector",
       "suffix": "base",
@@ -2281,7 +2617,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-multiSelector__item",
+      "className": "multiSelector__item",
       "kind": "component",
       "namespace": "multiSelector",
       "suffix": "item",
@@ -2289,7 +2625,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-multiSelector__itemCheckbox",
+      "className": "multiSelector__itemCheckbox",
       "kind": "component",
       "namespace": "multiSelector",
       "suffix": "itemCheckbox",
@@ -2297,7 +2633,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-multiSelector__itemLabel",
+      "className": "multiSelector__itemLabel",
       "kind": "component",
       "namespace": "multiSelector",
       "suffix": "itemLabel",
@@ -2305,7 +2641,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-multiSelector__label",
+      "className": "multiSelector__label",
       "kind": "component",
       "namespace": "multiSelector",
       "suffix": "label",
@@ -2313,7 +2649,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-multiSelector__popover",
+      "className": "multiSelector__popover",
       "kind": "component",
       "namespace": "multiSelector",
       "suffix": "popover",
@@ -2321,7 +2657,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-multiSelector__trigger",
+      "className": "multiSelector__trigger",
       "kind": "component",
       "namespace": "multiSelector",
       "suffix": "trigger",
@@ -2329,7 +2665,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-multiSelector__triggerIcon",
+      "className": "multiSelector__triggerIcon",
       "kind": "component",
       "namespace": "multiSelector",
       "suffix": "triggerIcon",
@@ -2337,7 +2673,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-number-input",
+      "className": "number-input",
       "kind": "component",
       "namespace": "number-input",
       "suffix": "base",
@@ -2345,7 +2681,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-number-input__description",
+      "className": "number-input__description",
       "kind": "component",
       "namespace": "number-input",
       "suffix": "description",
@@ -2353,7 +2689,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-number-input__error",
+      "className": "number-input__error",
       "kind": "component",
       "namespace": "number-input",
       "suffix": "error",
@@ -2361,7 +2697,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-number-input__group",
+      "className": "number-input__group",
       "kind": "component",
       "namespace": "number-input",
       "suffix": "group",
@@ -2369,7 +2705,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-number-input__input",
+      "className": "number-input__input",
       "kind": "component",
       "namespace": "number-input",
       "suffix": "input",
@@ -2377,7 +2713,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-number-input__label",
+      "className": "number-input__label",
       "kind": "component",
       "namespace": "number-input",
       "suffix": "label",
@@ -2385,7 +2721,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-number-input__stepper",
+      "className": "number-input__stepper",
       "kind": "component",
       "namespace": "number-input",
       "suffix": "stepper",
@@ -2393,7 +2729,79 @@
       "line": 6
     },
     {
-      "className": "var-ui-overlay__backdrop",
+      "className": "outline",
+      "kind": "component",
+      "namespace": "outline",
+      "suffix": "base",
+      "file": "src/components/outline.ts",
+      "line": 5
+    },
+    {
+      "className": "outline__link",
+      "kind": "component",
+      "namespace": "outline",
+      "suffix": "link",
+      "file": "src/components/outline.ts",
+      "line": 5
+    },
+    {
+      "className": "outline__linkActive",
+      "kind": "component",
+      "namespace": "outline",
+      "suffix": "linkActive",
+      "file": "src/components/outline.ts",
+      "line": 5
+    },
+    {
+      "className": "outline__linkNested",
+      "kind": "component",
+      "namespace": "outline",
+      "suffix": "linkNested",
+      "file": "src/components/outline.ts",
+      "line": 5
+    },
+    {
+      "className": "outline__list",
+      "kind": "component",
+      "namespace": "outline",
+      "suffix": "list",
+      "file": "src/components/outline.ts",
+      "line": 5
+    },
+    {
+      "className": "outline__title",
+      "kind": "component",
+      "namespace": "outline",
+      "suffix": "title",
+      "file": "src/components/outline.ts",
+      "line": 5
+    },
+    {
+      "className": "overflow-list",
+      "kind": "component",
+      "namespace": "overflow-list",
+      "suffix": "base",
+      "file": "src/components/overflowList.ts",
+      "line": 25
+    },
+    {
+      "className": "overflow-list__item",
+      "kind": "component",
+      "namespace": "overflow-list",
+      "suffix": "item",
+      "file": "src/components/overflowList.ts",
+      "line": 25
+    },
+    {
+      "className": "overflow-list__overflow",
+      "kind": "component",
+      "namespace": "overflow-list",
+      "suffix": "overflow",
+      "file": "src/components/overflowList.ts",
+      "line": 25
+    },
+    {
+      "className": "overlay__backdrop",
       "kind": "component",
       "namespace": "overlay",
       "suffix": "backdrop",
@@ -2401,7 +2809,7 @@
       "line": 16
     },
     {
-      "className": "var-ui-overlay__positioner",
+      "className": "overlay__positioner",
       "kind": "component",
       "namespace": "overlay",
       "suffix": "positioner",
@@ -2409,7 +2817,7 @@
       "line": 16
     },
     {
-      "className": "var-ui-pagination",
+      "className": "pagination",
       "kind": "component",
       "namespace": "pagination",
       "suffix": "base",
@@ -2417,7 +2825,7 @@
       "line": 36
     },
     {
-      "className": "var-ui-pagination__controls",
+      "className": "pagination__controls",
       "kind": "component",
       "namespace": "pagination",
       "suffix": "controls",
@@ -2425,7 +2833,7 @@
       "line": 36
     },
     {
-      "className": "var-ui-pagination__dot",
+      "className": "pagination__dot",
       "kind": "component",
       "namespace": "pagination",
       "suffix": "dot",
@@ -2433,7 +2841,7 @@
       "line": 36
     },
     {
-      "className": "var-ui-pagination__dotActive",
+      "className": "pagination__dotActive",
       "kind": "component",
       "namespace": "pagination",
       "suffix": "dotActive",
@@ -2441,7 +2849,7 @@
       "line": 36
     },
     {
-      "className": "var-ui-pagination__dotsContainer",
+      "className": "pagination__dotsContainer",
       "kind": "component",
       "namespace": "pagination",
       "suffix": "dotsContainer",
@@ -2449,7 +2857,7 @@
       "line": 36
     },
     {
-      "className": "var-ui-pagination__ellipsis",
+      "className": "pagination__ellipsis",
       "kind": "component",
       "namespace": "pagination",
       "suffix": "ellipsis",
@@ -2457,7 +2865,7 @@
       "line": 36
     },
     {
-      "className": "var-ui-pagination__infoText",
+      "className": "pagination__infoText",
       "kind": "component",
       "namespace": "pagination",
       "suffix": "infoText",
@@ -2465,7 +2873,7 @@
       "line": 36
     },
     {
-      "className": "var-ui-pagination__pageSizeGroup",
+      "className": "pagination__pageSizeGroup",
       "kind": "component",
       "namespace": "pagination",
       "suffix": "pageSizeGroup",
@@ -2473,7 +2881,7 @@
       "line": 36
     },
     {
-      "className": "var-ui-popover",
+      "className": "popover",
       "kind": "component",
       "namespace": "popover",
       "suffix": "base",
@@ -2481,7 +2889,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-popover__content",
+      "className": "popover__content",
       "kind": "component",
       "namespace": "popover",
       "suffix": "content",
@@ -2489,7 +2897,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-popover__title",
+      "className": "popover__title",
       "kind": "component",
       "namespace": "popover",
       "suffix": "title",
@@ -2497,7 +2905,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-progress-bar",
+      "className": "progress-bar",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "base",
@@ -2505,7 +2913,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-progress-bar__fill",
+      "className": "progress-bar__fill",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "fill",
@@ -2513,7 +2921,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-progress-bar__header",
+      "className": "progress-bar__header",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "header",
@@ -2521,7 +2929,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-progress-bar__label",
+      "className": "progress-bar__label",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "label",
@@ -2529,7 +2937,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-progress-bar__track",
+      "className": "progress-bar__track",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "track",
@@ -2537,7 +2945,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-progress-bar__valueText",
+      "className": "progress-bar__valueText",
       "kind": "component",
       "namespace": "progress-bar",
       "suffix": "valueText",
@@ -2545,7 +2953,7 @@
       "line": 15
     },
     {
-      "className": "var-ui-radio__control",
+      "className": "radio__control",
       "kind": "component",
       "namespace": "radio",
       "suffix": "control",
@@ -2553,7 +2961,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-radio__group",
+      "className": "radio__group",
       "kind": "component",
       "namespace": "radio",
       "suffix": "group",
@@ -2561,7 +2969,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-radio__groupLabel",
+      "className": "radio__groupLabel",
       "kind": "component",
       "namespace": "radio",
       "suffix": "groupLabel",
@@ -2569,7 +2977,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-radio__item",
+      "className": "radio__item",
       "kind": "component",
       "namespace": "radio",
       "suffix": "item",
@@ -2577,7 +2985,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-radio__label",
+      "className": "radio__label",
       "kind": "component",
       "namespace": "radio",
       "suffix": "label",
@@ -2585,7 +2993,23 @@
       "line": 5
     },
     {
-      "className": "var-ui-section",
+      "className": "resize-handle",
+      "kind": "component",
+      "namespace": "resize-handle",
+      "suffix": "base",
+      "file": "src/components/resizeHandle.ts",
+      "line": 15
+    },
+    {
+      "className": "resize-handle__pill",
+      "kind": "component",
+      "namespace": "resize-handle",
+      "suffix": "pill",
+      "file": "src/components/resizeHandle.ts",
+      "line": 15
+    },
+    {
+      "className": "section",
       "kind": "component",
       "namespace": "section",
       "suffix": "base",
@@ -2593,7 +3017,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-section__title",
+      "className": "section__title",
       "kind": "component",
       "namespace": "section",
       "suffix": "title",
@@ -2601,7 +3025,7 @@
       "line": 14
     },
     {
-      "className": "var-ui-segmented-control",
+      "className": "segmented-control",
       "kind": "component",
       "namespace": "segmented-control",
       "suffix": "base",
@@ -2609,7 +3033,7 @@
       "line": 8
     },
     {
-      "className": "var-ui-select",
+      "className": "select",
       "kind": "component",
       "namespace": "select",
       "suffix": "base",
@@ -2617,7 +3041,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-select__item",
+      "className": "select__item",
       "kind": "component",
       "namespace": "select",
       "suffix": "item",
@@ -2625,7 +3049,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-select__label",
+      "className": "select__label",
       "kind": "component",
       "namespace": "select",
       "suffix": "label",
@@ -2633,7 +3057,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-select__popover",
+      "className": "select__popover",
       "kind": "component",
       "namespace": "select",
       "suffix": "popover",
@@ -2641,7 +3065,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-select__trigger",
+      "className": "select__trigger",
       "kind": "component",
       "namespace": "select",
       "suffix": "trigger",
@@ -2649,7 +3073,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-select__triggerIcon",
+      "className": "select__triggerIcon",
       "kind": "component",
       "namespace": "select",
       "suffix": "triggerIcon",
@@ -2657,7 +3081,103 @@
       "line": 6
     },
     {
-      "className": "var-ui-skeleton",
+      "className": "side-nav",
+      "kind": "component",
+      "namespace": "side-nav",
+      "suffix": "base",
+      "file": "src/components/sideNav.ts",
+      "line": 36
+    },
+    {
+      "className": "side-nav__collapseButton",
+      "kind": "component",
+      "namespace": "side-nav",
+      "suffix": "collapseButton",
+      "file": "src/components/sideNav.ts",
+      "line": 36
+    },
+    {
+      "className": "side-nav__footer",
+      "kind": "component",
+      "namespace": "side-nav",
+      "suffix": "footer",
+      "file": "src/components/sideNav.ts",
+      "line": 36
+    },
+    {
+      "className": "side-nav__footerIcons",
+      "kind": "component",
+      "namespace": "side-nav",
+      "suffix": "footerIcons",
+      "file": "src/components/sideNav.ts",
+      "line": 36
+    },
+    {
+      "className": "side-nav__heading",
+      "kind": "component",
+      "namespace": "side-nav",
+      "suffix": "heading",
+      "file": "src/components/sideNav.ts",
+      "line": 36
+    },
+    {
+      "className": "side-nav__item",
+      "kind": "component",
+      "namespace": "side-nav",
+      "suffix": "item",
+      "file": "src/components/sideNav.ts",
+      "line": 36
+    },
+    {
+      "className": "side-nav__itemLabel",
+      "kind": "component",
+      "namespace": "side-nav",
+      "suffix": "itemLabel",
+      "file": "src/components/sideNav.ts",
+      "line": 36
+    },
+    {
+      "className": "side-nav__scrollable",
+      "kind": "component",
+      "namespace": "side-nav",
+      "suffix": "scrollable",
+      "file": "src/components/sideNav.ts",
+      "line": 36
+    },
+    {
+      "className": "side-nav__section",
+      "kind": "component",
+      "namespace": "side-nav",
+      "suffix": "section",
+      "file": "src/components/sideNav.ts",
+      "line": 36
+    },
+    {
+      "className": "side-nav__sectionTitle",
+      "kind": "component",
+      "namespace": "side-nav",
+      "suffix": "sectionTitle",
+      "file": "src/components/sideNav.ts",
+      "line": 36
+    },
+    {
+      "className": "side-nav__stickyTop",
+      "kind": "component",
+      "namespace": "side-nav",
+      "suffix": "stickyTop",
+      "file": "src/components/sideNav.ts",
+      "line": 36
+    },
+    {
+      "className": "side-nav__topContent",
+      "kind": "component",
+      "namespace": "side-nav",
+      "suffix": "topContent",
+      "file": "src/components/sideNav.ts",
+      "line": 36
+    },
+    {
+      "className": "skeleton",
       "kind": "component",
       "namespace": "skeleton",
       "suffix": "base",
@@ -2665,7 +3185,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-slider",
+      "className": "slider",
       "kind": "component",
       "namespace": "slider",
       "suffix": "base",
@@ -2673,7 +3193,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-slider__control",
+      "className": "slider__control",
       "kind": "component",
       "namespace": "slider",
       "suffix": "control",
@@ -2681,7 +3201,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-slider__description",
+      "className": "slider__description",
       "kind": "component",
       "namespace": "slider",
       "suffix": "description",
@@ -2689,7 +3209,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-slider__error",
+      "className": "slider__error",
       "kind": "component",
       "namespace": "slider",
       "suffix": "error",
@@ -2697,7 +3217,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-slider__fill",
+      "className": "slider__fill",
       "kind": "component",
       "namespace": "slider",
       "suffix": "fill",
@@ -2705,7 +3225,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-slider__label",
+      "className": "slider__label",
       "kind": "component",
       "namespace": "slider",
       "suffix": "label",
@@ -2713,7 +3233,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-slider__output",
+      "className": "slider__output",
       "kind": "component",
       "namespace": "slider",
       "suffix": "output",
@@ -2721,7 +3241,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-slider__thumb",
+      "className": "slider__thumb",
       "kind": "component",
       "namespace": "slider",
       "suffix": "thumb",
@@ -2729,7 +3249,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-slider__track",
+      "className": "slider__track",
       "kind": "component",
       "namespace": "slider",
       "suffix": "track",
@@ -2737,7 +3257,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-spinner",
+      "className": "spinner",
       "kind": "component",
       "namespace": "spinner",
       "suffix": "base",
@@ -2745,7 +3265,7 @@
       "line": 19
     },
     {
-      "className": "var-ui-stack",
+      "className": "stack",
       "kind": "component",
       "namespace": "stack",
       "suffix": "base",
@@ -2753,7 +3273,7 @@
       "line": 13
     },
     {
-      "className": "var-ui-status-dot",
+      "className": "status-dot",
       "kind": "component",
       "namespace": "status-dot",
       "suffix": "base",
@@ -2761,7 +3281,7 @@
       "line": 24
     },
     {
-      "className": "var-ui-steps",
+      "className": "steps",
       "kind": "component",
       "namespace": "steps",
       "suffix": "base",
@@ -2769,7 +3289,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-switch",
+      "className": "switch",
       "kind": "component",
       "namespace": "switch",
       "suffix": "base",
@@ -2777,7 +3297,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-switch__label",
+      "className": "switch__label",
       "kind": "component",
       "namespace": "switch",
       "suffix": "label",
@@ -2785,7 +3305,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-switch__thumb",
+      "className": "switch__thumb",
       "kind": "component",
       "namespace": "switch",
       "suffix": "thumb",
@@ -2793,7 +3313,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-switch__track",
+      "className": "switch__track",
       "kind": "component",
       "namespace": "switch",
       "suffix": "track",
@@ -2801,7 +3321,127 @@
       "line": 5
     },
     {
-      "className": "var-ui-tabs",
+      "className": "tab-list",
+      "kind": "component",
+      "namespace": "tab-list",
+      "suffix": "base",
+      "file": "src/components/tabList.ts",
+      "line": 36
+    },
+    {
+      "className": "tab-list__indicator",
+      "kind": "component",
+      "namespace": "tab-list",
+      "suffix": "indicator",
+      "file": "src/components/tabList.ts",
+      "line": 36
+    },
+    {
+      "className": "tab-list__menu",
+      "kind": "component",
+      "namespace": "tab-list",
+      "suffix": "menu",
+      "file": "src/components/tabList.ts",
+      "line": 36
+    },
+    {
+      "className": "tab-list__menuTrigger",
+      "kind": "component",
+      "namespace": "tab-list",
+      "suffix": "menuTrigger",
+      "file": "src/components/tabList.ts",
+      "line": 36
+    },
+    {
+      "className": "tab-list__tab",
+      "kind": "component",
+      "namespace": "tab-list",
+      "suffix": "tab",
+      "file": "src/components/tabList.ts",
+      "line": 36
+    },
+    {
+      "className": "table",
+      "kind": "component",
+      "namespace": "table",
+      "suffix": "base",
+      "file": "src/components/table.ts",
+      "line": 47
+    },
+    {
+      "className": "table__body",
+      "kind": "component",
+      "namespace": "table",
+      "suffix": "body",
+      "file": "src/components/table.ts",
+      "line": 47
+    },
+    {
+      "className": "table__caption",
+      "kind": "component",
+      "namespace": "table",
+      "suffix": "caption",
+      "file": "src/components/table.ts",
+      "line": 47
+    },
+    {
+      "className": "table__cell",
+      "kind": "component",
+      "namespace": "table",
+      "suffix": "cell",
+      "file": "src/components/table.ts",
+      "line": 47
+    },
+    {
+      "className": "table__empty",
+      "kind": "component",
+      "namespace": "table",
+      "suffix": "empty",
+      "file": "src/components/table.ts",
+      "line": 47
+    },
+    {
+      "className": "table__footer",
+      "kind": "component",
+      "namespace": "table",
+      "suffix": "footer",
+      "file": "src/components/table.ts",
+      "line": 47
+    },
+    {
+      "className": "table__header",
+      "kind": "component",
+      "namespace": "table",
+      "suffix": "header",
+      "file": "src/components/table.ts",
+      "line": 47
+    },
+    {
+      "className": "table__headerCell",
+      "kind": "component",
+      "namespace": "table",
+      "suffix": "headerCell",
+      "file": "src/components/table.ts",
+      "line": 47
+    },
+    {
+      "className": "table__row",
+      "kind": "component",
+      "namespace": "table",
+      "suffix": "row",
+      "file": "src/components/table.ts",
+      "line": 47
+    },
+    {
+      "className": "table__table",
+      "kind": "component",
+      "namespace": "table",
+      "suffix": "table",
+      "file": "src/components/table.ts",
+      "line": 47
+    },
+    {
+      "className": "tabs",
       "kind": "component",
       "namespace": "tabs",
       "suffix": "base",
@@ -2809,7 +3449,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-tabs__list",
+      "className": "tabs__list",
       "kind": "component",
       "namespace": "tabs",
       "suffix": "list",
@@ -2817,7 +3457,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-tabs__panel",
+      "className": "tabs__panel",
       "kind": "component",
       "namespace": "tabs",
       "suffix": "panel",
@@ -2825,7 +3465,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-tabs__tab",
+      "className": "tabs__tab",
       "kind": "component",
       "namespace": "tabs",
       "suffix": "tab",
@@ -2833,7 +3473,7 @@
       "line": 5
     },
     {
-      "className": "var-ui-text-area-field",
+      "className": "text-area-field",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "base",
@@ -2841,7 +3481,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-area-field__description",
+      "className": "text-area-field__description",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "description",
@@ -2849,7 +3489,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-area-field__error",
+      "className": "text-area-field__error",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "error",
@@ -2857,7 +3497,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-area-field__input",
+      "className": "text-area-field__input",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "input",
@@ -2865,7 +3505,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-area-field__label",
+      "className": "text-area-field__label",
       "kind": "component",
       "namespace": "text-area-field",
       "suffix": "label",
@@ -2873,7 +3513,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-block",
+      "className": "text-block",
       "kind": "component",
       "namespace": "text-block",
       "suffix": "base",
@@ -2881,7 +3521,7 @@
       "line": 55
     },
     {
-      "className": "var-ui-text-field",
+      "className": "text-field",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "base",
@@ -2889,7 +3529,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-field__description",
+      "className": "text-field__description",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "description",
@@ -2897,7 +3537,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-field__error",
+      "className": "text-field__error",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "error",
@@ -2905,7 +3545,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-field__input",
+      "className": "text-field__input",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "input",
@@ -2913,7 +3553,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-text-field__label",
+      "className": "text-field__label",
       "kind": "component",
       "namespace": "text-field",
       "suffix": "label",
@@ -2921,7 +3561,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-thumbnail",
+      "className": "thumbnail",
       "kind": "component",
       "namespace": "thumbnail",
       "suffix": "base",
@@ -2929,7 +3569,7 @@
       "line": 21
     },
     {
-      "className": "var-ui-thumbnail__dismiss",
+      "className": "thumbnail__dismiss",
       "kind": "component",
       "namespace": "thumbnail",
       "suffix": "dismiss",
@@ -2937,7 +3577,7 @@
       "line": 21
     },
     {
-      "className": "var-ui-thumbnail__image",
+      "className": "thumbnail__image",
       "kind": "component",
       "namespace": "thumbnail",
       "suffix": "image",
@@ -2945,7 +3585,7 @@
       "line": 21
     },
     {
-      "className": "var-ui-timeInput",
+      "className": "timeInput",
       "kind": "component",
       "namespace": "timeInput",
       "suffix": "base",
@@ -2953,7 +3593,7 @@
       "line": 21
     },
     {
-      "className": "var-ui-timeInput__description",
+      "className": "timeInput__description",
       "kind": "component",
       "namespace": "timeInput",
       "suffix": "description",
@@ -2961,7 +3601,7 @@
       "line": 21
     },
     {
-      "className": "var-ui-timeInput__error",
+      "className": "timeInput__error",
       "kind": "component",
       "namespace": "timeInput",
       "suffix": "error",
@@ -2969,7 +3609,7 @@
       "line": 21
     },
     {
-      "className": "var-ui-timeInput__group",
+      "className": "timeInput__group",
       "kind": "component",
       "namespace": "timeInput",
       "suffix": "group",
@@ -2977,7 +3617,7 @@
       "line": 21
     },
     {
-      "className": "var-ui-timeInput__label",
+      "className": "timeInput__label",
       "kind": "component",
       "namespace": "timeInput",
       "suffix": "label",
@@ -2985,7 +3625,7 @@
       "line": 21
     },
     {
-      "className": "var-ui-timeInput__segment",
+      "className": "timeInput__segment",
       "kind": "component",
       "namespace": "timeInput",
       "suffix": "segment",
@@ -2993,7 +3633,7 @@
       "line": 21
     },
     {
-      "className": "var-ui-toast__body",
+      "className": "toast__body",
       "kind": "component",
       "namespace": "toast",
       "suffix": "body",
@@ -3001,7 +3641,7 @@
       "line": 18
     },
     {
-      "className": "var-ui-toast__close",
+      "className": "toast__close",
       "kind": "component",
       "namespace": "toast",
       "suffix": "close",
@@ -3009,7 +3649,7 @@
       "line": 18
     },
     {
-      "className": "var-ui-toast__description",
+      "className": "toast__description",
       "kind": "component",
       "namespace": "toast",
       "suffix": "description",
@@ -3017,7 +3657,7 @@
       "line": 18
     },
     {
-      "className": "var-ui-toast__icon",
+      "className": "toast__icon",
       "kind": "component",
       "namespace": "toast",
       "suffix": "icon",
@@ -3025,7 +3665,7 @@
       "line": 18
     },
     {
-      "className": "var-ui-toast__item",
+      "className": "toast__item",
       "kind": "component",
       "namespace": "toast",
       "suffix": "item",
@@ -3033,7 +3673,7 @@
       "line": 18
     },
     {
-      "className": "var-ui-toast__region",
+      "className": "toast__region",
       "kind": "component",
       "namespace": "toast",
       "suffix": "region",
@@ -3041,7 +3681,7 @@
       "line": 18
     },
     {
-      "className": "var-ui-toast__title",
+      "className": "toast__title",
       "kind": "component",
       "namespace": "toast",
       "suffix": "title",
@@ -3049,7 +3689,7 @@
       "line": 18
     },
     {
-      "className": "var-ui-toggle-button",
+      "className": "toggle-button",
       "kind": "component",
       "namespace": "toggle-button",
       "suffix": "base",
@@ -3057,7 +3697,7 @@
       "line": 7
     },
     {
-      "className": "var-ui-tokenizer",
+      "className": "tokenizer",
       "kind": "component",
       "namespace": "tokenizer",
       "suffix": "base",
@@ -3065,7 +3705,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-tokenizer__description",
+      "className": "tokenizer__description",
       "kind": "component",
       "namespace": "tokenizer",
       "suffix": "description",
@@ -3073,7 +3713,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-tokenizer__error",
+      "className": "tokenizer__error",
       "kind": "component",
       "namespace": "tokenizer",
       "suffix": "error",
@@ -3081,7 +3721,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-tokenizer__group",
+      "className": "tokenizer__group",
       "kind": "component",
       "namespace": "tokenizer",
       "suffix": "group",
@@ -3089,7 +3729,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-tokenizer__input",
+      "className": "tokenizer__input",
       "kind": "component",
       "namespace": "tokenizer",
       "suffix": "input",
@@ -3097,7 +3737,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-tokenizer__item",
+      "className": "tokenizer__item",
       "kind": "component",
       "namespace": "tokenizer",
       "suffix": "item",
@@ -3105,7 +3745,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-tokenizer__label",
+      "className": "tokenizer__label",
       "kind": "component",
       "namespace": "tokenizer",
       "suffix": "label",
@@ -3113,7 +3753,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-tokenizer__popover",
+      "className": "tokenizer__popover",
       "kind": "component",
       "namespace": "tokenizer",
       "suffix": "popover",
@@ -3121,7 +3761,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-tokenizer__token",
+      "className": "tokenizer__token",
       "kind": "component",
       "namespace": "tokenizer",
       "suffix": "token",
@@ -3129,7 +3769,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-tokenizer__tokenLabel",
+      "className": "tokenizer__tokenLabel",
       "kind": "component",
       "namespace": "tokenizer",
       "suffix": "tokenLabel",
@@ -3137,7 +3777,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-tokenizer__tokenList",
+      "className": "tokenizer__tokenList",
       "kind": "component",
       "namespace": "tokenizer",
       "suffix": "tokenList",
@@ -3145,7 +3785,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-tokenizer__tokenRemoveButton",
+      "className": "tokenizer__tokenRemoveButton",
       "kind": "component",
       "namespace": "tokenizer",
       "suffix": "tokenRemoveButton",
@@ -3153,7 +3793,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-toolbar",
+      "className": "toolbar",
       "kind": "component",
       "namespace": "toolbar",
       "suffix": "base",
@@ -3161,7 +3801,7 @@
       "line": 23
     },
     {
-      "className": "var-ui-tooltip",
+      "className": "tooltip",
       "kind": "component",
       "namespace": "tooltip",
       "suffix": "base",
@@ -3169,7 +3809,159 @@
       "line": 13
     },
     {
-      "className": "var-ui-typeahead",
+      "className": "top-nav",
+      "kind": "component",
+      "namespace": "top-nav",
+      "suffix": "base",
+      "file": "src/components/topNav.ts",
+      "line": 28
+    },
+    {
+      "className": "top-nav__center",
+      "kind": "component",
+      "namespace": "top-nav",
+      "suffix": "center",
+      "file": "src/components/topNav.ts",
+      "line": 28
+    },
+    {
+      "className": "top-nav__end",
+      "kind": "component",
+      "namespace": "top-nav",
+      "suffix": "end",
+      "file": "src/components/topNav.ts",
+      "line": 28
+    },
+    {
+      "className": "top-nav__featuredCard",
+      "kind": "component",
+      "namespace": "top-nav",
+      "suffix": "featuredCard",
+      "file": "src/components/topNav.ts",
+      "line": 28
+    },
+    {
+      "className": "top-nav__heading",
+      "kind": "component",
+      "namespace": "top-nav",
+      "suffix": "heading",
+      "file": "src/components/topNav.ts",
+      "line": 28
+    },
+    {
+      "className": "top-nav__item",
+      "kind": "component",
+      "namespace": "top-nav",
+      "suffix": "item",
+      "file": "src/components/topNav.ts",
+      "line": 28
+    },
+    {
+      "className": "top-nav__megaItem",
+      "kind": "component",
+      "namespace": "top-nav",
+      "suffix": "megaItem",
+      "file": "src/components/topNav.ts",
+      "line": 28
+    },
+    {
+      "className": "top-nav__megaPanel",
+      "kind": "component",
+      "namespace": "top-nav",
+      "suffix": "megaPanel",
+      "file": "src/components/topNav.ts",
+      "line": 28
+    },
+    {
+      "className": "top-nav__menuTrigger",
+      "kind": "component",
+      "namespace": "top-nav",
+      "suffix": "menuTrigger",
+      "file": "src/components/topNav.ts",
+      "line": 28
+    },
+    {
+      "className": "top-nav__start",
+      "kind": "component",
+      "namespace": "top-nav",
+      "suffix": "start",
+      "file": "src/components/topNav.ts",
+      "line": 28
+    },
+    {
+      "className": "tree",
+      "kind": "component",
+      "namespace": "tree",
+      "suffix": "base",
+      "file": "src/components/tree.ts",
+      "line": 49
+    },
+    {
+      "className": "tree__description",
+      "kind": "component",
+      "namespace": "tree",
+      "suffix": "description",
+      "file": "src/components/tree.ts",
+      "line": 49
+    },
+    {
+      "className": "tree__end",
+      "kind": "component",
+      "namespace": "tree",
+      "suffix": "end",
+      "file": "src/components/tree.ts",
+      "line": 49
+    },
+    {
+      "className": "tree__group",
+      "kind": "component",
+      "namespace": "tree",
+      "suffix": "group",
+      "file": "src/components/tree.ts",
+      "line": 49
+    },
+    {
+      "className": "tree__item",
+      "kind": "component",
+      "namespace": "tree",
+      "suffix": "item",
+      "file": "src/components/tree.ts",
+      "line": 49
+    },
+    {
+      "className": "tree__label",
+      "kind": "component",
+      "namespace": "tree",
+      "suffix": "label",
+      "file": "src/components/tree.ts",
+      "line": 49
+    },
+    {
+      "className": "tree__row",
+      "kind": "component",
+      "namespace": "tree",
+      "suffix": "row",
+      "file": "src/components/tree.ts",
+      "line": 49
+    },
+    {
+      "className": "tree__start",
+      "kind": "component",
+      "namespace": "tree",
+      "suffix": "start",
+      "file": "src/components/tree.ts",
+      "line": 49
+    },
+    {
+      "className": "tree__toggle",
+      "kind": "component",
+      "namespace": "tree",
+      "suffix": "toggle",
+      "file": "src/components/tree.ts",
+      "line": 49
+    },
+    {
+      "className": "typeahead",
       "kind": "component",
       "namespace": "typeahead",
       "suffix": "base",
@@ -3177,7 +3969,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-typeahead__clearButton",
+      "className": "typeahead__clearButton",
       "kind": "component",
       "namespace": "typeahead",
       "suffix": "clearButton",
@@ -3185,7 +3977,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-typeahead__description",
+      "className": "typeahead__description",
       "kind": "component",
       "namespace": "typeahead",
       "suffix": "description",
@@ -3193,7 +3985,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-typeahead__error",
+      "className": "typeahead__error",
       "kind": "component",
       "namespace": "typeahead",
       "suffix": "error",
@@ -3201,7 +3993,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-typeahead__input",
+      "className": "typeahead__input",
       "kind": "component",
       "namespace": "typeahead",
       "suffix": "input",
@@ -3209,7 +4001,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-typeahead__inputWrapper",
+      "className": "typeahead__inputWrapper",
       "kind": "component",
       "namespace": "typeahead",
       "suffix": "inputWrapper",
@@ -3217,7 +4009,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-typeahead__item",
+      "className": "typeahead__item",
       "kind": "component",
       "namespace": "typeahead",
       "suffix": "item",
@@ -3225,7 +4017,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-typeahead__label",
+      "className": "typeahead__label",
       "kind": "component",
       "namespace": "typeahead",
       "suffix": "label",
@@ -3233,7 +4025,7 @@
       "line": 6
     },
     {
-      "className": "var-ui-typeahead__popover",
+      "className": "typeahead__popover",
       "kind": "component",
       "namespace": "typeahead",
       "suffix": "popover",

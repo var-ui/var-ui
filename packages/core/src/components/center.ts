@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 
 /**
  * Centers children on both axes. `inline` variant for inline-grid contexts.
@@ -7,7 +7,7 @@ import { styles } from '../runtime';
  * <div className={center()} style={{ minHeight: '200px' }}>{spinner}</div>
  * ```
  */
-export const center = styles.component(
+export const center = typestyles.styles.component(
   'center',
   () => ({
     base: {

@@ -1,6 +1,6 @@
 import { color } from 'typestyles/color';
 import { createDesignTheme } from '../create-theme';
-import { tokens } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as p } from '../tokens';
 import type { DesignTokenPack } from '../types';
 import { defaultDarkSyntaxValues, defaultLightSyntaxValues } from './default-values';
@@ -52,7 +52,7 @@ const aiGlowLightColorValues = {
     focus: '#DB2777',
   },
   shadow: { offset: 'color-mix(in oklch, #0EA5E9 24%, transparent)' },
-  danger: { default: p.palette['red-7'], solid: p.palette['red-8'] },
+  danger: { default: p.palette['red-7'].var, solid: p.palette['red-8'].var },
   success: { default: '#0F9F6E', solid: '#047857' },
   warning: { default: '#B45309', onSolid: '#FFFFFF' },
   info: { default: '#2563EB', onSolid: '#FFFFFF' },
@@ -61,7 +61,7 @@ const aiGlowLightColorValues = {
     panel: '#FFFFFF',
   },
   link: { default: '#0EA5E9', hover: '#7C3AED' },
-  syntax: aiGlowLightSyntaxValues,
+  code: aiGlowLightSyntaxValues,
 };
 
 const aiGlowDarkColorValues = {
@@ -89,7 +89,7 @@ const aiGlowDarkColorValues = {
     focus: '#F0ABFC',
   },
   shadow: { offset: 'color-mix(in oklch, #67E8F9 30%, transparent)' },
-  danger: { default: p.palette['red-4'], solid: p.palette['red-7'] },
+  danger: { default: p.palette['red-4'].var, solid: p.palette['red-7'].var },
   success: { default: '#6EE7B7', solid: '#047857' },
   warning: { default: '#FCD34D', onSolid: '#211400' },
   info: { default: '#67E8F9', onSolid: '#08111A' },
@@ -98,7 +98,7 @@ const aiGlowDarkColorValues = {
     panel: '#211B3B',
   },
   link: { default: '#67E8F9', hover: '#F0ABFC' },
-  syntax: aiGlowDarkSyntaxValues,
+  code: aiGlowDarkSyntaxValues,
 };
 
 const aiGlowPrimitiveValues = {
@@ -181,11 +181,13 @@ export const aiGlowTheme = createDesignTheme({
     {
       id: 'dark-elevation-shadow',
       overrides: { shadow: aiGlowDarkShadow },
-      when: tokens.when.or(
-        tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
-        tokens.when.and(
-          tokens.when.not(tokens.when.attr('data-mode', 'light', { scope: 'self' })),
-          tokens.when.prefersDark,
+      when: typestyles.tokens.when.or(
+        typestyles.tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
+        typestyles.tokens.when.and(
+          typestyles.tokens.when.not(
+            typestyles.tokens.when.attr('data-mode', 'light', { scope: 'self' }),
+          ),
+          typestyles.tokens.when.prefersDark,
         ),
       ),
     },

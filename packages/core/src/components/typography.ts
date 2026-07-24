@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -9,30 +9,30 @@ import { designTokens as t } from '../tokens';
  * <h3 className={heading({ size: 'lg' })}>Settings</h3>
  * ```
  */
-export const heading = styles.component(
+export const heading = typestyles.styles.component(
   'heading',
   (c) => {
     const v = c.vars({
-      color: { value: `${t.color.text.primary}`, syntax: '<color>', inherits: false },
+      color: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
     });
     return {
       base: {
         margin: 0,
         color: v.color.var,
-        fontWeight: t.fontWeight.semibold,
-        lineHeight: t.lineHeight.tight,
+        fontWeight: t.fontWeight.semibold.var,
+        lineHeight: t.lineHeight.tight.var,
         letterSpacing: '-0.01em',
       },
       variants: {
         size: {
-          xs: { fontSize: t.fontSize.md },
-          sm: { fontSize: t.fontSize.lg },
-          md: { fontSize: t.fontSize.xl },
-          lg: { fontSize: t.fontSize['2xl'] },
-          xl: { fontSize: t.fontSize['3xl'] },
+          xs: { fontSize: t.fontSize.md.var },
+          sm: { fontSize: t.fontSize.lg.var },
+          md: { fontSize: t.fontSize.xl.var },
+          lg: { fontSize: t.fontSize['2xl'].var },
+          xl: { fontSize: t.fontSize['3xl'].var },
           display: {
-            fontSize: t.fontSize['3xl'],
-            fontFamily: t.fontFamily.display,
+            fontSize: t.fontSize['3xl'].var,
+            fontFamily: t.fontFamily.display.var,
             letterSpacing: '-0.02em',
           },
         },
@@ -45,19 +45,19 @@ export const heading = styles.component(
 
 /**
  * Named body-text recipe (`Text` in React). Distinct from the `text` docs
- * utility in `styles.ts`.
+ * utility in `typestyles.styles.ts`.
  *
  * ```tsx
  * <p className={textBlock({ tone: 'secondary', size: 'sm' })}>hint</p>
  * ```
  */
-export const textBlock = styles.component(
+export const textBlock = typestyles.styles.component(
   'text-block',
   (c) => {
     const v = c.vars({
-      color: { value: `${t.color.text.primary}`, syntax: '<color>', inherits: false },
+      color: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
       secondaryColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -66,22 +66,22 @@ export const textBlock = styles.component(
       base: {
         margin: 0,
         color: v.color.var,
-        lineHeight: t.lineHeight.normal,
+        lineHeight: t.lineHeight.normal.var,
       },
       variants: {
         size: {
-          sm: { fontSize: t.fontSize.sm },
-          md: { fontSize: t.fontSize.md },
-          lg: { fontSize: t.fontSize.lg },
+          sm: { fontSize: t.fontSize.sm.var },
+          md: { fontSize: t.fontSize.md.var },
+          lg: { fontSize: t.fontSize.lg.var },
         },
         tone: {
           primary: {},
           secondary: { color: v.secondaryColor.var },
         },
         weight: {
-          normal: { fontWeight: t.fontWeight.normal },
-          medium: { fontWeight: t.fontWeight.medium },
-          semibold: { fontWeight: t.fontWeight.semibold },
+          normal: { fontWeight: t.fontWeight.normal.var },
+          medium: { fontWeight: t.fontWeight.medium.var },
+          semibold: { fontWeight: t.fontWeight.semibold.var },
         },
       },
       defaultVariants: { size: 'md', tone: 'primary', weight: 'normal' },

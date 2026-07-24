@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 type ThumbnailSlots = readonly ['root', 'image', 'dismiss'];
@@ -17,13 +17,13 @@ type ThumbnailVariants = {
  */
 // Overload pinning: slot names avoid CSS property collisions, so TypeScript
 // resolves this against typestyles' flat-variant overload (see avatar.ts).
-const thumbnailRecipe = styles.component(
+const thumbnailRecipe = typestyles.styles.component(
   'thumbnail',
   (c) => {
     const v = c.vars({
       size: { value: '64px', syntax: '<length>', inherits: false },
       border: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -36,7 +36,7 @@ const thumbnailRecipe = styles.component(
           display: 'inline-block',
           width: v.size.var,
           height: v.size.var,
-          borderRadius: t.radius.md,
+          borderRadius: t.radius.md.var,
           border: `1px solid ${v.border.var}`,
         },
         image: {
@@ -47,20 +47,20 @@ const thumbnailRecipe = styles.component(
         },
         dismiss: {
           position: 'absolute',
-          top: `calc(${t.space[2]} * -1)`,
-          right: `calc(${t.space[2]} * -1)`,
+          top: `calc(${t.space[2].var} * -1)`,
+          right: `calc(${t.space[2].var} * -1)`,
           display: 'grid',
           placeItems: 'center',
           width: '20px',
           height: '20px',
           borderRadius: '50%',
           border: `1px solid ${v.border.var}`,
-          backgroundColor: t.color.background.surface,
+          backgroundColor: t.color.background.surface.var,
           cursor: 'pointer',
           padding: 0,
-          '&:hover': { backgroundColor: t.color.background.subtle },
+          '&:hover': { backgroundColor: t.color.background.subtle.var },
           '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus}`,
+            outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '1px',
           },
         },

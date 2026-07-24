@@ -1,4 +1,4 @@
-import { styles } from '../../runtime';
+import { typestyles } from '../../runtime';
 import { designTokens as t } from '../../tokens';
 
 /**
@@ -10,7 +10,7 @@ import { designTokens as t } from '../../tokens';
  * <div className={chatMessage({ sender: 'assistant' }).root}>…</div>
  * ```
  */
-export const chatMessage = styles.component(
+export const chatMessage = typestyles.styles.component(
   'chat-message',
   () => ({
     slots: ['root', 'avatar', 'header', 'name', 'content', 'metadata'],
@@ -18,7 +18,7 @@ export const chatMessage = styles.component(
       root: {
         display: 'flex',
         alignItems: 'flex-start',
-        gap: t.space[2],
+        gap: t.space[2].var,
       },
       avatar: {
         flexShrink: 0,
@@ -26,22 +26,22 @@ export const chatMessage = styles.component(
       header: {
         display: 'flex',
         flexDirection: 'column',
-        gap: t.space[1],
+        gap: t.space[1].var,
       },
       name: {
-        fontSize: t.fontSize.sm,
-        fontWeight: t.fontWeight.medium,
-        color: t.color.text.secondary,
+        fontSize: t.fontSize.sm.var,
+        fontWeight: t.fontWeight.medium.var,
+        color: t.color.text.secondary.var,
       },
       content: {
         display: 'flex',
         flexDirection: 'column',
-        gap: t.space[1],
+        gap: t.space[1].var,
         minWidth: 0,
       },
       metadata: {
-        fontSize: t.fontSize.xs,
-        color: t.color.text.secondary,
+        fontSize: t.fontSize.xs.var,
+        color: t.color.text.secondary.var,
       },
     },
     variants: {

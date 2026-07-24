@@ -51,18 +51,18 @@ Tokens are registered from the default theme pack. Recipes consume `designTokens
 
 ### Token namespaces (expanded)
 
-| Namespace                    | Keys (indicative)                 | Notes                                                                                                   |
-| ---------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `palette`                    | 39 families × 10 steps            | Fixed primitive ramp                                                                                    |
-| `space`                      | `0`–`20` (non-contiguous)         | Layout spacing                                                                                          |
-| `size.control` / `size.icon` | `sm`, `md`, `lg`                  | Control heights + icon box                                                                              |
-| `breakpoint`                 | `sm`–`xl`                         | Mode-invariant media-query widths                                                                       |
-| `zIndex`                     | `base` … `max`                    | Stacking scale                                                                                          |
-| `opacity`                    | `disabled`, `muted`               | Shared opacity semantics                                                                                |
-| `letterSpacing`              | `tight`, `normal`, `wide`, `caps` | Typography rhythm                                                                                       |
-| `color.*`                    | semantic UI colors                | Full tree via `tokens.declare('color')`; derived leaves use `color.*` refs in `defaultColorTokenValues` |
-| `shadow.elevation`           | `low`, `med`, `high`              | Soft elevation (alongside brutalist `shadow.xs`–`xl`)                                                   |
-| `stroke`                     | `default`, `strong`               | Border shorthand (fixed)                                                                                |
+| Namespace                    | Keys (indicative)                 | Notes                                                                                                              |
+| ---------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `palette`                    | 39 families × 10 steps            | Fixed primitive ramp                                                                                               |
+| `space`                      | `0`–`20` (non-contiguous)         | Layout spacing                                                                                                     |
+| `size.control` / `size.icon` | `sm`, `md`, `lg`                  | Control heights + icon box                                                                                         |
+| `breakpoint`                 | `sm`–`xl`                         | Mode-invariant media-query widths                                                                                  |
+| `zIndex`                     | `base` … `max`                    | Stacking scale                                                                                                     |
+| `opacity`                    | `disabled`, `muted`               | Shared opacity semantics                                                                                           |
+| `letterSpacing`              | `tight`, `normal`, `wide`, `caps` | Typography rhythm                                                                                                  |
+| `color.*`                    | semantic UI colors                | Full tree via `tokens.declare('color')`; `defaultLightColorValues` mixes literals and `color.*` refs in one object |
+| `shadow.elevation`           | `low`, `med`, `high`              | Soft elevation (alongside brutalist `shadow.xs`–`xl`)                                                              |
+| `stroke`                     | `default`, `strong`               | Border shorthand (fixed)                                                                                           |
 
 Theme overrides example:
 

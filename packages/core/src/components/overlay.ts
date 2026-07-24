@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -12,11 +12,11 @@ import { designTokens as t } from '../tokens';
  * <div className={o.positioner}>{panel}</div>
  * ```
  */
-export const overlay = styles.component(
+export const overlay = typestyles.styles.component(
   'overlay',
   (c) => {
     const v = c.vars({
-      background: { value: `${t.color.overlay.backdrop}`, syntax: '<color>', inherits: false },
+      background: { value: t.color.overlay.backdrop.var, syntax: '<color>', inherits: false },
     });
     return {
       slots: ['backdrop', 'positioner'],
@@ -30,7 +30,7 @@ export const overlay = styles.component(
         inset: 0,
         display: 'grid',
         placeItems: 'center',
-        padding: t.space[4],
+        padding: t.space[4].var,
       },
     };
   },

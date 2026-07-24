@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 type ToolbarSlots = readonly ['root', 'startSlot', 'centerSlot', 'endSlot'];
@@ -15,11 +15,11 @@ type ToolbarVariants = {
  * here, that's the React wrapper's concern.
  */
 // Overload pinning: this slot recipe has `variants`, which TypeStyles'
-// `styles.component()` resolves against the flat-variant overload (types the
+// `typestyles.styles.component()` resolves against the flat-variant overload (types the
 // call as a class string). Runtime behavior is correct; assert the slot
 // signature until typestyles' ComponentConfig forbids `slots` the way
 // FlatComponentConfig does. See packages/core/src/components/avatar.ts.
-const toolbarRecipe = styles.component(
+const toolbarRecipe = typestyles.styles.component(
   'toolbar',
   () => ({
     slots: ['root', 'startSlot', 'centerSlot', 'endSlot'],
@@ -47,19 +47,19 @@ const toolbarRecipe = styles.component(
     variants: {
       size: {
         sm: {
-          root: { gap: t.space[2], minHeight: '2rem' },
-          startSlot: { gap: t.space[2] },
-          endSlot: { gap: t.space[2] },
+          root: { gap: t.space[2].var, minHeight: '2rem' },
+          startSlot: { gap: t.space[2].var },
+          endSlot: { gap: t.space[2].var },
         },
         md: {
-          root: { gap: t.space[3], minHeight: '2.5rem' },
-          startSlot: { gap: t.space[3] },
-          endSlot: { gap: t.space[3] },
+          root: { gap: t.space[3].var, minHeight: '2.5rem' },
+          startSlot: { gap: t.space[3].var },
+          endSlot: { gap: t.space[3].var },
         },
         lg: {
-          root: { gap: t.space[4], minHeight: '3rem' },
-          startSlot: { gap: t.space[4] },
-          endSlot: { gap: t.space[4] },
+          root: { gap: t.space[4].var, minHeight: '3rem' },
+          startSlot: { gap: t.space[4].var },
+          endSlot: { gap: t.space[4].var },
         },
       },
       orientation: {

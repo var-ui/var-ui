@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 export type FieldChromeColors = {
@@ -17,19 +17,19 @@ export function fieldChrome(colors: FieldChromeColors) {
   return {
     root: {
       display: 'grid',
-      gap: t.space[1],
+      gap: t.space[1].var,
     },
     label: {
-      fontSize: t.fontSize.md,
-      fontWeight: t.fontWeight.medium,
+      fontSize: t.fontSize.md.var,
+      fontWeight: t.fontWeight.medium.var,
       color: colors.label,
     },
     description: {
-      fontSize: t.fontSize.sm,
+      fontSize: t.fontSize.sm.var,
       color: colors.description,
     },
     error: {
-      fontSize: t.fontSize.sm,
+      fontSize: t.fontSize.sm.var,
       color: colors.error,
     },
   } as const;
@@ -68,16 +68,16 @@ export function dateFieldChrome(colors: DateFieldChromeColors) {
     group: {
       display: 'flex',
       alignItems: 'center',
-      gap: t.space[1],
+      gap: t.space[1].var,
       border: `1px solid ${colors.groupBorder}`,
-      borderRadius: t.radius.md,
-      padding: `${t.space[2]} ${t.space[3]}`,
+      borderRadius: t.radius.md.var,
+      padding: `${t.space[2].var} ${t.space[3].var}`,
       backgroundColor: colors.groupBackground,
       width: 'fit-content',
       '&[data-focus-within]': {
-        outline: `2px solid ${t.color.border.focus}`,
+        outline: `2px solid ${t.color.border.focus.var}`,
         outlineOffset: '1px',
-        [colors.groupFocusBorder]: t.color.border.focus,
+        [colors.groupFocusBorder]: t.color.border.focus.var,
       },
       '&[data-disabled]': {
         opacity: 0.6,
@@ -85,7 +85,7 @@ export function dateFieldChrome(colors: DateFieldChromeColors) {
       },
     },
     segment: {
-      fontSize: t.fontSize.md,
+      fontSize: t.fontSize.md.var,
       fontVariantNumeric: 'tabular-nums',
       color: colors.segmentColor,
       padding: '0 1px',
@@ -94,8 +94,8 @@ export function dateFieldChrome(colors: DateFieldChromeColors) {
       },
       '&[data-focused]': {
         outline: 'none',
-        backgroundColor: t.color.background.subtle,
-        borderRadius: t.radius.sm,
+        backgroundColor: t.color.background.subtle.var,
+        borderRadius: t.radius.sm.var,
       },
       '&[data-disabled]': {
         opacity: 0.6,
@@ -128,12 +128,12 @@ export function calendarGridChrome(colors: CalendarGridChromeColors) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      gap: t.space[2],
-      marginBottom: t.space[2],
+      gap: t.space[2].var,
+      marginBottom: t.space[2].var,
     },
     calendarHeading: {
-      fontSize: t.fontSize.md,
-      fontWeight: t.fontWeight.semibold,
+      fontSize: t.fontSize.md.var,
+      fontWeight: t.fontWeight.semibold.var,
       color: colors.headingColor,
     },
     calendarNavButton: {
@@ -142,7 +142,7 @@ export function calendarGridChrome(colors: CalendarGridChromeColors) {
       justifyContent: 'center',
       width: '1.75rem',
       height: '1.75rem',
-      borderRadius: t.radius.sm,
+      borderRadius: t.radius.sm.var,
       color: colors.navButtonColor,
       cursor: 'pointer',
       '&[data-hovered]': {
@@ -158,16 +158,16 @@ export function calendarGridChrome(colors: CalendarGridChromeColors) {
       width: '100%',
     },
     calendarHeaderCell: {
-      fontSize: t.fontSize.sm,
-      fontWeight: t.fontWeight.medium,
+      fontSize: t.fontSize.sm.var,
+      fontWeight: t.fontWeight.medium.var,
       color: colors.headerCellColor,
-      padding: t.space[1],
+      padding: t.space[1].var,
     },
     calendarCell: {
       textAlign: 'center',
-      fontSize: t.fontSize.md,
+      fontSize: t.fontSize.md.var,
       color: colors.cellColor,
-      padding: t.space[1],
+      padding: t.space[1].var,
       cursor: 'pointer',
       '& > *': {
         display: 'flex',
@@ -176,7 +176,7 @@ export function calendarGridChrome(colors: CalendarGridChromeColors) {
         width: '2rem',
         height: '2rem',
         margin: '0 auto',
-        borderRadius: t.radius.md,
+        borderRadius: t.radius.md.var,
       },
       '&[data-hovered] > *': {
         backgroundColor: colors.cellHoverBackground,
@@ -196,22 +196,22 @@ export function calendarGridChrome(colors: CalendarGridChromeColors) {
   } as const;
 }
 
-export const field = styles.component(
+export const field = typestyles.styles.component(
   'field',
   (c) => {
     const v = c.vars({
       labelColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       descriptionColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       errorColor: {
-        value: `${t.color.danger.default}`,
+        value: t.color.danger.default.var,
         syntax: '<color>',
         inherits: false,
       },

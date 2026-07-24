@@ -164,7 +164,7 @@ function mapLightColors(
       default: accentDefault,
       hover: rampAt(accent, slots.accent.hover),
     },
-    syntax: defaultLightSyntaxValues,
+    code: defaultLightSyntaxValues,
   };
 }
 
@@ -235,7 +235,7 @@ function mapDarkColors(
       default: accentDefault,
       hover: rampAt(accent, m(slots.accent.hover)),
     },
-    syntax: defaultDarkSyntaxValues,
+    code: defaultDarkSyntaxValues,
   };
 }
 

@@ -1,6 +1,6 @@
 import { color } from 'typestyles/color';
 import { createDesignTheme } from '../create-theme';
-import { tokens } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as p } from '../tokens';
 import type { DesignTokenPack } from '../types';
 import { defaultDarkSyntaxValues, defaultLightSyntaxValues } from './default-values';
@@ -59,7 +59,7 @@ const win95LightColorValues = {
     panel: '#F0F0F0',
   },
   link: { default: '#000080', hover: '#1084D0' },
-  syntax: win95LightSyntaxValues,
+  code: win95LightSyntaxValues,
 };
 
 const win95DarkColorValues = {
@@ -87,16 +87,16 @@ const win95DarkColorValues = {
     focus: '#38A8F0',
   },
   shadow: { offset: '#000000' },
-  danger: { default: p.palette['red-4'], solid: '#800000' },
-  success: { default: p.palette['green-4'], solid: '#008000' },
-  warning: { default: p.palette['amber-4'], onSolid: '#000000' },
+  danger: { default: p.palette['red-4'].var, solid: '#800000' },
+  success: { default: p.palette['green-4'].var, solid: '#008000' },
+  warning: { default: p.palette['amber-4'].var, onSolid: '#000000' },
   info: { default: '#38A8F0', onSolid: '#000000' },
   overlay: {
     default: color.alpha('#000000', 0.7, 'srgb'),
     panel: '#555555',
   },
   link: { default: '#1084D0', hover: '#38A8F0' },
-  syntax: win95DarkSyntaxValues,
+  code: win95DarkSyntaxValues,
 };
 
 const win95PrimitiveValues = {
@@ -178,11 +178,13 @@ export const windows95Theme = createDesignTheme({
     {
       id: 'dark-elevation-shadow',
       overrides: { shadow: win95DarkShadow },
-      when: tokens.when.or(
-        tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
-        tokens.when.and(
-          tokens.when.not(tokens.when.attr('data-mode', 'light', { scope: 'self' })),
-          tokens.when.prefersDark,
+      when: typestyles.tokens.when.or(
+        typestyles.tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
+        typestyles.tokens.when.and(
+          typestyles.tokens.when.not(
+            typestyles.tokens.when.attr('data-mode', 'light', { scope: 'self' }),
+          ),
+          typestyles.tokens.when.prefersDark,
         ),
       ),
     },

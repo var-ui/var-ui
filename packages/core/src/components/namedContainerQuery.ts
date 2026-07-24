@@ -1,16 +1,16 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 
 /**
- * Example: one readable `container-name` from `styles.containerRef` (here: `{scopeId}-product-shell`),
- * applied on the root and reused in `@container name (…) { … }` via `styles.container(name, …)`.
+ * Example: one readable `container-name` from `typestyles.styles.containerRef` (here: `{scopeId}-product-shell`),
+ * applied on the root and reused in `@container name (…) { … }` via `typestyles.styles.container(name, …)`.
  */
-const productShell = styles.containerRef('product-shell');
+const productShell = typestyles.styles.containerRef('product-shell');
 
 export const namedContainerQuery = {
   /** Pass to DevTools / documentation — the actual `container-name` value. */
   containerName: productShell,
   /** Establishes the named size container (`container-type: inline-size` + `container-name`). */
-  root: styles.class(
+  root: typestyles.styles.class(
     'ds-named-cq-root',
     {
       containerType: 'inline-size',
@@ -24,17 +24,20 @@ export const namedContainerQuery = {
     { layer: 'components' },
   ),
   /** Descendant layout that responds to **this** shell, not the viewport. */
-  body: styles.class(
+  body: typestyles.styles.class(
     'ds-named-cq-body',
     {
       display: 'flex',
       flexDirection: 'column',
       gap: '12px',
-      ...styles.atRuleBlock(styles.container(productShell, { minWidth: 480 }), {
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        gap: '20px',
-      }),
+      ...typestyles.styles.atRuleBlock(
+        typestyles.styles.container(productShell, { minWidth: 480 }),
+        {
+          flexDirection: 'row',
+          alignItems: 'flex-start',
+          gap: '20px',
+        },
+      ),
     },
     { layer: 'components' },
   ),

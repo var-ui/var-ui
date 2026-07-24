@@ -1,6 +1,6 @@
-import { designTokens as t, styles } from '@var-ui/core';
+import { designTokens as t, typestyles } from '@var-ui/core';
 
-export const homeBento = styles.component(
+export const homeBento = typestyles.styles.component(
   'home-bento',
   () => ({
     slots: [

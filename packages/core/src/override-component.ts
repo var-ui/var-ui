@@ -1,5 +1,5 @@
 import type { ThemeSurface } from 'typestyles';
-import { styles } from './runtime';
+import { typestyles } from './runtime';
 
 export type OverrideComponentOptions = {
   /** When set, scopes the override under `.${theme.className}` (descendant prefix). */
@@ -17,7 +17,7 @@ export function overrideComponent(
 ): void {
   const selectorPrefix = options?.theme ? `.${options.theme.className}` : undefined;
   // Overload surface is preserved at the styles.override call; config shape is checked there.
-  styles.override(component as never, config as never, {
+  typestyles.styles.override(component as never, config as never, {
     selectorPrefix,
     layer: 'overrides',
   });

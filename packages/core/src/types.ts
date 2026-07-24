@@ -1,25 +1,6 @@
 import type { ThemeModeDefinition, ThemeSurface } from 'typestyles';
 import type { ExtendTokenValues, TokenRefsOf } from './extend-tokens';
-import type { designTokens } from './tokens';
-import type {
-  DesignColorValues,
-  DesignSyntaxValues,
-  DesignTokenLeaf,
-  WithTokenLeaves,
-} from './tokens/semantic';
-import type {
-  DesignBorderWidthValues,
-  DesignDurationValues,
-  DesignEasingValues,
-  DesignFontFamilyValues,
-  DesignFontSizeValues,
-  DesignFontWeightValues,
-  DesignLineHeightValues,
-  DesignRadiusValues,
-  DesignShadowValues,
-  DesignSpaceValues,
-  DesignTransitionValues,
-} from './tokens/primitive';
+import type { DesignThemeTokenValues, DesignTokenPack } from './tokens/types';
 import type { ThemeableComponentName } from './themeable-components';
 import type { ThemeComponentOverrideFor } from './theme-override-types';
 
@@ -34,59 +15,11 @@ export type {
   ThemeSlotOverrideConfig,
 } from './theme-override-types';
 
-export type DesignSemanticValues = {
-  color: DesignColorValues;
-};
+export type { DesignThemeTokenValues, DesignTokenPack, DesignTokens } from './tokens/types';
 
-export type DesignPrimitiveOverrides = {
-  space?: Partial<DesignSpaceValues>;
-  radius?: Partial<DesignRadiusValues>;
-  fontFamily?: Partial<DesignFontFamilyValues>;
-  fontSize?: Partial<DesignFontSizeValues>;
-  fontWeight?: Partial<DesignFontWeightValues>;
-  lineHeight?: Partial<DesignLineHeightValues>;
-  shadow?: Partial<DesignShadowValues>;
-  duration?: Partial<DesignDurationValues>;
-  easing?: Partial<DesignEasingValues>;
-  transition?: Partial<DesignTransitionValues>;
-};
-
-type DesignTokenBag = typeof designTokens;
+type DesignTokenBag = typeof import('./tokens/declare').tokens;
 
 type ExtendMap = Record<string, ExtendTokenValues>;
-
-/**
- * Deep partial that widens primitive leaves to `DesignTokenLeaf` so string
- * literals from `typeof` values and token refs both remain assignable.
- */
-export type DeepPartialKeepingLeaves<T> = T extends string | number
-  ? DesignTokenLeaf
-  : T extends readonly (infer U)[]
-    ? readonly DeepPartialKeepingLeaves<U>[]
-    : T extends object
-      ? { [K in keyof T]?: DeepPartialKeepingLeaves<T[K]> }
-      : T;
-
-export type DesignThemeTokenValues = {
-  color: DesignColorValues;
-  /** Optional namespaces may be partial (e.g. style themes override only `duration.fast`). */
-  space?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignSpaceValues>>;
-  radius?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignRadiusValues>>;
-  fontFamily?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignFontFamilyValues>>;
-  fontSize?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignFontSizeValues>>;
-  fontWeight?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignFontWeightValues>>;
-  lineHeight?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignLineHeightValues>>;
-  shadow?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignShadowValues>>;
-  duration?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignDurationValues>>;
-  easing?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignEasingValues>>;
-  transition?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignTransitionValues>>;
-  borderWidth?: DeepPartialKeepingLeaves<WithTokenLeaves<DesignBorderWidthValues>>;
-};
-
-export type DesignTokenPack = {
-  tokens: DesignThemeTokenValues;
-  darkColor: DesignColorValues;
-};
 
 /**
  * Built-in design tokens plus refs from an `extend` map.
@@ -121,17 +54,22 @@ export type DesignThemeConfig<E extends ExtendMap = Record<string, never>> = {
   /** Token pack to merge onto. Defaults to `defaultTokens`. */
   from?: DesignTokenPack;
   /** Mode-invariant patches + optional light `color` overrides. */
-  tokens?: DeepPartialKeepingLeaves<DesignThemeTokenValues>;
+  tokens?: DesignThemeTokenValues;
   /**
    * Ambient light/dark color slices (Var UI color tree only).
    * Same shape as `createColorTheme`'s return value.
    */
   colorMode?: {
-    light?: DeepPartialKeepingLeaves<DesignColorValues>;
-    dark?: DeepPartialKeepingLeaves<DesignColorValues>;
+    light?: DesignTokenPack['darkColor'];
+    dark?: DesignTokenPack['darkColor'];
   };
   /** Additional TypeStyles modes (surfaces, custom conditions). */
   modes?: ThemeModeDefinition[];
+  /**
+   * Register fixed-tone surface modes (`data-surface="light"|"dark"`).
+   * Defaults to `true`; set `false` to omit or supply custom surface rules in `modes`.
+   */
+  surfaces?: boolean;
   /** Custom token namespaces; leaves are a string or `{ light, dark }`. */
   extend?: E;
   /**
@@ -145,5 +83,3 @@ export type DesignThemeConfig<E extends ExtendMap = Record<string, never>> = {
 export type DesignTheme<E extends ExtendMap = Record<string, never>> = ThemeSurface & {
   tokens: DesignThemeTokens<E>;
 };
-
-export type { DesignColorValues, DesignSyntaxValues, DesignTokenLeaf, WithTokenLeaves };

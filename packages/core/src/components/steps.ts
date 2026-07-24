@@ -1,22 +1,22 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
-export const steps = styles.component(
+export const steps = typestyles.styles.component(
   'steps',
   (c) => {
     const v = c.vars({
       stepForeground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       indicatorBackground: {
-        value: `${t.color.accent.default}`,
+        value: t.color.accent.default.var,
         syntax: '<color>',
         inherits: false,
       },
       indicatorForeground: {
-        value: `${t.color.text.onAccent}`,
+        value: t.color.text.onAccent.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -27,15 +27,15 @@ export const steps = styles.component(
       root: {
         listStyle: 'none',
         padding: 0,
-        margin: `${t.space[4]} 0`,
+        margin: `${t.space[4].var} 0`,
         counterReset: 'docs-step',
         '& > li': {
           position: 'relative',
           listStyle: 'none',
-          paddingLeft: `calc(${t.space[5]} + ${t.space[3]})`,
-          marginBottom: t.space[5],
+          paddingLeft: `calc(${t.space[5].var} + ${t.space[3].var})`,
+          marginBottom: t.space[5].var,
           counterIncrement: 'docs-step',
-          fontSize: t.fontSize.md,
+          fontSize: t.fontSize.md.var,
           color: v.stepForeground.var,
           lineHeight: 1.6,
           '&:last-child': {
@@ -46,16 +46,16 @@ export const steps = styles.component(
             position: 'absolute',
             left: 0,
             top: 0,
-            width: t.space[5],
-            height: t.space[5],
+            width: t.space[5].var,
+            height: t.space[5].var,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: t.fontSize.sm,
-            fontWeight: t.fontWeight.semibold,
+            fontSize: t.fontSize.sm.var,
+            fontWeight: t.fontWeight.semibold.var,
             color: v.indicatorForeground.var,
             backgroundColor: v.indicatorBackground.var,
-            borderRadius: t.radius.full,
+            borderRadius: t.radius.full.var,
             lineHeight: 1,
           },
           '& :first-child': {

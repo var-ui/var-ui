@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 type PaginationSlots = readonly [
@@ -32,12 +32,12 @@ type PaginationVariants = {
 // overload and types the call as a class string. Runtime behavior is correct
 // (typestyles branches on `slots` at runtime); assert the slot signature until
 // typestyles' ComponentConfig forbids `slots` the way FlatComponentConfig does.
-const paginationRecipe = styles.component(
+const paginationRecipe = typestyles.styles.component(
   'pagination',
   (c) => {
     const v = c.vars({
-      textColor: { value: `${t.color.text.secondary}`, syntax: '<color>', inherits: false },
-      dotColor: { value: `${t.color.border.default}`, syntax: '<color>', inherits: false },
+      textColor: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
+      dotColor: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
     });
     return {
       slots: [
@@ -55,13 +55,13 @@ const paginationRecipe = styles.component(
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: t.space[4],
+          gap: t.space[4].var,
           flexWrap: 'wrap',
         },
         controls: {
           display: 'flex',
           alignItems: 'center',
-          gap: t.space[1],
+          gap: t.space[1].var,
         },
         ellipsis: {
           display: 'inline-flex',
@@ -70,32 +70,32 @@ const paginationRecipe = styles.component(
           minWidth: '2rem',
           height: '2rem',
           color: v.textColor.var,
-          fontSize: t.fontSize.sm,
+          fontSize: t.fontSize.sm.var,
           userSelect: 'none',
         },
         infoText: {
           display: 'flex',
           alignItems: 'center',
           whiteSpace: 'nowrap',
-          fontSize: t.fontSize.sm,
+          fontSize: t.fontSize.sm.var,
           color: v.textColor.var,
         },
         dotsContainer: {
           display: 'flex',
           alignItems: 'center',
-          gap: t.space[1],
+          gap: t.space[1].var,
         },
         dot: {
-          width: t.space[2],
-          height: t.space[2],
+          width: t.space[2].var,
+          height: t.space[2].var,
           borderWidth: 0,
           padding: 0,
           borderRadius: '50%',
           backgroundColor: v.dotColor.var,
           cursor: 'pointer',
-          transition: `background-color ${t.duration.fast} ${t.easing.standard}`,
+          transition: `background-color ${t.duration.fast.var} ${t.easing.standard.var}`,
           '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus}`,
+            outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '2px',
           },
           '&:disabled': {
@@ -104,21 +104,21 @@ const paginationRecipe = styles.component(
           },
         },
         dotActive: {
-          backgroundColor: t.color.accent.default,
+          backgroundColor: t.color.accent.default.var,
         },
         pageSizeGroup: {
           display: 'flex',
           alignItems: 'center',
-          gap: t.space[2],
-          fontSize: t.fontSize.sm,
+          gap: t.space[2].var,
+          fontSize: t.fontSize.sm.var,
           color: v.textColor.var,
         },
       },
       variants: {
         size: {
           sm: {
-            ellipsis: { minWidth: '1.5rem', height: '1.5rem', fontSize: t.fontSize.xs },
-            dot: { width: t.space[1], height: t.space[1] },
+            ellipsis: { minWidth: '1.5rem', height: '1.5rem', fontSize: t.fontSize.xs.var },
+            dot: { width: t.space[1].var, height: t.space[1].var },
           },
           md: {},
         },

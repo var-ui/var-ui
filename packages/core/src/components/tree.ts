@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 type TreeSlots = readonly [
@@ -45,25 +45,29 @@ type TreeVariants = {
  * </ul>
  * ```
  */
-const treeRecipe = styles.component(
+const treeRecipe = typestyles.styles.component(
   'tree',
   (c) => {
     const v = c.vars({
-      labelColor: { value: `${t.color.text.primary}`, syntax: '<color>', inherits: false },
-      descriptionColor: { value: `${t.color.text.secondary}`, syntax: '<color>', inherits: false },
+      labelColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      descriptionColor: {
+        value: t.color.text.secondary.var,
+        syntax: '<color>',
+        inherits: false,
+      },
       hoverBg: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       selectedBg: {
-        value: `${t.color.accent.subtle}`,
+        value: t.color.accent.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
-      indentSize: { value: t.space[4], syntax: '<length>', inherits: false },
-      rowPaddingY: { value: t.space[2], syntax: '<length>', inherits: false },
-      rowPaddingX: { value: t.space[2], syntax: '<length>', inherits: false },
+      indentSize: { value: t.space[4].var, syntax: '<length>', inherits: false },
+      rowPaddingY: { value: t.space[2].var, syntax: '<length>', inherits: false },
+      rowPaddingX: { value: t.space[2].var, syntax: '<length>', inherits: false },
     });
     return {
       slots: ['root', 'item', 'row', 'toggle', 'label', 'description', 'group', 'start', 'end'],
@@ -81,26 +85,26 @@ const treeRecipe = styles.component(
           padding: 0,
           outline: 'none',
           '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus}`,
+            outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '2px',
-            borderRadius: t.radius.md,
+            borderRadius: t.radius.md.var,
           },
         },
         row: {
           display: 'flex',
           alignItems: 'center',
-          gap: t.space[2],
+          gap: t.space[2].var,
           padding: `${v.rowPaddingY.var} ${v.rowPaddingX.var}`,
-          borderRadius: t.radius.md,
+          borderRadius: t.radius.md.var,
           color: v.labelColor.var,
           cursor: 'default',
           minWidth: 0,
           '&:hover': { backgroundColor: v.hoverBg.var },
           '&[data-selected]': {
             backgroundColor: v.selectedBg.var,
-            fontWeight: t.fontWeight.medium,
+            fontWeight: t.fontWeight.medium.var,
           },
-          '&[data-disabled]': { opacity: t.opacity.disabled, pointerEvents: 'none' },
+          '&[data-disabled]': { opacity: t.opacity.disabled.var, pointerEvents: 'none' },
         },
         toggle: {
           display: 'inline-flex',
@@ -116,8 +120,8 @@ const treeRecipe = styles.component(
           '&[data-expanded]': { transform: 'rotate(90deg)' },
         },
         label: {
-          fontSize: t.fontSize.md,
-          fontWeight: t.fontWeight.medium,
+          fontSize: t.fontSize.md.var,
+          fontWeight: t.fontWeight.medium.var,
           color: v.labelColor.var,
           minWidth: 0,
           overflow: 'hidden',
@@ -125,7 +129,7 @@ const treeRecipe = styles.component(
           whiteSpace: 'nowrap',
         },
         description: {
-          fontSize: t.fontSize.sm,
+          fontSize: t.fontSize.sm.var,
           color: v.descriptionColor.var,
           minWidth: 0,
           overflow: 'hidden',
@@ -145,15 +149,15 @@ const treeRecipe = styles.component(
         density: {
           compact: {
             row: {
-              [v.rowPaddingY.name]: t.space[1],
-              [v.rowPaddingX.name]: t.space[2],
+              [v.rowPaddingY.name]: t.space[1].var,
+              [v.rowPaddingX.name]: t.space[2].var,
             },
           },
           balanced: {},
           spacious: {
             row: {
-              [v.rowPaddingY.name]: t.space[3],
-              [v.rowPaddingX.name]: t.space[4],
+              [v.rowPaddingY.name]: t.space[3].var,
+              [v.rowPaddingX.name]: t.space[4].var,
             },
           },
         },

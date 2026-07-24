@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -10,11 +10,11 @@ import { designTokens as t } from '../tokens';
  * <span className={icon({ size: 'md' })}>{svg}</span>
  * ```
  */
-export const icon = styles.component(
+export const icon = typestyles.styles.component(
   'icon',
   (c) => {
     const v = c.vars({
-      size: { value: t.size.icon.md, syntax: '<length>', inherits: false },
+      size: { value: t.size.icon.md.var, syntax: '<length>', inherits: false },
       color: { value: 'currentColor', syntax: '*', inherits: false },
     });
     return {
@@ -33,9 +33,9 @@ export const icon = styles.component(
       },
       variants: {
         size: {
-          sm: { [v.size.name]: t.size.icon.sm },
-          md: { [v.size.name]: t.size.icon.md },
-          lg: { [v.size.name]: t.size.icon.lg },
+          sm: { [v.size.name]: t.size.icon.sm.var },
+          md: { [v.size.name]: t.size.icon.md.var },
+          lg: { [v.size.name]: t.size.icon.lg.var },
           inherit: { [v.size.name]: '1em' },
         },
       },

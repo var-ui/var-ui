@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { fieldChrome } from './field';
 
@@ -8,47 +8,47 @@ import { fieldChrome } from './field';
  * validation and drag state; this recipe only styles the resulting DOM
  * states (`data-drag-over`, `data-disabled`).
  */
-export const fileInput = styles.component(
+export const fileInput = typestyles.styles.component(
   'file-input',
   (c) => {
     const v = c.vars({
       labelColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       descriptionColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       errorColor: {
-        value: `${t.color.danger.default}`,
+        value: t.color.danger.default.var,
         syntax: '<color>',
         inherits: false,
       },
       dropzoneBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       dropzoneBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       placeholderColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       fileNameColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       iconColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -82,17 +82,17 @@ export const fileInput = styles.component(
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: t.space[2],
+        gap: t.space[2].var,
         border: `1px dashed ${v.dropzoneBorder.var}`,
-        borderRadius: t.radius.md,
-        padding: `${t.space[6]} ${t.space[4]}`,
+        borderRadius: t.radius.md.var,
+        padding: `${t.space[6].var} ${t.space[4].var}`,
         backgroundColor: v.dropzoneBackground.var,
         cursor: 'pointer',
         textAlign: 'center',
         transition: 'background-color 140ms ease, border-color 140ms ease',
         '&[data-drag-over]': {
-          [v.dropzoneBorder.name]: t.color.accent.default,
-          [v.dropzoneBackground.name]: t.color.accent.subtle,
+          [v.dropzoneBorder.name]: t.color.accent.default.var,
+          [v.dropzoneBackground.name]: t.color.accent.subtle.var,
         },
         '&[data-disabled]': {
           opacity: 0.5,
@@ -100,12 +100,12 @@ export const fileInput = styles.component(
         },
       },
       placeholderText: {
-        fontSize: t.fontSize.sm,
+        fontSize: t.fontSize.sm.var,
         color: v.placeholderColor.var,
       },
       fileNameText: {
-        fontSize: t.fontSize.sm,
-        fontWeight: t.fontWeight.medium,
+        fontSize: t.fontSize.sm.var,
+        fontWeight: t.fontWeight.medium.var,
         color: v.fileNameColor.var,
       },
       icon: {
@@ -119,16 +119,16 @@ export const fileInput = styles.component(
       clearButton: {
         appearance: 'none',
         border: 'none',
-        borderRadius: t.radius.sm,
+        borderRadius: t.radius.sm.var,
         backgroundColor: 'transparent',
         color: v.iconColor.var,
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: t.space[1],
+        padding: t.space[1].var,
         cursor: 'pointer',
         '&:hover': {
-          backgroundColor: t.color.background.subtle,
+          backgroundColor: t.color.background.subtle.var,
         },
       },
       hiddenInput: {

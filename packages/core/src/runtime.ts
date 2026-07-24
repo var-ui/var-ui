@@ -1,24 +1,27 @@
 import { createTypeStyles } from 'typestyles';
 
+const scopeId = 'var-ui';
+const layers = ['tokens', 'components', 'overrides', 'utilities'] as const;
+const tokenLayer = 'tokens';
+
 /**
- * Single factory: shared scope and optional cascade layer stack for classes + tokens.
- * Omit `layers` for flat CSS (default); enable layers when integrating with global CSS
- * that uses `@layer`.
+ * Shared TypeStyles instance: scope, attribute mode, and cascade layer stack for
+ * classes, tokens, and global CSS. Omit `layers` for flat CSS; enable layers when
+ * integrating with global CSS that uses `@layer`.
  */
-export const { styles, tokens, global } = createTypeStyles({
-  scopeId: 'var-ui',
+export const typestyles = createTypeStyles({
+  scopeId,
   mode: 'attribute',
-  layers: ['tokens', 'components', 'overrides', 'utilities'] as const,
-  tokenLayer: 'tokens',
-  /** Baseline globals (e.g. `body`) share the token layer so they cascade with `:root` theme CSS. */
-  globalLayer: 'tokens',
+  layers,
+  tokenLayer,
+  globalLayer: tokenLayer,
 });
 
 /**
  * Self-hosted Space Grotesk (Latin, wght 300–700) from each host’s `public/fonts/`.
  * Root-relative `url('/fonts/…')` matches Astro, Vite, and Next static serving and typestyles extract.
  */
-global.fontFace('Space Grotesk', {
+typestyles.global.fontFace('Space Grotesk', {
   src: "url('/fonts/space-grotesk-latin.woff2') format('woff2')",
   fontWeight: '300 700',
   fontStyle: 'normal',
@@ -30,7 +33,7 @@ global.fontFace('Space Grotesk', {
 /**
  * Self-hosted JetBrains Mono (Latin, wght 100–800) from each host's `public/fonts/`.
  */
-global.fontFace('JetBrains Mono', {
+typestyles.global.fontFace('JetBrains Mono', {
   src: "url('/fonts/jetbrains-mono-latin.woff2') format('woff2')",
   fontWeight: '100 800',
   fontStyle: 'normal',

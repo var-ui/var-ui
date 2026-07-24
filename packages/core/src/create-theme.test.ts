@@ -1,8 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vite-plus/test';
 import { getRegisteredCss, reset } from 'typestyles';
 import { createDesignTheme, SURFACE_ATTRIBUTE } from './create-theme';
-import { tokens } from './runtime';
-import { defaultTokens } from './themes/default-values';
+import { defaultTokens } from './themes/default-pack';
 import { designTokens } from './tokens';
 
 /** Runtime uses scopeId `var-ui` — theme classes are `theme-var-ui-<name>`. */
@@ -33,8 +32,8 @@ describe('createDesignTheme', () => {
       colorMode: {
         light: {
           accent: {
-            default: designTokens.palette['sky-7'],
-            hover: designTokens.palette['sky-8'],
+            default: designTokens.palette['sky-7'].var,
+            hover: designTokens.palette['sky-8'].var,
           },
         },
       },
@@ -43,28 +42,22 @@ describe('createDesignTheme', () => {
     expect(css).toMatch(/--var-ui-color-accent-default:\s*var\(--var-ui-palette-sky-7\)/);
   });
 
-  it('appends consumer modes for surfaces', () => {
-    const { darkColor } = defaultTokens;
+  it('registers surface modes by default', () => {
     createDesignTheme({
       name: 'with-surface',
       from: defaultTokens,
-      modes: [
-        {
-          id: 'surface-dark',
-          overrides: { color: darkColor },
-          when: tokens.when.attr(SURFACE_ATTRIBUTE, 'dark', { scope: 'descendant' }),
-        },
-      ],
     });
     const css = getRegisteredCss();
     expect(css).toContain(`${themeClass('with-surface')} [${SURFACE_ATTRIBUTE}="dark"]`);
     expect(css).toContain(`${SURFACE_ATTRIBUTE}="dark"`);
+    expect(css).toContain(`[${SURFACE_ATTRIBUTE}="light"]`);
   });
 
-  it('omits surface rules when modes is omitted', () => {
+  it('omits surface rules when surfaces is false', () => {
     createDesignTheme({
       name: 'ambient-only',
       from: defaultTokens,
+      surfaces: false,
     });
 
     const css = getRegisteredCss();

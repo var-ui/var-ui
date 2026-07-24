@@ -1,11 +1,12 @@
 import {
   flattenTokenEntries,
   scopedTokenNamespace,
+  type CreateTokenValues,
   type CreatedTokenRef,
   type CSSProperties,
   type TokenValues,
 } from 'typestyles';
-import { global, tokens } from './runtime';
+import { typestyles } from './runtime';
 
 /** Leaf that is constant across color modes, or has distinct light/dark values. */
 export type ModeAwareTokenLeaf = string | { light: string; dark: string };
@@ -74,7 +75,7 @@ function customPropertyDeclarations(
   namespace: string,
   values: TokenValues,
 ): Record<string, string> {
-  const cssNs = scopedTokenNamespace(tokens.scopeId?.trim() || undefined, namespace);
+  const cssNs = scopedTokenNamespace(typestyles.tokens.scopeId?.trim() || undefined, namespace);
   const props: Record<string, string> = {};
   for (const [path, value] of flattenTokenEntries(values)) {
     props[`--${cssNs}-${path}`] = String(value);
@@ -88,7 +89,7 @@ function ensureNamespace(
 ): CreatedTokenRef<TokenValues, string> {
   const existing = registered.get(namespace);
   if (existing) return existing;
-  const created = tokens.create(namespace, lightValues);
+  const created = typestyles.tokens.create(namespace, lightValues as CreateTokenValues);
   registered.set(namespace, created);
   return created;
 }
@@ -96,8 +97,8 @@ function ensureNamespace(
 function emitGlobalDarkOverrides(namespace: string, darkValues: TokenValues): void {
   const props = customPropertyDeclarations(namespace, darkValues) as unknown as CSSProperties;
   // Match design-theme colorMode: explicit data-mode + system preference fallback.
-  global.style(':root[data-mode="dark"]', props, { layer: 'tokens' });
-  global.style(
+  typestyles.global.style(':root[data-mode="dark"]', props, { layer: 'tokens' });
+  typestyles.global.style(
     ':root',
     {
       '@media (prefers-color-scheme: dark)': props,

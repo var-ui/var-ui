@@ -1,5 +1,5 @@
 import type { DesignTokenPack } from '../types';
-import { colorTokens } from '../tokens/register';
+import { designTokens } from '../tokens';
 import { defaultDarkColorValues, defaultLightColorValues } from './default-values';
 import { createNeoBrutalistShadow } from './neo-brutalist-shadows';
 
@@ -7,7 +7,7 @@ import { createNeoBrutalistShadow } from './neo-brutalist-shadows';
 export const defaultTokens: DesignTokenPack = {
   tokens: {
     color: defaultLightColorValues,
-    shadow: createNeoBrutalistShadow(colorTokens.shadow.offset),
+    shadow: createNeoBrutalistShadow(designTokens.color.shadow.offset.var),
   },
   darkColor: defaultDarkColorValues,
 };

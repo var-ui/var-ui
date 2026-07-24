@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -11,22 +11,22 @@ import { designTokens as t } from '../tokens';
  * </div>
  * ```
  */
-export const resizeHandle = styles.component(
+export const resizeHandle = typestyles.styles.component(
   'resize-handle',
   (c) => {
     const v = c.vars({
       lineColor: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       pillColor: {
-        value: `${t.color.border.strong}`,
+        value: t.color.border.strong.var,
         syntax: '<color>',
         inherits: false,
       },
       focusRing: {
-        value: `${t.color.accent.default}`,
+        value: t.color.accent.default.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -62,7 +62,7 @@ export const resizeHandle = styles.component(
       pill: {
         width: '4px',
         height: '24px',
-        borderRadius: t.radius.sm,
+        borderRadius: t.radius.sm.var,
         backgroundColor: v.pillColor.var,
         pointerEvents: 'none',
         '[data-orientation="vertical"] &': {

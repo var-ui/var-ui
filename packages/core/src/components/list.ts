@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 type ListSlots = readonly [
@@ -35,26 +35,30 @@ type ListVariants = {
  * </ul>
  * ```
  */
-const listRecipe = styles.component(
+const listRecipe = typestyles.styles.component(
   'list',
   (c) => {
     const v = c.vars({
       root: { value: 'transparent', syntax: '<color>', inherits: false },
-      labelColor: { value: `${t.color.text.primary}`, syntax: '<color>', inherits: false },
-      descriptionColor: { value: `${t.color.text.secondary}`, syntax: '<color>', inherits: false },
+      labelColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      descriptionColor: {
+        value: t.color.text.secondary.var,
+        syntax: '<color>',
+        inherits: false,
+      },
       hoverBg: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       pressBg: {
-        value: `${t.color.background.elevated}`,
+        value: t.color.background.elevated.var,
         syntax: '<color>',
         inherits: false,
       },
-      dividerColor: { value: `${t.color.border.default}`, syntax: '<color>', inherits: false },
-      itemPaddingY: { value: t.space[2], syntax: '<length>', inherits: false },
-      itemPaddingX: { value: t.space[3], syntax: '<length>', inherits: false },
+      dividerColor: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
+      itemPaddingY: { value: t.space[2].var, syntax: '<length>', inherits: false },
+      itemPaddingX: { value: t.space[3].var, syntax: '<length>', inherits: false },
     });
     return {
       slots: ['root', 'header', 'item', 'label', 'description', 'start', 'end', 'divider'],
@@ -66,33 +70,33 @@ const listRecipe = styles.component(
           display: 'flex',
           flexDirection: 'column',
           backgroundColor: v.root.var,
-          '&[data-list-style="disc"]': { listStyle: 'disc', paddingLeft: t.space[5] },
-          '&[data-list-style="decimal"]': { listStyle: 'decimal', paddingLeft: t.space[5] },
+          '&[data-list-style="disc"]': { listStyle: 'disc', paddingLeft: t.space[5].var },
+          '&[data-list-style="decimal"]': { listStyle: 'decimal', paddingLeft: t.space[5].var },
         },
         header: {
-          fontSize: t.fontSize.sm,
-          fontWeight: t.fontWeight.semibold,
+          fontSize: t.fontSize.sm.var,
+          fontWeight: t.fontWeight.semibold.var,
           color: v.labelColor.var,
-          padding: `${t.space[2]} ${v.itemPaddingX.var}`,
+          padding: `${t.space[2].var} ${v.itemPaddingX.var}`,
         },
         item: {
           display: 'flex',
           alignItems: 'center',
-          gap: t.space[3],
+          gap: t.space[3].var,
           position: 'relative',
           padding: `${v.itemPaddingY.var} ${v.itemPaddingX.var}`,
           color: v.labelColor.var,
           '&[data-interactive]': { cursor: 'pointer' },
           '&[data-interactive]:hover': { backgroundColor: v.hoverBg.var },
           '&[data-interactive]:active': { backgroundColor: v.pressBg.var },
-          '&[data-disabled]': { opacity: t.opacity.disabled, pointerEvents: 'none' },
+          '&[data-disabled]': { opacity: t.opacity.disabled.var, pointerEvents: 'none' },
           '[data-has-dividers] >&:not(:last-child)': {
             borderBottom: `1px solid ${v.dividerColor.var}`,
           },
         },
         label: {
-          fontSize: t.fontSize.md,
-          fontWeight: t.fontWeight.medium,
+          fontSize: t.fontSize.md.var,
+          fontWeight: t.fontWeight.medium.var,
           color: v.labelColor.var,
           minWidth: 0,
           overflow: 'hidden',
@@ -100,7 +104,7 @@ const listRecipe = styles.component(
           whiteSpace: 'nowrap',
         },
         description: {
-          fontSize: t.fontSize.sm,
+          fontSize: t.fontSize.sm.var,
           color: v.descriptionColor.var,
           minWidth: 0,
           overflow: 'hidden',
@@ -115,15 +119,15 @@ const listRecipe = styles.component(
         density: {
           compact: {
             item: {
-              [v.itemPaddingY.name]: t.space[1],
-              [v.itemPaddingX.name]: t.space[2],
+              [v.itemPaddingY.name]: t.space[1].var,
+              [v.itemPaddingX.name]: t.space[2].var,
             },
           },
           balanced: {},
           spacious: {
             item: {
-              [v.itemPaddingY.name]: t.space[3],
-              [v.itemPaddingX.name]: t.space[4],
+              [v.itemPaddingY.name]: t.space[3].var,
+              [v.itemPaddingX.name]: t.space[4].var,
             },
           },
         },

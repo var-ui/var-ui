@@ -7,5 +7,4 @@ export * from './themeable-components';
 export * from './runtime';
 export * from './types';
 export * from './tokens';
-export * from './tokens/create-color-theme';
 export * from './themes';

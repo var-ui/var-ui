@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /** Icon-only rail width in px when the nav is collapsed. */
@@ -32,47 +32,47 @@ export const SIDE_NAV_COLLAPSED_WIDTH = 56;
  * </nav>
  * ```
  */
-export const sideNav = styles.component(
+export const sideNav = typestyles.styles.component(
   'side-nav',
   (c) => {
     const v = c.vars({
       background: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: true,
       },
       border: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: true,
       },
       headingColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: true,
       },
       sectionTitleColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: true,
       },
       itemColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: true,
       },
       itemHoverBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: true,
       },
       itemSelectedBackground: {
-        value: `${t.color.accent.subtle}`,
+        value: t.color.accent.subtle.var,
         syntax: '<color>',
         inherits: true,
       },
       itemSelectedColor: {
-        value: `${t.color.accent.default}`,
+        value: t.color.accent.default.var,
         syntax: '<color>',
         inherits: true,
       },
@@ -93,14 +93,14 @@ export const sideNav = styles.component(
         'collapseButton',
       ],
       root: {
-        [v.background.name]: t.color.background.surface,
-        [v.border.name]: t.color.border.default,
-        [v.headingColor.name]: t.color.text.primary,
-        [v.sectionTitleColor.name]: t.color.text.secondary,
-        [v.itemColor.name]: t.color.text.secondary,
-        [v.itemHoverBackground.name]: t.color.background.subtle,
-        [v.itemSelectedBackground.name]: t.color.accent.subtle,
-        [v.itemSelectedColor.name]: t.color.accent.default,
+        [v.background.name]: t.color.background.surface.var,
+        [v.border.name]: t.color.border.default.var,
+        [v.headingColor.name]: t.color.text.primary.var,
+        [v.sectionTitleColor.name]: t.color.text.secondary.var,
+        [v.itemColor.name]: t.color.text.secondary.var,
+        [v.itemHoverBackground.name]: t.color.background.subtle.var,
+        [v.itemSelectedBackground.name]: t.color.accent.subtle.var,
+        [v.itemSelectedColor.name]: t.color.accent.default.var,
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
@@ -120,20 +120,20 @@ export const sideNav = styles.component(
         top: 0,
         display: 'flex',
         flexDirection: 'column',
-        gap: t.space[2],
-        padding: t.space[3],
+        gap: t.space[2].var,
+        padding: t.space[3].var,
         borderBottom: `1px solid ${v.border.var}`,
         backgroundColor: v.background.var,
         zIndex: 1,
         '[data-collapsed] &': {
-          padding: t.space[2],
+          padding: t.space[2].var,
           borderBottom: 'none',
         },
       },
       topContent: {
         display: 'flex',
         flexDirection: 'column',
-        gap: t.space[2],
+        gap: t.space[2].var,
       },
       scrollable: {
         flex: '1 1 auto',
@@ -141,11 +141,11 @@ export const sideNav = styles.component(
         overflowY: 'auto',
         display: 'flex',
         flexDirection: 'column',
-        gap: t.space[4],
-        padding: t.space[3],
+        gap: t.space[4].var,
+        padding: t.space[3].var,
         '[data-collapsed] &': {
-          gap: t.space[2],
-          padding: t.space[2],
+          gap: t.space[2].var,
+          padding: t.space[2].var,
           overflow: 'hidden',
         },
       },
@@ -155,40 +155,40 @@ export const sideNav = styles.component(
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: t.space[2],
-        padding: t.space[3],
+        gap: t.space[2].var,
+        padding: t.space[3].var,
         borderTop: `1px solid ${v.border.var}`,
         backgroundColor: v.background.var,
         '[data-collapsed] &': {
           justifyContent: 'center',
-          padding: t.space[2],
+          padding: t.space[2].var,
         },
       },
       footerIcons: {
         display: 'flex',
         alignItems: 'center',
-        gap: t.space[1],
+        gap: t.space[1].var,
       },
       heading: {
         display: 'flex',
         alignItems: 'center',
-        gap: t.space[2],
-        fontSize: t.fontSize.md,
-        fontWeight: t.fontWeight.semibold,
+        gap: t.space[2].var,
+        fontSize: t.fontSize.md.var,
+        fontWeight: t.fontWeight.semibold.var,
         color: v.headingColor.var,
       },
       section: {
         display: 'flex',
         flexDirection: 'column',
-        gap: t.space[1],
+        gap: t.space[1].var,
         '&:not(:first-child)': {
-          marginTop: t.space[2],
+          marginTop: t.space[2].var,
         },
       },
       sectionTitle: {
-        padding: `${t.space[1]} ${t.space[2]}`,
-        fontSize: t.fontSize.xs,
-        fontWeight: t.fontWeight.semibold,
+        padding: `${t.space[1].var} ${t.space[2].var}`,
+        fontSize: t.fontSize.xs.var,
+        fontWeight: t.fontWeight.semibold.var,
         letterSpacing: '0.06em',
         textTransform: 'uppercase',
         color: v.sectionTitleColor.var,
@@ -199,26 +199,26 @@ export const sideNav = styles.component(
       item: {
         display: 'flex',
         alignItems: 'center',
-        gap: t.space[2],
-        padding: `${t.space[2]} ${t.space[2]}`,
-        borderRadius: t.radius.md,
+        gap: t.space[2].var,
+        padding: `${t.space[2].var} ${t.space[2].var}`,
+        borderRadius: t.radius.md.var,
         color: v.itemColor.var,
         textDecoration: 'none',
         cursor: 'pointer',
         outline: 'none',
-        transition: `background-color ${t.duration.fast} ${t.easing.standard}, color ${t.duration.fast} ${t.easing.standard}`,
+        transition: `background-color ${t.duration.fast.var} ${t.easing.standard.var}, color ${t.duration.fast.var} ${t.easing.standard.var}`,
         '&:hover:not([data-selected]):not([data-disabled])': {
           backgroundColor: v.itemHoverBackground.var,
           color: v.itemColor.var,
         },
         '&:focus-visible': {
-          outline: `2px solid ${t.color.border.focus}`,
+          outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '2px',
         },
         '&[data-selected]': {
           backgroundColor: v.itemSelectedBackground.var,
           color: v.itemSelectedColor.var,
-          fontWeight: t.fontWeight.medium,
+          fontWeight: t.fontWeight.medium.var,
         },
         '&[data-selected]:hover': {
           backgroundColor: v.itemSelectedBackground.var,
@@ -232,7 +232,7 @@ export const sideNav = styles.component(
         },
         '&[data-disabled]': {
           color: v.itemColor.var,
-          opacity: t.opacity.disabled,
+          opacity: t.opacity.disabled.var,
           cursor: 'not-allowed',
           pointerEvents: 'none',
         },
@@ -240,7 +240,7 @@ export const sideNav = styles.component(
           justifyContent: 'center',
           width: '2rem',
           minWidth: '2rem',
-          padding: t.space[2],
+          padding: t.space[2].var,
         },
         '[data-collapsed] &:not(:has(svg, img))': {
           display: 'none',
@@ -263,7 +263,7 @@ export const sideNav = styles.component(
         flexShrink: 0,
         width: '2rem',
         height: '2rem',
-        borderRadius: t.radius.md,
+        borderRadius: t.radius.md.var,
         border: 'none',
         backgroundColor: 'transparent',
         color: v.itemColor.var,
@@ -272,7 +272,7 @@ export const sideNav = styles.component(
           backgroundColor: v.itemHoverBackground.var,
         },
         '&:focus-visible': {
-          outline: `2px solid ${t.color.border.focus}`,
+          outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '2px',
         },
       },

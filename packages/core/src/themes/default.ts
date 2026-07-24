@@ -2,10 +2,12 @@ import { createDesignTheme } from '../create-theme';
 import { defaultTokens } from './default-pack';
 
 export {
+  defaultDarkCodeValues,
+  defaultDarkCodeValues as defaultDarkSyntaxValues,
   defaultDarkColorValues,
-  defaultDarkSyntaxValues,
+  defaultLightCodeValues,
+  defaultLightCodeValues as defaultLightSyntaxValues,
   defaultLightColorValues,
-  defaultLightSyntaxValues,
 } from './default-values';
 export { defaultTokens } from './default-pack';
 

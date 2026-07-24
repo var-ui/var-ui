@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -24,22 +24,22 @@ import { designTokens as t } from '../tokens';
  * </>
  * ```
  */
-export const mobileNav = styles.component(
+export const mobileNav = typestyles.styles.component(
   'mobile-nav',
   (c) => {
     const v = c.vars({
       overlayBackground: {
-        value: `${t.color.overlay.default}`,
+        value: t.color.overlay.default.var,
         syntax: '<color>',
         inherits: false,
       },
       panelBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       panelBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -49,22 +49,22 @@ export const mobileNav = styles.component(
         inherits: false,
       },
       headerColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       toggleColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       toggleHoverBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       closeButtonColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -88,7 +88,7 @@ export const mobileNav = styles.component(
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: v.panelBackground.var,
-        boxShadow: t.shadow.lg,
+        boxShadow: t.shadow.lg.var,
         overflowY: 'auto',
         transition: 'transform 200ms ease',
         '&[data-side="start"]': {
@@ -112,12 +112,12 @@ export const mobileNav = styles.component(
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: t.space[3],
-        padding: t.space[4],
+        gap: t.space[3].var,
+        padding: t.space[4].var,
         borderBottom: `1px solid ${v.panelBorder.var}`,
         color: v.headerColor.var,
-        fontSize: t.fontSize.md,
-        fontWeight: t.fontWeight.semibold,
+        fontSize: t.fontSize.md.var,
+        fontWeight: t.fontWeight.semibold.var,
         flexShrink: 0,
       },
       closeButton: {
@@ -129,15 +129,15 @@ export const mobileNav = styles.component(
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: t.space[1],
-        marginInlineEnd: `calc(${t.space[1]} * -1)`,
-        borderRadius: t.radius.sm,
+        padding: t.space[1].var,
+        marginInlineEnd: `calc(${t.space[1].var} * -1)`,
+        borderRadius: t.radius.sm.var,
         '&:hover': {
           backgroundColor: v.toggleHoverBackground.var,
           color: v.headerColor.var,
         },
         '&:focus-visible': {
-          outline: `2px solid ${t.color.border.focus}`,
+          outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '1px',
         },
       },
@@ -150,14 +150,14 @@ export const mobileNav = styles.component(
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: t.space[2],
-        borderRadius: t.radius.sm,
+        padding: t.space[2].var,
+        borderRadius: t.radius.sm.var,
         '&:hover': {
           backgroundColor: v.toggleHoverBackground.var,
           color: v.headerColor.var,
         },
         '&:focus-visible': {
-          outline: `2px solid ${t.color.border.focus}`,
+          outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '1px',
         },
       },

@@ -1,5 +1,5 @@
 import { keyframes } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 const spin = keyframes.create('var-ui-spin', {
@@ -15,17 +15,17 @@ const spin = keyframes.create('var-ui-spin', {
  * <span className={spinner({ size: 'md' })} />
  * ```
  */
-export const spinner = styles.component(
+export const spinner = typestyles.styles.component(
   'spinner',
   (c) => {
     const v = c.vars({
       indicatorColor: {
-        value: `${t.color.accent.default}`,
+        value: t.color.accent.default.var,
         syntax: '<color>',
         inherits: false,
       },
       trackColor: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -52,7 +52,7 @@ export const spinner = styles.component(
         },
         tone: {
           accent: {},
-          neutral: { [v.indicatorColor.name]: t.color.text.secondary },
+          neutral: { [v.indicatorColor.name]: t.color.text.secondary.var },
         },
       },
       defaultVariants: { size: 'md', tone: 'accent' },

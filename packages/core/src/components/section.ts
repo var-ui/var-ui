@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -10,28 +10,28 @@ import { designTokens as t } from '../tokens';
  * <section className={s.root}><h2 className={s.title}>Forms</h2>…</section>
  * ```
  */
-export const section = styles.component(
+export const section = typestyles.styles.component(
   'section',
   (c) => {
     const v = c.vars({
-      border: { value: `${t.color.border.default}`, syntax: '<color>', inherits: false },
-      background: { value: `${t.color.background.surface}`, syntax: '<color>', inherits: false },
+      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
+      background: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
     });
     return {
       slots: ['root', 'title'],
       root: {
         display: 'grid',
-        gap: t.space[3],
-        padding: t.space[4],
+        gap: t.space[3].var,
+        padding: t.space[4].var,
         border: `1px solid ${v.border.var}`,
-        borderRadius: t.radius.lg,
+        borderRadius: t.radius.lg.var,
         backgroundColor: v.background.var,
-        boxShadow: t.shadow.xs,
+        boxShadow: t.shadow.xs.var,
       },
       title: {
         margin: 0,
-        fontSize: t.fontSize.xl,
-        fontWeight: t.fontWeight.semibold,
+        fontSize: t.fontSize.xl.var,
+        fontWeight: t.fontWeight.semibold.var,
       },
     };
   },

@@ -1,7 +1,9 @@
 import { PALETTE_FAMILIES } from '../tokens/palette';
 export {
-  defaultDarkSyntaxValues,
-  defaultLightSyntaxValues,
+  defaultDarkCodeValues,
+  defaultDarkCodeValues as defaultDarkSyntaxValues,
+  defaultLightCodeValues,
+  defaultLightCodeValues as defaultLightSyntaxValues,
   defaultTheme,
   defaultTokens,
 } from './default';

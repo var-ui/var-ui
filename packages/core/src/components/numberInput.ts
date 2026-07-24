@@ -1,48 +1,48 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { fieldChrome } from './field';
 
-export const numberInput = styles.component(
+export const numberInput = typestyles.styles.component(
   'number-input',
   (c) => {
     const v = c.vars({
       labelColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       inputBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       inputBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       inputForeground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       descriptionColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       errorColor: {
-        value: `${t.color.danger.default}`,
+        value: t.color.danger.default.var,
         syntax: '<color>',
         inherits: false,
       },
       stepperBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       stepperForeground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -67,15 +67,15 @@ export const numberInput = styles.component(
         flex: 1,
         minWidth: 0,
         border: `1px solid ${v.inputBorder.var}`,
-        borderRadius: `${t.radius.md} 0 0 ${t.radius.md}`,
-        padding: `${t.space[2]} ${t.space[3]}`,
-        fontSize: t.fontSize.md,
+        borderRadius: `${t.radius.md.var} 0 0 ${t.radius.md.var}`,
+        padding: `${t.space[2].var} ${t.space[3].var}`,
+        fontSize: t.fontSize.md.var,
         backgroundColor: v.inputBackground.var,
         color: v.inputForeground.var,
         '&:focus': {
-          outline: `2px solid ${t.color.border.focus}`,
+          outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '1px',
-          [v.inputBorder.name]: t.color.border.focus,
+          [v.inputBorder.name]: t.color.border.focus.var,
         },
       },
       stepper: {
@@ -83,22 +83,22 @@ export const numberInput = styles.component(
         flexDirection: 'column',
         border: `1px solid ${v.inputBorder.var}`,
         borderInlineStart: 'none',
-        borderRadius: `0 ${t.radius.md} ${t.radius.md} 0`,
+        borderRadius: `0 ${t.radius.md.var} ${t.radius.md.var} 0`,
         overflow: 'hidden',
         '& button': {
           appearance: 'none',
           border: 'none',
           backgroundColor: v.stepperBackground.var,
           color: v.stepperForeground.var,
-          padding: `${t.space[1]} ${t.space[2]}`,
+          padding: `${t.space[1].var} ${t.space[2].var}`,
           cursor: 'pointer',
-          fontSize: t.fontSize.sm,
+          fontSize: t.fontSize.sm.var,
           lineHeight: 1,
           '&:hover': {
-            backgroundColor: t.color.background.subtle,
+            backgroundColor: t.color.background.subtle.var,
           },
           '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus}`,
+            outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '-2px',
           },
         },
