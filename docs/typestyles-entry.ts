@@ -14,4 +14,5 @@
 // the clearest way to express "run this module for its registrations."
 import '@var-ui/core';
 import '@var-ui/react';
+import './src/themes/extract';
 import './src/styles/homeBento';
