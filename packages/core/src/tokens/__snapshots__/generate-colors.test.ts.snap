@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createColorTheme > clamps chroma for a near-gray accent 1`] = `
+exports[`generateColors > clamps chroma for a near-gray accent 1`] = `
 {
   "dark": {
     "accent": {
@@ -53,7 +53,7 @@ exports[`createColorTheme > clamps chroma for a near-gray accent 1`] = `
       "panel": "oklch(22.00% 0.005 0)",
     },
     "shadow": {
-      "offset": "oklch(6.5% 0.035 0)",
+      "offset": "color-mix(in oklch, oklch(97.00% 0.002 0) 20%, transparent)",
     },
     "success": {
       "default": "oklch(72.00% 0.163 145)",
@@ -147,7 +147,7 @@ exports[`createColorTheme > clamps chroma for a near-gray accent 1`] = `
 }
 `;
 
-exports[`createColorTheme > returns color-shaped light and dark for the default accent 1`] = `
+exports[`generateColors > returns color-shaped light and dark for the default accent 1`] = `
 {
   "dark": {
     "accent": {
@@ -200,7 +200,7 @@ exports[`createColorTheme > returns color-shaped light and dark for the default 
       "panel": "oklch(22.00% 0.005 258.81008101651366)",
     },
     "shadow": {
-      "offset": "oklch(6.5% 0.035 258.81008101651366)",
+      "offset": "color-mix(in oklch, oklch(97.00% 0.002 258.81008101651366) 20%, transparent)",
     },
     "success": {
       "default": "oklch(72.00% 0.163 145)",
@@ -294,7 +294,7 @@ exports[`createColorTheme > returns color-shaped light and dark for the default 
 }
 `;
 
-exports[`createColorTheme > returns themes for a saturated pink accent 1`] = `
+exports[`generateColors > returns themes for a saturated pink accent 1`] = `
 {
   "dark": {
     "accent": {
@@ -347,7 +347,7 @@ exports[`createColorTheme > returns themes for a saturated pink accent 1`] = `
       "panel": "oklch(22.00% 0.005 356.9447697294126)",
     },
     "shadow": {
-      "offset": "oklch(6.5% 0.035 356.9447697294126)",
+      "offset": "color-mix(in oklch, oklch(97.00% 0.002 356.9447697294126) 20%, transparent)",
     },
     "success": {
       "default": "oklch(72.00% 0.163 145)",

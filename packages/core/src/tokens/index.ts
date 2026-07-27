@@ -1,11 +1,19 @@
-export type { DesignThemeTokenValues, DesignTokenPack, DesignTokens } from './types';
-export { FAMILY_SPECS, PALETTE_FAMILIES } from './palette';
-export { tokens } from './declare';
-export { designTokens } from './register';
-export { createColorTheme } from './create-color-theme';
 export type {
-  CreateColorThemeInput,
-  CreateColorThemeResult,
+  DesignColorValues,
+  DesignThemeColorMode,
+  DesignThemePreset,
+  DesignThemeTokenValues,
+  DesignTokens,
+} from './types';
+export { FAMILY_SPECS, PALETTE_FAMILIES } from './palette';
+export { designTokens, tokens } from './declare';
+export { tokenValues } from './preset';
+export { darkSyntaxValues, lightSyntaxValues } from './defaults/color';
+export { shadowElevationValues } from './defaults/shadow';
+export { generateColors } from './generate-colors';
+export type {
+  GenerateColorsInput,
+  GenerateColorsResult,
   ColorContrast,
   NeutralStyle,
-} from './create-color-theme';
+} from './generate-colors';

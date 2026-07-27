@@ -3,15 +3,15 @@ import { designTokens, typestyles } from '@var-ui/core';
 typestyles.global.style('body', {
   margin: 0,
   minHeight: '100%',
-  fontFamily: designTokens.fontFamily.sans,
-  lineHeight: designTokens.lineHeight.normal,
+  fontFamily: designTokens.fontFamily.sans.var,
+  lineHeight: designTokens.lineHeight.normal.var,
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
   // Resolves correctly when the design theme surface lives on `<html>`
   // (`DesignSystemProvider applyToDocument`). Otherwise these vars fall back to
   // unset/initial until an ancestor defines the theme tokens.
-  backgroundColor: designTokens.color.background.app,
-  color: designTokens.color.text.primary,
+  backgroundColor: designTokens.color.background.app.var,
+  color: designTokens.color.text.primary.var,
 });
 
 // Form controls don't inherit fonts by default (UA styles win), so buttons and

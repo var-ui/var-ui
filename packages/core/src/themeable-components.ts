@@ -1,3 +1,14 @@
+import type {
+  ComponentAttrsReturn,
+  ComponentReturn,
+  FlatComponentReturn,
+  FlatOverrideConfig,
+  MultiSlotOverrideConfig,
+  OverrideConfig,
+  SlotAttrsReturn,
+  SlotComponentFunction,
+  SlotOverrideConfig,
+} from 'typestyles';
 import { alert } from './components/alert';
 import { appShell } from './components/appShell';
 import { aspectRatio } from './components/aspectRatio';
@@ -172,3 +183,36 @@ export const themeableComponents = {
 } as const;
 
 export type ThemeableComponentName = keyof typeof themeableComponents;
+
+/**
+ * Override config inferred from a recipe return, mirroring `styles.override` overloads.
+ *
+ * TODO(typestyles): export `OverrideConfigFor<C>` from typestyles (mirroring `OverrideFn`)
+ * and export `MultiSlotReturn` so this branch can use it instead of `__tsMultiSlot`.
+ */
+export type OverrideConfigFor<C> =
+  C extends ComponentReturn<infer V>
+    ? OverrideConfig<V>
+    : C extends ComponentAttrsReturn<infer V>
+      ? OverrideConfig<V>
+      : C extends FlatComponentReturn<infer K>
+        ? FlatOverrideConfig<K>
+        : C extends { readonly __tsMultiSlot: true }
+          ? C extends () => infer R
+            ? MultiSlotOverrideConfig<readonly (keyof R & string)[]>
+            : never
+          : C extends SlotComponentFunction<infer Slots, infer V>
+            ? SlotOverrideConfig<Slots, V>
+            : C extends SlotAttrsReturn<infer Slots, infer V>
+              ? SlotOverrideConfig<Slots, V>
+              : never;
+
+/** Override config for one registry entry in {@link themeableComponents}. */
+export type ThemeComponentOverrideFor<K extends ThemeableComponentName> = OverrideConfigFor<
+  (typeof themeableComponents)[K]
+>;
+
+/** Union of all themeable recipe override shapes (escape hatch / docs). */
+export type ThemeComponentOverride = {
+  [K in ThemeableComponentName]: ThemeComponentOverrideFor<K>;
+}[ThemeableComponentName];

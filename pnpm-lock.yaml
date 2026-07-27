@@ -6,9 +6,6 @@ settings:
 
 catalogs:
   default:
-    '@internationalized/date':
-      specifier: ^3.12.2
-      version: 3.12.2
     '@types/react':
       specifier: ^18.2.0
       version: 18.3.31
@@ -37,11 +34,8 @@ catalogs:
       specifier: ^6.0.0
       version: 6.0.3
     typestyles:
-      specifier: ^0.14.0
-      version: 0.14.0
-    vite-plus:
-      specifier: 0.2.2
-      version: 0.2.2
+      specifier: ^0.16.0
+      version: 0.16.0
 
 overrides:
   vite: npm:@voidzero-dev/vite-plus-core@0.2.2
@@ -110,7 +104,7 @@ importers:
         version: 19.2.7(react@19.2.7)
       typestyles:
         specifier: 'catalog:'
-        version: 0.14.0
+        version: 0.16.0
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.9
@@ -169,7 +163,7 @@ importers:
         version: 6.0.3
       typestyles:
         specifier: 'catalog:'
-        version: 0.14.0
+        version: 0.16.0
 
   examples/vite-app:
     dependencies:
@@ -218,7 +212,7 @@ importers:
         version: 26.1.0
       typestyles:
         specifier: 'catalog:'
-        version: 0.14.0
+        version: 0.16.0
       vite:
         specifier: npm:@voidzero-dev/vite-plus-core@0.2.2
         version: '@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)'
@@ -230,7 +224,7 @@ importers:
     dependencies:
       typestyles:
         specifier: 'catalog:'
-        version: 0.14.0
+        version: 0.16.0
     devDependencies:
       '@typestyles/cli':
         specifier: ^0.2.1
@@ -267,7 +261,7 @@ importers:
     dependencies:
       typestyles:
         specifier: 'catalog:'
-        version: 0.14.0
+        version: 0.16.0
     devDependencies:
       '@internationalized/date':
         specifier: 'catalog:'
@@ -5821,8 +5815,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typestyles@0.14.0:
-    resolution: {integrity: sha512-qUTnbeEkes/7G4pW32DDBbREA+oMlJEkPzmE2sMX2eMUfUncTwQnhssgrrXctrKXlFC0H+1zE5kfoDUpWeiQrg==}
+  typestyles@0.16.0:
+    resolution: {integrity: sha512-M/lgPl2f5eNf6XjpkD1go/skPhroT3ks8eBKrPJR4nDXp61d3tb1p6H7gGtsyT7HqgbdvwVoqLojLZgc6Ppd3g==}
 
   ufo@1.6.4:
     resolution: {integrity: sha512-JFNbkD1Svwe0KvGi8GOeLcP4kAWQ609twvCdcHxq1oSL8svv39ZuSvajcD8B+5D0eL4+s1Is2D/O6KN3qcTeRA==}
@@ -12966,7 +12960,7 @@ snapshots:
 
   typescript@6.0.3: {}
 
-  typestyles@0.14.0:
+  typestyles@0.16.0:
     dependencies:
       csstype: 3.2.3
 

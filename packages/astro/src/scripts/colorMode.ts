@@ -18,10 +18,13 @@ export function resolveColorMode(mode: ColorMode): ResolvedColorMode {
 }
 
 export function applyColorModeToDocument(mode: ColorMode): void {
+  const root = document.documentElement;
   if (mode === 'system') {
-    document.documentElement.removeAttribute('data-mode');
+    root.removeAttribute('data-mode');
+    root.style.colorScheme = '';
   } else {
-    document.documentElement.setAttribute('data-mode', mode);
+    root.setAttribute('data-mode', mode);
+    root.style.colorScheme = mode;
   }
 }
 
@@ -35,14 +38,14 @@ export function setColorMode(mode: ColorMode, storageKey = 'theme-mode'): void {
   syncColorModeToggles(storageKey);
 }
 
-/** Boot path used by ThemeScript (class + data-mode). */
+/** Boot path used by ThemeScript (class + data-mode + color-scheme). */
 export function bootTheme(themeClass: string, storageKey = 'theme-mode'): ColorMode {
   const prefersDark =
     typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
   const stored = readStoredColorMode(storageKey);
   const mode: ColorMode = stored ?? (prefersDark ? 'dark' : 'light');
+
   document.documentElement.classList.add(themeClass);
-  applyColorModeToDocument(mode === 'system' ? 'system' : mode);
   if (stored === 'system') {
     applyColorModeToDocument('system');
   } else if (stored === 'light' || stored === 'dark') {

@@ -29,14 +29,14 @@ Docs: `/theming/customize`. Demo: `examples/vite-app` Acme palette.
 
 `createDesignTheme` takes a thin config (`name`, optional `from` / `tokens` /
 `colorMode` / `modes`) plus optional `extend` and `components`. Ambient
-light/dark colors go through `colorMode` (or pack `darkColor`); fixed-tone
+light/dark colors go through `colorMode`; fixed-tone
 surfaces use `modes` + `SURFACE_ATTRIBUTE` (not a `surfaces` key). See
 `docs/superpowers/specs/2026-07-21-theming-dx-design.md`.
 
 ```ts
-import { createColorTheme, createDesignTheme } from '@var-ui/core';
+import { generateColors, createDesignTheme } from '@var-ui/core';
 
-const colors = createColorTheme({ accent: '#7c3aed' });
+const colors = generateColors({ accent: '#7c3aed' });
 
 export const acme = createDesignTheme({
   name: 'acme',
@@ -316,9 +316,10 @@ reserves the `vars` key for it.
   prop-type widening it requires — documented future direction; the override
   config shape leaves room (a `variants` key whose options extend the recipe's
   set) but nothing is designed here.
-- **Per-mode blocks inside component overrides** — use mode-aware tokens
-  (`extend`) instead; keeps overrides mode-agnostic and avoids duplicating the
-  condition engine inside `override()`.
+- **Per-mode blocks inside component overrides** — deferred in V7; specified in
+  V8 (`specs/conditional-component-overrides.md`). Palette changes still belong
+  in mode-aware tokens (`extend` / `colorMode`); V8 adds typed `conditions` on
+  override style blocks for structural differences.
 - **Responsive/breakpoint values in overrides** — var-ui's runtime configures
   no breakpoints today.
 - **Nested-theme proximity tie-breaking** — existing `@scope` story.

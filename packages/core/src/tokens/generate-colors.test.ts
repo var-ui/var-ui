@@ -14,8 +14,8 @@ vi.mock('typestyles/color-scale', async (importOriginal) => {
 });
 
 import { basePaletteTokenValues } from './palette';
-import { createColorTheme } from './create-color-theme';
-import type { DesignTokenPack } from './types';
+import { generateColors } from './generate-colors';
+import type { DesignColorValues } from './types';
 
 /** Snapshot of palette output before the color-scale extraction — guards byte-identical ramps. */
 const PALETTE_BYTE_IDENTICAL_FIXTURE: Record<string, string> = {
@@ -25,7 +25,7 @@ const PALETTE_BYTE_IDENTICAL_FIXTURE: Record<string, string> = {
   'gray-1': 'oklch(97.00% 0.002 264)',
 };
 
-function assertDesignColorShape(values: DesignTokenPack['darkColor']): void {
+function assertDesignColorShape(values: DesignColorValues): void {
   expect(values.background).toMatchObject({
     app: expect.any(String),
     surface: expect.any(String),
@@ -85,7 +85,7 @@ describe('palette extraction', () => {
   });
 });
 
-describe('createColorTheme', () => {
+describe('generateColors', () => {
   beforeEach(async () => {
     vi.stubEnv('NODE_ENV', 'development');
     const actual =
@@ -99,21 +99,21 @@ describe('createColorTheme', () => {
   });
 
   it('returns color-shaped light and dark for the default accent', () => {
-    const theme = createColorTheme({ accent: '#0064E0' });
+    const theme = generateColors({ accent: '#0064E0' });
     assertDesignColorShape(theme.light);
     assertDesignColorShape(theme.dark);
     expect(theme).toMatchSnapshot();
   });
 
   it('returns themes for a saturated pink accent', () => {
-    const theme = createColorTheme({ accent: '#FF1493' });
+    const theme = generateColors({ accent: '#FF1493' });
     assertDesignColorShape(theme.light);
     assertDesignColorShape(theme.dark);
     expect(theme).toMatchSnapshot();
   });
 
   it('clamps chroma for a near-gray accent', () => {
-    const theme = createColorTheme({ accent: '#808080' });
+    const theme = generateColors({ accent: '#808080' });
     assertDesignColorShape(theme.light);
     expect(theme.light.accent!.default).toMatch(/oklch\(/);
     expect(theme).toMatchSnapshot();
@@ -122,15 +122,15 @@ describe('createColorTheme', () => {
   it('warns when contrast validation fails', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     mockContrastRatio.mockReturnValue(3);
-    createColorTheme({ accent: '#0064E0', contrast: 'standard' });
+    generateColors({ accent: '#0064E0', contrast: 'standard' });
     expect(warn).toHaveBeenCalled();
     const messages = warn.mock.calls.map((call) => String(call[0]));
-    expect(messages.some((msg) => msg.includes('createColorTheme'))).toBe(true);
+    expect(messages.some((msg) => msg.includes('generateColors'))).toBe(true);
   });
 
   it('stays silent for a known-good accent', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    createColorTheme({ accent: '#0064E0', contrast: 'standard' });
+    generateColors({ accent: '#0064E0', contrast: 'standard' });
     expect(warn).not.toHaveBeenCalled();
   });
 });

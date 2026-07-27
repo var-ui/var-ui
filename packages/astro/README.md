@@ -55,11 +55,11 @@ when restoring color mode from `localStorage`:
 ---
 import ThemeScript from '@var-ui/astro/ThemeScript';
 // or: import { ThemeScript } from '@var-ui/astro';
-import { defaultTheme } from '@var-ui/core';
+import { defaultThemeClassName } from '@var-ui/core';
 ---
-<html class={defaultTheme.className}>
+<html class={defaultThemeClassName}>
   <head>
-    <ThemeScript themeClass={defaultTheme.className} />
+    <ThemeScript themeClass={defaultThemeClassName} />
   </head>
   <body>...</body>
 </html>
@@ -67,7 +67,7 @@ import { defaultTheme } from '@var-ui/core';
 
 Props:
 
-- `themeClass` (required) — theme class from `@var-ui/core` (e.g. `defaultTheme.className`)
+- `themeClass` (required) — theme class from `@var-ui/core` (e.g. `defaultThemeClassName`)
 - `storageKey` (optional) — `localStorage` key; defaults to `'theme-mode'`
 
 The inline boot script matches the Astro snippet in `@var-ui/core` README: it reads

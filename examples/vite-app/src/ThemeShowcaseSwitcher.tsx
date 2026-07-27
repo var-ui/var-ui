@@ -1,13 +1,13 @@
+import { defaultThemeClassName } from '@var-ui/core';
 import {
   aiGlowTheme,
   amberTheme,
   classicSystemTheme,
-  defaultTheme,
   forestTheme,
   newWaveTheme,
   roseTheme,
   windows95Theme,
-} from '@var-ui/core';
+} from './themes';
 import { Button, HStack, Stack, Text } from '@var-ui/react';
 
 export type ShowcaseThemeId =
@@ -27,9 +27,9 @@ type ShowcaseTheme = {
   swatch: string;
 };
 
-/** All 8 built-in themes from `@var-ui/core` — used for Phase 1 visual QA. */
+/** Showcase themes — default from core, palette/style examples from docs `src/themes`. */
 export const SHOWCASE_THEMES: ShowcaseTheme[] = [
-  { id: 'default', label: 'Default', className: defaultTheme.className, swatch: '#64748b' },
+  { id: 'default', label: 'Default', className: defaultThemeClassName, swatch: '#64748b' },
   { id: 'forest', label: 'Forest', className: forestTheme.className, swatch: '#16a34a' },
   { id: 'rose', label: 'Rose', className: roseTheme.className, swatch: '#e11d48' },
   { id: 'amber', label: 'Amber', className: amberTheme.className, swatch: '#d97706' },

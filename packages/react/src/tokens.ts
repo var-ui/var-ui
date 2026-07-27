@@ -1,1 +1,1 @@
-export { designTokens, defaultTheme, type DesignTokens } from '@var-ui/core';
+export { designTokens, type DesignTokens } from '@var-ui/core';

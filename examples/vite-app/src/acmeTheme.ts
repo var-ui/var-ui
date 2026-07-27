@@ -1,11 +1,8 @@
-import { createDesignTheme } from '@var-ui/core';
+import { createDesignTheme, when } from '@var-ui/core';
 
 /**
- * Demo theme for the vite example app — exercises V7 `extend` + `components`.
- * Violet accent palette with pill buttons, brand glow, and uppercase primary labels.
- *
- * Entries may be factories `(t) => …` or plain objects; factories enable split files
- * typed with `DesignThemeTokens<typeof extend>`.
+ * Demo theme for the vite example app — exercises V7 `extend` + `components` and
+ * V8 mode values (`{ light, dark }` → `light-dark()`) + `conditions`.
  */
 export const acmeTheme = createDesignTheme({
   name: 'acme',
@@ -45,6 +42,15 @@ export const acmeTheme = createDesignTheme({
       base: {
         borderRadius: '999px',
         boxShadow: t.brand.glow,
+        borderColor: {
+          light: t.color.border.default.var,
+          dark: t.color.border.strong.var,
+        },
+        letterSpacing: '0.02em',
+        conditions: [
+          when.dark({ letterSpacing: '0.06em', fontWeight: 600 }),
+          when.reducedMotion({ transition: 'none' }),
+        ],
         '&:hover': { boxShadow: 'none' },
       },
       variants: {
@@ -75,6 +81,7 @@ export const acmeTheme = createDesignTheme({
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'top right',
           backgroundSize: '40% 40%',
+          padding: { base: t.space[4], md: t.space[6] },
         },
       },
     }),

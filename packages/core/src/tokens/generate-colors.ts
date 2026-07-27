@@ -1,32 +1,28 @@
 import { color } from 'typestyles/color';
 import { contrastRatio, generateRamp, parseColor } from 'typestyles/color-scale';
-import { defaultDarkSyntaxValues, defaultLightSyntaxValues } from '../themes/default-values';
-import type { DesignTokenPack, DesignTokens } from './types';
+import type { DesignColorValues, DesignTokens } from './types';
+import { darkSyntaxValues, lightSyntaxValues } from './defaults/color';
 import { FAMILY_SPECS } from './palette';
-import {
-  neoBrutalistShadowOffsetDark,
-  neoBrutalistShadowOffsetLight,
-} from '../themes/neo-brutalist-shadows';
 
 export type NeutralStyle = 'neutral' | 'cool' | 'warm';
 export type ColorContrast = 'standard' | 'high';
 
-export type CreateColorThemeInput = {
+export type GenerateColorsInput = {
   accent: string;
   neutralStyle?: NeutralStyle;
   contrast?: ColorContrast;
 };
 
-export type CreateColorThemeResult = {
-  light: DesignTokenPack['darkColor'];
-  dark: DesignTokenPack['darkColor'];
+export type GenerateColorsResult = {
+  light: DesignColorValues;
+  dark: DesignColorValues;
 };
 
 /**
  * Calibration notes (`#0064E0`, standard contrast, neutral style):
  * - Light `accent.default` lands near palette `sky-7`; dark accent mirrors to ~`blue-4`.
- * - Hand-authored `default.ts` uses custom paper backgrounds (`#F5F1E9`) and ink borders
- *   (`#000`) — generated neutrals are ramp-based OKLCH, so surfaces read cooler/flatter.
+ * - Hand-authored `default.ts` uses palette neutrals and soft elevation shadows — generated
+ *   neutrals are ramp-based OKLCH from the accent hue.
  * - Dark `danger.solid` / `success.solid` use ramp step 7 (not mirrored step 3) to keep
  *   white `text.onDanger` above 4.5:1 — matches forest/rose/default dark themes.
  * - `ACCENT_CHROMA_MIN = 0.08` keeps near-gray accents visible without oversaturating hues.
@@ -139,7 +135,7 @@ function mapLightColors(
       strong: rampAt(neutral, slots.border.strong),
       focus: rampAt(accent, slots.border.focus),
     },
-    shadow: { offset: neoBrutalistShadowOffsetLight(background.subtle) },
+    shadow: { offset: color.alpha(background.subtle, 0.5, 'oklch') },
     danger: {
       default: rampAt(danger, slots.danger.default),
       solid: rampAt(danger, slots.danger.solid),
@@ -164,7 +160,7 @@ function mapLightColors(
       default: accentDefault,
       hover: rampAt(accent, slots.accent.hover),
     },
-    code: defaultLightSyntaxValues,
+    code: lightSyntaxValues,
   };
 }
 
@@ -175,7 +171,6 @@ function mapDarkColors(
   success: Ramp,
   warning: Ramp,
   info: Ramp,
-  neutralHue: number,
 ) {
   const m = mirrorStep;
   const slots = LIGHT_SLOTS;
@@ -190,10 +185,12 @@ function mapDarkColors(
 
   const accentDefault = rampAt(accent, m(slots.accent.default));
 
+  const textPrimary = rampAt(neutral, m(slots.text.primary));
+
   return {
     background,
     text: {
-      primary: rampAt(neutral, m(slots.text.primary)),
+      primary: textPrimary,
       secondary: rampAt(neutral, m(slots.text.secondary)),
       onAccent: resolveOnAccent(accentDefault, neutral),
       onDanger: WHITE,
@@ -210,7 +207,7 @@ function mapDarkColors(
       strong: rampAt(neutral, m(slots.border.strong)),
       focus: rampAt(accent, m(slots.border.focus)),
     },
-    shadow: { offset: neoBrutalistShadowOffsetDark(neutralHue) },
+    shadow: { offset: color.alpha(textPrimary, 0.2, 'oklch') },
     danger: {
       default: rampAt(danger, m(slots.danger.default)),
       solid: rampAt(danger, 7),
@@ -235,7 +232,7 @@ function mapDarkColors(
       default: accentDefault,
       hover: rampAt(accent, m(slots.accent.hover)),
     },
-    code: defaultDarkSyntaxValues,
+    code: darkSyntaxValues,
   };
 }
 
@@ -280,13 +277,13 @@ function validateContrast(
   for (const [label, foreground, background] of pairs) {
     if (contrastRatio(foreground, background) < threshold) {
       console.warn(
-        `[design-system] createColorTheme (${mode}): contrast below ${threshold} for ${label}.`,
+        `[design-system] generateColors (${mode}): contrast below ${threshold} for ${label}.`,
       );
     }
   }
 }
 
-export function createColorTheme(input: CreateColorThemeInput): CreateColorThemeResult {
+export function generateColors(input: GenerateColorsInput): GenerateColorsResult {
   const neutralStyle = input.neutralStyle ?? 'neutral';
   const contrast = input.contrast ?? 'standard';
   const lightnessRange = resolveLightnessRange(contrast);
@@ -335,7 +332,6 @@ export function createColorTheme(input: CreateColorThemeInput): CreateColorTheme
     successRamp,
     warningRamp,
     infoRamp,
-    neutralHue,
   );
 
   validateContrast('light', light, contrastThreshold);

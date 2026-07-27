@@ -1,4 +1,4 @@
-# `createColorTheme` — Design-System Layer Spec (V1)
+# `generateColors` — Design-System Layer Spec (V1)
 
 Implements `ROADMAP.md` V1. This covers the design-system-layer half only —
 the generic color math (`parseColor`, `generateRamp`, `contrastRatio`) lives
@@ -8,7 +8,7 @@ document is the opinionated layer on top: which ramp step means which
 `DesignColorValues` slot, which hue means "danger," and so on.
 
 **Status: shipped.** This is a historical record of the design as
-implemented (`packages/core/src/tokens/create-color-theme.ts`), not an open
+implemented (`packages/core/src/tokens/generate-colors.ts`), not an open
 task.
 
 ---
@@ -25,24 +25,24 @@ primitive, own the opinion.
 
 ---
 
-## `packages/core/src/tokens/create-color-theme.ts`
+## `packages/core/src/tokens/generate-colors.ts`
 
 ```ts
 export type NeutralStyle = 'neutral' | 'cool' | 'warm';
 export type ColorContrast = 'standard' | 'high';
 
-export type CreateColorThemeInput = {
+export type GenerateColorsInput = {
   accent: string; // hex
   neutralStyle?: NeutralStyle; // default 'neutral'
   contrast?: ColorContrast; // default 'standard'
 };
 
-export type CreateColorThemeResult = {
+export type GenerateColorsResult = {
   light: DesignColorValues;
   dark: DesignColorValues;
 };
 
-export function createColorTheme(input: CreateColorThemeInput): CreateColorThemeResult;
+export function generateColors(input: GenerateColorsInput): GenerateColorsResult;
 ```
 
 Each `light` / `dark` map includes **`syntax`** (`defaultLightSyntaxValues` /
@@ -54,11 +54,11 @@ Primary path — pass the result straight into `colorMode` (same `{ light, dark 
 shape as `DesignThemeConfig.colorMode`):
 
 ```ts
-import { createColorTheme, createDesignTheme } from '@var-ui/core';
+import { generateColors, createDesignTheme } from '@var-ui/core';
 
 export const acme = createDesignTheme({
   name: 'acme',
-  colorMode: createColorTheme({ accent: '#7c3aed' }),
+  colorMode: generateColors({ accent: '#7c3aed' }),
 });
 ```
 
@@ -81,7 +81,7 @@ Optional: start from a pack (`from: forestTokens`) and/or append fixed-tone
    change: `danger` ← `FAMILY_SPECS.red`, `success` ← `FAMILY_SPECS.green`,
    `warning` ← `FAMILY_SPECS.amber`, `info` ← `FAMILY_SPECS.violet`.
 7. Ramps map to `DesignColorValues` slots (see
-   `create-color-theme.ts`/`create-color-theme.test.ts` for the exact,
+   `generate-colors.ts`/`generate-colors.test.ts` for the exact,
    calibrated step indices — tuned against the original `default.ts` values
    for visual continuity when this was first built).
 8. Dark mode reads the same four ramps in the mirrored direction.
@@ -94,7 +94,7 @@ Optional: start from a pack (`from: forestTokens`) and/or append fixed-tone
 
 ## Testing
 
-`create-color-theme.test.ts` (with a committed snapshot in `__snapshots__/`)
+`generate-colors.test.ts` (with a committed snapshot in `__snapshots__/`)
 covers: full `light`/`dark` output for representative accents (the current
 default theme's accent, a highly saturated pink, a near-gray custom accent
 exercising the chroma clamp); `DesignColorValues` shape assertions; contrast
@@ -106,7 +106,7 @@ warnings firing/staying silent per case.
 
 - Non-hex accent input.
 - Migrating any _other_ built-in theme (`forest`, `rose`, `amber`, …) to
-  `createColorTheme` wholesale — each theme's hand-authored values stay
+  `generateColors` wholesale — each theme's hand-authored values stay
   unless there's a specific reason to regenerate them.
 - Any change to the underlying `typestyles/color-scale` math — that's
   TypeStyles' own repo.

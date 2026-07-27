@@ -1,4 +1,4 @@
-import { forestTheme } from '@var-ui/core';
+import { forestTheme } from '@/themes';
 import { defaultIcons } from '@var-ui/icons';
 import { DesignSystemProvider, IconProvider, LayerProvider } from '@var-ui/react';
 import { describe, expect, it } from 'vite-plus/test';

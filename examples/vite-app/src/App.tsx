@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import { ChatDemo } from './ChatDemo';
 import { acmeTheme } from './acmeTheme';
-import { defaultTheme, SURFACE_ATTRIBUTE } from '@var-ui/core';
+import { defaultThemeClassName, SURFACE_ATTRIBUTE } from '@var-ui/core';
 import { defaultIcons } from '@var-ui/icons';
 import {
   Alert,
@@ -108,7 +108,7 @@ function PaletteSwitcher({
         onPress={() => onSelect('acme')}
         aria-pressed={selected === 'acme'}
       >
-        Acme (V7 demo)
+        Acme (V7 + V8 demo)
       </Button>
     </HStack>
   );
@@ -1130,7 +1130,7 @@ function OverlaysSection() {
 
 export function App() {
   const [palette, setPalette] = useState<ShowcasePalette>('default');
-  const activeTheme = palette === 'acme' ? acmeTheme : defaultTheme;
+  const activeTheme = palette === 'acme' ? acmeTheme : { className: defaultThemeClassName };
 
   return (
     <DesignSystemProvider applyToDocument defaultColorMode="light" customTheme={activeTheme}>
@@ -1143,8 +1143,9 @@ export function App() {
                   var-ui
                 </Heading>
                 <Text tone="secondary">
-                  Component showcase. Switch to <strong>Acme</strong> to preview V7 typed theming —
-                  custom brand tokens, pill buttons with glow, and uppercase primary labels — via
+                  Component showcase. Switch to <strong>Acme</strong> to preview V7 typed theming
+                  and V8 mode/condition overrides — custom brand tokens, pill buttons with glow, and
+                  uppercase primary labels — via
                   <code> createDesignTheme({'{ extend, components }'})</code>.
                 </Text>
                 <Stack gap="xs">

@@ -50,13 +50,29 @@ export type DesignThemeTokens<E extends ExtendMap = Record<string, never>> = Des
   TokenRefsOf<E>;
 
 /**
+ * Runtime-valid override shape when recipe inference is too strict for `conditions`
+ * or `{ light, dark }` property values (see `when` / `colorModes`).
+ */
+export type ThemeComponentOverrideInput = {
+  base?: Record<string, unknown>;
+  variants?: Record<string, Record<string, Record<string, unknown>>>;
+  compoundVariants?: ReadonlyArray<{
+    variants: Record<string, string>;
+    style: Record<string, unknown>;
+  }>;
+};
+
+/**
  * Per-recipe entry: static override object, or a factory that receives theme tokens
  * (built-ins + `extend` refs). Prefer factories in separate files for split themes.
  */
 export type ThemeComponentEntry<
   TTokens = DesignThemeTokens,
   K extends ThemeableComponentName = ThemeableComponentName,
-> = ThemeComponentOverrideFor<K> | ((t: TTokens) => ThemeComponentOverrideFor<K>);
+> =
+  | ThemeComponentOverrideFor<K>
+  | ThemeComponentOverrideInput
+  | ((t: TTokens) => ThemeComponentOverrideFor<K> | ThemeComponentOverrideInput);
 
 /**
  * Per-recipe override map. Keys are themeable recipes; values are typed to that

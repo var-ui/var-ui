@@ -124,7 +124,7 @@ for your own UI, or `<Icon>{node}</Icon>` for one-off custom glyphs.
 | **Layers**           | `LayerProvider`, `useLayer` — z-index coordination for floating UI                                    |
 | **Hooks**            | `useMediaQuery`, `useScrollLock`                                                                      |
 | **Layout utilities** | `layout`, `text` — re-exported from `@var-ui/core`                                                    |
-| **Tokens**           | `designTokens`, `defaultTheme`, typed value exports                                                   |
+| **Tokens**           | `designTokens`, typed value exports                                                                   |
 | **Theming**          | `DesignSystemProvider`, `useColorMode`, `ColorModeToggle`                                             |
 
 Core-only recipes without wrappers (use the class helpers from `@var-ui/core`):
