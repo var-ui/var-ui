@@ -43,7 +43,7 @@ describe('useTableSort', () => {
   });
 
   it('is controlled when sortDescriptor is provided — internal state does not change', () => {
-    const onSortChange = vi.fn();
+    const onSortChange = vi.fn<(next: SortDescriptor) => void>();
     const initialSort: SortDescriptor = { column: 'name', direction: 'ascending' };
     const { result, rerender } = renderHook(
       ({ sortDescriptor }: { sortDescriptor: SortDescriptor }) =>

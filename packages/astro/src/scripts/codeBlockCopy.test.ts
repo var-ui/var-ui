@@ -108,7 +108,7 @@ describe('initCodeBlockCopy', () => {
 
       const btn = document.querySelector<HTMLButtonElement>('[data-var-ui-code-copy]')!;
       btn.click();
-      await vi.runAllTicks();
+      vi.runAllTicks();
 
       vi.advanceTimersByTime(1200);
 

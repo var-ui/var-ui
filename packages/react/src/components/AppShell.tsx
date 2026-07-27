@@ -45,8 +45,8 @@ export type AppShellProps = {
 
 function resolveContentPadding(padding: number | undefined): string | undefined {
   if (padding == null) return undefined;
-  const space = t.space as Record<number, string>;
-  return space[padding] ?? `${padding}px`;
+  const token = t.space[padding as keyof typeof t.space];
+  return token != null ? String(token) : `${padding}px`;
 }
 
 /**

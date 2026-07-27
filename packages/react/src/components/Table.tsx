@@ -98,7 +98,7 @@ function nextSortDirection(current: SortDirection | 'none'): SortDirection {
 const sortButtonStyle: CSSProperties = {
   display: 'inline-flex',
   alignItems: 'center',
-  gap: t.space[1],
+  gap: String(t.space[1]),
   background: 'none',
   border: 'none',
   padding: 0,

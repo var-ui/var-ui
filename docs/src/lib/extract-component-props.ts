@@ -229,13 +229,17 @@ function extractPropsForType(program: ts.Program, typeName: string): ComponentPr
 }
 
 function createReactProgram(): ts.Program {
-  const configPath = ts.findConfigFile(REACT_SRC, ts.sys.fileExists, 'tsconfig.json');
+  const configPath = ts.findConfigFile(
+    REACT_SRC,
+    (file) => ts.sys.fileExists(file),
+    'tsconfig.json',
+  );
 
   if (!configPath) {
     throw new Error(`Could not find tsconfig.json for ${REACT_SRC}`);
   }
 
-  const configFile = ts.readConfigFile(configPath, ts.sys.readFile);
+  const configFile = ts.readConfigFile(configPath, (file) => ts.sys.readFile(file));
   const parsed = ts.parseJsonConfigFileContent(configFile.config, ts.sys, path.dirname(configPath));
 
   return ts.createProgram({

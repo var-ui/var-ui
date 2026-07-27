@@ -1,4 +1,4 @@
-import type { ThemeModeDefinition, ThemeOverrides } from 'typestyles';
+import type { ThemeOverrides } from 'typestyles';
 import { registerExtendMap, type ExtendTokenValues } from './extend-tokens';
 import { registerFontFace } from './fonts/register-font-face';
 import { styles, typestyles } from './runtime';
@@ -55,6 +55,8 @@ function cloneForThemeMerge(value: unknown): unknown {
     }
     return out;
   }
+  // Token refs stringify to `var(--…)`; plain objects should not reach this branch.
+  // oxlint-disable-next-line typescript/no-base-to-string -- RegisteredPropertyRef
   return String(value);
 }
 
