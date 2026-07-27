@@ -232,6 +232,7 @@ describe('getColorModeInitScript', () => {
   function run(storageKey: string, defaultColorMode: 'light' | 'dark' | 'system') {
     const script = getColorModeInitScript({ storageKey, defaultColorMode });
     // eslint-disable-next-line no-new-func
+    // oxlint-disable-next-line typescript/no-implied-eval -- executes generated init script in tests
     new Function(script)();
   }
 
@@ -293,6 +294,7 @@ describe('getColorModeInitScript', () => {
       themeClassName: 'theme-fixture',
     });
     // eslint-disable-next-line no-new-func
+    // oxlint-disable-next-line typescript/no-implied-eval -- executes generated init script in tests
     new Function(script)();
     expect(document.documentElement.classList.contains('theme-fixture')).toBe(true);
     cleanup();

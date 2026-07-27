@@ -285,18 +285,7 @@ export {
   type UseChatNewMessagesOptions,
   type UseChatNewMessagesReturn,
 } from './chat/useChatNewMessages';
-export {
-  designTokens,
-  defaultTheme,
-  type DesignColorValues,
-  type DesignFontFamilyValues,
-  type DesignFontSizeValues,
-  type DesignFontWeightValues,
-  type DesignLineHeightValues,
-  type DesignRadiusValues,
-  type DesignShadowValues,
-  type DesignSpaceValues,
-} from './tokens';
+export { designTokens, type DesignTokens } from './tokens';
 export { DesignSystemProvider, type DesignSystemProviderProps } from './DesignSystemProvider';
 export {
   useColorMode,

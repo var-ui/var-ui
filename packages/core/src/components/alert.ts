@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import {
   semanticChannelAssignments,
@@ -20,22 +20,22 @@ import {
  *
  * **Shared:** `semanticTone.ts` — one table for tone channels; subtle mixes match badge.
  */
-export const alert = styles.component(
+export const alert = typestyles.styles.component(
   'alert',
   (c) => {
     const v = c.vars({
       semantic: {
-        value: t.color.accent.default,
+        value: t.color.accent.default.var,
         syntax: '<color>',
         inherits: true,
       },
       solidBg: {
-        value: t.color.accent.default,
+        value: t.color.accent.default.var,
         syntax: '<color>',
         inherits: false,
       },
       solidFg: {
-        value: t.color.text.onAccent,
+        value: t.color.text.onAccent.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -47,16 +47,16 @@ export const alert = styles.component(
         root: {
           display: 'flex',
           alignItems: 'flex-start',
-          gap: t.space[3],
-          padding: t.space[4],
-          borderRadius: t.radius.md,
+          gap: t.space[3].var,
+          padding: t.space[4].var,
+          borderRadius: t.radius.md.var,
           lineHeight: 1.55,
         },
         icon: {
           flexShrink: 0,
           display: 'inline-flex',
           marginTop: '2px',
-          fontSize: t.fontSize.lg,
+          fontSize: t.fontSize.lg.var,
           lineHeight: 1,
         },
         body: {
@@ -64,22 +64,22 @@ export const alert = styles.component(
           minWidth: 0,
         },
         title: {
-          fontSize: t.fontSize.md,
-          fontWeight: t.fontWeight.semibold,
+          fontSize: t.fontSize.md.var,
+          fontWeight: t.fontWeight.semibold.var,
           margin: 0,
           color: v.semantic.var,
         },
         content: {
-          fontSize: t.fontSize.md,
+          fontSize: t.fontSize.md.var,
           margin: 0,
           color: 'inherit',
         },
         action: {
-          marginTop: t.space[2],
+          marginTop: t.space[2].var,
         },
         actionLink: {
-          fontSize: t.fontSize.md,
-          fontWeight: t.fontWeight.medium,
+          fontSize: t.fontSize.md.var,
+          fontWeight: t.fontWeight.medium.var,
           color: 'inherit',
           textDecoration: 'underline',
           textUnderlineOffset: '2px',
@@ -87,9 +87,9 @@ export const alert = styles.component(
             textDecoration: 'none',
           },
           '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus}`,
+            outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '2px',
-            borderRadius: t.radius.sm,
+            borderRadius: t.radius.sm.var,
           },
         },
       },
@@ -106,7 +106,7 @@ export const alert = styles.component(
             root: {
               backgroundColor: subtleBackgroundColor(v.semantic.var),
               border: `1px solid ${subtleBorderColor(v.semantic.var)}`,
-              color: t.color.text.primary,
+              color: t.color.text.primary.var,
             },
           },
           solid: {
@@ -119,7 +119,7 @@ export const alert = styles.component(
           },
         },
         contentGap: {
-          spaced: { content: { marginTop: t.space[1] } },
+          spaced: { content: { marginTop: t.space[1].var } },
           flush: { content: { marginTop: 0 } },
         },
       },

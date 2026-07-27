@@ -19,10 +19,12 @@ describe('colorMode', () => {
     expect(resolveColorMode('dark')).toBe('dark');
   });
 
-  it('applyColorModeToDocument sets or clears data-mode', () => {
+  it('applyColorModeToDocument sets data-mode and color-scheme', () => {
     applyColorModeToDocument('dark');
     expect(document.documentElement.getAttribute('data-mode')).toBe('dark');
+    expect(document.documentElement.style.colorScheme).toBe('dark');
     applyColorModeToDocument('system');
     expect(document.documentElement.hasAttribute('data-mode')).toBe(false);
+    expect(document.documentElement.style.colorScheme).toBe('');
   });
 });

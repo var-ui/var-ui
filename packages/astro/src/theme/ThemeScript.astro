@@ -5,6 +5,7 @@ type Props = {
 };
 const { themeClass, storageKey = 'theme-mode' } = Astro.props;
 ---
+<meta name="color-scheme" content="light dark" />
 <script is:inline define:vars={{ themeClass, storageKey }}>
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const stored = localStorage.getItem(storageKey);
@@ -14,10 +15,8 @@ const { themeClass, storageKey = 'theme-mode' } = Astro.props;
       : prefersDark
         ? 'dark'
         : 'light';
+  const resolved = mode === 'system' ? (prefersDark ? 'dark' : 'light') : mode;
   document.documentElement.classList.add(themeClass);
-  if (mode === 'system') {
-    document.documentElement.removeAttribute('data-mode');
-  } else {
-    document.documentElement.setAttribute('data-mode', mode);
-  }
+  document.documentElement.setAttribute('data-mode', mode);
+  document.documentElement.style.colorScheme = mode === 'system' ? '' : resolved;
 </script>

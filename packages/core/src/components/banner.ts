@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import {
   semanticChannelAssignments,
@@ -15,13 +15,13 @@ import {
  * <div className={b.root} role="alert">…</div>
  * ```
  */
-export const banner = styles.component(
+export const banner = typestyles.styles.component(
   'banner',
   (c) => {
     const v = c.vars({
-      semantic: { value: t.color.accent.default, syntax: '<color>', inherits: true },
-      solidBg: { value: t.color.accent.default, syntax: '<color>', inherits: false },
-      solidFg: { value: t.color.text.onAccent, syntax: '<color>', inherits: false },
+      semantic: { value: t.color.accent.default.var, syntax: '<color>', inherits: true },
+      solidBg: { value: t.color.accent.default.var, syntax: '<color>', inherits: false },
+      solidFg: { value: t.color.text.onAccent.var, syntax: '<color>', inherits: false },
     });
     return {
       slots: ['root', 'icon', 'content', 'title', 'actions', 'dismiss'],
@@ -29,10 +29,10 @@ export const banner = styles.component(
         root: {
           display: 'flex',
           alignItems: 'center',
-          gap: t.space[3],
+          gap: t.space[3].var,
           width: '100%',
-          padding: `${t.space[3]} ${t.space[4]}`,
-          fontSize: t.fontSize.md,
+          padding: `${t.space[3].var} ${t.space[4].var}`,
+          fontSize: t.fontSize.md.var,
           lineHeight: 1.5,
         },
         icon: {
@@ -45,15 +45,15 @@ export const banner = styles.component(
           minWidth: 0,
           display: 'flex',
           flexWrap: 'wrap',
-          columnGap: t.space[2],
+          columnGap: t.space[2].var,
         },
         title: {
-          fontWeight: t.fontWeight.semibold,
+          fontWeight: t.fontWeight.semibold.var,
           color: v.semantic.var,
         },
         actions: {
           display: 'flex',
-          gap: t.space[2],
+          gap: t.space[2].var,
           flexShrink: 0,
         },
         dismiss: {
@@ -63,11 +63,11 @@ export const banner = styles.component(
           color: 'inherit',
           cursor: 'pointer',
           display: 'inline-flex',
-          padding: t.space[1],
-          borderRadius: t.radius.sm,
+          padding: t.space[1].var,
+          borderRadius: t.radius.sm.var,
           '&:hover': { backgroundColor: subtleBackgroundColor(v.semantic.var) },
           '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus}`,
+            outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '1px',
           },
         },
@@ -84,7 +84,7 @@ export const banner = styles.component(
             root: {
               backgroundColor: subtleBackgroundColor(v.semantic.var),
               borderBlock: `1px solid ${subtleBorderColor(v.semantic.var)}`,
-              color: t.color.text.primary,
+              color: t.color.text.primary.var,
             },
           },
           solid: {

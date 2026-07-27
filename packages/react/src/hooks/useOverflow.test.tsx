@@ -6,7 +6,7 @@ import { useOverflow } from './useOverflow';
 type RectStub = { width: number };
 
 function installRectStub(widths: Map<string, RectStub>): () => void {
-  const original = HTMLElement.prototype.getBoundingClientRect;
+  const original = HTMLElement.prototype.getBoundingClientRect.bind(HTMLElement.prototype);
   HTMLElement.prototype.getBoundingClientRect = function stubbedRect(this: HTMLElement) {
     const key = this.dataset.rectKey;
     const width = key ? (widths.get(key)?.width ?? 0) : 0;

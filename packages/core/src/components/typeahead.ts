@@ -1,58 +1,58 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { fieldChrome } from './field';
 
-export const typeahead = styles.component(
+export const typeahead = typestyles.styles.component(
   'typeahead',
   (c) => {
     const v = c.vars({
       labelColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       descriptionColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       errorColor: {
-        value: `${t.color.danger.default}`,
+        value: t.color.danger.default.var,
         syntax: '<color>',
         inherits: false,
       },
       inputBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       inputBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       inputForeground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       popoverBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       popoverBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       itemSelectedColor: {
-        value: `${t.color.accent.default}`,
+        value: t.color.accent.default.var,
         syntax: '<color>',
         inherits: false,
       },
       itemFocusedBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -82,15 +82,15 @@ export const typeahead = styles.component(
       inputWrapper: {
         display: 'flex',
         alignItems: 'center',
-        gap: t.space[2],
+        gap: t.space[2].var,
         border: `1px solid ${v.inputBorder.var}`,
-        borderRadius: t.radius.md,
-        padding: `${t.space[2]} ${t.space[3]}`,
+        borderRadius: t.radius.md.var,
+        padding: `${t.space[2].var} ${t.space[3].var}`,
         backgroundColor: v.inputBackground.var,
         '&:focus-within': {
-          outline: `2px solid ${t.color.border.focus}`,
+          outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '1px',
-          [v.inputBorder.name]: t.color.border.focus,
+          [v.inputBorder.name]: t.color.border.focus.var,
         },
       },
       input: {
@@ -98,38 +98,38 @@ export const typeahead = styles.component(
         background: 'transparent',
         outline: 'none',
         flex: 1,
-        fontSize: t.fontSize.md,
+        fontSize: t.fontSize.md.var,
         color: v.inputForeground.var,
       },
       clearButton: {
         display: 'inline-flex',
         flexShrink: 0,
-        color: t.color.text.secondary,
+        color: t.color.text.secondary.var,
         cursor: 'pointer',
-        borderRadius: t.radius.sm,
-        padding: t.space[1],
+        borderRadius: t.radius.sm.var,
+        padding: t.space[1].var,
         '&[data-hovered]': {
-          backgroundColor: t.color.background.subtle,
+          backgroundColor: t.color.background.subtle.var,
         },
       },
       popover: {
         border: `1px solid ${v.popoverBorder.var}`,
-        borderRadius: t.radius.md,
+        borderRadius: t.radius.md.var,
         backgroundColor: v.popoverBackground.var,
-        boxShadow: t.shadow.md,
-        padding: t.space[1],
+        boxShadow: t.shadow.md.var,
+        padding: t.space[1].var,
       },
       item: {
-        fontSize: t.fontSize.md,
-        padding: `${t.space[2]} ${t.space[3]}`,
-        borderRadius: t.radius.sm,
+        fontSize: t.fontSize.md.var,
+        padding: `${t.space[2].var} ${t.space[3].var}`,
+        borderRadius: t.radius.sm.var,
         cursor: 'pointer',
         '&[data-focused]': {
           backgroundColor: v.itemFocusedBackground.var,
         },
         '&[data-selected]': {
           color: v.itemSelectedColor.var,
-          fontWeight: t.fontWeight.semibold,
+          fontWeight: t.fontWeight.semibold.var,
         },
       },
     };

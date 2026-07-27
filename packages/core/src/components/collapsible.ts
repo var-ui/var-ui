@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 type CollapsibleSlots = readonly ['root', 'trigger', 'triggerIcon', 'panel'];
@@ -21,14 +21,14 @@ type CollapsibleVariants = {
  * </div>
  * ```
  */
-const collapsibleRecipe = styles.component(
+const collapsibleRecipe = typestyles.styles.component(
   'collapsible',
   (c) => {
     const v = c.vars({
-      border: { value: `${t.color.border.default}`, syntax: '<color>', inherits: false },
-      background: { value: `${t.color.background.surface}`, syntax: '<color>', inherits: false },
-      triggerColor: { value: `${t.color.text.primary}`, syntax: '<color>', inherits: false },
-      hoverBg: { value: `${t.color.background.subtle}`, syntax: '<color>', inherits: false },
+      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
+      background: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
+      triggerColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      hoverBg: { value: t.color.background.subtle.var, syntax: '<color>', inherits: false },
     });
     return {
       slots: ['root', 'trigger', 'triggerIcon', 'panel'],
@@ -50,24 +50,24 @@ const collapsibleRecipe = styles.component(
           appearance: 'none',
           display: 'inline-flex',
           alignItems: 'center',
-          gap: t.space[2],
+          gap: t.space[2].var,
           width: '100%',
           margin: 0,
-          padding: `${t.space[2]} ${t.space[3]}`,
+          padding: `${t.space[2].var} ${t.space[3].var}`,
           border: 'none',
           background: 'transparent',
           color: v.triggerColor.var,
-          fontSize: t.fontSize.sm,
-          fontWeight: t.fontWeight.medium,
+          fontSize: t.fontSize.sm.var,
+          fontWeight: t.fontWeight.medium.var,
           fontFamily: 'inherit',
           textAlign: 'start',
           cursor: 'pointer',
-          borderRadius: t.radius.sm,
+          borderRadius: t.radius.sm.var,
           '&:hover': {
             backgroundColor: v.hoverBg.var,
           },
           '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus}`,
+            outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '2px',
           },
         },
@@ -77,7 +77,7 @@ const collapsibleRecipe = styles.component(
           transition: 'transform 0.15s ease',
         },
         panel: {
-          padding: `${t.space[2]} ${t.space[3]} ${t.space[3]}`,
+          padding: `${t.space[2].var} ${t.space[3].var} ${t.space[3].var}`,
           minWidth: 0,
         },
       },
@@ -87,7 +87,7 @@ const collapsibleRecipe = styles.component(
           bordered: {
             root: {
               border: `1px solid ${v.border.var}`,
-              borderRadius: t.radius.md,
+              borderRadius: t.radius.md.var,
               backgroundColor: v.background.var,
             },
           },

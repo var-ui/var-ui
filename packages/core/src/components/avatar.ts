@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 type AvatarSlots = readonly ['root', 'image', 'initials', 'status'];
@@ -21,18 +21,18 @@ type AvatarVariants = {
 // overload and types the call as a class string. Runtime behavior is correct
 // (typestyles branches on `slots` at runtime); assert the slot signature until
 // typestyles' ComponentConfig forbids `slots` the way FlatComponentConfig does.
-const avatarRecipe = styles.component(
+const avatarRecipe = typestyles.styles.component(
   'avatar',
   (c) => {
     const v = c.vars({
       size: { value: '32px', syntax: '<length>', inherits: false },
       background: {
-        value: `${t.color.accent.subtle}`,
+        value: t.color.accent.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       foreground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -63,7 +63,7 @@ const avatarRecipe = styles.component(
           display: 'grid',
           placeItems: 'center',
           fontSize: `calc(${v.size.var} * 0.4)`,
-          fontWeight: t.fontWeight.semibold,
+          fontWeight: t.fontWeight.semibold.var,
           textTransform: 'uppercase',
           userSelect: 'none',
         },
@@ -73,7 +73,7 @@ const avatarRecipe = styles.component(
           bottom: '-1px',
           display: 'inline-flex',
           borderRadius: '50%',
-          border: `2px solid ${t.color.background.surface}`,
+          border: `2px solid ${t.color.background.surface.var}`,
         },
       },
       variants: {
@@ -101,12 +101,12 @@ export const avatar = avatarRecipe as unknown as SlotComponentFunction<AvatarSlo
  * <span className={g.root}>{avatars.map(a => <span className={g.item}>{a}</span>)}</span>
  * ```
  */
-export const avatarGroup = styles.component(
+export const avatarGroup = typestyles.styles.component(
   'avatar-group',
   (c) => {
     const v = c.vars({
       ringColor: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -115,24 +115,24 @@ export const avatarGroup = styles.component(
       slots: ['root', 'item', 'overflow'],
       root: { display: 'inline-flex', alignItems: 'center' },
       item: {
-        marginLeft: `calc(${t.space[2]} * -1)`,
+        marginLeft: `calc(${t.space[2].var} * -1)`,
         borderRadius: '50%',
         boxShadow: `0 0 0 2px ${v.ringColor.var}`,
         '&:first-child': { marginLeft: 0 },
       },
       overflow: {
-        marginLeft: `calc(${t.space[2]} * -1)`,
+        marginLeft: `calc(${t.space[2].var} * -1)`,
         display: 'grid',
         placeItems: 'center',
         minWidth: '32px',
         height: '32px',
-        padding: `0 ${t.space[1]}`,
+        padding: `0 ${t.space[1].var}`,
         borderRadius: '50%',
-        backgroundColor: t.color.background.subtle,
+        backgroundColor: t.color.background.subtle.var,
         boxShadow: `0 0 0 2px ${v.ringColor.var}`,
-        fontSize: t.fontSize.xs,
-        fontWeight: t.fontWeight.semibold,
-        color: t.color.text.secondary,
+        fontSize: t.fontSize.xs.var,
+        fontWeight: t.fontWeight.semibold.var,
+        color: t.color.text.secondary.var,
       },
     };
   },

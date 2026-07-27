@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 type DescriptionListSlots = readonly ['root', 'title', 'item', 'term', 'details', 'toggle'];
@@ -25,13 +25,13 @@ type DescriptionListVariants = {
  * </dl>
  * ```
  */
-const descriptionListRecipe = styles.component(
+const descriptionListRecipe = typestyles.styles.component(
   'description-list',
   (c) => {
     const v = c.vars({
-      termColor: { value: `${t.color.text.secondary}`, syntax: '<color>', inherits: false },
-      detailsColor: { value: `${t.color.text.primary}`, syntax: '<color>', inherits: false },
-      gap: { value: t.space[4], syntax: '<length>', inherits: false },
+      termColor: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
+      detailsColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      gap: { value: t.space[4].var, syntax: '<length>', inherits: false },
       termWidth: { value: '8rem', syntax: '<length>', inherits: false },
       columns: { value: '2', syntax: '<integer>', inherits: false },
     });
@@ -46,24 +46,24 @@ const descriptionListRecipe = styles.component(
         title: {
           gridColumn: '1 / -1',
           margin: 0,
-          fontSize: t.fontSize.sm,
-          fontWeight: t.fontWeight.semibold,
+          fontSize: t.fontSize.sm.var,
+          fontWeight: t.fontWeight.semibold.var,
           color: v.termColor.var,
         },
         item: {
           display: 'grid',
-          gap: t.space[1],
+          gap: t.space[1].var,
           minWidth: 0,
         },
         term: {
           margin: 0,
-          fontSize: t.fontSize.sm,
-          fontWeight: t.fontWeight.medium,
+          fontSize: t.fontSize.sm.var,
+          fontWeight: t.fontWeight.medium.var,
           color: v.termColor.var,
         },
         details: {
           margin: 0,
-          fontSize: t.fontSize.sm,
+          fontSize: t.fontSize.sm.var,
           color: v.detailsColor.var,
           minWidth: 0,
         },

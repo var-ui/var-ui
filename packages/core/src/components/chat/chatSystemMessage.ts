@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../../runtime';
+import { typestyles } from '../../runtime';
 import { designTokens as t } from '../../tokens';
 import { semanticTone, subtleBackgroundColor, type SemanticToneKey } from '../semanticTone';
 
@@ -39,12 +39,12 @@ function tonePaint(
 // runtime); assert the slot signature until typestyles' ComponentConfig
 // forbids `slots` the way FlatComponentConfig does. See
 // packages/core/src/components/avatar.ts.
-const chatSystemMessageRecipe = styles.component(
+const chatSystemMessageRecipe = typestyles.styles.component(
   'chat-system-message',
   (c) => {
     const v = c.vars({
-      color: { value: t.color.text.secondary, syntax: '<color>', inherits: false },
-      background: { value: t.color.background.subtle, syntax: '<color>', inherits: false },
+      color: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
+      background: { value: t.color.background.subtle.var, syntax: '<color>', inherits: false },
     });
     return {
       slots: ['root', 'icon', 'text'],
@@ -53,13 +53,13 @@ const chatSystemMessageRecipe = styles.component(
           display: 'inline-flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: t.space[1],
+          gap: t.space[1].var,
           alignSelf: 'center',
-          padding: `${t.space[1]} ${t.space[3]}`,
-          borderRadius: t.radius.full,
+          padding: `${t.space[1].var} ${t.space[3].var}`,
+          borderRadius: t.radius.full.var,
           backgroundColor: v.background.var,
           color: v.color.var,
-          fontSize: t.fontSize.sm,
+          fontSize: t.fontSize.sm.var,
         },
         icon: {
           display: 'inline-flex',

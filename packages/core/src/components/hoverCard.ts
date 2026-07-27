@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -11,22 +11,22 @@ import { designTokens as t } from '../tokens';
  * <div className={hc.root}>…</div>
  * ```
  */
-export const hoverCard = styles.component(
+export const hoverCard = typestyles.styles.component(
   'hover-card',
   (c) => {
     const v = c.vars({
       background: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       border: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       titleForeground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -35,22 +35,22 @@ export const hoverCard = styles.component(
       slots: ['root', 'title', 'content'],
       root: {
         border: `1px solid ${v.border.var}`,
-        borderRadius: t.radius.md,
+        borderRadius: t.radius.md.var,
         backgroundColor: v.background.var,
-        boxShadow: t.shadow.md,
+        boxShadow: t.shadow.md.var,
         minWidth: '14rem',
         maxWidth: '22rem',
         outline: 'none',
       },
       title: {
-        fontSize: t.fontSize.md,
-        fontWeight: t.fontWeight.semibold,
+        fontSize: t.fontSize.md.var,
+        fontWeight: t.fontWeight.semibold.var,
         color: v.titleForeground.var,
         margin: 0,
-        padding: `${t.space[4]} ${t.space[4]} ${t.space[3]}`,
+        padding: `${t.space[4].var} ${t.space[4].var} ${t.space[3].var}`,
       },
       content: {
-        padding: `${t.space[3]} ${t.space[4]} ${t.space[4]}`,
+        padding: `${t.space[3].var} ${t.space[4].var} ${t.space[4].var}`,
         outline: 'none',
       },
     };

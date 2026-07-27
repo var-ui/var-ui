@@ -75,14 +75,14 @@ describe('useTablePagination', () => {
   });
 
   it('calls onPageChange when setPage is invoked', () => {
-    const onPageChange = vi.fn();
+    const onPageChange = vi.fn<(page: number) => void>();
     const { result } = renderHook(() => useTablePagination({ data, pageSize: 10, onPageChange }));
     act(() => result.current.setPage(2));
     expect(onPageChange).toHaveBeenCalledWith(2);
   });
 
   it('is controlled when page is provided — internal state does not change', () => {
-    const onPageChange = vi.fn();
+    const onPageChange = vi.fn<(page: number) => void>();
     const { result, rerender } = renderHook(
       ({ page }: { page: number }) =>
         useTablePagination({ data, pageSize: 10, page, onPageChange }),

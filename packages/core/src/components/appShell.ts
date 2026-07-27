@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -26,8 +26,8 @@ const APP_SHELL_SLOTS = [
 
 /**
  * Explicit variant-dimension shape (values left as `{}` — only the keys matter for the
- * `styles.component` call signature). None of these slot names happen to collide with a
- * strictly-typed CSS property, so `styles.component`'s overload inference can't rule out the
+ * `typestyles.styles.component` call signature). None of these slot names happen to collide with a
+ * strictly-typed CSS property, so `typestyles.styles.component`'s overload inference can't rule out the
  * flat single-slot config on its own and silently picks it over the slot-with-variants one —
  * passing `Slots`/`V` as explicit type arguments below pins the correct overload.
  */
@@ -57,17 +57,17 @@ type AppShellVariantDefs = {
  * </div>
  * ```
  */
-export const appShell = styles.component<typeof APP_SHELL_SLOTS, AppShellVariantDefs>(
+export const appShell = typestyles.styles.component<typeof APP_SHELL_SLOTS, AppShellVariantDefs>(
   'app-shell',
   (c) => {
     const v = c.vars({
       background: {
-        value: `${t.color.background.app}`,
+        value: t.color.background.app.var,
         syntax: '<color>',
         inherits: false,
       },
       border: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -104,25 +104,25 @@ export const appShell = styles.component<typeof APP_SHELL_SLOTS, AppShellVariant
           border: 0,
           '&:focus-visible': {
             position: 'fixed',
-            top: t.space[2],
-            insetInlineStart: t.space[2],
-            zIndex: 9999,
+            top: t.space[2].var,
+            insetInlineStart: t.space[2].var,
+            zIndex: t.zIndex.max.var,
             width: 'auto',
             height: 'auto',
             margin: 0,
-            padding: `${t.space[2]} ${t.space[3]}`,
+            padding: `${t.space[2].var} ${t.space[3].var}`,
             overflow: 'visible',
             clip: 'auto',
             whiteSpace: 'normal',
-            borderRadius: t.radius.md,
-            backgroundColor: t.color.background.surface,
-            color: t.color.text.primary,
-            boxShadow: t.shadow.md,
-            outline: `2px solid ${t.color.border.focus}`,
+            borderRadius: t.radius.md.var,
+            backgroundColor: t.color.background.surface.var,
+            color: t.color.text.primary.var,
+            boxShadow: t.shadow.md.var,
+            outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '2px',
             textDecoration: 'none',
-            fontSize: t.fontSize.sm,
-            fontWeight: t.fontWeight.medium,
+            fontSize: t.fontSize.sm.var,
+            fontWeight: t.fontWeight.medium.var,
           },
         },
         banner: {
@@ -203,23 +203,23 @@ export const appShell = styles.component<typeof APP_SHELL_SLOTS, AppShellVariant
         },
         variant: {
           wash: {
-            root: backgroundVar(v.background.name, t.color.background.app),
+            root: backgroundVar(v.background.name, t.color.background.app.var),
           },
           surface: {
-            root: backgroundVar(v.background.name, t.color.background.surface),
+            root: backgroundVar(v.background.name, t.color.background.surface.var),
           },
           section: {
             root: {
-              ...backgroundVar(v.background.name, t.color.background.surface),
+              ...backgroundVar(v.background.name, t.color.background.surface.var),
               border: `1px solid ${v.border.var}`,
-              borderRadius: t.radius.lg,
-              boxShadow: t.shadow.xs,
+              borderRadius: t.radius.lg.var,
+              boxShadow: t.shadow.xs.var,
             },
           },
           elevated: {
             root: {
-              ...backgroundVar(v.background.name, t.color.background.elevated),
-              boxShadow: t.shadow.sm,
+              ...backgroundVar(v.background.name, t.color.background.elevated.var),
+              boxShadow: t.shadow.sm.var,
             },
           },
         },

@@ -86,6 +86,37 @@ export const acme = createDesignTheme({
 
 Try the **Acme (V7 demo)** palette in the vite example app to see this live.
 
+## Self-hosted fonts
+
+Register `@font-face` rules with `fonts` on `createDesignTheme` (or on a
+`from` preset). Pair with `tokens.fontFamily` stacks that reference the same
+family names. Use `defineFonts` to generate stacks from face definitions:
+
+```ts
+import { createDesignTheme, defineFonts, groteskMono } from '@var-ui/core';
+
+const brand = defineFonts({
+  sans: {
+    face: {
+      family: 'Acme Sans',
+      src: "url('/fonts/acme-sans.woff2') format('woff2')",
+      fontWeight: '400 700',
+      fontDisplay: 'swap',
+    },
+    fallback: 'system-ui, sans-serif',
+  },
+});
+
+export const acme = createDesignTheme({
+  name: 'acme',
+  fonts: brand.fonts,
+  tokens: { fontFamily: brand.tokens.fontFamily },
+});
+```
+
+Host font files under your app's `public/fonts/` directory. Root-relative
+`url('/fonts/…')` works with Astro, Vite, and Next static serving.
+
 ## Split across files
 
 Hoist `extend` into a leaf module and type factories with `DesignThemeTokens` —

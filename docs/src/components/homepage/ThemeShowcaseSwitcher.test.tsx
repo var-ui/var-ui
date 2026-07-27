@@ -1,11 +1,11 @@
-import { designPaletteList, designStyleList } from '@var-ui/core';
+import { designPaletteList, designStyleList } from '@/themes';
 import { describe, expect, it, vi } from 'vite-plus/test';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SHOWCASE_THEMES, ThemeShowcaseSwitcher } from './ThemeShowcaseSwitcher';
 
 describe('ThemeShowcaseSwitcher', () => {
-  it('lists exactly the 8 real themes from @var-ui/core (see specs/theme-gallery.md)', () => {
+  it('lists exactly the 8 showcase themes (see specs/theme-gallery.md)', () => {
     const knownIds = new Set([
       ...designPaletteList.map((entry) => entry.id),
       ...designStyleList.map((entry) => entry.id),

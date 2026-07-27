@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../../runtime';
+import { typestyles } from '../../runtime';
 import { designTokens as t } from '../../tokens';
 
 type ChatLayoutSlots = readonly ['root', 'messageArea', 'dock'];
@@ -22,12 +22,12 @@ type ChatLayoutVariants = {
 // runtime); assert the slot signature until typestyles' ComponentConfig
 // forbids `slots` the way FlatComponentConfig does. See
 // packages/core/src/components/avatar.ts.
-const chatLayoutRecipe = styles.component(
+const chatLayoutRecipe = typestyles.styles.component(
   'chat-layout',
   (c) => {
     const v = c.vars({
-      background: { value: t.color.background.surface, syntax: '<color>', inherits: false },
-      border: { value: t.color.border.default, syntax: '<color>', inherits: false },
+      background: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
+      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
     });
     return {
       slots: ['root', 'messageArea', 'dock'],
@@ -49,8 +49,8 @@ const chatLayoutRecipe = styles.component(
           bottom: 0,
           display: 'flex',
           flexDirection: 'column',
-          gap: t.space[2],
-          padding: t.space[3],
+          gap: t.space[2].var,
+          padding: t.space[3].var,
           backgroundColor: v.background.var,
           borderTop: `1px solid ${v.border.var}`,
         },

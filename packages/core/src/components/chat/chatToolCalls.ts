@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../../runtime';
+import { typestyles } from '../../runtime';
 import { designTokens as t } from '../../tokens';
 import { semanticTone } from '../semanticTone';
 
@@ -40,7 +40,7 @@ type ChatToolCallsVariants = {
 // assert the slot signature until typestyles' ComponentConfig forbids
 // `slots` the way FlatComponentConfig does. See
 // packages/core/src/components/avatar.ts.
-const chatToolCallsRecipe = styles.component(
+const chatToolCallsRecipe = typestyles.styles.component(
   'chat-tool-calls',
   () => ({
     slots: [
@@ -58,13 +58,13 @@ const chatToolCallsRecipe = styles.component(
       root: {
         display: 'flex',
         flexDirection: 'column',
-        gap: t.space[1],
-        marginTop: t.space[2],
+        gap: t.space[1].var,
+        marginTop: t.space[2].var,
       },
       header: {
         display: 'flex',
         alignItems: 'center',
-        gap: t.space[1],
+        gap: t.space[1].var,
         minHeight: '24px',
         cursor: 'pointer',
         userSelect: 'none',
@@ -79,21 +79,21 @@ const chatToolCallsRecipe = styles.component(
         flexShrink: 0,
       },
       name: {
-        fontSize: t.fontSize.sm,
-        fontFamily: t.fontFamily.mono,
-        fontWeight: t.fontWeight.medium,
-        color: t.color.text.secondary,
+        fontSize: t.fontSize.sm.var,
+        fontFamily: t.fontFamily.mono.var,
+        fontWeight: t.fontWeight.medium.var,
+        color: t.color.text.secondary.var,
       },
       target: {
-        fontSize: t.fontSize.sm,
-        color: t.color.text.secondary,
+        fontSize: t.fontSize.sm.var,
+        color: t.color.text.secondary.var,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
       },
       duration: {
-        fontSize: t.fontSize.sm,
-        color: t.color.text.secondary,
+        fontSize: t.fontSize.sm.var,
+        color: t.color.text.secondary.var,
         flexShrink: 0,
       },
       chevron: {
@@ -104,17 +104,17 @@ const chatToolCallsRecipe = styles.component(
       list: {
         display: 'flex',
         flexDirection: 'column',
-        gap: t.space[1],
-        paddingLeft: t.space[4],
+        gap: t.space[1].var,
+        paddingLeft: t.space[4].var,
       },
       detail: {
-        paddingLeft: t.space[4],
-        paddingBottom: t.space[2],
+        paddingLeft: t.space[4].var,
+        paddingBottom: t.space[2].var,
       },
     },
     variants: {
       status: {
-        pending: { statusIcon: { color: t.color.text.secondary } },
+        pending: { statusIcon: { color: t.color.text.secondary.var } },
         running: { statusIcon: { color: semanticTone.accent.semantic } },
         complete: { statusIcon: { color: semanticTone.success.semantic } },
         error: { statusIcon: { color: semanticTone.danger.semantic } },

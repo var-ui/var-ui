@@ -1,7 +1,7 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
-const bp = '@media (max-width: 768px)';
+const bp = `@media (max-width: ${t.breakpoint.md.var})`;
 
 /**
  * Long-form / markdown prose primitives: blockquote, kbd, inline badges, tables, dividers,
@@ -13,52 +13,52 @@ const bp = '@media (max-width: 768px)';
  * prose tracks `--color-text-*` / `--color-accent-*` without per-element component vars.
  * Surface chrome (blockquote, fenced pre, tables) uses `c.vars()` for theme overrides.
  */
-export const proseContent = styles.component(
+export const proseContent = typestyles.styles.component(
   'docs-prose',
   (c) => {
     const v = c.vars({
       foreground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       secondaryColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       blockquoteBorder: {
-        value: `${t.color.border.strong}`,
+        value: t.color.border.strong.var,
         syntax: '<color>',
         inherits: false,
       },
       blockquoteBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       preBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       preBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       tableBorder: {
-        value: `${t.color.border.strong}`,
+        value: t.color.border.strong.var,
         syntax: '<color>',
         inherits: false,
       },
       tableHeaderBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       tableCellBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -66,8 +66,8 @@ export const proseContent = styles.component(
     return {
       slots: ['root', 'tableWrap', 'headingAnchor'],
       root: {
-        fontFamily: t.fontFamily.sans,
-        fontSize: t.fontSize.md,
+        fontFamily: t.fontFamily.sans.var,
+        fontSize: t.fontSize.md.var,
         lineHeight: 1.75,
         'html[data-mode="dark"] &': {
           lineHeight: 1.82,
@@ -79,18 +79,18 @@ export const proseContent = styles.component(
         },
         color: v.foreground.var,
         '& h1': {
-          fontFamily: t.fontFamily.display,
+          fontFamily: t.fontFamily.display.var,
           fontStyle: 'italic',
           fontSize: '28px',
-          fontWeight: t.fontWeight.bold,
-          letterSpacing: '-0.015em',
+          fontWeight: t.fontWeight.bold.var,
+          letterSpacing: t.letterSpacing.tight.var,
           lineHeight: 1.25,
           marginTop: 0,
-          marginBottom: t.space[3],
-          color: t.color.text.primary,
+          marginBottom: t.space[3].var,
+          color: t.color.text.primary.var,
           [bp]: {
             fontSize: '24px',
-            marginBottom: t.space[2],
+            marginBottom: t.space[2].var,
           },
         },
         /**
@@ -98,25 +98,25 @@ export const proseContent = styles.component(
          * First H2 after an intro gets no rule (description block already provides one).
          */
         '& h2': {
-          fontFamily: t.fontFamily.display,
+          fontFamily: t.fontFamily.display.var,
           fontStyle: 'italic',
           fontSize: '24px',
-          fontWeight: t.fontWeight.bold,
-          letterSpacing: '-0.015em',
+          fontWeight: t.fontWeight.bold.var,
+          letterSpacing: t.letterSpacing.tight.var,
           lineHeight: 1.25,
-          marginTop: t.space[8],
-          marginBottom: t.space[3],
-          paddingTop: t.space[5],
-          borderTop: t.stroke.strong,
-          color: t.color.text.primary,
+          marginTop: t.space[8].var,
+          marginBottom: t.space[3].var,
+          paddingTop: t.space[5].var,
+          borderTop: t.stroke.strong.var,
+          color: t.color.text.primary.var,
           [bp]: {
             fontSize: '21px',
-            marginTop: t.space[6],
-            paddingTop: t.space[4],
+            marginTop: t.space[6].var,
+            paddingTop: t.space[4].var,
           },
         },
         '& > h2:first-of-type, & > h2:first-child': {
-          marginTop: t.space[4],
+          marginTop: t.space[4].var,
           paddingTop: 0,
           borderTop: 'none',
         },
@@ -125,65 +125,65 @@ export const proseContent = styles.component(
         },
         '& h3': {
           fontSize: '17px',
-          fontWeight: t.fontWeight.semibold,
+          fontWeight: t.fontWeight.semibold.var,
           lineHeight: 1.35,
-          marginTop: t.space[5],
-          marginBottom: t.space[2],
-          color: t.color.text.primary,
+          marginTop: t.space[5].var,
+          marginBottom: t.space[2].var,
+          color: t.color.text.primary.var,
           [bp]: {
-            marginTop: t.space[4],
+            marginTop: t.space[4].var,
           },
         },
         '& h4, & h5, & h6': {
-          fontSize: t.fontSize.md,
-          fontWeight: t.fontWeight.semibold,
-          marginTop: t.space[4],
-          marginBottom: t.space[1],
-          color: t.color.text.primary,
+          fontSize: t.fontSize.md.var,
+          fontWeight: t.fontWeight.semibold.var,
+          marginTop: t.space[4].var,
+          marginBottom: t.space[1].var,
+          color: t.color.text.primary.var,
           [bp]: {
-            marginTop: t.space[3],
+            marginTop: t.space[3].var,
           },
         },
         '& h2, & h3, & h4, & h5, & h6': {
           position: 'relative',
         },
         '& p': {
-          marginBottom: t.space[4],
+          marginBottom: t.space[4].var,
           [bp]: {
-            marginBottom: t.space[3],
+            marginBottom: t.space[3].var,
           },
         },
         '& ul, & ol': {
-          marginBottom: t.space[3],
-          paddingLeft: t.space[4],
+          marginBottom: t.space[3].var,
+          paddingLeft: t.space[4].var,
           [bp]: {
-            marginBottom: t.space[2],
-            paddingLeft: t.space[3],
+            marginBottom: t.space[2].var,
+            paddingLeft: t.space[3].var,
           },
         },
         '& li': {
-          marginBottom: t.space[1],
+          marginBottom: t.space[1].var,
         },
         /**
          * Links carry an always-on tinted underline so they're distinguishable from inline `code`
          * (which is mono + color only). On hover the underline snaps to full accent.
          */
         '& a': {
-          color: t.color.accent.default,
+          color: t.color.accent.default.var,
           textDecoration: 'underline',
           textDecorationThickness: '1px',
           textUnderlineOffset: '3px',
-          textDecorationColor: `color-mix(in srgb, ${t.color.accent.default} 40%, transparent)`,
-          fontWeight: t.fontWeight.medium,
-          transition: t.transition.colorShift,
+          textDecorationColor: `color-mix(in srgb, ${t.color.accent.default.var} 40%, transparent)`,
+          fontWeight: t.fontWeight.medium.var,
+          transition: t.transition.colorShift.var,
           '&:hover': {
-            color: t.color.accent.hover,
+            color: t.color.accent.hover.var,
             textDecorationColor: 'currentColor',
           },
           '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus}`,
+            outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '2px',
-            borderRadius: t.radius.sm,
+            borderRadius: t.radius.sm.var,
           },
         },
         /**
@@ -192,10 +192,10 @@ export const proseContent = styles.component(
          * from anchors.
          */
         '& code': {
-          fontFamily: t.fontFamily.mono,
+          fontFamily: t.fontFamily.mono.var,
           fontSize: '0.92em',
-          fontWeight: t.fontWeight.medium,
-          color: t.color.accent.hover,
+          fontWeight: t.fontWeight.medium.var,
+          color: t.color.accent.hover.var,
           whiteSpace: 'nowrap',
         },
         '& a code': {
@@ -216,18 +216,18 @@ export const proseContent = styles.component(
           },
         },
         '& pre:not([data-codeblock-pre])': {
-          fontFamily: t.fontFamily.mono,
-          fontSize: t.fontSize.sm,
+          fontFamily: t.fontFamily.mono.var,
+          fontSize: t.fontSize.sm.var,
           lineHeight: 1.6,
           backgroundColor: v.preBackground.var,
-          padding: t.space[3],
-          borderRadius: t.radius.md,
+          padding: t.space[3].var,
+          borderRadius: t.radius.md.var,
           border: `1px solid ${v.preBorder.var}`,
           overflow: 'auto',
-          marginBottom: t.space[3],
+          marginBottom: t.space[3].var,
           [bp]: {
-            padding: t.space[2],
-            marginBottom: t.space[2],
+            padding: t.space[2].var,
+            marginBottom: t.space[2].var,
           },
         },
         '& pre code': {
@@ -245,13 +245,13 @@ export const proseContent = styles.component(
          * blocks sit adjacent — consecutive examples should read as a pair, not two islands.
          */
         '& [data-codeblock]': {
-          marginBlock: t.space[5],
+          marginBlock: t.space[5].var,
           [bp]: {
-            marginBlock: t.space[4],
+            marginBlock: t.space[4].var,
           },
         },
         '& [data-codeblock] + [data-codeblock]': {
-          marginTop: t.space[3],
+          marginTop: t.space[3].var,
         },
         '& [data-codeblock]:first-child': {
           marginTop: 0,
@@ -261,118 +261,118 @@ export const proseContent = styles.component(
         },
         /** Brutalist callout — full ink border + hard shadow offset, no side stripe. */
         '& blockquote': {
-          margin: `${t.space[5]} 0`,
-          padding: `${t.space[4]} ${t.space[5]}`,
-          border: `${t.borderWidth.default} solid ${v.blockquoteBorder.var}`,
+          margin: `${t.space[5].var} 0`,
+          padding: `${t.space[4].var} ${t.space[5].var}`,
+          border: `${t.borderWidth.default.var} solid ${v.blockquoteBorder.var}`,
           backgroundColor: v.blockquoteBackground.var,
-          boxShadow: t.shadow.sm,
+          boxShadow: t.shadow.sm.var,
           color: v.foreground.var,
           fontStyle: 'normal',
           [bp]: {
-            margin: `${t.space[4]} 0`,
-            padding: `${t.space[3]} ${t.space[4]}`,
+            margin: `${t.space[4].var} 0`,
+            padding: `${t.space[3].var} ${t.space[4].var}`,
           },
         },
         '& blockquote p': {
-          marginBottom: t.space[2],
+          marginBottom: t.space[2].var,
         },
         '& blockquote p:last-child': {
           marginBottom: 0,
         },
         '& kbd': {
-          fontFamily: t.fontFamily.mono,
-          fontSize: t.fontSize.sm,
-          fontWeight: t.fontWeight.medium,
-          padding: `2px ${t.space[2]}`,
-          borderRadius: t.radius.sm,
-          border: `1px solid ${t.color.border.strong}`,
-          backgroundColor: t.color.background.surface,
-          boxShadow: `0 1px 0 ${t.color.border.default}`,
+          fontFamily: t.fontFamily.mono.var,
+          fontSize: t.fontSize.sm.var,
+          fontWeight: t.fontWeight.medium.var,
+          padding: `2px ${t.space[2].var}`,
+          borderRadius: t.radius.sm.var,
+          border: `1px solid ${t.color.border.strong.var}`,
+          backgroundColor: t.color.background.surface.var,
+          boxShadow: `0 1px 0 ${t.color.border.default.var}`,
           whiteSpace: 'nowrap',
         },
         '& [data-docs-badge]': {
           display: 'inline-flex',
           alignItems: 'center',
           boxSizing: 'border-box',
-          fontSize: t.fontSize.sm,
-          fontWeight: t.fontWeight.medium,
+          fontSize: t.fontSize.sm.var,
+          fontWeight: t.fontWeight.medium.var,
           lineHeight: 1.2,
-          padding: `2px ${t.space[2]}`,
-          borderRadius: t.radius.full,
-          border: `1px solid ${t.color.border.default}`,
-          backgroundColor: t.color.background.subtle,
-          color: t.color.text.primary,
+          padding: `2px ${t.space[2].var}`,
+          borderRadius: t.radius.full.var,
+          border: `1px solid ${t.color.border.default.var}`,
+          backgroundColor: t.color.background.subtle.var,
+          color: t.color.text.primary.var,
           verticalAlign: '0.08em',
         },
         '& [data-docs-badge][data-docs-badge-tone="success"]': {
-          borderColor: `color-mix(in srgb, ${t.color.success.default} 45%, ${t.color.border.default})`,
-          backgroundColor: `color-mix(in srgb, ${t.color.success.default} 14%, ${t.color.background.surface})`,
-          color: `color-mix(in srgb, ${t.color.success.default} 85%, ${t.color.text.primary})`,
+          borderColor: `color-mix(in srgb, ${t.color.success.default.var} 45%, ${t.color.border.default.var})`,
+          backgroundColor: `color-mix(in srgb, ${t.color.success.default.var} 14%, ${t.color.background.surface.var})`,
+          color: `color-mix(in srgb, ${t.color.success.default.var} 85%, ${t.color.text.primary.var})`,
         },
         '& [data-docs-badge][data-docs-badge-tone="warning"]': {
-          borderColor: `color-mix(in srgb, ${t.color.warning.default} 45%, ${t.color.border.default})`,
-          backgroundColor: `color-mix(in srgb, ${t.color.warning.default} 16%, ${t.color.background.surface})`,
-          color: `color-mix(in srgb, ${t.color.warning.default} 75%, ${t.color.text.primary})`,
+          borderColor: `color-mix(in srgb, ${t.color.warning.default.var} 45%, ${t.color.border.default.var})`,
+          backgroundColor: `color-mix(in srgb, ${t.color.warning.default.var} 16%, ${t.color.background.surface.var})`,
+          color: `color-mix(in srgb, ${t.color.warning.default.var} 75%, ${t.color.text.primary.var})`,
         },
         '& [data-docs-badge][data-docs-badge-tone="danger"]': {
-          borderColor: `color-mix(in srgb, ${t.color.danger.default} 45%, ${t.color.border.default})`,
-          backgroundColor: `color-mix(in srgb, ${t.color.danger.default} 12%, ${t.color.background.surface})`,
-          color: `color-mix(in srgb, ${t.color.danger.default} 80%, ${t.color.text.primary})`,
+          borderColor: `color-mix(in srgb, ${t.color.danger.default.var} 45%, ${t.color.border.default.var})`,
+          backgroundColor: `color-mix(in srgb, ${t.color.danger.default.var} 12%, ${t.color.background.surface.var})`,
+          color: `color-mix(in srgb, ${t.color.danger.default.var} 80%, ${t.color.text.primary.var})`,
         },
         '& [data-docs-badge][data-docs-badge-tone="info"]': {
-          borderColor: `color-mix(in srgb, ${t.color.accent.default} 45%, ${t.color.border.default})`,
-          backgroundColor: `color-mix(in srgb, ${t.color.accent.default} 12%, ${t.color.background.surface})`,
-          color: `color-mix(in srgb, ${t.color.accent.default} 75%, ${t.color.text.primary})`,
+          borderColor: `color-mix(in srgb, ${t.color.accent.default.var} 45%, ${t.color.border.default.var})`,
+          backgroundColor: `color-mix(in srgb, ${t.color.accent.default.var} 12%, ${t.color.background.surface.var})`,
+          color: `color-mix(in srgb, ${t.color.accent.default.var} 75%, ${t.color.text.primary.var})`,
         },
         '& hr': {
-          borderTop: `1px solid ${t.color.border.default}`,
+          borderTop: `1px solid ${t.color.border.default.var}`,
           borderRight: 'none',
           borderBottom: 'none',
           borderLeft: 'none',
-          margin: `${t.space[5]} 0`,
+          margin: `${t.space[5].var} 0`,
           [bp]: {
-            margin: `${t.space[4]} 0`,
+            margin: `${t.space[4].var} 0`,
           },
         },
         '& table': {
           width: '100%',
           borderCollapse: 'collapse',
-          marginBlock: `${t.space[4]} ${t.space[5]}`,
-          fontSize: t.fontSize.sm,
-          border: `${t.borderWidth.default} solid ${v.tableBorder.var}`,
+          marginBlock: `${t.space[4].var} ${t.space[5].var}`,
+          fontSize: t.fontSize.sm.var,
+          border: `${t.borderWidth.default.var} solid ${v.tableBorder.var}`,
         },
         '& thead': {
           backgroundColor: v.tableHeaderBackground.var,
-          borderBottom: `${t.borderWidth.thick} solid ${v.tableBorder.var}`,
+          borderBottom: `${t.borderWidth.thick.var} solid ${v.tableBorder.var}`,
         },
         '& th, & td': {
           textAlign: 'left',
-          padding: `${t.space[2]} ${t.space[3]}`,
+          padding: `${t.space[2].var} ${t.space[3].var}`,
           borderBottom: `1px solid ${v.tableCellBorder.var}`,
           verticalAlign: 'top',
         },
         '& th': {
-          fontWeight: t.fontWeight.bold,
-          fontSize: t.fontSize.xs,
-          color: t.color.text.primary,
+          fontWeight: t.fontWeight.bold.var,
+          fontSize: t.fontSize.xs.var,
+          color: t.color.text.primary.var,
           textTransform: 'uppercase',
-          letterSpacing: '0.06em',
-          fontFamily: t.fontFamily.mono,
+          letterSpacing: t.letterSpacing.caps.var,
+          fontFamily: t.fontFamily.mono.var,
         },
         '& tr:last-child td': {
           borderBottom: 'none',
         },
         '& caption': {
           captionSide: 'bottom',
-          paddingTop: t.space[2],
-          fontSize: t.fontSize.sm,
-          color: t.color.text.secondary,
+          paddingTop: t.space[2].var,
+          fontSize: t.fontSize.sm.var,
+          color: t.color.text.secondary.var,
           textAlign: 'left',
         },
         '& [data-prose-heading-anchor]': {
-          marginLeft: t.space[2],
-          fontWeight: t.fontWeight.medium,
-          color: t.color.text.secondary,
+          marginLeft: t.space[2].var,
+          fontWeight: t.fontWeight.medium.var,
+          color: t.color.text.secondary.var,
           textDecoration: 'none',
           opacity: 0,
           transition: `opacity var(--duration-medium) var(--easing-standard), color var(--duration-medium) var(--easing-standard)`,
@@ -386,15 +386,15 @@ export const proseContent = styles.component(
         },
         '& [data-prose-heading-anchor]:focus-visible': {
           opacity: 1,
-          outline: `2px solid ${t.color.border.focus}`,
+          outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '2px',
-          borderRadius: t.radius.sm,
+          borderRadius: t.radius.sm.var,
         },
       },
       /** Scroll container for wide GFM tables (wrap HTML manually). */
       tableWrap: {
         overflowX: 'auto',
-        marginBottom: t.space[3],
+        marginBottom: t.space[3].var,
         WebkitOverflowScrolling: 'touch',
       },
       /** Applied with `data-prose-heading-anchor`; visual rules live on `root`. */

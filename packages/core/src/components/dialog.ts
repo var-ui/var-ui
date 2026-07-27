@@ -1,27 +1,27 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
-export const dialog = styles.component(
+export const dialog = typestyles.styles.component(
   'dialog',
   (c) => {
     const v = c.vars({
       overlayBackground: {
-        value: `${t.color.overlay.default}`,
+        value: t.color.overlay.default.var,
         syntax: '<color>',
         inherits: false,
       },
       modalBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       modalBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       descriptionColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -44,60 +44,60 @@ export const dialog = styles.component(
           backgroundColor: v.overlayBackground.var,
           display: 'grid',
           placeItems: 'center',
-          padding: t.space[4],
+          padding: t.space[4].var,
         },
         modal: {
           width: 'min(480px, 100%)',
           backgroundColor: v.modalBackground.var,
-          borderRadius: t.radius.lg,
+          borderRadius: t.radius.lg.var,
           border: `1px solid ${v.modalBorder.var}`,
-          boxShadow: t.shadow.md,
-          padding: t.space[4],
+          boxShadow: t.shadow.md.var,
+          padding: t.space[4].var,
         },
         content: {
           display: 'grid',
-          gap: t.space[3],
+          gap: t.space[3].var,
         },
         header: {
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'space-between',
-          gap: t.space[3],
+          gap: t.space[3].var,
         },
         heading: {
           fontSize: '18px',
-          fontWeight: t.fontWeight.semibold,
+          fontWeight: t.fontWeight.semibold.var,
           margin: 0,
         },
         closeButton: {
           appearance: 'none',
           border: 'none',
           background: 'transparent',
-          color: t.color.text.secondary,
+          color: t.color.text.secondary.var,
           cursor: 'pointer',
           display: 'inline-flex',
-          padding: t.space[1],
-          marginRight: `calc(${t.space[1]} * -1)`,
-          borderRadius: t.radius.sm,
+          padding: t.space[1].var,
+          marginRight: `calc(${t.space[1].var} * -1)`,
+          borderRadius: t.radius.sm.var,
           '&:hover': {
-            backgroundColor: t.color.background.subtle,
-            color: t.color.text.primary,
+            backgroundColor: t.color.background.subtle.var,
+            color: t.color.text.primary.var,
           },
           '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus}`,
+            outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '1px',
           },
         },
         description: {
           margin: 0,
-          fontSize: t.fontSize.sm,
+          fontSize: t.fontSize.sm.var,
           color: v.descriptionColor.var,
         },
         actions: {
           display: 'flex',
           justifyContent: 'flex-end',
-          gap: t.space[2],
-          marginTop: t.space[2],
+          gap: t.space[2].var,
+          marginTop: t.space[2].var,
         },
       },
       variants: {
@@ -105,7 +105,7 @@ export const dialog = styles.component(
           dialog: {},
           alertdialog: {
             modal: {
-              borderColor: t.color.border.strong,
+              borderColor: t.color.border.strong.var,
             },
           },
         },

@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -10,17 +10,17 @@ import { designTokens as t } from '../tokens';
  * <div className={e.root}>…</div>
  * ```
  */
-export const emptyState = styles.component(
+export const emptyState = typestyles.styles.component(
   'empty-state',
   (c) => {
     const v = c.vars({
       iconColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       iconBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -32,8 +32,8 @@ export const emptyState = styles.component(
         flexDirection: 'column',
         alignItems: 'center',
         textAlign: 'center',
-        gap: t.space[2],
-        padding: `${t.space[8]} ${t.space[4]}`,
+        gap: t.space[2].var,
+        padding: `${t.space[8].var} ${t.space[4].var}`,
       },
       icon: {
         display: 'grid',
@@ -43,21 +43,21 @@ export const emptyState = styles.component(
         borderRadius: '50%',
         color: v.iconColor.var,
         backgroundColor: v.iconBackground.var,
-        marginBottom: t.space[1],
+        marginBottom: t.space[1].var,
       },
       title: {
         margin: 0,
-        fontSize: t.fontSize.lg,
-        fontWeight: t.fontWeight.semibold,
+        fontSize: t.fontSize.lg.var,
+        fontWeight: t.fontWeight.semibold.var,
       },
       description: {
         margin: 0,
-        fontSize: t.fontSize.md,
-        color: t.color.text.secondary,
+        fontSize: t.fontSize.md.var,
+        color: t.color.text.secondary.var,
         maxWidth: '40ch',
       },
       action: {
-        marginTop: t.space[2],
+        marginTop: t.space[2].var,
       },
     };
   },

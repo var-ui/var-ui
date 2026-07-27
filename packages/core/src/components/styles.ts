@@ -1,48 +1,48 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
-export const layout = styles.component(
+export const layout = typestyles.styles.component(
   'ds-layout',
   (c) => {
     const v = c.vars({
       foreground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       sectionBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       sectionBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
     });
     return {
       base: {
-        fontFamily: t.fontFamily.sans,
+        fontFamily: t.fontFamily.sans.var,
         color: v.foreground.var,
       },
       stack: {
         display: 'grid',
-        gap: t.space[5],
+        gap: t.space[5].var,
       },
       section: {
         display: 'grid',
-        gap: t.space[3],
-        padding: t.space[4],
+        gap: t.space[3].var,
+        padding: t.space[4].var,
         border: `1px solid ${v.sectionBorder.var}`,
-        borderRadius: t.radius.lg,
+        borderRadius: t.radius.lg.var,
         backgroundColor: v.sectionBackground.var,
-        boxShadow: t.shadow.xs,
+        boxShadow: t.shadow.xs.var,
       },
       row: {
         display: 'flex',
         flexWrap: 'wrap',
-        gap: t.space[3],
+        gap: t.space[3].var,
         alignItems: 'center',
       },
     };
@@ -50,17 +50,17 @@ export const layout = styles.component(
   { layer: 'utilities' },
 );
 
-export const text = styles.component(
+export const text = typestyles.styles.component(
   'ds-text',
   (c) => {
     const v = c.vars({
       foreground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       secondaryColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -72,23 +72,23 @@ export const text = styles.component(
       },
       title: {
         fontSize: '28px',
-        fontWeight: t.fontWeight.semibold,
+        fontWeight: t.fontWeight.semibold.var,
         letterSpacing: '-0.02em',
       },
       subtitle: {
-        fontSize: t.fontSize.lg,
+        fontSize: t.fontSize.lg.var,
         color: v.secondaryColor.var,
       },
       sectionTitle: {
         fontSize: '20px',
-        fontWeight: t.fontWeight.semibold,
+        fontWeight: t.fontWeight.semibold.var,
       },
       label: {
-        fontSize: t.fontSize.md,
-        fontWeight: t.fontWeight.medium,
+        fontSize: t.fontSize.md.var,
+        fontWeight: t.fontWeight.medium.var,
       },
       caption: {
-        fontSize: t.fontSize.sm,
+        fontSize: t.fontSize.sm.var,
         color: v.secondaryColor.var,
       },
     };

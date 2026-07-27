@@ -1,98 +1,98 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { calendarGridChrome, dateFieldChrome } from './field';
 
-export const dateInput = styles.component(
+export const dateInput = typestyles.styles.component(
   'dateInput',
   (c) => {
     const v = c.vars({
       labelColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       descriptionColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       errorColor: {
-        value: `${t.color.danger.default}`,
+        value: t.color.danger.default.var,
         syntax: '<color>',
         inherits: false,
       },
       groupBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       groupBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       segmentColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       segmentPlaceholderColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       popoverBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       popoverBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       headingColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       navButtonColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       navButtonHoverBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       headerCellColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       cellColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       cellHoverBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       cellSelectedBackground: {
-        value: `${t.color.accent.default}`,
+        value: t.color.accent.default.var,
         syntax: '<color>',
         inherits: false,
       },
       cellSelectedColor: {
-        value: `${t.color.text.onAccent}`,
+        value: t.color.text.onAccent.var,
         syntax: '<color>',
         inherits: false,
       },
       cellDisabledColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -151,7 +151,7 @@ export const dateInput = styles.component(
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: t.radius.sm,
+        borderRadius: t.radius.sm.var,
         color: v.navButtonColor.var,
         cursor: 'pointer',
         '&[data-hovered]': {
@@ -164,10 +164,10 @@ export const dateInput = styles.component(
       },
       popover: {
         border: `1px solid ${v.popoverBorder.var}`,
-        borderRadius: t.radius.md,
+        borderRadius: t.radius.md.var,
         backgroundColor: v.popoverBackground.var,
-        boxShadow: t.shadow.md,
-        padding: t.space[3],
+        boxShadow: t.shadow.md.var,
+        padding: t.space[3].var,
         width: '280px',
       },
       calendarHeader: grid.calendarHeader,

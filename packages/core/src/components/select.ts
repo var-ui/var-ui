@@ -1,48 +1,48 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { fieldChrome } from './field';
 
-export const select = styles.component(
+export const select = typestyles.styles.component(
   'select',
   (c) => {
     const v = c.vars({
       labelColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       triggerBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       triggerBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       triggerForeground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       popoverBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       popoverBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       itemSelectedColor: {
-        value: `${t.color.accent.default}`,
+        value: t.color.accent.default.var,
         syntax: '<color>',
         inherits: false,
       },
       itemFocusedBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -60,44 +60,44 @@ export const select = styles.component(
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: t.space[2],
+        gap: t.space[2].var,
         textAlign: 'left',
         border: `1px solid ${v.triggerBorder.var}`,
-        borderRadius: t.radius.md,
-        padding: `${t.space[2]} ${t.space[3]}`,
+        borderRadius: t.radius.md.var,
+        padding: `${t.space[2].var} ${t.space[3].var}`,
         backgroundColor: v.triggerBackground.var,
         color: v.triggerForeground.var,
-        fontSize: t.fontSize.md,
+        fontSize: t.fontSize.md.var,
         cursor: 'pointer',
         '&:focus-visible': {
-          outline: `2px solid ${t.color.border.focus}`,
+          outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '1px',
-          [v.triggerBorder.name]: t.color.border.focus,
+          [v.triggerBorder.name]: t.color.border.focus.var,
         },
       },
       triggerIcon: {
         display: 'inline-flex',
         flexShrink: 0,
-        color: t.color.text.secondary,
+        color: t.color.text.secondary.var,
       },
       popover: {
         border: `1px solid ${v.popoverBorder.var}`,
-        borderRadius: t.radius.md,
+        borderRadius: t.radius.md.var,
         backgroundColor: v.popoverBackground.var,
-        boxShadow: t.shadow.md,
-        padding: t.space[1],
+        boxShadow: t.shadow.md.var,
+        padding: t.space[1].var,
       },
       item: {
-        fontSize: t.fontSize.md,
-        padding: `${t.space[2]} ${t.space[3]}`,
-        borderRadius: t.radius.sm,
+        fontSize: t.fontSize.md.var,
+        padding: `${t.space[2].var} ${t.space[3].var}`,
+        borderRadius: t.radius.sm.var,
         cursor: 'pointer',
         '&[data-focused]': {
           backgroundColor: v.itemFocusedBackground.var,
         },
         '&[data-selected]': {
           color: v.itemSelectedColor.var,
-          fontWeight: t.fontWeight.semibold,
+          fontWeight: t.fontWeight.semibold.var,
         },
       },
     };

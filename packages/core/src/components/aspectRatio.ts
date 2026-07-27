@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 
 /**
  * Constrains children to a fixed aspect ratio (16/9 default). Override the
@@ -8,7 +8,7 @@ import { styles } from '../runtime';
  * <div className={aspectRatio()}><img src={cover} alt="" /></div>
  * ```
  */
-export const aspectRatio = styles.component(
+export const aspectRatio = typestyles.styles.component(
   'aspect-ratio',
   () => ({
     base: {

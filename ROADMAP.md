@@ -183,6 +183,22 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
       `specs/typed-component-theming.md`. Plan:
       `plans/2026-07-17-v7-typed-theming.md`.
 
+## V8 — Conditional component overrides
+
+- [x] **V8 — Mode-aware override values + `conditions`** — `{ light, dark }`
+      property values (→ `light-dark()`) for ambient/surface light/dark in
+      overrides; `conditions` + `when` presets for reduced motion and complex
+      blocks. TypeStyles 0.15+ (`conditions`, `colorModes`). Spec:
+      `specs/conditional-component-overrides.md`.
+
+## V9 — Token color migration to `light-dark()`
+
+- [x] **V9 — Ambient + surface color tokens via `light-dark()`** — theme
+      `colorMode` patches compile via TypeStyles **0.16+** (`colorMode: { light, dark }`
+      on `createTheme`, mode-aware `extend` leaves). Global `color-scheme` on `:root`,
+      theme surfaces, and `data-surface`. Shadow `modes` retained for non-color values.
+      Spec: `specs/conditional-component-overrides.md` (TypeStyles: [#164](https://github.com/type-styles/typestyles/pull/164)).
+
 ## Chat components
 
 - [x] **Chat — "MVP + AI streaming essentials"** — `ChatLayout`,

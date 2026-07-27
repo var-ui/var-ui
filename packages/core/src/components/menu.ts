@@ -1,47 +1,47 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
-export const menu = styles.component(
+export const menu = typestyles.styles.component(
   'menu',
   (c) => {
     const v = c.vars({
       popoverBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       popoverBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       itemForeground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       itemFocusedBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       itemDisabledForeground: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       sectionHeaderForeground: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       separatorColor: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       dangerForeground: {
-        value: `${t.color.danger.default}`,
+        value: t.color.danger.default.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -62,10 +62,10 @@ export const menu = styles.component(
       ],
       popover: {
         border: `1px solid ${v.popoverBorder.var}`,
-        borderRadius: t.radius.md,
+        borderRadius: t.radius.md.var,
         backgroundColor: v.popoverBackground.var,
-        boxShadow: t.shadow.md,
-        padding: t.space[1],
+        boxShadow: t.shadow.md.var,
+        padding: t.space[1].var,
         minWidth: '12rem',
       },
       menu: {
@@ -74,21 +74,21 @@ export const menu = styles.component(
       section: {
         display: 'flex',
         flexDirection: 'column',
-        gap: t.space[1],
+        gap: t.space[1].var,
       },
       sectionHeader: {
-        fontSize: t.fontSize.sm,
-        fontWeight: t.fontWeight.semibold,
+        fontSize: t.fontSize.sm.var,
+        fontWeight: t.fontWeight.semibold.var,
         color: v.sectionHeaderForeground.var,
-        padding: `${t.space[1]} ${t.space[3]}`,
+        padding: `${t.space[1].var} ${t.space[3].var}`,
       },
       item: {
         display: 'flex',
         alignItems: 'center',
-        gap: t.space[2],
-        fontSize: t.fontSize.md,
-        padding: `${t.space[2]} ${t.space[3]}`,
-        borderRadius: t.radius.sm,
+        gap: t.space[2].var,
+        fontSize: t.fontSize.md.var,
+        padding: `${t.space[2].var} ${t.space[3].var}`,
+        borderRadius: t.radius.sm.var,
         cursor: 'pointer',
         color: v.itemForeground.var,
         outline: 'none',
@@ -108,7 +108,7 @@ export const menu = styles.component(
         minWidth: 0,
       },
       itemShortcut: {
-        fontSize: t.fontSize.sm,
+        fontSize: t.fontSize.sm.var,
         color: v.sectionHeaderForeground.var,
       },
       itemCheck: {
@@ -118,7 +118,7 @@ export const menu = styles.component(
       },
       separator: {
         height: '1px',
-        margin: `${t.space[1]} 0`,
+        margin: `${t.space[1].var} 0`,
         backgroundColor: v.separatorColor.var,
       },
       submenuChevron: {

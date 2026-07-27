@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../../runtime';
+import { typestyles } from '../../runtime';
 import { designTokens as t } from '../../tokens';
 
 type ChatMessageBubbleSlots = readonly ['root'];
@@ -29,17 +29,17 @@ type ChatMessageBubbleVariants = {
 // behavior is correct (typestyles branches on `slots` at runtime); assert the
 // slot signature until typestyles' ComponentConfig forbids `slots` the way
 // FlatComponentConfig does. See packages/core/src/components/avatar.ts.
-const chatMessageBubbleRecipe = styles.component(
+const chatMessageBubbleRecipe = typestyles.styles.component(
   'chat-message-bubble',
   (c) => {
     const v = c.vars({
       senderBackground: {
-        value: t.color.background.subtle,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       senderText: {
-        value: t.color.text.primary,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -51,11 +51,11 @@ const chatMessageBubbleRecipe = styles.component(
           display: 'inline-flex',
           flexDirection: 'column',
           maxWidth: 'min(80%, 480px)',
-          padding: `${t.space[3]} ${t.space[4]}`,
-          borderRadius: t.radius.lg,
+          padding: `${t.space[3].var} ${t.space[4].var}`,
+          borderRadius: t.radius.lg.var,
           backgroundColor: v.senderBackground.var,
           color: v.senderText.var,
-          fontSize: t.fontSize.md,
+          fontSize: t.fontSize.md.var,
           lineHeight: 1.55,
           overflowWrap: 'break-word',
           wordBreak: 'break-word',
@@ -65,14 +65,14 @@ const chatMessageBubbleRecipe = styles.component(
         sender: {
           user: {
             root: {
-              [v.senderBackground.name]: t.color.accent.default,
-              [v.senderText.name]: t.color.text.onAccent,
+              [v.senderBackground.name]: t.color.accent.default.var,
+              [v.senderText.name]: t.color.text.onAccent.var,
             },
           },
           assistant: {
             root: {
-              [v.senderBackground.name]: t.color.background.subtle,
-              [v.senderText.name]: t.color.text.primary,
+              [v.senderBackground.name]: t.color.background.subtle.var,
+              [v.senderText.name]: t.color.text.primary.var,
             },
           },
         },
@@ -81,8 +81,8 @@ const chatMessageBubbleRecipe = styles.component(
           ghost: {
             root: {
               backgroundColor: 'transparent',
-              color: t.color.text.primary,
-              padding: `${t.space[1]} 0`,
+              color: t.color.text.primary.var,
+              padding: `${t.space[1].var} 0`,
             },
           },
         },
@@ -90,22 +90,22 @@ const chatMessageBubbleRecipe = styles.component(
           none: { root: {} },
           first: {
             root: {
-              borderBottomLeftRadius: t.radius.sm,
-              borderBottomRightRadius: t.radius.sm,
+              borderBottomLeftRadius: t.radius.sm.var,
+              borderBottomRightRadius: t.radius.sm.var,
             },
           },
           middle: {
             root: {
-              borderTopLeftRadius: t.radius.sm,
-              borderTopRightRadius: t.radius.sm,
-              borderBottomLeftRadius: t.radius.sm,
-              borderBottomRightRadius: t.radius.sm,
+              borderTopLeftRadius: t.radius.sm.var,
+              borderTopRightRadius: t.radius.sm.var,
+              borderBottomLeftRadius: t.radius.sm.var,
+              borderBottomRightRadius: t.radius.sm.var,
             },
           },
           last: {
             root: {
-              borderTopLeftRadius: t.radius.sm,
-              borderTopRightRadius: t.radius.sm,
+              borderTopLeftRadius: t.radius.sm.var,
+              borderTopRightRadius: t.radius.sm.var,
             },
           },
         },

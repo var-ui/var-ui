@@ -1,17 +1,17 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
-export const switchStyles = styles.component(
+export const switchStyles = typestyles.styles.component(
   'switch',
   (c) => {
     const v = c.vars({
       trackBackground: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       thumbBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -21,18 +21,18 @@ export const switchStyles = styles.component(
       root: {
         display: 'inline-flex',
         alignItems: 'center',
-        gap: t.space[2],
+        gap: t.space[2].var,
         cursor: 'pointer',
       },
       track: {
         position: 'relative',
         width: '40px',
         height: '24px',
-        borderRadius: t.radius.full,
+        borderRadius: t.radius.full.var,
         backgroundColor: v.trackBackground.var,
         transition: 'background-color 140ms ease',
         '&[data-selected]': {
-          [v.trackBackground.name]: t.color.accent.default,
+          [v.trackBackground.name]: t.color.accent.default.var,
         },
       },
       thumb: {
@@ -41,7 +41,7 @@ export const switchStyles = styles.component(
         left: '3px',
         width: '18px',
         height: '18px',
-        borderRadius: t.radius.full,
+        borderRadius: t.radius.full.var,
         backgroundColor: v.thumbBackground.var,
         transition: 'transform 140ms ease',
         '&[data-selected]': {
@@ -49,7 +49,7 @@ export const switchStyles = styles.component(
         },
       },
       label: {
-        fontSize: t.fontSize.md,
+        fontSize: t.fontSize.md.var,
       },
     };
   },

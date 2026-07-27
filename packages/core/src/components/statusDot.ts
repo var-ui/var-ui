@@ -1,5 +1,5 @@
 import { keyframes } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { semanticTone, type SemanticToneKey } from './semanticTone';
 
@@ -20,7 +20,7 @@ function toneColor(key: SemanticToneKey) {
  * <span className={statusDot({ tone: 'success', pulse: 'true' })} />
  * ```
  */
-export const statusDot = styles.component(
+export const statusDot = typestyles.styles.component(
   'status-dot',
   (c) => {
     const v = c.vars({
@@ -33,7 +33,7 @@ export const statusDot = styles.component(
         height: v.size.var,
         borderRadius: '50%',
         backgroundColor: 'currentColor',
-        color: t.color.text.secondary,
+        color: t.color.text.secondary.var,
         flexShrink: 0,
       },
       variants: {

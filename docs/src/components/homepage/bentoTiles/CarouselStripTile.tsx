@@ -15,7 +15,10 @@ export function CarouselStripTile({ className }: CarouselStripTileProps) {
         {SLIDES.map((slide) => (
           <Card key={slide} title={slide}>
             <VStack gap="xs">
-              <AspectRatio ratio={16 / 9} style={{ background: t.color.background.subtle }} />
+              <AspectRatio
+                ratio={16 / 9}
+                style={{ background: String(t.color.background.subtle) }}
+              />
               <Text size="sm" tone="secondary">
                 Scroll-snap slide.
               </Text>

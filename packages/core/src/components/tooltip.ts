@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -9,22 +9,22 @@ import { designTokens as t } from '../tokens';
  * <div className={tip.root}>More info</div>
  * ```
  */
-export const tooltip = styles.component(
+export const tooltip = typestyles.styles.component(
   'tooltip',
   (c) => {
     const v = c.vars({
-      background: { value: `${t.color.text.primary}`, syntax: '<color>', inherits: false },
-      foreground: { value: `${t.color.background.surface}`, syntax: '<color>', inherits: false },
+      background: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      foreground: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
     });
     return {
       slots: ['root'],
       root: {
         backgroundColor: v.background.var,
         color: v.foreground.var,
-        fontSize: t.fontSize.sm,
-        padding: `${t.space[1]} ${t.space[2]}`,
-        borderRadius: t.radius.sm,
-        boxShadow: t.shadow.sm,
+        fontSize: t.fontSize.sm.var,
+        padding: `${t.space[1].var} ${t.space[2].var}`,
+        borderRadius: t.radius.sm.var,
+        boxShadow: t.shadow.sm.var,
         maxWidth: '16rem',
         lineHeight: 1.4,
       },

@@ -1,68 +1,68 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { fieldChrome } from './field';
 
-export const tokenizer = styles.component(
+export const tokenizer = typestyles.styles.component(
   'tokenizer',
   (c) => {
     const v = c.vars({
       labelColor: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       descriptionColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
       errorColor: {
-        value: `${t.color.danger.default}`,
+        value: t.color.danger.default.var,
         syntax: '<color>',
         inherits: false,
       },
       groupBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       groupBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       inputForeground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       popoverBackground: {
-        value: `${t.color.background.surface}`,
+        value: t.color.background.surface.var,
         syntax: '<color>',
         inherits: false,
       },
       popoverBorder: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       itemFocusedBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       tokenBackground: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       tokenForeground: {
-        value: `${t.color.text.primary}`,
+        value: t.color.text.primary.var,
         syntax: '<color>',
         inherits: false,
       },
       tokenRemoveHoverBackground: {
-        value: `${t.color.background.elevated}`,
+        value: t.color.background.elevated.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -98,15 +98,15 @@ export const tokenizer = styles.component(
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: 'center',
-        gap: t.space[1],
+        gap: t.space[1].var,
         border: `1px solid ${v.groupBorder.var}`,
-        borderRadius: t.radius.md,
-        padding: t.space[2],
+        borderRadius: t.radius.md.var,
+        padding: t.space[2].var,
         backgroundColor: v.groupBackground.var,
         '&[data-focus-within]': {
-          outline: `2px solid ${t.color.border.focus}`,
+          outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '1px',
-          [v.groupBorder.name]: t.color.border.focus,
+          [v.groupBorder.name]: t.color.border.focus.var,
         },
         '&[data-disabled]': {
           opacity: 0.6,
@@ -119,12 +119,12 @@ export const tokenizer = styles.component(
       token: {
         display: 'inline-flex',
         alignItems: 'center',
-        gap: t.space[1],
-        padding: `${t.space[1]} ${t.space[2]}`,
-        borderRadius: t.radius.full,
+        gap: t.space[1].var,
+        padding: `${t.space[1].var} ${t.space[2].var}`,
+        borderRadius: t.radius.full.var,
         backgroundColor: v.tokenBackground.var,
         color: v.tokenForeground.var,
-        fontSize: t.fontSize.sm,
+        fontSize: t.fontSize.sm.var,
       },
       tokenLabel: {},
       tokenRemoveButton: {
@@ -144,20 +144,20 @@ export const tokenizer = styles.component(
         outline: 'none',
         flex: 1,
         minWidth: '4rem',
-        fontSize: t.fontSize.md,
+        fontSize: t.fontSize.md.var,
         color: v.inputForeground.var,
       },
       popover: {
         border: `1px solid ${v.popoverBorder.var}`,
-        borderRadius: t.radius.md,
+        borderRadius: t.radius.md.var,
         backgroundColor: v.popoverBackground.var,
-        boxShadow: t.shadow.md,
-        padding: t.space[1],
+        boxShadow: t.shadow.md.var,
+        padding: t.space[1].var,
       },
       item: {
-        fontSize: t.fontSize.md,
-        padding: `${t.space[2]} ${t.space[3]}`,
-        borderRadius: t.radius.sm,
+        fontSize: t.fontSize.md.var,
+        padding: `${t.space[2].var} ${t.space[3].var}`,
+        borderRadius: t.radius.sm.var,
         cursor: 'pointer',
         '&[data-focused]': {
           backgroundColor: v.itemFocusedBackground.var,

@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../../runtime';
+import { typestyles } from '../../runtime';
 import { designTokens as t } from '../../tokens';
 
 type ChatComposerSlots = readonly ['root', 'inputRow', 'input', 'actions'];
@@ -26,12 +26,12 @@ type ChatComposerVariants = {
 // `slots` at runtime); assert the slot signature until typestyles'
 // ComponentConfig forbids `slots` the way FlatComponentConfig does. See
 // packages/core/src/components/avatar.ts.
-const chatComposerRecipe = styles.component(
+const chatComposerRecipe = typestyles.styles.component(
   'chat-composer',
   (c) => {
     const v = c.vars({
-      border: { value: t.color.border.default, syntax: '<color>', inherits: false },
-      background: { value: t.color.background.surface, syntax: '<color>', inherits: false },
+      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
+      background: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
     });
     return {
       slots: ['root', 'inputRow', 'input', 'actions'],
@@ -39,10 +39,10 @@ const chatComposerRecipe = styles.component(
         root: {
           display: 'flex',
           alignItems: 'flex-end',
-          gap: t.space[2],
-          padding: t.space[2],
+          gap: t.space[2].var,
+          padding: t.space[2].var,
           border: `1px solid ${v.border.var}`,
-          borderRadius: t.radius.lg,
+          borderRadius: t.radius.lg.var,
           backgroundColor: v.background.var,
         },
         inputRow: {
@@ -58,16 +58,16 @@ const chatComposerRecipe = styles.component(
           outline: 'none',
           background: 'transparent',
           fontFamily: 'inherit',
-          fontSize: t.fontSize.md,
+          fontSize: t.fontSize.md.var,
           lineHeight: '22px',
-          color: t.color.text.primary,
-          padding: t.space[1],
-          '&::placeholder': { color: t.color.text.secondary },
+          color: t.color.text.primary.var,
+          padding: t.space[1].var,
+          '&::placeholder': { color: t.color.text.secondary.var },
         },
         actions: {
           display: 'flex',
           alignItems: 'center',
-          gap: t.space[1],
+          gap: t.space[1].var,
           flexShrink: 0,
         },
       },

@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { dateFieldChrome } from './field';
 
@@ -17,22 +17,26 @@ import { dateFieldChrome } from './field';
  * </AriaTimeField>
  * ```
  */
-export const timeInput = styles.component(
+export const timeInput = typestyles.styles.component(
   'timeInput',
   (c) => {
     const v = c.vars({
-      labelColor: { value: `${t.color.text.primary}`, syntax: '<color>', inherits: false },
-      descriptionColor: { value: `${t.color.text.secondary}`, syntax: '<color>', inherits: false },
-      errorColor: { value: `${t.color.danger.default}`, syntax: '<color>', inherits: false },
-      groupBackground: {
-        value: `${t.color.background.surface}`,
+      labelColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      descriptionColor: {
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
-      groupBorder: { value: `${t.color.border.default}`, syntax: '<color>', inherits: false },
-      segmentColor: { value: `${t.color.text.primary}`, syntax: '<color>', inherits: false },
+      errorColor: { value: t.color.danger.default.var, syntax: '<color>', inherits: false },
+      groupBackground: {
+        value: t.color.background.surface.var,
+        syntax: '<color>',
+        inherits: false,
+      },
+      groupBorder: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
+      segmentColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
       segmentPlaceholderColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },

@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { badgeTonePaint } from './semanticTone';
 
@@ -10,22 +10,22 @@ import { badgeTonePaint } from './semanticTone';
  *
  * **Shared:** `semanticTone.ts` holds the semantic palette + subtle `color-mix` recipe (same as alert).
  */
-export const badge = styles.component(
+export const badge = typestyles.styles.component(
   'badge',
   (c) => {
     const v = c.vars({
       borderColor: {
-        value: `${t.color.border.default}`,
+        value: t.color.border.default.var,
         syntax: '<color>',
         inherits: false,
       },
       backgroundColor: {
-        value: `${t.color.background.subtle}`,
+        value: t.color.background.subtle.var,
         syntax: '<color>',
         inherits: false,
       },
       textColor: {
-        value: `${t.color.text.secondary}`,
+        value: t.color.text.secondary.var,
         syntax: '<color>',
         inherits: false,
       },
@@ -34,11 +34,11 @@ export const badge = styles.component(
       base: {
         display: 'inline-flex',
         alignItems: 'center',
-        fontSize: t.fontSize.sm,
-        fontWeight: t.fontWeight.semibold,
+        fontSize: t.fontSize.sm.var,
+        fontWeight: t.fontWeight.semibold.var,
         lineHeight: 1,
-        padding: `${t.space[1]} ${t.space[2]}`,
-        borderRadius: t.radius.full,
+        padding: `${t.space[1].var} ${t.space[2].var}`,
+        borderRadius: t.radius.full.var,
         border: `1px solid ${v.borderColor.var}`,
         backgroundColor: v.backgroundColor.var,
         color: v.textColor.var,

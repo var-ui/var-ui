@@ -13,7 +13,7 @@ export type DescriptionListItemData = {
   id: string;
   label: string;
   value: ReactNode;
-  icon?: IconName | ReactNode;
+  icon?: IconName | Exclude<ReactNode, string>;
 };
 
 export type DescriptionListProps = {
@@ -29,7 +29,7 @@ export type DescriptionListProps = {
 export type DescriptionListItemProps = {
   label: string;
   children?: ReactNode;
-  icon?: IconName | ReactNode;
+  icon?: IconName | Exclude<ReactNode, string>;
   className?: string;
 };
 
@@ -45,7 +45,9 @@ function isIconName(value: unknown): value is IconName {
   return typeof value === 'string' && (iconNameList as readonly string[]).includes(value);
 }
 
-function renderDescriptionListIcon(icon: IconName | ReactNode | undefined): ReactNode {
+function renderDescriptionListIcon(
+  icon: IconName | Exclude<ReactNode, string> | undefined,
+): ReactNode {
   if (icon == null || icon === false) return null;
   return isIconName(icon) ? <Icon name={icon} size="sm" /> : icon;
 }

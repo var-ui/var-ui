@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -9,11 +9,11 @@ import { designTokens as t } from '../tokens';
  * <div className={stack({ gap: 'lg' })}>…</div>
  * ```
  */
-export const stack = styles.component(
+export const stack = typestyles.styles.component(
   'stack',
   (c) => {
     const v = c.vars({
-      gap: { value: t.space[3], syntax: '<length>', inherits: false },
+      gap: { value: t.space[3].var, syntax: '<length>', inherits: false },
     });
     return {
       base: {
@@ -29,11 +29,11 @@ export const stack = styles.component(
         },
         gap: {
           none: { [v.gap.name]: '0px' },
-          xs: { [v.gap.name]: t.space[1] },
-          sm: { [v.gap.name]: t.space[2] },
-          md: { [v.gap.name]: t.space[3] },
-          lg: { [v.gap.name]: t.space[5] },
-          xl: { [v.gap.name]: t.space[8] },
+          xs: { [v.gap.name]: t.space[1].var },
+          sm: { [v.gap.name]: t.space[2].var },
+          md: { [v.gap.name]: t.space[3].var },
+          lg: { [v.gap.name]: t.space[5].var },
+          xl: { [v.gap.name]: t.space[8].var },
         },
         align: {
           start: { alignItems: 'flex-start' },

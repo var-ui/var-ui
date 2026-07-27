@@ -10,7 +10,7 @@ import {
   TopNavHeading,
   TopNavItem,
 } from '@var-ui/astro';
-import { defaultTheme } from '@var-ui/core';
+import { defaultThemeClassName } from '@var-ui/core';
 import DocsSearch from '../components/DocsSearch.astro';
 import DocsSidebarNav from '../components/DocsSidebarNav.astro';
 import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
@@ -41,12 +41,12 @@ function isSidebarLinkActive(link: string): boolean {
 }
 ---
 
-<html lang="en" class={defaultTheme.className} data-framework={framework}>
+<html lang="en" class={defaultThemeClassName} data-framework={framework}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
-    <ThemeScript themeClass={defaultTheme.className} />
+    <ThemeScript themeClass={defaultThemeClassName} />
     <link rel="stylesheet" href="/typestyles.css" />
   </head>
   <body class="docs-body">

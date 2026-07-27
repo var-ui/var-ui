@@ -1,0 +1,442 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`generateColors > clamps chroma for a near-gray accent 1`] = `
+{
+  "dark": {
+    "accent": {
+      "default": "oklch(72.00% 0.069 0)",
+      "hover": "oklch(80.33% 0.05 0)",
+    },
+    "background": {
+      "app": "oklch(22.00% 0.005 0)",
+      "elevated": "oklch(22.00% 0.005 0)",
+      "muted": "oklch(30.33% 0.007 0)",
+      "popover": "oklch(22.00% 0.005 0)",
+      "subtle": "oklch(30.33% 0.007 0)",
+      "surface": "oklch(22.00% 0.005 0)",
+    },
+    "border": {
+      "default": "oklch(47.00% 0.013 0)",
+      "focus": "oklch(55.33% 0.08 0)",
+      "strong": "oklch(63.67% 0.015 0)",
+    },
+    "code": {
+      "addition": "oklch(81.5% 0.2 170)",
+      "additionBackground": "oklch(18% 0.04 170)",
+      "attr": "oklch(77.2% 0.24 60)",
+      "base": "oklch(90% 0.002 264)",
+      "builtIn": "oklch(79.5% 0.22 45)",
+      "bullet": "oklch(67.5% 0.28 62)",
+      "comment": "oklch(77.5% 0.012 264)",
+      "deletion": "oklch(80.3% 0.22 27.5)",
+      "deletionBackground": "oklch(18% 0.04 30)",
+      "keyword": "oklch(79.5% 0.17 295)",
+      "name": "oklch(80.3% 0.22 27.5)",
+      "section": "oklch(79% 0.17 265)",
+      "string": "oklch(81.5% 0.2 170)",
+      "title": "oklch(82.5% 0.16 245)",
+    },
+    "danger": {
+      "default": "oklch(72.00% 0.181 27)",
+      "solid": "oklch(47.00% 0.189 27)",
+    },
+    "info": {
+      "default": "oklch(72.00% 0.189 294)",
+      "onSolid": "oklch(100% 0 0)",
+    },
+    "link": {
+      "default": "oklch(72.00% 0.069 0)",
+      "hover": "oklch(80.33% 0.05 0)",
+    },
+    "overlay": {
+      "default": "color-mix(in oklch, oklch(97.00% 0.002 0) 70%, transparent)",
+      "panel": "oklch(22.00% 0.005 0)",
+    },
+    "shadow": {
+      "offset": "color-mix(in oklch, oklch(97.00% 0.002 0) 20%, transparent)",
+    },
+    "success": {
+      "default": "oklch(72.00% 0.163 145)",
+      "solid": "oklch(47.00% 0.171 145)",
+    },
+    "text": {
+      "onAccent": "oklch(22.00% 0.005 0)",
+      "onDanger": "oklch(100% 0 0)",
+      "onInfo": "oklch(100% 0 0)",
+      "onSuccess": "oklch(100% 0 0)",
+      "onWarning": "oklch(97.00% 0.002 0)",
+      "primary": "oklch(97.00% 0.002 0)",
+      "secondary": "oklch(72.00% 0.013 0)",
+    },
+    "warning": {
+      "default": "oklch(72.00% 0.146 72)",
+      "onSolid": "oklch(97.00% 0.002 0)",
+    },
+  },
+  "light": {
+    "accent": {
+      "default": "oklch(47.00% 0.072 0)",
+      "hover": "oklch(38.67% 0.054 0)",
+    },
+    "background": {
+      "app": "oklch(97.00% 0.002 0)",
+      "elevated": "oklch(97.00% 0.002 0)",
+      "muted": "oklch(88.67% 0.005 0)",
+      "popover": "oklch(97.00% 0.002 0)",
+      "subtle": "oklch(88.67% 0.005 0)",
+      "surface": "oklch(97.00% 0.002 0)",
+    },
+    "border": {
+      "default": "oklch(72.00% 0.013 0)",
+      "focus": "oklch(63.67% 0.08 0)",
+      "strong": "oklch(55.33% 0.015 0)",
+    },
+    "code": {
+      "addition": "oklch(58.8% 0.22 176)",
+      "additionBackground": "oklch(99.3% 0.01 160)",
+      "attr": "oklch(50% 0.18 68)",
+      "base": "oklch(24.8% 0.008 264)",
+      "builtIn": "oklch(56.5% 0.22 48)",
+      "bullet": "oklch(55.5% 0.22 66)",
+      "comment": "oklch(66.4% 0.014 264)",
+      "deletion": "oklch(57.5% 0.18 29)",
+      "deletionBackground": "oklch(99.7% 0.008 25)",
+      "keyword": "oklch(54.5% 0.24 301)",
+      "name": "oklch(57.5% 0.18 29)",
+      "section": "oklch(55.2% 0.24 271)",
+      "string": "oklch(53.2% 0.18 178)",
+      "title": "oklch(58.5% 0.22 248)",
+    },
+    "danger": {
+      "default": "oklch(47.00% 0.189 27)",
+      "solid": "oklch(38.67% 0.143 27)",
+    },
+    "info": {
+      "default": "oklch(47.00% 0.198 294)",
+      "onSolid": "oklch(100% 0 0)",
+    },
+    "link": {
+      "default": "oklch(47.00% 0.072 0)",
+      "hover": "oklch(38.67% 0.054 0)",
+    },
+    "overlay": {
+      "default": "color-mix(in oklch, oklch(22.00% 0.005 0) 55%, transparent)",
+      "panel": "oklch(97.00% 0.002 0)",
+    },
+    "shadow": {
+      "offset": "color-mix(in oklch, oklch(88.67% 0.005 0) 50%, transparent)",
+    },
+    "success": {
+      "default": "oklch(47.00% 0.171 145)",
+      "solid": "oklch(38.67% 0.129 145)",
+    },
+    "text": {
+      "onAccent": "oklch(100% 0 0)",
+      "onDanger": "oklch(100% 0 0)",
+      "onInfo": "oklch(100% 0 0)",
+      "onSuccess": "oklch(100% 0 0)",
+      "onWarning": "oklch(22.00% 0.005 0)",
+      "primary": "oklch(22.00% 0.005 0)",
+      "secondary": "oklch(47.00% 0.013 0)",
+    },
+    "warning": {
+      "default": "oklch(47.00% 0.153 72)",
+      "onSolid": "oklch(22.00% 0.005 0)",
+    },
+  },
+}
+`;
+
+exports[`generateColors > returns color-shaped light and dark for the default accent 1`] = `
+{
+  "dark": {
+    "accent": {
+      "default": "oklch(72.00% 0.176 258.81008101651366)",
+      "hover": "oklch(80.33% 0.127 258.81008101651366)",
+    },
+    "background": {
+      "app": "oklch(22.00% 0.005 258.81008101651366)",
+      "elevated": "oklch(22.00% 0.005 258.81008101651366)",
+      "muted": "oklch(30.33% 0.007 258.81008101651366)",
+      "popover": "oklch(22.00% 0.005 258.81008101651366)",
+      "subtle": "oklch(30.33% 0.007 258.81008101651366)",
+      "surface": "oklch(22.00% 0.005 258.81008101651366)",
+    },
+    "border": {
+      "default": "oklch(47.00% 0.013 258.81008101651366)",
+      "focus": "oklch(55.33% 0.205 258.81008101651366)",
+      "strong": "oklch(63.67% 0.015 258.81008101651366)",
+    },
+    "code": {
+      "addition": "oklch(81.5% 0.2 170)",
+      "additionBackground": "oklch(18% 0.04 170)",
+      "attr": "oklch(77.2% 0.24 60)",
+      "base": "oklch(90% 0.002 264)",
+      "builtIn": "oklch(79.5% 0.22 45)",
+      "bullet": "oklch(67.5% 0.28 62)",
+      "comment": "oklch(77.5% 0.012 264)",
+      "deletion": "oklch(80.3% 0.22 27.5)",
+      "deletionBackground": "oklch(18% 0.04 30)",
+      "keyword": "oklch(79.5% 0.17 295)",
+      "name": "oklch(80.3% 0.22 27.5)",
+      "section": "oklch(79% 0.17 265)",
+      "string": "oklch(81.5% 0.2 170)",
+      "title": "oklch(82.5% 0.16 245)",
+    },
+    "danger": {
+      "default": "oklch(72.00% 0.181 27)",
+      "solid": "oklch(47.00% 0.189 27)",
+    },
+    "info": {
+      "default": "oklch(72.00% 0.189 294)",
+      "onSolid": "oklch(100% 0 0)",
+    },
+    "link": {
+      "default": "oklch(72.00% 0.176 258.81008101651366)",
+      "hover": "oklch(80.33% 0.127 258.81008101651366)",
+    },
+    "overlay": {
+      "default": "color-mix(in oklch, oklch(97.00% 0.002 258.81008101651366) 70%, transparent)",
+      "panel": "oklch(22.00% 0.005 258.81008101651366)",
+    },
+    "shadow": {
+      "offset": "color-mix(in oklch, oklch(97.00% 0.002 258.81008101651366) 20%, transparent)",
+    },
+    "success": {
+      "default": "oklch(72.00% 0.163 145)",
+      "solid": "oklch(47.00% 0.171 145)",
+    },
+    "text": {
+      "onAccent": "oklch(22.00% 0.005 258.81008101651366)",
+      "onDanger": "oklch(100% 0 0)",
+      "onInfo": "oklch(100% 0 0)",
+      "onSuccess": "oklch(100% 0 0)",
+      "onWarning": "oklch(97.00% 0.002 258.81008101651366)",
+      "primary": "oklch(97.00% 0.002 258.81008101651366)",
+      "secondary": "oklch(72.00% 0.013 258.81008101651366)",
+    },
+    "warning": {
+      "default": "oklch(72.00% 0.146 72)",
+      "onSolid": "oklch(97.00% 0.002 258.81008101651366)",
+    },
+  },
+  "light": {
+    "accent": {
+      "default": "oklch(47.00% 0.184 258.81008101651366)",
+      "hover": "oklch(38.67% 0.139 258.81008101651366)",
+    },
+    "background": {
+      "app": "oklch(97.00% 0.002 258.81008101651366)",
+      "elevated": "oklch(97.00% 0.002 258.81008101651366)",
+      "muted": "oklch(88.67% 0.005 258.81008101651366)",
+      "popover": "oklch(97.00% 0.002 258.81008101651366)",
+      "subtle": "oklch(88.67% 0.005 258.81008101651366)",
+      "surface": "oklch(97.00% 0.002 258.81008101651366)",
+    },
+    "border": {
+      "default": "oklch(72.00% 0.013 258.81008101651366)",
+      "focus": "oklch(63.67% 0.205 258.81008101651366)",
+      "strong": "oklch(55.33% 0.015 258.81008101651366)",
+    },
+    "code": {
+      "addition": "oklch(58.8% 0.22 176)",
+      "additionBackground": "oklch(99.3% 0.01 160)",
+      "attr": "oklch(50% 0.18 68)",
+      "base": "oklch(24.8% 0.008 264)",
+      "builtIn": "oklch(56.5% 0.22 48)",
+      "bullet": "oklch(55.5% 0.22 66)",
+      "comment": "oklch(66.4% 0.014 264)",
+      "deletion": "oklch(57.5% 0.18 29)",
+      "deletionBackground": "oklch(99.7% 0.008 25)",
+      "keyword": "oklch(54.5% 0.24 301)",
+      "name": "oklch(57.5% 0.18 29)",
+      "section": "oklch(55.2% 0.24 271)",
+      "string": "oklch(53.2% 0.18 178)",
+      "title": "oklch(58.5% 0.22 248)",
+    },
+    "danger": {
+      "default": "oklch(47.00% 0.189 27)",
+      "solid": "oklch(38.67% 0.143 27)",
+    },
+    "info": {
+      "default": "oklch(47.00% 0.198 294)",
+      "onSolid": "oklch(100% 0 0)",
+    },
+    "link": {
+      "default": "oklch(47.00% 0.184 258.81008101651366)",
+      "hover": "oklch(38.67% 0.139 258.81008101651366)",
+    },
+    "overlay": {
+      "default": "color-mix(in oklch, oklch(22.00% 0.005 258.81008101651366) 55%, transparent)",
+      "panel": "oklch(97.00% 0.002 258.81008101651366)",
+    },
+    "shadow": {
+      "offset": "color-mix(in oklch, oklch(88.67% 0.005 258.81008101651366) 50%, transparent)",
+    },
+    "success": {
+      "default": "oklch(47.00% 0.171 145)",
+      "solid": "oklch(38.67% 0.129 145)",
+    },
+    "text": {
+      "onAccent": "oklch(100% 0 0)",
+      "onDanger": "oklch(100% 0 0)",
+      "onInfo": "oklch(100% 0 0)",
+      "onSuccess": "oklch(100% 0 0)",
+      "onWarning": "oklch(22.00% 0.005 258.81008101651366)",
+      "primary": "oklch(22.00% 0.005 258.81008101651366)",
+      "secondary": "oklch(47.00% 0.013 258.81008101651366)",
+    },
+    "warning": {
+      "default": "oklch(47.00% 0.153 72)",
+      "onSolid": "oklch(22.00% 0.005 258.81008101651366)",
+    },
+  },
+}
+`;
+
+exports[`generateColors > returns themes for a saturated pink accent 1`] = `
+{
+  "dark": {
+    "accent": {
+      "default": "oklch(72.00% 0.225 356.9447697294126)",
+      "hover": "oklch(80.33% 0.162 356.9447697294126)",
+    },
+    "background": {
+      "app": "oklch(22.00% 0.005 356.9447697294126)",
+      "elevated": "oklch(22.00% 0.005 356.9447697294126)",
+      "muted": "oklch(30.33% 0.007 356.9447697294126)",
+      "popover": "oklch(22.00% 0.005 356.9447697294126)",
+      "subtle": "oklch(30.33% 0.007 356.9447697294126)",
+      "surface": "oklch(22.00% 0.005 356.9447697294126)",
+    },
+    "border": {
+      "default": "oklch(47.00% 0.013 356.9447697294126)",
+      "focus": "oklch(55.33% 0.261 356.9447697294126)",
+      "strong": "oklch(63.67% 0.015 356.9447697294126)",
+    },
+    "code": {
+      "addition": "oklch(81.5% 0.2 170)",
+      "additionBackground": "oklch(18% 0.04 170)",
+      "attr": "oklch(77.2% 0.24 60)",
+      "base": "oklch(90% 0.002 264)",
+      "builtIn": "oklch(79.5% 0.22 45)",
+      "bullet": "oklch(67.5% 0.28 62)",
+      "comment": "oklch(77.5% 0.012 264)",
+      "deletion": "oklch(80.3% 0.22 27.5)",
+      "deletionBackground": "oklch(18% 0.04 30)",
+      "keyword": "oklch(79.5% 0.17 295)",
+      "name": "oklch(80.3% 0.22 27.5)",
+      "section": "oklch(79% 0.17 265)",
+      "string": "oklch(81.5% 0.2 170)",
+      "title": "oklch(82.5% 0.16 245)",
+    },
+    "danger": {
+      "default": "oklch(72.00% 0.181 27)",
+      "solid": "oklch(47.00% 0.189 27)",
+    },
+    "info": {
+      "default": "oklch(72.00% 0.189 294)",
+      "onSolid": "oklch(100% 0 0)",
+    },
+    "link": {
+      "default": "oklch(72.00% 0.225 356.9447697294126)",
+      "hover": "oklch(80.33% 0.162 356.9447697294126)",
+    },
+    "overlay": {
+      "default": "color-mix(in oklch, oklch(97.00% 0.002 356.9447697294126) 70%, transparent)",
+      "panel": "oklch(22.00% 0.005 356.9447697294126)",
+    },
+    "shadow": {
+      "offset": "color-mix(in oklch, oklch(97.00% 0.002 356.9447697294126) 20%, transparent)",
+    },
+    "success": {
+      "default": "oklch(72.00% 0.163 145)",
+      "solid": "oklch(47.00% 0.171 145)",
+    },
+    "text": {
+      "onAccent": "oklch(22.00% 0.005 356.9447697294126)",
+      "onDanger": "oklch(100% 0 0)",
+      "onInfo": "oklch(100% 0 0)",
+      "onSuccess": "oklch(100% 0 0)",
+      "onWarning": "oklch(97.00% 0.002 356.9447697294126)",
+      "primary": "oklch(97.00% 0.002 356.9447697294126)",
+      "secondary": "oklch(72.00% 0.013 356.9447697294126)",
+    },
+    "warning": {
+      "default": "oklch(72.00% 0.146 72)",
+      "onSolid": "oklch(97.00% 0.002 356.9447697294126)",
+    },
+  },
+  "light": {
+    "accent": {
+      "default": "oklch(47.00% 0.235 356.9447697294126)",
+      "hover": "oklch(38.67% 0.178 356.9447697294126)",
+    },
+    "background": {
+      "app": "oklch(97.00% 0.002 356.9447697294126)",
+      "elevated": "oklch(97.00% 0.002 356.9447697294126)",
+      "muted": "oklch(88.67% 0.005 356.9447697294126)",
+      "popover": "oklch(97.00% 0.002 356.9447697294126)",
+      "subtle": "oklch(88.67% 0.005 356.9447697294126)",
+      "surface": "oklch(97.00% 0.002 356.9447697294126)",
+    },
+    "border": {
+      "default": "oklch(72.00% 0.013 356.9447697294126)",
+      "focus": "oklch(63.67% 0.261 356.9447697294126)",
+      "strong": "oklch(55.33% 0.015 356.9447697294126)",
+    },
+    "code": {
+      "addition": "oklch(58.8% 0.22 176)",
+      "additionBackground": "oklch(99.3% 0.01 160)",
+      "attr": "oklch(50% 0.18 68)",
+      "base": "oklch(24.8% 0.008 264)",
+      "builtIn": "oklch(56.5% 0.22 48)",
+      "bullet": "oklch(55.5% 0.22 66)",
+      "comment": "oklch(66.4% 0.014 264)",
+      "deletion": "oklch(57.5% 0.18 29)",
+      "deletionBackground": "oklch(99.7% 0.008 25)",
+      "keyword": "oklch(54.5% 0.24 301)",
+      "name": "oklch(57.5% 0.18 29)",
+      "section": "oklch(55.2% 0.24 271)",
+      "string": "oklch(53.2% 0.18 178)",
+      "title": "oklch(58.5% 0.22 248)",
+    },
+    "danger": {
+      "default": "oklch(47.00% 0.189 27)",
+      "solid": "oklch(38.67% 0.143 27)",
+    },
+    "info": {
+      "default": "oklch(47.00% 0.198 294)",
+      "onSolid": "oklch(100% 0 0)",
+    },
+    "link": {
+      "default": "oklch(47.00% 0.235 356.9447697294126)",
+      "hover": "oklch(38.67% 0.178 356.9447697294126)",
+    },
+    "overlay": {
+      "default": "color-mix(in oklch, oklch(22.00% 0.005 356.9447697294126) 55%, transparent)",
+      "panel": "oklch(97.00% 0.002 356.9447697294126)",
+    },
+    "shadow": {
+      "offset": "color-mix(in oklch, oklch(88.67% 0.005 356.9447697294126) 50%, transparent)",
+    },
+    "success": {
+      "default": "oklch(47.00% 0.171 145)",
+      "solid": "oklch(38.67% 0.129 145)",
+    },
+    "text": {
+      "onAccent": "oklch(100% 0 0)",
+      "onDanger": "oklch(100% 0 0)",
+      "onInfo": "oklch(100% 0 0)",
+      "onSuccess": "oklch(100% 0 0)",
+      "onWarning": "oklch(22.00% 0.005 356.9447697294126)",
+      "primary": "oklch(22.00% 0.005 356.9447697294126)",
+      "secondary": "oklch(47.00% 0.013 356.9447697294126)",
+    },
+    "warning": {
+      "default": "oklch(47.00% 0.153 72)",
+      "onSolid": "oklch(22.00% 0.005 356.9447697294126)",
+    },
+  },
+}
+`;

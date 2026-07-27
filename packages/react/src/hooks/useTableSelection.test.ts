@@ -75,7 +75,7 @@ describe('useTableSelection', () => {
   });
 
   it('calls onSelectionChange whenever selection changes', () => {
-    const onSelectionChange = vi.fn();
+    const onSelectionChange = vi.fn<(keys: Set<string>) => void>();
     const { result } = renderHook(() =>
       useTableSelection({ data, getRowId, mode: 'multiple', onSelectionChange }),
     );
@@ -84,7 +84,7 @@ describe('useTableSelection', () => {
   });
 
   it('is controlled when selectedKeys is provided — internal state does not change', () => {
-    const onSelectionChange = vi.fn();
+    const onSelectionChange = vi.fn<(keys: Set<string>) => void>();
     const { result, rerender } = renderHook(
       ({ selectedKeys }: { selectedKeys: Iterable<string> }) =>
         useTableSelection({ data, getRowId, mode: 'multiple', selectedKeys, onSelectionChange }),
@@ -102,7 +102,7 @@ describe('useTableSelection', () => {
   });
 
   it('onSelectionChange exposed on the result can be called directly', () => {
-    const onSelectionChange = vi.fn();
+    const onSelectionChange = vi.fn<(keys: Set<string>) => void>();
     const { result } = renderHook(() =>
       useTableSelection({ data, getRowId, mode: 'multiple', onSelectionChange }),
     );

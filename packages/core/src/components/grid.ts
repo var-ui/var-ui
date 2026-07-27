@@ -1,4 +1,4 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -10,11 +10,11 @@ import { designTokens as t } from '../tokens';
  * <div className={grid({ columns: 'auto', gap: 'lg' })}>{cards}</div>
  * ```
  */
-export const grid = styles.component(
+export const grid = typestyles.styles.component(
   'grid',
   (c) => {
     const v = c.vars({
-      gap: { value: t.space[4], syntax: '<length>', inherits: false },
+      gap: { value: t.space[4].var, syntax: '<length>', inherits: false },
       minColumnWidth: { value: '240px', syntax: '<length>', inherits: false },
     });
     return {
@@ -33,11 +33,11 @@ export const grid = styles.component(
         },
         gap: {
           none: { [v.gap.name]: '0px' },
-          xs: { [v.gap.name]: t.space[1] },
-          sm: { [v.gap.name]: t.space[2] },
-          md: { [v.gap.name]: t.space[4] },
-          lg: { [v.gap.name]: t.space[5] },
-          xl: { [v.gap.name]: t.space[8] },
+          xs: { [v.gap.name]: t.space[1].var },
+          sm: { [v.gap.name]: t.space[2].var },
+          md: { [v.gap.name]: t.space[4].var },
+          lg: { [v.gap.name]: t.space[5].var },
+          xl: { [v.gap.name]: t.space[8].var },
         },
       },
       defaultVariants: { columns: 'auto', gap: 'md' },

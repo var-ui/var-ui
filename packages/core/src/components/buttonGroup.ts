@@ -1,11 +1,11 @@
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 /**
  * Visually groups adjacent buttons with shared borders and connected corners.
  * Apply `root` to a wrapper; direct child buttons pick up grouped styling.
  */
-export const buttonGroup = styles.component(
+export const buttonGroup = typestyles.styles.component(
   'button-group',
   () => ({
     slots: ['root'],
@@ -20,12 +20,12 @@ export const buttonGroup = styles.component(
         marginInlineStart: '-1px',
       },
       '& > *:first-child': {
-        borderStartStartRadius: t.radius.md,
-        borderEndStartRadius: t.radius.md,
+        borderStartStartRadius: t.radius.md.var,
+        borderEndStartRadius: t.radius.md.var,
       },
       '& > *:last-child': {
-        borderStartEndRadius: t.radius.md,
-        borderEndEndRadius: t.radius.md,
+        borderStartEndRadius: t.radius.md.var,
+        borderEndEndRadius: t.radius.md.var,
       },
       '& > *:hover, & > *:focus-visible': {
         zIndex: 1,

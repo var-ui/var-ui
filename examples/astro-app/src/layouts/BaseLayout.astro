@@ -1,17 +1,17 @@
 ---
 import { ThemeScript, ColorModeToggle } from '@var-ui/astro';
-import { defaultTheme } from '@var-ui/core';
+import { defaultThemeClassName } from '@var-ui/core';
 
 const { title = 'var-ui Astro' } = Astro.props;
 ---
 
-<html lang="en" class={defaultTheme.className}>
+<html lang="en" class={defaultThemeClassName}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
     <link rel="stylesheet" href="/typestyles.css" />
-    <ThemeScript themeClass={defaultTheme.className} />
+    <ThemeScript themeClass={defaultThemeClassName} />
   </head>
   <body>
     <header style="padding: 1rem 1.5rem; display: flex; justify-content: flex-end;">

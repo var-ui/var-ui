@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../../runtime';
+import { typestyles } from '../../runtime';
 import { designTokens as t } from '../../tokens';
 
 type ChatMessageListSlots = readonly ['root', 'inner', 'emptyState'];
@@ -23,7 +23,7 @@ type ChatMessageListVariants = {
 // runtime); assert the slot signature until typestyles' ComponentConfig
 // forbids `slots` the way FlatComponentConfig does. See
 // packages/core/src/components/avatar.ts.
-const chatMessageListRecipe = styles.component(
+const chatMessageListRecipe = typestyles.styles.component(
   'chat-message-list',
   () => ({
     slots: ['root', 'inner', 'emptyState'],
@@ -50,9 +50,9 @@ const chatMessageListRecipe = styles.component(
     },
     variants: {
       density: {
-        compact: { inner: { gap: t.space[2], padding: t.space[2] } },
-        balanced: { inner: { gap: t.space[4], padding: t.space[4] } },
-        spacious: { inner: { gap: t.space[6], padding: t.space[6] } },
+        compact: { inner: { gap: t.space[2].var, padding: t.space[2].var } },
+        balanced: { inner: { gap: t.space[4].var, padding: t.space[4].var } },
+        spacious: { inner: { gap: t.space[6].var, padding: t.space[6].var } },
       },
     },
     defaultVariants: { density: 'balanced' },

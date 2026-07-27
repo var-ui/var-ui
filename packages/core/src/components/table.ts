@@ -1,5 +1,5 @@
 import type { SlotComponentFunction, SlotStyles } from 'typestyles';
-import { styles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 type TableSlots = readonly [
@@ -43,19 +43,19 @@ type TableVariants = {
  * </div>
  * ```
  */
-const tableRecipe = styles.component(
+const tableRecipe = typestyles.styles.component(
   'table',
   (c) => {
     const v = c.vars({
-      headerBg: { value: `${t.color.background.surface}`, syntax: '<color>', inherits: false },
-      headerColor: { value: `${t.color.text.secondary}`, syntax: '<color>', inherits: false },
-      bodyColor: { value: `${t.color.text.primary}`, syntax: '<color>', inherits: false },
-      captionColor: { value: `${t.color.text.secondary}`, syntax: '<color>', inherits: false },
-      borderColor: { value: `${t.color.border.default}`, syntax: '<color>', inherits: false },
-      stripeBg: { value: `${t.color.background.subtle}`, syntax: '<color>', inherits: false },
-      hoverBg: { value: `${t.color.background.elevated}`, syntax: '<color>', inherits: false },
-      cellPaddingY: { value: t.space[2], syntax: '<length>', inherits: false },
-      cellPaddingX: { value: t.space[3], syntax: '<length>', inherits: false },
+      headerBg: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
+      headerColor: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
+      bodyColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      captionColor: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
+      borderColor: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
+      stripeBg: { value: t.color.background.subtle.var, syntax: '<color>', inherits: false },
+      hoverBg: { value: t.color.background.elevated.var, syntax: '<color>', inherits: false },
+      cellPaddingY: { value: t.space[2].var, syntax: '<length>', inherits: false },
+      cellPaddingX: { value: t.space[3].var, syntax: '<length>', inherits: false },
     });
 
     const rowDivider = {
@@ -90,22 +90,22 @@ const tableRecipe = styles.component(
         table: {
           width: '100%',
           borderCollapse: 'collapse',
-          fontSize: t.fontSize.sm,
+          fontSize: t.fontSize.sm.var,
           color: v.bodyColor.var,
         },
         caption: {
           captionSide: 'top',
           textAlign: 'left',
-          padding: `${t.space[2]} ${v.cellPaddingX.var}`,
-          fontSize: t.fontSize.sm,
-          fontWeight: t.fontWeight.medium,
+          padding: `${t.space[2].var} ${v.cellPaddingX.var}`,
+          fontSize: t.fontSize.sm.var,
+          fontWeight: t.fontWeight.medium.var,
           color: v.captionColor.var,
         },
         header: {},
         headerCell: {
           textAlign: 'left',
-          fontWeight: t.fontWeight.semibold,
-          fontSize: t.fontSize.sm,
+          fontWeight: t.fontWeight.semibold.var,
+          fontSize: t.fontSize.sm.var,
           color: v.headerColor.var,
           backgroundColor: v.headerBg.var,
           padding: `${v.cellPaddingY.var} ${v.cellPaddingX.var}`,
@@ -121,11 +121,11 @@ const tableRecipe = styles.component(
           '&[data-align="end"]': { textAlign: 'right' },
         },
         footer: {
-          fontWeight: t.fontWeight.medium,
+          fontWeight: t.fontWeight.medium.var,
           color: v.headerColor.var,
         },
         empty: {
-          padding: t.space[8],
+          padding: t.space[8].var,
           textAlign: 'center',
           color: v.captionColor.var,
         },
@@ -133,13 +133,19 @@ const tableRecipe = styles.component(
       variants: {
         density: {
           compact: {
-            headerCell: { [v.cellPaddingY.name]: t.space[1], [v.cellPaddingX.name]: t.space[2] },
-            cell: { [v.cellPaddingY.name]: t.space[1], [v.cellPaddingX.name]: t.space[2] },
+            headerCell: {
+              [v.cellPaddingY.name]: t.space[1].var,
+              [v.cellPaddingX.name]: t.space[2].var,
+            },
+            cell: { [v.cellPaddingY.name]: t.space[1].var, [v.cellPaddingX.name]: t.space[2].var },
           },
           balanced: {},
           spacious: {
-            headerCell: { [v.cellPaddingY.name]: t.space[3], [v.cellPaddingX.name]: t.space[4] },
-            cell: { [v.cellPaddingY.name]: t.space[3], [v.cellPaddingX.name]: t.space[4] },
+            headerCell: {
+              [v.cellPaddingY.name]: t.space[3].var,
+              [v.cellPaddingX.name]: t.space[4].var,
+            },
+            cell: { [v.cellPaddingY.name]: t.space[3].var, [v.cellPaddingX.name]: t.space[4].var },
           },
         },
         dividers: {

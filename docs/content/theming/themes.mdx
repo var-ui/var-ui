@@ -11,6 +11,12 @@ optional typed component overrides (`components`).
 
 ## Authoring
 
+Built-in default tokens ship from `@var-ui/core` (`preset`, `defaultThemeClassName`).
+The default theme surface is registered when you import from the package — use
+`createDesignTheme({ name: 'default' })` or another name for custom themes. Additional palette
+and style themes (forest, rose, AI Glow, Windows 95, …) live as copyable examples in the
+docs repo under `docs/src/themes/`.
+
 ```ts
 import { createDesignTheme } from '@var-ui/core';
 
@@ -43,9 +49,7 @@ export const forest = createDesignTheme({
 });
 ```
 
-Built-in themes (`defaultTheme`, `forestTheme`, `roseTheme`, …) ship from
-`@var-ui/core`. For custom themes, pass partial `light` / `dark` overrides —
-`createDesignTheme` deep-merges them onto the default palette.
+For a full working forest theme, see `docs/src/themes/forest.ts` in the var-ui repo.
 
 ## Applying a theme
 
@@ -53,7 +57,7 @@ Wrap the app in `DesignSystemProvider` and pass the theme object:
 
 ```tsx
 import { DesignSystemProvider } from '@var-ui/react';
-import { forestTheme } from '@var-ui/core';
+import { forestTheme } from './themes/forest';
 
 export function App() {
   return (
@@ -68,7 +72,7 @@ export function App() {
 - `customThemeClassName` — string escape hatch if you only have the class name.
 - When `customTheme` / `customThemeClassName` is set, it **replaces** the built-in
   default surface class on the provider wrapper (it does not stack both).
-- `defaultTheme` / controlled `theme` — light / dark / system color mode via
+- `defaultThemeClassName` / controlled `theme` — light / dark / system color mode via
   `data-mode` (independent of which palette theme class is applied).
 
 For SPA / full-page apps, pass `applyToDocument` so the theme class and `data-mode`

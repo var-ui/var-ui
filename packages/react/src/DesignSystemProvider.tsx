@@ -8,7 +8,7 @@ import {
   useIsomorphicLayoutEffect,
   useResolvedColorMode,
 } from './color-mode';
-import { defaultTheme as baseTheme } from './tokens';
+import { defaultThemeClassName } from '@var-ui/core';
 
 export type DesignSystemProviderProps = {
   children: ReactNode;
@@ -96,7 +96,7 @@ export function DesignSystemProvider({
     [colorMode, resolvedColorMode, colorModeReady],
   );
 
-  const themeClassName = customTheme?.className ?? customThemeClassName ?? baseTheme.className;
+  const themeClassName = customTheme?.className ?? customThemeClassName ?? defaultThemeClassName;
 
   useIsomorphicLayoutEffect(() => {
     if (!applyToDocument || typeof document === 'undefined') return;
@@ -139,7 +139,14 @@ export function DesignSystemProvider({
 
   return (
     <ColorModeContext.Provider value={value}>
-      <div className={themeClassName} data-mode={colorMode} style={{ display: 'contents' }}>
+      <div
+        className={themeClassName}
+        data-mode={colorMode}
+        style={{
+          display: 'contents',
+          colorScheme: colorMode === 'system' ? 'light dark' : resolvedColorMode,
+        }}
+      >
         {children}
       </div>
     </ColorModeContext.Provider>
