@@ -1,3 +1,4 @@
+import type { FontFaceDefinition } from '../fonts/types';
 import type { basePaletteTokenValues } from './palette';
 
 type TokenLeaf = string | number;
@@ -169,8 +170,17 @@ export type DesignThemeTokenValues = {
   [K in ThemeOverridableNamespace]?: DeepPartial<DesignTokens[K]>;
 };
 
-/** Built-in token pack: mode-invariant theme tokens + dark color face. */
-export type DesignTokenPack = {
-  tokens: DesignThemeTokenValues;
-  darkColor: DeepPartial<DesignTokens['color']>;
+/** Ambient light/dark color patches — compiled into TypeStyles color modes. */
+export type DesignColorValues = DeepPartial<DesignTokens['color']>;
+
+export type DesignThemeColorMode = {
+  light?: DesignColorValues;
+  dark?: DesignColorValues;
+};
+
+/** Reusable `tokens` + `colorMode` defaults for `createDesignTheme({ from })`. */
+export type DesignThemePreset = {
+  tokens?: DesignThemeTokenValues;
+  colorMode?: DesignThemeColorMode;
+  fonts?: FontFaceDefinition[];
 };

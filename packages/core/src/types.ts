@@ -1,21 +1,41 @@
 import type { ThemeModeDefinition, ThemeSurface } from 'typestyles';
 import type { ExtendTokenValues, TokenRefsOf } from './extend-tokens';
-import type { DesignThemeTokenValues, DesignTokenPack } from './tokens/types';
-import type { ThemeableComponentName } from './themeable-components';
-import type { ThemeComponentOverrideFor } from './theme-override-types';
+import type { FontFaceDefinition } from './fonts/types';
+import type { ThemeableComponentName, ThemeComponentOverrideFor } from './themeable-components';
+import type {
+  DesignThemeColorMode,
+  DesignThemePreset,
+  DesignThemeTokenValues,
+} from './tokens/types';
+
+export type {
+  ConditionalOverride,
+  FlatOverrideConfig,
+  MultiSlotOverrideConfig,
+  OverrideConfig,
+  OverrideOptions,
+  SlotOverrideConfig,
+  StylableOverride,
+  ThemeCondition,
+  VariantOptionStyle,
+} from 'typestyles';
+
+export { colorModes, conditional } from 'typestyles';
 
 export type {
   OverrideConfigFor,
+  ThemeableComponentName,
   ThemeComponentOverride,
   ThemeComponentOverrideFor,
-  ThemeFlatOverrideConfig,
-  ThemeMultiSlotOverrideConfig,
-  ThemeOverrideConfig,
-  ThemeOverrideStyle,
-  ThemeSlotOverrideConfig,
-} from './theme-override-types';
+} from './themeable-components';
 
-export type { DesignThemeTokenValues, DesignTokenPack, DesignTokens } from './tokens/types';
+export type {
+  DesignColorValues,
+  DesignThemeColorMode,
+  DesignThemePreset,
+  DesignThemeTokenValues,
+  DesignTokens,
+} from './tokens/types';
 
 type DesignTokenBag = typeof import('./tokens/declare').tokens;
 
@@ -47,27 +67,21 @@ export type ThemeComponentsConfig<TTokens = DesignThemeTokens> = {
 };
 
 /**
- * Thin theme config: pack + mode-invariant token patches + colorMode + extra modes.
+ * Theme config: token overrides, ambient color modes, and optional preset base.
  */
 export type DesignThemeConfig<E extends ExtendMap = Record<string, never>> = {
   name: string;
-  /** Token pack to merge onto. Defaults to `defaultTokens`. */
-  from?: DesignTokenPack;
-  /** Mode-invariant patches + optional light `color` overrides. */
+  /** Preset to merge onto. Defaults to built-in token values + dark color mode. */
+  from?: DesignThemePreset;
+  /** Mode-invariant token overrides; light `color` lives here by default. */
   tokens?: DesignThemeTokenValues;
-  /**
-   * Ambient light/dark color slices (Var UI color tree only).
-   * Same shape as `createColorTheme`'s return value.
-   */
-  colorMode?: {
-    light?: DesignTokenPack['darkColor'];
-    dark?: DesignTokenPack['darkColor'];
-  };
-  /** Additional TypeStyles modes (surfaces, custom conditions). */
+  /** Ambient light/dark color patches — compiled to `light-dark()` on theme tokens. */
+  colorMode?: DesignThemeColorMode;
+  /** Additional TypeStyles modes (e.g. dark-only shadow overrides). */
   modes?: ThemeModeDefinition[];
   /**
-   * Register fixed-tone surface modes (`data-surface="light"|"dark"`).
-   * Defaults to `true`; set `false` to omit or supply custom surface rules in `modes`.
+   * @deprecated Surfaces use global `color-scheme` on `data-surface` since V9.
+   * Kept for API compatibility; has no effect.
    */
   surfaces?: boolean;
   /** Custom token namespaces; leaves are a string or `{ light, dark }`. */
@@ -77,9 +91,19 @@ export type DesignThemeConfig<E extends ExtendMap = Record<string, never>> = {
    * Compiles to `styles.override` under this theme's class in the `overrides` layer.
    */
   components?: ThemeComponentsConfig<DesignThemeTokens<E>>;
+  /** Self-hosted @font-face definitions registered when the theme is created. */
+  fonts?: FontFaceDefinition[];
 };
 
 /** Theme surface plus merged token refs when `extend` is used. */
 export type DesignTheme<E extends ExtendMap = Record<string, never>> = ThemeSurface & {
   tokens: DesignThemeTokens<E>;
 };
+
+export type {
+  FontFaceDefinition,
+  FontSlotConfig,
+  DefineFontsInput,
+  DefineFontsResult,
+} from './fonts/types';
+export { defineFonts } from './fonts/define-fonts';
