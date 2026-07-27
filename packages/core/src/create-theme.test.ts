@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vite-plus/test';
 import { getRegisteredCss, reset } from 'typestyles';
-import { createDesignTheme, SURFACE_ATTRIBUTE } from './create-theme';
+import { createDesignTheme, DEFAULT_THEME_NAME, SURFACE_ATTRIBUTE } from './create-theme';
 import { extendTokens, resetExtendTokenRegistry } from './extend-tokens';
 import { resetRegisteredFontFaces } from './fonts/register-font-face';
 import { styles, registerColorSchemeGlobals } from './runtime';
@@ -288,6 +288,19 @@ describe('createDesignTheme', () => {
       expect(css).toContain('font-family: "Space Grotesk"');
     });
 
-    // Default-theme no-font-face regression deferred to Task 3 (runtime.ts still registers faces on import).
+    describe('default theme', () => {
+      beforeEach(() => {
+        reset();
+        resetRegisteredFontFaces();
+        resetExtendTokenRegistry();
+        registerColorSchemeGlobals();
+      });
+
+      it('does not register @font-face rules', () => {
+        createDesignTheme({ name: DEFAULT_THEME_NAME });
+        const css = getRegisteredCss();
+        expect(css).not.toContain('@font-face');
+      });
+    });
   });
 });
