@@ -70,7 +70,7 @@ export const acmeTheme = createDesignTheme({
         borderRadius: '999px',
         textTransform: 'uppercase',
         letterSpacing: '0.06em',
-        fontSize: t.fontSize.xs,
+        fontSize: t.fontSize.xs.var,
       },
     }),
     card: (t) => ({
@@ -81,7 +81,7 @@ export const acmeTheme = createDesignTheme({
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'top right',
           backgroundSize: '40% 40%',
-          padding: { base: t.space[4], md: t.space[6] },
+          padding: t.space[4].var,
         },
       },
     }),

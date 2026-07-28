@@ -1,13 +1,5 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../../runtime';
 import { designTokens as t } from '../../tokens';
-
-type ChatMessageBubbleSlots = readonly ['root'];
-type ChatMessageBubbleVariants = {
-  sender: Record<'user' | 'assistant', SlotStyles<ChatMessageBubbleSlots[number]>>;
-  variant: Record<'filled' | 'ghost', SlotStyles<ChatMessageBubbleSlots[number]>>;
-  group: Record<'none' | 'first' | 'middle' | 'last', SlotStyles<ChatMessageBubbleSlots[number]>>;
-};
 
 /**
  * The chat "bubble." Sender drives background/text color via `c.vars()` so
@@ -23,13 +15,7 @@ type ChatMessageBubbleVariants = {
  * <div className={chatMessageBubble({ sender: 'user' }).root}>Hi!</div>
  * ```
  */
-// Overload pinning: this recipe's only slot name (`root`) doesn't collide with
-// a known CSS property, so TypeScript resolves the config against typestyles'
-// flat-variant overload and types the call as a class string. Runtime
-// behavior is correct (typestyles branches on `slots` at runtime); assert the
-// slot signature until typestyles' ComponentConfig forbids `slots` the way
-// FlatComponentConfig does. See packages/core/src/components/avatar.ts.
-const chatMessageBubbleRecipe = typestyles.styles.component(
+export const chatMessageBubble = typestyles.styles.component(
   'chat-message-bubble',
   (c) => {
     const v = c.vars({
@@ -115,8 +101,3 @@ const chatMessageBubbleRecipe = typestyles.styles.component(
   },
   { layer: 'components' },
 );
-
-export const chatMessageBubble = chatMessageBubbleRecipe as unknown as SlotComponentFunction<
-  ChatMessageBubbleSlots,
-  ChatMessageBubbleVariants
->;

@@ -1,8 +1,8 @@
-import type { ThemeOverrides } from 'typestyles';
+import { mergeThemeOverrides, type ThemeOverrides } from 'typestyles';
 import { registerExtendMap, type ExtendTokenValues } from './extend-tokens';
 import { registerFontFace } from './fonts/register-font-face';
 import { styles, typestyles } from './runtime';
-import { themeableComponents } from './themeable-components';
+import { themeableComponents, type ThemeableComponentName } from './themeable-components';
 import { dark } from './tokens/defaults/color';
 import { tokenValues } from './tokens/preset';
 import { designTokens } from './tokens/declare';
@@ -12,7 +12,11 @@ import type {
   DesignThemeConfig,
   DesignThemePreset,
   DesignThemeTokenValues,
+  DesignThemeTokens,
+  ThemeComponentsConfig,
 } from './types';
+
+export { mergeThemeOverrides, mergeThemeOverrides as deepMergeThemeOverrides } from 'typestyles';
 
 /** Default token + dark color base merged when `from` is omitted. */
 const builtInPreset: DesignThemePreset = {
@@ -40,47 +44,8 @@ function mergeDesignTokenRefs(extendRefs?: Record<string, unknown>): typeof desi
   });
 }
 
-function isPlainObject(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
-}
-
-/** Plain clone for theme merges — stringify declare token refs (`var(--…)`) instead of structuredClone. */
-function cloneForThemeMerge(value: unknown): unknown {
-  if (value === null || typeof value !== 'object') return value;
-  if (Array.isArray(value)) return value.map(cloneForThemeMerge);
-  if (isPlainObject(value)) {
-    const out: Record<string, unknown> = {};
-    for (const [key, child] of Object.entries(value)) {
-      out[key] = cloneForThemeMerge(child);
-    }
-    return out;
-  }
-  // Token refs stringify to `var(--…)`; plain objects should not reach this branch.
-  // oxlint-disable-next-line typescript/no-base-to-string -- RegisteredPropertyRef
-  return String(value);
-}
-
-/** Deep-merge plain objects; arrays and primitives from `patch` win. */
-export function deepMergeThemeOverrides(
-  base: ThemeOverrides,
-  patch?: ThemeOverrides,
-): ThemeOverrides {
-  if (!patch) return cloneForThemeMerge(base) as ThemeOverrides;
-
-  const out = cloneForThemeMerge(base) as Record<string, unknown>;
-  for (const [key, patchValue] of Object.entries(patch)) {
-    const baseValue = out[key];
-    if (isPlainObject(baseValue) && isPlainObject(patchValue)) {
-      out[key] = deepMergeThemeOverrides(baseValue as ThemeOverrides, patchValue as ThemeOverrides);
-    } else {
-      out[key] = patchValue;
-    }
-  }
-  return out as ThemeOverrides;
-}
-
 function deepMergeColor(base: ColorPatch | undefined, patch?: ColorPatch): ColorPatch {
-  return deepMergeThemeOverrides(
+  return mergeThemeOverrides(
     { color: base ?? {} } as ThemeOverrides,
     patch ? ({ color: patch } as ThemeOverrides) : undefined,
   ).color as ColorPatch;
@@ -108,7 +73,7 @@ export function createDesignTheme<const E extends ExtendMap = Record<string, nev
   for (const face of mergedFonts) {
     registerFontFace(face);
   }
-  const mergedTokens = deepMergeThemeOverrides(
+  const mergedTokens = mergeThemeOverrides(
     (preset.tokens ?? {}) as ThemeOverrides,
     (tokenOverrides ?? {}) as ThemeOverrides,
   ) as DesignThemeTokenValues;
@@ -133,19 +98,29 @@ export function createDesignTheme<const E extends ExtendMap = Record<string, nev
   });
 
   if (components) {
-    for (const [name, entry] of Object.entries(components)) {
+    type Components = NonNullable<typeof components>;
+    for (const name of Object.keys(components) as Array<keyof Components>) {
+      const entry = components[name];
       if (entry == null) continue;
-      const overrideConfig = typeof entry === 'function' ? entry(mergedTokensRefs) : entry;
-      const recipe = themeableComponents[name as keyof typeof themeableComponents];
-      if (!recipe) continue;
-      styles.override(recipe as never, overrideConfig as never, {
-        selectorPrefix: `.${theme.className}`,
-        layer: 'overrides',
-      });
+      applyThemeComponentOverride(name, entry, theme.className, mergedTokensRefs);
     }
   }
 
   return Object.assign(theme, { tokens: mergedTokensRefs });
+}
+
+function applyThemeComponentOverride<E extends ExtendMap, K extends ThemeableComponentName>(
+  name: K,
+  entry: NonNullable<ThemeComponentsConfig<DesignThemeTokens<E>>[K]>,
+  className: string,
+  tokenRefs: DesignTheme<E>['tokens'],
+): void {
+  const overrideConfig: unknown = typeof entry === 'function' ? entry(tokenRefs) : entry;
+  // Registry iteration cannot correlate `name`, recipe, and override config for overload resolution.
+  styles.override(themeableComponents[name] as never, overrideConfig as never, {
+    selectorPrefix: `.${className}`,
+    layer: 'overrides',
+  });
 }
 
 /** Name of the built-in default theme surface registered on package load. */

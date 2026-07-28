@@ -1,27 +1,5 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-
-type TableSlots = readonly [
-  'root',
-  'table',
-  'caption',
-  'header',
-  'headerCell',
-  'body',
-  'row',
-  'cell',
-  'footer',
-  'empty',
-];
-type TableVariants = {
-  density: Record<'compact' | 'balanced' | 'spacious', SlotStyles<TableSlots[number]>>;
-  dividers: Record<'rows' | 'columns' | 'grid' | 'none', SlotStyles<TableSlots[number]>>;
-  isStriped: Record<'true' | 'false', SlotStyles<TableSlots[number]>>;
-  hasHover: Record<'true' | 'false', SlotStyles<TableSlots[number]>>;
-  stickyHeader: Record<'true' | 'false', SlotStyles<TableSlots[number]>>;
-  textOverflow: Record<'wrap' | 'truncate', SlotStyles<TableSlots[number]>>;
-};
 
 /**
  * Presentational semantic `<table>` chrome for admin data grids. Pair with the
@@ -43,7 +21,7 @@ type TableVariants = {
  * </div>
  * ```
  */
-const tableRecipe = typestyles.styles.component(
+export const table = typestyles.styles.component(
   'table',
   (c) => {
     const v = c.vars({
@@ -198,5 +176,3 @@ const tableRecipe = typestyles.styles.component(
   },
   { layer: 'components' },
 );
-
-export const table = tableRecipe as unknown as SlotComponentFunction<TableSlots, TableVariants>;

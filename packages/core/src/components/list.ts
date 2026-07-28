@@ -1,22 +1,5 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-
-type ListSlots = readonly [
-  'root',
-  'header',
-  'item',
-  'label',
-  'description',
-  'start',
-  'end',
-  'divider',
-];
-type ListVariants = {
-  density: Record<'compact' | 'balanced' | 'spacious', SlotStyles<ListSlots[number]>>;
-  listStyle: Record<'none' | 'disc' | 'decimal', SlotStyles<ListSlots[number]>>;
-  hasDividers: Record<'true' | 'false', SlotStyles<ListSlots[number]>>;
-};
 
 /**
  * Generic vertical list chrome for settings rows, member lists, and static
@@ -35,7 +18,7 @@ type ListVariants = {
  * </ul>
  * ```
  */
-const listRecipe = typestyles.styles.component(
+export const list = typestyles.styles.component(
   'list',
   (c) => {
     const v = c.vars({
@@ -139,5 +122,3 @@ const listRecipe = typestyles.styles.component(
   },
   { layer: 'components' },
 );
-
-export const list = listRecipe as unknown as SlotComponentFunction<ListSlots, ListVariants>;

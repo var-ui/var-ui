@@ -63,13 +63,13 @@ describe('theme conditions and colorModes', () => {
   it('styles.override accepts conditions and color mode values directly', () => {
     button({ intent: 'secondary', size: 'sm' });
     styles.override(
-      button as never,
+      button,
       {
         base: {
           color: { light: '#111111', dark: '#eeeeee' },
           conditions: [when.reducedMotion({ transition: 'none' })],
         },
-      } as never,
+      },
       { layer: 'overrides' },
     );
 

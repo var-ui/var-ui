@@ -21,8 +21,8 @@ import { DesignSystemProvider } from '@var-ui/react';
 
 export const acme = createDesignTheme({
   name: 'acme',
-  // Partial — deep-merged onto the built-in default light/dark palette
-  light: {
+  // Partial — deep-merged onto the built-in default palette
+  tokens: {
     color: {
       accent: {
         default: 'oklch(55% 0.2 290)',
@@ -30,8 +30,8 @@ export const acme = createDesignTheme({
       },
     },
   },
-  dark: {
-    color: {
+  colorMode: {
+    dark: {
       accent: {
         default: 'oklch(72% 0.16 290)',
         hover: 'oklch(78% 0.14 290)',
@@ -81,10 +81,10 @@ export const acme = createDesignTheme({
 <DesignSystemProvider customTheme={acme}>{/* app */}</DesignSystemProvider>
 ```
 
-- `acme.className` — theme surface class (same as before)
+- `acme.className` — theme surface class (`theme-var-ui-acme`)
 - `acme.tokens.brand.glow` — typed `var(--var-ui-brand-glow)` ref
 
-Try the **Acme (V7 demo)** palette in the vite example app to see this live.
+Try the **Acme (V7 + V8 demo)** palette in the vite example app to see this live.
 
 ## Self-hosted fonts
 
@@ -155,19 +155,21 @@ createDesignTheme({
 
 ## Composable primitives
 
-`createDesignTheme` is sugar over two exports:
+`createDesignTheme({ components })` compiles to TypeStyles `styles.override` under
+the theme class. For app-global or ad-hoc restyles, call `styles.override`
+directly:
 
 ```ts
-import { overrideComponent, extendTokens, button } from '@var-ui/core';
+import { styles, extendTokens, button } from '@var-ui/core';
 
-// App-global restyle — no theme required
-overrideComponent(button, { base: { borderRadius: '999px' } });
+// App-global restyle — no theme class prefix
+styles.override(button, { base: { borderRadius: '999px' } }, { layer: 'overrides' });
 
-// Theme-scoped
-overrideComponent(
+// Theme-scoped (same mechanism createDesignTheme uses internally)
+styles.override(
   button,
   { variants: { intent: { danger: { fontWeight: 700 } } } },
-  { theme: acme },
+  { selectorPrefix: `.${acme.className}`, layer: 'overrides' },
 );
 
 // Custom tokens without a theme (global :root + dark mode rules)
@@ -193,6 +195,6 @@ selectors yourself in the theme config.
 ## Nested themes
 
 `components` overrides use a descendant selector prefix
-(`.theme-acme .var-ui-button`). If two themed regions nest and both override the
+(`.theme-var-ui-acme .var-ui-button`). If two themed regions nest and both override the
 same recipe, prefer **component CSS variables** (Tier 1) or `styles.scope()` for
 proximity-correct CSS. See TypeStyles' component override contract for details.

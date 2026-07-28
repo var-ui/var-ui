@@ -1,11 +1,5 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-
-type AvatarSlots = readonly ['root', 'image', 'initials', 'status'];
-type AvatarVariants = {
-  size: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', SlotStyles<AvatarSlots[number]>>;
-};
 
 /**
  * Identity avatar: image with initials fallback and an optional status well
@@ -16,12 +10,7 @@ type AvatarVariants = {
  * <span className={a.root}><img className={a.image} … /></span>
  * ```
  */
-// Overload pinning: none of this recipe's slot names collide with a known CSS
-// property, so TypeScript resolves the config against typestyles' flat-variant
-// overload and types the call as a class string. Runtime behavior is correct
-// (typestyles branches on `slots` at runtime); assert the slot signature until
-// typestyles' ComponentConfig forbids `slots` the way FlatComponentConfig does.
-const avatarRecipe = typestyles.styles.component(
+export const avatar = typestyles.styles.component(
   'avatar',
   (c) => {
     const v = c.vars({
@@ -90,8 +79,6 @@ const avatarRecipe = typestyles.styles.component(
   },
   { layer: 'components' },
 );
-
-export const avatar = avatarRecipe as unknown as SlotComponentFunction<AvatarSlots, AvatarVariants>;
 
 /**
  * Overlapping avatar row with a "+N" overflow chip.

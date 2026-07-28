@@ -1,11 +1,5 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-
-type ThumbnailSlots = readonly ['root', 'image', 'dismiss'];
-type ThumbnailVariants = {
-  size: Record<'sm' | 'md' | 'lg', SlotStyles<ThumbnailSlots[number]>>;
-};
 
 /**
  * Square media preview with an optional floating remove control.
@@ -15,9 +9,7 @@ type ThumbnailVariants = {
  * <span className={s.root}><img className={s.image} … /></span>
  * ```
  */
-// Overload pinning: slot names avoid CSS property collisions, so TypeScript
-// resolves this against typestyles' flat-variant overload (see avatar.ts).
-const thumbnailRecipe = typestyles.styles.component(
+export const thumbnail = typestyles.styles.component(
   'thumbnail',
   (c) => {
     const v = c.vars({
@@ -77,8 +69,3 @@ const thumbnailRecipe = typestyles.styles.component(
   },
   { layer: 'components' },
 );
-
-export const thumbnail = thumbnailRecipe as unknown as SlotComponentFunction<
-  ThumbnailSlots,
-  ThumbnailVariants
->;

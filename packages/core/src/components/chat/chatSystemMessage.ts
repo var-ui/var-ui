@@ -1,15 +1,6 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../../runtime';
 import { designTokens as t } from '../../tokens';
 import { semanticTone, subtleBackgroundColor, type SemanticToneKey } from '../semanticTone';
-
-type ChatSystemMessageSlots = readonly ['root', 'icon', 'text'];
-type ChatSystemMessageVariants = {
-  tone: Record<
-    'neutral' | 'accent' | 'success' | 'warning' | 'danger' | 'info',
-    SlotStyles<ChatSystemMessageSlots[number]>
-  >;
-};
 
 function tonePaint(
   v: { color: { name: string }; background: { name: string } },
@@ -32,14 +23,7 @@ function tonePaint(
  * <div className={chatSystemMessage({ tone: 'info' }).root}>…</div>
  * ```
  */
-// Overload pinning: this recipe's slot names (`root`, `icon`, `text`) don't
-// collide with known CSS properties, so TypeScript resolves the config
-// against typestyles' flat-variant overload and types the call as a class
-// string. Runtime behavior is correct (typestyles branches on `slots` at
-// runtime); assert the slot signature until typestyles' ComponentConfig
-// forbids `slots` the way FlatComponentConfig does. See
-// packages/core/src/components/avatar.ts.
-const chatSystemMessageRecipe = typestyles.styles.component(
+export const chatSystemMessage = typestyles.styles.component(
   'chat-system-message',
   (c) => {
     const v = c.vars({
@@ -84,8 +68,3 @@ const chatSystemMessageRecipe = typestyles.styles.component(
   },
   { layer: 'components' },
 );
-
-export const chatSystemMessage = chatSystemMessageRecipe as unknown as SlotComponentFunction<
-  ChatSystemMessageSlots,
-  ChatSystemMessageVariants
->;

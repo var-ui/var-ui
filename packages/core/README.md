@@ -7,12 +7,15 @@ This is a **library package** (not a standalone app). Import it from apps or the
 ## Quick start
 
 ```ts
-import { button, layout, text, designTokens, defaultTheme } from '@var-ui/core';
+import { button, layout, text, designTokens, defaultThemeClassName } from '@var-ui/core';
 
-// Recipes return callable + destructurable class helpers
-document.body.className = defaultTheme.className;
+// The default theme surface is registered when the package loads (name: `default`).
+document.body.className = defaultThemeClassName; // `theme-var-ui-default`
 element.className = button({ intent: 'primary' });
 ```
+
+Custom themes return a `DesignTheme` from `createDesignTheme({ name: 'acme' })` — use
+`theme.className` the same way. See [Theme surfaces](#theme-surfaces).
 
 For syntax highlighting in docs or apps:
 
@@ -21,6 +24,16 @@ import '@var-ui/core/codeHighlight';
 ```
 
 Pair with a **typestyles extraction entry** in consuming apps so token and recipe CSS lands in production output — see [`examples/vite-app`](../vite-app/README.md).
+
+### Key exports
+
+| Area              | Exports                                                                                                        |
+| ----------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Themes**        | `createDesignTheme`, `DEFAULT_THEME_NAME`, `defaultThemeClassName`, `SURFACE_ATTRIBUTE`, `mergeThemeOverrides` |
+| **Tokens**        | `designTokens`, `tokens`, `tokenValues`, `generateColors`, `lightSyntaxValues`, `darkSyntaxValues`             |
+| **Customization** | `extendTokens`, `when`, `themeWhen`, `themeableComponents`, `defineFonts`, `groteskMono`                       |
+| **TypeStyles**    | `typestyles`, `styles`, `global`                                                                               |
+| **Types**         | `DesignTheme`, `DesignThemeConfig`, `DesignThemePreset`, `ThemeComponentsConfig`, `OverrideConfigFor`, …       |
 
 ## Recipe inventory
 
@@ -40,29 +53,31 @@ emits stable public class names.
 
 ## Token layers
 
-Tokens are grouped for clarity; recipes consume the flat `designTokens` object.
-
-Tokens are registered from the default theme pack. Recipes consume `designTokens` refs.
+Tokens are declared once via `tokens.declare(tokenSchema)` and exposed as `designTokens`
+(aliases: `tokens`). Default values live in `tokenValues`; the built-in theme surface
+registers them on package load.
 
 | Export         | Role                                                                 |
 | -------------- | -------------------------------------------------------------------- |
 | `designTokens` | All registered token refs (`palette`, `space`, `color`, `stroke`, …) |
-| `color`        | Typed declare handle for `color.*` refs + `@property` declarations   |
+| `tokens`       | Alias for `designTokens` (the `tokens.declare` handle)               |
+| `tokenValues`  | Default registered values (`DesignThemePreset.tokens` base)          |
 
 ### Token namespaces (expanded)
 
-| Namespace                    | Keys (indicative)                 | Notes                                                                                                              |
-| ---------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `palette`                    | 39 families × 10 steps            | Fixed primitive ramp                                                                                               |
-| `space`                      | `0`–`20` (non-contiguous)         | Layout spacing                                                                                                     |
-| `size.control` / `size.icon` | `sm`, `md`, `lg`                  | Control heights + icon box                                                                                         |
-| `breakpoint`                 | `sm`–`xl`                         | Mode-invariant media-query widths                                                                                  |
-| `zIndex`                     | `base` … `max`                    | Stacking scale                                                                                                     |
-| `opacity`                    | `disabled`, `muted`               | Shared opacity semantics                                                                                           |
-| `letterSpacing`              | `tight`, `normal`, `wide`, `caps` | Typography rhythm                                                                                                  |
-| `color.*`                    | semantic UI colors                | Full tree via `tokens.declare('color')`; `defaultLightColorValues` mixes literals and `color.*` refs in one object |
-| `shadow.elevation`           | `low`, `med`, `high`              | Soft elevation (alongside brutalist `shadow.xs`–`xl`)                                                              |
-| `stroke`                     | `default`, `strong`               | Border shorthand (fixed)                                                                                           |
+| Namespace                    | Keys (indicative)                 | Notes                                                                                                   |
+| ---------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `palette`                    | 39 families × 10 steps            | Fixed primitive ramp                                                                                    |
+| `space`                      | `0`–`20` (non-contiguous)         | Layout spacing                                                                                          |
+| `size.control` / `size.icon` | `sm`, `md`, `lg`                  | Control heights + icon box                                                                              |
+| `breakpoint`                 | `sm`–`xl`                         | Mode-invariant media-query widths                                                                       |
+| `zIndex`                     | `base` … `max`                    | Stacking scale                                                                                          |
+| `opacity`                    | `disabled`, `muted`               | Shared opacity semantics                                                                                |
+| `letterSpacing`              | `tight`, `normal`, `wide`, `caps` | Typography rhythm                                                                                       |
+| `color.*`                    | semantic UI colors                | Full tree via `tokens.declare`; default light face in `tokenValues.color`, dark patches via `colorMode` |
+| `color.code`                 | syntax-highlighting palette       | Used by `codeHljsScope`; aliases `lightSyntaxValues` / `darkSyntaxValues` for theme presets             |
+| `shadow.elevation`           | `low`, `med`, `high`              | Soft elevation (alongside brutalist `shadow.xs`–`xl`)                                                   |
+| `stroke`                     | `default`, `strong`               | Border shorthand (fixed)                                                                                |
 
 Theme overrides example:
 
@@ -82,36 +97,50 @@ createDesignTheme({
 
 Theme values accept **token-ref leaves**: raw CSS (`'#0064E0'`, `'16px'`) or refs into registered tokens (`designTokens.palette['sky-7']`, `designTokens.radius.lg`). Refs stringify to `var(--var-ui-…)` in emitted CSS.
 
-**Breaking (theming DX):** syntax lives under `color.syntax` (`--var-ui-color-syntax-*`), not a top-level `codeSyntax` / `syntax` namespace. There is no `codeBlock` token namespace — the `codeBlock` recipe reads semantic `color.*` (+ Tier 1 `c.vars()`). Former face exports `defaultLightValues` / `defaultDarkValues` are replaced by the pack `defaultTokens` (`{ tokens, darkColor }`).
+**Note:** syntax-highlighting colors live under `color.code` (`--var-ui-color-code-*`), not a
+top-level `syntax` namespace. There is no `codeBlock` token namespace — the `codeBlock` recipe
+reads semantic `color.*` plus Tier 1 `c.vars()`.
 
 ## Theme surfaces
 
-Themes are thin wrappers around TypeStyles. Ladder:
+Themes are thin wrappers around TypeStyles `tokens.createTheme`. Class names use the
+configured scope: `theme-var-ui-<name>` (e.g. `theme-var-ui-default`).
 
-1. **Token pack** — `defaultTokens`, `forestTokens`, … (`DesignTokenPack`: mode-invariant `tokens` + dark `darkColor`)
-2. **`createDesignTheme`** — merge pack + patches, compile ambient color mode, register surface modes
-3. **Optional `createColorTheme`** — accent → `{ light, dark }` color trees for `colorMode`
-4. **`modes` / `extend` / `components`** — extra conditions, custom tokens, typed recipe overrides
-5. **Optional `fonts`** — self-hosted `@font-face` rules; use `defineFonts` to pair faces with `tokens.fontFamily` stacks (see [`groteskMono`](./src/fonts/grotesk-mono.ts) for a bundled example)
+### Default theme
+
+Importing `@var-ui/core` registers the built-in default surface (`createDesignTheme({ name: 'default' })`).
+Use the class name directly:
+
+| Export                  | Value                    | Role                                         |
+| ----------------------- | ------------------------ | -------------------------------------------- |
+| `DEFAULT_THEME_NAME`    | `'default'`              | Built-in theme name                          |
+| `defaultThemeClassName` | `'theme-var-ui-default'` | Class for the pre-registered default surface |
+
+Additional palette themes (forest, rose, amber, Windows 95, …) are **not** bundled exports —
+copy examples from [`docs/src/themes/`](../../docs/src/themes/) in the docs repo.
+
+### Authoring a theme
+
+`createDesignTheme` merges a preset, token patches, ambient color mode, and optional
+component overrides:
+
+1. **`from`** — optional `DesignThemePreset` (`{ tokens?, colorMode?, fonts? }`); defaults to built-in `tokenValues` + dark color mode
+2. **`tokens`** — mode-invariant overrides (light `color` face lives here by default)
+3. **`colorMode`** — ambient `{ light?, dark? }` color patches (compiled to `light-dark()`)
+4. **`generateColors`** — optional helper to build `{ light, dark }` color trees from an accent
+5. **`modes` / `extend` / `components` / `fonts`** — extra TypeStyles modes, custom tokens, typed recipe overrides, `@font-face` rules
 
 ```ts
-import { createColorTheme, createDesignTheme, forestTokens } from '@var-ui/core';
+import {
+  createDesignTheme,
+  designTokens,
+  generateColors,
+  tokenValues,
+  type DesignThemePreset,
+} from '@var-ui/core';
 
-export const acme = createDesignTheme({
-  name: 'acme',
-  from: forestTokens,
-  colorMode: createColorTheme({ accent: '#7c3aed' }),
-});
-```
-
-Token refs in packs / `tokens` / `colorMode`:
-
-```ts
-import { createDesignTheme, designTokens, forestTokens } from '@var-ui/core';
-
-createDesignTheme({
-  name: 'acme',
-  from: forestTokens,
+// Reusable preset (spread into createDesignTheme)
+export const acmePreset: DesignThemePreset = {
   tokens: {
     color: {
       accent: {
@@ -121,62 +150,72 @@ createDesignTheme({
     },
     radius: { md: designTokens.radius.lg },
   },
+};
+
+// Accent-generated color mode
+const { light, dark } = generateColors({ accent: '#7c3aed' });
+
+export const acmeTheme = createDesignTheme({
+  name: 'acme',
+  from: acmePreset, // optional; built-in defaults apply when omitted
+  colorMode: { light, dark },
+  components: {
+    button: (t) => ({
+      base: { borderRadius: t.radius.lg.var },
+    }),
+  },
 });
+
+// acmeTheme.className → `theme-var-ui-acme`
 ```
 
 ### What `createDesignTheme` compiles to
 
 ```ts
-tokens.createTheme(name, {
-  base: { ...modeInvariantTokens, color: lightColor },
-  modes: [
-    ...tokens.colorMode.systemWithLightDarkOverride({
-      attribute: 'data-mode',
-      values: { light: 'light', dark: 'dark' },
-      scope: 'self',
-      light: { color: lightColor },
-      dark: { color: darkColor },
-    }),
-    ...modes, // e.g. dark-elevation-shadow on style themes
-  ],
+typestyles.tokens.createTheme(name, {
+  base: { ...mergedModeInvariantTokens, color: lightColor },
+  colorMode: {
+    light: { color: mergedLightColorPatch },
+    dark: { color: mergedDarkColorPatch },
+  },
+  modes: [...extraModes],
+});
+
+// Optional per-recipe overrides:
+styles.override(recipe, overrideConfig, {
+  selectorPrefix: `.${theme.className}`,
+  layer: 'overrides',
 });
 ```
 
-Surface modes (`data-surface="light"|"dark"`) are registered automatically unless you pass `surfaces: false`.
-
-| Export         | `className`     | Role                      |
-| -------------- | --------------- | ------------------------- |
-| `defaultTheme` | `theme-default` | Default slate / blue ramp |
-| `forestTheme`  | `theme-forest`  | Forest / sage palette     |
-| `roseTheme`    | `theme-rose`    | Rose palette              |
-| `amberTheme`   | `theme-amber`   | Amber palette             |
-
-Each export is a **`DesignTheme`** (`ThemeSurface` from `tokens.createTheme`: `className`,
-`name`, string coercion). Matching packs: `defaultTokens`, `forestTokens`, … Strip other
-palette classes before switching (see `docs/src/tokens.ts`).
+Each return value is a **`DesignTheme`**: `ThemeSurface` (`className`, `name`, string coercion)
+plus `tokens` (built-in refs merged with any `extend` namespaces).
 
 ### Ambient light / dark mode
 
 Dark overrides follow OS preference unless `data-mode="light"` or `data-mode="dark"` is set on
 the **same element** that carries the theme class. Only the **color** tree (including
-`color.syntax`) flips; radius, fontSize, etc. stay on `base`.
+`color.code`) flips; radius, fontSize, etc. stay on `base`.
 
 ### Fixed-tone surfaces (`SURFACE_ATTRIBUTE`)
 
-Import `SURFACE_ATTRIBUTE` (`'data-surface'`) from `@var-ui/core`. `createDesignTheme`
-registers light/dark surface modes by default (`surfaces: true`). Pass `surfaces: false`
-to omit them or supply custom rules in `modes`.
-Mark a subtree with `data-surface="dark"` or `data-surface="light"` to pin that face
-regardless of ambient mode:
+Import `SURFACE_ATTRIBUTE` (`'data-surface'`) from `@var-ui/core`. Global `color-scheme`
+rules for `data-surface="light"` and `data-surface="dark"` are registered in `runtime.ts`
+on package load — no theme option required.
+
+Mark a subtree to pin light or dark chrome regardless of ambient mode:
 
 ```html
-<div class="theme-default" data-mode="light">
-  <article data-surface="dark" class="card-root">…</article>
+<div class="theme-var-ui-default" data-mode="light">
+  <article data-surface="dark" class="var-ui-card-root">…</article>
 </div>
 ```
 
-Built-in themes register both surface faces this way. Keep wrappers scoped tightly — nested
-subtrees cannot "reset" to ambient mode without an explicit opposite surface marker.
+Keep wrappers scoped tightly — nested subtrees cannot "reset" to ambient mode without an
+explicit opposite surface marker.
+
+> **Note:** `surfaces` on `DesignThemeConfig` is deprecated and has no effect. Use
+> `SURFACE_ATTRIBUTE` markers and the global rules above instead.
 
 ### Astro (no React context)
 
@@ -184,9 +223,9 @@ Use a tiny inline script to set **one** palette class on `document.documentEleme
 
 ```astro
 ---
-import { defaultTheme } from '@var-ui/core';
+import { defaultThemeClassName } from '@var-ui/core';
 ---
-<script is:inline define:vars={{ themeClass: defaultTheme.className }}>
+<script is:inline define:vars={{ themeClass: defaultThemeClassName }}>
   const key = 'theme-mode';
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const stored = localStorage.getItem(key);
@@ -205,23 +244,30 @@ import { defaultTheme } from '@var-ui/core';
 </script>
 ```
 
-`import.meta.env.SSR` stays irrelevant: the snippet runs in the browser only. Swap `defaultTheme` for another palette export when you change brand themes.
+`import.meta.env.SSR` stays irrelevant: the snippet runs in the browser only. Swap
+`defaultThemeClassName` for another theme's `className` when you change brand themes.
 
 ## Theming helpers
 
-Prefer `createDesignTheme` + packs. Use `createColorTheme` when you want an accent-generated color tree:
+Prefer `createDesignTheme` with an optional `from` preset. Use `generateColors` when you want
+an accent-generated color tree:
 
 ```ts
-import { createColorTheme, createDesignTheme, defaultTokens } from '@var-ui/core';
+import { createDesignTheme, generateColors, tokenValues } from '@var-ui/core';
+
+const { light, dark } = generateColors({ accent: '#7c3aed' });
 
 export const acme = createDesignTheme({
   name: 'acme',
-  from: defaultTokens, // optional; this is the default
-  colorMode: createColorTheme({ accent: '#7c3aed' }),
+  from: { tokens: tokenValues }, // optional; this is the implicit default
+  colorMode: { light, dark },
 });
 ```
 
-`createColorTheme` returns `{ light, dark }` (`DesignTokens['color']` patches, including `syntax`). That shape plugs straight into `colorMode`. For advanced merges, `deepMergeThemeOverrides` is available — it is not a second theme API. Optional `extend` / `components` / `overrideComponent` remain for custom tokens and typed recipe restyles.
+`generateColors` returns `{ light, dark }` (`DesignColorValues` patches, including `code`).
+That shape plugs straight into `colorMode`. For advanced merges, `mergeThemeOverrides` is
+available (aliased as `deepMergeThemeOverrides`) — it is not a second theme API. Use `extend` / `components` for custom tokens and
+typed recipe restyles via `styles.override`.
 
 ## Authoring recipes
 
@@ -243,9 +289,10 @@ Override a recipe's registered vars in theme CSS or `createDesignTheme` override
 for buttons on a custom theme:
 
 ```css
-.theme-acme .button-base {
-  --button-background: var(--color-accent-default);
-  --button-foreground: var(--color-text-on-accent);
+.theme-var-ui-acme .var-ui-button {
+  /* component-scoped vars from c.vars() — exact names match the recipe */
+  --var-ui-button-background: var(--var-ui-color-accent-default);
+  --var-ui-button-foreground: var(--var-ui-color-text-on-accent);
 }
 ```
 
@@ -256,8 +303,8 @@ single theme region, a later cascade layer wins:
 
 ```css
 @layer utilities {
-  .theme-acme .card-root {
-    box-shadow: var(--shadow-lg);
+  .theme-var-ui-acme .var-ui-card-root {
+    box-shadow: var(--var-ui-shadow-lg);
   }
 }
 ```
@@ -271,7 +318,7 @@ Chrome 118+, Firefox 128+, Safari 17.4+):
 ```ts
 import { styles } from '@var-ui/core';
 
-styles.scope({ root: '.theme-windows-95', layer: 'utilities' }, 'button-base', {
+styles.scope({ root: '.theme-var-ui-windows-95', layer: 'utilities' }, 'button-base', {
   borderColor: 'var(--color-border-strong)',
   backgroundColor: 'var(--color-background-subtle)',
 });
@@ -297,7 +344,7 @@ Adding class names is free; removing or renaming requires a major bump and a del
 
 ## Extending tokens safely
 
-1. **New primitive or semantic keys** — Add values under `src/tokens/` (`primitive.ts`, `types.ts`, palette), register with `tokens.create`, and extend `DesignTokens` / `DesignThemeTokenValues` as needed.
+1. **New primitive or semantic keys** — Add values under `src/tokens/`, extend `DesignTokens` / `DesignThemeTokenValues`, and include them in `tokenSchema` + `tokenValues`.
 2. **Theme-level patches** — Prefer `createDesignTheme({ from, tokens, colorMode, modes })`. Code-block chrome uses Tier 1 `c.vars()` / `components`, not a dedicated token namespace.
 3. **Breaking renames** — Avoid renaming existing CSS custom properties; add aliases if you must migrate consumers gradually.
 
@@ -346,10 +393,10 @@ Import the stylesheet side effect once (it registers `ds-hljs` rules):
 import '@var-ui/core/codeHighlight';
 ```
 
-### Semantic tokens (`color.syntax`)
+### Semantic tokens (`color.code`)
 
-Syntax highlighting reads `designTokens.color.syntax` (`--var-ui-color-syntax-*`).
-**Breaking:** former `--codeSyntax-*` / top-level `syntax` namespaces are gone.
+Syntax highlighting reads `designTokens.color.code` (`--var-ui-color-code-*`).
+`lightSyntaxValues` / `darkSyntaxValues` are aliases exported for theme presets.
 
 | Token                             | Meaning                                              |
 | --------------------------------- | ---------------------------------------------------- |
@@ -366,7 +413,8 @@ Syntax highlighting reads `designTokens.color.syntax` (`--var-ui-color-syntax-*`
 | `addition` / `additionBackground` | Diff additions (foreground / wash)                   |
 | `deletion` / `deletionBackground` | Diff deletions (foreground / wash)                   |
 
-Defaults are bundled with `createColorTheme` and the built-in packs. Override via theme `colorMode` / pack `color.syntax`.
+Defaults ship in `tokenValues.color.code` (light face) and the built-in dark `colorMode`
+patch. Override via theme `colorMode` or a `from` preset's `tokens.color` / `colorMode.dark`.
 
 ### highlight.js class mapping
 
@@ -402,7 +450,8 @@ Covered primitives:
 | **Divider**       | `---` → `<hr>`                     | Themed horizontal rule                                                     |
 | **Heading links** | `h1`–`h6`                          | Apps can inject `<a data-prose-heading-anchor>` permalinks (see docs site) |
 
-**Docs site** composes `proseContent('root')` with site overrides and merges `designColorDarkValues` into the dark theme so `--color-*` tracks the shell.
+**Docs site** composes `proseContent('root')` with site overrides and passes a custom
+`createDesignTheme` surface so semantic `--var-ui-color-*` tracks the shell.
 
 ### Admonition-style callouts (markdown-only)
 

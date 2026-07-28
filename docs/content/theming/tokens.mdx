@@ -19,11 +19,22 @@ designTokens.space[4];
 designTokens.fontSize.md;
 ```
 
-Theme `light` / `dark` objects assign concrete values to those custom
-properties under the theme class. Custom namespaces from
-`createDesignTheme({ extend })` or `extendTokens` appear on the theme's
-`.tokens` object alongside `designTokens`.
+`tokens` is an alias for `designTokens`. Default registered values live in
+`tokenValues` (used as the built-in `from` preset base).
+
+Theme overrides use two layers:
+
+- **`tokens`** on `createDesignTheme` — mode-invariant patches; the light `color`
+  face lives here by default
+- **`colorMode`** — ambient `{ light?, dark? }` color patches (compiled to
+  `light-dark()` on theme tokens)
+
+Custom namespaces from `createDesignTheme({ extend })` or `extendTokens` appear on
+the theme's `.tokens` object alongside built-in refs.
+
+Syntax-highlighting colors live under `color.code` (`designTokens.color.code`).
+`lightSyntaxValues` / `darkSyntaxValues` are exported aliases for theme presets.
 
 Token reference tables generated from the core package are planned for a
-follow-up. Until then, see `packages/core/src/tokens/` and the built-in theme
-files under `packages/core/src/themes/`.
+follow-up. Until then, see `packages/core/src/tokens/` and example theme presets
+under `docs/src/themes/`.

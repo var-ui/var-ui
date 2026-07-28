@@ -1,17 +1,5 @@
-import type { CSSProperties } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-
-/**
- * Isolates the custom-property override in its own explicitly-typed object so it can be
- * spread alongside plain CSS properties without widening the enclosing literal's inferred
- * type (a raw computed key mixed into the same literal as named properties can make the
- * slot-with-variants config fail `VariantOptionStyle` assignability and fall through to the
- * flat single-slot overload).
- */
-function backgroundVar(name: string, value: string): CSSProperties {
-  return { [name]: value } as unknown as CSSProperties;
-}
 
 const APP_SHELL_SLOTS = [
   'root',
@@ -203,14 +191,14 @@ export const appShell = typestyles.styles.component<typeof APP_SHELL_SLOTS, AppS
         },
         variant: {
           wash: {
-            root: backgroundVar(v.background.name, t.color.background.app.var),
+            root: { [v.background.name]: t.color.background.app.var },
           },
           surface: {
-            root: backgroundVar(v.background.name, t.color.background.surface.var),
+            root: { [v.background.name]: t.color.background.surface.var },
           },
           section: {
             root: {
-              ...backgroundVar(v.background.name, t.color.background.surface.var),
+              [v.background.name]: t.color.background.surface.var,
               border: `1px solid ${v.border.var}`,
               borderRadius: t.radius.lg.var,
               boxShadow: t.shadow.xs.var,
@@ -218,7 +206,7 @@ export const appShell = typestyles.styles.component<typeof APP_SHELL_SLOTS, AppS
           },
           elevated: {
             root: {
-              ...backgroundVar(v.background.name, t.color.background.elevated.var),
+              [v.background.name]: t.color.background.elevated.var,
               boxShadow: t.shadow.sm.var,
             },
           },

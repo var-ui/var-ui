@@ -1,12 +1,5 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-
-type DescriptionListSlots = readonly ['root', 'title', 'item', 'term', 'details', 'toggle'];
-type DescriptionListVariants = {
-  columns: Record<'single' | 'multi', SlotStyles<DescriptionListSlots[number]>>;
-  labelPosition: Record<'start' | 'top', SlotStyles<DescriptionListSlots[number]>>;
-};
 
 /**
  * Semantic key/value display chrome for `<dl>` / `<dt>` / `<dd>` pairs. Pair with
@@ -25,7 +18,7 @@ type DescriptionListVariants = {
  * </dl>
  * ```
  */
-const descriptionListRecipe = typestyles.styles.component(
+export const descriptionList = typestyles.styles.component(
   'description-list',
   (c) => {
     const v = c.vars({
@@ -104,8 +97,3 @@ const descriptionListRecipe = typestyles.styles.component(
   },
   { layer: 'components' },
 );
-
-export const descriptionList = descriptionListRecipe as unknown as SlotComponentFunction<
-  DescriptionListSlots,
-  DescriptionListVariants
->;

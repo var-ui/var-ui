@@ -1,26 +1,6 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../../runtime';
 import { designTokens as t } from '../../tokens';
 import { semanticTone } from '../semanticTone';
-
-type ChatToolCallsSlots = readonly [
-  'root',
-  'header',
-  'statusIcon',
-  'name',
-  'target',
-  'duration',
-  'chevron',
-  'list',
-  'detail',
-];
-type ChatToolCallsVariants = {
-  status: Record<
-    'pending' | 'running' | 'complete' | 'error',
-    SlotStyles<ChatToolCallsSlots[number]>
-  >;
-  expanded: Record<'true' | 'false', SlotStyles<ChatToolCallsSlots[number]>>;
-};
 
 /**
  * Tool/function call display. One call renders inline; the React wrapper
@@ -32,15 +12,7 @@ type ChatToolCallsVariants = {
  * <div className={chatToolCalls({ status: 'running' }).root}>…</div>
  * ```
  */
-// Overload pinning: this recipe's slot names (`root`, `header`, `statusIcon`,
-// `name`, `target`, `duration`, `chevron`, `list`, `detail`) don't collide
-// with known CSS properties, so TypeScript resolves the config against
-// typestyles' flat-variant overload and types the call as a class string.
-// Runtime behavior is correct (typestyles branches on `slots` at runtime);
-// assert the slot signature until typestyles' ComponentConfig forbids
-// `slots` the way FlatComponentConfig does. See
-// packages/core/src/components/avatar.ts.
-const chatToolCallsRecipe = typestyles.styles.component(
+export const chatToolCalls = typestyles.styles.component(
   'chat-tool-calls',
   () => ({
     slots: [
@@ -128,8 +100,3 @@ const chatToolCallsRecipe = typestyles.styles.component(
   }),
   { layer: 'components' },
 );
-
-export const chatToolCalls = chatToolCallsRecipe as unknown as SlotComponentFunction<
-  ChatToolCallsSlots,
-  ChatToolCallsVariants
->;

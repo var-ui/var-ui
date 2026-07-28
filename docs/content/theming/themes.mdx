@@ -5,41 +5,46 @@ description: Create and apply custom var-ui themes with createDesignTheme.
 
 # Themes
 
-A theme is a named TypeStyles surface: light/dark (and optional fixed
-`data-surface`) token values, optional custom token namespaces (`extend`), and
-optional typed component overrides (`components`).
+A theme is a named TypeStyles surface: light/dark token values (via `tokens` +
+`colorMode`), optional fixed `data-surface` subtrees, optional custom token
+namespaces (`extend`), and optional typed component overrides (`components`).
+
+Theme class names use the configured scope: `theme-var-ui-<name>` (e.g.
+`theme-var-ui-default`).
 
 ## Authoring
 
-Built-in default tokens ship from `@var-ui/core` (`preset`, `defaultThemeClassName`).
-The default theme surface is registered when you import from the package — use
-`createDesignTheme({ name: 'default' })` or another name for custom themes. Additional palette
-and style themes (forest, rose, AI Glow, Windows 95, …) live as copyable examples in the
-docs repo under `docs/src/themes/`.
+Built-in default tokens ship from `@var-ui/core` (`tokenValues`,
+`defaultThemeClassName`). The default theme surface is registered when you import
+from the package. Use `createDesignTheme({ name: '…' })` for custom themes.
+Additional palette and style themes (forest, rose, AI Glow, Windows 95, …) live
+as copyable examples in the docs repo under `docs/src/themes/`.
 
 ```ts
-import { createDesignTheme } from '@var-ui/core';
+import { createDesignTheme, type DesignThemePreset } from '@var-ui/core';
 
-export const forest = createDesignTheme({
-  name: 'forest',
-  light: {
+// Reusable preset — spread into createDesignTheme
+export const forestPreset: DesignThemePreset = {
+  tokens: {
     color: {
-      /* DesignColorValues */
-    } /* … */,
-  },
-  dark: {
-    color: {
-      /* … */
+      /* light-face DesignColorValues */
+    },
+    shadow: {
+      /* mode-invariant overrides */
     },
   },
-  surfaces: {
-    // Optional fixed-tone faces for marked subtrees
+  colorMode: {
     dark: {
       color: {
-        /* always-dark toast, etc. */
+        /* dark-face DesignColorValues */
       },
     },
   },
+};
+
+export const forestTheme = createDesignTheme({
+  name: 'forest',
+  ...forestPreset,
   extend: {
     /* optional custom tokens — see Customize */
   },
@@ -50,6 +55,15 @@ export const forest = createDesignTheme({
 ```
 
 For a full working forest theme, see `docs/src/themes/forest.ts` in the var-ui repo.
+
+### Fixed-tone surfaces
+
+Mark subtrees with `data-surface="light"` or `data-surface="dark"` to pin chrome
+regardless of ambient mode. Import `SURFACE_ATTRIBUTE` from `@var-ui/core` if you
+need the attribute name in code. Global `color-scheme` rules for these markers are
+registered on package load — no theme option required.
+
+> **Note:** `surfaces` on `DesignThemeConfig` is deprecated and has no effect.
 
 ## Applying a theme
 
@@ -81,5 +95,5 @@ For SSR without a flash of wrong mode, also use `getColorModeInitScript`.
 
 ## Next
 
-- [Customize](/theming/customize) — `extend`, `components`, `overrideComponent`
-- [Design tokens](/theming/tokens) — what `light` / `dark` override
+- [Customize](/theming/customize) — `extend`, `components`, `styles.override`
+- [Design tokens](/theming/tokens) — what `tokens` / `colorMode` override

@@ -1,12 +1,5 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-
-type OverflowListSlots = readonly ['root', 'item', 'overflow'];
-type OverflowListVariants = {
-  gap: Record<'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl', SlotStyles<OverflowListSlots[number]>>;
-  fillParent: Record<'true' | 'false', SlotStyles<OverflowListSlots[number]>>;
-};
 
 /**
  * Single-row flex chrome for a horizontally overflowing list of items. Pair with
@@ -21,7 +14,7 @@ type OverflowListVariants = {
  * </div>
  * ```
  */
-const overflowListRecipe = typestyles.styles.component(
+export const overflowList = typestyles.styles.component(
   'overflow-list',
   (c) => {
     const v = c.vars({
@@ -69,8 +62,3 @@ const overflowListRecipe = typestyles.styles.component(
   },
   { layer: 'components' },
 );
-
-export const overflowList = overflowListRecipe as unknown as SlotComponentFunction<
-  OverflowListSlots,
-  OverflowListVariants
->;

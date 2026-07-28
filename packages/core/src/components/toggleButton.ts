@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
@@ -64,7 +63,7 @@ export const toggleButton = typestyles.styles.component(
             [v.background.name]: t.color.accent.hover.var,
             [v.border.name]: t.color.accent.hover.var,
           },
-        } as unknown as CSSProperties,
+        },
       },
       variants: {
         size: {

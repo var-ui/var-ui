@@ -1,11 +1,5 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-
-type CollapsibleSlots = readonly ['root', 'trigger', 'triggerIcon', 'panel'];
-type CollapsibleVariants = {
-  variant: Record<'flush' | 'bordered', SlotStyles<CollapsibleSlots[number]>>;
-};
 
 /**
  * Expand/collapse panel chrome for Disclosure-backed Collapsible.
@@ -21,7 +15,7 @@ type CollapsibleVariants = {
  * </div>
  * ```
  */
-const collapsibleRecipe = typestyles.styles.component(
+export const collapsible = typestyles.styles.component(
   'collapsible',
   (c) => {
     const v = c.vars({
@@ -98,8 +92,3 @@ const collapsibleRecipe = typestyles.styles.component(
   },
   { layer: 'components' },
 );
-
-export const collapsible = collapsibleRecipe as unknown as SlotComponentFunction<
-  CollapsibleSlots,
-  CollapsibleVariants
->;

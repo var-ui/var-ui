@@ -1,11 +1,5 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../../runtime';
 import { designTokens as t } from '../../tokens';
-
-type ChatComposerSlots = readonly ['root', 'inputRow', 'input', 'actions'];
-type ChatComposerVariants = {
-  appearance: Record<'default', SlotStyles<ChatComposerSlots[number]>>;
-};
 
 /**
  * Composer chrome: a bordered container around the message textarea and a
@@ -19,14 +13,7 @@ type ChatComposerVariants = {
  * </div>
  * ```
  */
-// Overload pinning: this recipe's slot names (`root`, `inputRow`, `input`,
-// `actions`) don't collide with known CSS properties, so TypeScript resolves
-// the config against typestyles' flat-variant overload and types the call as
-// a class string. Runtime behavior is correct (typestyles branches on
-// `slots` at runtime); assert the slot signature until typestyles'
-// ComponentConfig forbids `slots` the way FlatComponentConfig does. See
-// packages/core/src/components/avatar.ts.
-const chatComposerRecipe = typestyles.styles.component(
+export const chatComposer = typestyles.styles.component(
   'chat-composer',
   (c) => {
     const v = c.vars({
@@ -81,8 +68,3 @@ const chatComposerRecipe = typestyles.styles.component(
   },
   { layer: 'components' },
 );
-
-export const chatComposer = chatComposerRecipe as unknown as SlotComponentFunction<
-  ChatComposerSlots,
-  ChatComposerVariants
->;

@@ -1,11 +1,5 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../../runtime';
 import { designTokens as t } from '../../tokens';
-
-type ChatMessageListSlots = readonly ['root', 'inner', 'emptyState'];
-type ChatMessageListVariants = {
-  density: Record<'compact' | 'balanced' | 'spacious', SlotStyles<ChatMessageListSlots[number]>>;
-};
 
 /**
  * Presentational scroll container for chat messages. `density` controls
@@ -16,14 +10,7 @@ type ChatMessageListVariants = {
  * <div className={chatMessageList({ density: 'balanced' }).root}>…</div>
  * ```
  */
-// Overload pinning: this recipe's slot names (`root`, `inner`, `emptyState`)
-// don't collide with known CSS properties, so TypeScript resolves the config
-// against typestyles' flat-variant overload and types the call as a class
-// string. Runtime behavior is correct (typestyles branches on `slots` at
-// runtime); assert the slot signature until typestyles' ComponentConfig
-// forbids `slots` the way FlatComponentConfig does. See
-// packages/core/src/components/avatar.ts.
-const chatMessageListRecipe = typestyles.styles.component(
+export const chatMessageList = typestyles.styles.component(
   'chat-message-list',
   () => ({
     slots: ['root', 'inner', 'emptyState'],
@@ -59,8 +46,3 @@ const chatMessageListRecipe = typestyles.styles.component(
   }),
   { layer: 'components' },
 );
-
-export const chatMessageList = chatMessageListRecipe as unknown as SlotComponentFunction<
-  ChatMessageListSlots,
-  ChatMessageListVariants
->;

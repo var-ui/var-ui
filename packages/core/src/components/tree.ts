@@ -1,21 +1,5 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-
-type TreeSlots = readonly [
-  'root',
-  'item',
-  'row',
-  'toggle',
-  'label',
-  'description',
-  'group',
-  'start',
-  'end',
-];
-type TreeVariants = {
-  density: Record<'compact' | 'balanced' | 'spacious', SlotStyles<TreeSlots[number]>>;
-};
 
 /**
  * Hierarchical expandable list chrome for file explorers and nested navigation.
@@ -45,7 +29,7 @@ type TreeVariants = {
  * </ul>
  * ```
  */
-const treeRecipe = typestyles.styles.component(
+export const tree = typestyles.styles.component(
   'tree',
   (c) => {
     const v = c.vars({
@@ -167,5 +151,3 @@ const treeRecipe = typestyles.styles.component(
   },
   { layer: 'components' },
 );
-
-export const tree = treeRecipe as unknown as SlotComponentFunction<TreeSlots, TreeVariants>;

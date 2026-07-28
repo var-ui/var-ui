@@ -1,25 +1,12 @@
-import type { SlotComponentFunction, SlotStyles } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-
-type ToolbarSlots = readonly ['root', 'startSlot', 'centerSlot', 'endSlot'];
-type ToolbarVariants = {
-  size: Record<'sm' | 'md' | 'lg', SlotStyles<ToolbarSlots[number]>>;
-  orientation: Record<'horizontal' | 'vertical', SlotStyles<ToolbarSlots[number]>>;
-  layout: Record<'flex' | 'grid', SlotStyles<ToolbarSlots[number]>>;
-};
 
 /**
  * Layout chrome for a toolbar: a flex (or grid, when `layout: 'grid'`) row of
  * start/center/end slots. Purely visual — no keyboard navigation logic lives
  * here, that's the React wrapper's concern.
  */
-// Overload pinning: this slot recipe has `variants`, which TypeStyles'
-// `typestyles.styles.component()` resolves against the flat-variant overload (types the
-// call as a class string). Runtime behavior is correct; assert the slot
-// signature until typestyles' ComponentConfig forbids `slots` the way
-// FlatComponentConfig does. See packages/core/src/components/avatar.ts.
-const toolbarRecipe = typestyles.styles.component(
+export const toolbar = typestyles.styles.component(
   'toolbar',
   () => ({
     slots: ['root', 'startSlot', 'centerSlot', 'endSlot'],
@@ -79,8 +66,3 @@ const toolbarRecipe = typestyles.styles.component(
   }),
   { layer: 'components' },
 );
-
-export const toolbar = toolbarRecipe as unknown as SlotComponentFunction<
-  ToolbarSlots,
-  ToolbarVariants
->;
