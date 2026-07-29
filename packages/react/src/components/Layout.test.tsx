@@ -1,8 +1,18 @@
-import { describe, expect, it } from 'vite-plus/test';
+import { describe, expect, it, vi } from 'vite-plus/test';
 import { render, screen } from '@testing-library/react';
 import { layout } from '@var-ui/core';
 import { Layout, LayoutContent, LayoutFooter, LayoutHeader, LayoutPanel } from './Layout';
 import type { UseResizableResult } from '../hooks';
+
+/** Stubs `window.matchMedia` so `useMediaQuery` reports a fixed `matches` value for every query. */
+function mockMatchMedia(matches: boolean) {
+  vi.stubGlobal('matchMedia', (query: string) => ({
+    matches,
+    media: query,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  }));
+}
 
 function fakeResizable(width: number): UseResizableResult {
   return {
@@ -183,5 +193,68 @@ describe('LayoutPanel', () => {
     render(<LayoutPanel label="Details">Panel body</LayoutPanel>);
     const panel = screen.getByRole('region', { name: 'Details' });
     expect(panel.textContent).toBe('Panel body');
+  });
+
+  describe('responsive', () => {
+    it('hidden mode: panel not in DOM when closed below breakpoint', () => {
+      mockMatchMedia(true);
+      render(
+        <LayoutPanel responsive={{ below: 'lg', mode: 'hidden' }} defaultOpen={false}>
+          Inspector
+        </LayoutPanel>,
+      );
+      expect(screen.queryByText('Inspector')).toBeNull();
+      vi.unstubAllGlobals();
+    });
+
+    it('hidden mode: panel visible when isOpen below breakpoint', () => {
+      mockMatchMedia(true);
+      render(
+        <LayoutPanel responsive={{ below: 'lg', mode: 'hidden' }} isOpen>
+          Inspector
+        </LayoutPanel>,
+      );
+      expect(screen.getByText('Inspector')).toBeTruthy();
+      vi.unstubAllGlobals();
+    });
+
+    it('overlay mode: complementary landmark in modal when isOpen below breakpoint', () => {
+      mockMatchMedia(true);
+      render(
+        <LayoutPanel
+          responsive={{ below: 'lg', mode: 'overlay' }}
+          isOpen
+          label="Details"
+          role="complementary"
+        >
+          Inspector
+        </LayoutPanel>,
+      );
+      expect(screen.getByRole('dialog')).toBeTruthy();
+      expect(screen.getByRole('complementary', { name: 'Details' })).toBeTruthy();
+      expect(screen.getByText('Inspector')).toBeTruthy();
+      vi.unstubAllGlobals();
+    });
+
+    it('above breakpoint: responsive is inert and the panel always renders inline', () => {
+      mockMatchMedia(false);
+      render(
+        <LayoutPanel responsive={{ below: 'lg', mode: 'hidden' }} defaultOpen={false}>
+          Inspector
+        </LayoutPanel>,
+      );
+      expect(screen.queryByRole('dialog')).toBeNull();
+      expect(screen.getByText('Inspector')).toBeTruthy();
+
+      const { unmount } = render(
+        <LayoutPanel responsive={{ below: 'lg', mode: 'overlay' }} isOpen={false}>
+          Overlay panel
+        </LayoutPanel>,
+      );
+      expect(screen.queryByRole('dialog')).toBeNull();
+      expect(screen.getByText('Overlay panel')).toBeTruthy();
+      unmount();
+      vi.unstubAllGlobals();
+    });
   });
 });

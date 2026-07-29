@@ -244,5 +244,6 @@ export {
   type LayoutFooterProps,
   type LayoutHeaderProps,
   type LayoutPanelProps,
+  type LayoutPanelResponsive,
   type LayoutProps,
 } from './Layout';

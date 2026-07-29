@@ -10,6 +10,8 @@ export {
   type AppShellMobileBreakpoint,
   type AppShellMobileBreakpointName,
   appShellMobileBreakpointQueries,
+  type LayoutBreakpoint,
+  layoutBreakpointQueries,
 } from './breakpoints';
 export { typestyles, styles, global } from './runtime';
 export { registerDocumentGlobals, registerGlobals } from './document-globals';
