@@ -16,3 +16,4 @@ import '@var-ui/core';
 import '@var-ui/react';
 import './src/themes/extract';
 import './src/styles/homeBento';
+import './src/styles/root';

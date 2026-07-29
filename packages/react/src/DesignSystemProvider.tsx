@@ -21,7 +21,7 @@ export type DesignSystemProviderProps = {
   /**
    * When true, apply the design theme class, `data-mode`, and `color-scheme` on
    * `document.documentElement` instead of a wrapper, so page chrome (`body` background /
-   * text from `globalBody`) and portals resolve the same color mode as the app.
+   * text from core document globals) and portals resolve the same color mode as the app.
    * @default false
    */
   applyToDocument?: boolean;

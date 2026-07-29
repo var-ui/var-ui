@@ -37,8 +37,8 @@ catalogs:
       specifier: ^6.0.0
       version: 6.0.3
     typestyles:
-      specifier: ^0.17.0
-      version: 0.17.0
+      specifier: ^0.18.0
+      version: 0.18.0
     vite-plus:
       specifier: 0.2.2
       version: 0.2.2
@@ -110,7 +110,7 @@ importers:
         version: 19.2.7(react@19.2.7)
       typestyles:
         specifier: 'catalog:'
-        version: 0.17.0
+        version: 0.18.0
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.9
@@ -169,7 +169,7 @@ importers:
         version: 6.0.3
       typestyles:
         specifier: 'catalog:'
-        version: 0.17.0
+        version: 0.18.0
 
   examples/vite-app:
     dependencies:
@@ -218,7 +218,7 @@ importers:
         version: 26.1.0
       typestyles:
         specifier: 'catalog:'
-        version: 0.17.0
+        version: 0.18.0
       vite:
         specifier: npm:@voidzero-dev/vite-plus-core@0.2.2
         version: '@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)'
@@ -230,7 +230,7 @@ importers:
     dependencies:
       typestyles:
         specifier: 'catalog:'
-        version: 0.17.0
+        version: 0.18.0
     devDependencies:
       '@typestyles/cli':
         specifier: ^0.2.1
@@ -267,7 +267,7 @@ importers:
     dependencies:
       typestyles:
         specifier: 'catalog:'
-        version: 0.17.0
+        version: 0.18.0
     devDependencies:
       '@internationalized/date':
         specifier: 'catalog:'
@@ -5821,8 +5821,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typestyles@0.17.0:
-    resolution: {integrity: sha512-ayQq0oLecDI06rzb74/ntrrlG34qu+tuz63TC0gZxdITGgEOFR58R03vDAlesgiZ0vt86enJX404Mue27pNoCg==}
+  typestyles@0.18.0:
+    resolution: {integrity: sha512-66Qt4nFRMaYQHcYs7GBp/wvQi1txvm2zYfXOmr/KYUXjoq5gPtmP/yQ6RXjhR7Wc5b93t44D1ovOd7qz65CeyA==}
 
   ufo@1.6.4:
     resolution: {integrity: sha512-JFNbkD1Svwe0KvGi8GOeLcP4kAWQ609twvCdcHxq1oSL8svv39ZuSvajcD8B+5D0eL4+s1Is2D/O6KN3qcTeRA==}
@@ -12966,7 +12966,7 @@ snapshots:
 
   typescript@6.0.3: {}
 
-  typestyles@0.17.0:
+  typestyles@0.18.0:
     dependencies:
       csstype: 3.2.3
 

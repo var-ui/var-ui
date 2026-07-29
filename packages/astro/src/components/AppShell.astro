@@ -1,12 +1,12 @@
 ---
-import { appShell, designTokens as t } from '@var-ui/core';
+import { appShell, type AppShellMobileBreakpoint, designTokens as t } from '@var-ui/core';
 import { recipeProps } from '../utils';
 
 type Props = {
   height?: 'fill' | 'auto';
   variant?: 'wash' | 'surface' | 'section' | 'elevated';
   contentPadding?: number;
-  mobileBreakpoint?: 'sm' | 'md' | 'lg' | 'none';
+  mobileBreakpoint?: AppShellMobileBreakpoint;
   className?: string;
 };
 

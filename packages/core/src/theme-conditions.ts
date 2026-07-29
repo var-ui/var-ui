@@ -2,11 +2,13 @@ import {
   conditional,
   type ConditionalOverride,
   type ThemeCondition,
+  toMediaAtRuleKey,
   type VariantOptionStyle,
 } from 'typestyles';
 import { typestyles } from './runtime';
 
 const tsWhen = typestyles.tokens.when;
+const reducedMotionQuery = '(prefers-reduced-motion: reduce)';
 
 /** Canonical `ThemeCondition` presets for var-ui color mode and a11y media queries. */
 export const themeWhen = {
@@ -25,8 +27,16 @@ export const themeWhen = {
     tsWhen.not(tsWhen.attr('data-mode', 'dark', { scope: 'ancestor' })),
     tsWhen.prefersDark,
   ),
-  reducedMotion: tsWhen.media('(prefers-reduced-motion: reduce)'),
+  reducedMotion: tsWhen.media(reducedMotionQuery),
 } as const;
+
+/** `@media` key for reduced motion — internal; prefer {@link atReducedMotion}. */
+const reducedMotionAtRule = toMediaAtRuleKey(reducedMotionQuery);
+
+/** Reduced-motion styles for variant slots — spread into a style object. */
+export function atReducedMotion(style: VariantOptionStyle) {
+  return typestyles.styles.atRuleBlock(reducedMotionAtRule, style);
+}
 
 /** Build a `conditions` entry — prefer `{ light, dark }` on color properties when possible. */
 export const when = {

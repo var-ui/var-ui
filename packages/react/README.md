@@ -131,7 +131,7 @@ Core-only recipes without wrappers (use the class helpers from `@var-ui/core`):
 `skeleton`, `statusDot`, `kbd`, `overlay`, plus everything in the core README's
 inventory.
 
-Side effect on import: `globalBody` registers base document styles.
+Side effect on import: `@var-ui/core` registers base document styles (see `document-globals.ts`).
 
 ## Structure
 
@@ -145,7 +145,6 @@ src/
   tokens.ts       # Re-exports / aliases @var-ui/core tokens
   color-mode.tsx            # useColorMode, getColorModeInitScript
   DesignSystemProvider.tsx  # DesignSystemProvider
-  globalBody.ts   # Document/reset registrations
   index.ts        # Public API
 ```
 

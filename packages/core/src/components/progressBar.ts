@@ -1,5 +1,6 @@
 import { keyframes } from 'typestyles';
 import { typestyles } from '../runtime';
+import { atReducedMotion } from '../theme-conditions';
 import { designTokens as t } from '../tokens';
 
 const slide = keyframes.create('var-ui-progress-slide', {
@@ -58,11 +59,11 @@ export const progressBar = typestyles.styles.component(
             fill: {
               width: '25%',
               animation: `${slide} 1200ms ease-in-out infinite`,
-              '@media (prefers-reduced-motion: reduce)': {
+              ...atReducedMotion({
                 animation: 'none',
                 width: '100%',
                 opacity: 0.5,
-              },
+              }),
             },
           },
           false: {},

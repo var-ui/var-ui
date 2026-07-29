@@ -1,7 +1,8 @@
-import { typestyles } from '../runtime';
+import { styles, typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
-const bp = `@media (max-width: ${t.breakpoint.md.var})`;
+/** Mobile prose density — uses TypeStyles breakpoint map from `runtime.ts`. */
+const belowMd = styles.breakpoint('md', 'max');
 
 /**
  * Long-form / markdown prose primitives: blockquote, kbd, inline badges, tables, dividers,
@@ -88,7 +89,7 @@ export const proseContent = typestyles.styles.component(
           marginTop: 0,
           marginBottom: t.space[3].var,
           color: t.color.text.primary.var,
-          [bp]: {
+          [belowMd]: {
             fontSize: '24px',
             marginBottom: t.space[2].var,
           },
@@ -109,7 +110,7 @@ export const proseContent = typestyles.styles.component(
           paddingTop: t.space[5].var,
           borderTop: t.stroke.strong.var,
           color: t.color.text.primary.var,
-          [bp]: {
+          [belowMd]: {
             fontSize: '21px',
             marginTop: t.space[6].var,
             paddingTop: t.space[4].var,
@@ -130,7 +131,7 @@ export const proseContent = typestyles.styles.component(
           marginTop: t.space[5].var,
           marginBottom: t.space[2].var,
           color: t.color.text.primary.var,
-          [bp]: {
+          [belowMd]: {
             marginTop: t.space[4].var,
           },
         },
@@ -140,7 +141,7 @@ export const proseContent = typestyles.styles.component(
           marginTop: t.space[4].var,
           marginBottom: t.space[1].var,
           color: t.color.text.primary.var,
-          [bp]: {
+          [belowMd]: {
             marginTop: t.space[3].var,
           },
         },
@@ -149,14 +150,14 @@ export const proseContent = typestyles.styles.component(
         },
         '& p': {
           marginBottom: t.space[4].var,
-          [bp]: {
+          [belowMd]: {
             marginBottom: t.space[3].var,
           },
         },
         '& ul, & ol': {
           marginBottom: t.space[3].var,
           paddingLeft: t.space[4].var,
-          [bp]: {
+          [belowMd]: {
             marginBottom: t.space[2].var,
             paddingLeft: t.space[3].var,
           },
@@ -225,7 +226,7 @@ export const proseContent = typestyles.styles.component(
           border: `1px solid ${v.preBorder.var}`,
           overflow: 'auto',
           marginBottom: t.space[3].var,
-          [bp]: {
+          [belowMd]: {
             padding: t.space[2].var,
             marginBottom: t.space[2].var,
           },
@@ -246,7 +247,7 @@ export const proseContent = typestyles.styles.component(
          */
         '& [data-codeblock]': {
           marginBlock: t.space[5].var,
-          [bp]: {
+          [belowMd]: {
             marginBlock: t.space[4].var,
           },
         },
@@ -268,7 +269,7 @@ export const proseContent = typestyles.styles.component(
           boxShadow: t.shadow.sm.var,
           color: v.foreground.var,
           fontStyle: 'normal',
-          [bp]: {
+          [belowMd]: {
             margin: `${t.space[4].var} 0`,
             padding: `${t.space[3].var} ${t.space[4].var}`,
           },
@@ -330,7 +331,7 @@ export const proseContent = typestyles.styles.component(
           borderBottom: 'none',
           borderLeft: 'none',
           margin: `${t.space[5].var} 0`,
-          [bp]: {
+          [belowMd]: {
             margin: `${t.space[4].var} 0`,
           },
         },

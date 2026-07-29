@@ -1,5 +1,3 @@
-import './globalBody';
-
 export {
   Button,
   IconButton,

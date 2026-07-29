@@ -1,18 +1,11 @@
+import { type AppShellMobileBreakpoint, appShellMobileBreakpointQueries } from '@var-ui/core';
+
 /** `id` of the `<main>` landmark — target of the skip-to-content link. */
 export const APP_SHELL_MAIN_ID = 'var-ui-app-shell-main';
 
-const MOBILE_BREAKPOINT_QUERIES = {
-  sm: '(max-width: 640px)',
-  md: '(max-width: 768px)',
-  lg: '(max-width: 1024px)',
-  none: 'not all',
-} as const;
-
-type MobileBreakpoint = keyof typeof MOBILE_BREAKPOINT_QUERIES;
-
 export function initAppShell(root: HTMLElement): () => void {
-  const breakpoint = (root.dataset.mobileBreakpoint ?? 'md') as MobileBreakpoint;
-  const query = MOBILE_BREAKPOINT_QUERIES[breakpoint] ?? MOBILE_BREAKPOINT_QUERIES.md;
+  const breakpoint = (root.dataset.mobileBreakpoint ?? 'md') as AppShellMobileBreakpoint;
+  const query = appShellMobileBreakpointQueries[breakpoint] ?? appShellMobileBreakpointQueries.md;
   const mql = window.matchMedia(query);
 
   const update = () => {

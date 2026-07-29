@@ -1,5 +1,5 @@
 ---
-import { codeBlock } from '@var-ui/core';
+import { codeBlock, defaultIconSvgs } from '@var-ui/core';
 import { cx, recipeClassName, recipeProps } from '../utils';
 
 type CodeBlockVariant = 'default' | 'inline' | 'diff' | 'terminal';
@@ -51,9 +51,6 @@ const feedbackClassName = cx(
   recipeClassName(cb.feedback),
   recipeClassName(cb.feedbackInline),
 );
-
-const copyIcon =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M15 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h1"></path></svg>';
 ---
 
 {
@@ -101,7 +98,7 @@ const copyIcon =
               data-class-error={recipeClassName(cb.copyButtonError)}
               aria-label={copyLabel}
             >
-              <span data-codeblock-copy-icon set:html={copyIcon} />
+              <span data-codeblock-copy-icon set:html={defaultIconSvgs.copy} />
               <span data-codeblock-copy-text>Copy</span>
             </button>
             <span

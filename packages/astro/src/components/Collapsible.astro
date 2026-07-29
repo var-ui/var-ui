@@ -1,5 +1,5 @@
 ---
-import { collapsible } from '@var-ui/core';
+import { collapsible, defaultIconSvgs } from '@var-ui/core';
 import { recipeProps } from '../utils';
 
 type Props = {
@@ -20,9 +20,6 @@ const {
 
 const c = collapsible({ variant });
 const hasTriggerSlot = Astro.slots.has('trigger');
-
-const chevronIcon =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9.5l6 6 6-6"></path></svg>';
 ---
 
 <details id={id} open={defaultExpanded || undefined} {...recipeProps(c.root, className)}>
@@ -32,7 +29,7 @@ const chevronIcon =
         <slot name="trigger" />
       ) : (
         <>
-          <span {...recipeProps(c.triggerIcon)} set:html={chevronIcon} />
+          <span {...recipeProps(c.triggerIcon)} set:html={defaultIconSvgs.chevronDown} />
           {title}
         </>
       )

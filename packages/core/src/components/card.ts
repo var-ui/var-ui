@@ -1,4 +1,4 @@
-import { typestyles } from '../runtime';
+import { styles, typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
 export const card = typestyles.styles.component(
@@ -69,9 +69,9 @@ export const card = typestyles.styles.component(
         display: 'grid',
         gap: t.space[4].var,
         gridTemplateColumns: '1fr',
-        [`@media (min-width: ${t.breakpoint.sm.var})`]: {
+        ...styles.media('sm', 'min', {
           gridTemplateColumns: 'repeat(2, 1fr)',
-        },
+        }),
       },
       linkRoot: {
         textDecoration: 'none',

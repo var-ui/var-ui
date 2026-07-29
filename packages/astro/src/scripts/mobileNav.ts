@@ -1,3 +1,5 @@
+import { defaultIconSvgs } from '@var-ui/core';
+
 type MobileNavController = {
   isOpen: boolean;
   open: () => void;
@@ -7,10 +9,8 @@ type MobileNavController = {
 
 const providers = new WeakMap<HTMLElement, MobileNavController>();
 
-const MENU_ICON =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>';
-const CLOSE_ICON =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6L6 18M6 6l12 12"></path></svg>';
+const MENU_ICON = defaultIconSvgs.menu;
+const CLOSE_ICON = defaultIconSvgs.close;
 
 function getFocusableElements(container: HTMLElement): HTMLElement[] {
   return Array.from(

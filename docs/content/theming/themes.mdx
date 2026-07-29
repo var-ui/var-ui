@@ -90,7 +90,7 @@ export function App() {
   `data-mode` (independent of which palette theme class is applied).
 
 For SPA / full-page apps, pass `applyToDocument` so the theme class and `data-mode`
-live on `<html>` and `body` picks up tokenized background/text from `globalBody`.
+live on `<html>` and `body` picks up tokenized background/text from core document globals.
 For SSR without a flash of wrong mode, also use `getColorModeInitScript`.
 
 ## Next

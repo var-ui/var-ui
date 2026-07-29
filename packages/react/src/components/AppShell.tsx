@@ -1,18 +1,16 @@
 import type { CSSProperties, JSX, ReactNode } from 'react';
-import { appShell, designTokens as t } from '@var-ui/core';
+import {
+  appShell,
+  type AppShellMobileBreakpoint,
+  appShellMobileBreakpointQueries,
+  designTokens as t,
+} from '@var-ui/core';
 import { useMediaQuery } from '../hooks';
 import { MobileNavProvider } from './MobileNav';
 import { recipeProps } from './utils';
 
 /** `id` of the `<main>` landmark — target of the skip-to-content link. */
 export const APP_SHELL_MAIN_ID = 'var-ui-app-shell-main';
-
-const MOBILE_BREAKPOINT_QUERIES = {
-  sm: '(max-width: 640px)',
-  md: '(max-width: 768px)',
-  lg: '(max-width: 1024px)',
-  none: 'not all',
-} as const;
 
 export type AppShellProps = {
   /** Rendered inside the `<main>` landmark. */
@@ -39,7 +37,7 @@ export type AppShellProps = {
   /** Main content padding. Values matching a `designTokens.space` step resolve to that token; anything else is treated as raw px. */
   contentPadding?: number;
   /** Viewport width below which `sideNav` hides and `data-mobile` is set on the root. `'none'` never goes mobile. @default 'md' */
-  mobileBreakpoint?: 'sm' | 'md' | 'lg' | 'none';
+  mobileBreakpoint?: AppShellMobileBreakpoint;
   className?: string;
 };
 
@@ -80,7 +78,7 @@ export function AppShell({
   mobileBreakpoint = 'md',
   className,
 }: AppShellProps): JSX.Element {
-  const isMobile = useMediaQuery(MOBILE_BREAKPOINT_QUERIES[mobileBreakpoint]);
+  const isMobile = useMediaQuery(appShellMobileBreakpointQueries[mobileBreakpoint]);
   const s = appShell({ height, variant });
   const resolvedPadding = resolveContentPadding(contentPadding);
   const mainStyle = resolvedPadding
