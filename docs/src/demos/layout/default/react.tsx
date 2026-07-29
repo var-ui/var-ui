@@ -26,39 +26,43 @@ export default function Preview() {
 
   return (
     <div style={{ minHeight: 240 }}>
-      <Layout height="auto" padding={0}>
-        <LayoutContent padding={0}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 12 }}>
-            {ITEMS.map((item) => (
-              <Button
-                key={item.id}
-                intent={item.id === selectedId ? 'primary' : 'secondary'}
-                onPress={() => setSelectedId(item.id)}
+      <Layout
+        height="auto"
+        padding={0}
+        content={
+          <LayoutContent padding={0}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 12 }}>
+              {ITEMS.map((item) => (
+                <Button
+                  key={item.id}
+                  intent={item.id === selectedId ? 'primary' : 'secondary'}
+                  onPress={() => setSelectedId(item.id)}
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </div>
+          </LayoutContent>
+        }
+        end={
+          selected ? (
+            <>
+              <LayoutPanel
+                resizable={end}
+                hasDivider
+                label="Details"
+                role="complementary"
+                padding={0}
               >
-                {item.label}
-              </Button>
-            ))}
-          </div>
-        </LayoutContent>
-        {selected ? (
-          <>
-            <LayoutPanel
-              resizable={end}
-              hasDivider
-              label="Details"
-              role="complementary"
-              responsive={{ below: 'lg', mode: 'overlay' }}
-              isOpen
-              padding={0}
-            >
-              <div style={{ padding: 12 }}>
-                <Text size="sm">Selected: {selected.label}</Text>
-              </div>
-            </LayoutPanel>
-            <ResizeHandle {...end.handleProps} aria-label="Resize inspector" />
-          </>
-        ) : null}
-      </Layout>
+                <div style={{ padding: 12 }}>
+                  <Text size="sm">Selected: {selected.label}</Text>
+                </div>
+              </LayoutPanel>
+              <ResizeHandle {...end.handleProps} aria-label="Resize inspector" />
+            </>
+          ) : null
+        }
+      />
     </div>
   );
 }

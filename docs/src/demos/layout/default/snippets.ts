@@ -15,13 +15,19 @@ const { end } = useResizable({
   regions: { end: { defaultWidth: 280, minWidth: 220, maxWidth: 400 } },
 });
 
-<Layout height="auto" padding={0}>
-  <LayoutContent padding={0}>{/* list */}</LayoutContent>
-  <LayoutPanel resizable={end} hasDivider label="Details" role="complementary">
-    Inspector
-  </LayoutPanel>
-  <ResizeHandle {...end.handleProps} />
-</Layout>`,
+<Layout
+  height="auto"
+  padding={0}
+  content={<LayoutContent padding={0}>{/* list */}</LayoutContent>}
+  end={
+    <>
+      <LayoutPanel resizable={end} hasDivider label="Details" role="complementary">
+        Inspector
+      </LayoutPanel>
+      <ResizeHandle {...end.handleProps} />
+    </>
+  }
+/>`,
   astro: `---
 import { Layout, LayoutContent, LayoutPanel } from '@var-ui/astro';
 ---

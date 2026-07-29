@@ -185,40 +185,49 @@ function LayoutSection() {
   return (
     <Section title="Layout (master-detail)">
       <div style={{ minHeight: 280, display: 'flex', flexDirection: 'column' }}>
-        <Layout height="fill" padding={0}>
-          <LayoutContent padding={0}>
-            <Stack gap="sm" style={{ padding: 12 }}>
-              {items.map((item) => (
-                <Button
-                  key={item.id}
-                  intent={item.id === selectedId ? 'primary' : 'secondary'}
-                  onPress={() => setSelectedId(item.id)}
+        <Layout
+          height="fill"
+          padding={0}
+          content={
+            <LayoutContent padding={0}>
+              <Stack gap="sm" style={{ padding: 12 }}>
+                {items.map((item) => (
+                  <Button
+                    key={item.id}
+                    intent={item.id === selectedId ? 'primary' : 'secondary'}
+                    onPress={() => setSelectedId(item.id)}
+                  >
+                    {item.label}
+                  </Button>
+                ))}
+              </Stack>
+            </LayoutContent>
+          }
+          end={
+            selected ? (
+              <>
+                <LayoutPanel
+                  resizable={end}
+                  hasDivider
+                  label="Inspector"
+                  role="complementary"
+                  responsive={{ below: 'lg', mode: 'overlay' }}
+                  isOpen
+                  onOpenChange={(open) => {
+                    if (!open) setSelectedId(null);
+                  }}
+                  padding={0}
                 >
-                  {item.label}
-                </Button>
-              ))}
-            </Stack>
-          </LayoutContent>
-          {selected ? (
-            <>
-              <LayoutPanel
-                resizable={end}
-                hasDivider
-                label="Inspector"
-                role="complementary"
-                responsive={{ below: 'lg', mode: 'overlay' }}
-                isOpen
-                padding={0}
-              >
-                <Stack gap="sm" style={{ padding: 12 }}>
-                  <Heading level={4}>{selected.label}</Heading>
-                  <Text>Detail panel for the selected row.</Text>
-                </Stack>
-              </LayoutPanel>
-              <ResizeHandle {...end.handleProps} aria-label="Resize inspector" />
-            </>
-          ) : null}
-        </Layout>
+                  <Stack gap="sm" style={{ padding: 12 }}>
+                    <Heading level={4}>{selected.label}</Heading>
+                    <Text>Detail panel for the selected row.</Text>
+                  </Stack>
+                </LayoutPanel>
+                <ResizeHandle {...end.handleProps} aria-label="Resize inspector" />
+              </>
+            ) : null
+          }
+        />
       </div>
     </Section>
   );
