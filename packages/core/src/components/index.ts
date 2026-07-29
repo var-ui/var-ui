@@ -1,7 +1,7 @@
 export * from './chat';
 export { proseContent } from './proseContent';
 export { codeHljsScope } from './codeHighlight';
-export { layout, text } from './styles';
+export { layout as layoutUtility, text } from './styles';
 export { commandPalette } from './commandPalette';
 export { button, linkButton } from './button';
 export { buttonGroup } from './buttonGroup';
@@ -58,6 +58,14 @@ export { icon } from './icon';
 export { kbd } from './kbd';
 export { outline } from './outline';
 export { collapsible } from './collapsible';
+export {
+  layout,
+  layoutHeader,
+  layoutFooter,
+  layoutContent,
+  layoutPanel,
+  type LayoutPadding,
+} from './layout';
 export { overflowList } from './overflowList';
 export { overlay } from './overlay';
 export { pagination } from './pagination';
