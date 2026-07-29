@@ -73,6 +73,11 @@ export const layout = typestyles.styles.component<typeof LAYOUT_SLOTS, LayoutVar
           marginInlineEnd: 'calc(-1 * var(--container-padding-inline-end, 0px))',
           marginBlockStart: 'calc(-1 * var(--container-padding-block-start, 0px))',
           marginBlockEnd: 'calc(-1 * var(--container-padding-block-end, 0px))',
+          display: 'flex',
+          flexDirection: 'column',
+          flex: '1 1 auto',
+          minHeight: 0,
+          minWidth: 0,
         },
         inner: {
           '--container-padding-inline-start': '0px',
@@ -94,7 +99,7 @@ export const layout = typestyles.styles.component<typeof LAYOUT_SLOTS, LayoutVar
       },
       variants: {
         height: {
-          fill: { root: { flex: '1 1 auto', minHeight: 0 } },
+          fill: { root: { flex: '1 1 auto', minHeight: 0, overflow: 'hidden' } },
           auto: { root: { flex: 'none' } },
         },
       },

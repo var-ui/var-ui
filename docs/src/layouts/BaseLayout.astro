@@ -84,7 +84,7 @@ function isSidebarLinkActive(link: string): boolean {
       {
         sidebarSections ? (
           <Layout height="fill" padding={0} class="docs-site-layout">
-            <LayoutPanel slot="start" side="start" width={280} hasDivider padding={0}>
+            <LayoutPanel slot="start" side="start" width={280} hasDivider padding={0} isScrollable={false}>
               <SideNav label="Section navigation" collapsible>
                 <DocsSidebarNav sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
               </SideNav>
