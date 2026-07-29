@@ -240,6 +240,8 @@ export {
   LayoutFooter,
   LayoutHeader,
   LayoutPanel,
+  useLayoutArea,
+  useLayoutSlots,
   type LayoutContentProps,
   type LayoutFooterProps,
   type LayoutHeaderProps,

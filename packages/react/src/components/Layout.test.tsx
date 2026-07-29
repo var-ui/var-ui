@@ -1,7 +1,14 @@
 import { describe, expect, it, vi } from 'vite-plus/test';
 import { render, screen } from '@testing-library/react';
 import { layout } from '@var-ui/core';
-import { Layout, LayoutContent, LayoutFooter, LayoutHeader, LayoutPanel } from './Layout';
+import {
+  Layout,
+  LayoutContent,
+  LayoutFooter,
+  LayoutHeader,
+  LayoutPanel,
+  useLayoutSlots,
+} from './Layout';
 import type { UseResizableResult } from '../hooks';
 
 /** Stubs `window.matchMedia` so `useMediaQuery` reports a fixed `matches` value for every query. */
@@ -95,6 +102,43 @@ describe('Layout', () => {
     );
     const panel = document.querySelector('[data-side="end"]') as HTMLElement;
     expect(panel.style.width).toBe('420px');
+  });
+
+  it('unmounts LayoutPanel when resizable.isCollapsed is true', () => {
+    const resizable = { ...fakeResizable(320), isCollapsed: true };
+    render(
+      <Layout
+        content={<div>Main</div>}
+        end={<LayoutPanel resizable={resizable}>Panel</LayoutPanel>}
+      />,
+    );
+    expect(screen.queryByText('Panel')).toBeNull();
+  });
+
+  it('exposes slot presence via useLayoutSlots', () => {
+    function Probe() {
+      const slots = useLayoutSlots();
+      return (
+        <span>
+          {slots.hasHeader ? 'h' : ''}
+          {slots.hasStart ? 's' : ''}
+          {slots.hasEnd ? 'e' : ''}
+        </span>
+      );
+    }
+    render(
+      <Layout
+        header={<LayoutHeader>Header</LayoutHeader>}
+        start={<LayoutPanel>Start</LayoutPanel>}
+        end={<LayoutPanel>End</LayoutPanel>}
+        content={
+          <LayoutContent>
+            <Probe />
+          </LayoutContent>
+        }
+      />,
+    );
+    expect(screen.getByText('hse')).toBeTruthy();
   });
 
   it('sets data-side="start" or "end" on LayoutPanel based on its slot', () => {
@@ -218,7 +262,7 @@ describe('LayoutPanel', () => {
       vi.unstubAllGlobals();
     });
 
-    it('overlay mode: complementary landmark in modal when isOpen below breakpoint', () => {
+    it('overlay mode: dialog landmark when isOpen below breakpoint', () => {
       mockMatchMedia(true);
       render(
         <LayoutPanel
@@ -230,8 +274,8 @@ describe('LayoutPanel', () => {
           Inspector
         </LayoutPanel>,
       );
-      expect(screen.getByRole('dialog')).toBeTruthy();
-      expect(screen.getByRole('complementary', { name: 'Details' })).toBeTruthy();
+      expect(screen.getByRole('dialog', { name: 'Details' })).toBeTruthy();
+      expect(screen.queryByRole('complementary')).toBeNull();
       expect(screen.getByText('Inspector')).toBeTruthy();
       vi.unstubAllGlobals();
     });

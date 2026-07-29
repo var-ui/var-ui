@@ -67,6 +67,16 @@ const LayoutSlotsContext = createContext<LayoutSlotsContextValue>({
   defaultHasDividers: false,
 });
 
+/** Slot presence and divider defaults from the nearest `Layout` root. */
+export function useLayoutSlots(): LayoutSlotsContextValue {
+  return useContext(LayoutSlotsContext);
+}
+
+/** Which zone of the nearest `Layout` rendered this subtree, if any. */
+export function useLayoutArea(): LayoutArea | null {
+  return useContext(LayoutAreaContext);
+}
+
 /** Inherited divider default consumed by `LayoutHeader`/`LayoutFooter` when `hasDivider` is unset. */
 const LayoutDividerContext = createContext<boolean>(false);
 
@@ -340,7 +350,10 @@ export type LayoutPanelProps = {
   isScrollable?: boolean;
   /** Only `0` (seamless) is distinct from the inherited default. */
   padding?: LayoutPadding;
-  /** Binds `useResizable()`'s result — reads `width` and ignores the `width` prop. */
+  /**
+   * Binds `useResizable()`'s result — reads `width` and ignores the `width` prop.
+   * When `isCollapsed` is true the panel unmounts (pair with `ResizeHandle` to expand).
+   */
   resizable?: UseResizableResult;
   /** Collapses the panel to `overlay` or `hidden` below a breakpoint. Inert above it. */
   responsive?: LayoutPanelResponsive;
@@ -391,8 +404,11 @@ export function LayoutPanel({
   const style: CSSProperties | undefined =
     effectiveWidth != null ? { width: toCssSize(effectiveWidth) } : undefined;
 
-  const isBelowBreakpoint = useMediaQuery(layoutBreakpointQueries[responsive?.below ?? 'lg']);
+  const isBelowBreakpoint = useMediaQuery(
+    responsive ? layoutBreakpointQueries[responsive.below] : 'not all',
+  );
   const isResponsiveActive = responsive != null && isBelowBreakpoint;
+  const isOverlayMode = isResponsiveActive && responsive?.mode === 'overlay';
 
   const isControlled = isOpenProp !== undefined;
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
@@ -405,9 +421,13 @@ export function LayoutPanel({
     [isControlled, onOpenChange],
   );
 
-  const isOverlayVisible = isResponsiveActive && responsive?.mode === 'overlay' && isOpen;
+  const isOverlayVisible = isOverlayMode && isOpen;
   useScrollLock(isOverlayVisible);
   const { style: layerStyle } = useLayer();
+
+  if (resizable?.isCollapsed) {
+    return null;
+  }
 
   if (isResponsiveActive && responsive?.mode === 'hidden' && !isOpen) {
     return null;
@@ -418,14 +438,14 @@ export function LayoutPanel({
       {...recipeProps(s.panel, className)}
       data-side={dataSide}
       style={style}
-      role={resolvedRole}
-      aria-label={label}
+      role={isOverlayMode ? undefined : resolvedRole}
+      aria-label={isOverlayMode ? undefined : label}
     >
       {children}
     </div>
   );
 
-  if (isResponsiveActive && responsive?.mode === 'overlay') {
+  if (isOverlayMode) {
     return (
       <ModalOverlay
         isOpen={isOpen}

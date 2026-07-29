@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { layoutBreakpointQueries } from '@var-ui/core';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import { ChatDemo } from './ChatDemo';
 import { acmeTheme } from './acmeTheme';
@@ -83,6 +84,7 @@ import {
   useTablePagination,
   useTableSelection,
   useResizable,
+  useMediaQuery,
   useTableSort,
   useToast,
 } from '@var-ui/react';
@@ -175,6 +177,8 @@ function LayoutSection() {
       end: { defaultWidth: 300, minWidth: 240, maxWidth: 420, autoSaveId: 'vite-layout-demo' },
     },
   });
+  const isBelowLg = useMediaQuery(layoutBreakpointQueries.lg);
+  const showResizeHandle = !isBelowLg && !end.isCollapsed;
   const items = [
     { id: 'alpha', label: 'Alpha' },
     { id: 'beta', label: 'Beta' },
@@ -223,7 +227,9 @@ function LayoutSection() {
                     <Text>Detail panel for the selected row.</Text>
                   </Stack>
                 </LayoutPanel>
-                <ResizeHandle {...end.handleProps} aria-label="Resize inspector" />
+                {showResizeHandle ? (
+                  <ResizeHandle {...end.handleProps} aria-label="Resize inspector" />
+                ) : null}
               </>
             ) : null
           }

@@ -172,8 +172,13 @@ import {
 </Layout>
 ```
 
-Props mirror `@var-ui/react` where applicable. Set `side="start"` or `side="end"`
-on `LayoutPanel` — Astro has no layout area context, so the attribute is explicit.
+Props mirror `@var-ui/react` where applicable, with these limitations:
+
+- `LayoutPanel` requires an explicit `side="start"` or `side="end"` — Astro has no
+  layout area context.
+- No `contentWidth` on `Layout` (set `--var-ui-layout-content-width` on the root if needed).
+- No automatic `data-divider-header` / `data-divider-footer` on the layout root — set
+  `hasDivider` on `LayoutHeader` / `LayoutFooter` directly.
 
 ## Collapsible
 

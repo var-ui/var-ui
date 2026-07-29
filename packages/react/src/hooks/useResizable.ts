@@ -137,7 +137,8 @@ function useResizableRegion(
  * keyboard/pointer handle bindings, and optional `localStorage` persistence.
  *
  * Multi-region callers must pass a stable `regions` key set across renders
- * (same contract as Astryx split layouts).
+ * (same contract as Astryx split layouts). Changing the set of region keys
+ * between renders violates the Rules of Hooks and will break React state.
  */
 export function useResizable(config?: boolean | ResizableConfig): UseResizableResult;
 export function useResizable(config: MultiResizableConfig): Record<string, UseResizableResult>;
