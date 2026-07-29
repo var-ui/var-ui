@@ -5,16 +5,30 @@ export type LayoutPadding = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8;
 
 const paddingValue = (step: LayoutPadding) => t.space[step].var;
 
-/** Custom properties set on {@link layout} root — read by zone recipes. */
+/**
+ * Custom properties registered on {@link layout} root. Hyphenated `c.vars()` keys
+ * ensure emitted names match the spec contract (`--var-ui-layout-padding-outer-x`, …).
+ */
+const LAYOUT_VAR = {
+  paddingOuterX: '--var-ui-layout-padding-outer-x',
+  paddingOuterY: '--var-ui-layout-padding-outer-y',
+  paddingInnerX: '--var-ui-layout-padding-inner-x',
+  paddingInnerY: '--var-ui-layout-padding-inner-y',
+  contentWidth: '--var-ui-layout-content-width',
+} as const;
+
+/** `var(...)` references to {@link LAYOUT_VAR} for zone recipe style values. */
 const layoutVar = {
-  paddingOuterX: 'var(--var-ui-layout-padding-outer-x)',
-  paddingOuterY: 'var(--var-ui-layout-padding-outer-y)',
-  paddingInnerX: 'var(--var-ui-layout-padding-inner-x)',
-  paddingInnerY: 'var(--var-ui-layout-padding-inner-y)',
-  contentWidth: 'var(--var-ui-layout-content-width, none)',
+  paddingOuterX: `var(${LAYOUT_VAR.paddingOuterX})`,
+  paddingOuterY: `var(${LAYOUT_VAR.paddingOuterY})`,
+  paddingInnerX: `var(${LAYOUT_VAR.paddingInnerX})`,
+  paddingInnerY: `var(${LAYOUT_VAR.paddingInnerY})`,
+  contentWidth: `var(${LAYOUT_VAR.contentWidth}, none)`,
 } as const;
 
 const LAYOUT_SLOTS = ['root', 'outer', 'inner', 'middle'] as const;
+const LAYOUT_HEADER_SLOTS = ['header', 'headerInner'] as const;
+const LAYOUT_FOOTER_SLOTS = ['footer', 'footerInner'] as const;
 
 /**
  * Explicit variant-dimension shape — `padding` collides with a CSS property name,
@@ -34,6 +48,14 @@ type LayoutVariantDefs = {
   };
 };
 
+type LayoutHeaderVariantDefs = {
+  chrome: { default: object };
+};
+
+type LayoutFooterVariantDefs = {
+  chrome: { default: object };
+};
+
 /**
  * Multi-pane page shell: header/footer bands and a horizontal middle row for
  * start/content/end zones. Sets padding and content-width CSS vars consumed by
@@ -42,7 +64,7 @@ type LayoutVariantDefs = {
  * `data-has-*` and divider attributes on the root.
  *
  * ```tsx
- * const l = layout({ height: 'fill', padding: 4 });
+ * const l = layout({ height: 'fill', padding: '4' });
  * <div className={l.root} data-has-header data-has-start data-has-end>
  *   <div className={l.outer}><div className={l.inner}>
  *     <LayoutHeader>…</LayoutHeader>
@@ -60,18 +82,18 @@ export const layout = typestyles.styles.component<typeof LAYOUT_SLOTS, LayoutVar
   'layout',
   (c) => {
     const v = c.vars({
-      paddingOuterX: { value: t.space[4].var, syntax: '<length>', inherits: false },
-      paddingOuterY: { value: t.space[4].var, syntax: '<length>', inherits: false },
-      paddingInnerX: { value: t.space[4].var, syntax: '<length>', inherits: false },
-      paddingInnerY: { value: t.space[4].var, syntax: '<length>', inherits: false },
-      contentWidth: { value: 'none', syntax: '<length> | none', inherits: false },
+      'padding-outer-x': { value: t.space[4].var, syntax: '<length>', inherits: false },
+      'padding-outer-y': { value: t.space[4].var, syntax: '<length>', inherits: false },
+      'padding-inner-x': { value: t.space[4].var, syntax: '<length>', inherits: false },
+      'padding-inner-y': { value: t.space[4].var, syntax: '<length>', inherits: false },
+      'content-width': { value: 'none', syntax: '<length> | none', inherits: false },
     });
     const paddingVariant = (step: LayoutPadding) => ({
       root: {
-        [v.paddingOuterX.name]: paddingValue(step),
-        [v.paddingOuterY.name]: paddingValue(step),
-        [v.paddingInnerX.name]: paddingValue(step),
-        [v.paddingInnerY.name]: paddingValue(step),
+        [v['padding-outer-x'].name]: paddingValue(step),
+        [v['padding-outer-y'].name]: paddingValue(step),
+        [v['padding-inner-x'].name]: paddingValue(step),
+        [v['padding-inner-y'].name]: paddingValue(step),
       },
     });
     return {
@@ -82,10 +104,10 @@ export const layout = typestyles.styles.component<typeof LAYOUT_SLOTS, LayoutVar
           flexDirection: 'column',
           minWidth: 0,
           minHeight: 0,
-          [v.paddingOuterX.name]: t.space[4].var,
-          [v.paddingOuterY.name]: t.space[4].var,
-          [v.paddingInnerX.name]: t.space[4].var,
-          [v.paddingInnerY.name]: t.space[4].var,
+          [v['padding-outer-x'].name]: t.space[4].var,
+          [v['padding-outer-y'].name]: t.space[4].var,
+          [v['padding-inner-x'].name]: t.space[4].var,
+          [v['padding-inner-y'].name]: t.space[4].var,
         },
         outer: {
           marginInlineStart: 'calc(-1 * var(--container-padding-inline-start, 0px))',
@@ -134,30 +156,31 @@ export const layout = typestyles.styles.component<typeof LAYOUT_SLOTS, LayoutVar
 );
 
 /**
- * Top chrome band for {@link layout}. Optional bottom divider via `data-divider`
- * on the header slot; edge padding reads layout CSS vars from the shell root.
+ * Top chrome band for {@link layout}. Divider when the header slot has
+ * `data-divider` or the layout root has `data-divider-header` (set by React
+ * `Layout` in Task 3). Edge padding reads layout CSS vars from the shell root.
  */
-export const layoutHeader = typestyles.styles.component(
+export const layoutHeader = typestyles.styles.component<
+  typeof LAYOUT_HEADER_SLOTS,
+  LayoutHeaderVariantDefs
+>(
   'layout-header',
   (c) => {
     const v = c.vars({
       border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
     });
     return {
-      slots: ['header', 'headerInner'],
+      slots: LAYOUT_HEADER_SLOTS,
       base: {
         header: {
           flexShrink: 0,
           minWidth: 0,
           paddingInline: layoutVar.paddingOuterX,
           paddingBlockStart: layoutVar.paddingOuterY,
-          paddingBlockEnd: layoutVar.paddingInnerY,
-          '&[data-divider]': {
+          paddingBlockEnd: layoutVar.paddingOuterY,
+          '&[data-divider], [data-divider-header] &': {
             paddingBlockEnd: layoutVar.paddingInnerY,
             borderBlockEnd: `1px solid ${v.border.var}`,
-          },
-          '&:not([data-divider])': {
-            paddingBlockEnd: layoutVar.paddingOuterY,
           },
         },
         headerInner: {
@@ -167,36 +190,43 @@ export const layoutHeader = typestyles.styles.component(
           minWidth: 0,
         },
       },
+      variants: {
+        chrome: {
+          default: {},
+        },
+      },
+      defaultVariants: { chrome: 'default' },
     };
   },
   { layer: 'components' },
 );
 
 /**
- * Bottom chrome band for {@link layout}. Optional top divider via `data-divider`
- * on the footer slot; edge padding reads layout CSS vars from the shell root.
+ * Bottom chrome band for {@link layout}. Divider when the footer slot has
+ * `data-divider` or the layout root has `data-divider-footer` (set by React
+ * `Layout` in Task 3). Edge padding reads layout CSS vars from the shell root.
  */
-export const layoutFooter = typestyles.styles.component(
+export const layoutFooter = typestyles.styles.component<
+  typeof LAYOUT_FOOTER_SLOTS,
+  LayoutFooterVariantDefs
+>(
   'layout-footer',
   (c) => {
     const v = c.vars({
       border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
     });
     return {
-      slots: ['footer', 'footerInner'],
+      slots: LAYOUT_FOOTER_SLOTS,
       base: {
         footer: {
           flexShrink: 0,
           minWidth: 0,
           paddingInline: layoutVar.paddingOuterX,
           paddingBlockEnd: layoutVar.paddingOuterY,
-          paddingBlockStart: layoutVar.paddingInnerY,
-          '&[data-divider]': {
+          paddingBlockStart: layoutVar.paddingOuterY,
+          '&[data-divider], [data-divider-footer] &': {
             paddingBlockStart: layoutVar.paddingInnerY,
             borderBlockStart: `1px solid ${v.border.var}`,
-          },
-          '&:not([data-divider])': {
-            paddingBlockStart: layoutVar.paddingOuterY,
           },
         },
         footerInner: {
@@ -206,6 +236,12 @@ export const layoutFooter = typestyles.styles.component(
           minWidth: 0,
         },
       },
+      variants: {
+        chrome: {
+          default: {},
+        },
+      },
+      defaultVariants: { chrome: 'default' },
     };
   },
   { layer: 'components' },
