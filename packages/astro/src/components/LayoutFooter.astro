@@ -1,5 +1,5 @@
 ---
-import { designTokens as t, layoutFooter, type LayoutPadding } from '@var-ui/core';
+import { layoutFooter, layoutShellPaddingAssignments, type LayoutPadding } from '@var-ui/core';
 import { recipeProps } from '../utils';
 
 type Props = {
@@ -20,18 +20,7 @@ function zoneOverrideStyle(
 ): Record<string, string> | undefined {
   const heightValue = toCssSize(height);
   if (heightValue == null && padding == null) return undefined;
-  const paddingVars =
-    padding == null
-      ? undefined
-      : (() => {
-          const value = t.space[padding].var;
-          return {
-            '--var-ui-layout-padding-outer-x': value,
-            '--var-ui-layout-padding-outer-y': value,
-            '--var-ui-layout-padding-inner-x': value,
-            '--var-ui-layout-padding-inner-y': value,
-          };
-        })();
+  const paddingVars = padding == null ? undefined : layoutShellPaddingAssignments(padding);
   return {
     ...(heightValue != null ? { height: heightValue } : {}),
     ...paddingVars,

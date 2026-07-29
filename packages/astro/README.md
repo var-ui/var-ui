@@ -176,7 +176,7 @@ Props mirror `@var-ui/react` where applicable, with these limitations:
 
 - `LayoutPanel` requires an explicit `side="start"` or `side="end"` — Astro has no
   layout area context.
-- No `contentWidth` on `Layout` (set `--var-ui-layout-content-width` on the root if needed).
+- No `contentWidth` on `Layout` (use `layoutContentWidthAssignment()` from `@var-ui/core` if needed).
 - No automatic `data-divider-header` / `data-divider-footer` on the layout root — set
   `hasDivider` on `LayoutHeader` / `LayoutFooter` directly.
 

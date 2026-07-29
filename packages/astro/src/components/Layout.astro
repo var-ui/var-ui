@@ -1,22 +1,17 @@
 ---
-import { layout, type LayoutPadding } from '@var-ui/core';
+import { layout, layoutShellPaddingAssignments, type LayoutPadding } from '@var-ui/core';
 import { recipeProps } from '../utils';
-
-type LayoutPaddingVariant = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '8';
 
 type Props = {
   height?: 'fill' | 'auto';
+  /** Sets shell CSS vars on the root. Omit for recipe default (`space[4]`). */
   padding?: LayoutPadding;
   className?: string;
 };
 
-function toLayoutPaddingVariant(padding: LayoutPadding | undefined): LayoutPaddingVariant | undefined {
-  return padding == null ? undefined : (String(padding) as LayoutPaddingVariant);
-}
-
-const { height = 'fill', padding = 4, className } = Astro.props;
-const paddingVariant = toLayoutPaddingVariant(padding);
-const l = layout(paddingVariant == null ? { height } : { height, padding: paddingVariant });
+const { height = 'fill', padding, className } = Astro.props;
+const l = layout({ height });
+const rootStyle = padding == null ? undefined : layoutShellPaddingAssignments(padding);
 
 const hasHeader = Astro.slots.has('header');
 const hasFooter = Astro.slots.has('footer');
@@ -26,6 +21,7 @@ const hasEnd = Astro.slots.has('end');
 
 <div
   {...recipeProps(l.root, className)}
+  style={rootStyle}
   data-has-header={hasHeader ? '' : undefined}
   data-has-footer={hasFooter ? '' : undefined}
   data-has-start={hasStart ? '' : undefined}

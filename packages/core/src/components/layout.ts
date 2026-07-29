@@ -1,51 +1,24 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { defineLayoutShellVars, getLayoutShellVars } from './layoutShellVars';
 
-export type LayoutPadding = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8;
-
-const paddingValue = (step: LayoutPadding) => t.space[step].var;
-
-/**
- * Custom properties registered on {@link layout} root. Hyphenated `c.vars()` keys
- * ensure emitted names match the spec contract (`--var-ui-layout-padding-outer-x`, …).
- */
-const LAYOUT_VAR = {
-  paddingOuterX: '--var-ui-layout-padding-outer-x',
-  paddingOuterY: '--var-ui-layout-padding-outer-y',
-  paddingInnerX: '--var-ui-layout-padding-inner-x',
-  paddingInnerY: '--var-ui-layout-padding-inner-y',
-  contentWidth: '--var-ui-layout-content-width',
-} as const;
-
-/** `var(...)` references to {@link LAYOUT_VAR} for zone recipe style values. */
-const layoutVar = {
-  paddingOuterX: `var(${LAYOUT_VAR.paddingOuterX})`,
-  paddingOuterY: `var(${LAYOUT_VAR.paddingOuterY})`,
-  paddingInnerX: `var(${LAYOUT_VAR.paddingInnerX})`,
-  paddingInnerY: `var(${LAYOUT_VAR.paddingInnerY})`,
-  contentWidth: `var(${LAYOUT_VAR.contentWidth}, none)`,
-} as const;
+export type { LayoutPadding } from './layoutShellVars';
+export {
+  getLayoutShellVars,
+  layoutContentWidthAssignment,
+  layoutShellPaddingAssignments,
+} from './layoutShellVars';
 
 const LAYOUT_SLOTS = ['root', 'outer', 'inner', 'middle'] as const;
 const LAYOUT_HEADER_SLOTS = ['header', 'headerInner'] as const;
 const LAYOUT_FOOTER_SLOTS = ['footer', 'footerInner'] as const;
 
 /**
- * Explicit variant-dimension shape — `padding` collides with a CSS property name,
- * so generic inference can pick the flat single-slot overload incorrectly.
+ * Explicit variant-dimension shape for `height` only — shell padding is controlled
+ * via registered CSS vars (theme overrides or `layoutShellPaddingAssignments`).
  */
 type LayoutVariantDefs = {
   height: { fill: object; auto: object };
-  padding: {
-    '0': object;
-    '1': object;
-    '2': object;
-    '3': object;
-    '4': object;
-    '5': object;
-    '6': object;
-    '8': object;
-  };
 };
 
 type LayoutHeaderVariantDefs = {
@@ -64,7 +37,7 @@ type LayoutFooterVariantDefs = {
  * `data-has-*` and divider attributes on the root.
  *
  * ```tsx
- * const l = layout({ height: 'fill', padding: '4' });
+ * const l = layout({ height: 'fill' });
  * <div className={l.root} data-has-header data-has-start data-has-end>
  *   <div className={l.outer}><div className={l.inner}>
  *     <LayoutHeader>…</LayoutHeader>
@@ -81,21 +54,7 @@ type LayoutFooterVariantDefs = {
 export const layout = typestyles.styles.component<typeof LAYOUT_SLOTS, LayoutVariantDefs>(
   'layout',
   (c) => {
-    const v = c.vars({
-      'padding-outer-x': { value: t.space[4].var, syntax: '<length>', inherits: false },
-      'padding-outer-y': { value: t.space[4].var, syntax: '<length>', inherits: false },
-      'padding-inner-x': { value: t.space[4].var, syntax: '<length>', inherits: false },
-      'padding-inner-y': { value: t.space[4].var, syntax: '<length>', inherits: false },
-      'content-width': { value: 'none', syntax: '<length> | none', inherits: false },
-    });
-    const paddingVariant = (step: LayoutPadding) => ({
-      root: {
-        [v['padding-outer-x'].name]: paddingValue(step),
-        [v['padding-outer-y'].name]: paddingValue(step),
-        [v['padding-inner-x'].name]: paddingValue(step),
-        [v['padding-inner-y'].name]: paddingValue(step),
-      },
-    });
+    const shell = defineLayoutShellVars(c);
     return {
       slots: LAYOUT_SLOTS,
       base: {
@@ -104,10 +63,10 @@ export const layout = typestyles.styles.component<typeof LAYOUT_SLOTS, LayoutVar
           flexDirection: 'column',
           minWidth: 0,
           minHeight: 0,
-          [v['padding-outer-x'].name]: t.space[4].var,
-          [v['padding-outer-y'].name]: t.space[4].var,
-          [v['padding-inner-x'].name]: t.space[4].var,
-          [v['padding-inner-y'].name]: t.space[4].var,
+          [shell.padding.outer.x.name]: t.space[4].var,
+          [shell.padding.outer.y.name]: t.space[4].var,
+          [shell.padding.inner.x.name]: t.space[4].var,
+          [shell.padding.inner.y.name]: t.space[4].var,
         },
         outer: {
           marginInlineStart: 'calc(-1 * var(--container-padding-inline-start, 0px))',
@@ -138,18 +97,8 @@ export const layout = typestyles.styles.component<typeof LAYOUT_SLOTS, LayoutVar
           fill: { root: { flex: '1 1 auto', minHeight: 0 } },
           auto: { root: { flex: 'none' } },
         },
-        padding: {
-          '0': paddingVariant(0),
-          '1': paddingVariant(1),
-          '2': paddingVariant(2),
-          '3': paddingVariant(3),
-          '4': {},
-          '5': paddingVariant(5),
-          '6': paddingVariant(6),
-          '8': paddingVariant(8),
-        },
       },
-      defaultVariants: { height: 'fill', padding: '4' },
+      defaultVariants: { height: 'fill' },
     };
   },
   { layer: 'components' },
@@ -158,7 +107,7 @@ export const layout = typestyles.styles.component<typeof LAYOUT_SLOTS, LayoutVar
 /**
  * Top chrome band for {@link layout}. Divider when the header slot has
  * `data-divider` or the layout root has `data-divider-header` (set by React
- * `Layout` in Task 3). Edge padding reads layout CSS vars from the shell root.
+ * `Layout` in Task 3). Edge padding reads layout shell vars from the ancestor root.
  */
 export const layoutHeader = typestyles.styles.component<
   typeof LAYOUT_HEADER_SLOTS,
@@ -166,6 +115,7 @@ export const layoutHeader = typestyles.styles.component<
 >(
   'layout-header',
   (c) => {
+    const shell = getLayoutShellVars();
     const v = c.vars({
       border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
     });
@@ -175,16 +125,16 @@ export const layoutHeader = typestyles.styles.component<
         header: {
           flexShrink: 0,
           minWidth: 0,
-          paddingInline: layoutVar.paddingOuterX,
-          paddingBlockStart: layoutVar.paddingOuterY,
-          paddingBlockEnd: layoutVar.paddingOuterY,
+          paddingInline: shell.padding.outer.x.var,
+          paddingBlockStart: shell.padding.outer.y.var,
+          paddingBlockEnd: shell.padding.outer.y.var,
           '&[data-divider], [data-divider-header] &': {
-            paddingBlockEnd: layoutVar.paddingInnerY,
+            paddingBlockEnd: shell.padding.inner.y.var,
             borderBlockEnd: `1px solid ${v.border.var}`,
           },
         },
         headerInner: {
-          maxWidth: layoutVar.contentWidth,
+          maxWidth: shell.content.width.var,
           marginInline: 'auto',
           width: '100%',
           minWidth: 0,
@@ -204,7 +154,7 @@ export const layoutHeader = typestyles.styles.component<
 /**
  * Bottom chrome band for {@link layout}. Divider when the footer slot has
  * `data-divider` or the layout root has `data-divider-footer` (set by React
- * `Layout` in Task 3). Edge padding reads layout CSS vars from the shell root.
+ * `Layout` in Task 3). Edge padding reads layout shell vars from the ancestor root.
  */
 export const layoutFooter = typestyles.styles.component<
   typeof LAYOUT_FOOTER_SLOTS,
@@ -212,6 +162,7 @@ export const layoutFooter = typestyles.styles.component<
 >(
   'layout-footer',
   (c) => {
+    const shell = getLayoutShellVars();
     const v = c.vars({
       border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
     });
@@ -221,16 +172,16 @@ export const layoutFooter = typestyles.styles.component<
         footer: {
           flexShrink: 0,
           minWidth: 0,
-          paddingInline: layoutVar.paddingOuterX,
-          paddingBlockEnd: layoutVar.paddingOuterY,
-          paddingBlockStart: layoutVar.paddingOuterY,
+          paddingInline: shell.padding.outer.x.var,
+          paddingBlockEnd: shell.padding.outer.y.var,
+          paddingBlockStart: shell.padding.outer.y.var,
           '&[data-divider], [data-divider-footer] &': {
-            paddingBlockStart: layoutVar.paddingInnerY,
+            paddingBlockStart: shell.padding.inner.y.var,
             borderBlockStart: `1px solid ${v.border.var}`,
           },
         },
         footerInner: {
-          maxWidth: layoutVar.contentWidth,
+          maxWidth: shell.content.width.var,
           marginInline: 'auto',
           width: '100%',
           minWidth: 0,
@@ -254,6 +205,7 @@ export const layoutFooter = typestyles.styles.component<
 export const layoutContent = typestyles.styles.component(
   'layout-content',
   () => {
+    const shell = getLayoutShellVars();
     return {
       slots: ['content'],
       base: {
@@ -261,21 +213,21 @@ export const layoutContent = typestyles.styles.component(
           flex: '1 1 auto',
           minWidth: 0,
           minHeight: 0,
-          paddingInlineStart: layoutVar.paddingOuterX,
-          paddingInlineEnd: layoutVar.paddingOuterX,
-          paddingBlockStart: layoutVar.paddingOuterY,
-          paddingBlockEnd: layoutVar.paddingOuterY,
+          paddingInlineStart: shell.padding.outer.x.var,
+          paddingInlineEnd: shell.padding.outer.x.var,
+          paddingBlockStart: shell.padding.outer.y.var,
+          paddingBlockEnd: shell.padding.outer.y.var,
           '[data-has-start] &': {
-            paddingInlineStart: layoutVar.paddingInnerX,
+            paddingInlineStart: shell.padding.inner.x.var,
           },
           '[data-has-end] &': {
-            paddingInlineEnd: layoutVar.paddingInnerX,
+            paddingInlineEnd: shell.padding.inner.x.var,
           },
           '[data-has-header] &': {
-            paddingBlockStart: layoutVar.paddingInnerY,
+            paddingBlockStart: shell.padding.inner.y.var,
           },
           '[data-has-footer] &': {
-            paddingBlockEnd: layoutVar.paddingInnerY,
+            paddingBlockEnd: shell.padding.inner.y.var,
           },
         },
       },
@@ -309,6 +261,7 @@ export const layoutContent = typestyles.styles.component(
 export const layoutPanel = typestyles.styles.component(
   'layout-panel',
   (c) => {
+    const shell = getLayoutShellVars();
     const v = c.vars({
       border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
       overlayBackground: {
@@ -331,28 +284,28 @@ export const layoutPanel = typestyles.styles.component(
           minHeight: 0,
           display: 'flex',
           flexDirection: 'column',
-          paddingInlineStart: layoutVar.paddingOuterX,
-          paddingInlineEnd: layoutVar.paddingOuterX,
-          paddingBlockStart: layoutVar.paddingOuterY,
-          paddingBlockEnd: layoutVar.paddingOuterY,
+          paddingInlineStart: shell.padding.outer.x.var,
+          paddingInlineEnd: shell.padding.outer.x.var,
+          paddingBlockStart: shell.padding.outer.y.var,
+          paddingBlockEnd: shell.padding.outer.y.var,
           '[data-has-header] &': {
-            paddingBlockStart: layoutVar.paddingInnerY,
+            paddingBlockStart: shell.padding.inner.y.var,
           },
           '[data-has-footer] &': {
-            paddingBlockEnd: layoutVar.paddingInnerY,
+            paddingBlockEnd: shell.padding.inner.y.var,
           },
           '&[data-side="start"]': {
-            paddingInlineStart: layoutVar.paddingOuterX,
-            paddingInlineEnd: layoutVar.paddingInnerX,
+            paddingInlineStart: shell.padding.outer.x.var,
+            paddingInlineEnd: shell.padding.inner.x.var,
             '[data-has-start] &': {
-              paddingInlineStart: layoutVar.paddingInnerX,
+              paddingInlineStart: shell.padding.inner.x.var,
             },
           },
           '&[data-side="end"]': {
-            paddingInlineStart: layoutVar.paddingInnerX,
-            paddingInlineEnd: layoutVar.paddingOuterX,
+            paddingInlineStart: shell.padding.inner.x.var,
+            paddingInlineEnd: shell.padding.outer.x.var,
             '[data-has-end] &': {
-              paddingInlineEnd: layoutVar.paddingInnerX,
+              paddingInlineEnd: shell.padding.inner.x.var,
             },
           },
         },
@@ -406,10 +359,10 @@ export const layoutPanel = typestyles.styles.component(
           false: {
             panel: {
               '&[data-side="start"]': {
-                marginInlineEnd: `calc(-1 * ${layoutVar.paddingInnerX})`,
+                marginInlineEnd: `calc(-1 * ${shell.padding.inner.x.var})`,
               },
               '&[data-side="end"]': {
-                marginInlineStart: `calc(-1 * ${layoutVar.paddingInnerX})`,
+                marginInlineStart: `calc(-1 * ${shell.padding.inner.x.var})`,
               },
             },
           },

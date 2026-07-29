@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vite-plus/test';
 import { render, screen } from '@testing-library/react';
-import { layout } from '@var-ui/core';
+import { getLayoutShellVars, layoutShellPaddingAssignments } from '@var-ui/core';
 import {
   Layout,
   LayoutContent,
@@ -157,28 +157,26 @@ describe('Layout', () => {
     );
   });
 
-  it('maps a numeric padding prop to the layout recipe string variant key', () => {
+  it('sets shell padding CSS vars when padding prop is provided', () => {
     const { container } = render(<Layout padding={2} content={<div>Main</div>} />);
     const root = container.firstElementChild as HTMLElement;
-    const expectedResult = layout({ height: 'fill', padding: '2' }).root;
-    const expectedClassName =
-      typeof expectedResult === 'string' ? expectedResult : expectedResult.className;
-    expect(root.className).toBe(expectedClassName);
+    const expected = layoutShellPaddingAssignments(2);
+    for (const [name, value] of Object.entries(expected)) {
+      expect(root.style.getPropertyValue(name)).toBe(value);
+    }
   });
 
-  it('uses the layout recipe default padding variant when padding is omitted', () => {
+  it('does not set shell padding inline when padding is omitted', () => {
     const { container } = render(<Layout content={<div>Main</div>} />);
     const root = container.firstElementChild as HTMLElement;
-    const expectedResult = layout({ height: 'fill', padding: '4' }).root;
-    const expectedClassName =
-      typeof expectedResult === 'string' ? expectedResult : expectedResult.className;
-    expect(root.className).toBe(expectedClassName);
+    const shell = getLayoutShellVars();
+    expect(root.style.getPropertyValue(shell.padding.outer.x.name)).toBe('');
   });
 
   it('sets the content-width CSS variable when contentWidth is provided', () => {
     const { container } = render(<Layout contentWidth={720} content={<div>Main</div>} />);
     const root = container.firstElementChild as HTMLElement;
-    expect(root.style.getPropertyValue('--var-ui-layout-content-width')).toBe('720px');
+    expect(root.style.getPropertyValue(getLayoutShellVars().content.width.name)).toBe('720px');
   });
 
   it('sets data-divider on LayoutHeader/LayoutFooter when hasDivider is explicit', () => {

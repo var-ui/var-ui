@@ -64,6 +64,9 @@ export {
   layoutFooter,
   layoutContent,
   layoutPanel,
+  getLayoutShellVars,
+  layoutContentWidthAssignment,
+  layoutShellPaddingAssignments,
   type LayoutPadding,
 } from './layout';
 export { overflowList } from './overflowList';

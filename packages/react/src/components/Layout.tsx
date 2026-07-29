@@ -2,13 +2,14 @@ import type { CSSProperties, JSX, ReactElement, ReactNode } from 'react';
 import { createContext, isValidElement, useCallback, useContext, useMemo, useState } from 'react';
 import { Dialog as AriaDialog, Modal, ModalOverlay } from 'react-aria-components';
 import {
-  designTokens as t,
   layout,
   layoutBreakpointQueries,
   layoutContent,
+  layoutContentWidthAssignment,
   layoutFooter,
   layoutHeader,
   layoutPanel,
+  layoutShellPaddingAssignments,
   type LayoutBreakpoint,
   type LayoutPadding,
 } from '@var-ui/core';
@@ -18,15 +19,6 @@ import { useLayer } from '../layers/LayerProvider';
 import { recipeProps } from './utils';
 
 const dialogContentStyle: CSSProperties = { display: 'contents' };
-
-type LayoutPaddingVariant = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '8';
-
-/** `layout()`'s padding variant keys are strings — recipe callers must map the numeric prop. */
-function toLayoutPaddingVariant(
-  padding: LayoutPadding | undefined,
-): LayoutPaddingVariant | undefined {
-  return padding == null ? undefined : (String(padding) as LayoutPaddingVariant);
-}
 
 /** `layoutContent()`/`layoutPanel()` only support seamless (`inherit`, the default) or `0`. */
 function toZonePaddingVariant(padding: LayoutPadding | undefined): 'inherit' | '0' {
@@ -97,7 +89,7 @@ export type LayoutProps = {
   height?: 'fill' | 'auto';
   /** Constrains header/content/footer inner wrappers via `margin-inline: auto`. */
   contentWidth?: number;
-  /** Outer/inner spacing step for all zones. @default 4 */
+  /** Outer/inner spacing step for all zones — sets shell CSS vars on the root. Omit for recipe default (`space[4]`). */
   padding?: LayoutPadding;
   /** Divider default inherited by `LayoutHeader`/`LayoutFooter` when they don't set `hasDivider`. @default false */
   defaultHasDividers?: boolean;
@@ -130,8 +122,7 @@ export function Layout({
   defaultHasDividers = false,
   className,
 }: LayoutProps): JSX.Element {
-  const paddingVariant = toLayoutPaddingVariant(padding);
-  const l = layout(paddingVariant == null ? { height } : { height, padding: paddingVariant });
+  const l = layout({ height });
   const contentNode = content ?? children;
 
   const hasHeader = header != null;
@@ -144,10 +135,13 @@ export function Layout({
     [hasHeader, hasFooter, hasStart, hasEnd, defaultHasDividers],
   );
 
-  const rootStyle: CSSProperties | undefined =
-    contentWidth != null
-      ? ({ '--var-ui-layout-content-width': `${contentWidth}px` } as CSSProperties)
-      : undefined;
+  const rootStyle = useMemo((): CSSProperties | undefined => {
+    const style = {
+      ...(padding != null ? layoutShellPaddingAssignments(padding) : {}),
+      ...(contentWidth != null ? layoutContentWidthAssignment(contentWidth) : {}),
+    };
+    return Object.keys(style).length > 0 ? (style as CSSProperties) : undefined;
+  }, [padding, contentWidth]);
 
   const headerHasDivider = elementHasDivider(header, defaultHasDividers);
   const footerHasDivider = elementHasDivider(footer, defaultHasDividers);
@@ -199,18 +193,7 @@ function zoneOverrideStyle(
 ): CSSProperties | undefined {
   const heightValue = toCssSize(height);
   if (heightValue == null && padding == null) return undefined;
-  const paddingVars =
-    padding == null
-      ? undefined
-      : (() => {
-          const value = t.space[padding].var;
-          return {
-            '--var-ui-layout-padding-outer-x': value,
-            '--var-ui-layout-padding-outer-y': value,
-            '--var-ui-layout-padding-inner-x': value,
-            '--var-ui-layout-padding-inner-y': value,
-          };
-        })();
+  const paddingVars = padding == null ? undefined : layoutShellPaddingAssignments(padding);
   return {
     ...(heightValue != null ? { height: heightValue } : {}),
     ...paddingVars,
