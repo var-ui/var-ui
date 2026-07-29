@@ -1,0 +1,48 @@
+---
+import { designTokens as t, layoutHeader, type LayoutPadding } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  hasDivider?: boolean;
+  height?: number | string;
+  padding?: LayoutPadding;
+  className?: string;
+};
+
+function toCssSize(value: number | string | undefined): string | undefined {
+  if (value == null) return undefined;
+  return typeof value === 'number' ? `${value}px` : value;
+}
+
+function zoneOverrideStyle(
+  height: number | string | undefined,
+  padding: LayoutPadding | undefined,
+): Record<string, string> | undefined {
+  const heightValue = toCssSize(height);
+  if (heightValue == null && padding == null) return undefined;
+  const paddingVars =
+    padding == null
+      ? undefined
+      : (() => {
+          const value = t.space[padding].var;
+          return {
+            '--var-ui-layout-padding-outer-x': value,
+            '--var-ui-layout-padding-outer-y': value,
+            '--var-ui-layout-padding-inner-x': value,
+            '--var-ui-layout-padding-inner-y': value,
+          };
+        })();
+  return {
+    ...(heightValue != null ? { height: heightValue } : {}),
+    ...paddingVars,
+  };
+}
+
+const { hasDivider = false, height, padding, className } = Astro.props;
+const s = layoutHeader();
+const style = zoneOverrideStyle(height, padding);
+---
+
+<div {...recipeProps(s.header, className)} style={style} data-divider={hasDivider ? '' : undefined}>
+  <div {...recipeProps(s.headerInner)}><slot /></div>
+</div>

@@ -1,0 +1,45 @@
+---
+import { layout, type LayoutPadding } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type LayoutPaddingVariant = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '8';
+
+type Props = {
+  height?: 'fill' | 'auto';
+  padding?: LayoutPadding;
+  className?: string;
+};
+
+function toLayoutPaddingVariant(padding: LayoutPadding | undefined): LayoutPaddingVariant | undefined {
+  return padding == null ? undefined : (String(padding) as LayoutPaddingVariant);
+}
+
+const { height = 'fill', padding = 4, className } = Astro.props;
+const paddingVariant = toLayoutPaddingVariant(padding);
+const l = layout(paddingVariant == null ? { height } : { height, padding: paddingVariant });
+
+const hasHeader = Astro.slots.has('header');
+const hasFooter = Astro.slots.has('footer');
+const hasStart = Astro.slots.has('start');
+const hasEnd = Astro.slots.has('end');
+---
+
+<div
+  {...recipeProps(l.root, className)}
+  data-has-header={hasHeader ? '' : undefined}
+  data-has-footer={hasFooter ? '' : undefined}
+  data-has-start={hasStart ? '' : undefined}
+  data-has-end={hasEnd ? '' : undefined}
+>
+  <div {...recipeProps(l.outer)}>
+    <div {...recipeProps(l.inner)}>
+      {hasHeader && <slot name="header" />}
+      <div {...recipeProps(l.middle)}>
+        {hasStart && <slot name="start" />}
+        <slot />
+        {hasEnd && <slot name="end" />}
+      </div>
+      {hasFooter && <slot name="footer" />}
+    </div>
+  </div>
+</div>

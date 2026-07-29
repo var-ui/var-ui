@@ -1,0 +1,49 @@
+---
+import { layoutPanel, type LayoutPadding } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  width?: number | string;
+  hasDivider?: boolean;
+  isScrollable?: boolean;
+  padding?: LayoutPadding;
+  side?: 'start' | 'end';
+  role?: string;
+  label?: string;
+  className?: string;
+};
+
+function toZonePaddingVariant(padding: LayoutPadding | undefined): 'inherit' | '0' {
+  return padding === 0 ? '0' : 'inherit';
+}
+
+function toCssSize(value: number | string | undefined): string | undefined {
+  if (value == null) return undefined;
+  return typeof value === 'number' ? `${value}px` : value;
+}
+
+const {
+  width,
+  hasDivider = false,
+  isScrollable = true,
+  padding,
+  side,
+  role,
+  label,
+  className,
+} = Astro.props;
+const s = layoutPanel({ isScrollable, hasDivider, padding: toZonePaddingVariant(padding) });
+const resolvedRole = role ?? (label != null ? 'region' : undefined);
+const widthValue = toCssSize(width);
+const style = widthValue != null ? { width: widthValue } : undefined;
+---
+
+<div
+  {...recipeProps(s.panel, className)}
+  data-side={side}
+  style={style}
+  role={resolvedRole}
+  aria-label={label}
+>
+  <slot />
+</div>
