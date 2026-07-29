@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { layoutBreakpointQueries } from '@var-ui/core';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import { ChatDemo } from './ChatDemo';
 import { acmeTheme } from './acmeTheme';
@@ -22,6 +23,10 @@ import {
   ClickableCard,
   Collapsible,
   CollapsibleGroup,
+  Layout,
+  LayoutContent,
+  LayoutPanel,
+  ResizeHandle,
   CommandPalette,
   DateInput,
   DateRangeInput,
@@ -78,6 +83,8 @@ import {
   ColorModeToggle,
   useTablePagination,
   useTableSelection,
+  useResizable,
+  useMediaQuery,
   useTableSort,
   useToast,
 } from '@var-ui/react';
@@ -159,6 +166,75 @@ function FeedbackSection() {
         <Skeleton shape="text" style={{ width: '90%' }} />
         <Skeleton shape="rect" style={{ height: '48px' }} />
       </Stack>
+    </Section>
+  );
+}
+
+function LayoutSection() {
+  const [selectedId, setSelectedId] = useState<string | null>('alpha');
+  const { end } = useResizable({
+    regions: {
+      end: { defaultWidth: 300, minWidth: 240, maxWidth: 420, autoSaveId: 'vite-layout-demo' },
+    },
+  });
+  const isBelowLg = useMediaQuery(layoutBreakpointQueries.lg);
+  const showResizeHandle = !isBelowLg && !end.isCollapsed;
+  const items = [
+    { id: 'alpha', label: 'Alpha' },
+    { id: 'beta', label: 'Beta' },
+    { id: 'gamma', label: 'Gamma' },
+  ] as const;
+  const selected = items.find((item) => item.id === selectedId);
+
+  return (
+    <Section title="Layout (master-detail)">
+      <div style={{ minHeight: 280, display: 'flex', flexDirection: 'column' }}>
+        <Layout
+          height="fill"
+          padding={0}
+          content={
+            <LayoutContent padding={0}>
+              <Stack gap="sm" style={{ padding: 12 }}>
+                {items.map((item) => (
+                  <Button
+                    key={item.id}
+                    intent={item.id === selectedId ? 'primary' : 'secondary'}
+                    onPress={() => setSelectedId(item.id)}
+                  >
+                    {item.label}
+                  </Button>
+                ))}
+              </Stack>
+            </LayoutContent>
+          }
+          end={
+            selected ? (
+              <>
+                <LayoutPanel
+                  resizable={end}
+                  hasDivider
+                  label="Inspector"
+                  role="complementary"
+                  responsive={{ below: 'lg', mode: 'overlay' }}
+                  isOpen
+                  onOpenChange={(open) => {
+                    if (!open) setSelectedId(null);
+                  }}
+                  padding={0}
+                >
+                  <Stack gap="sm" style={{ padding: 12 }}>
+                    <Heading level={4}>{selected.label}</Heading>
+                    <Text>Detail panel for the selected row.</Text>
+                  </Stack>
+                </LayoutPanel>
+                {showResizeHandle ? (
+                  <ResizeHandle {...end.handleProps} aria-label="Resize inspector" />
+                ) : null}
+              </>
+            ) : null
+          }
+        />
+      </div>
     </Section>
   );
 }
@@ -1166,6 +1242,7 @@ export function App() {
 
               <FeedbackSection />
               <ContentSection />
+              <LayoutSection />
               <ContainerSection />
               <FormsSection />
               <NavigationSection />

@@ -234,3 +234,18 @@ export {
   type MobileNavToggleProps,
 } from './MobileNav';
 export { AppShell, APP_SHELL_MAIN_ID, type AppShellProps } from './AppShell';
+export {
+  Layout,
+  LayoutContent,
+  LayoutFooter,
+  LayoutHeader,
+  LayoutPanel,
+  useLayoutArea,
+  useLayoutSlots,
+  type LayoutContentProps,
+  type LayoutFooterProps,
+  type LayoutHeaderProps,
+  type LayoutPanelProps,
+  type LayoutPanelResponsive,
+  type LayoutProps,
+} from './Layout';

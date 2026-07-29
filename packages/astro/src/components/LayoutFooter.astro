@@ -1,0 +1,37 @@
+---
+import { layoutFooter, layoutShellPaddingAssignments, type LayoutPadding } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  hasDivider?: boolean;
+  height?: number | string;
+  padding?: LayoutPadding;
+  className?: string;
+};
+
+function toCssSize(value: number | string | undefined): string | undefined {
+  if (value == null) return undefined;
+  return typeof value === 'number' ? `${value}px` : value;
+}
+
+function zoneOverrideStyle(
+  height: number | string | undefined,
+  padding: LayoutPadding | undefined,
+): Record<string, string> | undefined {
+  const heightValue = toCssSize(height);
+  if (heightValue == null && padding == null) return undefined;
+  const paddingVars = padding == null ? undefined : layoutShellPaddingAssignments(padding);
+  return {
+    ...(heightValue != null ? { height: heightValue } : {}),
+    ...paddingVars,
+  };
+}
+
+const { hasDivider = false, height, padding, className } = Astro.props;
+const s = layoutFooter();
+const style = zoneOverrideStyle(height, padding);
+---
+
+<div {...recipeProps(s.footer, className)} style={style} data-divider={hasDivider ? '' : undefined}>
+  <div {...recipeProps(s.footerInner)}><slot /></div>
+</div>

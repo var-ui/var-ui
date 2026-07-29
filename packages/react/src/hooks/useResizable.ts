@@ -17,6 +17,11 @@ export type ResizableConfig = {
   collapsedSize?: number;
 };
 
+export type MultiResizableConfig = {
+  regions: Record<string, ResizableConfig>;
+  autoSaveId?: string;
+};
+
 export type UseResizableResult = {
   width: number;
   isCollapsed: boolean;
@@ -72,21 +77,20 @@ function writeStoredWidth(autoSaveId: string | undefined, width: number): void {
   }
 }
 
-/**
- * Single-region resize state: clamped width, drag-to-collapse, keyboard/pointer
- * handle bindings, and optional `localStorage` persistence. Multi-region split
- * panes are a Phase 6 concern; this hook's exports are stable for that reuse.
- */
-export function useResizable(config?: boolean | ResizableConfig): UseResizableResult {
+function useResizableRegion(
+  config: ResizableConfig,
+  autoSaveIdOverride?: string,
+): UseResizableResult {
   const {
     defaultWidth = DEFAULT_WIDTH,
     minWidth = DEFAULT_MIN_WIDTH,
     maxWidth = DEFAULT_MAX_WIDTH,
-    autoSaveId,
+    autoSaveId: configAutoSaveId,
     onWidthChange,
     collapsible = false,
     collapsedSize = DEFAULT_COLLAPSED_SIZE,
-  } = normalizeConfig(config);
+  } = config;
+  const autoSaveId = autoSaveIdOverride ?? configAutoSaveId;
 
   const [width, setWidth] = useState<number>(() => {
     const stored = readStoredWidth(autoSaveId);
@@ -126,4 +130,29 @@ export function useResizable(config?: boolean | ResizableConfig): UseResizableRe
   );
 
   return { width, isCollapsed, setCollapsed, collapse, expand, resize, handleProps };
+}
+
+/**
+ * Single- or multi-region resize state: clamped width, drag-to-collapse,
+ * keyboard/pointer handle bindings, and optional `localStorage` persistence.
+ *
+ * Multi-region callers must pass a stable `regions` key set across renders
+ * (same contract as Astryx split layouts). Changing the set of region keys
+ * between renders violates the Rules of Hooks and will break React state.
+ */
+export function useResizable(config?: boolean | ResizableConfig): UseResizableResult;
+export function useResizable(config: MultiResizableConfig): Record<string, UseResizableResult>;
+export function useResizable(
+  config?: boolean | ResizableConfig | MultiResizableConfig,
+): UseResizableResult | Record<string, UseResizableResult> {
+  if (config && typeof config === 'object' && 'regions' in config) {
+    const { regions, autoSaveId } = config;
+    const entries = Object.entries(regions);
+    const results = entries.map(([key, regionConfig]) =>
+      useResizableRegion(regionConfig, autoSaveId ? `${autoSaveId}:${key}` : undefined),
+    );
+    return Object.fromEntries(entries.map(([key], i) => [key, results[i]!]));
+  }
+  const normalized = normalizeConfig(config as boolean | ResizableConfig | undefined);
+  return useResizableRegion(normalized);
 }

@@ -1,0 +1,69 @@
+import type { ComponentConfigContext, ComponentVarRefTree } from 'typestyles';
+import { designTokens as t } from '../tokens';
+
+export type LayoutPadding = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8;
+
+const shellPadding = t.space[4].var;
+
+/**
+ * Nested shell var definitions for the `layout` recipe family. Paths flatten to
+ * `padding-outer-x`, `padding-inner-y`, `content-width`, etc. — registered on
+ * `layout` root via `defineLayoutShellVars`; zone recipes read them through
+ * `getLayoutShellVars()`.
+ */
+export const layoutShellVarDefinitions = {
+  padding: {
+    outer: {
+      x: { value: shellPadding, syntax: '<length>' as const, inherits: false as const },
+      y: { value: shellPadding, syntax: '<length>' as const, inherits: false as const },
+    },
+    inner: {
+      x: { value: shellPadding, syntax: '<length>' as const, inherits: false as const },
+      y: { value: shellPadding, syntax: '<length>' as const, inherits: false as const },
+    },
+  },
+  content: {
+    width: { value: 'none', syntax: '<length> | none' as const, inherits: false as const },
+  },
+} as const;
+
+type LayoutShellVars = ComponentVarRefTree<typeof layoutShellVarDefinitions>;
+
+let shellVars: LayoutShellVars | undefined;
+
+/** Registers shell `@property` vars on `layout` root. Call once from the `layout()` recipe. */
+export function defineLayoutShellVars(c: ComponentConfigContext): LayoutShellVars {
+  const vars = c.vars(layoutShellVarDefinitions);
+  shellVars = vars;
+  return vars;
+}
+
+/** Shell var refs for `layout*` zone recipes. Requires `layout()` to be defined first. */
+export function getLayoutShellVars(): LayoutShellVars {
+  if (!shellVars) {
+    throw new Error(
+      '[var-ui] Layout shell vars are not initialized — import `layout` from @var-ui/core',
+    );
+  }
+  return shellVars;
+}
+
+const paddingToken = (step: LayoutPadding) => t.space[step].var;
+
+/** `[shellVar.name]: value` map for a uniform padding step on all shell edges. */
+export function layoutShellPaddingAssignments(step: LayoutPadding): Record<string, string> {
+  const shell = getLayoutShellVars();
+  const value = paddingToken(step);
+  return {
+    [shell.padding.outer.x.name]: value,
+    [shell.padding.outer.y.name]: value,
+    [shell.padding.inner.x.name]: value,
+    [shell.padding.inner.y.name]: value,
+  };
+}
+
+/** `[shellVar.name]: value` map for `Layout` `contentWidth`. */
+export function layoutContentWidthAssignment(width: number): Record<string, string> {
+  const shell = getLayoutShellVars();
+  return { [shell.content.width.name]: `${width}px` };
+}

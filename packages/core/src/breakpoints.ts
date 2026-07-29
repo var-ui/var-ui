@@ -16,3 +16,13 @@ export const appShellMobileBreakpointQueries = {
   lg: toMatchMediaQuery(styles.breakpoint('lg', 'max')),
   none: 'not all',
 } as const satisfies Record<AppShellMobileBreakpoint, string>;
+
+/** Breakpoint names used by `LayoutPanel.responsive.below` for `matchMedia`. */
+export type LayoutBreakpoint = 'sm' | 'md' | 'lg';
+
+/** `matchMedia` conditions for `LayoutPanel` responsive `overlay`/`hidden` modes. */
+export const layoutBreakpointQueries = {
+  sm: appShellMobileBreakpointQueries.sm,
+  md: appShellMobileBreakpointQueries.md,
+  lg: appShellMobileBreakpointQueries.lg,
+} as const satisfies Record<LayoutBreakpoint, string>;

@@ -2,6 +2,9 @@
 import {
   AppShell,
   ColorModeToggle,
+  Layout,
+  LayoutContent,
+  LayoutPanel,
   MobileNav,
   MobileNavToggle,
   SideNav,
@@ -50,7 +53,7 @@ function isSidebarLinkActive(link: string): boolean {
     <link rel="stylesheet" href="/typestyles.css" />
   </head>
   <body class="docs-body">
-    <AppShell variant="wash" height="fill" contentPadding={6} mobileBreakpoint="md">
+    <AppShell variant="wash" height="fill" contentPadding={0} mobileBreakpoint="md">
       <TopNav slot="topNav">
         <TopNavHeading slot="heading" heading="Var UI" headingHref="/" />
         {
@@ -72,28 +75,36 @@ function isSidebarLinkActive(link: string): boolean {
 
       {
         sidebarSections && (
-          <SideNav
-            slot="sideNav"
-            label="Section"
-            collapsible
-            resizable={{ autoSaveId: 'docs-sidebar' }}
-          >
-            <DocsSidebarNav sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
-          </SideNav>
-        )
-      }
-
-      {
-        sidebarSections && (
           <MobileNav slot="mobileNav" header="Menu">
             <DocsSidebarNav sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
           </MobileNav>
         )
       }
 
-      <div class="docs-content">
-        <slot />
-      </div>
+      {
+        sidebarSections ? (
+          <Layout height="fill" padding={0} class="docs-site-layout">
+            <LayoutPanel slot="start" side="start" width={280} hasDivider padding={0}>
+              <SideNav label="Section navigation" collapsible>
+                <DocsSidebarNav sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
+              </SideNav>
+            </LayoutPanel>
+            <LayoutContent label="Main content">
+              <div class="docs-content">
+                <slot />
+              </div>
+            </LayoutContent>
+          </Layout>
+        ) : (
+          <Layout height="fill" padding={6} class="docs-site-layout">
+            <LayoutContent label="Main content">
+              <div class="docs-content">
+                <slot />
+              </div>
+            </LayoutContent>
+          </Layout>
+        )
+      }
     </AppShell>
   </body>
 </html>
@@ -108,6 +119,13 @@ function isSidebarLinkActive(link: string): boolean {
   body.docs-body {
     overflow: hidden;
   }
+
+  body.docs-body #var-ui-app-shell-main {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+  }
 </style>
 
 <style>
@@ -115,6 +133,12 @@ function isSidebarLinkActive(link: string): boolean {
     display: flex;
     align-items: center;
     gap: 1rem;
+  }
+
+  .docs-site-layout {
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
   }
 
   .docs-content {

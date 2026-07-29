@@ -40,6 +40,13 @@ import { inputGroup } from './components/inputGroup';
 import { kbd } from './components/kbd';
 import { link } from './components/link';
 import { list } from './components/list';
+import {
+  layout,
+  layoutContent,
+  layoutFooter,
+  layoutHeader,
+  layoutPanel,
+} from './components/layout';
 import { menu } from './components/menu';
 import { mobileNav } from './components/mobileNav';
 import { multiSelector } from './components/multiSelector';
@@ -130,6 +137,11 @@ export const themeableComponents = {
   link,
   linkButton,
   list,
+  layout,
+  layoutContent,
+  layoutFooter,
+  layoutHeader,
+  layoutPanel,
   menu,
   mobileNav,
   multiSelector,

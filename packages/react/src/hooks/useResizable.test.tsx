@@ -77,4 +77,37 @@ describe('useResizable', () => {
     expect(result2.current.width).toBe(300);
     localStorage.removeItem(key);
   });
+
+  it('returns independent regions for multi-region config', () => {
+    const { result } = renderHook(() =>
+      useResizable({
+        regions: {
+          start: { defaultWidth: 200, minWidth: 160, maxWidth: 300 },
+          end: { defaultWidth: 380, minWidth: 320, maxWidth: 480 },
+        },
+      }),
+    );
+    expect(result.current.start.width).toBe(200);
+    expect(result.current.end.width).toBe(380);
+    act(() => result.current.end.resize(400));
+    expect(result.current.end.width).toBe(400);
+    expect(result.current.start.width).toBe(200);
+  });
+
+  it('prefixes autoSaveId per region key', () => {
+    localStorage.removeItem('var-ui-resizable:panels:end');
+    const { result, unmount } = renderHook(() =>
+      useResizable({
+        autoSaveId: 'panels',
+        regions: { end: { defaultWidth: 380 } },
+      }),
+    );
+    act(() => result.current.end.resize(420));
+    unmount();
+    const { result: result2 } = renderHook(() =>
+      useResizable({ autoSaveId: 'panels', regions: { end: { defaultWidth: 380 } } }),
+    );
+    expect(result2.current.end.width).toBe(420);
+    localStorage.removeItem('var-ui-resizable:panels:end');
+  });
 });

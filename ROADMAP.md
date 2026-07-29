@@ -162,10 +162,11 @@ TypeStyles' `IMPROVEMENTS.md`/`specs/` for current status first.
   - [ ] **Phase 5 P3 — Outline, NavIcon/NavMenu** — shipped: `Outline`
         (in-page TOC + scroll-spy, docs shell parity); `NavIcon`/`NavMenu`
         deferred.
-  - [ ] **Phase 6 — layout polish and collapsible regions** — shipped:
-        `Collapsible`/`CollapsibleGroup` (pulled forward via docs shell parity);
-        `Resizable` single-region already shipped in P2; deepen multi-region /
-        `Layout*` here.
+  - [x] **Phase 6 — layout polish and collapsible regions** — shipped:
+        `Collapsible`/`CollapsibleGroup`; `Resizable` single-region (P5 P2);
+        `Layout`/`LayoutContent`/`LayoutPanel`/`LayoutHeader`/`LayoutFooter`,
+        multi-region `useResizable`, responsive panel modes, Astro static bindings.
+        Spec: `docs/superpowers/specs/2026-07-29-phase-6-layout-design.md`.
   - [ ] Phase 7 — chat
 
 ## V7 — Typed theming & component overrides

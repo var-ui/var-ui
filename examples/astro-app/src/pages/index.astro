@@ -15,6 +15,10 @@ import {
   Heading,
   HStack,
   Kbd,
+  Layout,
+  LayoutContent,
+  LayoutHeader,
+  LayoutPanel,
   Link,
   ProgressBar,
   Section,
@@ -158,6 +162,21 @@ const tabDefs = [
           <Text>Design tokens panel — theme class on <Kbd>&lt;html&gt;</Kbd> drives CSS variables.</Text>
         </div>
       </Tabs>
+    </Section>
+
+    <Section title="Layout (static)">
+      <Layout padding={4}>
+        <LayoutHeader slot="header"><Heading level={3}>Explorer</Heading></LayoutHeader>
+        <LayoutPanel slot="start" side="start" width={200} hasDivider>
+          <Text as="span" size="sm">Nav</Text>
+        </LayoutPanel>
+        <LayoutContent>
+          <Text>Main content — static three-zone shell with no client scripts.</Text>
+        </LayoutContent>
+        <LayoutPanel slot="end" side="end" width={280} hasDivider>
+          <Text as="span" size="sm">Inspector</Text>
+        </LayoutPanel>
+      </Layout>
     </Section>
 
     <Section title="Collapsible">

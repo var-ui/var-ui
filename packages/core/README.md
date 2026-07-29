@@ -7,11 +7,19 @@ This is a **library package** (not a standalone app). Import it from apps or the
 ## Quick start
 
 ```ts
-import { button, layout, text, designTokens, defaultThemeClassName } from '@var-ui/core';
+import {
+  button,
+  layout,
+  layoutUtility,
+  text,
+  designTokens,
+  defaultThemeClassName,
+} from '@var-ui/core';
 
 // The default theme surface is registered when the package loads (name: `default`).
 document.body.className = defaultThemeClassName; // `theme-var-ui-default`
 element.className = button({ intent: 'primary' });
+// `layout` — multi-pane page shell recipe; `layoutUtility` — legacy docs stack/section helpers
 ```
 
 Custom themes return a `DesignTheme` from `createDesignTheme({ name: 'acme' })` — use
@@ -40,16 +48,16 @@ Pair with a **typestyles extraction entry** in consuming apps so token and recip
 Every recipe follows the [`c.vars()` override contract](#authoring-recipes) and
 emits stable public class names.
 
-| Category       | Recipes                                                                                                       |
-| -------------- | ------------------------------------------------------------------------------------------------------------- |
-| **Actions**    | `button`, `linkButton`, `link`                                                                                |
-| **Data input** | `textField`, `textAreaField`, `checkbox`, `radio`, `switchStyles`, `select`, `field` (+ `fieldChrome` helper) |
-| **Feedback**   | `alert`, `banner`, `badge`, `spinner`, `skeleton`, `progressBar`, `statusDot`                                 |
-| **Layout**     | `stack`, `grid`, `section`, `center`, `aspectRatio`, `divider`, `layout`/`text` utilities                     |
-| **Content**    | `heading`, `textBlock`, `kbd`, `emptyState`, `codeBlock`, `proseContent`, `steps`, `fileTree`                 |
-| **Containers** | `card`, `carousel`, `thumbnail`, `avatar`, `avatarGroup`                                                      |
-| **Overlay**    | `dialog`, `overlay`, `commandPalette`, `tabs`                                                                 |
-| **Icons**      | `icon` recipe + `IconName` union / `iconNameList` (glyphs live in `@var-ui/icons`)                            |
+| Category       | Recipes                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Actions**    | `button`, `linkButton`, `link`                                                                                     |
+| **Data input** | `textField`, `textAreaField`, `checkbox`, `radio`, `switchStyles`, `select`, `field` (+ `fieldChrome` helper)      |
+| **Feedback**   | `alert`, `banner`, `badge`, `spinner`, `skeleton`, `progressBar`, `statusDot`                                      |
+| **Layout**     | `stack`, `grid`, `section`, `center`, `aspectRatio`, `divider`, `layout` (shell), `layoutUtility`/`text` utilities |
+| **Content**    | `heading`, `textBlock`, `kbd`, `emptyState`, `codeBlock`, `proseContent`, `steps`, `fileTree`                      |
+| **Containers** | `card`, `carousel`, `thumbnail`, `avatar`, `avatarGroup`                                                           |
+| **Overlay**    | `dialog`, `overlay`, `commandPalette`, `tabs`                                                                      |
+| **Icons**      | `icon` recipe + `IconName` union / `iconNameList` (glyphs live in `@var-ui/icons`)                                 |
 
 ## Token layers
 

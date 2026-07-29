@@ -34,6 +34,8 @@ import SelectDefault from './select/default/astro.astro';
 import SelectOptions from './select/options/astro.astro';
 import TabsDefault from './tabs/default/astro.astro';
 import DialogDefault from './dialog/default/astro.astro';
+import LayoutDefault from './layout/default/astro.astro';
+import CollapsibleDefault from './collapsible/default/astro.astro';
 import ChatLayoutDefault from './chat-layout/default/astro.astro';
 import ChatMessageListDefault from './chat-message-list/default/astro.astro';
 import ChatMessageDefault from './chat-message/default/astro.astro';
@@ -81,6 +83,8 @@ export const astroDemoMap = {
   'select.options': SelectOptions,
   'tabs.default': TabsDefault,
   'dialog.default': DialogDefault,
+  'layout.default': LayoutDefault,
+  'collapsible.default': CollapsibleDefault,
   'chat-layout.default': ChatLayoutDefault,
   'chat-message-list.default': ChatMessageListDefault,
   'chat-message.default': ChatMessageDefault,

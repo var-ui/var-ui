@@ -1,0 +1,24 @@
+---
+import { layoutContent, type LayoutPadding } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  padding?: LayoutPadding;
+  isScrollable?: boolean;
+  role?: string;
+  label?: string;
+  className?: string;
+};
+
+function toZonePaddingVariant(padding: LayoutPadding | undefined): 'inherit' | '0' {
+  return padding === 0 ? '0' : 'inherit';
+}
+
+const { padding, isScrollable = true, role, label, className } = Astro.props;
+const s = layoutContent({ isScrollable, padding: toZonePaddingVariant(padding) });
+const resolvedRole = role ?? (label != null ? 'region' : undefined);
+---
+
+<div {...recipeProps(s.content, className)} role={resolvedRole} aria-label={label}>
+  <slot />
+</div>

@@ -1,0 +1,47 @@
+---
+import { layout, layoutShellPaddingAssignments, layoutContentWidthAssignment, type LayoutPadding } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  height?: 'fill' | 'auto';
+  /** Sets shell CSS vars on the root. Omit for recipe default (`space[4]`). */
+  padding?: LayoutPadding;
+  /** Constrains header/footer inner wrappers via shell CSS vars. */
+  contentWidth?: number;
+  className?: string;
+};
+
+const { height = 'fill', padding, contentWidth, className } = Astro.props;
+const l = layout({ height });
+const rootStyle = {
+  ...(padding != null ? layoutShellPaddingAssignments(padding) : {}),
+  ...(contentWidth != null ? layoutContentWidthAssignment(contentWidth) : {}),
+};
+const hasRootStyle = Object.keys(rootStyle).length > 0;
+
+const hasHeader = Astro.slots.has('header');
+const hasFooter = Astro.slots.has('footer');
+const hasStart = Astro.slots.has('start');
+const hasEnd = Astro.slots.has('end');
+---
+
+<div
+  {...recipeProps(l.root, className)}
+  style={hasRootStyle ? rootStyle : undefined}
+  data-has-header={hasHeader ? '' : undefined}
+  data-has-footer={hasFooter ? '' : undefined}
+  data-has-start={hasStart ? '' : undefined}
+  data-has-end={hasEnd ? '' : undefined}
+>
+  <div {...recipeProps(l.outer)}>
+    <div {...recipeProps(l.inner)}>
+      {hasHeader && <slot name="header" />}
+      <div {...recipeProps(l.middle)}>
+        {hasStart && <slot name="start" />}
+        <slot />
+        {hasEnd && <slot name="end" />}
+      </div>
+      {hasFooter && <slot name="footer" />}
+    </div>
+  </div>
+</div>

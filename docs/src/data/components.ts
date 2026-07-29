@@ -140,6 +140,27 @@ export const componentRegistry: ComponentEntry[] = [
     importLine: "import { Tabs } from '@var-ui/react';",
   },
   {
+    slug: 'collapsible',
+    name: 'Collapsible',
+    category: 'layout',
+    description: 'Expand/collapse disclosure panel.',
+    importLine: "import { Collapsible, CollapsibleGroup } from '@var-ui/react';",
+  },
+  {
+    slug: 'layout',
+    name: 'Layout',
+    category: 'layout',
+    description: 'Multi-pane page shell with header, side panels, and scrollable content.',
+    importLine: "import { Layout, LayoutContent, LayoutPanel } from '@var-ui/react';",
+  },
+  {
+    slug: 'layout-panel',
+    name: 'LayoutPanel',
+    category: 'layout',
+    description: 'Fixed-width side panel for Layout start/end slots.',
+    importLine: "import { LayoutPanel } from '@var-ui/react';",
+  },
+  {
     slug: 'stack',
     name: 'Stack',
     category: 'layout',

@@ -141,6 +141,45 @@ Props:
 Panel content uses **named slots** matching each tab `id` (e.g. `slot="overview"`).
 Pass `defaultSelectedId` to change which panel is shown before the client script runs.
 
+## Layout
+
+Multi-pane page shell for header/footer bands and start/content/end zones. Static
+bindings only — same core recipes as `@var-ui/react`, named slots instead of
+compound props.
+
+Interactive resize (`useResizable` + `ResizeHandle`) and responsive panel modes
+(`overlay` / `hidden`) require React; Astro ships the structural shell and styling
+only.
+
+```astro
+---
+import {
+  Layout,
+  LayoutHeader,
+  LayoutFooter,
+  LayoutContent,
+  LayoutPanel,
+  Heading,
+} from '@var-ui/astro';
+---
+<Layout padding={4}>
+  <LayoutHeader slot="header" hasDivider>
+    <Heading level={3}>Explorer</Heading>
+  </LayoutHeader>
+  <LayoutPanel slot="start" side="start" width={200} hasDivider>Nav</LayoutPanel>
+  <LayoutContent>Main content</LayoutContent>
+  <LayoutPanel slot="end" side="end" width={280} hasDivider>Inspector</LayoutPanel>
+</Layout>
+```
+
+Props mirror `@var-ui/react` where applicable, with these limitations:
+
+- `LayoutPanel` requires an explicit `side="start"` or `side="end"` — Astro has no
+  layout area context.
+- `Layout` accepts `contentWidth` (px) to set the shell content-width CSS var on the root.
+- No automatic `data-divider-header` / `data-divider-footer` on the layout root — set
+  `hasDivider` on `LayoutHeader` / `LayoutFooter` directly.
+
 ## Collapsible
 
 Expand/collapse panel built on native `<details>` / `<summary>` (no React Aria).

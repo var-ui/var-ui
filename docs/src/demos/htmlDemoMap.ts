@@ -34,6 +34,8 @@ import { render as renderSelectDefault } from './select/default/html';
 import { render as renderSelectOptions } from './select/options/html';
 import { render as renderTabsDefault } from './tabs/default/html';
 import { render as renderDialogDefault } from './dialog/default/html';
+import { render as renderLayoutDefault } from './layout/default/html';
+import { render as renderCollapsibleDefault } from './collapsible/default/html';
 import { render as renderChatLayoutDefault } from './chat-layout/default/html';
 import { render as renderChatMessageListDefault } from './chat-message-list/default/html';
 import { render as renderChatMessageDefault } from './chat-message/default/html';
@@ -81,6 +83,8 @@ export const htmlDemoMap = {
   'select.options': renderSelectOptions,
   'tabs.default': renderTabsDefault,
   'dialog.default': renderDialogDefault,
+  'layout.default': renderLayoutDefault,
+  'collapsible.default': renderCollapsibleDefault,
   'chat-layout.default': renderChatLayoutDefault,
   'chat-message-list.default': renderChatMessageListDefault,
   'chat-message.default': renderChatMessageDefault,

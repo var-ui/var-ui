@@ -13,7 +13,15 @@ describe('themeableComponents', () => {
       ([name, value]) =>
         typeof value === 'function' &&
         // Skip non-recipe helpers re-exported from components
-        !['layout', 'text', 'namedContainerQuery', 'codeHljsScope'].includes(name) &&
+        ![
+          'layoutUtility',
+          'text',
+          'namedContainerQuery',
+          'codeHljsScope',
+          'getLayoutShellVars',
+          'layoutContentWidthAssignment',
+          'layoutShellPaddingAssignments',
+        ].includes(name) &&
         !name.endsWith('Chrome') &&
         !name.startsWith('create'),
     );

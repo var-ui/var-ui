@@ -37,6 +37,8 @@ export type DemoId =
   | 'select.options'
   | 'tabs.default'
   | 'dialog.default'
+  | 'layout.default'
+  | 'collapsible.default'
   | 'chat-layout.default'
   | 'chat-message-list.default'
   | 'chat-message.default'
