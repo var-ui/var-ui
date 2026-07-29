@@ -1,0 +1,26 @@
+---
+import { toc } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  label: string;
+  href: string;
+  isSelected?: boolean;
+  isNested?: boolean;
+  className?: string;
+};
+
+const { label, href, isSelected = false, isNested = false, className } = Astro.props;
+const s = toc();
+const linkProps = {
+  ...recipeProps(s.link, className),
+  ...(isSelected ? { 'data-selected': '' } : {}),
+  'aria-current': isSelected ? ('location' as const) : undefined,
+};
+---
+
+<li {...recipeProps(s.item)} data-nested={isNested || undefined}>
+  <a href={href} {...linkProps}>
+    {label}
+  </a>
+</li>

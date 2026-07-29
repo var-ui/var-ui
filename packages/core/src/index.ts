@@ -6,6 +6,8 @@ export * from './create-theme';
 export * from './extend-tokens';
 export * from './theme-conditions';
 export * from './themeable-components';
+export * from './tocSpy';
+export { positionTocIndicator } from './tocIndicator';
 export {
   type AppShellMobileBreakpoint,
   type AppShellMobileBreakpointName,

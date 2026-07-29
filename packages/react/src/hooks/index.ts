@@ -31,3 +31,4 @@ export {
   type UseTreeFocusOptions,
   type UseTreeFocusResult,
 } from './useTreeFocus';
+export { useTocSpy, type UseTocSpyOptions, type UseTocSpyResult } from './useTocSpy';

@@ -1,0 +1,59 @@
+---
+import { toc } from '@var-ui/core';
+import { recipeClassName, recipeProps } from '../utils';
+
+type Props = {
+  title?: string;
+  label?: string;
+  auto?: boolean;
+  contentSelector?: string;
+  headingSelector?: string;
+  minHeadings?: number;
+  headerOffset?: number;
+  hideBelowXl?: boolean;
+  stickyTop?: string;
+  className?: string;
+};
+
+const {
+  title = 'On this page',
+  label,
+  auto = false,
+  contentSelector,
+  headingSelector,
+  minHeadings = 2,
+  headerOffset,
+  hideBelowXl = false,
+  stickyTop,
+  className,
+} = Astro.props;
+
+const resolvedLabel = label ?? title;
+const s = toc({ hideBelow: hideBelowXl ? 'xl' : 'none' });
+const rootClass = recipeClassName(s.root, className);
+const rootStyle = stickyTop ? `--var-ui-toc-sticky-top: ${stickyTop}` : undefined;
+---
+
+<nav
+  class={rootClass}
+  style={rootStyle}
+  aria-label={resolvedLabel}
+  data-var-ui-toc
+  data-auto={auto || undefined}
+  data-content-selector={auto ? contentSelector : undefined}
+  data-heading-selector={auto && headingSelector ? headingSelector : undefined}
+  data-min-headings={auto ? String(minHeadings) : undefined}
+  data-header-offset={auto && headerOffset != null ? String(headerOffset) : undefined}
+  hidden={auto || undefined}
+>
+  {title ? <p {...recipeProps(s.title)}>{title}</p> : null}
+  <ol {...recipeProps(s.list)} data-var-ui-toc-list>
+    <span {...recipeProps(s.indicator)} data-toc-indicator aria-hidden="true"></span>
+    {!auto ? <slot /> : null}
+  </ol>
+</nav>
+
+<script>
+  import { initTocs } from '../scripts/toc';
+  initTocs();
+</script>

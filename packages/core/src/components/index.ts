@@ -76,6 +76,7 @@ export { resizeHandle } from './resizeHandle';
 export { progressBar } from './progressBar';
 export { section } from './section';
 export { sideNav, SIDE_NAV_COLLAPSED_WIDTH } from './sideNav';
+export { toc } from './toc';
 export { mobileNav } from './mobileNav';
 export { topNav } from './topNav';
 export { skeleton } from './skeleton';

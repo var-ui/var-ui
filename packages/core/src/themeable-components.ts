@@ -79,6 +79,7 @@ import { textAreaField } from './components/textAreaField';
 import { textField } from './components/textField';
 import { thumbnail } from './components/thumbnail';
 import { timeInput } from './components/timeInput';
+import { toc } from './components/toc';
 import { toast } from './components/toast';
 import { toggleButton } from './components/toggleButton';
 import { tokenizer } from './components/tokenizer';
@@ -175,6 +176,7 @@ export const themeableComponents = {
   textField,
   thumbnail,
   timeInput,
+  toc,
   toast,
   toggleButton,
   tokenizer,

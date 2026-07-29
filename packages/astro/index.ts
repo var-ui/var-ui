@@ -28,6 +28,8 @@ export { default as Banner } from './src/components/Banner.astro';
 export { default as CodeBlock } from './src/components/CodeBlock.astro';
 export { default as Steps } from './src/components/Steps.astro';
 export { default as Breadcrumbs } from './src/components/Breadcrumbs.astro';
+export { default as Toc } from './src/components/Toc.astro';
+export { default as TocItem } from './src/components/TocItem.astro';
 export { default as Collapsible } from './src/components/Collapsible.astro';
 export { default as Tabs } from './src/components/Tabs.astro';
 export { default as Layout } from './src/components/Layout.astro';
@@ -60,6 +62,7 @@ export {
   initMobileNavToggles,
 } from './src/scripts/mobileNav';
 export { initSideNav, initSideNavs } from './src/scripts/sideNav';
+export { initToc, initTocs } from './src/scripts/toc';
 export { createResizeHandle } from './src/scripts/resizeHandle';
 export { copyText, initCodeBlockCopy } from './src/scripts/codeBlockCopy';
 export {

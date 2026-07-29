@@ -4,6 +4,7 @@ import netlify from '@astrojs/netlify';
 import react from '@astrojs/react';
 import typestylesVite from '@typestyles/vite';
 import { defineConfig } from 'astro/config';
+import rehypeSlug from 'rehype-slug';
 import { extractPropsPlugin } from './src/lib/extract-props-plugin.ts';
 import { rolldownJsxOptionsCompat } from './src/lib/rolldown-jsx-options.ts';
 
@@ -13,7 +14,7 @@ const docsRoot = fileURLToPath(new URL('.', import.meta.url));
 export default defineConfig({
   output: 'server',
   adapter: netlify(),
-  integrations: [mdx(), react()],
+  integrations: [mdx({ rehypePlugins: [rehypeSlug] }), react()],
   vite: {
     plugins: [
       extractPropsPlugin(docsRoot),

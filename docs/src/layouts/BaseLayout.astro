@@ -94,6 +94,21 @@ function isSidebarLinkActive(link: string): boolean {
                 <slot />
               </div>
             </LayoutContent>
+            {
+              Astro.slots.has('toc') ? (
+                <LayoutPanel
+                  slot="end"
+                  side="end"
+                  width={220}
+                  hasDivider
+                  padding={0}
+                  isScrollable
+                  label="On this page"
+                >
+                  <slot name="toc" />
+                </LayoutPanel>
+              ) : null
+            }
           </Layout>
         ) : (
           <Layout height="fill" padding={6} class="docs-site-layout">
