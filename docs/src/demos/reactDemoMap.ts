@@ -35,6 +35,8 @@ import SelectDefault from './select/default/react';
 import SelectOptions from './select/options/react';
 import TabsDefault from './tabs/default/react';
 import DialogDefault from './dialog/default/react';
+import LayoutDefault from './layout/default/react';
+import CollapsibleDefault from './collapsible/default/react';
 import ChatLayoutDefault from './chat-layout/default/react';
 import ChatMessageListDefault from './chat-message-list/default/react';
 import ChatMessageDefault from './chat-message/default/react';
@@ -82,6 +84,8 @@ export const reactDemoMap = {
   'select.options': SelectOptions,
   'tabs.default': TabsDefault,
   'dialog.default': DialogDefault,
+  'layout.default': LayoutDefault,
+  'collapsible.default': CollapsibleDefault,
   'chat-layout.default': ChatLayoutDefault,
   'chat-message-list.default': ChatMessageListDefault,
   'chat-message.default': ChatMessageDefault,

@@ -1,0 +1,14 @@
+---
+import { Layout, LayoutContent, LayoutPanel, LayoutHeader, Text } from '@var-ui/astro';
+---
+
+<Layout height="auto" padding={0}>
+  <LayoutHeader slot="header">Explorer</LayoutHeader>
+  <LayoutPanel slot="start" side="start" width={180} hasDivider>Nav</LayoutPanel>
+  <LayoutContent>
+    <Text size="sm">Main content</Text>
+  </LayoutContent>
+  <LayoutPanel slot="end" side="end" width={240} hasDivider label="Details" role="complementary">
+    <Text size="sm">Inspector</Text>
+  </LayoutPanel>
+</Layout>

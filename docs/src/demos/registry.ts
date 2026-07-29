@@ -34,6 +34,8 @@ import { snippets as selectDefaultSnippets } from './select/default/snippets';
 import { snippets as selectOptionsSnippets } from './select/options/snippets';
 import { snippets as tabsDefaultSnippets } from './tabs/default/snippets';
 import { snippets as dialogDefaultSnippets } from './dialog/default/snippets';
+import { snippets as layoutDefaultSnippets } from './layout/default/snippets';
+import { snippets as collapsibleDefaultSnippets } from './collapsible/default/snippets';
 import { snippets as chatLayoutDefaultSnippets } from './chat-layout/default/snippets';
 import { snippets as chatMessageListDefaultSnippets } from './chat-message-list/default/snippets';
 import { snippets as chatMessageDefaultSnippets } from './chat-message/default/snippets';
@@ -82,6 +84,8 @@ export const DEMO_IDS = [
   'select.options',
   'tabs.default',
   'dialog.default',
+  'layout.default',
+  'collapsible.default',
   'chat-layout.default',
   'chat-message-list.default',
   'chat-message.default',
@@ -129,6 +133,8 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'select.options': selectOptionsSnippets,
   'tabs.default': tabsDefaultSnippets,
   'dialog.default': dialogDefaultSnippets,
+  'layout.default': layoutDefaultSnippets,
+  'collapsible.default': collapsibleDefaultSnippets,
   'chat-layout.default': chatLayoutDefaultSnippets,
   'chat-message-list.default': chatMessageListDefaultSnippets,
   'chat-message.default': chatMessageDefaultSnippets,
@@ -176,6 +182,8 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'select.options': () => import('./select/options/react'),
   'tabs.default': () => import('./tabs/default/react'),
   'dialog.default': () => import('./dialog/default/react'),
+  'layout.default': () => import('./layout/default/react'),
+  'collapsible.default': () => import('./collapsible/default/react'),
   'chat-layout.default': () => import('./chat-layout/default/react'),
   'chat-message-list.default': () => import('./chat-message-list/default/react'),
   'chat-message.default': () => import('./chat-message/default/react'),
@@ -362,6 +370,16 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'dialog.default',
     snippets: demoSnippets['dialog.default'],
     react: reactDemoLoaders['dialog.default'],
+  },
+  'layout.default': {
+    id: 'layout.default',
+    snippets: demoSnippets['layout.default'],
+    react: reactDemoLoaders['layout.default'],
+  },
+  'collapsible.default': {
+    id: 'collapsible.default',
+    snippets: demoSnippets['collapsible.default'],
+    react: reactDemoLoaders['collapsible.default'],
   },
   'chat-layout.default': {
     id: 'chat-layout.default',
