@@ -8,57 +8,46 @@ export const codeBlock = typestyles.styles.component(
       border: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       background: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       backgroundInline: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       backgroundHeader: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       filenameColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       languageColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       copyButtonColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       copyButtonHoverBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       feedbackColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       lineNumberColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       lineHighlightBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

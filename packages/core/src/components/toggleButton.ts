@@ -9,27 +9,22 @@ export const toggleButton = typestyles.styles.component(
       border: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       background: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       foreground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       selectedBackground: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       selectedForeground: {
         value: t.color.text.onAccent.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

@@ -16,8 +16,8 @@ export const pagination = typestyles.styles.component(
   'pagination',
   (c) => {
     const v = c.vars({
-      textColor: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
-      dotColor: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
+      textColor: { value: t.color.text.secondary.var, syntax: '<color>' },
+      dotColor: { value: t.color.border.default.var, syntax: '<color>' },
     });
     return {
       slots: [

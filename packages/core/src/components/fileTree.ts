@@ -8,37 +8,30 @@ export const fileTree = typestyles.styles.component(
       rootForeground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       rootBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       rootBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       nestedBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       rowColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       folderColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       fileColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

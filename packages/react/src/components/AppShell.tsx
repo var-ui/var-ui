@@ -1,16 +1,20 @@
-import type { CSSProperties, JSX, ReactNode } from 'react';
+import type { JSX, ReactNode } from 'react';
+import { useRef } from 'react';
 import {
   appShell,
+  type AppShellContentPadding,
   type AppShellMobileBreakpoint,
   appShellMobileBreakpointQueries,
-  designTokens as t,
 } from '@var-ui/core';
+import { useHeadroom, type UseHeadroomOptions } from '../hooks/useHeadroom';
 import { useMediaQuery } from '../hooks';
 import { MobileNavProvider } from './MobileNav';
 import { recipeProps } from './utils';
 
 /** `id` of the `<main>` landmark — target of the skip-to-content link. */
 export const APP_SHELL_MAIN_ID = 'var-ui-app-shell-main';
+
+export type AppShellLayout = 'default' | 'alt';
 
 export type AppShellProps = {
   /** Rendered inside the `<main>` landmark. */
@@ -30,40 +34,53 @@ export type AppShellProps = {
   banner?: ReactNode;
   /** Optional right rail (e.g. an `Outline`). Hidden below `mobileBreakpoint`. */
   aside?: ReactNode;
+  /**
+   * When `true`, renders only the main landmark — no chrome slots, skip link, or
+   * mobile provider wrapper. Useful for auth and onboarding pages.
+   */
+  disabled?: boolean;
+  /**
+   * `default` — header spans full width above the side column.
+   * `alt` — side column spans full viewport height; header sits above main only.
+   */
+  layout?: AppShellLayout;
+  /** Fully hides the side column on desktop (distinct from `SideNav` icon-only collapse). */
+  sideNavCollapsed?: boolean;
+  /** Fully hides the aside column. */
+  asideCollapsed?: boolean;
+  /**
+   * Scroll-driven header hide — sets `headerHidden` from `useHeadroom`.
+   * Observes the shell `<main>` scroll container.
+   */
+  headroom?: boolean | UseHeadroomOptions;
+  /** Hides the top nav (pairs with `headroom` or manual scroll logic). */
+  headerHidden?: boolean;
+  /**
+   * When `true` (default), a hidden header still reserves grid space.
+   * When `false`, the top row collapses so main expands into the header band.
+   */
+  headerOffset?: boolean;
   /** @default 'fill' */
   height?: 'fill' | 'auto';
   /** @default 'elevated' */
   variant?: 'wash' | 'surface' | 'section' | 'elevated';
-  /** Main content padding. Values matching a `designTokens.space` step resolve to that token; anything else is treated as raw px. */
-  contentPadding?: number;
+  /** Main content padding — design-token space step. @default 0 */
+  contentPadding?: AppShellContentPadding;
   /** Viewport width below which `sideNav` hides and `data-mobile` is set on the root. `'none'` never goes mobile. @default 'md' */
   mobileBreakpoint?: AppShellMobileBreakpoint;
   className?: string;
 };
 
-function resolveContentPadding(padding: number | undefined): string | undefined {
-  if (padding == null) return undefined;
-  const token = t.space[padding as keyof typeof t.space];
-  return token != null ? String(token) : `${padding}px`;
+function toContentPaddingVariant(
+  padding: AppShellContentPadding | undefined,
+): `${AppShellContentPadding}` {
+  return `${padding ?? 0}` as `${AppShellContentPadding}`;
 }
 
 /**
  * Application chrome: optional banner, top nav, side nav, main content, and
  * aside rail in a CSS grid layout, plus a skip-to-content link and the mobile
- * breakpoint that hides the persistent side nav and aside. Wraps its slots in
- * a `MobileNavProvider` so a `MobileNav` + `MobileNav.Toggle` placed anywhere
- * inside stay in sync — `AppShell` itself never renders a toggle.
- *
- * ```tsx
- * <AppShell
- *   topNav={<TopNav endContent={<MobileNav.Toggle />}>…</TopNav>}
- *   sideNav={<SideNav>…</SideNav>}
- *   mobileNav={<MobileNav header="Menu"><SideNav.Section>…</SideNav.Section></MobileNav>}
- *   aside={<Outline items={[…]} />}
- * >
- *   <p>Main content</p>
- * </AppShell>
- * ```
+ * breakpoint that hides the persistent side nav and aside.
  */
 export function AppShell({
   children,
@@ -72,18 +89,44 @@ export function AppShell({
   mobileNav,
   banner,
   aside,
+  disabled = false,
+  layout = 'default',
+  sideNavCollapsed = false,
+  asideCollapsed = false,
+  headroom,
+  headerHidden,
+  headerOffset = true,
   height = 'fill',
   variant = 'elevated',
   contentPadding,
   mobileBreakpoint = 'md',
   className,
 }: AppShellProps): JSX.Element {
+  const mainRef = useRef<HTMLElement>(null);
   const isMobile = useMediaQuery(appShellMobileBreakpointQueries[mobileBreakpoint]);
-  const s = appShell({ height, variant });
-  const resolvedPadding = resolveContentPadding(contentPadding);
-  const mainStyle = resolvedPadding
-    ? ({ '--var-ui-app-shell-contentpadding': resolvedPadding } as CSSProperties)
-    : undefined;
+
+  const headroomOptions = headroom === true ? {} : headroom === false ? undefined : headroom;
+  const headroomEnabled = headroomOptions != null;
+  const { pinned } = useHeadroom({
+    ...headroomOptions,
+    target: mainRef,
+  });
+
+  const s = appShell({
+    height,
+    variant,
+    contentPadding: toContentPaddingVariant(contentPadding),
+  });
+
+  const effectiveHeaderHidden = headerHidden ?? (headroomEnabled ? !pinned : false);
+
+  if (disabled) {
+    return (
+      <main id={APP_SHELL_MAIN_ID} {...recipeProps(s.main, className)} ref={mainRef}>
+        {children}
+      </main>
+    );
+  }
 
   return (
     <MobileNavProvider>
@@ -91,6 +134,13 @@ export function AppShell({
         {...recipeProps(s.root, className)}
         data-mobile={isMobile ? '' : undefined}
         data-aside={aside ? '' : undefined}
+        data-has-top-nav={topNav ? '' : undefined}
+        data-has-side-nav={sideNav ? '' : undefined}
+        data-layout={layout === 'alt' ? 'alt' : undefined}
+        data-side-nav-collapsed={sideNavCollapsed ? '' : undefined}
+        data-aside-collapsed={asideCollapsed ? '' : undefined}
+        data-header-hidden={effectiveHeaderHidden ? '' : undefined}
+        data-header-offset={headerOffset ? '' : undefined}
       >
         <a href={`#${APP_SHELL_MAIN_ID}`} {...recipeProps(s.skipLink)}>
           Skip to content
@@ -99,7 +149,7 @@ export function AppShell({
         <div {...recipeProps(s.frame)}>
           {topNav ? <header {...recipeProps(s.topNav)}>{topNav}</header> : null}
           {sideNav ? <div {...recipeProps(s.sideNav)}>{sideNav}</div> : null}
-          <main id={APP_SHELL_MAIN_ID} {...recipeProps(s.main)} style={mainStyle}>
+          <main id={APP_SHELL_MAIN_ID} {...recipeProps(s.main)} ref={mainRef}>
             {children}
           </main>
           {aside ? <aside {...recipeProps(s.aside)}>{aside}</aside> : null}

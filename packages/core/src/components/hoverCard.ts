@@ -18,17 +18,14 @@ export const hoverCard = typestyles.styles.component(
       background: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       border: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       titleForeground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

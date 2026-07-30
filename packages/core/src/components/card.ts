@@ -8,27 +8,22 @@ export const card = typestyles.styles.component(
       border: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       background: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       titleColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       bodyColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       linkTitleColor: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

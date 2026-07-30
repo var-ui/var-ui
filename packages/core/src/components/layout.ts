@@ -122,7 +122,7 @@ export const layoutHeader = typestyles.styles.component<
   (c) => {
     const shell = getLayoutShellVars();
     const v = c.vars({
-      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
+      border: { value: t.color.border.default.var, syntax: '<color>' },
     });
     return {
       slots: LAYOUT_HEADER_SLOTS,
@@ -169,7 +169,7 @@ export const layoutFooter = typestyles.styles.component<
   (c) => {
     const shell = getLayoutShellVars();
     const v = c.vars({
-      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
+      border: { value: t.color.border.default.var, syntax: '<color>' },
     });
     return {
       slots: LAYOUT_FOOTER_SLOTS,
@@ -268,16 +268,14 @@ export const layoutPanel = typestyles.styles.component(
   (c) => {
     const shell = getLayoutShellVars();
     const v = c.vars({
-      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
+      border: { value: t.color.border.default.var, syntax: '<color>' },
       overlayBackground: {
         value: t.color.overlay.backdrop.var,
         syntax: '<color>',
-        inherits: false,
       },
       panelBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

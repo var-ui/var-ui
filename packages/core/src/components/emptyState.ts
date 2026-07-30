@@ -17,12 +17,10 @@ export const emptyState = typestyles.styles.component(
       iconColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       iconBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

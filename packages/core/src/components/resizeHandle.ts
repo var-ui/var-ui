@@ -18,17 +18,14 @@ export const resizeHandle = typestyles.styles.component(
       lineColor: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       pillColor: {
         value: t.color.border.strong.var,
         syntax: '<color>',
-        inherits: false,
       },
       focusRing: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

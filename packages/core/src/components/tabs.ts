@@ -8,32 +8,26 @@ export const tabs = typestyles.styles.component(
       listBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       tabColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       tabSelectedColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       tabIndicatorColor: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       panelBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       panelBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

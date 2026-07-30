@@ -14,8 +14,8 @@ export const icon = typestyles.styles.component(
   'icon',
   (c) => {
     const v = c.vars({
-      size: { value: t.size.icon.md.var, syntax: '<length>', inherits: false },
-      color: { value: 'currentColor', syntax: '*', inherits: false },
+      size: { value: t.size.icon.md.var, syntax: '<length>' },
+      color: { value: 'currentColor', syntax: '*' },
     });
     return {
       base: {

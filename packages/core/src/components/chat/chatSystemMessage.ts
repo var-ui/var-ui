@@ -27,8 +27,8 @@ export const chatSystemMessage = typestyles.styles.component(
   'chat-system-message',
   (c) => {
     const v = c.vars({
-      color: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
-      background: { value: t.color.background.subtle.var, syntax: '<color>', inherits: false },
+      color: { value: t.color.text.secondary.var, syntax: '<color>' },
+      background: { value: t.color.background.subtle.var, syntax: '<color>' },
     });
     return {
       slots: ['root', 'icon', 'text'],

@@ -31,42 +31,34 @@ export const mobileNav = typestyles.styles.component(
       overlayBackground: {
         value: t.color.overlay.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       panelBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       panelBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       panelWidth: {
         value: '320px',
         syntax: '<length>',
-        inherits: false,
       },
       headerColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       toggleColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       toggleHoverBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       closeButtonColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

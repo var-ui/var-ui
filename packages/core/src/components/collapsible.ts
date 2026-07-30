@@ -19,10 +19,10 @@ export const collapsible = typestyles.styles.component(
   'collapsible',
   (c) => {
     const v = c.vars({
-      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
-      background: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
-      triggerColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
-      hoverBg: { value: t.color.background.subtle.var, syntax: '<color>', inherits: false },
+      border: { value: t.color.border.default.var, syntax: '<color>' },
+      background: { value: t.color.background.surface.var, syntax: '<color>' },
+      triggerColor: { value: t.color.text.primary.var, syntax: '<color>' },
+      hoverBg: { value: t.color.background.subtle.var, syntax: '<color>' },
     });
     return {
       slots: ['root', 'trigger', 'triggerIcon', 'panel'],

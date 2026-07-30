@@ -282,7 +282,7 @@ typed recipe restyles via `styles.override`.
 Component recipes expose themeable **surface colors** (background, border, foreground) as
 component-scoped CSS custom properties via `c.vars()` in the recipe callback:
 
-- Register colors with `{ value, syntax: '<color>', inherits: false }` (see `button.ts`).
+- Register colors with `{ value, syntax: '<color>' }` (see `button.ts`).
 - Use `v.background.var` (etc.) in base styles; assign variants with `[v.background.name]: tokenValue`.
 - Layout, spacing, and type scale stay as direct token references unless a theme need appears.
 

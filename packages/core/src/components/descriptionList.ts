@@ -22,11 +22,11 @@ export const descriptionList = typestyles.styles.component(
   'description-list',
   (c) => {
     const v = c.vars({
-      termColor: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
-      detailsColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
-      gap: { value: t.space[4].var, syntax: '<length>', inherits: false },
-      termWidth: { value: '8rem', syntax: '<length>', inherits: false },
-      columns: { value: '2', syntax: '<integer>', inherits: false },
+      termColor: { value: t.color.text.secondary.var, syntax: '<color>' },
+      detailsColor: { value: t.color.text.primary.var, syntax: '<color>' },
+      gap: { value: t.space[4].var, syntax: '<length>' },
+      termWidth: { value: '8rem', syntax: '<length>' },
+      columns: { value: '2', syntax: '<integer>' },
     });
     return {
       slots: ['root', 'title', 'item', 'term', 'details', 'toggle'],

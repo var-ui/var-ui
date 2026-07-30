@@ -14,9 +14,9 @@ export const breadcrumbs = typestyles.styles.component(
   'breadcrumbs',
   (c) => {
     const v = c.vars({
-      separator: { value: '"/"', syntax: '*', inherits: false },
-      textColor: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
-      currentColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      separator: { value: '"/"', syntax: '*' },
+      textColor: { value: t.color.text.secondary.var, syntax: '<color>' },
+      currentColor: { value: t.color.text.primary.var, syntax: '<color>' },
     });
     return {
       slots: ['root', 'list', 'item', 'ellipsisItem', 'link'],

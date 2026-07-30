@@ -134,4 +134,37 @@ describe('AppShell', () => {
     expect(screen.getByText('Drawer content')).toBeTruthy();
     vi.unstubAllGlobals();
   });
+
+  it('renders only main when disabled', () => {
+    stubMatchMedia(false);
+    const { container } = wrap(
+      <AppShell disabled topNav={<span>Top</span>} sideNav={<span>Side</span>}>
+        Content
+      </AppShell>,
+    );
+    expect(screen.getByRole('main').textContent).toBe('Content');
+    expect(container.querySelector('header')).toBeNull();
+    expect(screen.queryByText('Top')).toBeNull();
+    vi.unstubAllGlobals();
+  });
+
+  it('sets data-side-nav-collapsed when sideNavCollapsed is true', () => {
+    stubMatchMedia(false);
+    const { container } = wrap(
+      <AppShell sideNav={<span>Side</span>} sideNavCollapsed>
+        Content
+      </AppShell>,
+    );
+    const root = container.firstElementChild as HTMLElement;
+    expect(root.getAttribute('data-side-nav-collapsed')).toBe('');
+    vi.unstubAllGlobals();
+  });
+
+  it('sets data-layout="alt" for alt layout', () => {
+    stubMatchMedia(false);
+    const { container } = wrap(<AppShell layout="alt">Content</AppShell>);
+    const root = container.firstElementChild as HTMLElement;
+    expect(root.getAttribute('data-layout')).toBe('alt');
+    vi.unstubAllGlobals();
+  });
 });

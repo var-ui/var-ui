@@ -9,42 +9,34 @@ export const select = typestyles.styles.component(
       labelColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       triggerBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       triggerBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       triggerForeground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       popoverBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       popoverBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       itemSelectedColor: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       itemFocusedBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     // Select has no description/error slots — reuse only the shared root/label chrome.

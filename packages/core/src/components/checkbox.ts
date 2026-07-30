@@ -8,22 +8,18 @@ export const checkbox = typestyles.styles.component(
       boxBorder: {
         value: t.color.border.strong.var,
         syntax: '<color>',
-        inherits: false,
       },
       boxBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       boxForeground: {
         value: t.color.text.onAccent.var,
         syntax: '<color>',
-        inherits: false,
       },
       groupLabelColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

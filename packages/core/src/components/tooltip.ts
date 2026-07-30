@@ -13,8 +13,8 @@ export const tooltip = typestyles.styles.component(
   'tooltip',
   (c) => {
     const v = c.vars({
-      background: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
-      foreground: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
+      background: { value: t.color.text.primary.var, syntax: '<color>' },
+      foreground: { value: t.color.background.surface.var, syntax: '<color>' },
     });
     return {
       slots: ['root'],

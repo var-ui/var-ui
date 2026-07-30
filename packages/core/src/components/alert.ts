@@ -27,17 +27,14 @@ export const alert = typestyles.styles.component(
       semantic: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: true,
       },
       solidBg: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       solidFg: {
         value: t.color.text.onAccent.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
 

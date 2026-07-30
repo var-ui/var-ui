@@ -25,15 +25,15 @@ export const table = typestyles.styles.component(
   'table',
   (c) => {
     const v = c.vars({
-      headerBg: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
-      headerColor: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
-      bodyColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
-      captionColor: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
-      borderColor: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
-      stripeBg: { value: t.color.background.subtle.var, syntax: '<color>', inherits: false },
-      hoverBg: { value: t.color.background.elevated.var, syntax: '<color>', inherits: false },
-      cellPaddingY: { value: t.space[2].var, syntax: '<length>', inherits: false },
-      cellPaddingX: { value: t.space[3].var, syntax: '<length>', inherits: false },
+      headerBg: { value: t.color.background.surface.var, syntax: '<color>' },
+      headerColor: { value: t.color.text.secondary.var, syntax: '<color>' },
+      bodyColor: { value: t.color.text.primary.var, syntax: '<color>' },
+      captionColor: { value: t.color.text.secondary.var, syntax: '<color>' },
+      borderColor: { value: t.color.border.default.var, syntax: '<color>' },
+      stripeBg: { value: t.color.background.subtle.var, syntax: '<color>' },
+      hoverBg: { value: t.color.background.elevated.var, syntax: '<color>' },
+      cellPaddingY: { value: t.space[2].var, syntax: '<length>' },
+      cellPaddingX: { value: t.space[3].var, syntax: '<length>' },
     });
 
     const rowDivider = {

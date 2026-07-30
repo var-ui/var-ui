@@ -14,8 +14,8 @@ export const grid = typestyles.styles.component(
   'grid',
   (c) => {
     const v = c.vars({
-      gap: { value: t.space[4].var, syntax: '<length>', inherits: false },
-      minColumnWidth: { value: '240px', syntax: '<length>', inherits: false },
+      gap: { value: t.space[4].var, syntax: '<length>' },
+      minColumnWidth: { value: '240px', syntax: '<length>' },
     });
     return {
       base: {

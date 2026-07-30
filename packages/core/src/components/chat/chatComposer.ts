@@ -17,8 +17,8 @@ export const chatComposer = typestyles.styles.component(
   'chat-composer',
   (c) => {
     const v = c.vars({
-      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
-      background: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
+      border: { value: t.color.border.default.var, syntax: '<color>' },
+      background: { value: t.color.background.surface.var, syntax: '<color>' },
     });
     return {
       slots: ['root', 'inputRow', 'input', 'actions'],

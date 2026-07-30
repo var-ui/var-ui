@@ -13,7 +13,7 @@ export const divider = typestyles.styles.component(
   'divider',
   (c) => {
     const v = c.vars({
-      color: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
+      color: { value: t.color.border.default.var, syntax: '<color>' },
     });
     return {
       base: {

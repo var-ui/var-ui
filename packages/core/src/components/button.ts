@@ -8,17 +8,14 @@ export const button = typestyles.styles.component(
       border: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       background: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       foreground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

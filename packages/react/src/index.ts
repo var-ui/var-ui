@@ -207,6 +207,7 @@ export {
   type MobileNavToggleProps,
   AppShell,
   APP_SHELL_MAIN_ID,
+  type AppShellLayout,
   type AppShellProps,
   Layout,
   LayoutContent,

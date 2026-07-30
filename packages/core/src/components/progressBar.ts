@@ -19,12 +19,10 @@ export const progressBar = typestyles.styles.component(
       trackColor: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       fillColor: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: true,
       },
     });
     return {

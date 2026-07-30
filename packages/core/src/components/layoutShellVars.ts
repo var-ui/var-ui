@@ -14,16 +14,16 @@ const shellPadding = t.space[4].var;
 export const layoutShellVarDefinitions = {
   padding: {
     outer: {
-      x: { value: shellPadding, syntax: '<length>' as const, inherits: false as const },
-      y: { value: shellPadding, syntax: '<length>' as const, inherits: false as const },
+      x: { value: shellPadding, syntax: '<length>' as const },
+      y: { value: shellPadding, syntax: '<length>' as const },
     },
     inner: {
-      x: { value: shellPadding, syntax: '<length>' as const, inherits: false as const },
-      y: { value: shellPadding, syntax: '<length>' as const, inherits: false as const },
+      x: { value: shellPadding, syntax: '<length>' as const },
+      y: { value: shellPadding, syntax: '<length>' as const },
     },
   },
   content: {
-    width: { value: 'none', syntax: '<length> | none' as const, inherits: false as const },
+    width: { value: 'none', syntax: '<length> | none' as const },
   },
 } as const;
 

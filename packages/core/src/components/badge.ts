@@ -17,17 +17,14 @@ export const badge = typestyles.styles.component(
       borderColor: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       backgroundColor: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       textColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

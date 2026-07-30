@@ -234,7 +234,7 @@ export {
   type MobileNavProviderProps,
   type MobileNavToggleProps,
 } from './MobileNav';
-export { AppShell, APP_SHELL_MAIN_ID, type AppShellProps } from './AppShell';
+export { AppShell, APP_SHELL_MAIN_ID, type AppShellLayout, type AppShellProps } from './AppShell';
 export {
   Layout,
   LayoutContent,

@@ -18,7 +18,7 @@ export const overflowList = typestyles.styles.component(
   'overflow-list',
   (c) => {
     const v = c.vars({
-      gap: { value: t.space[3].var, syntax: '<length>', inherits: false },
+      gap: { value: t.space[3].var, syntax: '<length>' },
     });
     return {
       slots: ['root', 'item', 'overflow'],

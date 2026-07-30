@@ -1,34 +1,44 @@
 ---
-import { appShell, type AppShellMobileBreakpoint, designTokens as t } from '@var-ui/core';
+import {
+  appShell,
+  type AppShellContentPadding,
+  type AppShellMobileBreakpoint,
+} from '@var-ui/core';
 import { recipeProps } from '../utils';
 
 type Props = {
   height?: 'fill' | 'auto';
   variant?: 'wash' | 'surface' | 'section' | 'elevated';
-  contentPadding?: number;
+  contentPadding?: AppShellContentPadding;
   mobileBreakpoint?: AppShellMobileBreakpoint;
+  disabled?: boolean;
+  layout?: 'default' | 'alt';
+  sideNavCollapsed?: boolean;
+  asideCollapsed?: boolean;
+  headerHidden?: boolean;
+  headerOffset?: boolean;
   className?: string;
 };
-
-function resolveContentPadding(padding: number | undefined): string | undefined {
-  if (padding == null) return undefined;
-  const space = t.space as Record<number, string>;
-  return space[padding] ?? `${padding}px`;
-}
 
 const {
   height = 'fill',
   variant = 'elevated',
-  contentPadding,
+  contentPadding = 0,
   mobileBreakpoint = 'md',
+  disabled = false,
+  layout = 'default',
+  sideNavCollapsed = false,
+  asideCollapsed = false,
+  headerHidden = false,
+  headerOffset = true,
   className,
 } = Astro.props;
 
-const s = appShell({ height, variant });
-const resolvedPadding = resolveContentPadding(contentPadding);
-const mainStyle = resolvedPadding
-  ? `--var-ui-app-shell-contentpadding: ${resolvedPadding}`
-  : undefined;
+const s = appShell({
+  height,
+  variant,
+  contentPadding: `${contentPadding}` as `${AppShellContentPadding}`,
+});
 const hasAside = Astro.slots.has('aside');
 const hasSideNav = Astro.slots.has('sideNav');
 const hasTopNav = Astro.slots.has('topNav');
@@ -36,23 +46,38 @@ const hasBanner = Astro.slots.has('banner');
 const hasMobileNav = Astro.slots.has('mobileNav');
 ---
 
-<div
-  {...recipeProps(s.root, className)}
-  data-var-ui-app-shell
-  data-var-ui-mobile-nav-provider
-  data-mobile-breakpoint={mobileBreakpoint}
-  data-aside={hasAside || undefined}
->
-  <a href="#var-ui-app-shell-main" {...recipeProps(s.skipLink)}>Skip to content</a>
-  {hasBanner && <div {...recipeProps(s.banner)}><slot name="banner" /></div>}
-  <div {...recipeProps(s.frame)}>
-    {hasTopNav && <header {...recipeProps(s.topNav)}><slot name="topNav" /></header>}
-    {hasSideNav && <div {...recipeProps(s.sideNav)}><slot name="sideNav" /></div>}
-    <main id="var-ui-app-shell-main" {...recipeProps(s.main)} style={mainStyle}><slot /></main>
-    {hasAside && <aside {...recipeProps(s.aside)}><slot name="aside" /></aside>}
-  </div>
-  {hasMobileNav && <slot name="mobileNav" />}
-</div>
+{
+  disabled ? (
+    <main id="var-ui-app-shell-main" {...recipeProps(s.main, className)}>
+      <slot />
+    </main>
+  ) : (
+    <div
+      {...recipeProps(s.root, className)}
+      data-var-ui-app-shell
+      data-var-ui-mobile-nav-provider
+      data-mobile-breakpoint={mobileBreakpoint}
+      data-aside={hasAside || undefined}
+      data-has-top-nav={hasTopNav || undefined}
+      data-has-side-nav={hasSideNav || undefined}
+      data-layout={layout === 'alt' ? 'alt' : undefined}
+      data-side-nav-collapsed={sideNavCollapsed || undefined}
+      data-aside-collapsed={asideCollapsed || undefined}
+      data-header-hidden={headerHidden ? '' : undefined}
+      data-header-offset={headerOffset ? '' : undefined}
+    >
+      <a href="#var-ui-app-shell-main" {...recipeProps(s.skipLink)}>Skip to content</a>
+      {hasBanner && <div {...recipeProps(s.banner)}><slot name="banner" /></div>}
+      <div {...recipeProps(s.frame)}>
+        {hasTopNav && <header {...recipeProps(s.topNav)}><slot name="topNav" /></header>}
+        {hasSideNav && <div {...recipeProps(s.sideNav)}><slot name="sideNav" /></div>}
+        <main id="var-ui-app-shell-main" {...recipeProps(s.main)}><slot /></main>
+        {hasAside && <aside {...recipeProps(s.aside)}><slot name="aside" /></aside>}
+      </div>
+      {hasMobileNav && <slot name="mobileNav" />}
+    </div>
+  )
+}
 
 <script>
   import { initAppShells } from '../scripts/appShell';

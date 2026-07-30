@@ -16,67 +16,54 @@ export const commandPalette = typestyles.styles.component(
       backdropBackground: {
         value: t.color.overlay.backdrop.var,
         syntax: '<color>',
-        inherits: false,
       },
       dialogBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       dialogBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       inputRowBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       inputIconColor: {
         value: t.color.text.placeholder.var,
         syntax: '<color>',
-        inherits: false,
       },
       inputForeground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       inputPlaceholder: {
         value: t.color.text.placeholder.var,
         syntax: '<color>',
-        inherits: false,
       },
       resultForeground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       resultHoverBackground: {
         value: t.color.accent.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       resultMetaColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       markBackground: {
         value: t.color.accent.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       markForeground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       emptyColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

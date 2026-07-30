@@ -9,42 +9,34 @@ export const slider = typestyles.styles.component(
       labelColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       trackBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       fillBackground: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       thumbBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       thumbBorder: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       outputColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       descriptionColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       errorColor: {
         value: t.color.danger.default.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     const chrome = fieldChrome({

@@ -15,16 +15,14 @@ export const carousel = typestyles.styles.component(
   'carousel',
   (c) => {
     const v = c.vars({
-      itemWidth: { value: '280px', syntax: '<length>', inherits: false },
+      itemWidth: { value: '280px', syntax: '<length>' },
       controlBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       controlBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

@@ -8,22 +8,18 @@ export const dialog = typestyles.styles.component(
       overlayBackground: {
         value: t.color.overlay.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       modalBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       modalBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       descriptionColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

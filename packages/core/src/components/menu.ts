@@ -8,42 +8,34 @@ export const menu = typestyles.styles.component(
       popoverBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       popoverBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       itemForeground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       itemFocusedBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       itemDisabledForeground: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       sectionHeaderForeground: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       separatorColor: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       dangerForeground: {
         value: t.color.danger.default.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

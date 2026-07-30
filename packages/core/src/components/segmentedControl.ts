@@ -11,12 +11,10 @@ export const segmentedControl = typestyles.styles.component(
       trackBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       trackBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

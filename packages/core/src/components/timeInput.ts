@@ -21,24 +21,21 @@ export const timeInput = typestyles.styles.component(
   'timeInput',
   (c) => {
     const v = c.vars({
-      labelColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      labelColor: { value: t.color.text.primary.var, syntax: '<color>' },
       descriptionColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
-      errorColor: { value: t.color.danger.default.var, syntax: '<color>', inherits: false },
+      errorColor: { value: t.color.danger.default.var, syntax: '<color>' },
       groupBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
-      groupBorder: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
-      segmentColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      groupBorder: { value: t.color.border.default.var, syntax: '<color>' },
+      segmentColor: { value: t.color.text.primary.var, syntax: '<color>' },
       segmentPlaceholderColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     const chrome = dateFieldChrome({

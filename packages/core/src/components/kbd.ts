@@ -15,12 +15,10 @@ export const kbd = typestyles.styles.component(
       background: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       border: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

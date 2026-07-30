@@ -9,62 +9,50 @@ export const tokenizer = typestyles.styles.component(
       labelColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       descriptionColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       errorColor: {
         value: t.color.danger.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       groupBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       groupBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       inputForeground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       popoverBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       popoverBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       itemFocusedBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       tokenBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       tokenForeground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       tokenRemoveHoverBackground: {
         value: t.color.background.elevated.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     const chrome = fieldChrome({

@@ -24,7 +24,7 @@ export const statusDot = typestyles.styles.component(
   'status-dot',
   (c) => {
     const v = c.vars({
-      size: { value: '8px', syntax: '<length>', inherits: false },
+      size: { value: '8px', syntax: '<length>' },
     });
     return {
       base: {

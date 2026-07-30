@@ -22,12 +22,10 @@ export const chatMessageBubble = typestyles.styles.component(
       senderBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       senderText: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

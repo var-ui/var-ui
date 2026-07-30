@@ -39,27 +39,22 @@ export const tabList = typestyles.styles.component<typeof TAB_LIST_SLOTS, TabLis
       tabColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       tabSelectedColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       tabHoverBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       indicatorColor: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       dividerColor: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
 

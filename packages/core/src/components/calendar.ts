@@ -9,47 +9,38 @@ export const calendar = typestyles.styles.component(
       headingColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       navButtonColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       navButtonHoverBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       headerCellColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       cellColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       cellHoverBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       cellSelectedBackground: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       cellSelectedColor: {
         value: t.color.text.onAccent.var,
         syntax: '<color>',
-        inherits: false,
       },
       cellDisabledColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     const grid = calendarGridChrome({

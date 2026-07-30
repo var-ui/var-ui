@@ -39,42 +39,34 @@ export const sideNav = typestyles.styles.component(
       background: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: true,
       },
       border: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: true,
       },
       headingColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: true,
       },
       sectionTitleColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: true,
       },
       itemColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: true,
       },
       itemHoverBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: true,
       },
       itemSelectedBackground: {
         value: t.color.accent.subtle.var,
         syntax: '<color>',
-        inherits: true,
       },
       itemSelectedColor: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: true,
       },
     });
     return {

@@ -13,8 +13,8 @@ export const chatLayout = typestyles.styles.component(
   'chat-layout',
   (c) => {
     const v = c.vars({
-      background: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
-      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
+      background: { value: t.color.background.surface.var, syntax: '<color>' },
+      border: { value: t.color.border.default.var, syntax: '<color>' },
     });
     return {
       slots: ['root', 'messageArea', 'dock'],

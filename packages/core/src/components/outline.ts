@@ -5,10 +5,10 @@ export const outline = typestyles.styles.component(
   'outline',
   (c) => {
     const v = c.vars({
-      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
-      titleColor: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
-      linkColor: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
-      linkActiveColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      border: { value: t.color.border.default.var, syntax: '<color>' },
+      titleColor: { value: t.color.text.secondary.var, syntax: '<color>' },
+      linkColor: { value: t.color.text.secondary.var, syntax: '<color>' },
+      linkActiveColor: { value: t.color.text.primary.var, syntax: '<color>' },
     });
     return {
       slots: ['root', 'title', 'list', 'link', 'linkActive', 'linkNested'],

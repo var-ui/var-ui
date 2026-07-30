@@ -22,14 +22,12 @@ export const spinner = typestyles.styles.component(
       indicatorColor: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       trackColor: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
-      size: { value: '20px', syntax: '<length>', inherits: false },
+      size: { value: '20px', syntax: '<length>' },
     });
     return {
       base: {

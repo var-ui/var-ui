@@ -13,7 +13,7 @@ export const heading = typestyles.styles.component(
   'heading',
   (c) => {
     const v = c.vars({
-      color: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      color: { value: t.color.text.primary.var, syntax: '<color>' },
     });
     return {
       base: {
@@ -55,11 +55,10 @@ export const textBlock = typestyles.styles.component(
   'text-block',
   (c) => {
     const v = c.vars({
-      color: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      color: { value: t.color.text.primary.var, syntax: '<color>' },
       secondaryColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

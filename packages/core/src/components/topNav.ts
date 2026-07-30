@@ -31,72 +31,58 @@ export const topNav = typestyles.styles.component(
       background: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: true,
       },
       border: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: true,
       },
       headingColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: true,
       },
       itemColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: true,
       },
       itemHoverBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: true,
       },
       itemSelectedBackground: {
         value: t.color.accent.subtle.var,
         syntax: '<color>',
-        inherits: true,
       },
       itemSelectedColor: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: true,
       },
       menuTriggerColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: true,
       },
       megaPanelBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: true,
       },
       megaPanelBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: true,
       },
       megaItemColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: true,
       },
       megaItemHoverBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: true,
       },
       featuredCardBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: true,
       },
       featuredCardBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: true,
       },
     });
     return {

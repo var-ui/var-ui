@@ -14,16 +14,14 @@ export const avatar = typestyles.styles.component(
   'avatar',
   (c) => {
     const v = c.vars({
-      size: { value: '32px', syntax: '<length>', inherits: false },
+      size: { value: '32px', syntax: '<length>' },
       background: {
         value: t.color.accent.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       foreground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {
@@ -95,7 +93,6 @@ export const avatarGroup = typestyles.styles.component(
       ringColor: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

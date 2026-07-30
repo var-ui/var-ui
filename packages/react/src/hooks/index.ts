@@ -32,3 +32,4 @@ export {
   type UseTreeFocusResult,
 } from './useTreeFocus';
 export { useTocSpy, type UseTocSpyOptions, type UseTocSpyResult } from './useTocSpy';
+export { useHeadroom, type UseHeadroomOptions } from './useHeadroom';

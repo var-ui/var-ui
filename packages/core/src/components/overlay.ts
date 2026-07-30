@@ -16,7 +16,7 @@ export const overlay = typestyles.styles.component(
   'overlay',
   (c) => {
     const v = c.vars({
-      background: { value: t.color.overlay.backdrop.var, syntax: '<color>', inherits: false },
+      background: { value: t.color.overlay.backdrop.var, syntax: '<color>' },
     });
     return {
       slots: ['backdrop', 'positioner'],

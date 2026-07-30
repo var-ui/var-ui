@@ -8,17 +8,14 @@ export const radio = typestyles.styles.component(
       controlBorder: {
         value: t.color.border.strong.var,
         syntax: '<color>',
-        inherits: false,
       },
       indicatorBackground: {
         value: 'transparent',
         syntax: '<color>',
-        inherits: false,
       },
       groupLabelColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

@@ -22,12 +22,10 @@ export const skeleton = typestyles.styles.component(
       baseColor: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       highlightColor: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

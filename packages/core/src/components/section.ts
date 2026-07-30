@@ -14,8 +14,8 @@ export const section = typestyles.styles.component(
   'section',
   (c) => {
     const v = c.vars({
-      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
-      background: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
+      border: { value: t.color.border.default.var, syntax: '<color>' },
+      background: { value: t.color.background.surface.var, syntax: '<color>' },
     });
     return {
       slots: ['root', 'title'],

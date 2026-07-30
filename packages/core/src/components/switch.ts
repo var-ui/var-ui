@@ -8,12 +8,10 @@ export const switchStyles = typestyles.styles.component(
       trackBackground: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       thumbBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

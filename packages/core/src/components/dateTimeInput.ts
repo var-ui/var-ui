@@ -9,92 +9,74 @@ export const dateTimeInput = typestyles.styles.component(
       labelColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       descriptionColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       errorColor: {
         value: t.color.danger.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       groupBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       groupBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       segmentColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       segmentPlaceholderColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       popoverBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       popoverBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       headingColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       navButtonColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       navButtonHoverBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       headerCellColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       cellColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       cellHoverBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       cellSelectedBackground: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       cellSelectedColor: {
         value: t.color.text.onAccent.var,
         syntax: '<color>',
-        inherits: false,
       },
       cellDisabledColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
 

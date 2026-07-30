@@ -8,17 +8,14 @@ export const layout = typestyles.styles.component(
       foreground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       sectionBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       sectionBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {
@@ -57,12 +54,10 @@ export const text = typestyles.styles.component(
       foreground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       secondaryColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

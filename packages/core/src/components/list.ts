@@ -22,26 +22,23 @@ export const list = typestyles.styles.component(
   'list',
   (c) => {
     const v = c.vars({
-      root: { value: 'transparent', syntax: '<color>', inherits: false },
-      labelColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      root: { value: 'transparent', syntax: '<color>' },
+      labelColor: { value: t.color.text.primary.var, syntax: '<color>' },
       descriptionColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       hoverBg: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       pressBg: {
         value: t.color.background.elevated.var,
         syntax: '<color>',
-        inherits: false,
       },
-      dividerColor: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
-      itemPaddingY: { value: t.space[2].var, syntax: '<length>', inherits: false },
-      itemPaddingX: { value: t.space[3].var, syntax: '<length>', inherits: false },
+      dividerColor: { value: t.color.border.default.var, syntax: '<color>' },
+      itemPaddingY: { value: t.space[2].var, syntax: '<length>' },
+      itemPaddingX: { value: t.space[3].var, syntax: '<length>' },
     });
     return {
       slots: ['root', 'header', 'item', 'label', 'description', 'start', 'end', 'divider'],

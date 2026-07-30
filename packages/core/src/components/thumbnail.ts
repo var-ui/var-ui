@@ -13,11 +13,10 @@ export const thumbnail = typestyles.styles.component(
   'thumbnail',
   (c) => {
     const v = c.vars({
-      size: { value: '64px', syntax: '<length>', inherits: false },
+      size: { value: '64px', syntax: '<length>' },
       border: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

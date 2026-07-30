@@ -20,47 +20,38 @@ export const inputGroup = typestyles.styles.component(
       labelColor: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       descriptionColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       errorColor: {
         value: t.color.danger.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       inputBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
-        inherits: false,
       },
       inputBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       inputForeground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       placeholderColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       textBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       textForeground: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     const chrome = fieldChrome({

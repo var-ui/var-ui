@@ -8,17 +8,14 @@ export const steps = typestyles.styles.component(
       stepForeground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       indicatorBackground: {
         value: t.color.accent.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       indicatorForeground: {
         value: t.color.text.onAccent.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

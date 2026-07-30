@@ -33,25 +33,22 @@ export const tree = typestyles.styles.component(
   'tree',
   (c) => {
     const v = c.vars({
-      labelColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      labelColor: { value: t.color.text.primary.var, syntax: '<color>' },
       descriptionColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       hoverBg: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       selectedBg: {
         value: t.color.accent.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
-      indentSize: { value: t.space[4].var, syntax: '<length>', inherits: false },
-      rowPaddingY: { value: t.space[2].var, syntax: '<length>', inherits: false },
-      rowPaddingX: { value: t.space[2].var, syntax: '<length>', inherits: false },
+      indentSize: { value: t.space[4].var, syntax: '<length>' },
+      rowPaddingY: { value: t.space[2].var, syntax: '<length>' },
+      rowPaddingX: { value: t.space[2].var, syntax: '<length>' },
     });
     return {
       slots: ['root', 'item', 'row', 'toggle', 'label', 'description', 'group', 'start', 'end'],

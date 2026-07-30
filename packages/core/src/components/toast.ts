@@ -18,18 +18,17 @@ export const toast = typestyles.styles.component(
   'toast',
   (c) => {
     const v = c.vars({
-      semantic: { value: t.color.accent.default.var, syntax: '<color>', inherits: true },
-      solidBg: { value: t.color.accent.default.var, syntax: '<color>', inherits: false },
-      solidFg: { value: t.color.text.onAccent.var, syntax: '<color>', inherits: false },
-      surface: { value: t.color.background.surface.var, syntax: '<color>', inherits: false },
-      border: { value: t.color.border.default.var, syntax: '<color>', inherits: false },
-      titleColor: { value: t.color.text.primary.var, syntax: '<color>', inherits: false },
+      semantic: { value: t.color.accent.default.var, syntax: '<color>' },
+      solidBg: { value: t.color.accent.default.var, syntax: '<color>' },
+      solidFg: { value: t.color.text.onAccent.var, syntax: '<color>' },
+      surface: { value: t.color.background.surface.var, syntax: '<color>' },
+      border: { value: t.color.border.default.var, syntax: '<color>' },
+      titleColor: { value: t.color.text.primary.var, syntax: '<color>' },
       descriptionColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
-      closeColor: { value: t.color.text.secondary.var, syntax: '<color>', inherits: false },
+      closeColor: { value: t.color.text.secondary.var, syntax: '<color>' },
     });
     return {
       slots: ['region', 'item', 'icon', 'body', 'title', 'description', 'close'],

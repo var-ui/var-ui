@@ -21,47 +21,38 @@ export const proseContent = typestyles.styles.component(
       foreground: {
         value: t.color.text.primary.var,
         syntax: '<color>',
-        inherits: false,
       },
       secondaryColor: {
         value: t.color.text.secondary.var,
         syntax: '<color>',
-        inherits: false,
       },
       blockquoteBorder: {
         value: t.color.border.strong.var,
         syntax: '<color>',
-        inherits: false,
       },
       blockquoteBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       preBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       preBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       tableBorder: {
         value: t.color.border.strong.var,
         syntax: '<color>',
-        inherits: false,
       },
       tableHeaderBackground: {
         value: t.color.background.subtle.var,
         syntax: '<color>',
-        inherits: false,
       },
       tableCellBorder: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
     });
     return {

@@ -12,36 +12,28 @@ const APP_SHELL_SLOTS = [
   'skipLink',
 ] as const;
 
-/**
- * Explicit variant-dimension shape (values left as `{}` — only the keys matter for the
- * `typestyles.styles.component` call signature). None of these slot names happen to collide with a
- * strictly-typed CSS property, so `typestyles.styles.component`'s overload inference can't rule out the
- * flat single-slot config on its own and silently picks it over the slot-with-variants one —
- * passing `Slots`/`V` as explicit type arguments below pins the correct overload.
- */
+/** `appShell` `contentPadding` variant — design-token space steps. */
+export type AppShellContentPadding = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8;
+
 type AppShellVariantDefs = {
   height: { fill: object; auto: object };
   variant: { wash: object; surface: object; section: object; elevated: object };
+  contentPadding: Record<`${AppShellContentPadding}`, object>;
 };
 
 /**
  * Application chrome shell: optional banner, top nav, side nav, main, and
  * aside content in a CSS grid layout. Pair with the React `AppShell`
  * compound, which sets `data-mobile` on the root below the breakpoint and
- * `data-aside` when aside content is provided, and drives `contentPadding`
- * via the exposed custom property.
+ * `data-aside` when aside content is provided.
+ *
+ * Shell dimensions are CSS vars on the recipe (`contentPadding`, `asideWidth`,
+ * `sideNavWidth`) — override via variants or theme `components.appShell`.
  *
  * ```tsx
- * const s = appShell({ height: 'fill', variant: 'surface' });
+ * const s = appShell({ height: 'fill', variant: 'surface', contentPadding: '0' });
  * <div className={s.root} data-mobile={isMobile || undefined} data-aside={hasAside ? '' : undefined}>
- *   <a className={s.skipLink} href="#var-ui-app-shell-main">Skip to content</a>
- *   <div className={s.banner}>…</div>
- *   <div className={s.frame}>
- *     <header className={s.topNav}>…</header>
- *     <nav className={s.sideNav}>…</nav>
- *     <main className={s.main} id="var-ui-app-shell-main">…</main>
- *     <aside className={s.aside}>…</aside>
- *   </div>
+ *   …
  * </div>
  * ```
  */
@@ -52,24 +44,26 @@ export const appShell = typestyles.styles.component<typeof APP_SHELL_SLOTS, AppS
       background: {
         value: t.color.background.app.var,
         syntax: '<color>',
-        inherits: false,
       },
       border: {
         value: t.color.border.default.var,
         syntax: '<color>',
-        inherits: false,
       },
       contentPadding: {
         value: '0px',
         syntax: '<length>',
-        inherits: false,
       },
       asideWidth: {
         value: '12.5rem',
         syntax: '<length>',
-        inherits: false,
+      },
+      sideNavWidth: {
+        value: 'auto',
+        syntax: '<length> | auto',
       },
     });
+    const transition = `transform ${t.duration.fast.var} ${t.easing.standard.var}`;
+
     return {
       slots: APP_SHELL_SLOTS,
       base: {
@@ -125,13 +119,71 @@ export const appShell = typestyles.styles.component<typeof APP_SHELL_SLOTS, AppS
           gridTemplateAreas: '"top top" "side main"',
           gridTemplateColumns: 'auto 1fr',
           gridTemplateRows: 'auto 1fr',
+          '[data-has-side-nav] &': {
+            gridTemplateColumns: `${v.sideNavWidth.var} 1fr`,
+          },
           '[data-aside] &': {
             gridTemplateAreas: '"top top top" "side main aside"',
             gridTemplateColumns: `auto 1fr ${v.asideWidth.var}`,
           },
+          '[data-has-side-nav][data-aside] &': {
+            gridTemplateColumns: `${v.sideNavWidth.var} 1fr ${v.asideWidth.var}`,
+          },
+          '[data-aside]:not([data-has-side-nav]) &': {
+            gridTemplateAreas: '"top top" "main aside"',
+            gridTemplateColumns: `1fr ${v.asideWidth.var}`,
+          },
+          '[data-side-nav-collapsed] &': {
+            gridTemplateAreas: '"top top" "main main"',
+            gridTemplateColumns: '1fr',
+          },
+          '[data-side-nav-collapsed][data-aside] &': {
+            gridTemplateAreas: '"top top top" "main aside"',
+            gridTemplateColumns: `1fr ${v.asideWidth.var}`,
+          },
+          '[data-side-nav-collapsed][data-aside-collapsed] &': {
+            gridTemplateAreas: '"top top" "main main"',
+            gridTemplateColumns: '1fr',
+          },
+          '[data-aside-collapsed] &': {
+            gridTemplateAreas: '"top top" "side main"',
+            gridTemplateColumns: 'auto 1fr',
+          },
+          '[data-aside-collapsed][data-has-side-nav] &': {
+            gridTemplateColumns: `${v.sideNavWidth.var} 1fr`,
+          },
+          '[data-layout="alt"] &': {
+            gridTemplateAreas: '"side top" "side main"',
+            gridTemplateColumns: `${v.sideNavWidth.var} 1fr`,
+            gridTemplateRows: 'auto 1fr',
+          },
+          '[data-layout="alt"][data-aside] &': {
+            gridTemplateAreas: '"side top top" "side main aside"',
+            gridTemplateColumns: `${v.sideNavWidth.var} 1fr ${v.asideWidth.var}`,
+          },
+          '[data-layout="alt"][data-side-nav-collapsed] &': {
+            gridTemplateAreas: '"top" "main"',
+            gridTemplateColumns: '1fr',
+          },
+          '[data-layout="alt"][data-side-nav-collapsed][data-aside] &': {
+            gridTemplateAreas: '"top top" "main aside"',
+            gridTemplateColumns: `1fr ${v.asideWidth.var}`,
+          },
+          '[data-layout="alt"][data-side-nav-collapsed][data-aside-collapsed] &': {
+            gridTemplateAreas: '"top" "main"',
+            gridTemplateColumns: '1fr',
+          },
+          '[data-layout="alt"][data-aside-collapsed] &': {
+            gridTemplateAreas: '"side top" "side main"',
+            gridTemplateColumns: `${v.sideNavWidth.var} 1fr`,
+          },
+          '[data-header-hidden]:not([data-header-offset]) &': {
+            gridTemplateRows: '0fr 1fr',
+          },
           '[data-mobile] &': {
             gridTemplateAreas: '"top" "main"',
             gridTemplateColumns: '1fr',
+            gridTemplateRows: 'auto 1fr',
           },
         },
         topNav: {
@@ -139,6 +191,17 @@ export const appShell = typestyles.styles.component<typeof APP_SHELL_SLOTS, AppS
           minWidth: 0,
           zIndex: 2,
           flexShrink: 0,
+          transition,
+          '[data-header-hidden][data-header-offset] &': {
+            transform: 'translateY(-100%)',
+          },
+          '[data-header-hidden]:not([data-header-offset]) &': {
+            transform: 'none',
+            minHeight: 0,
+            height: 0,
+            overflow: 'hidden',
+            visibility: 'hidden',
+          },
         },
         sideNav: {
           gridArea: 'side',
@@ -147,6 +210,13 @@ export const appShell = typestyles.styles.component<typeof APP_SHELL_SLOTS, AppS
           minHeight: 0,
           minWidth: 0,
           overflow: 'hidden',
+          transition,
+          '[data-has-side-nav] &': {
+            width: v.sideNavWidth.var,
+          },
+          '[data-side-nav-collapsed] &': {
+            display: 'none',
+          },
           '[data-mobile] &': {
             display: 'none',
           },
@@ -167,6 +237,13 @@ export const appShell = typestyles.styles.component<typeof APP_SHELL_SLOTS, AppS
           top: 0,
           alignSelf: 'start',
           maxHeight: '100%',
+          transition,
+          '[data-aside] &': {
+            width: v.asideWidth.var,
+          },
+          '[data-aside-collapsed] &': {
+            display: 'none',
+          },
           '[data-mobile] &': {
             display: 'none',
           },
@@ -211,10 +288,21 @@ export const appShell = typestyles.styles.component<typeof APP_SHELL_SLOTS, AppS
             },
           },
         },
+        contentPadding: {
+          '0': { root: { [v.contentPadding.name]: '0px' } },
+          '1': { root: { [v.contentPadding.name]: t.space[1].var } },
+          '2': { root: { [v.contentPadding.name]: t.space[2].var } },
+          '3': { root: { [v.contentPadding.name]: t.space[3].var } },
+          '4': { root: { [v.contentPadding.name]: t.space[4].var } },
+          '5': { root: { [v.contentPadding.name]: t.space[5].var } },
+          '6': { root: { [v.contentPadding.name]: t.space[6].var } },
+          '8': { root: { [v.contentPadding.name]: t.space[8].var } },
+        },
       },
       defaultVariants: {
         height: 'fill',
         variant: 'wash',
+        contentPadding: '0',
       },
     };
   },

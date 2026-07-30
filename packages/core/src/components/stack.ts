@@ -13,7 +13,7 @@ export const stack = typestyles.styles.component(
   'stack',
   (c) => {
     const v = c.vars({
-      gap: { value: t.space[3].var, syntax: '<length>', inherits: false },
+      gap: { value: t.space[3].var, syntax: '<length>' },
     });
     return {
       base: {
