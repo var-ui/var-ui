@@ -59,14 +59,17 @@ export const acme = createDesignTheme({
         '&:hover': { boxShadow: 'none' },
       },
       variants: {
-        intent: {
-          // keys autocomplete: primary | secondary | ghost | danger
-          primary: { textTransform: 'uppercase' },
+        tone: {
+          // keys autocomplete: neutral | accent | success | warning | danger | info
+          accent: { textTransform: 'uppercase' },
+        },
+        appearance: {
+          filled: {},
         },
       },
       compoundVariants: [
         {
-          variants: { intent: 'primary', size: 'lg' },
+          variants: { tone: 'accent', appearance: 'filled', size: 'lg' },
           style: { letterSpacing: '0.08em' },
         },
       ],
@@ -168,7 +171,7 @@ styles.override(button, { base: { borderRadius: '999px' } }, { layer: 'overrides
 // Theme-scoped (same mechanism createDesignTheme uses internally)
 styles.override(
   button,
-  { variants: { intent: { danger: { fontWeight: 700 } } } },
+  { variants: { tone: { danger: { fontWeight: 700 } }, appearance: { filled: {} } } },
   { selectorPrefix: `.${acme.className}`, layer: 'overrides' },
 );
 
@@ -188,7 +191,7 @@ const brand = extendTokens('brand', {
 | Hand-written CSS against a public class          | Target the stable base/slot class (e.g. `.var-ui-button`)           |
 
 Attribute mode means variant state is `data-*` on the element
-(`data-intent="primary"`), not a separate class. Overrides still target the
+(`data-tone="accent"` and `data-appearance="filled"`), not a separate class. Overrides still target the
 right selectors via TypeStyles `styles.override` — you never write those
 selectors yourself in the theme config.
 

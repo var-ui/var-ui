@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { controlSizeVariants, controlSurfaceSize } from './controlSize';
 import { fieldChrome } from './field';
 
 export const textField = typestyles.styles.component(
@@ -42,27 +43,36 @@ export const textField = typestyles.styles.component(
     });
     return {
       slots: ['root', 'label', 'input', 'description', 'error'],
-      ...chrome,
-      root: {
-        ...chrome.root,
-        minWidth: '240px',
-      },
-      input: {
-        border: `1px solid ${v.inputBorder.var}`,
-        borderRadius: t.radius.md.var,
-        padding: `${t.space[2].var} ${t.space[3].var}`,
-        fontSize: t.fontSize.md.var,
-        backgroundColor: v.inputBackground.var,
-        color: v.inputForeground.var,
-        '&:focus': {
-          outline: `2px solid ${t.color.border.focus.var}`,
-          outlineOffset: '1px',
-          [v.inputBorder.name]: t.color.border.focus.var,
+      base: {
+        root: {
+          ...chrome.root,
+          minWidth: '240px',
         },
-        '&::placeholder': {
-          color: v.placeholderColor.var,
+        label: chrome.label,
+        description: chrome.description,
+        error: chrome.error,
+        input: {
+          border: `1px solid ${v.inputBorder.var}`,
+          borderRadius: t.radius.md.var,
+          backgroundColor: v.inputBackground.var,
+          color: v.inputForeground.var,
+          boxSizing: 'border-box',
+          '&:focus': {
+            outline: `2px solid ${t.color.border.focus.var}`,
+            outlineOffset: '1px',
+            [v.inputBorder.name]: t.color.border.focus.var,
+          },
+          '&::placeholder': {
+            color: v.placeholderColor.var,
+          },
         },
       },
+      variants: {
+        size: controlSizeVariants((size) => ({
+          input: controlSurfaceSize(size, { inset: 'compact' }),
+        })),
+      },
+      defaultVariants: { size: 'md' },
     };
   },
   { layer: 'components' },

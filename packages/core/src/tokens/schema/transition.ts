@@ -1,10 +1,11 @@
 import type { TokenSchema } from 'typestyles';
+import { customToken } from './custom';
 
 export const transitionTokenSchema = {
-  overlayFade: { syntax: '*' },
-  panelEnter: { syntax: '*' },
-  backdrop: { syntax: '*' },
-  surfaceFast: { syntax: '*' },
-  colorShift: { syntax: '*' },
-  controlSurface: { syntax: '*' },
+  overlayFade: customToken,
+  panelEnter: customToken,
+  backdrop: customToken,
+  surfaceFast: customToken,
+  colorShift: customToken,
+  controlSurface: customToken,
 } as const satisfies TokenSchema;

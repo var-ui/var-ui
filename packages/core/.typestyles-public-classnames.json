@@ -118,8 +118,18 @@
     "collapsible__panel",
     "collapsible__trigger",
     "collapsible__triggerIcon",
+    "combobox",
+    "combobox__clearButton",
+    "combobox__description",
+    "combobox__empty",
+    "combobox__error",
+    "combobox__input",
+    "combobox__inputWrapper",
+    "combobox__item",
+    "combobox__label",
+    "combobox__listbox",
+    "combobox__popover",
     "command-palette",
-    "command-palette__backdrop",
     "command-palette__dialog",
     "command-palette__empty",
     "command-palette__input",
@@ -193,7 +203,12 @@
     "docs-prose",
     "docs-prose__headingAnchor",
     "docs-prose__tableWrap",
-    "ds-hljs",
+    "drawer__body",
+    "drawer__closeButton",
+    "drawer__header",
+    "drawer__overlay",
+    "drawer__panel",
+    "drawer__title",
     "ds-layout",
     "ds-layout--row",
     "ds-layout--section",
@@ -246,6 +261,18 @@
     "input-group__label",
     "input-group__text",
     "kbd",
+    "layout",
+    "layout__inner",
+    "layout__middle",
+    "layout__outer",
+    "layout-content__content",
+    "layout-footer__footer",
+    "layout-footer__footerInner",
+    "layout-header__header",
+    "layout-header__headerInner",
+    "layout-panel__overlay",
+    "layout-panel__overlayBackdrop",
+    "layout-panel__panel",
     "link",
     "list",
     "list__description",
@@ -276,9 +303,11 @@
     "multiSelector__itemCheckbox",
     "multiSelector__itemLabel",
     "multiSelector__label",
+    "multiSelector__listbox",
     "multiSelector__popover",
     "multiSelector__trigger",
     "multiSelector__triggerIcon",
+    "multiSelector__triggerValue",
     "number-input",
     "number-input__description",
     "number-input__error",
@@ -327,7 +356,9 @@
     "select",
     "select__item",
     "select__label",
+    "select__listbox",
     "select__popover",
+    "select__selectValue",
     "select__trigger",
     "select__triggerIcon",
     "side-nav",
@@ -406,6 +437,11 @@
     "toast__item",
     "toast__region",
     "toast__title",
+    "toc",
+    "toc__item",
+    "toc__link",
+    "toc__list",
+    "toc__title",
     "toggle-button",
     "tokenizer",
     "tokenizer__description",
@@ -448,6 +484,7 @@
     "typeahead__inputWrapper",
     "typeahead__item",
     "typeahead__label",
+    "typeahead__listbox",
     "typeahead__popover"
   ],
   "entries": [
@@ -513,7 +550,7 @@
       "namespace": "app-shell",
       "suffix": "base",
       "file": "src/components/appShell.ts",
-      "line": 61
+      "line": 41
     },
     {
       "className": "app-shell__aside",
@@ -521,7 +558,7 @@
       "namespace": "app-shell",
       "suffix": "aside",
       "file": "src/components/appShell.ts",
-      "line": 61
+      "line": 41
     },
     {
       "className": "app-shell__banner",
@@ -529,7 +566,7 @@
       "namespace": "app-shell",
       "suffix": "banner",
       "file": "src/components/appShell.ts",
-      "line": 61
+      "line": 41
     },
     {
       "className": "app-shell__frame",
@@ -537,7 +574,7 @@
       "namespace": "app-shell",
       "suffix": "frame",
       "file": "src/components/appShell.ts",
-      "line": 61
+      "line": 41
     },
     {
       "className": "app-shell__main",
@@ -545,7 +582,7 @@
       "namespace": "app-shell",
       "suffix": "main",
       "file": "src/components/appShell.ts",
-      "line": 61
+      "line": 41
     },
     {
       "className": "app-shell__sideNav",
@@ -553,7 +590,7 @@
       "namespace": "app-shell",
       "suffix": "sideNav",
       "file": "src/components/appShell.ts",
-      "line": 61
+      "line": 41
     },
     {
       "className": "app-shell__skipLink",
@@ -561,7 +598,7 @@
       "namespace": "app-shell",
       "suffix": "skipLink",
       "file": "src/components/appShell.ts",
-      "line": 61
+      "line": 41
     },
     {
       "className": "app-shell__topNav",
@@ -569,7 +606,7 @@
       "namespace": "app-shell",
       "suffix": "topNav",
       "file": "src/components/appShell.ts",
-      "line": 61
+      "line": 41
     },
     {
       "className": "aspect-ratio",
@@ -585,7 +622,7 @@
       "namespace": "avatar",
       "suffix": "base",
       "file": "src/components/avatar.ts",
-      "line": 25
+      "line": 15
     },
     {
       "className": "avatar__image",
@@ -593,7 +630,7 @@
       "namespace": "avatar",
       "suffix": "image",
       "file": "src/components/avatar.ts",
-      "line": 25
+      "line": 15
     },
     {
       "className": "avatar__initials",
@@ -601,7 +638,7 @@
       "namespace": "avatar",
       "suffix": "initials",
       "file": "src/components/avatar.ts",
-      "line": 25
+      "line": 15
     },
     {
       "className": "avatar__status",
@@ -609,7 +646,7 @@
       "namespace": "avatar",
       "suffix": "status",
       "file": "src/components/avatar.ts",
-      "line": 25
+      "line": 15
     },
     {
       "className": "avatar-group",
@@ -617,7 +654,7 @@
       "namespace": "avatar-group",
       "suffix": "base",
       "file": "src/components/avatar.ts",
-      "line": 105
+      "line": 108
     },
     {
       "className": "avatar-group__item",
@@ -625,7 +662,7 @@
       "namespace": "avatar-group",
       "suffix": "item",
       "file": "src/components/avatar.ts",
-      "line": 105
+      "line": 108
     },
     {
       "className": "avatar-group__overflow",
@@ -633,7 +670,7 @@
       "namespace": "avatar-group",
       "suffix": "overflow",
       "file": "src/components/avatar.ts",
-      "line": 105
+      "line": 108
     },
     {
       "className": "badge",
@@ -649,7 +686,7 @@
       "namespace": "banner",
       "suffix": "base",
       "file": "src/components/banner.ts",
-      "line": 19
+      "line": 20
     },
     {
       "className": "banner__actions",
@@ -657,7 +694,7 @@
       "namespace": "banner",
       "suffix": "actions",
       "file": "src/components/banner.ts",
-      "line": 19
+      "line": 20
     },
     {
       "className": "banner__content",
@@ -665,7 +702,7 @@
       "namespace": "banner",
       "suffix": "content",
       "file": "src/components/banner.ts",
-      "line": 19
+      "line": 20
     },
     {
       "className": "banner__dismiss",
@@ -673,7 +710,7 @@
       "namespace": "banner",
       "suffix": "dismiss",
       "file": "src/components/banner.ts",
-      "line": 19
+      "line": 20
     },
     {
       "className": "banner__icon",
@@ -681,7 +718,7 @@
       "namespace": "banner",
       "suffix": "icon",
       "file": "src/components/banner.ts",
-      "line": 19
+      "line": 20
     },
     {
       "className": "banner__title",
@@ -689,7 +726,7 @@
       "namespace": "banner",
       "suffix": "title",
       "file": "src/components/banner.ts",
-      "line": 19
+      "line": 20
     },
     {
       "className": "breadcrumbs",
@@ -737,7 +774,7 @@
       "namespace": "button",
       "suffix": "base",
       "file": "src/components/button.ts",
-      "line": 5
+      "line": 12
     },
     {
       "className": "button-group",
@@ -921,7 +958,7 @@
       "namespace": "chat-composer",
       "suffix": "base",
       "file": "src/components/chat/chatComposer.ts",
-      "line": 30
+      "line": 17
     },
     {
       "className": "chat-composer__actions",
@@ -929,7 +966,7 @@
       "namespace": "chat-composer",
       "suffix": "actions",
       "file": "src/components/chat/chatComposer.ts",
-      "line": 30
+      "line": 17
     },
     {
       "className": "chat-composer__input",
@@ -937,7 +974,7 @@
       "namespace": "chat-composer",
       "suffix": "input",
       "file": "src/components/chat/chatComposer.ts",
-      "line": 30
+      "line": 17
     },
     {
       "className": "chat-composer__inputRow",
@@ -945,7 +982,7 @@
       "namespace": "chat-composer",
       "suffix": "inputRow",
       "file": "src/components/chat/chatComposer.ts",
-      "line": 30
+      "line": 17
     },
     {
       "className": "chat-layout",
@@ -953,7 +990,7 @@
       "namespace": "chat-layout",
       "suffix": "base",
       "file": "src/components/chat/chatLayout.ts",
-      "line": 26
+      "line": 13
     },
     {
       "className": "chat-layout__dock",
@@ -961,7 +998,7 @@
       "namespace": "chat-layout",
       "suffix": "dock",
       "file": "src/components/chat/chatLayout.ts",
-      "line": 26
+      "line": 13
     },
     {
       "className": "chat-layout__messageArea",
@@ -969,7 +1006,7 @@
       "namespace": "chat-layout",
       "suffix": "messageArea",
       "file": "src/components/chat/chatLayout.ts",
-      "line": 26
+      "line": 13
     },
     {
       "className": "chat-message",
@@ -985,7 +1022,7 @@
       "namespace": "chat-message-bubble",
       "suffix": "base",
       "file": "src/components/chat/chatMessageBubble.ts",
-      "line": 33
+      "line": 19
     },
     {
       "className": "chat-message-list",
@@ -993,7 +1030,7 @@
       "namespace": "chat-message-list",
       "suffix": "base",
       "file": "src/components/chat/chatMessageList.ts",
-      "line": 27
+      "line": 14
     },
     {
       "className": "chat-system-message",
@@ -1001,7 +1038,7 @@
       "namespace": "chat-system-message",
       "suffix": "base",
       "file": "src/components/chat/chatSystemMessage.ts",
-      "line": 43
+      "line": 27
     },
     {
       "className": "chat-system-message__icon",
@@ -1009,7 +1046,7 @@
       "namespace": "chat-system-message",
       "suffix": "icon",
       "file": "src/components/chat/chatSystemMessage.ts",
-      "line": 43
+      "line": 27
     },
     {
       "className": "chat-system-message__text",
@@ -1017,7 +1054,7 @@
       "namespace": "chat-system-message",
       "suffix": "text",
       "file": "src/components/chat/chatSystemMessage.ts",
-      "line": 43
+      "line": 27
     },
     {
       "className": "chat-tool-calls",
@@ -1025,7 +1062,7 @@
       "namespace": "chat-tool-calls",
       "suffix": "base",
       "file": "src/components/chat/chatToolCalls.ts",
-      "line": 44
+      "line": 16
     },
     {
       "className": "checkbox",
@@ -1361,7 +1398,7 @@
       "namespace": "collapsible",
       "suffix": "base",
       "file": "src/components/collapsible.ts",
-      "line": 25
+      "line": 19
     },
     {
       "className": "collapsible__panel",
@@ -1369,7 +1406,7 @@
       "namespace": "collapsible",
       "suffix": "panel",
       "file": "src/components/collapsible.ts",
-      "line": 25
+      "line": 19
     },
     {
       "className": "collapsible__trigger",
@@ -1377,7 +1414,7 @@
       "namespace": "collapsible",
       "suffix": "trigger",
       "file": "src/components/collapsible.ts",
-      "line": 25
+      "line": 19
     },
     {
       "className": "collapsible__triggerIcon",
@@ -1385,21 +1422,101 @@
       "namespace": "collapsible",
       "suffix": "triggerIcon",
       "file": "src/components/collapsible.ts",
-      "line": 25
+      "line": 19
+    },
+    {
+      "className": "combobox",
+      "kind": "component",
+      "namespace": "combobox",
+      "suffix": "base",
+      "file": "src/components/combobox.ts",
+      "line": 10
+    },
+    {
+      "className": "combobox__clearButton",
+      "kind": "component",
+      "namespace": "combobox",
+      "suffix": "clearButton",
+      "file": "src/components/combobox.ts",
+      "line": 10
+    },
+    {
+      "className": "combobox__description",
+      "kind": "component",
+      "namespace": "combobox",
+      "suffix": "description",
+      "file": "src/components/combobox.ts",
+      "line": 10
+    },
+    {
+      "className": "combobox__empty",
+      "kind": "component",
+      "namespace": "combobox",
+      "suffix": "empty",
+      "file": "src/components/combobox.ts",
+      "line": 10
+    },
+    {
+      "className": "combobox__error",
+      "kind": "component",
+      "namespace": "combobox",
+      "suffix": "error",
+      "file": "src/components/combobox.ts",
+      "line": 10
+    },
+    {
+      "className": "combobox__input",
+      "kind": "component",
+      "namespace": "combobox",
+      "suffix": "input",
+      "file": "src/components/combobox.ts",
+      "line": 10
+    },
+    {
+      "className": "combobox__inputWrapper",
+      "kind": "component",
+      "namespace": "combobox",
+      "suffix": "inputWrapper",
+      "file": "src/components/combobox.ts",
+      "line": 10
+    },
+    {
+      "className": "combobox__item",
+      "kind": "component",
+      "namespace": "combobox",
+      "suffix": "item",
+      "file": "src/components/combobox.ts",
+      "line": 10
+    },
+    {
+      "className": "combobox__label",
+      "kind": "component",
+      "namespace": "combobox",
+      "suffix": "label",
+      "file": "src/components/combobox.ts",
+      "line": 10
+    },
+    {
+      "className": "combobox__listbox",
+      "kind": "component",
+      "namespace": "combobox",
+      "suffix": "listbox",
+      "file": "src/components/combobox.ts",
+      "line": 10
+    },
+    {
+      "className": "combobox__popover",
+      "kind": "component",
+      "namespace": "combobox",
+      "suffix": "popover",
+      "file": "src/components/combobox.ts",
+      "line": 10
     },
     {
       "className": "command-palette",
       "kind": "component",
       "namespace": "command-palette",
       "suffix": "base",
-      "file": "src/components/commandPalette.ts",
-      "line": 13
-    },
-    {
-      "className": "command-palette__backdrop",
-      "kind": "component",
-      "namespace": "command-palette",
-      "suffix": "backdrop",
       "file": "src/components/commandPalette.ts",
       "line": 13
     },
@@ -1849,7 +1966,7 @@
       "namespace": "description-list",
       "suffix": "base",
       "file": "src/components/descriptionList.ts",
-      "line": 29
+      "line": 22
     },
     {
       "className": "description-list__details",
@@ -1857,7 +1974,7 @@
       "namespace": "description-list",
       "suffix": "details",
       "file": "src/components/descriptionList.ts",
-      "line": 29
+      "line": 22
     },
     {
       "className": "description-list__item",
@@ -1865,7 +1982,7 @@
       "namespace": "description-list",
       "suffix": "item",
       "file": "src/components/descriptionList.ts",
-      "line": 29
+      "line": 22
     },
     {
       "className": "description-list__term",
@@ -1873,7 +1990,7 @@
       "namespace": "description-list",
       "suffix": "term",
       "file": "src/components/descriptionList.ts",
-      "line": 29
+      "line": 22
     },
     {
       "className": "description-list__title",
@@ -1881,7 +1998,7 @@
       "namespace": "description-list",
       "suffix": "title",
       "file": "src/components/descriptionList.ts",
-      "line": 29
+      "line": 22
     },
     {
       "className": "description-list__toggle",
@@ -1889,7 +2006,7 @@
       "namespace": "description-list",
       "suffix": "toggle",
       "file": "src/components/descriptionList.ts",
-      "line": 29
+      "line": 22
     },
     {
       "className": "dialog__actions",
@@ -1969,7 +2086,7 @@
       "namespace": "docs-prose",
       "suffix": "base",
       "file": "src/components/proseContent.ts",
-      "line": 17
+      "line": 18
     },
     {
       "className": "docs-prose__headingAnchor",
@@ -1977,7 +2094,7 @@
       "namespace": "docs-prose",
       "suffix": "headingAnchor",
       "file": "src/components/proseContent.ts",
-      "line": 17
+      "line": 18
     },
     {
       "className": "docs-prose__tableWrap",
@@ -1985,15 +2102,55 @@
       "namespace": "docs-prose",
       "suffix": "tableWrap",
       "file": "src/components/proseContent.ts",
-      "line": 17
+      "line": 18
     },
     {
-      "className": "ds-hljs",
+      "className": "drawer__body",
       "kind": "component",
-      "namespace": "ds-hljs",
-      "suffix": "base",
-      "file": "src/components/codeHighlight.ts",
-      "line": 30
+      "namespace": "drawer",
+      "suffix": "body",
+      "file": "src/components/drawer.ts",
+      "line": 9
+    },
+    {
+      "className": "drawer__closeButton",
+      "kind": "component",
+      "namespace": "drawer",
+      "suffix": "closeButton",
+      "file": "src/components/drawer.ts",
+      "line": 9
+    },
+    {
+      "className": "drawer__header",
+      "kind": "component",
+      "namespace": "drawer",
+      "suffix": "header",
+      "file": "src/components/drawer.ts",
+      "line": 9
+    },
+    {
+      "className": "drawer__overlay",
+      "kind": "component",
+      "namespace": "drawer",
+      "suffix": "overlay",
+      "file": "src/components/drawer.ts",
+      "line": 9
+    },
+    {
+      "className": "drawer__panel",
+      "kind": "component",
+      "namespace": "drawer",
+      "suffix": "panel",
+      "file": "src/components/drawer.ts",
+      "line": 9
+    },
+    {
+      "className": "drawer__title",
+      "kind": "component",
+      "namespace": "drawer",
+      "suffix": "title",
+      "file": "src/components/drawer.ts",
+      "line": 9
     },
     {
       "className": "ds-layout",
@@ -2047,7 +2204,7 @@
       "namespace": "ds-text",
       "suffix": "base",
       "file": "src/components/styles.ts",
-      "line": 54
+      "line": 51
     },
     {
       "className": "ds-text--caption",
@@ -2055,7 +2212,7 @@
       "namespace": "ds-text",
       "suffix": "caption",
       "file": "src/components/styles.ts",
-      "line": 54
+      "line": 51
     },
     {
       "className": "ds-text--label",
@@ -2063,7 +2220,7 @@
       "namespace": "ds-text",
       "suffix": "label",
       "file": "src/components/styles.ts",
-      "line": 54
+      "line": 51
     },
     {
       "className": "ds-text--sectionTitle",
@@ -2071,7 +2228,7 @@
       "namespace": "ds-text",
       "suffix": "sectionTitle",
       "file": "src/components/styles.ts",
-      "line": 54
+      "line": 51
     },
     {
       "className": "ds-text--subtitle",
@@ -2079,7 +2236,7 @@
       "namespace": "ds-text",
       "suffix": "subtitle",
       "file": "src/components/styles.ts",
-      "line": 54
+      "line": 51
     },
     {
       "className": "ds-text--title",
@@ -2087,7 +2244,7 @@
       "namespace": "ds-text",
       "suffix": "title",
       "file": "src/components/styles.ts",
-      "line": 54
+      "line": 51
     },
     {
       "className": "empty-state",
@@ -2135,7 +2292,7 @@
       "namespace": "field",
       "suffix": "base",
       "file": "src/components/field.ts",
-      "line": 200
+      "line": 262
     },
     {
       "className": "field__description",
@@ -2143,7 +2300,7 @@
       "namespace": "field",
       "suffix": "description",
       "file": "src/components/field.ts",
-      "line": 200
+      "line": 262
     },
     {
       "className": "field__error",
@@ -2151,7 +2308,7 @@
       "namespace": "field",
       "suffix": "error",
       "file": "src/components/field.ts",
-      "line": 200
+      "line": 262
     },
     {
       "className": "field__label",
@@ -2159,7 +2316,7 @@
       "namespace": "field",
       "suffix": "label",
       "file": "src/components/field.ts",
-      "line": 200
+      "line": 262
     },
     {
       "className": "file-input",
@@ -2410,6 +2567,102 @@
       "line": 12
     },
     {
+      "className": "layout",
+      "kind": "component",
+      "namespace": "layout",
+      "suffix": "base",
+      "file": "src/components/layout.ts",
+      "line": 55
+    },
+    {
+      "className": "layout__inner",
+      "kind": "component",
+      "namespace": "layout",
+      "suffix": "inner",
+      "file": "src/components/layout.ts",
+      "line": 55
+    },
+    {
+      "className": "layout__middle",
+      "kind": "component",
+      "namespace": "layout",
+      "suffix": "middle",
+      "file": "src/components/layout.ts",
+      "line": 55
+    },
+    {
+      "className": "layout__outer",
+      "kind": "component",
+      "namespace": "layout",
+      "suffix": "outer",
+      "file": "src/components/layout.ts",
+      "line": 55
+    },
+    {
+      "className": "layout-content__content",
+      "kind": "component",
+      "namespace": "layout-content",
+      "suffix": "content",
+      "file": "src/components/layout.ts",
+      "line": 211
+    },
+    {
+      "className": "layout-footer__footer",
+      "kind": "component",
+      "namespace": "layout-footer",
+      "suffix": "footer",
+      "file": "src/components/layout.ts",
+      "line": 168
+    },
+    {
+      "className": "layout-footer__footerInner",
+      "kind": "component",
+      "namespace": "layout-footer",
+      "suffix": "footerInner",
+      "file": "src/components/layout.ts",
+      "line": 168
+    },
+    {
+      "className": "layout-header__header",
+      "kind": "component",
+      "namespace": "layout-header",
+      "suffix": "header",
+      "file": "src/components/layout.ts",
+      "line": 121
+    },
+    {
+      "className": "layout-header__headerInner",
+      "kind": "component",
+      "namespace": "layout-header",
+      "suffix": "headerInner",
+      "file": "src/components/layout.ts",
+      "line": 121
+    },
+    {
+      "className": "layout-panel__overlay",
+      "kind": "component",
+      "namespace": "layout-panel",
+      "suffix": "overlay",
+      "file": "src/components/layout.ts",
+      "line": 267
+    },
+    {
+      "className": "layout-panel__overlayBackdrop",
+      "kind": "component",
+      "namespace": "layout-panel",
+      "suffix": "overlayBackdrop",
+      "file": "src/components/layout.ts",
+      "line": 267
+    },
+    {
+      "className": "layout-panel__panel",
+      "kind": "component",
+      "namespace": "layout-panel",
+      "suffix": "panel",
+      "file": "src/components/layout.ts",
+      "line": 267
+    },
+    {
       "className": "link",
       "kind": "class",
       "namespace": "link",
@@ -2422,7 +2675,7 @@
       "namespace": "list",
       "suffix": "base",
       "file": "src/components/list.ts",
-      "line": 39
+      "line": 22
     },
     {
       "className": "list__description",
@@ -2430,7 +2683,7 @@
       "namespace": "list",
       "suffix": "description",
       "file": "src/components/list.ts",
-      "line": 39
+      "line": 22
     },
     {
       "className": "list__divider",
@@ -2438,7 +2691,7 @@
       "namespace": "list",
       "suffix": "divider",
       "file": "src/components/list.ts",
-      "line": 39
+      "line": 22
     },
     {
       "className": "list__end",
@@ -2446,7 +2699,7 @@
       "namespace": "list",
       "suffix": "end",
       "file": "src/components/list.ts",
-      "line": 39
+      "line": 22
     },
     {
       "className": "list__header",
@@ -2454,7 +2707,7 @@
       "namespace": "list",
       "suffix": "header",
       "file": "src/components/list.ts",
-      "line": 39
+      "line": 22
     },
     {
       "className": "list__item",
@@ -2462,7 +2715,7 @@
       "namespace": "list",
       "suffix": "item",
       "file": "src/components/list.ts",
-      "line": 39
+      "line": 22
     },
     {
       "className": "list__label",
@@ -2470,7 +2723,7 @@
       "namespace": "list",
       "suffix": "label",
       "file": "src/components/list.ts",
-      "line": 39
+      "line": 22
     },
     {
       "className": "list__start",
@@ -2478,7 +2731,7 @@
       "namespace": "list",
       "suffix": "start",
       "file": "src/components/list.ts",
-      "line": 39
+      "line": 22
     },
     {
       "className": "menu__item",
@@ -2649,6 +2902,14 @@
       "line": 6
     },
     {
+      "className": "multiSelector__listbox",
+      "kind": "component",
+      "namespace": "multiSelector",
+      "suffix": "listbox",
+      "file": "src/components/multiSelector.ts",
+      "line": 6
+    },
+    {
       "className": "multiSelector__popover",
       "kind": "component",
       "namespace": "multiSelector",
@@ -2669,6 +2930,14 @@
       "kind": "component",
       "namespace": "multiSelector",
       "suffix": "triggerIcon",
+      "file": "src/components/multiSelector.ts",
+      "line": 6
+    },
+    {
+      "className": "multiSelector__triggerValue",
+      "kind": "component",
+      "namespace": "multiSelector",
+      "suffix": "triggerValue",
       "file": "src/components/multiSelector.ts",
       "line": 6
     },
@@ -2782,7 +3051,7 @@
       "namespace": "overflow-list",
       "suffix": "base",
       "file": "src/components/overflowList.ts",
-      "line": 25
+      "line": 18
     },
     {
       "className": "overflow-list__item",
@@ -2790,7 +3059,7 @@
       "namespace": "overflow-list",
       "suffix": "item",
       "file": "src/components/overflowList.ts",
-      "line": 25
+      "line": 18
     },
     {
       "className": "overflow-list__overflow",
@@ -2798,7 +3067,7 @@
       "namespace": "overflow-list",
       "suffix": "overflow",
       "file": "src/components/overflowList.ts",
-      "line": 25
+      "line": 18
     },
     {
       "className": "overlay__backdrop",
@@ -2822,7 +3091,7 @@
       "namespace": "pagination",
       "suffix": "base",
       "file": "src/components/pagination.ts",
-      "line": 36
+      "line": 16
     },
     {
       "className": "pagination__controls",
@@ -2830,7 +3099,7 @@
       "namespace": "pagination",
       "suffix": "controls",
       "file": "src/components/pagination.ts",
-      "line": 36
+      "line": 16
     },
     {
       "className": "pagination__dot",
@@ -2838,7 +3107,7 @@
       "namespace": "pagination",
       "suffix": "dot",
       "file": "src/components/pagination.ts",
-      "line": 36
+      "line": 16
     },
     {
       "className": "pagination__dotActive",
@@ -2846,7 +3115,7 @@
       "namespace": "pagination",
       "suffix": "dotActive",
       "file": "src/components/pagination.ts",
-      "line": 36
+      "line": 16
     },
     {
       "className": "pagination__dotsContainer",
@@ -2854,7 +3123,7 @@
       "namespace": "pagination",
       "suffix": "dotsContainer",
       "file": "src/components/pagination.ts",
-      "line": 36
+      "line": 16
     },
     {
       "className": "pagination__ellipsis",
@@ -2862,7 +3131,7 @@
       "namespace": "pagination",
       "suffix": "ellipsis",
       "file": "src/components/pagination.ts",
-      "line": 36
+      "line": 16
     },
     {
       "className": "pagination__infoText",
@@ -2870,7 +3139,7 @@
       "namespace": "pagination",
       "suffix": "infoText",
       "file": "src/components/pagination.ts",
-      "line": 36
+      "line": 16
     },
     {
       "className": "pagination__pageSizeGroup",
@@ -2878,7 +3147,7 @@
       "namespace": "pagination",
       "suffix": "pageSizeGroup",
       "file": "src/components/pagination.ts",
-      "line": 36
+      "line": 16
     },
     {
       "className": "popover",
@@ -2910,7 +3179,7 @@
       "namespace": "progress-bar",
       "suffix": "base",
       "file": "src/components/progressBar.ts",
-      "line": 15
+      "line": 19
     },
     {
       "className": "progress-bar__fill",
@@ -2918,7 +3187,7 @@
       "namespace": "progress-bar",
       "suffix": "fill",
       "file": "src/components/progressBar.ts",
-      "line": 15
+      "line": 19
     },
     {
       "className": "progress-bar__header",
@@ -2926,7 +3195,7 @@
       "namespace": "progress-bar",
       "suffix": "header",
       "file": "src/components/progressBar.ts",
-      "line": 15
+      "line": 19
     },
     {
       "className": "progress-bar__label",
@@ -2934,7 +3203,7 @@
       "namespace": "progress-bar",
       "suffix": "label",
       "file": "src/components/progressBar.ts",
-      "line": 15
+      "line": 19
     },
     {
       "className": "progress-bar__track",
@@ -2942,7 +3211,7 @@
       "namespace": "progress-bar",
       "suffix": "track",
       "file": "src/components/progressBar.ts",
-      "line": 15
+      "line": 19
     },
     {
       "className": "progress-bar__valueText",
@@ -2950,7 +3219,7 @@
       "namespace": "progress-bar",
       "suffix": "valueText",
       "file": "src/components/progressBar.ts",
-      "line": 15
+      "line": 19
     },
     {
       "className": "radio__control",
@@ -3057,10 +3326,26 @@
       "line": 6
     },
     {
+      "className": "select__listbox",
+      "kind": "component",
+      "namespace": "select",
+      "suffix": "listbox",
+      "file": "src/components/select.ts",
+      "line": 6
+    },
+    {
       "className": "select__popover",
       "kind": "component",
       "namespace": "select",
       "suffix": "popover",
+      "file": "src/components/select.ts",
+      "line": 6
+    },
+    {
+      "className": "select__selectValue",
+      "kind": "component",
+      "namespace": "select",
+      "suffix": "selectValue",
       "file": "src/components/select.ts",
       "line": 6
     },
@@ -3262,7 +3547,7 @@
       "namespace": "spinner",
       "suffix": "base",
       "file": "src/components/spinner.ts",
-      "line": 19
+      "line": 21
     },
     {
       "className": "stack",
@@ -3278,7 +3563,7 @@
       "namespace": "status-dot",
       "suffix": "base",
       "file": "src/components/statusDot.ts",
-      "line": 24
+      "line": 25
     },
     {
       "className": "steps",
@@ -3366,7 +3651,7 @@
       "namespace": "table",
       "suffix": "base",
       "file": "src/components/table.ts",
-      "line": 47
+      "line": 25
     },
     {
       "className": "table__body",
@@ -3374,7 +3659,7 @@
       "namespace": "table",
       "suffix": "body",
       "file": "src/components/table.ts",
-      "line": 47
+      "line": 25
     },
     {
       "className": "table__caption",
@@ -3382,7 +3667,7 @@
       "namespace": "table",
       "suffix": "caption",
       "file": "src/components/table.ts",
-      "line": 47
+      "line": 25
     },
     {
       "className": "table__cell",
@@ -3390,7 +3675,7 @@
       "namespace": "table",
       "suffix": "cell",
       "file": "src/components/table.ts",
-      "line": 47
+      "line": 25
     },
     {
       "className": "table__empty",
@@ -3398,7 +3683,7 @@
       "namespace": "table",
       "suffix": "empty",
       "file": "src/components/table.ts",
-      "line": 47
+      "line": 25
     },
     {
       "className": "table__footer",
@@ -3406,7 +3691,7 @@
       "namespace": "table",
       "suffix": "footer",
       "file": "src/components/table.ts",
-      "line": 47
+      "line": 25
     },
     {
       "className": "table__header",
@@ -3414,7 +3699,7 @@
       "namespace": "table",
       "suffix": "header",
       "file": "src/components/table.ts",
-      "line": 47
+      "line": 25
     },
     {
       "className": "table__headerCell",
@@ -3422,7 +3707,7 @@
       "namespace": "table",
       "suffix": "headerCell",
       "file": "src/components/table.ts",
-      "line": 47
+      "line": 25
     },
     {
       "className": "table__row",
@@ -3430,7 +3715,7 @@
       "namespace": "table",
       "suffix": "row",
       "file": "src/components/table.ts",
-      "line": 47
+      "line": 25
     },
     {
       "className": "table__table",
@@ -3438,7 +3723,7 @@
       "namespace": "table",
       "suffix": "table",
       "file": "src/components/table.ts",
-      "line": 47
+      "line": 25
     },
     {
       "className": "tabs",
@@ -3566,7 +3851,7 @@
       "namespace": "thumbnail",
       "suffix": "base",
       "file": "src/components/thumbnail.ts",
-      "line": 21
+      "line": 13
     },
     {
       "className": "thumbnail__dismiss",
@@ -3574,7 +3859,7 @@
       "namespace": "thumbnail",
       "suffix": "dismiss",
       "file": "src/components/thumbnail.ts",
-      "line": 21
+      "line": 13
     },
     {
       "className": "thumbnail__image",
@@ -3582,7 +3867,7 @@
       "namespace": "thumbnail",
       "suffix": "image",
       "file": "src/components/thumbnail.ts",
-      "line": 21
+      "line": 13
     },
     {
       "className": "timeInput",
@@ -3638,7 +3923,7 @@
       "namespace": "toast",
       "suffix": "body",
       "file": "src/components/toast.ts",
-      "line": 18
+      "line": 19
     },
     {
       "className": "toast__close",
@@ -3646,7 +3931,7 @@
       "namespace": "toast",
       "suffix": "close",
       "file": "src/components/toast.ts",
-      "line": 18
+      "line": 19
     },
     {
       "className": "toast__description",
@@ -3654,7 +3939,7 @@
       "namespace": "toast",
       "suffix": "description",
       "file": "src/components/toast.ts",
-      "line": 18
+      "line": 19
     },
     {
       "className": "toast__icon",
@@ -3662,7 +3947,7 @@
       "namespace": "toast",
       "suffix": "icon",
       "file": "src/components/toast.ts",
-      "line": 18
+      "line": 19
     },
     {
       "className": "toast__item",
@@ -3670,7 +3955,7 @@
       "namespace": "toast",
       "suffix": "item",
       "file": "src/components/toast.ts",
-      "line": 18
+      "line": 19
     },
     {
       "className": "toast__region",
@@ -3678,7 +3963,7 @@
       "namespace": "toast",
       "suffix": "region",
       "file": "src/components/toast.ts",
-      "line": 18
+      "line": 19
     },
     {
       "className": "toast__title",
@@ -3686,7 +3971,47 @@
       "namespace": "toast",
       "suffix": "title",
       "file": "src/components/toast.ts",
-      "line": 18
+      "line": 19
+    },
+    {
+      "className": "toc",
+      "kind": "component",
+      "namespace": "toc",
+      "suffix": "base",
+      "file": "src/components/toc.ts",
+      "line": 24
+    },
+    {
+      "className": "toc__item",
+      "kind": "component",
+      "namespace": "toc",
+      "suffix": "item",
+      "file": "src/components/toc.ts",
+      "line": 24
+    },
+    {
+      "className": "toc__link",
+      "kind": "component",
+      "namespace": "toc",
+      "suffix": "link",
+      "file": "src/components/toc.ts",
+      "line": 24
+    },
+    {
+      "className": "toc__list",
+      "kind": "component",
+      "namespace": "toc",
+      "suffix": "list",
+      "file": "src/components/toc.ts",
+      "line": 24
+    },
+    {
+      "className": "toc__title",
+      "kind": "component",
+      "namespace": "toc",
+      "suffix": "title",
+      "file": "src/components/toc.ts",
+      "line": 24
     },
     {
       "className": "toggle-button",
@@ -3694,7 +4019,7 @@
       "namespace": "toggle-button",
       "suffix": "base",
       "file": "src/components/toggleButton.ts",
-      "line": 7
+      "line": 6
     },
     {
       "className": "tokenizer",
@@ -3798,7 +4123,7 @@
       "namespace": "toolbar",
       "suffix": "base",
       "file": "src/components/toolbar.ts",
-      "line": 23
+      "line": 10
     },
     {
       "className": "tooltip",
@@ -3894,7 +4219,7 @@
       "namespace": "tree",
       "suffix": "base",
       "file": "src/components/tree.ts",
-      "line": 49
+      "line": 33
     },
     {
       "className": "tree__description",
@@ -3902,7 +4227,7 @@
       "namespace": "tree",
       "suffix": "description",
       "file": "src/components/tree.ts",
-      "line": 49
+      "line": 33
     },
     {
       "className": "tree__end",
@@ -3910,7 +4235,7 @@
       "namespace": "tree",
       "suffix": "end",
       "file": "src/components/tree.ts",
-      "line": 49
+      "line": 33
     },
     {
       "className": "tree__group",
@@ -3918,7 +4243,7 @@
       "namespace": "tree",
       "suffix": "group",
       "file": "src/components/tree.ts",
-      "line": 49
+      "line": 33
     },
     {
       "className": "tree__item",
@@ -3926,7 +4251,7 @@
       "namespace": "tree",
       "suffix": "item",
       "file": "src/components/tree.ts",
-      "line": 49
+      "line": 33
     },
     {
       "className": "tree__label",
@@ -3934,7 +4259,7 @@
       "namespace": "tree",
       "suffix": "label",
       "file": "src/components/tree.ts",
-      "line": 49
+      "line": 33
     },
     {
       "className": "tree__row",
@@ -3942,7 +4267,7 @@
       "namespace": "tree",
       "suffix": "row",
       "file": "src/components/tree.ts",
-      "line": 49
+      "line": 33
     },
     {
       "className": "tree__start",
@@ -3950,7 +4275,7 @@
       "namespace": "tree",
       "suffix": "start",
       "file": "src/components/tree.ts",
-      "line": 49
+      "line": 33
     },
     {
       "className": "tree__toggle",
@@ -3958,7 +4283,7 @@
       "namespace": "tree",
       "suffix": "toggle",
       "file": "src/components/tree.ts",
-      "line": 49
+      "line": 33
     },
     {
       "className": "typeahead",
@@ -4021,6 +4346,14 @@
       "kind": "component",
       "namespace": "typeahead",
       "suffix": "label",
+      "file": "src/components/typeahead.ts",
+      "line": 6
+    },
+    {
+      "className": "typeahead__listbox",
+      "kind": "component",
+      "namespace": "typeahead",
+      "suffix": "listbox",
       "file": "src/components/typeahead.ts",
       "line": 6
     },

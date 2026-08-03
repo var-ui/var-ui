@@ -1,10 +1,30 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { controlSizeVariants, controlSurfaceSize } from './controlSize';
+import {
+  controlAppearancePaint,
+  neutralChannelAssignments,
+  semanticChannelAssignments,
+  type ButtonTone,
+  type ToneAppearance,
+} from './semanticTone';
 
 export const button = typestyles.styles.component(
   'button',
   (c) => {
     const v = c.vars({
+      semantic: {
+        value: t.color.text.primary.var,
+        syntax: '<color>',
+      },
+      solidBg: {
+        value: t.color.text.primary.var,
+        syntax: '<color>',
+      },
+      solidFg: {
+        value: t.color.background.surface.var,
+        syntax: '<color>',
+      },
       border: {
         value: t.color.border.default.var,
         syntax: '<color>',
@@ -27,7 +47,7 @@ export const button = typestyles.styles.component(
         color: v.foreground.var,
         fontSize: t.fontSize.md.var,
         fontWeight: t.fontWeight.medium.var,
-        padding: `${t.space[2].var} ${t.space[4].var}`,
+        boxSizing: 'border-box',
         cursor: 'pointer',
         textDecoration: 'none',
         display: 'inline-flex',
@@ -35,10 +55,6 @@ export const button = typestyles.styles.component(
         justifyContent: 'center',
         gap: t.space[2].var,
         transition: 'background-color 140ms ease, border-color 140ms ease, transform 80ms ease',
-        '&:hover': {
-          borderColor: t.color.border.strong.var,
-          backgroundColor: t.color.background.subtle.var,
-        },
         '&:active': {
           transform: 'translateY(1px)',
         },
@@ -48,69 +64,99 @@ export const button = typestyles.styles.component(
         },
       },
       variants: {
-        intent: {
-          primary: {
-            [v.border.name]: t.color.accent.default.var,
-            [v.background.name]: t.color.accent.default.var,
-            [v.foreground.name]: t.color.text.onAccent.var,
-            '&:hover': {
-              [v.background.name]: t.color.accent.hover.var,
-              [v.border.name]: t.color.accent.hover.var,
-            },
-          },
-          secondary: {
-            [v.background.name]: t.color.background.surface.var,
-            [v.border.name]: t.color.border.default.var,
-            [v.foreground.name]: t.color.text.primary.var,
-            '&:hover': {
-              borderColor: t.color.border.strong.var,
-              backgroundColor: t.color.background.subtle.var,
-            },
-          },
-          ghost: {
-            [v.background.name]: 'transparent',
-            [v.border.name]: 'transparent',
-            [v.foreground.name]: t.color.text.primary.var,
-            '&:hover': {
-              backgroundColor: t.color.background.subtle.var,
-            },
-          },
-          danger: {
-            [v.border.name]: t.color.danger.solid.var,
-            [v.background.name]: t.color.danger.solid.var,
-            [v.foreground.name]: t.color.text.onDanger.var,
-            '&:hover': {
-              [v.background.name]: `color-mix(in oklch, ${t.color.danger.solid.var} 88%, black)`,
-              [v.border.name]: `color-mix(in oklch, ${t.color.danger.solid.var} 88%, black)`,
-            },
-          },
+        tone: {
+          neutral: neutralChannelAssignments(v),
+          accent: semanticChannelAssignments(v, 'accent'),
+          success: semanticChannelAssignments(v, 'success'),
+          warning: semanticChannelAssignments(v, 'warning'),
+          danger: semanticChannelAssignments(v, 'danger'),
+          info: semanticChannelAssignments(v, 'info'),
         },
-        size: {
-          sm: {
-            fontSize: t.fontSize.sm.var,
-            padding: `${t.space[1].var} ${t.space[3].var}`,
-          },
-          md: {},
-          lg: {
-            fontSize: t.fontSize.lg.var,
-            padding: `${t.space[3].var} ${t.space[5].var}`,
-          },
+        appearance: {
+          filled: controlAppearancePaint(v, 'filled'),
+          outline: controlAppearancePaint(v, 'outline'),
+          subtle: controlAppearancePaint(v, 'subtle'),
+          ghost: controlAppearancePaint(v, 'ghost'),
         },
+        size: controlSizeVariants((size) => controlSurfaceSize(size)),
         layout: {
           default: {},
           icon: {
-            padding: t.space[2].var,
-            width: '2rem',
-            height: '2rem',
-            minWidth: '2rem',
-            minHeight: '2rem',
+            padding: 0,
+            aspectRatio: '1',
+            width: 'auto',
           },
         },
       },
-      defaultVariants: { intent: 'secondary', size: 'md', layout: 'default' },
+      defaultVariants: {
+        tone: 'neutral',
+        appearance: 'subtle',
+        size: 'md',
+        layout: 'default',
+      },
     };
   },
   { layer: 'components' },
 );
+
+export type ButtonIntent = 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline';
+
+const INTENT_TO_VARIANTS: Record<ButtonIntent, { tone: ButtonTone; appearance: ToneAppearance }> = {
+  primary: { tone: 'accent', appearance: 'filled' },
+  secondary: { tone: 'neutral', appearance: 'subtle' },
+  ghost: { tone: 'accent', appearance: 'ghost' },
+  danger: { tone: 'danger', appearance: 'filled' },
+  outline: { tone: 'accent', appearance: 'outline' },
+};
+
+export type ButtonRecipeProps = NonNullable<Parameters<typeof button>[0]>;
+
+export type ButtonOptions = ButtonRecipeProps & {
+  /** Shorthand for common `tone` + `appearance` pairs. */
+  intent?: ButtonIntent;
+};
+
+/** Recipe variant props shared by React, Astro, and other Button wrappers. */
+export type ButtonVariantProps = {
+  /** Shorthand for common `tone` + `appearance` pairs. Ignored when `tone` is set. */
+  intent?: ButtonIntent;
+  /** Semantic color family. */
+  tone?: ButtonTone;
+  /** Surface treatment from the shared tone resolver. */
+  appearance?: ToneAppearance;
+  size?: ButtonRecipeProps['size'];
+  layout?: ButtonRecipeProps['layout'];
+};
+
+/** Prop metadata for Astro/docs props tables when `Props extends ButtonVariantProps`. */
+export const buttonVariantPropDocs = [
+  { name: 'intent', type: 'ButtonIntent', required: false },
+  { name: 'tone', type: 'ButtonTone', required: false },
+  { name: 'appearance', type: 'ToneAppearance', required: false },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", required: false },
+  { name: 'layout', type: "'default' | 'icon'", required: false },
+] as const satisfies ReadonlyArray<{
+  name: keyof ButtonVariantProps;
+  type: string;
+  required: false;
+}>;
+
+/** Maps `intent` shorthand onto `tone` + `appearance` for `button(...)`. */
+export function resolveButtonProps(props?: ButtonOptions): ButtonRecipeProps {
+  const { intent, tone, appearance, ...rest } = props ?? {};
+  if (intent) {
+    const mapped = INTENT_TO_VARIANTS[intent];
+    return {
+      ...rest,
+      tone: tone ?? mapped.tone,
+      appearance: appearance ?? mapped.appearance,
+    };
+  }
+  return {
+    ...rest,
+    ...(tone != null ? { tone } : {}),
+    ...(appearance != null ? { appearance } : {}),
+  };
+}
 
 export const linkButton = button;

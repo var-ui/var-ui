@@ -2,7 +2,7 @@ import { colorModes, createTypeStyles } from 'typestyles';
 import { designBreakpoints } from './tokens/defaults/breakpoint';
 
 const scopeId = 'var-ui';
-const layers = ['tokens', 'components', 'overrides', 'utilities'] as const;
+const layers = ['reset', 'base', 'tokens', 'components', 'overrides', 'utilities'] as const;
 const tokenLayer = 'tokens';
 
 /**

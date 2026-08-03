@@ -7,6 +7,7 @@ import {
   chatMessage,
   chatMessageBubble,
   chatMessageList,
+  resolveButtonProps,
 } from '@var-ui/core';
 import { recipeProps } from '../../../lib/recipeProps';
 
@@ -17,7 +18,7 @@ const m = chatMessage({ sender: 'assistant' });
 const bubble = chatMessageBubble({ sender: 'assistant', variant: 'filled', group: 'none' });
 const a = avatar({ size: 'sm' });
 const c = chatComposer();
-const send = button({ intent: 'primary' });
+const send = button(resolveButtonProps({ intent: 'primary' }));
 ---
 
 <div style="height: 280px">

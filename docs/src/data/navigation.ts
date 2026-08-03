@@ -28,6 +28,7 @@ export const themingSidebarSections: readonly SidebarSection[] = [
       { text: 'Customize', link: '/theming/customize' },
       { text: 'Themes', link: '/theming/themes' },
       { text: 'Design tokens', link: '/theming/tokens' },
+      { text: 'Colors', link: '/theming/colors' },
     ],
   },
 ] as const;

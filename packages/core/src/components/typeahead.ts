@@ -1,6 +1,8 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-import { fieldChrome } from './field';
+import { controlFocusStyles } from './controlFocus';
+import { controlSizeVariants, controlSurfaceSize } from './controlSize';
+import { dropdownPopoverChrome, fieldChrome } from './field';
 
 export const typeahead = typestyles.styles.component(
   'typeahead',
@@ -30,6 +32,10 @@ export const typeahead = typestyles.styles.component(
         value: t.color.text.primary.var,
         syntax: '<color>',
       },
+      placeholderColor: {
+        value: t.color.text.secondary.var,
+        syntax: '<color>',
+      },
       popoverBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
@@ -52,6 +58,12 @@ export const typeahead = typestyles.styles.component(
       description: v.descriptionColor.var,
       error: v.errorColor.var,
     });
+    const panel = dropdownPopoverChrome({
+      popoverBorder: v.popoverBorder,
+      popoverBackground: v.popoverBackground,
+      itemFocusedBackground: v.itemFocusedBackground,
+      itemSelectedColor: v.itemSelectedColor,
+    });
     return {
       slots: [
         'root',
@@ -62,66 +74,65 @@ export const typeahead = typestyles.styles.component(
         'input',
         'clearButton',
         'popover',
+        'listbox',
         'item',
       ],
-      ...chrome,
-      root: {
-        ...chrome.root,
-        minWidth: '240px',
-      },
-      inputWrapper: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: t.space[2].var,
-        border: `1px solid ${v.inputBorder.var}`,
-        borderRadius: t.radius.md.var,
-        padding: `${t.space[2].var} ${t.space[3].var}`,
-        backgroundColor: v.inputBackground.var,
-        '&:focus-within': {
-          outline: `2px solid ${t.color.border.focus.var}`,
-          outlineOffset: '1px',
-          [v.inputBorder.name]: t.color.border.focus.var,
+      base: {
+        root: {
+          ...chrome.root,
+          minWidth: '240px',
         },
-      },
-      input: {
-        border: 'none',
-        background: 'transparent',
-        outline: 'none',
-        flex: 1,
-        fontSize: t.fontSize.md.var,
-        color: v.inputForeground.var,
-      },
-      clearButton: {
-        display: 'inline-flex',
-        flexShrink: 0,
-        color: t.color.text.secondary.var,
-        cursor: 'pointer',
-        borderRadius: t.radius.sm.var,
-        padding: t.space[1].var,
-        '&[data-hovered]': {
-          backgroundColor: t.color.background.subtle.var,
+        label: chrome.label,
+        description: chrome.description,
+        error: chrome.error,
+        inputWrapper: {
+          display: 'flex',
+          alignItems: 'center',
+          gap: t.space[2].var,
+          width: '100%',
+          boxSizing: 'border-box',
+          border: `1px solid ${v.inputBorder.var}`,
+          borderRadius: t.radius.md.var,
+          backgroundColor: v.inputBackground.var,
+          transition: 'border-color 140ms ease, box-shadow 140ms ease',
+          '&:hover': {
+            borderColor: t.color.border.strong.var,
+          },
+          '&:focus-within': controlFocusStyles(),
         },
-      },
-      popover: {
-        border: `1px solid ${v.popoverBorder.var}`,
-        borderRadius: t.radius.md.var,
-        backgroundColor: v.popoverBackground.var,
-        boxShadow: t.shadow.md.var,
-        padding: t.space[1].var,
-      },
-      item: {
-        fontSize: t.fontSize.md.var,
-        padding: `${t.space[2].var} ${t.space[3].var}`,
-        borderRadius: t.radius.sm.var,
-        cursor: 'pointer',
-        '&[data-focused]': {
-          backgroundColor: v.itemFocusedBackground.var,
+        input: {
+          border: 'none',
+          background: 'transparent',
+          outline: 'none',
+          flex: 1,
+          minWidth: 0,
+          fontSize: 'inherit',
+          color: v.inputForeground.var,
+          '&::placeholder': {
+            color: v.placeholderColor.var,
+          },
         },
-        '&[data-selected]': {
-          color: v.itemSelectedColor.var,
-          fontWeight: t.fontWeight.semibold.var,
+        clearButton: {
+          display: 'inline-flex',
+          flexShrink: 0,
+          color: t.color.text.secondary.var,
+          cursor: 'pointer',
+          borderRadius: t.radius.sm.var,
+          padding: t.space[1].var,
+          '&[data-hovered]': {
+            backgroundColor: t.color.background.subtle.var,
+          },
         },
+        popover: panel.popover,
+        listbox: panel.listbox,
+        item: panel.item,
       },
+      variants: {
+        size: controlSizeVariants((size) => ({
+          inputWrapper: controlSurfaceSize(size, { inset: 'compact' }),
+        })),
+      },
+      defaultVariants: { size: 'md' },
     };
   },
   { layer: 'components' },

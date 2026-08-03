@@ -1,4 +1,5 @@
 import type { JSX, ReactNode } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import {
   ToggleButton as AriaToggleButton,
   ToggleButtonGroup as AriaToggleButtonGroup,
@@ -6,7 +7,8 @@ import {
   type ToggleButtonProps as RACToggleButtonProps,
 } from 'react-aria-components';
 import { segmentedControl, toggleButton } from '@var-ui/core';
-import { cx, recipeProps } from './utils';
+import { observeSegmentedControlIndicator } from '@var-ui/core/internal';
+import { recipeProps } from './utils';
 
 export type SegmentedControlOption = {
   id: string;
@@ -34,15 +36,40 @@ export function SegmentedControl({
   className,
   size = 'md',
   selectionMode = 'single',
+  selectedKeys,
+  defaultSelectedKeys,
+  onSelectionChange,
   ...props
 }: SegmentedControlProps): JSX.Element {
-  const s = segmentedControl();
-  const t = toggleButton({ size });
+  const s = segmentedControl({ size });
+  const t = toggleButton({ segmented: true });
+  const rootRef = useRef<HTMLDivElement>(null);
+  const isControlled = selectedKeys !== undefined;
+  const [uncontrolledKeys, setUncontrolledKeys] = useState(
+    defaultSelectedKeys ?? (options[0] ? [options[0].id] : []),
+  );
+  const activeKeys = isControlled ? selectedKeys : uncontrolledKeys;
+
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    return observeSegmentedControlIndicator(root);
+  }, [activeKeys, options]);
+
   return (
     <AriaToggleButtonGroup
       {...props}
+      ref={rootRef}
       selectionMode={selectionMode}
-      className={cx(s.root, className)}
+      selectedKeys={selectedKeys}
+      defaultSelectedKeys={defaultSelectedKeys}
+      onSelectionChange={(keys) => {
+        if (!isControlled) {
+          setUncontrolledKeys([...keys]);
+        }
+        onSelectionChange?.(keys);
+      }}
+      {...recipeProps(s.root, className)}
     >
       {options.map((option) => (
         <AriaToggleButton

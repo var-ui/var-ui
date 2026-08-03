@@ -35,6 +35,34 @@ the theme's `.tokens` object alongside built-in refs.
 Syntax-highlighting colors live under `color.code` (`designTokens.color.code`).
 `lightSyntaxValues` / `darkSyntaxValues` are exported aliases for theme presets.
 
-Token reference tables generated from the core package are planned for a
-follow-up. Until then, see `packages/core/src/tokens/` and example theme presets
-under `docs/src/themes/`.
+### Syntax highlighting
+
+var-ui defines semantic **code colors** but does not ship highlighter-specific CSS.
+Map `color.code` to your toolchain:
+
+- **highlight.js** — CSS rules targeting `.hljs-*` classes (see this site's
+  `docs/src/styles/codeHighlight.ts` for a reference mapping)
+- **Shiki** — build a theme object from the token values at compile time
+- **Prism** — map token groups to Prism's theme format
+
+Override defaults via `createDesignTheme({ tokens: { color: { code: … } } })` or
+`colorMode.dark`. Token groups:
+
+| Token                             | Typical use                               |
+| --------------------------------- | ----------------------------------------- |
+| `base`                            | Default foreground                        |
+| `keyword`                         | Keywords, types                           |
+| `title`                           | Titles, class/function names              |
+| `attr`                            | Attributes, numbers, operators, variables |
+| `string`                          | Strings, regexps                          |
+| `builtIn`                         | Built-ins, symbols                        |
+| `comment`                         | Comments                                  |
+| `name`                            | Tags, pseudo-selectors                    |
+| `section`                         | Headings                                  |
+| `bullet`                          | List bullets                              |
+| `addition` / `additionBackground` | Diff additions                            |
+| `deletion` / `deletionBackground` | Diff deletions                            |
+
+See the [Colors](/theming/colors) reference for palette ramps and semantic color
+swatches. Other token namespaces (spacing, typography, motion) are documented in
+`packages/core/src/tokens/`; example theme presets live under `docs/src/themes/`.

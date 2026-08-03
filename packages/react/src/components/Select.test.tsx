@@ -20,6 +20,20 @@ describe('Select', () => {
     expect(screen.getByRole('button', { name: /Fruit/ })).toBeTruthy();
   });
 
+  it('portals the listbox into document.body by default', async () => {
+    const { container } = render(
+      <IconProvider icons={{}}>
+        <Select label="Fruit" options={OPTIONS} />
+      </IconProvider>,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: /Fruit/ }));
+
+    const option = await screen.findByRole('option', { name: 'Apple' });
+    expect(document.body.contains(option)).toBe(true);
+    expect(container.contains(option)).toBe(false);
+  });
+
   it('portals the listbox into a custom portalContainer when provided', async () => {
     const container = document.createElement('div');
     container.setAttribute('data-testid', 'custom-portal');

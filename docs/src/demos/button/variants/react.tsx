@@ -1,11 +1,39 @@
-import { Button, HStack } from '@var-ui/react';
+import { Button, HStack, VStack } from '@var-ui/react';
 
 export default function Preview() {
   return (
-    <HStack gap="sm" wrap>
-      <Button intent="primary">Primary</Button>
-      <Button intent="secondary">Secondary</Button>
-      <Button intent="ghost">Ghost</Button>
-    </HStack>
+    <VStack gap="md">
+      <HStack gap="sm" wrap>
+        <Button tone="accent" appearance="filled">
+          Filled
+        </Button>
+        <Button tone="accent" appearance="outline">
+          Outline
+        </Button>
+        <Button tone="accent" appearance="subtle">
+          Subtle
+        </Button>
+        <Button tone="accent" appearance="ghost">
+          Ghost
+        </Button>
+      </HStack>
+      <HStack gap="sm" wrap>
+        <Button tone="accent" appearance="filled">
+          Accent
+        </Button>
+        <Button tone="success" appearance="filled">
+          Success
+        </Button>
+        <Button tone="warning" appearance="filled">
+          Warning
+        </Button>
+        <Button tone="danger" appearance="filled">
+          Danger
+        </Button>
+        <Button tone="info" appearance="filled">
+          Info
+        </Button>
+      </HStack>
+    </VStack>
   );
 }

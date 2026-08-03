@@ -3,7 +3,7 @@ import {
   collectArticleHeadings,
   pickActiveHeadingByPosition,
   resolveActiveHeading,
-} from '@var-ui/core';
+} from '@var-ui/core/internal';
 import { setActive } from './toc';
 
 describe('collectArticleHeadings', () => {
@@ -87,7 +87,6 @@ describe('setActive', () => {
   it('marks only the matching link with data-selected', () => {
     const list = document.createElement('ol');
     list.innerHTML = `
-      <span data-toc-indicator></span>
       <li><a href="#one" data-toc-link="one">One</a></li>
       <li><a href="#two" data-toc-link="two">Two</a></li>
     `;
@@ -104,7 +103,6 @@ describe('setActive', () => {
   it('clears data-selected when no id is active', () => {
     const list = document.createElement('ol');
     list.innerHTML = `
-      <span data-toc-indicator></span>
       <li><a href="#one" data-toc-link="one" data-selected="">One</a></li>
     `;
 

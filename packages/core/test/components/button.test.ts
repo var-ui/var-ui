@@ -1,17 +1,33 @@
 import { describe, expect, it } from 'vite-plus/test';
 import { getRegisteredCss } from 'typestyles';
-import { button } from '../../src/components/button';
+import { badge } from '../../src/components/badge';
+import { button, resolveButtonProps } from '../../src/components/button';
 
 describe('button', () => {
-  it('registers intent variants including danger', () => {
-    button({ intent: 'primary' });
-    button({ intent: 'danger' });
+  it('registers tone and appearance variants including danger', () => {
+    button(resolveButtonProps({ tone: 'accent', appearance: 'filled' }));
+    button(resolveButtonProps({ tone: 'danger', appearance: 'filled' }));
     const css = getRegisteredCss();
-    expect(css).toContain('.var-ui-button[data-intent="primary"]');
-    expect(css).toContain('.var-ui-button[data-intent="danger"]');
+    expect(css).toContain('.var-ui-button[data-tone="accent"]');
+    expect(css).toContain('.var-ui-button[data-tone="danger"]');
+    expect(css).toContain('[data-appearance="filled"]');
     expect(css).toContain('var(--var-ui-color-danger-solid)');
-    expect(css).not.toMatch(
-      /\.var-ui-button\[data-intent="danger"\][^}]*var\(--var-ui-color-danger-default\)/,
-    );
+  });
+
+  it('maps intent shorthand to tone and appearance', () => {
+    button(resolveButtonProps({ intent: 'primary' }));
+    button(resolveButtonProps({ intent: 'outline' }));
+    const css = getRegisteredCss();
+    expect(css).toContain('.var-ui-button[data-tone="accent"]');
+    expect(css).toContain('[data-appearance="outline"]');
+  });
+});
+
+describe('badge appearance', () => {
+  it('registers tone and appearance variants', () => {
+    badge({ tone: 'accent', appearance: 'solid' });
+    const css = getRegisteredCss();
+    expect(css).toContain('.var-ui-badge[data-tone="accent"]');
+    expect(css).toContain('[data-appearance="solid"]');
   });
 });

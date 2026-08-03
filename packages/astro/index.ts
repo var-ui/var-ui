@@ -50,6 +50,8 @@ export { default as SideNavCollapseButton } from './src/components/SideNavCollap
 export { default as ResizeHandle } from './src/components/ResizeHandle.astro';
 export { default as MobileNav } from './src/components/MobileNav.astro';
 export { default as MobileNavToggle } from './src/components/MobileNavToggle.astro';
+export { default as SearchInput } from './src/components/SearchInput.astro';
+export { default as CommandPalette } from './src/components/CommandPalette.astro';
 export type { ColorMode, ResolvedColorMode } from './src/scripts/colorMode';
 export { APP_SHELL_MAIN_ID, initAppShell, initAppShells } from './src/scripts/appShell';
 export {
@@ -74,3 +76,19 @@ export {
   resolveColorMode,
   setColorMode,
 } from './src/scripts/colorMode';
+export {
+  getCommandPaletteController,
+  initCommandPalette,
+  initCommandPalettes,
+  type CommandPaletteController,
+} from './src/scripts/commandPalette';
+export {
+  filterCommandPaletteItems,
+  flattenCommandPaletteGroups,
+  groupCommandPaletteResults,
+  matchCommandPaletteItem,
+  moveCommandPaletteActiveIndex,
+  type CommandPaletteGroup,
+  type CommandPaletteItem,
+} from './src/scripts/commandPaletteUtils';
+export { initSearchInput, initSearchInputs } from './src/scripts/searchInput';

@@ -1,4 +1,4 @@
-import { button, stack } from '@var-ui/core';
+import { button, resolveButtonProps, stack } from '@var-ui/core';
 import { recipeProps } from '../../../lib/recipeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
@@ -8,7 +8,7 @@ export function render(): string {
   );
   const cancel = serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(button({ intent: 'secondary' })) },
+    { type: 'button', ...recipeProps(button(resolveButtonProps({ intent: 'secondary' }))) },
     'Cancel',
   );
   const save = serializeHtmlTag('button', { type: 'button', ...recipeProps(button({})) }, 'Save');

@@ -1,17 +1,76 @@
 ---
 title: CodeBlock
-description: Syntax-highlighted code display.
+description: Code display with copy, line numbers, and optional syntax highlighting.
 ---
 
 # CodeBlock
 
-Syntax-highlighted code display.
+Code display with copy-to-clipboard, line numbers, and optional syntax highlighting.
+
+`CodeBlock` handles layout and interaction. **Syntax highlighting is separate** — you run a
+highlighter (highlight.js, Shiki, Prism, etc.) and pass the result via `codeHtml` and
+`codeClassName`. The plain `code` string is always used for the copy button.
 
 ## Examples
 
 ### Default
 
 <Demo id="code-block.default" />
+
+## Syntax highlighting
+
+### Styles
+
+Syntax highlighting colors come from `color.code` tokens (`--var-ui-color-code-*`).
+Your app maps those CSS variables to whatever highlighter you use — highlight.js
+class selectors, a Shiki theme, Prism tokens, etc. See
+[Design tokens](/theming/tokens#syntax-highlighting).
+
+### Runtime highlighting
+
+Pass pre-highlighted HTML alongside the plain source:
+
+```tsx
+import { CodeBlock } from '@var-ui/react';
+import hljs from 'highlight.js/lib/core';
+import typescript from 'highlight.js/lib/languages/typescript';
+
+hljs.registerLanguage('typescript', typescript);
+
+const code = 'const greeting = "hello";';
+
+<CodeBlock
+  code={code}
+  language="tsx"
+  codeHtml={hljs.highlight(code, { language: 'typescript' }).value}
+  codeClassName="hljs language-typescript"
+/>;
+```
+
+Use any highlighter that outputs HTML with `hljs-*` classes (or map your classes to the
+same token groups in a custom theme).
+
+### Build-time highlighting
+
+For docs sites and SSR, prefer highlighting at build time — Shiki, `rehype-highlight`, or
+Astro/MDX pipelines — then pass the resulting HTML to `codeHtml`. No client-side highlighter
+bundle required.
+
+### Line numbers
+
+When `showLineNumbers` is enabled, pass one HTML string per line via `lineHtml` instead of
+`codeHtml`:
+
+```tsx
+const lines = code.replace(/\n$/, '').split('\n');
+
+<CodeBlock
+  code={code}
+  language="tsx"
+  showLineNumbers
+  lineHtml={lines.map((line) => hljs.highlight(line, { language: 'typescript' }).value)}
+/>;
+```
 
 ## Props
 

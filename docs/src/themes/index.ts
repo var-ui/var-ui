@@ -1,3 +1,12 @@
+// Showcase theme presets — side-effect imports register @font-face rules at build time.
+import './ai-glow';
+import './new-wave';
+import './windows-95';
+import './classic-system';
+import './forest';
+import './rose';
+import './amber';
+
 export { forestTheme, forestPreset } from './forest';
 export { roseTheme, rosePreset } from './rose';
 export { amberTheme, amberPreset } from './amber';

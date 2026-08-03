@@ -1,7 +1,7 @@
 import { typestyles } from '@var-ui/core';
 
 // Docs site globals (extracted via typestyles-entry.ts).
-// Document reset and smooth scrolling live in @var-ui/core/document-globals.
+// CSS reset and base element styles live in @var-ui/core/base-styles.
 
 // Offset fixed docs header when following in-page anchor links.
 typestyles.global.style('article :is(h2, h3)[id]', {

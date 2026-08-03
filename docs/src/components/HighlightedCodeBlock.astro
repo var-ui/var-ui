@@ -1,0 +1,24 @@
+---
+import { CodeBlock } from '@var-ui/astro';
+import { highlightCodeBlockContent } from '@/lib/highlightCodeBlock';
+
+type Props = {
+  code: string;
+  language?: string;
+  filename?: string;
+  className?: string;
+  copyable?: boolean;
+  variant?: 'default' | 'inline' | 'diff' | 'terminal';
+  wrapLongLines?: boolean;
+  showLineNumbers?: boolean;
+  highlightedLines?: number[];
+  copyLabel?: string;
+  copiedLabel?: string;
+  copyErrorLabel?: string;
+};
+
+const { code, language, showLineNumbers, ...rest } = Astro.props as Props;
+const highlighted = highlightCodeBlockContent(code, language, { showLineNumbers });
+---
+
+<CodeBlock code={code} language={language} showLineNumbers={showLineNumbers} {...highlighted} {...rest} />

@@ -5,7 +5,7 @@ import { when } from '../src/theme-conditions';
 import { resetExtendTokenRegistry } from '../src/extend-tokens';
 import { registerGlobals } from '../src/document-globals';
 import { styles } from '../src/runtime';
-import { button } from '../src/components/button';
+import { button, resolveButtonProps } from '../src/components/button';
 
 const themeClass = (name: string) => `.theme-var-ui-${name}`;
 
@@ -17,7 +17,7 @@ describe('theme conditions and colorModes', () => {
   });
 
   it('emits light-dark() for color mode values on override properties', () => {
-    button({ intent: 'primary', size: 'md' });
+    button(resolveButtonProps({ intent: 'primary', size: 'md' }));
     createDesignTheme({
       name: 'mode-values',
       components: {
@@ -35,7 +35,7 @@ describe('theme conditions and colorModes', () => {
   });
 
   it('emits conditional override rules for when.dark', () => {
-    button({ intent: 'primary', size: 'md' });
+    button(resolveButtonProps({ intent: 'primary', size: 'md' }));
     createDesignTheme({
       name: 'conditions',
       components: {
@@ -62,7 +62,7 @@ describe('theme conditions and colorModes', () => {
   });
 
   it('styles.override accepts conditions and color mode values directly', () => {
-    button({ intent: 'secondary', size: 'sm' });
+    button(resolveButtonProps({ intent: 'secondary', size: 'sm' }));
     styles.override(
       button,
       {

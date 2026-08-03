@@ -1,11 +1,10 @@
 import type { HTMLAttributes, JSX } from 'react';
-import { badge } from '@var-ui/core';
+import { badge, type BadgeVariantProps } from '@var-ui/core';
 import { recipeProps } from './utils';
 
-export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
-  /** Semantic color treatment. @default neutral */
-  tone?: 'neutral' | 'accent' | 'success' | 'warning' | 'danger' | 'tip';
-};
+export type { BadgeTone, SurfaceAppearance as BadgeAppearance } from '@var-ui/core';
+
+export type BadgeProps = HTMLAttributes<HTMLSpanElement> & BadgeVariantProps;
 
 /**
  * Small semantic label chip.
@@ -14,6 +13,11 @@ export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
  * <Badge tone="success">Active</Badge>
  * ```
  */
-export function Badge({ tone = 'neutral', className, ...props }: BadgeProps): JSX.Element {
-  return <span {...props} {...recipeProps(badge({ tone }), className)} />;
+export function Badge({
+  tone = 'neutral',
+  appearance = 'subtle',
+  className,
+  ...props
+}: BadgeProps): JSX.Element {
+  return <span {...props} {...recipeProps(badge({ tone, appearance }), className)} />;
 }

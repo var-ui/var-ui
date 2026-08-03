@@ -1,0 +1,33 @@
+---
+title: Combobox
+description: Headless combobox primitive for autocompletes and custom selects.
+---
+
+# Combobox
+
+Headless combobox built on React Aria `ComboBox`. Compose `Root`, `Label`, `Input`,
+`Description`, `Error`, `Popover`, `ListBox`, and `Item` for autocompletes, searchable
+selects, and other filterable pickers.
+
+For the common single-select search field, use [`Typeahead`](/components/typeahead) instead.
+
+## Examples
+
+### Default
+
+<Demo id="combobox.default" />
+
+### Field chrome
+
+Add helper text and validation with `Description` and `Error`.
+
+<Demo id="combobox.field" />
+
+## Props
+
+<PropsTable slug="combobox" />
+
+## Accessibility
+
+Built on React Aria Components. The input exposes `role="combobox"`; the listbox opens
+on focus or typing and supports keyboard navigation.

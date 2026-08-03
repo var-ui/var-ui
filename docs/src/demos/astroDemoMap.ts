@@ -32,6 +32,10 @@ import RadioGroupDefault from './radio-group/default/astro.astro';
 import SwitchDefault from './switch/default/astro.astro';
 import SelectDefault from './select/default/astro.astro';
 import SelectOptions from './select/options/astro.astro';
+import ComboboxDefault from './combobox/default/astro.astro';
+import ComboboxField from './combobox/field/astro.astro';
+import TypeaheadDefault from './typeahead/default/astro.astro';
+import TypeaheadField from './typeahead/field/astro.astro';
 import TabsDefault from './tabs/default/astro.astro';
 import DialogDefault from './dialog/default/astro.astro';
 import LayoutDefault from './layout/default/astro.astro';
@@ -81,6 +85,10 @@ export const astroDemoMap = {
   'switch.default': SwitchDefault,
   'select.default': SelectDefault,
   'select.options': SelectOptions,
+  'combobox.default': ComboboxDefault,
+  'combobox.field': ComboboxField,
+  'typeahead.default': TypeaheadDefault,
+  'typeahead.field': TypeaheadField,
   'tabs.default': TabsDefault,
   'dialog.default': DialogDefault,
   'layout.default': LayoutDefault,

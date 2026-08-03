@@ -1,6 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-import { fieldChrome } from './field';
+import { dropdownPopoverChrome, fieldChrome } from './field';
 
 export const multiSelector = typestyles.styles.component(
   'multiSelector',
@@ -20,6 +20,10 @@ export const multiSelector = typestyles.styles.component(
       },
       triggerForeground: {
         value: t.color.text.primary.var,
+        syntax: '<color>',
+      },
+      placeholderColor: {
+        value: t.color.text.secondary.var,
         syntax: '<color>',
       },
       popoverBackground: {
@@ -45,13 +49,21 @@ export const multiSelector = typestyles.styles.component(
     });
     // MultiSelector has no description/error slots — reuse only the shared root/label chrome.
     const chrome = fieldChrome({ label: v.labelColor.var, description: '', error: '' });
+    const panel = dropdownPopoverChrome({
+      popoverBorder: v.popoverBorder,
+      popoverBackground: v.popoverBackground,
+      itemFocusedBackground: v.itemFocusedBackground,
+      itemSelectedColor: v.itemSelectedColor,
+    });
     return {
       slots: [
         'root',
         'label',
         'trigger',
+        'triggerValue',
         'triggerIcon',
         'popover',
+        'listbox',
         'item',
         'itemCheckbox',
         'itemLabel',
@@ -62,10 +74,12 @@ export const multiSelector = typestyles.styles.component(
       },
       label: chrome.label,
       trigger: {
+        appearance: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: t.space[2].var,
+        width: '100%',
         textAlign: 'left',
         border: `1px solid ${v.triggerBorder.var}`,
         borderRadius: t.radius.md.var,
@@ -74,10 +88,27 @@ export const multiSelector = typestyles.styles.component(
         color: v.triggerForeground.var,
         fontSize: t.fontSize.md.var,
         cursor: 'pointer',
-        '&:focus-visible': {
+        outline: 'none',
+        transition: 'border-color 140ms ease, box-shadow 140ms ease',
+        '&:hover, &[data-hovered]': {
+          borderColor: t.color.border.strong.var,
+        },
+        '&[data-focus-visible]:not([data-pressed])': {
           outline: `2px solid ${t.color.border.focus.var}`,
-          outlineOffset: '1px',
-          [v.triggerBorder.name]: t.color.border.focus.var,
+          outlineOffset: '2px',
+        },
+        '&[data-pressed]': {
+          borderColor: t.color.border.focus.var,
+        },
+      },
+      triggerValue: {
+        flex: 1,
+        minWidth: 0,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        '&[data-placeholder]': {
+          color: v.placeholderColor.var,
         },
       },
       triggerIcon: {
@@ -85,24 +116,13 @@ export const multiSelector = typestyles.styles.component(
         flexShrink: 0,
         color: t.color.text.secondary.var,
       },
-      popover: {
-        border: `1px solid ${v.popoverBorder.var}`,
-        borderRadius: t.radius.md.var,
-        backgroundColor: v.popoverBackground.var,
-        boxShadow: t.shadow.md.var,
-        padding: t.space[1].var,
-      },
+      popover: panel.popover,
+      listbox: panel.listbox,
       item: {
+        ...panel.item,
         display: 'flex',
         alignItems: 'center',
         gap: t.space[2].var,
-        fontSize: t.fontSize.md.var,
-        padding: `${t.space[2].var} ${t.space[3].var}`,
-        borderRadius: t.radius.sm.var,
-        cursor: 'pointer',
-        '&[data-focused]': {
-          backgroundColor: v.itemFocusedBackground.var,
-        },
       },
       itemCheckbox: {
         width: '1rem',

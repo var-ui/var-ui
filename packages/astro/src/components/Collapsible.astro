@@ -1,14 +1,13 @@
 ---
-import { collapsible, defaultIconSvgs } from '@var-ui/core';
+import { collapsible, defaultIconSvgs, type CollapsibleVariantProps } from '@var-ui/core';
 import { recipeProps } from '../utils';
 
-type Props = {
+interface Props extends CollapsibleVariantProps {
   id?: string;
   title?: string;
   defaultExpanded?: boolean;
-  variant?: 'flush' | 'bordered';
   className?: string;
-};
+}
 
 const {
   id,

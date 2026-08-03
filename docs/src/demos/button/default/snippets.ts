@@ -9,5 +9,5 @@ import { Button } from '@var-ui/astro';
 ---
 
 <Button>Click me</Button>`,
-  html: `<button type="button" class="var-ui-button" data-intent="secondary" data-size="md" data-layout="default">Click me</button>`,
+  html: `<button type="button" class="var-ui-button" data-tone="neutral" data-appearance="subtle" data-size="md" data-layout="default">Click me</button>`,
 } satisfies DemoSnippets;

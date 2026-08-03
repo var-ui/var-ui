@@ -197,3 +197,5 @@ export function createTocSpy({
     mutationObserver.disconnect();
   };
 }
+
+export * from './tocIndicator';

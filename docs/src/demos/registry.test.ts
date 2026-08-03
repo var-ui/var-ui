@@ -37,7 +37,8 @@ describe('demo registry completeness', () => {
     const html = renderButtonDefault();
     expect(html).toMatch(/^<button /);
     expect(html).toContain('class="var-ui-button"');
-    expect(html).toContain('data-intent="secondary"');
+    expect(html).toContain('data-tone="neutral"');
+    expect(html).toContain('data-appearance="subtle"');
     expect(html).toContain('>Click me</button>');
     expect(html).not.toContain('className=');
   });

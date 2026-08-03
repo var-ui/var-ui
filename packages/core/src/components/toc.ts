@@ -1,25 +1,23 @@
 import { styles, typestyles } from '../runtime';
 import { atReducedMotion } from '../theme-conditions';
+import { duration } from '../tokens/defaults/duration';
+import { easing } from '../tokens/defaults/easing';
+import { transition } from '../tokens/defaults/transition';
 import { designTokens as t } from '../tokens';
 
 const belowXl = styles.breakpoint('xl', 'max');
 const listIndent = t.space[3].var;
 const nestedIndent = t.space[2].var;
-
-type TocVariantDefs = {
-  hideBelow: { none: object; xl: object };
-};
+const indicatorTransition = `transform ${duration.medium} ${easing.standard}, height ${duration.fast} ${easing.standard}, opacity ${duration.fast} ${easing.standard}`;
 
 /**
  * In-page table of contents for long-form docs. Pair with the React `Toc`
  * compound or Astro `Toc` / `TocItem` bindings. Active items use
  * `data-selected` on links; nested `h3` rows use `data-nested` on items.
- * A single sliding `indicator` element is positioned via `positionTocIndicator`.
+ * The active-row indicator is the list `::after` pseudo, positioned via
+ * `positionTocIndicator`.
  */
-export const toc = typestyles.styles.component<
-  readonly ['root', 'title', 'list', 'indicator', 'item', 'link'],
-  TocVariantDefs
->(
+export const toc = typestyles.styles.component(
   'toc',
   (c) => {
     const v = c.vars({
@@ -36,7 +34,7 @@ export const toc = typestyles.styles.component<
         syntax: '<color>',
       },
       railColor: {
-        value: t.color.border.default.var,
+        value: t.color.border.subtle.var,
         syntax: '<color>',
       },
       railWidth: {
@@ -47,9 +45,17 @@ export const toc = typestyles.styles.component<
         value: '1px',
         syntax: '<length>',
       },
-      railInset: {
-        value: '-1px',
+      indicatorY: {
+        value: '0px',
         syntax: '<length>',
+      },
+      indicatorHeight: {
+        value: '0px',
+        syntax: '<length>',
+      },
+      indicatorOpacity: {
+        value: '0',
+        syntax: '<number>',
       },
       linkColor: {
         value: t.color.text.secondary.var,
@@ -69,111 +75,88 @@ export const toc = typestyles.styles.component<
       },
     });
 
-    const indicatorTransition = `transform ${t.duration.medium.var} ${t.easing.standard.var}, height ${t.duration.fast.var} ${t.easing.standard.var}, opacity ${t.duration.fast.var} ${t.easing.standard.var}`;
-
     return {
-      slots: ['root', 'title', 'list', 'indicator', 'item', 'link'] as const,
-      base: {
-        root: {
-          [v.stickyTop.name]: t.space[5].var,
-          [v.stickyMaxHeightOffset.name]: t.space[6].var,
-          [v.titleColor.name]: t.color.text.secondary.var,
-          [v.railColor.name]: t.color.background.subtle.var,
-          [v.railWidth.name]: '2px',
-          [v.railRadius.name]: '1px',
-          [v.railInset.name]: '-1px',
-          [v.linkColor.name]: t.color.text.secondary.var,
-          [v.linkHoverColor.name]: t.color.text.primary.var,
-          [v.linkSelectedColor.name]: t.color.text.primary.var,
-          [v.linkSelectedIndicator.name]: t.color.text.primary.var,
-          position: 'sticky',
-          top: v.stickyTop.var,
-          padding: `${t.space[6].var} ${t.space[5].var} ${t.space[8].var} ${t.space[4].var}`,
-          maxHeight: `calc(100dvh - ${v.stickyTop.var} - ${v.stickyMaxHeightOffset.var})`,
-          overflow: 'auto',
+      slots: ['root', 'title', 'list', 'item', 'link'],
+      root: {
+        position: 'sticky',
+        top: v.stickyTop.var,
+        padding: `${t.space[6].var} ${t.space[5].var} ${t.space[8].var} ${t.space[4].var}`,
+        maxHeight: `calc(100dvh - ${v.stickyTop.var} - ${v.stickyMaxHeightOffset.var})`,
+        overflow: 'auto',
+        [belowXl]: {
+          display: 'none',
         },
-        title: {
-          margin: `0 0 ${t.space[4].var}`,
-          fontSize: t.fontSize.sm.var,
-          fontWeight: t.fontWeight.medium.var,
-          color: v.titleColor.var,
-        },
-        list: {
-          position: 'relative',
-          margin: 0,
-          padding: 0,
-          paddingInlineStart: listIndent,
-          listStyle: 'none',
-          display: 'flex',
-          flexDirection: 'column',
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            insetInlineStart: v.railInset.var,
-            width: v.railWidth.var,
-            borderRadius: v.railRadius.var,
-            backgroundColor: v.railColor.var,
-            pointerEvents: 'none',
-          },
-        },
-        indicator: {
+      },
+      title: {
+        margin: `0 0 ${t.space[4].var}`,
+        fontSize: t.fontSize.sm.var,
+        fontWeight: t.fontWeight.medium.var,
+        color: v.titleColor.var,
+      },
+      list: {
+        position: 'relative',
+        margin: 0,
+        padding: 0,
+        paddingInlineStart: listIndent,
+        listStyle: 'none',
+        display: 'flex',
+        flexDirection: 'column',
+        [v.indicatorY.name]: '0px',
+        [v.indicatorHeight.name]: '0px',
+        [v.indicatorOpacity.name]: '0',
+        '&::before': {
+          content: '""',
           position: 'absolute',
           top: 0,
-          insetInlineStart: v.railInset.var,
+          bottom: 0,
+          insetInlineStart: 0,
           width: v.railWidth.var,
-          height: 0,
+          borderRadius: v.railRadius.var,
+          backgroundColor: v.railColor.var,
+          pointerEvents: 'none',
+        },
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          insetInlineStart: 0,
+          width: v.railWidth.var,
+          height: v.indicatorHeight.var,
           borderRadius: v.railRadius.var,
           backgroundColor: v.linkSelectedIndicator.var,
           pointerEvents: 'none',
-          opacity: 0,
+          opacity: v.indicatorOpacity.var,
           zIndex: 1,
-          transform: 'translateY(0)',
+          transform: `translateY(${v.indicatorY.var})`,
           transition: indicatorTransition,
           ...atReducedMotion({ transition: 'none' }),
         },
-        item: {
-          '&[data-nested]': {
-            paddingInlineStart: nestedIndent,
-          },
-        },
-        link: {
-          display: 'block',
-          paddingBlock: t.space[1].var,
-          fontSize: t.fontSize.sm.var,
-          lineHeight: t.lineHeight.normal.var,
-          fontWeight: t.fontWeight.normal.var,
-          color: v.linkColor.var,
-          textDecoration: 'none',
-          transition: `color ${t.duration.fast.var} ${t.easing.standard.var}`,
-          '&:hover': {
-            color: v.linkHoverColor.var,
-          },
-          '&:focus-visible': {
-            outline: `2px solid ${t.color.border.focus.var}`,
-            outlineOffset: '2px',
-          },
-          '&[data-selected]': {
-            color: v.linkSelectedColor.var,
-            fontWeight: t.fontWeight.semibold.var,
-          },
+      },
+      item: {
+        '&[data-nested]': {
+          paddingInlineStart: nestedIndent,
         },
       },
-      variants: {
-        hideBelow: {
-          none: {},
-          xl: {
-            root: {
-              [belowXl]: {
-                display: 'none',
-              },
-            },
-          },
+      link: {
+        display: 'block',
+        paddingBlock: t.space[1].var,
+        fontSize: t.fontSize.sm.var,
+        lineHeight: t.lineHeight.normal.var,
+        fontWeight: t.fontWeight.normal.var,
+        color: v.linkColor.var,
+        textDecoration: 'none',
+        transition: transition.colorShift,
+        '&:hover': {
+          color: v.linkHoverColor.var,
         },
-      },
-      defaultVariants: {
-        hideBelow: 'none',
+        '&:focus-visible': {
+          outline: `2px solid ${t.color.border.focus.var}`,
+          outlineOffset: '2px',
+        },
+        '&[data-selected]': {
+          color: v.linkSelectedColor.var,
+          fontWeight: t.fontWeight.semibold.var,
+        },
       },
     };
   },

@@ -1,13 +1,12 @@
 ---
-import { badge } from '@var-ui/core';
+import { badge, type BadgeVariantProps } from '@var-ui/core';
 import { recipeProps } from '../utils';
 
-type Props = {
-  tone?: 'neutral' | 'accent' | 'success' | 'warning' | 'danger' | 'tip';
+interface Props extends BadgeVariantProps {
   className?: string;
-};
+}
 
-const { tone = 'neutral', className } = Astro.props;
-const rp = recipeProps(badge({ tone }), className);
+const { tone = 'neutral', appearance = 'subtle', className } = Astro.props;
+const rp = recipeProps(badge({ tone, appearance }), className);
 ---
 <span {...rp}><slot /></span>

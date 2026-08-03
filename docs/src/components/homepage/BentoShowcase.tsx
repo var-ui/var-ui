@@ -1,6 +1,6 @@
 'use client';
 
-import { cx, recipeClassName, useColorMode } from '@var-ui/react';
+import { cx, recipeClassName } from '@var-ui/react';
 import { useState } from 'react';
 import { homeBento } from '@/styles/homeBento';
 import { BannerTile } from './bentoTiles/BannerTile';
@@ -20,18 +20,16 @@ export type BentoShowcaseProps = {
 
 export function BentoShowcase({ themeId }: BentoShowcaseProps) {
   const b = homeBento();
-  const { colorMode, colorModeReady } = useColorMode();
   const [portalContainer, setPortalContainer] = useState<HTMLDivElement | null>(null);
   const theme = SHOWCASE_THEMES.find((entry) => entry.id === themeId) ?? SHOWCASE_THEMES[0];
 
   return (
     <div
       className={cx(recipeClassName(b.showcase), theme.className)}
-      // Wait for storage hydration so we never paint `defaultColorMode` ("system") for a frame.
-      data-mode={colorModeReady ? colorMode : undefined}
       data-testid="bento-showcase"
       ref={setPortalContainer}
-      style={colorModeReady ? undefined : { visibility: 'hidden' }}
+      // Theme surfaces ship `color-scheme: light dark`; inherit from the docs site instead.
+      style={{ colorScheme: 'inherit' }}
     >
       <div className={recipeClassName(b.grid)}>
         <QuickActionsTile

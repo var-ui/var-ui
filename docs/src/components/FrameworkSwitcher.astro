@@ -1,19 +1,18 @@
 ---
 import { segmentedControl, toggleButton } from '@var-ui/core';
-import { recipeClassName, recipeProps } from '@var-ui/astro';
+import { recipeProps } from '@var-ui/astro';
 import { DOCS_FRAMEWORKS } from '../lib/framework';
 import { FRAMEWORK_META } from '../lib/framework-icons';
 
 const framework = Astro.locals.framework;
 
-const s = segmentedControl();
-const t = toggleButton({ size: 'sm' });
-const rootClass = recipeClassName(s.root);
+const s = segmentedControl({ size: 'md' });
+const t = toggleButton({ segmented: true });
 const buttonRecipe = recipeProps(t);
 ---
 
 <div
-  class={rootClass}
+  {...recipeProps(s.root)}
   role="group"
   aria-label="Documentation framework"
   data-framework-switcher

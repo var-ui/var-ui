@@ -1,21 +1,29 @@
 export * from './components';
 export * from './fonts';
-export * from './icons/iconNames';
-export * from './icons/default-glyphs';
-export * from './create-theme';
-export * from './extend-tokens';
+export * from './icons';
+export { createDesignTheme } from './create-theme';
+export * from './theme-constants';
+export {
+  extendTokens,
+  type ExtendTokenValues,
+  type ModeAwareTokenLeaf,
+  type TokenRefsOf,
+} from './extend-tokens';
 export * from './theme-conditions';
 export * from './themeable-components';
-export * from './tocSpy';
-export { positionTocIndicator } from './tocIndicator';
-export {
-  type AppShellMobileBreakpoint,
-  type AppShellMobileBreakpointName,
-  appShellMobileBreakpointQueries,
-  type LayoutBreakpoint,
-  layoutBreakpointQueries,
-} from './breakpoints';
+export * from './breakpoints';
 export { typestyles, styles, global } from './runtime';
-export { registerDocumentGlobals, registerGlobals } from './document-globals';
 export * from './types';
 export * from './tokens';
+export type {
+  SemanticToneKey,
+  ToneAppearance,
+  SurfaceAppearance,
+  FeedbackTone,
+  ButtonTone,
+  ControlSize,
+  SpinnerAppearance,
+  ProgressBarAppearance,
+  ProgressBarTone,
+} from './components/semanticTone';
+export type { TocHeading } from './tocSpy';

@@ -171,6 +171,15 @@ export { DateRangeInput, type DateRangeInputProps } from './DateRangeInput';
 export { DateTimeInput, type DateTimeInputProps } from './DateTimeInput';
 export { TimeInput, type TimeInputProps } from './TimeInput';
 export { Typeahead, type TypeaheadOption, type TypeaheadProps } from './Typeahead';
+export {
+  Combobox,
+  type ComboboxItemProps,
+  type ComboboxListBoxProps,
+  type ComboboxOption,
+  type ComboboxProps,
+  type ComboboxRootProps,
+} from './Combobox';
+export { Drawer, type DrawerProps } from './Drawer';
 export { Tokenizer, type TokenizerOption, type TokenizerProps } from './Tokenizer';
 export {
   cx,

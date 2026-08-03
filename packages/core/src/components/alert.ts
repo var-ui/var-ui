@@ -1,9 +1,9 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import {
+  appearanceSurface,
   semanticChannelAssignments,
-  subtleBackgroundColor,
-  subtleBorderColor,
+  type SurfaceAppearance,
 } from './semanticTone';
 
 /**
@@ -100,19 +100,15 @@ export const alert = typestyles.styles.component(
         },
         appearance: {
           subtle: {
-            root: {
-              backgroundColor: subtleBackgroundColor(v.semantic.var),
-              border: `1px solid ${subtleBorderColor(v.semantic.var)}`,
-              color: t.color.text.primary.var,
-            },
+            root: appearanceSurface(v, 'subtle'),
           },
           solid: {
-            root: {
-              backgroundColor: v.solidBg.var,
-              border: `1px solid ${v.solidBg.var}`,
-              color: v.solidFg.var,
-            },
+            root: appearanceSurface(v, 'solid'),
             title: { color: 'inherit' },
+            icon: { color: 'inherit' },
+          },
+          outline: {
+            root: appearanceSurface(v, 'outline'),
           },
         },
         contentGap: {
@@ -129,3 +125,23 @@ export const alert = typestyles.styles.component(
   },
   { layer: 'components' },
 );
+
+export type AlertRecipeProps = NonNullable<Parameters<typeof alert>[0]>;
+export type AlertTone = NonNullable<AlertRecipeProps['tone']>;
+/** Public API alias — React/Astro `Alert` uses `variant` for this axis. */
+export type AlertVariant = AlertTone;
+export type AlertVariantProps = {
+  tone?: AlertTone;
+  appearance?: SurfaceAppearance;
+  contentGap?: NonNullable<AlertRecipeProps['contentGap']>;
+};
+
+export const alertVariantPropDocs = [
+  { name: 'tone', type: 'AlertTone', required: false },
+  { name: 'appearance', type: 'SurfaceAppearance', required: false },
+  { name: 'contentGap', type: "'spaced' | 'flush'", required: false },
+] as const satisfies ReadonlyArray<{
+  name: keyof AlertVariantProps;
+  type: string;
+  required: boolean;
+}>;

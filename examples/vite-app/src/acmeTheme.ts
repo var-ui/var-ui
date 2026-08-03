@@ -54,13 +54,13 @@ export const acmeTheme = createDesignTheme({
         '&:hover': { boxShadow: 'none' },
       },
       variants: {
-        intent: {
-          primary: { textTransform: 'uppercase', letterSpacing: '0.04em' },
+        tone: {
+          accent: { textTransform: 'uppercase', letterSpacing: '0.04em' },
         },
       },
       compoundVariants: [
         {
-          variants: { intent: 'primary', size: 'lg' },
+          variants: { tone: 'accent', appearance: 'filled', size: 'lg' },
           style: { letterSpacing: '0.08em' },
         },
       ],

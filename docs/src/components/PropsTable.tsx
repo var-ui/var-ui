@@ -1,5 +1,5 @@
 import type { ComponentPropsDoc } from '@/lib/extract-component-props';
-import { proseContent } from '@var-ui/core';
+import { proseContent } from '@var-ui/core/internal';
 import { recipeClassName } from '@var-ui/react';
 
 type PropsTableProps = {

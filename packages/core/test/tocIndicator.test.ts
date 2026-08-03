@@ -1,13 +1,20 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vite-plus/test';
-import { positionTocIndicator } from '../src/tocIndicator';
+import { getRegisteredCss } from 'typestyles';
+import { toc } from '../src/components/toc';
+import { positionTocIndicator, tocIndicatorCssVars } from '../src/tocIndicator';
 
 describe('positionTocIndicator', () => {
+  it('uses CSS var names that match the toc recipe', () => {
+    toc();
+    const css = getRegisteredCss();
+    for (const name of Object.values(tocIndicatorCssVars)) {
+      expect(css).toContain(name);
+    }
+  });
+
   it('positions the indicator to match the active list item', () => {
     const list = document.createElement('ol');
-    const indicator = document.createElement('span');
-    indicator.dataset.tocIndicator = '';
-    list.append(indicator);
 
     const item = document.createElement('li');
     item.getBoundingClientRect = () => ({ height: 32 }) as DOMRect;
@@ -21,19 +28,16 @@ describe('positionTocIndicator', () => {
 
     positionTocIndicator(list, link);
 
-    expect(indicator.style.transform).toBe('translateY(48px)');
-    expect(indicator.style.height).toBe('32px');
-    expect(indicator.style.opacity).toBe('1');
+    expect(list.style.getPropertyValue(tocIndicatorCssVars.y)).toBe('48px');
+    expect(list.style.getPropertyValue(tocIndicatorCssVars.height)).toBe('32px');
+    expect(list.style.getPropertyValue(tocIndicatorCssVars.opacity)).toBe('1');
   });
 
   it('hides the indicator when there is no active link', () => {
     const list = document.createElement('ol');
-    const indicator = document.createElement('span');
-    indicator.dataset.tocIndicator = '';
-    list.append(indicator);
 
     positionTocIndicator(list, null);
 
-    expect(indicator.style.opacity).toBe('0');
+    expect(list.style.getPropertyValue(tocIndicatorCssVars.opacity)).toBe('0');
   });
 });

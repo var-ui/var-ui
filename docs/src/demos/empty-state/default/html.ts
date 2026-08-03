@@ -1,4 +1,4 @@
-import { button, emptyState } from '@var-ui/core';
+import { button, emptyState, resolveButtonProps } from '@var-ui/core';
 import { recipeProps } from '../../../lib/recipeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
@@ -20,7 +20,7 @@ export function render(): string {
   );
   const btn = serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(button({ intent: 'primary' })) },
+    { type: 'button', ...recipeProps(button(resolveButtonProps({ intent: 'primary' }))) },
     'Clear filters',
   );
   const action = serializeHtmlTag('div', recipeProps(e.action), btn);

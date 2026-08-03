@@ -7,6 +7,9 @@ type CodeBlockVariant = 'default' | 'inline' | 'diff' | 'terminal';
 type Props = {
   code: string;
   language?: string;
+  codeHtml?: string;
+  codeClassName?: string;
+  lineHtml?: string[];
   filename?: string;
   className?: string;
   copyable?: boolean;
@@ -19,9 +22,20 @@ type Props = {
   copyErrorLabel?: string;
 };
 
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 const {
   code,
   language,
+  codeHtml,
+  codeClassName: highlightedCodeClassName,
+  lineHtml,
   filename,
   className,
   copyable = true,
@@ -32,7 +46,7 @@ const {
   copyLabel = 'Copy code',
   copiedLabel = 'Copied',
   copyErrorLabel = 'Copy failed',
-} = Astro.props;
+} = Astro.props as Props;
 
 const cb = codeBlock();
 const variantRootClass: Record<CodeBlockVariant, string> = {
@@ -46,6 +60,8 @@ const highlightedSet = new Set(highlightedLines);
 const lines = code.replace(/\n$/, '').split('\n');
 const terminal = variant === 'terminal';
 const inline = variant === 'inline';
+const useHighlightedHtml = Boolean(codeHtml || lineHtml) && !terminal;
+const resolvedCodeClassName = cx(recipeClassName(cb.code), highlightedCodeClassName);
 
 const feedbackClassName = cx(
   recipeClassName(cb.feedback),
@@ -134,6 +150,7 @@ const feedbackClassName = cx(
             <code {...recipeProps(cb.code, recipeClassName(cb.lines))}>
               {lines.map((line, index) => {
                 const lineNumber = index + 1;
+                const lineContentHtml = lineHtml?.[index];
                 return (
                   <span
                     {...recipeProps(
@@ -144,13 +161,22 @@ const feedbackClassName = cx(
                     <span {...recipeProps(cb.lineNumber)} aria-hidden="true">
                       {lineNumber}
                     </span>
-                    <span {...recipeProps(cb.lineContent)}>{line || ' '}</span>
+                    {lineContentHtml ? (
+                      <span
+                        {...recipeProps(cb.lineContent)}
+                        set:html={lineContentHtml}
+                      />
+                    ) : (
+                      <span {...recipeProps(cb.lineContent)}>{line || ' '}</span>
+                    )}
                   </span>
                 );
               })}
             </code>
+          ) : useHighlightedHtml ? (
+            <code {...recipeProps(cb.code, resolvedCodeClassName)} set:html={codeHtml} />
           ) : (
-            <code {...recipeProps(cb.code)}>{code}</code>
+            <code {...recipeProps(cb.code)}>{escapeHtml(code)}</code>
           )}
         </pre>
       </div>

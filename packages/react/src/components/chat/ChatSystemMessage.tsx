@@ -1,14 +1,8 @@
 import type { JSX, ReactNode } from 'react';
-import { chatSystemMessage } from '@var-ui/core';
+import { chatSystemMessage, type ButtonTone } from '@var-ui/core';
 import { recipeProps } from '../utils';
 
-export type ChatSystemMessageTone =
-  | 'neutral'
-  | 'accent'
-  | 'success'
-  | 'warning'
-  | 'danger'
-  | 'info';
+export type ChatSystemMessageTone = ButtonTone;
 
 export type ChatSystemMessageProps = {
   /** Semantic tone. @default neutral */

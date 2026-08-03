@@ -70,9 +70,9 @@ const classicDarkColorValues = {
     focus: '#FFFFFF',
   },
   shadow: { offset: '#FFFFFF' },
-  danger: { default: p.palette['red-3'].var, solid: p.palette['red-3'].var },
-  success: { default: p.palette['green-3'].var, solid: p.palette['green-3'].var },
-  warning: { default: p.palette['amber-3'].var, onSolid: '#000000' },
+  danger: { default: p.color.palette['red-3'].var, solid: p.color.palette['red-3'].var },
+  success: { default: p.color.palette['green-3'].var, solid: p.color.palette['green-3'].var },
+  warning: { default: p.color.palette['amber-3'].var, onSolid: '#000000' },
   info: { default: '#FFFFFF', onSolid: '#000000' },
   overlay: {
     default: color.alpha('#000000', 0.72, 'srgb'),

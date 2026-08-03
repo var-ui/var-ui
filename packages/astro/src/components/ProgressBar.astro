@@ -1,14 +1,13 @@
 ---
-import { progressBar } from '@var-ui/core';
+import { progressBar, type ProgressBarVariantProps } from '@var-ui/core';
 import { recipeProps } from '../utils';
 
-type Props = {
+type Props = ProgressBarVariantProps & {
   value?: number;
   minValue?: number;
   maxValue?: number;
   isIndeterminate?: boolean;
   label?: string;
-  tone?: 'accent' | 'success' | 'warning' | 'danger';
   showValueText?: boolean;
   className?: string;
 };
@@ -20,11 +19,16 @@ const {
   isIndeterminate = false,
   label,
   tone = 'accent',
+  appearance = 'solid',
   showValueText = true,
   className,
 } = Astro.props;
 
-const p = progressBar({ tone, indeterminate: isIndeterminate ? 'true' : 'false' });
+const p = progressBar({
+  tone,
+  appearance,
+  indeterminate: isIndeterminate ? 'true' : 'false',
+});
 const showValue = showValueText && !isIndeterminate;
 const percentage =
   maxValue === minValue ? 0 : ((value - minValue) / (maxValue - minValue)) * 100;

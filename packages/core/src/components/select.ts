@@ -1,6 +1,7 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-import { fieldChrome } from './field';
+import { controlSizeVariants, controlSurfaceSize } from './controlSize';
+import { fieldChrome, dropdownPopoverChrome } from './field';
 
 export const select = typestyles.styles.component(
   'select',
@@ -22,6 +23,10 @@ export const select = typestyles.styles.component(
         value: t.color.text.primary.var,
         syntax: '<color>',
       },
+      placeholderColor: {
+        value: t.color.text.secondary.var,
+        syntax: '<color>',
+      },
       popoverBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
@@ -41,57 +46,81 @@ export const select = typestyles.styles.component(
     });
     // Select has no description/error slots — reuse only the shared root/label chrome.
     const chrome = fieldChrome({ label: v.labelColor.var, description: '', error: '' });
+    const panel = dropdownPopoverChrome({
+      popoverBorder: v.popoverBorder,
+      popoverBackground: v.popoverBackground,
+      itemFocusedBackground: v.itemFocusedBackground,
+      itemSelectedColor: v.itemSelectedColor,
+    });
     return {
-      slots: ['root', 'label', 'trigger', 'triggerIcon', 'popover', 'item'],
-      root: {
-        ...chrome.root,
-        minWidth: '240px',
-      },
-      label: chrome.label,
-      trigger: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: t.space[2].var,
-        textAlign: 'left',
-        border: `1px solid ${v.triggerBorder.var}`,
-        borderRadius: t.radius.md.var,
-        padding: `${t.space[2].var} ${t.space[3].var}`,
-        backgroundColor: v.triggerBackground.var,
-        color: v.triggerForeground.var,
-        fontSize: t.fontSize.md.var,
-        cursor: 'pointer',
-        '&:focus-visible': {
-          outline: `2px solid ${t.color.border.focus.var}`,
-          outlineOffset: '1px',
-          [v.triggerBorder.name]: t.color.border.focus.var,
+      slots: [
+        'root',
+        'label',
+        'trigger',
+        'selectValue',
+        'triggerIcon',
+        'popover',
+        'listbox',
+        'item',
+      ],
+      base: {
+        root: {
+          ...chrome.root,
+          minWidth: '240px',
         },
-      },
-      triggerIcon: {
-        display: 'inline-flex',
-        flexShrink: 0,
-        color: t.color.text.secondary.var,
-      },
-      popover: {
-        border: `1px solid ${v.popoverBorder.var}`,
-        borderRadius: t.radius.md.var,
-        backgroundColor: v.popoverBackground.var,
-        boxShadow: t.shadow.md.var,
-        padding: t.space[1].var,
-      },
-      item: {
-        fontSize: t.fontSize.md.var,
-        padding: `${t.space[2].var} ${t.space[3].var}`,
-        borderRadius: t.radius.sm.var,
-        cursor: 'pointer',
-        '&[data-focused]': {
-          backgroundColor: v.itemFocusedBackground.var,
+        label: chrome.label,
+        trigger: {
+          appearance: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: t.space[2].var,
+          width: '100%',
+          textAlign: 'left',
+          boxSizing: 'border-box',
+          border: `1px solid ${v.triggerBorder.var}`,
+          borderRadius: t.radius.md.var,
+          backgroundColor: v.triggerBackground.var,
+          color: v.triggerForeground.var,
+          cursor: 'pointer',
+          outline: 'none',
+          transition: 'border-color 140ms ease, box-shadow 140ms ease',
+          '&:hover, &[data-hovered]': {
+            borderColor: t.color.border.strong.var,
+          },
+          '&[data-focus-visible]:not([data-pressed])': {
+            outline: `2px solid ${t.color.border.focus.var}`,
+            outlineOffset: '2px',
+          },
+          '&[data-pressed]': {
+            borderColor: t.color.border.focus.var,
+          },
         },
-        '&[data-selected]': {
-          color: v.itemSelectedColor.var,
-          fontWeight: t.fontWeight.semibold.var,
+        selectValue: {
+          flex: 1,
+          minWidth: 0,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          '&[data-placeholder]': {
+            color: v.placeholderColor.var,
+          },
         },
+        triggerIcon: {
+          display: 'inline-flex',
+          flexShrink: 0,
+          color: t.color.text.secondary.var,
+        },
+        popover: panel.popover,
+        listbox: panel.listbox,
+        item: panel.item,
       },
+      variants: {
+        size: controlSizeVariants((size) => ({
+          trigger: controlSurfaceSize(size, { inset: 'compact' }),
+        })),
+      },
+      defaultVariants: { size: 'md' },
     };
   },
   { layer: 'components' },

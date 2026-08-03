@@ -1,7 +1,8 @@
 import type { CSSProperties, JSX, ReactNode } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link as AriaLink } from 'react-aria-components';
-import { positionTocIndicator, toc as tocStyles, type TocHeading } from '@var-ui/core';
+import { positionTocIndicator, type TocHeading } from '@var-ui/core/internal';
+import { toc as tocStyles } from '@var-ui/core';
 import { useTocSpy } from '../hooks/useTocSpy';
 import { recipeProps } from './utils';
 
@@ -72,7 +73,6 @@ function TocList({
 
   return (
     <ol ref={listRef} {...recipeProps(s.list)}>
-      <span {...recipeProps(s.indicator)} data-toc-indicator aria-hidden="true" />
       {children ??
         (headings ?? []).map((heading) => (
           <TocItem

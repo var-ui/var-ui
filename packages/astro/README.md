@@ -20,11 +20,11 @@ or `@var-ui/react`.
 
 Recipe CSS must be extracted at build time with
 [`@typestyles/vite`](https://github.com/type-styles/typestyles). Add a side-effect
-entry that imports `@var-ui/core`, then point the plugin at it:
+entry that imports `@var-ui/core/styles`, then point the plugin at it:
 
 ```ts
 // typestyles-entry.ts
-import '@var-ui/core';
+import '@var-ui/core/styles';
 ```
 
 ```js

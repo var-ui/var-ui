@@ -35,6 +35,68 @@ export function fieldChrome(colors: FieldChromeColors) {
   } as const;
 }
 
+export type DropdownPopoverVarRef = {
+  name: string;
+  var: string;
+};
+
+export type DropdownPopoverVars = {
+  popoverBorder: DropdownPopoverVarRef;
+  popoverBackground: DropdownPopoverVarRef;
+  itemFocusedBackground: DropdownPopoverVarRef;
+  itemSelectedColor: DropdownPopoverVarRef;
+};
+
+/**
+ * Shared popover panel, listbox, and option chrome for Select-like controls.
+ * Channel defaults are declared on `popover` so portaled listboxes still resolve
+ * component vars outside the field root (same pattern as `menu`).
+ */
+export function dropdownPopoverChrome(v: DropdownPopoverVars) {
+  return {
+    popover: {
+      [v.popoverBorder.name]: t.color.border.default.var,
+      [v.popoverBackground.name]: t.color.background.surface.var,
+      [v.itemFocusedBackground.name]: t.color.background.subtle.var,
+      [v.itemSelectedColor.name]: t.color.accent.default.var,
+      zIndex: t.zIndex.dropdown.var,
+      boxSizing: 'border-box',
+      width: 'var(--trigger-width)',
+      minWidth: 'var(--trigger-width)',
+      maxHeight: '16rem',
+      overflow: 'hidden',
+      border: `1px solid ${v.popoverBorder.var}`,
+      borderRadius: t.radius.md.var,
+      backgroundColor: v.popoverBackground.var,
+      boxShadow: t.shadow.md.var,
+      padding: t.space[1].var,
+      outline: 'none',
+    },
+    listbox: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: t.space[1].var,
+      maxHeight: 'calc(16rem - 2 * var(--var-ui-space-1))',
+      overflowY: 'auto',
+      outline: 'none',
+    },
+    item: {
+      fontSize: t.fontSize.md.var,
+      padding: `${t.space[2].var} ${t.space[3].var}`,
+      borderRadius: t.radius.sm.var,
+      cursor: 'pointer',
+      outline: 'none',
+      '&[data-focused], &[data-hovered]': {
+        backgroundColor: v.itemFocusedBackground.var,
+      },
+      '&[data-selected]': {
+        color: v.itemSelectedColor.var,
+        fontWeight: t.fontWeight.semibold.var,
+      },
+    },
+  } as const;
+}
+
 /**
  * Standalone field chrome for custom inputs that aren't one of the built-in
  * field recipes — label, help text, and validation message around any control.

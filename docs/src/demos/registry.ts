@@ -32,6 +32,10 @@ import { snippets as radioGroupDefaultSnippets } from './radio-group/default/sni
 import { snippets as switchDefaultSnippets } from './switch/default/snippets';
 import { snippets as selectDefaultSnippets } from './select/default/snippets';
 import { snippets as selectOptionsSnippets } from './select/options/snippets';
+import { snippets as comboboxDefaultSnippets } from './combobox/default/snippets';
+import { snippets as comboboxFieldSnippets } from './combobox/field/snippets';
+import { snippets as typeaheadDefaultSnippets } from './typeahead/default/snippets';
+import { snippets as typeaheadFieldSnippets } from './typeahead/field/snippets';
 import { snippets as tabsDefaultSnippets } from './tabs/default/snippets';
 import { snippets as dialogDefaultSnippets } from './dialog/default/snippets';
 import { snippets as layoutDefaultSnippets } from './layout/default/snippets';
@@ -82,6 +86,10 @@ export const DEMO_IDS = [
   'switch.default',
   'select.default',
   'select.options',
+  'combobox.default',
+  'combobox.field',
+  'typeahead.default',
+  'typeahead.field',
   'tabs.default',
   'dialog.default',
   'layout.default',
@@ -131,6 +139,10 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'switch.default': switchDefaultSnippets,
   'select.default': selectDefaultSnippets,
   'select.options': selectOptionsSnippets,
+  'combobox.default': comboboxDefaultSnippets,
+  'combobox.field': comboboxFieldSnippets,
+  'typeahead.default': typeaheadDefaultSnippets,
+  'typeahead.field': typeaheadFieldSnippets,
   'tabs.default': tabsDefaultSnippets,
   'dialog.default': dialogDefaultSnippets,
   'layout.default': layoutDefaultSnippets,
@@ -180,6 +192,10 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'switch.default': () => import('./switch/default/react'),
   'select.default': () => import('./select/default/react'),
   'select.options': () => import('./select/options/react'),
+  'combobox.default': () => import('./combobox/default/react'),
+  'combobox.field': () => import('./combobox/field/react'),
+  'typeahead.default': () => import('./typeahead/default/react'),
+  'typeahead.field': () => import('./typeahead/field/react'),
   'tabs.default': () => import('./tabs/default/react'),
   'dialog.default': () => import('./dialog/default/react'),
   'layout.default': () => import('./layout/default/react'),
@@ -360,6 +376,26 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'select.options',
     snippets: demoSnippets['select.options'],
     react: reactDemoLoaders['select.options'],
+  },
+  'combobox.default': {
+    id: 'combobox.default',
+    snippets: demoSnippets['combobox.default'],
+    react: reactDemoLoaders['combobox.default'],
+  },
+  'combobox.field': {
+    id: 'combobox.field',
+    snippets: demoSnippets['combobox.field'],
+    react: reactDemoLoaders['combobox.field'],
+  },
+  'typeahead.default': {
+    id: 'typeahead.default',
+    snippets: demoSnippets['typeahead.default'],
+    react: reactDemoLoaders['typeahead.default'],
+  },
+  'typeahead.field': {
+    id: 'typeahead.field',
+    snippets: demoSnippets['typeahead.field'],
+    react: reactDemoLoaders['typeahead.field'],
   },
   'tabs.default': {
     id: 'tabs.default',

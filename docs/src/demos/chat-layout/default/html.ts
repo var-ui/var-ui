@@ -6,6 +6,7 @@ import {
   chatMessage,
   chatMessageBubble,
   chatMessageList,
+  resolveButtonProps,
 } from '@var-ui/core';
 import { recipeProps } from '../../../lib/recipeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
@@ -78,7 +79,7 @@ export function render(): string {
     'button',
     {
       type: 'button',
-      ...recipeProps(button({ intent: 'primary' })),
+      ...recipeProps(button(resolveButtonProps({ intent: 'primary' }))),
       'aria-label': 'Send message',
       disabled: true,
     },

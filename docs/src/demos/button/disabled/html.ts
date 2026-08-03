@@ -1,4 +1,4 @@
-import { button, stack } from '@var-ui/core';
+import { button, resolveButtonProps, stack } from '@var-ui/core';
 import { recipeProps } from '../../../lib/recipeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
@@ -13,7 +13,11 @@ export function render(): string {
   );
   const disabledPrimary = serializeHtmlTag(
     'button',
-    { type: 'button', disabled: true, ...recipeProps(button({ intent: 'primary' })) },
+    {
+      type: 'button',
+      disabled: true,
+      ...recipeProps(button(resolveButtonProps({ intent: 'primary' }))),
+    },
     'Disabled primary',
   );
   return serializeHtmlTag('div', stackRp, `${disabled}${disabledPrimary}`);

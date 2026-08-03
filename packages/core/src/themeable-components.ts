@@ -22,12 +22,14 @@ import { chatToolCalls } from './components/chat/chatToolCalls';
 import { checkbox } from './components/checkbox';
 import { codeBlock } from './components/codeBlock';
 import { collapsible } from './components/collapsible';
+import { combobox } from './components/combobox';
 import { commandPalette } from './components/commandPalette';
 import { dateInput } from './components/dateInput';
 import { dateRangeInput } from './components/dateRangeInput';
 import { dateTimeInput } from './components/dateTimeInput';
 import { descriptionList } from './components/descriptionList';
 import { dialog } from './components/dialog';
+import { drawer } from './components/drawer';
 import { divider } from './components/divider';
 import { emptyState } from './components/emptyState';
 import { field } from './components/field';
@@ -61,6 +63,7 @@ import { proseContent } from './components/proseContent';
 import { radio } from './components/radio';
 import { resizeHandle } from './components/resizeHandle';
 import { section } from './components/section';
+import { searchInput } from './components/searchInput';
 import { segmentedControl } from './components/segmentedControl';
 import { select } from './components/select';
 import { sideNav } from './components/sideNav';
@@ -118,12 +121,14 @@ export const themeableComponents = {
   checkbox,
   codeBlock,
   collapsible,
+  combobox,
   commandPalette,
   dateInput,
   dateRangeInput,
   dateTimeInput,
   descriptionList,
   dialog,
+  drawer,
   divider,
   emptyState,
   field,
@@ -156,6 +161,7 @@ export const themeableComponents = {
   proseContent,
   radio,
   resizeHandle,
+  searchInput,
   section,
   segmentedControl,
   select,

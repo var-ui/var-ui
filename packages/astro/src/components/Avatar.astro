@@ -1,15 +1,19 @@
 ---
-import { avatar, statusDot } from '@var-ui/core';
+import {
+  avatar,
+  statusDot,
+  type AvatarStatusTone,
+  type AvatarVariantProps,
+} from '@var-ui/core';
 import { recipeProps } from '../utils';
 
-type Props = {
+interface Props extends AvatarVariantProps {
   src?: string;
   alt?: string;
   name?: string;
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  status?: 'success' | 'warning' | 'danger' | 'neutral';
+  status?: AvatarStatusTone;
   className?: string;
-};
+}
 
 function initialsOf(name: string): string {
   return name

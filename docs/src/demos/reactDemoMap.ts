@@ -33,6 +33,10 @@ import RadioGroupDefault from './radio-group/default/react';
 import SwitchDefault from './switch/default/react';
 import SelectDefault from './select/default/react';
 import SelectOptions from './select/options/react';
+import ComboboxDefault from './combobox/default/react';
+import ComboboxField from './combobox/field/react';
+import TypeaheadDefault from './typeahead/default/react';
+import TypeaheadField from './typeahead/field/react';
 import TabsDefault from './tabs/default/react';
 import DialogDefault from './dialog/default/react';
 import LayoutDefault from './layout/default/react';
@@ -82,6 +86,10 @@ export const reactDemoMap = {
   'switch.default': SwitchDefault,
   'select.default': SelectDefault,
   'select.options': SelectOptions,
+  'combobox.default': ComboboxDefault,
+  'combobox.field': ComboboxField,
+  'typeahead.default': TypeaheadDefault,
+  'typeahead.field': TypeaheadField,
   'tabs.default': TabsDefault,
   'dialog.default': DialogDefault,
   'layout.default': LayoutDefault,

@@ -2,11 +2,14 @@ import { keyframes } from 'typestyles';
 import { typestyles } from '../runtime';
 import { atReducedMotion } from '../theme-conditions';
 import { designTokens as t } from '../tokens';
+import { semanticTone, type ProgressBarAppearance, type ProgressBarTone } from './semanticTone';
 
 const slide = keyframes.create('var-ui-progress-slide', {
   from: { transform: 'translateX(-100%)' },
   to: { transform: 'translateX(400%)' },
 });
+
+const toneKeys: ProgressBarTone[] = ['accent', 'success', 'warning', 'danger'];
 
 /**
  * Linear progress. Fill width is set inline by the React wrapper
@@ -46,11 +49,16 @@ export const progressBar = typestyles.styles.component(
         },
       },
       variants: {
-        tone: {
-          accent: {},
-          success: { root: { [v.fillColor.name]: t.color.success.solid.var } },
-          warning: { root: { [v.fillColor.name]: t.color.warning.default.var } },
-          danger: { root: { [v.fillColor.name]: t.color.danger.solid.var } },
+        tone: Object.fromEntries(
+          toneKeys.map((key) => [key, { root: { [v.fillColor.name]: semanticTone[key].solidBg } }]),
+        ) as Record<ProgressBarTone, { root: Record<string, string> }>,
+        appearance: {
+          solid: {},
+          subtle: {
+            fill: {
+              backgroundColor: `color-mix(in srgb, ${v.fillColor.var} 55%, ${t.color.background.subtle.var})`,
+            },
+          },
         },
         indeterminate: {
           true: {
@@ -67,8 +75,24 @@ export const progressBar = typestyles.styles.component(
           false: {},
         },
       },
-      defaultVariants: { tone: 'accent', indeterminate: 'false' },
+      defaultVariants: { tone: 'accent', appearance: 'solid', indeterminate: 'false' },
     };
   },
   { layer: 'components' },
 );
+
+export type ProgressBarRecipeProps = NonNullable<Parameters<typeof progressBar>[0]>;
+
+export type ProgressBarVariantProps = {
+  tone?: ProgressBarTone;
+  appearance?: ProgressBarAppearance;
+};
+
+export const progressBarVariantPropDocs = [
+  { name: 'tone', type: 'ProgressBarTone', required: false },
+  { name: 'appearance', type: 'ProgressBarAppearance', required: false },
+] as const satisfies ReadonlyArray<{
+  name: keyof ProgressBarVariantProps;
+  type: string;
+  required: false;
+}>;

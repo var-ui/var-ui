@@ -1,12 +1,13 @@
 import type { JSX } from 'react';
 import { FieldError, Input, Label, TextField as AriaTextField } from 'react-aria-components';
-import { textField } from '@var-ui/core';
+import { textField, type ControlSize } from '@var-ui/core';
 import type { BaseTextFieldProps } from './utils';
 import { recipeProps } from './utils';
 
 export type TextFieldProps = BaseTextFieldProps & {
   /** Placeholder text shown when the input is empty. */
   placeholder?: string;
+  size?: ControlSize;
 };
 
 export function TextField({
@@ -14,9 +15,10 @@ export function TextField({
   description,
   errorMessage,
   placeholder,
+  size = 'md',
   ...props
 }: TextFieldProps): JSX.Element {
-  const tf = textField();
+  const tf = textField({ size });
   return (
     <AriaTextField {...props} {...recipeProps(tf.root)}>
       {label ? <Label {...recipeProps(tf.label)}>{label}</Label> : null}

@@ -1,4 +1,5 @@
 import { generateLinearScale } from 'typestyles/token-scale';
+import { tokens } from '../declare';
 import type { DesignTokens } from '../types';
 
 const RADIUS_STEPS = [1, 2, 3, 4] as const;
@@ -20,4 +21,5 @@ export const radius = {
   none: '0',
   ...zipPx(RADIUS_NAMES, radiusScale),
   full: '9999px',
+  navItem: tokens.radius.md.var,
 } satisfies DesignTokens['radius'];

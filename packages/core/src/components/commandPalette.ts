@@ -1,13 +1,16 @@
 import { typestyles } from '../runtime';
+import { atDarkMode } from '../theme-conditions';
 import { designTokens as t } from '../tokens';
 
 /**
  * Command / search palette overlay (⌘K-style).
  *
+ * Built on native `<dialog>` with `showModal()`. Style the shell via `root`
+ * (`::backdrop` included) and the surface panel via `dialog`. Toggle panel
+ * enter animation with `data-open` on the panel element.
+ *
  * Multi-part UI: use the **slots** API (`commandPalette().dialog`) rather than flat
  * `component({ key: true })`, which is meant for optional style toggles on one surface.
- *
- * Pass `{ open: true }` when the overlay is visible; default is closed.
  */
 export const commandPalette = typestyles.styles.component(
   'command-palette',
@@ -42,11 +45,19 @@ export const commandPalette = typestyles.styles.component(
         syntax: '<color>',
       },
       resultForeground: {
-        value: t.color.text.primary.var,
+        value: t.color.navItem.foreground.var,
         syntax: '<color>',
       },
       resultHoverBackground: {
-        value: t.color.accent.subtle.var,
+        value: t.color.navItem.hoverBackground.var,
+        syntax: '<color>',
+      },
+      resultSelectedBackground: {
+        value: t.color.navItem.selectedBackground.var,
+        syntax: '<color>',
+      },
+      resultSelectedForeground: {
+        value: t.color.navItem.selectedForeground.var,
         syntax: '<color>',
       },
       resultMetaColor: {
@@ -69,7 +80,6 @@ export const commandPalette = typestyles.styles.component(
     return {
       slots: [
         'root',
-        'backdrop',
         'dialog',
         'inputRow',
         'inputIcon',
@@ -92,31 +102,41 @@ export const commandPalette = typestyles.styles.component(
           [v.inputIconColor.name]: t.color.text.placeholder.var,
           [v.inputForeground.name]: t.color.text.primary.var,
           [v.inputPlaceholder.name]: t.color.text.placeholder.var,
-          [v.resultForeground.name]: t.color.text.primary.var,
-          [v.resultHoverBackground.name]: t.color.accent.subtle.var,
+          [v.resultForeground.name]: t.color.navItem.foreground.var,
+          [v.resultHoverBackground.name]: t.color.navItem.hoverBackground.var,
+          [v.resultSelectedBackground.name]: t.color.navItem.selectedBackground.var,
+          [v.resultSelectedForeground.name]: t.color.navItem.selectedForeground.var,
           [v.resultMetaColor.name]: t.color.text.secondary.var,
           [v.markBackground.name]: t.color.accent.subtle.var,
           [v.markForeground.name]: t.color.text.primary.var,
           [v.emptyColor.name]: t.color.text.secondary.var,
-          position: 'fixed',
-          inset: 0,
-          zIndex: t.zIndex.overlay.var,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          padding: `max(12vh, 72px) ${t.space[4].var} ${t.space[5].var}`,
+          // Closed <dialog> is display:none in the UA stylesheet; root layout must not
+          // override that or the element stays in the hit-test tree and blocks clicks.
+          display: 'none',
           pointerEvents: 'none',
-          opacity: 0,
-          visibility: 'hidden',
-          transition: t.transition.overlayFade.var,
-        },
-        backdrop: {
-          position: 'absolute',
-          inset: 0,
-          backgroundColor: v.backdropBackground.var,
-          transition: t.transition.backdrop.var,
-          '@supports (backdrop-filter: blur(1px))': {
-            backdropFilter: 'blur(10px)',
+          '&[open]': {
+            display: 'flex',
+            pointerEvents: 'auto',
+            border: 'none',
+            margin: 0,
+            padding: `max(12vh, 72px) ${t.space[4].var} ${t.space[5].var}`,
+            maxWidth: 'none',
+            maxHeight: 'none',
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'transparent',
+            color: 'inherit',
+            zIndex: t.zIndex.overlay.var,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            overflow: 'visible',
+            '&::backdrop': {
+              backgroundColor: v.backdropBackground.var,
+              transition: t.transition.backdrop.var,
+              '@supports (backdrop-filter: blur(1px))': {
+                backdropFilter: 'blur(10px)',
+              },
+            },
           },
         },
         dialog: {
@@ -134,6 +154,12 @@ export const commandPalette = typestyles.styles.component(
           overflow: 'hidden',
           opacity: 0,
           transition: t.transition.panelEnter.var,
+          '&[data-open]': {
+            opacity: 1,
+          },
+          ...atDarkMode({
+            boxShadow: 'none',
+          }),
         },
         inputRow: {
           flexShrink: 0,
@@ -168,7 +194,7 @@ export const commandPalette = typestyles.styles.component(
           minHeight: 0,
           overflowY: 'auto',
           margin: 0,
-          padding: `${t.space[1].var} 0 ${t.space[2].var}`,
+          padding: t.space[2].var,
           listStyle: 'none',
         },
         result: {
@@ -180,12 +206,14 @@ export const commandPalette = typestyles.styles.component(
           textDecoration: 'none',
           color: v.resultForeground.var,
           transition: t.transition.surfaceFast.var,
+          borderRadius: t.radius.navItem.var,
           '&:hover': {
             backgroundColor: v.resultHoverBackground.var,
           },
         },
         resultLinkActive: {
-          backgroundColor: v.resultHoverBackground.var,
+          backgroundColor: v.resultSelectedBackground.var,
+          color: v.resultSelectedForeground.var,
         },
         resultTitle: {
           display: 'block',
@@ -218,11 +246,6 @@ export const commandPalette = typestyles.styles.component(
         open: {
           false: {},
           true: {
-            root: {
-              pointerEvents: 'auto',
-              opacity: 1,
-              visibility: 'visible',
-            },
             dialog: {
               opacity: 1,
             },

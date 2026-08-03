@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { controlSizeMetrics, controlSizeVariants } from './controlSize';
 
 const TAB_LIST_SLOTS = ['root', 'tab', 'indicator', 'menu', 'menuTrigger'] as const;
 
@@ -98,7 +99,8 @@ export const tabList = typestyles.styles.component<typeof TAB_LIST_SLOTS, TabLis
           cursor: 'pointer',
           outline: 'none',
           whiteSpace: 'nowrap',
-          padding: `${t.space[2].var} ${t.space[3].var}`,
+          paddingBlock: 0,
+          paddingInline: t.space[3].var,
           '&:hover': {
             backgroundColor: v.tabHoverBackground.var,
           },
@@ -154,7 +156,8 @@ export const tabList = typestyles.styles.component<typeof TAB_LIST_SLOTS, TabLis
           cursor: 'pointer',
           outline: 'none',
           whiteSpace: 'nowrap',
-          padding: `${t.space[2].var} ${t.space[3].var}`,
+          paddingBlock: 0,
+          paddingInline: t.space[3].var,
           '&:hover': {
             backgroundColor: v.tabHoverBackground.var,
           },
@@ -169,36 +172,18 @@ export const tabList = typestyles.styles.component<typeof TAB_LIST_SLOTS, TabLis
         },
       },
       variants: {
-        size: {
-          sm: {
-            tab: {
-              minHeight: '2rem',
-              fontSize: t.fontSize.sm.var,
-              padding: `${t.space[1].var} ${t.space[2].var}`,
-            },
-            menuTrigger: {
-              minHeight: '2rem',
-              fontSize: t.fontSize.sm.var,
-              padding: `${t.space[1].var} ${t.space[2].var}`,
-            },
+        size: controlSizeVariants((size) => ({
+          tab: {
+            minHeight: controlSizeMetrics[size].height,
+            fontSize: controlSizeMetrics[size].fontSize,
+            paddingInline: controlSizeMetrics[size].paddingInline,
           },
-          md: {
-            tab: { minHeight: '2.5rem' },
-            menuTrigger: { minHeight: '2.5rem' },
+          menuTrigger: {
+            minHeight: controlSizeMetrics[size].height,
+            fontSize: controlSizeMetrics[size].fontSize,
+            paddingInline: controlSizeMetrics[size].paddingInline,
           },
-          lg: {
-            tab: {
-              minHeight: '3rem',
-              fontSize: t.fontSize.lg.var,
-              padding: `${t.space[3].var} ${t.space[4].var}`,
-            },
-            menuTrigger: {
-              minHeight: '3rem',
-              fontSize: t.fontSize.lg.var,
-              padding: `${t.space[3].var} ${t.space[4].var}`,
-            },
-          },
-        },
+        })),
       },
       defaultVariants: { size: 'md' },
     };

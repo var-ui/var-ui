@@ -1,0 +1,103 @@
+---
+import { proseContent } from '@var-ui/core/internal';
+import { recipeProps } from '../lib/recipeProps';
+import { getHtmlApiDoc } from '../lib/html-api-docs';
+
+type Props = {
+  slug: string;
+};
+
+const { slug } = Astro.props;
+const htmlDoc = getHtmlApiDoc(slug);
+const tableWrap = recipeProps(proseContent().tableWrap);
+---
+
+<div class="component-styles-panel">
+  {
+    htmlDoc ? (
+      <>
+        <p>
+          Theme this component via <code>createDesignTheme({'{'} components: {'{'} {htmlDoc.recipeName}: … {'}'} {'}'})</code>.
+          See <a href="/theming/customize">Customize</a> for the full override API.
+        </p>
+        <p>
+          Public classes and data attributes from <code>@var-ui/core</code>{' '}
+          <code>{htmlDoc.recipeName}()</code>.
+        </p>
+        {
+          htmlDoc.parts.map((part) => (
+            <div>
+              {htmlDoc.parts.length > 1 ? <h2 id={`styles-${part.part}`}>{part.part}</h2> : null}
+              <div {...tableWrap}>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Example</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      part.className ? (
+                        <tr>
+                          <td>
+                            <code>class</code>
+                          </td>
+                          <td>
+                            <code>{part.className}</code>
+                          </td>
+                          <td>Root / part class name</td>
+                        </tr>
+                      ) : null
+                    }
+                    {
+                      part.attributes.map((attr) => (
+                        <tr>
+                          <td>
+                            <code>{attr.name}</code>
+                          </td>
+                          <td>{attr.example ? <code>{attr.example}</code> : '—'}</td>
+                          <td>{attr.description ?? '—'}</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))
+        }
+        {
+          htmlDoc.note ? (
+            <p>
+              <em>{htmlDoc.note}</em>
+            </p>
+          ) : null
+        }
+      </>
+    ) : (
+      <p>
+        No dedicated style recipe table for <code>{slug}</code>. Check the HTML demo markup and{' '}
+        <code>@var-ui/core</code> recipes, or see <a href="/theming/customize">Customize</a> for
+        theme overrides.
+      </p>
+    )
+  }
+</div>
+
+<style>
+  .component-styles-panel :global(h2) {
+    margin-block: 1.75rem 0.75rem;
+    font-size: 1.15rem;
+  }
+
+  .component-styles-panel :global(p) {
+    margin-block: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .component-styles-panel :global(code) {
+    font-size: 0.9em;
+  }
+</style>

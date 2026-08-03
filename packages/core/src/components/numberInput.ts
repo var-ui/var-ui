@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { controlSizeVariants, controlSurfaceSize } from './controlSize';
 import { fieldChrome } from './field';
 
 export const numberInput = typestyles.styles.component(
@@ -46,57 +47,64 @@ export const numberInput = typestyles.styles.component(
     });
     return {
       slots: ['root', 'label', 'group', 'input', 'stepper', 'description', 'error'],
-      root: {
-        ...chrome.root,
-        minWidth: '240px',
-      },
-      label: chrome.label,
-      group: {
-        display: 'flex',
-        alignItems: 'stretch',
-      },
-      input: {
-        flex: 1,
-        minWidth: 0,
-        border: `1px solid ${v.inputBorder.var}`,
-        borderRadius: `${t.radius.md.var} 0 0 ${t.radius.md.var}`,
-        padding: `${t.space[2].var} ${t.space[3].var}`,
-        fontSize: t.fontSize.md.var,
-        backgroundColor: v.inputBackground.var,
-        color: v.inputForeground.var,
-        '&:focus': {
-          outline: `2px solid ${t.color.border.focus.var}`,
-          outlineOffset: '1px',
-          [v.inputBorder.name]: t.color.border.focus.var,
+      base: {
+        root: {
+          ...chrome.root,
+          minWidth: '240px',
         },
-      },
-      stepper: {
-        display: 'flex',
-        flexDirection: 'column',
-        border: `1px solid ${v.inputBorder.var}`,
-        borderInlineStart: 'none',
-        borderRadius: `0 ${t.radius.md.var} ${t.radius.md.var} 0`,
-        overflow: 'hidden',
-        '& button': {
-          appearance: 'none',
-          border: 'none',
-          backgroundColor: v.stepperBackground.var,
-          color: v.stepperForeground.var,
-          padding: `${t.space[1].var} ${t.space[2].var}`,
-          cursor: 'pointer',
-          fontSize: t.fontSize.sm.var,
-          lineHeight: 1,
-          '&:hover': {
-            backgroundColor: t.color.background.subtle.var,
-          },
-          '&:focus-visible': {
+        label: chrome.label,
+        group: {
+          display: 'flex',
+          alignItems: 'stretch',
+        },
+        input: {
+          flex: 1,
+          minWidth: 0,
+          boxSizing: 'border-box',
+          border: `1px solid ${v.inputBorder.var}`,
+          borderRadius: `${t.radius.md.var} 0 0 ${t.radius.md.var}`,
+          backgroundColor: v.inputBackground.var,
+          color: v.inputForeground.var,
+          '&:focus': {
             outline: `2px solid ${t.color.border.focus.var}`,
-            outlineOffset: '-2px',
+            outlineOffset: '1px',
+            [v.inputBorder.name]: t.color.border.focus.var,
           },
         },
+        stepper: {
+          display: 'flex',
+          flexDirection: 'column',
+          border: `1px solid ${v.inputBorder.var}`,
+          borderInlineStart: 'none',
+          borderRadius: `0 ${t.radius.md.var} ${t.radius.md.var} 0`,
+          overflow: 'hidden',
+          '& button': {
+            appearance: 'none',
+            border: 'none',
+            backgroundColor: v.stepperBackground.var,
+            color: v.stepperForeground.var,
+            padding: `${t.space[1].var} ${t.space[2].var}`,
+            cursor: 'pointer',
+            fontSize: t.fontSize.sm.var,
+            lineHeight: 1,
+            '&:hover': {
+              backgroundColor: t.color.background.subtle.var,
+            },
+            '&:focus-visible': {
+              outline: `2px solid ${t.color.border.focus.var}`,
+              outlineOffset: '-2px',
+            },
+          },
+        },
+        description: chrome.description,
+        error: chrome.error,
       },
-      description: chrome.description,
-      error: chrome.error,
+      variants: {
+        size: controlSizeVariants((size) => ({
+          input: controlSurfaceSize(size, { inset: 'compact' }),
+        })),
+      },
+      defaultVariants: { size: 'md' },
     };
   },
   { layer: 'components' },

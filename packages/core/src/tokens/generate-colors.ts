@@ -2,7 +2,7 @@ import { color } from 'typestyles/color';
 import { contrastRatio, generateRamp, parseColor } from 'typestyles/color-scale';
 import type { DesignColorValues, DesignTokens } from './types';
 import { darkSyntaxValues, lightSyntaxValues } from './defaults/color';
-import { FAMILY_SPECS } from './palette';
+import { paletteHue } from './defaults/color/palette';
 
 export type NeutralStyle = 'neutral' | 'cool' | 'warm';
 export type ColorContrast = 'standard' | 'high';
@@ -29,13 +29,20 @@ export type GenerateColorsResult = {
  */
 const ACCENT_CHROMA_MIN = 0.08;
 const NEUTRAL_CHROMA = 0.015;
+/** Peak chroma for semantic ramps — matches step 5–6 in baseColorPalettes. */
+const SEMANTIC_CHROMA = {
+  danger: 0.21,
+  success: 0.19,
+  warning: 0.17,
+  info: 0.22,
+} as const;
 const WHITE = color.oklch('100%', 0, 0);
 
 type Ramp = readonly string[];
 
 /**
  * Color leaves sourced from palette ramp steps in light/dark mapping.
- * Derived tokens (`onAccent`, `shadow`, `syntax`, …) are computed separately.
+ * Derived tokens (`onAccent`, `syntax`, …) are computed separately.
  */
 type RampMappedColor = {
   background: DesignTokens['color']['background'];
@@ -60,10 +67,20 @@ type LightSlotMap = {
  * `danger.solid` / `success.solid` which use step 7 (matches default/forest/rose themes).
  */
 const LIGHT_SLOTS = {
-  background: { app: 1, surface: 1, subtle: 2, elevated: 1, popover: 1, muted: 2 },
+  background: {
+    app: 1,
+    surface: 1,
+    subtle: 2,
+    elevated: 1,
+    popover: 1,
+    muted: 2,
+    secondary: 2,
+    tertiary: 3,
+    info: 1,
+  },
   text: { primary: 10, secondary: 7 },
   accent: { default: 7, hover: 8 },
-  border: { default: 4, strong: 6, focus: 5 },
+  border: { default: 4, strong: 5, focus: 5, subtle: 2 },
   danger: { default: 7, solid: 8 },
   success: { default: 7, solid: 8 },
   warning: { default: 7 },
@@ -111,6 +128,9 @@ function mapLightColors(
     elevated: rampAt(neutral, slots.background.elevated),
     popover: rampAt(neutral, slots.background.popover),
     muted: rampAt(neutral, slots.background.muted),
+    secondary: rampAt(neutral, slots.background.secondary),
+    tertiary: rampAt(neutral, slots.background.tertiary),
+    info: rampAt(info, slots.background.info),
   };
 
   const accentDefault = rampAt(accent, slots.accent.default);
@@ -134,8 +154,8 @@ function mapLightColors(
       default: rampAt(neutral, slots.border.default),
       strong: rampAt(neutral, slots.border.strong),
       focus: rampAt(accent, slots.border.focus),
+      subtle: rampAt(neutral, slots.border.subtle),
     },
-    shadow: { offset: color.alpha(background.subtle, 0.5, 'oklch') },
     danger: {
       default: rampAt(danger, slots.danger.default),
       solid: rampAt(danger, slots.danger.solid),
@@ -181,6 +201,9 @@ function mapDarkColors(
     elevated: rampAt(neutral, m(slots.background.elevated)),
     popover: rampAt(neutral, m(slots.background.popover)),
     muted: rampAt(neutral, m(slots.background.muted)),
+    secondary: rampAt(neutral, m(slots.background.secondary)),
+    tertiary: rampAt(neutral, m(slots.background.tertiary)),
+    info: rampAt(info, m(slots.background.info)),
   };
 
   const accentDefault = rampAt(accent, m(slots.accent.default));
@@ -206,8 +229,8 @@ function mapDarkColors(
       default: rampAt(neutral, m(slots.border.default)),
       strong: rampAt(neutral, m(slots.border.strong)),
       focus: rampAt(accent, m(slots.border.focus)),
+      subtle: rampAt(neutral, m(slots.border.subtle)),
     },
-    shadow: { offset: color.alpha(textPrimary, 0.2, 'oklch') },
     danger: {
       default: rampAt(danger, m(slots.danger.default)),
       solid: rampAt(danger, 7),
@@ -297,23 +320,23 @@ export function generateColors(input: GenerateColorsInput): GenerateColorsResult
   const neutralRamp = generateRamp({ hue: neutralHue, chroma: NEUTRAL_CHROMA, ...rampOpts });
   const accentRamp = generateRamp({ hue: accentOklch.h, chroma: accentChroma, ...rampOpts });
   const dangerRamp = generateRamp({
-    hue: FAMILY_SPECS.red.h,
-    chroma: FAMILY_SPECS.red.cMax,
+    hue: paletteHue.red,
+    chroma: SEMANTIC_CHROMA.danger,
     ...rampOpts,
   });
   const successRamp = generateRamp({
-    hue: FAMILY_SPECS.green.h,
-    chroma: FAMILY_SPECS.green.cMax,
+    hue: paletteHue.green,
+    chroma: SEMANTIC_CHROMA.success,
     ...rampOpts,
   });
   const warningRamp = generateRamp({
-    hue: FAMILY_SPECS.amber.h,
-    chroma: FAMILY_SPECS.amber.cMax,
+    hue: paletteHue.amber,
+    chroma: SEMANTIC_CHROMA.warning,
     ...rampOpts,
   });
   const infoRamp = generateRamp({
-    hue: FAMILY_SPECS.violet.h,
-    chroma: FAMILY_SPECS.violet.cMax,
+    hue: paletteHue.violet,
+    chroma: SEMANTIC_CHROMA.info,
     ...rampOpts,
   });
 

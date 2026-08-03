@@ -17,10 +17,12 @@ describe('themeableComponents', () => {
           'layoutUtility',
           'text',
           'namedContainerQuery',
-          'codeHljsScope',
           'getLayoutShellVars',
           'layoutContentWidthAssignment',
           'layoutShellPaddingAssignments',
+          'resolveButtonProps',
+          'controlSurfaceSize',
+          'controlSizeVariants',
         ].includes(name) &&
         !name.endsWith('Chrome') &&
         !name.startsWith('create'),
@@ -47,8 +49,8 @@ describe('themeableComponents', () => {
     const ok: ButtonOverride = {
       base: { borderRadius: '999px' },
       variants: {
-        intent: {
-          primary: { textTransform: 'uppercase' },
+        tone: {
+          accent: { textTransform: 'uppercase' },
         },
       },
     };
@@ -99,8 +101,8 @@ describe('themeableComponents', () => {
       button: (t) => ({
         base: { boxShadow: t.shadow.md.var, borderRadius: t.radius.lg.var },
         variants: {
-          intent: {
-            primary: { textTransform: 'uppercase' },
+          tone: {
+            accent: { textTransform: 'uppercase' },
           },
         },
       }),

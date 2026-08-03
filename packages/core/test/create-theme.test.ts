@@ -1,11 +1,12 @@
 import { describe, it, expect, beforeEach } from 'vite-plus/test';
 import { getRegisteredCss, reset } from 'typestyles';
-import { createDesignTheme, DEFAULT_THEME_NAME, SURFACE_ATTRIBUTE } from '../src/create-theme';
+import { createDesignTheme } from '../src/create-theme';
+import { DEFAULT_THEME_NAME, SURFACE_ATTRIBUTE } from '../src/theme-constants';
 import { extendTokens, resetExtendTokenRegistry } from '../src/extend-tokens';
 import { resetRegisteredFontFaces } from '../src/fonts/register-font-face';
 import { registerGlobals } from '../src/document-globals';
 import { styles } from '../src/runtime';
-import { button } from '../src/components/button';
+import { button, resolveButtonProps } from '../src/components/button';
 import { badge } from '../src/components/badge';
 import { designTokens } from '../src/tokens';
 
@@ -53,15 +54,15 @@ describe('createDesignTheme', () => {
       colorMode: {
         light: {
           accent: {
-            default: designTokens.palette['sky-7'].var,
-            hover: designTokens.palette['sky-8'].var,
+            default: designTokens.color.palette['sky-7'].var,
+            hover: designTokens.color.palette['sky-8'].var,
           },
         },
       },
     });
     const css = getRegisteredCss();
     expect(css).toMatch(
-      /--var-ui-color-accent-default:\s*light-dark\(var\(--var-ui-palette-sky-7\)/,
+      /--var-ui-color-accent-default:\s*light-dark\(var\(--var-ui-color-palette-sky-7\)/,
     );
   });
 
@@ -123,7 +124,7 @@ describe('createDesignTheme', () => {
       /--var-ui-color-accent-default:\s*light-dark\(oklch\(55% 0\.2 290\), oklch\(72% 0\.16 290\)\)/,
     );
     expect(css).toMatch(
-      /--var-ui-color-background-app:\s*light-dark\(var\(--var-ui-palette-neutral-1\)/,
+      /--var-ui-color-background-app:\s*light-dark\(var\(--var-ui-color-palette-neutral-1\)/,
     );
   });
 
@@ -183,7 +184,7 @@ describe('createDesignTheme', () => {
   });
 
   it('components emits overrides under the theme class', () => {
-    button({ intent: 'primary', size: 'md' });
+    button(resolveButtonProps({ intent: 'primary', size: 'md' }));
 
     createDesignTheme({
       name: 'acme-components',
@@ -193,8 +194,11 @@ describe('createDesignTheme', () => {
             borderRadius: t.radius.lg.var,
           },
           variants: {
-            intent: {
-              primary: { textTransform: 'uppercase' },
+            tone: {
+              accent: { textTransform: 'uppercase' },
+            },
+            appearance: {
+              filled: {},
             },
           },
         }),
@@ -208,7 +212,7 @@ describe('createDesignTheme', () => {
   });
 
   it('components accepts plain objects and per-key factories', () => {
-    button({ intent: 'primary', size: 'md' });
+    button(resolveButtonProps({ intent: 'primary', size: 'md' }));
     badge({});
 
     createDesignTheme({
@@ -236,7 +240,7 @@ describe('createDesignTheme', () => {
   });
 
   it('styles.override without selectorPrefix applies globally in overrides layer', () => {
-    button({ intent: 'secondary', size: 'sm' });
+    button(resolveButtonProps({ intent: 'secondary', size: 'sm' }));
     styles.override(
       button,
       {

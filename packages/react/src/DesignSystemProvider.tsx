@@ -8,7 +8,7 @@ import {
   useIsomorphicLayoutEffect,
   useResolvedColorMode,
 } from './color-mode';
-import { defaultThemeClassName } from '@var-ui/core';
+import { defaultThemeClassName } from '@var-ui/core/theme-constants';
 
 export type DesignSystemProviderProps = {
   children: ReactNode;

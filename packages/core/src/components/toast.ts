@@ -1,16 +1,17 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import {
+  appearanceSurface,
   semanticChannelAssignments,
-  subtleBackgroundColor,
-  subtleBorderColor,
+  type FeedbackTone,
+  type SurfaceAppearance,
 } from './semanticTone';
 
 /**
  * Toast viewport + toast item chrome.
  *
  * ```ts
- * const t = toast({ tone: 'success', placement: 'bottom-end' });
+ * const t = toast({ tone: 'success', appearance: 'subtle', placement: 'bottom-end' });
  * <div className={t.region}><div className={t.item}>…</div></div>
  * ```
  */
@@ -21,8 +22,6 @@ export const toast = typestyles.styles.component(
       semantic: { value: t.color.accent.default.var, syntax: '<color>' },
       solidBg: { value: t.color.accent.default.var, syntax: '<color>' },
       solidFg: { value: t.color.text.onAccent.var, syntax: '<color>' },
-      surface: { value: t.color.background.surface.var, syntax: '<color>' },
-      border: { value: t.color.border.default.var, syntax: '<color>' },
       titleColor: { value: t.color.text.primary.var, syntax: '<color>' },
       descriptionColor: {
         value: t.color.text.secondary.var,
@@ -50,10 +49,7 @@ export const toast = typestyles.styles.component(
           gap: t.space[3].var,
           padding: t.space[3].var,
           borderRadius: t.radius.md.var,
-          backgroundColor: subtleBackgroundColor(v.semantic.var),
-          border: `1px solid ${subtleBorderColor(v.semantic.var)}`,
           boxShadow: t.shadow.md.var,
-          color: t.color.text.primary.var,
           outline: 'none',
           '&[data-focus-visible]': {
             outline: `2px solid ${t.color.border.focus.var}`,
@@ -111,6 +107,15 @@ export const toast = typestyles.styles.component(
           warning: { item: semanticChannelAssignments(v, 'warning') },
           danger: { item: semanticChannelAssignments(v, 'danger') },
         },
+        appearance: {
+          subtle: { item: appearanceSurface(v, 'subtle') },
+          solid: {
+            item: appearanceSurface(v, 'solid'),
+            icon: { color: 'inherit' },
+            title: { color: 'inherit' },
+          },
+          outline: { item: appearanceSurface(v, 'outline') },
+        },
         placement: {
           'top-end': { region: { top: 0, right: 0 } },
           'top-start': { region: { top: 0, left: 0 } },
@@ -118,8 +123,27 @@ export const toast = typestyles.styles.component(
           'bottom-start': { region: { bottom: 0, left: 0 } },
         },
       },
-      defaultVariants: { tone: 'info', placement: 'bottom-end' },
+      defaultVariants: { tone: 'info', appearance: 'subtle', placement: 'bottom-end' },
     };
   },
   { layer: 'components' },
 );
+
+export type ToastRecipeProps = NonNullable<Parameters<typeof toast>[0]>;
+export type ToastTone = FeedbackTone;
+export type ToastPlacement = NonNullable<ToastRecipeProps['placement']>;
+export type ToastVariantProps = {
+  tone?: ToastTone;
+  appearance?: SurfaceAppearance;
+  placement?: ToastPlacement;
+};
+
+export const toastVariantPropDocs = [
+  { name: 'tone', type: 'ToastTone', required: false },
+  { name: 'appearance', type: 'SurfaceAppearance', required: false },
+  { name: 'placement', type: 'ToastPlacement', required: false },
+] as const satisfies ReadonlyArray<{
+  name: keyof ToastVariantProps;
+  type: string;
+  required: false;
+}>;

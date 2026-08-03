@@ -1,15 +1,14 @@
 ---
-import { spinner } from '@var-ui/core';
+import { spinner, type SpinnerVariantProps } from '@var-ui/core';
 import { recipeProps } from '../utils';
 
-type Props = {
-  size?: 'sm' | 'md' | 'lg';
-  tone?: 'accent' | 'neutral';
+interface Props extends SpinnerVariantProps {
   label?: string;
   className?: string;
-};
+}
 
-const { size = 'md', tone = 'accent', label = 'Loading', className } = Astro.props;
+const { size = 'md', tone = 'accent', appearance = 'solid', label = 'Loading', className } =
+  Astro.props;
 const visuallyHidden = {
   position: 'absolute',
   width: '1px',
@@ -23,6 +22,6 @@ const visuallyHidden = {
 } as const;
 ---
 <span role="status" class={className}>
-  <span {...recipeProps(spinner({ size, tone }))} aria-hidden="true" />
+  <span {...recipeProps(spinner({ size, tone, appearance }))} aria-hidden="true" />
   <span style={visuallyHidden}>{label}</span>
 </span>

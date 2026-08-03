@@ -1,4 +1,4 @@
-import { button, dialog } from '@var-ui/core';
+import { button, dialog, resolveButtonProps } from '@var-ui/core';
 import { recipeProps } from '../../../lib/recipeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
@@ -9,7 +9,11 @@ export function render(): string {
   const d = dialog();
   const trigger = serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(button({ intent: 'secondary' })), disabled: true },
+    {
+      type: 'button',
+      ...recipeProps(button(resolveButtonProps({ intent: 'secondary' }))),
+      disabled: true,
+    },
     'Open dialog',
   );
   const heading = serializeHtmlTag(

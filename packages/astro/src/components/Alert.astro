@@ -1,13 +1,10 @@
 ---
-import { alert } from '@var-ui/core';
+import { alert, type AlertTone, type SurfaceAppearance } from '@var-ui/core';
 import { recipeProps } from '../utils';
 
-type AlertVariant = 'info' | 'success' | 'warning' | 'danger' | 'tip';
-type AlertAppearance = 'subtle' | 'solid';
-
 type Props = {
-  variant: AlertVariant;
-  appearance?: AlertAppearance;
+  variant: AlertTone;
+  appearance?: SurfaceAppearance;
   title?: string;
   action?: { href: string; label: string };
   className?: string;

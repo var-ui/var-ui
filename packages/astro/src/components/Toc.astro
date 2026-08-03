@@ -48,7 +48,6 @@ const rootStyle = stickyTop ? `--var-ui-toc-sticky-top: ${stickyTop}` : undefine
 >
   {title ? <p {...recipeProps(s.title)}>{title}</p> : null}
   <ol {...recipeProps(s.list)} data-var-ui-toc-list>
-    <span {...recipeProps(s.indicator)} data-toc-indicator aria-hidden="true"></span>
     {!auto ? <slot /> : null}
   </ol>
 </nav>

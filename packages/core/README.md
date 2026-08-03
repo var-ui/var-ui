@@ -16,7 +16,7 @@ import {
   defaultThemeClassName,
 } from '@var-ui/core';
 
-// The default theme surface is registered when the package loads (name: `default`).
+// Register styles at build time via `@var-ui/core/styles` (see TypeStyles setup below).
 document.body.className = defaultThemeClassName; // `theme-var-ui-default`
 element.className = button({ intent: 'primary' });
 // `layout` — multi-pane page shell recipe; `layoutUtility` — legacy docs stack/section helpers
@@ -25,13 +25,37 @@ element.className = button({ intent: 'primary' });
 Custom themes return a `DesignTheme` from `createDesignTheme({ name: 'acme' })` — use
 `theme.className` the same way. See [Theme surfaces](#theme-surfaces).
 
-For syntax highlighting in docs or apps:
+### TypeStyles extraction
+
+Add a build entry that side-effect-imports the styles bundle, then point
+`@typestyles/vite` at it:
 
 ```ts
-import '@var-ui/core/codeHighlight';
+// typestyles-entry.ts
+import '@var-ui/core/styles';
+
+// Optional: custom theme presets and app-owned styles.component() modules
+import './acme-theme';
 ```
 
-Pair with a **typestyles extraction entry** in consuming apps so token and recipe CSS lands in production output — see [`examples/vite-app`](../vite-app/README.md).
+```ts
+// vite.config.ts
+import typestylesVite from '@typestyles/vite';
+
+export default defineConfig({
+  plugins: [typestylesVite({ extract: { modules: ['typestyles-entry.ts'] } })],
+});
+```
+
+`@var-ui/core/styles` registers every component recipe, base HTML styles, layout
+utilities, and the built-in default theme surface. For tree-shaken fixture apps that
+only use a few components, import the recipes you need instead (see
+[`examples/bundle-fixtures`](../../examples/bundle-fixtures/)).
+
+Syntax highlighting is app-owned: use `color.code` tokens and wire them to your
+highlighter (see [Syntax highlighting](#syntax-highlighting) below).
+
+See [`examples/vite-app`](../vite-app/README.md) and [`examples/astro-app`](../astro-app/) for full workspace setups.
 
 ### Key exports
 
@@ -73,19 +97,19 @@ registers them on package load.
 
 ### Token namespaces (expanded)
 
-| Namespace                    | Keys (indicative)                 | Notes                                                                                                   |
-| ---------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `palette`                    | 39 families × 10 steps            | Fixed primitive ramp                                                                                    |
-| `space`                      | `0`–`20` (non-contiguous)         | Layout spacing                                                                                          |
-| `size.control` / `size.icon` | `sm`, `md`, `lg`                  | Control heights + icon box                                                                              |
-| `breakpoint`                 | `sm`–`xl`                         | Mode-invariant media-query widths                                                                       |
-| `zIndex`                     | `base` … `max`                    | Stacking scale                                                                                          |
-| `opacity`                    | `disabled`, `muted`               | Shared opacity semantics                                                                                |
-| `letterSpacing`              | `tight`, `normal`, `wide`, `caps` | Typography rhythm                                                                                       |
-| `color.*`                    | semantic UI colors                | Full tree via `tokens.declare`; default light face in `tokenValues.color`, dark patches via `colorMode` |
-| `color.code`                 | syntax-highlighting palette       | Used by `codeHljsScope`; aliases `lightSyntaxValues` / `darkSyntaxValues` for theme presets             |
-| `shadow.elevation`           | `low`, `med`, `high`              | Soft elevation (alongside brutalist `shadow.xs`–`xl`)                                                   |
-| `stroke`                     | `default`, `strong`               | Border shorthand (fixed)                                                                                |
+| Namespace                    | Keys (indicative)                 | Notes                                                                                                                |
+| ---------------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `palette`                    | 39 families × 10 steps            | Fixed primitive ramp                                                                                                 |
+| `space`                      | `0`–`20` (non-contiguous)         | Layout spacing                                                                                                       |
+| `size.control` / `size.icon` | `sm`, `md`, `lg`                  | Control heights + icon box                                                                                           |
+| `breakpoint`                 | `sm`–`xl`                         | Mode-invariant media-query widths                                                                                    |
+| `zIndex`                     | `base` … `max`                    | Stacking scale                                                                                                       |
+| `opacity`                    | `disabled`, `muted`               | Shared opacity semantics                                                                                             |
+| `letterSpacing`              | `tight`, `normal`, `wide`, `caps` | Typography rhythm                                                                                                    |
+| `color.*`                    | semantic UI colors                | Full tree via `tokens.declare`; default light face in `tokenValues.color`, dark patches via `colorMode`              |
+| `color.code`                 | syntax-highlighting palette       | Semantic groups for app-owned highlighter wiring; aliases `lightSyntaxValues` / `darkSyntaxValues` for theme presets |
+| `shadow.elevation`           | `low`, `med`, `high`              | Soft elevation (alongside brutalist `shadow.xs`–`xl`)                                                                |
+| `stroke`                     | `default`, `strong`               | Border shorthand (fixed)                                                                                             |
 
 Theme overrides example:
 
@@ -95,7 +119,7 @@ createDesignTheme({
     size: { control: { md: '36px' } },
     zIndex: { toast: 600 },
     color: {
-      background: { popover: designTokens.palette['sand-1'] },
+      background: { popover: designTokens.color.palette['sand-1'] },
     },
   },
 });
@@ -103,7 +127,7 @@ createDesignTheme({
 
 **Non-goals:** no `tokens.components.*`, chart/data palette, or Astryx-style communication hue tables — recipes compose global `color.*` instead.
 
-Theme values accept **token-ref leaves**: raw CSS (`'#0064E0'`, `'16px'`) or refs into registered tokens (`designTokens.palette['sky-7']`, `designTokens.radius.lg`). Refs stringify to `var(--var-ui-…)` in emitted CSS.
+Theme values accept **token-ref leaves**: raw CSS (`'#0064E0'`, `'16px'`) or refs into registered tokens (`designTokens.color.palette['sky-7']`, `designTokens.radius.lg`). Refs stringify to `var(--var-ui-…)` in emitted CSS.
 
 **Note:** syntax-highlighting colors live under `color.code` (`--var-ui-color-code-*`), not a
 top-level `syntax` namespace. There is no `codeBlock` token namespace — the `codeBlock` recipe
@@ -116,8 +140,9 @@ configured scope: `theme-var-ui-<name>` (e.g. `theme-var-ui-default`).
 
 ### Default theme
 
-Importing `@var-ui/core` registers the built-in default surface (`createDesignTheme({ name: 'default' })`).
-Use the class name directly:
+Import `@var-ui/core/styles` in your typestyles extraction entry to register the
+built-in default surface (`createDesignTheme({ name: 'default' })`). Use the class name
+directly at runtime:
 
 | Export                  | Value                    | Role                                         |
 | ----------------------- | ------------------------ | -------------------------------------------- |
@@ -152,8 +177,8 @@ export const acmePreset: DesignThemePreset = {
   tokens: {
     color: {
       accent: {
-        default: designTokens.palette['sky-7'],
-        hover: designTokens.palette['sky-8'],
+        default: designTokens.color.palette['sky-7'],
+        hover: designTokens.color.palette['sky-8'],
       },
     },
     radius: { md: designTokens.radius.lg },
@@ -393,18 +418,14 @@ Minimal behavior:
 3. Set button `aria-label` to `Copied` on success, and restore to `Copy code` after a timeout.
 4. Announce status text through `[data-codeblock-feedback]` (`role="status"` + `aria-live="polite"`).
 
-## Syntax highlighting (`highlight.js`)
+## Syntax highlighting
 
-Import the stylesheet side effect once (it registers `ds-hljs` rules):
+var-ui defines semantic **`color.code`** tokens (`--var-ui-color-code-*`) but does
+not ship highlighter-specific CSS. Map those variables to whatever toolchain you use
+(highlight.js selectors, a Shiki theme, Prism, etc.) so highlighted output matches
+your design system in light and dark mode.
 
-```ts
-import '@var-ui/core/codeHighlight';
-```
-
-### Semantic tokens (`color.code`)
-
-Syntax highlighting reads `designTokens.color.code` (`--var-ui-color-code-*`).
-`lightSyntaxValues` / `darkSyntaxValues` are aliases exported for theme presets.
+`lightSyntaxValues` / `darkSyntaxValues` are aliases for theme presets.
 
 | Token                             | Meaning                                              |
 | --------------------------------- | ---------------------------------------------------- |
@@ -424,18 +445,8 @@ Syntax highlighting reads `designTokens.color.code` (`--var-ui-color-code-*`).
 Defaults ship in `tokenValues.color.code` (light face) and the built-in dark `colorMode`
 patch. Override via theme `colorMode` or a `from` preset's `tokens.color` / `colorMode.dark`.
 
-### highlight.js class mapping
-
-highlight.js emits `span` nodes with classes like `hljs-keyword`. This theme groups them as follows:
-
-- **keyword** — `.hljs-keyword`, `.hljs-type`, `.hljs-template-*`, `.hljs-variable.language_*`, …
-- **title** — `.hljs-title` (+ class / function variants)
-- **attr** — `.hljs-attr`, `.hljs-number`, `.hljs-operator`, `.hljs-variable`, selector classes, …
-- **string** — `.hljs-string`, `.hljs-regexp`, `.hljs-meta .hljs-string`
-- **comment** — `.hljs-comment`, `.hljs-code`, `.hljs-formula`
-- **addition / deletion** — `.hljs-addition`, `.hljs-deletion`
-
-Use `hljs.highlight(code, { language })` (or `marked-highlight` with `langPrefix: 'hljs language-'`) so the output includes these classes; typography inherits from `.hljs` on the root `code` element.
+The [documentation site](../../docs/README.md) includes a reference highlight.js
+mapping in `docs/src/styles/codeHighlight.ts`.
 
 ## Learn more
 

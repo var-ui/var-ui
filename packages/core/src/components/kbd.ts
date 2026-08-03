@@ -17,7 +17,7 @@ export const kbd = typestyles.styles.component(
         syntax: '<color>',
       },
       border: {
-        value: t.color.border.default.var,
+        value: t.color.border.subtle.var,
         syntax: '<color>',
       },
     });

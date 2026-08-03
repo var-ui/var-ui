@@ -1,25 +1,22 @@
 import type { JSX } from 'react';
-import { statusDot } from '@var-ui/core';
+import { statusDot, type StatusDotVariantProps } from '@var-ui/core';
 import { recipeProps } from './utils';
 
-export type StatusDotProps = {
-  tone?: 'neutral' | 'accent' | 'success' | 'warning' | 'danger' | 'info';
-  pulse?: boolean;
-  /** Required for a11y when no adjacent visible text names the status. */
+export type StatusDotProps = StatusDotVariantProps & {
   'aria-label'?: string;
   className?: string;
 };
 
-/** Semantic presence/status indicator. */
 export function StatusDot({
   tone = 'neutral',
+  appearance = 'filled',
   pulse = false,
   'aria-label': ariaLabel,
   className,
 }: StatusDotProps): JSX.Element {
   return (
     <span
-      {...recipeProps(statusDot({ tone, pulse: pulse ? 'true' : 'false' }), className)}
+      {...recipeProps(statusDot({ tone, appearance, pulse: pulse ? 'true' : 'false' }), className)}
       aria-label={ariaLabel}
       role={ariaLabel ? 'img' : undefined}
       aria-hidden={ariaLabel ? undefined : true}

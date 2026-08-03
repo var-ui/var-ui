@@ -4,6 +4,7 @@ import {
   button,
   descriptionList as descriptionListStyles,
   iconNameList,
+  resolveButtonProps,
   type IconName,
 } from '@var-ui/core';
 import { Icon } from '../icons';
@@ -133,7 +134,10 @@ export function DescriptionList({
         {isCollapsible ? (
           <button
             type="button"
-            {...recipeProps(s.toggle, recipeClassName(button({ intent: 'ghost', size: 'sm' })))}
+            {...recipeProps(
+              s.toggle,
+              recipeClassName(button(resolveButtonProps({ intent: 'ghost', size: 'sm' }))),
+            )}
             onClick={() => setExpanded((value) => !value)}
           >
             {expanded ? 'Show less' : 'Show more'}

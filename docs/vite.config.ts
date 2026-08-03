@@ -12,7 +12,15 @@ export default defineConfig({
     {
       name: 'vitest-stub-astro',
       enforce: 'pre',
+      resolveId(id) {
+        if (id === 'astro:transitions/client') {
+          return '\0astro-transitions-client-stub';
+        }
+      },
       load(id) {
+        if (id === '\0astro-transitions-client-stub') {
+          return 'export const navigate = () => Promise.resolve();';
+        }
         // Keep `?raw` imports intact for Astro Props/slots extraction in tests.
         if (id.includes('.astro') && !id.includes('?raw') && !id.includes('&raw')) {
           return 'export default function AstroStub() { return null; }';
@@ -26,6 +34,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      '@var-ui/core/internal': `${root}/packages/core/src/internal.ts`,
       '@var-ui/core': `${root}/packages/core/src/index.ts`,
       '@var-ui/react': `${root}/packages/react/src/index.ts`,
       '@var-ui/icons': `${root}/packages/icons/src/index.ts`,

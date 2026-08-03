@@ -1,16 +1,23 @@
 ---
-import { Card, CodeBlock, Collapsible, Heading, VStack } from '@var-ui/astro';
+import HighlightedCodeBlock from './HighlightedCodeBlock.astro';
+import { Heading, cx, recipeClassName } from '@var-ui/astro';
+import { demoChrome } from '../styles/demoChrome';
+
+type Framework = 'react' | 'astro' | 'html';
 
 type Props = {
   code: string;
   language?: string;
+  filename: string;
+  framework: Framework;
   title?: string;
 };
 
-const { code, language = 'tsx', title } = Astro.props;
+const { code, language = 'tsx', filename, framework, title } = Astro.props;
+const d = demoChrome();
 ---
 
-<VStack gap="sm" className="demo-chrome">
+<div class={recipeClassName(d.root)} data-demo-chrome>
   {
     title ? (
       <Heading level={4} size="sm">
@@ -18,22 +25,30 @@ const { code, language = 'tsx', title } = Astro.props;
       </Heading>
     ) : null
   }
-  <Card>
-    <div class="demo-chrome__preview">
-      <slot />
+  <div class={recipeClassName(d.card)}>
+    <div class={recipeClassName(d.preview)}>
+      <div class={recipeClassName(d.previewInner)}>
+        <slot />
+      </div>
     </div>
-  </Card>
-  <Collapsible title="Show code" defaultExpanded={false}>
-    <CodeBlock code={code} language={language} />
-  </Collapsible>
-</VStack>
+    <section
+      class={cx(recipeClassName(d.code), recipeClassName(d.codeBlock))}
+      data-demo-chrome-code
+      data-demo-code={code}
+      data-demo-framework={framework}
+    >
+      <HighlightedCodeBlock code={code} language={language} filename={filename} />
+      <div class={recipeClassName(d.codeFade)} data-demo-fade hidden></div>
+      <div class={recipeClassName(d.expand)} data-demo-expand-wrap>
+        <button type="button" class={recipeClassName(d.expandButton)} data-demo-expand>
+          Expand code
+        </button>
+      </div>
+    </section>
+  </div>
+</div>
 
-<style>
-  .demo-chrome {
-    margin-block: 1.5rem;
-  }
-
-  .demo-chrome__preview {
-    padding: 1.25rem;
-  }
-</style>
+<script>
+  import { initDemoChromeExpand } from '../scripts/demoChromeExpand';
+  initDemoChromeExpand();
+</script>

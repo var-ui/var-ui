@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vite-plus/test';
+import { describe, expect, it, vi, beforeEach } from 'vite-plus/test';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ReactElement } from 'react';
@@ -8,6 +8,16 @@ import { CommandPalette } from './CommandPalette';
 function wrap(children: ReactElement) {
   return render(<LayerProvider>{children}</LayerProvider>);
 }
+
+beforeEach(() => {
+  HTMLDialogElement.prototype.showModal = function showModal(this: HTMLDialogElement) {
+    this.open = true;
+  };
+  HTMLDialogElement.prototype.close = function close(this: HTMLDialogElement) {
+    this.open = false;
+    this.dispatchEvent(new Event('close'));
+  };
+});
 
 describe('CommandPalette', () => {
   it('filters items and invokes onAction on Enter', async () => {

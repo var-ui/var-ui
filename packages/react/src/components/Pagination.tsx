@@ -1,6 +1,6 @@
 import type { JSX } from 'react';
 import { Button as AriaButton } from 'react-aria-components';
-import { button, pagination } from '@var-ui/core';
+import { button, pagination, resolveButtonProps } from '@var-ui/core';
 import { IconButton } from './IconButton';
 import { Select } from './Select';
 import { cx, recipeProps } from './utils';
@@ -147,7 +147,9 @@ export function Pagination({
           ) : (
             <AriaButton
               key={item}
-              {...recipeProps(button({ intent: item === page ? 'secondary' : 'ghost', size }))}
+              {...recipeProps(
+                button(resolveButtonProps({ intent: item === page ? 'secondary' : 'ghost', size })),
+              )}
               onPress={() => goTo(item)}
               isDisabled={isDisabled}
               aria-label={`Go to page ${item}`}

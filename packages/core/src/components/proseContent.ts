@@ -42,6 +42,10 @@ export const proseContent = typestyles.styles.component(
         value: t.color.border.default.var,
         syntax: '<color>',
       },
+      inlineCodeBackground: {
+        value: `color-mix(in srgb, ${t.color.accent.default.var} 10%, ${t.color.background.subtle.var})`,
+        syntax: '<color>',
+      },
       tableBorder: {
         value: t.color.border.strong.var,
         syntax: '<color>',
@@ -158,7 +162,7 @@ export const proseContent = typestyles.styles.component(
         },
         /**
          * Links carry an always-on tinted underline so they're distinguishable from inline `code`
-         * (which is mono + color only). On hover the underline snaps to full accent.
+         * (mono pill on a tinted background). On hover the underline snaps to full accent.
          */
         '& a': {
           color: t.color.accent.default.var,
@@ -179,19 +183,22 @@ export const proseContent = typestyles.styles.component(
           },
         },
         /**
-         * Inline `code` — typographic treatment (mono + tinted color), no box, no underline.
-         * Color and font change alone mark it as code; the absence of an underline differentiates it
-         * from anchors.
+         * Inline `code` — mono pill on a tinted surface. Background + font differentiate it from
+         * anchors (underline only).
          */
         '& code': {
           fontFamily: t.fontFamily.mono.var,
           fontSize: '0.92em',
           fontWeight: t.fontWeight.medium.var,
           color: t.color.accent.hover.var,
+          backgroundColor: v.inlineCodeBackground.var,
+          padding: `1px ${t.space[1].var}`,
+          borderRadius: t.radius.sm.var,
           whiteSpace: 'nowrap',
         },
         '& a code': {
           color: 'inherit',
+          backgroundColor: v.inlineCodeBackground.var,
         },
         /**
          * Alert / callout anchor links inherit the callout's color and invert the underline behavior
@@ -226,6 +233,7 @@ export const proseContent = typestyles.styles.component(
           backgroundColor: 'transparent',
           padding: 0,
           border: 'none',
+          borderRadius: 0,
           fontSize: 'inherit',
           fontWeight: 'inherit',
           color: 'inherit',

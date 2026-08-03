@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { controlSizeVariants, controlSurfaceSize } from './controlSize';
 import { fieldChrome } from './field';
 
 /**
@@ -61,67 +62,85 @@ export const inputGroup = typestyles.styles.component(
     });
     return {
       slots: ['root', 'label', 'description', 'error', 'group', 'input', 'text'],
-      ...chrome,
-      root: {
-        ...chrome.root,
-        minWidth: '240px',
+      base: {
+        root: {
+          ...chrome.root,
+          minWidth: '240px',
+        },
+        label: chrome.label,
+        description: chrome.description,
+        error: chrome.error,
+        group: {
+          display: 'inline-flex',
+          alignItems: 'stretch',
+          '& > *': {
+            borderRadius: 0,
+            position: 'relative',
+          },
+          '& > * + *': {
+            marginInlineStart: '-1px',
+          },
+          '& > *:first-child': {
+            borderStartStartRadius: t.radius.md.var,
+            borderEndStartRadius: t.radius.md.var,
+          },
+          '& > *:last-child': {
+            borderStartEndRadius: t.radius.md.var,
+            borderEndEndRadius: t.radius.md.var,
+          },
+          '& > *:focus-within, & > *:hover': {
+            zIndex: 1,
+          },
+          '&[data-disabled]': {
+            opacity: 0.5,
+            cursor: 'not-allowed',
+          },
+        },
+        input: {
+          flex: 1,
+          minWidth: 0,
+          boxSizing: 'border-box',
+          border: `1px solid ${v.inputBorder.var}`,
+          fontSize: 'inherit',
+          backgroundColor: v.inputBackground.var,
+          color: v.inputForeground.var,
+          '&:focus': {
+            outline: `2px solid ${t.color.border.focus.var}`,
+            outlineOffset: '1px',
+            [v.inputBorder.name]: t.color.border.focus.var,
+          },
+          '&::placeholder': {
+            color: v.placeholderColor.var,
+          },
+          '&:disabled': {
+            cursor: 'not-allowed',
+          },
+        },
+        text: {
+          display: 'flex',
+          alignItems: 'center',
+          paddingInline: t.space[2].var,
+          backgroundColor: v.textBackground.var,
+          color: v.textForeground.var,
+          border: `1px solid ${v.inputBorder.var}`,
+          whiteSpace: 'nowrap',
+          flexShrink: 0,
+        },
       },
-      group: {
-        display: 'inline-flex',
-        alignItems: 'stretch',
-        '& > *': {
-          borderRadius: 0,
-          position: 'relative',
-        },
-        '& > * + *': {
-          marginInlineStart: '-1px',
-        },
-        '& > *:first-child': {
-          borderStartStartRadius: t.radius.md.var,
-          borderEndStartRadius: t.radius.md.var,
-        },
-        '& > *:last-child': {
-          borderStartEndRadius: t.radius.md.var,
-          borderEndEndRadius: t.radius.md.var,
-        },
-        '& > *:focus-within, & > *:hover': {
-          zIndex: 1,
-        },
-        '&[data-disabled]': {
-          opacity: 0.5,
-          cursor: 'not-allowed',
-        },
+      variants: {
+        size: controlSizeVariants((size) => ({
+          group: controlSurfaceSize(size, { inset: 'compact' }),
+          input: {
+            height: '100%',
+            paddingBlock: 0,
+            paddingInline: 0,
+          },
+          text: {
+            fontSize: controlSurfaceSize(size).fontSize,
+          },
+        })),
       },
-      input: {
-        flex: 1,
-        minWidth: 0,
-        border: `1px solid ${v.inputBorder.var}`,
-        padding: `${t.space[2].var} ${t.space[3].var}`,
-        fontSize: t.fontSize.md.var,
-        backgroundColor: v.inputBackground.var,
-        color: v.inputForeground.var,
-        '&:focus': {
-          outline: `2px solid ${t.color.border.focus.var}`,
-          outlineOffset: '1px',
-          [v.inputBorder.name]: t.color.border.focus.var,
-        },
-        '&::placeholder': {
-          color: v.placeholderColor.var,
-        },
-        '&:disabled': {
-          cursor: 'not-allowed',
-        },
-      },
-      text: {
-        display: 'flex',
-        alignItems: 'center',
-        paddingInline: t.space[2].var,
-        backgroundColor: v.textBackground.var,
-        color: v.textForeground.var,
-        border: `1px solid ${v.inputBorder.var}`,
-        whiteSpace: 'nowrap',
-        flexShrink: 0,
-      },
+      defaultVariants: { size: 'md' },
     };
   },
   { layer: 'components' },

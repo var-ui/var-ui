@@ -5,7 +5,14 @@ export type {
   DesignThemeTokenValues,
   DesignTokens,
 } from './types';
-export { FAMILY_SPECS, PALETTE_FAMILIES } from './palette';
+export { palette } from './defaults/color/palette';
+export {
+  PALETTE_FAMILIES,
+  PALETTE_STEPS,
+  type PaletteFamily,
+  type PaletteStep,
+  type PaletteTokenKey,
+} from './schema/color/palette';
 export { designTokens, tokens } from './declare';
 export { tokenValues } from './preset';
 export { darkSyntaxValues, lightSyntaxValues } from './defaults/color';

@@ -1,10 +1,9 @@
 import type { JSX, ReactNode } from 'react';
-import { alert, type IconName } from '@var-ui/core';
+import { alert, type AlertVariant, type IconName, type SurfaceAppearance } from '@var-ui/core';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 
-export type AlertVariant = 'info' | 'success' | 'warning' | 'danger' | 'tip';
-export type AlertAppearance = 'subtle' | 'solid';
+export type { AlertTone, AlertVariant, SurfaceAppearance as AlertAppearance } from '@var-ui/core';
 
 /** Tone → registry glyph (spec §0.4): danger shares the `error` glyph, tip shares `info`. */
 const variantIconName: Record<AlertVariant, IconName> = {
@@ -19,7 +18,7 @@ export type AlertProps = {
   /** Semantic tone that drives color and the default icon. */
   variant: AlertVariant;
   /** Surface treatment. @default subtle */
-  appearance?: AlertAppearance;
+  appearance?: SurfaceAppearance;
   /** Optional bold headline above the body content. */
   title?: string;
   /** Optional text link rendered below the message body. */

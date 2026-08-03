@@ -1,15 +1,7 @@
 import type { JSX } from 'react';
-import { useEffect, useMemo, useState } from 'react';
-import {
-  Autocomplete,
-  Dialog as AriaDialog,
-  Input,
-  ListBox,
-  ListBoxItem,
-  Modal,
-  ModalOverlay,
-  TextField,
-} from 'react-aria-components';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { Autocomplete, Input, ListBox, ListBoxItem, TextField } from 'react-aria-components';
 import type { ComponentAttrsResult } from 'typestyles';
 import { commandPalette } from '@var-ui/core';
 import { Icon } from '../icons';
@@ -45,7 +37,7 @@ export type CommandPaletteProps = {
   /** Overrides the default case-insensitive title/meta/keywords match. */
   filter?: (item: CommandPaletteItem, query: string) => boolean;
   /**
-   * Element the modal portals into instead of `document.body`. Needed when a subtree renders
+   * Element the dialog renders into instead of its React parent. Needed when a subtree renders
    * under a different theme than the page ambient (the theme's CSS custom properties only
    * cascade to descendants of the themed element).
    */
@@ -54,7 +46,6 @@ export type CommandPaletteProps = {
 
 type CommandPaletteSlot =
   | 'root'
-  | 'backdrop'
   | 'dialog'
   | 'inputRow'
   | 'inputIcon'
@@ -98,7 +89,9 @@ export function CommandPalette({
   portalContainer,
 }: CommandPaletteProps): JSX.Element {
   const [query, setQuery] = useState('');
-  const cp = commandPaletteSlots({ open: Boolean(isOpen) });
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const open = Boolean(isOpen);
+  const cp = commandPaletteSlots({ open });
   const { style: layerStyle } = useLayer();
 
   useEffect(() => {
@@ -106,67 +99,95 @@ export function CommandPalette({
     function handleKeyDown(event: KeyboardEvent) {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
         event.preventDefault();
-        onOpenChange?.(!isOpen);
+        onOpenChange?.(!open);
       }
     }
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [hotkey, isOpen, onOpenChange]);
+  }, [hotkey, open, onOpenChange]);
 
   useEffect(() => {
-    if (!isOpen) setQuery('');
-  }, [isOpen]);
+    if (!open) setQuery('');
+  }, [open]);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (open) {
+      if (!dialog.open) dialog.showModal();
+    } else if (dialog.open) {
+      dialog.close();
+    }
+  }, [open]);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    const handleClose = () => onOpenChange?.(false);
+    dialog.addEventListener('close', handleClose);
+    return () => dialog.removeEventListener('close', handleClose);
+  }, [onOpenChange]);
 
   const visibleItems = useMemo(
     () => items.filter((item) => filter(item, query)),
     [items, filter, query],
   );
 
-  return (
-    <ModalOverlay
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
+  const palette = (
+    <dialog
+      ref={dialogRef}
+      aria-label={placeholder}
       {...recipeProps(cp.root)}
       style={layerStyle}
-      UNSTABLE_portalContainer={portalContainer}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onOpenChange?.(false);
+      }}
+      onCancel={(event) => {
+        event.preventDefault();
+        onOpenChange?.(false);
+      }}
+      onKeyDownCapture={(event) => {
+        if (event.key !== 'Escape') return;
+        event.preventDefault();
+        onOpenChange?.(false);
+      }}
     >
-      <div {...recipeProps(cp.backdrop)} />
-      <Modal {...recipeProps(cp.dialog)}>
-        <AriaDialog aria-label={placeholder}>
-          <Autocomplete inputValue={query} onInputChange={setQuery}>
-            <div {...recipeProps(cp.inputRow)}>
-              <span {...recipeProps(cp.inputIcon)}>
-                <Icon name="search" />
-              </span>
-              <TextField aria-label={placeholder} style={{ display: 'flex', flex: 1, minWidth: 0 }}>
-                <Input {...recipeProps(cp.input)} placeholder={placeholder} autoFocus />
-              </TextField>
-            </div>
-            <ListBox
-              items={visibleItems}
-              {...recipeProps(cp.results)}
-              aria-label={placeholder}
-              renderEmptyState={() => <div {...recipeProps(cp.empty)}>{emptyLabel}</div>}
-            >
-              {(item) => (
-                <ListBoxItem
-                  id={item.id}
-                  textValue={item.title}
-                  {...recipeProps(cp.result)}
-                  onAction={() => onAction(item.id)}
-                >
-                  {({ isFocused }) => (
-                    <span {...recipeProps(cp.resultLink, cx(isFocused && cp.resultLinkActive))}>
-                      <span {...recipeProps(cp.resultTitle)}>{item.title}</span>
-                      {item.meta ? <span {...recipeProps(cp.resultMeta)}>{item.meta}</span> : null}
-                    </span>
-                  )}
-                </ListBoxItem>
-              )}
-            </ListBox>
-          </Autocomplete>
-        </AriaDialog>
-      </Modal>
-    </ModalOverlay>
+      <div {...recipeProps(cp.dialog)} data-open={open ? '' : undefined}>
+        <Autocomplete inputValue={query} onInputChange={setQuery}>
+          <div {...recipeProps(cp.inputRow)}>
+            <span {...recipeProps(cp.inputIcon)}>
+              <Icon name="search" />
+            </span>
+            <TextField aria-label={placeholder} style={{ display: 'flex', flex: 1, minWidth: 0 }}>
+              <Input {...recipeProps(cp.input)} placeholder={placeholder} autoFocus />
+            </TextField>
+          </div>
+          <ListBox
+            items={visibleItems}
+            {...recipeProps(cp.results)}
+            aria-label={placeholder}
+            renderEmptyState={() => <div {...recipeProps(cp.empty)}>{emptyLabel}</div>}
+          >
+            {(item) => (
+              <ListBoxItem
+                id={item.id}
+                textValue={item.title}
+                {...recipeProps(cp.result)}
+                onAction={() => onAction(item.id)}
+              >
+                {({ isFocused }) => (
+                  <span {...recipeProps(cp.resultLink, cx(isFocused && cp.resultLinkActive))}>
+                    <span {...recipeProps(cp.resultTitle)}>{item.title}</span>
+                    {item.meta ? <span {...recipeProps(cp.resultMeta)}>{item.meta}</span> : null}
+                  </span>
+                )}
+              </ListBoxItem>
+            )}
+          </ListBox>
+        </Autocomplete>
+      </div>
+    </dialog>
   );
+
+  return portalContainer ? createPortal(palette, portalContainer) : palette;
 }

@@ -4,19 +4,20 @@ import {
   ProgressBar as AriaProgressBar,
   type ProgressBarProps as RACProgressBarProps,
 } from 'react-aria-components';
-import { progressBar } from '@var-ui/core';
+import { progressBar, type ProgressBarVariantProps } from '@var-ui/core';
 import { recipeProps } from './utils';
 
-export type ProgressBarProps = Omit<RACProgressBarProps, 'children' | 'className'> & {
-  /** Label rendered above the track. */
-  label?: string;
-  /** Fill color treatment. @default accent */
-  tone?: 'accent' | 'success' | 'warning' | 'danger';
-  /** Show the formatted value (e.g. "40%") next to the label. @default true */
-  showValueText?: boolean;
-  /** Additional CSS class names merged onto the root element. */
-  className?: string;
-};
+export type { ProgressBarTone, ProgressBarAppearance } from '@var-ui/core';
+
+export type ProgressBarProps = Omit<RACProgressBarProps, 'children' | 'className'> &
+  ProgressBarVariantProps & {
+    /** Label rendered above the track. */
+    label?: string;
+    /** Show the formatted value (e.g. "40%") next to the label. @default true */
+    showValueText?: boolean;
+    /** Additional CSS class names merged onto the root element. */
+    className?: string;
+  };
 
 /**
  * Linear progress bar on react-aria ProgressBar (determinate or
@@ -30,11 +31,16 @@ export type ProgressBarProps = Omit<RACProgressBarProps, 'children' | 'className
 export function ProgressBar({
   label,
   tone = 'accent',
+  appearance = 'solid',
   showValueText = true,
   className,
   ...props
 }: ProgressBarProps): JSX.Element {
-  const p = progressBar({ tone, indeterminate: props.isIndeterminate ? 'true' : 'false' });
+  const p = progressBar({
+    tone,
+    appearance,
+    indeterminate: props.isIndeterminate ? 'true' : 'false',
+  });
   const showValue = showValueText && !props.isIndeterminate;
   return (
     <AriaProgressBar {...props} {...recipeProps(p.root, className)}>

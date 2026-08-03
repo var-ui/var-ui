@@ -1,5 +1,5 @@
-import { CodeBlock } from '@var-ui/react';
+import { HighlightedCodeBlock } from '../../../components/HighlightedCodeBlock';
 
 export default function Preview() {
-  return <CodeBlock code={'const greeting = "hello";'} language="tsx" />;
+  return <HighlightedCodeBlock code={'const greeting = "hello";'} language="tsx" />;
 }

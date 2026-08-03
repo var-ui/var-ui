@@ -1,0 +1,22 @@
+{
+  "name": "@var-ui/bundle-fixture-button-only",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vp build"
+  },
+  "dependencies": {
+    "@var-ui/core": "workspace:*",
+    "@var-ui/react": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@typestyles/vite": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "typestyles": "catalog:",
+    "vite-plus": "catalog:"
+  }
+}

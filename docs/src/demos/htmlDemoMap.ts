@@ -32,6 +32,10 @@ import { render as renderRadioGroupDefault } from './radio-group/default/html';
 import { render as renderSwitchDefault } from './switch/default/html';
 import { render as renderSelectDefault } from './select/default/html';
 import { render as renderSelectOptions } from './select/options/html';
+import { render as renderComboboxDefault } from './combobox/default/html';
+import { render as renderComboboxField } from './combobox/field/html';
+import { render as renderTypeaheadDefault } from './typeahead/default/html';
+import { render as renderTypeaheadField } from './typeahead/field/html';
 import { render as renderTabsDefault } from './tabs/default/html';
 import { render as renderDialogDefault } from './dialog/default/html';
 import { render as renderLayoutDefault } from './layout/default/html';
@@ -81,6 +85,10 @@ export const htmlDemoMap = {
   'switch.default': renderSwitchDefault,
   'select.default': renderSelectDefault,
   'select.options': renderSelectOptions,
+  'combobox.default': renderComboboxDefault,
+  'combobox.field': renderComboboxField,
+  'typeahead.default': renderTypeaheadDefault,
+  'typeahead.field': renderTypeaheadField,
   'tabs.default': renderTabsDefault,
   'dialog.default': renderDialogDefault,
   'layout.default': renderLayoutDefault,

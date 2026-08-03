@@ -1,0 +1,100 @@
+---
+import {
+  defaultIconSvgs,
+  icon,
+  searchInput,
+  type SearchInputVariantProps,
+} from '@var-ui/core';
+import Kbd from './Kbd.astro';
+import { recipeProps } from '../utils';
+
+type Props = SearchInputVariantProps & {
+  /** Links this trigger to a `CommandPalette` root `id` when `variant="command"`. */
+  commandPalette?: string;
+  placeholder?: string;
+  /** Shown in the command trigger when `variant="command"`. @default '⌘K' */
+  shortcut?: string;
+  name?: string;
+  value?: string;
+  className?: string;
+  'aria-label'?: string;
+};
+
+const {
+  variant = 'default',
+  size = 'md',
+  commandPalette: commandPaletteId,
+  placeholder = 'Search…',
+  shortcut = '⌘K',
+  name,
+  value,
+  className,
+  'aria-label': ariaLabel = placeholder,
+} = Astro.props;
+
+const s = searchInput({ variant, size });
+const iconRecipe = recipeProps(icon({ size: size === 'lg' ? 'lg' : size === 'sm' ? 'sm' : 'md' }));
+---
+
+<div
+  {...recipeProps(s.root, className)}
+  data-var-ui-search-input
+  data-variant={variant}
+  data-command-palette={commandPaletteId}
+  aria-expanded="false"
+>
+  <span {...recipeProps(s.icon)} aria-hidden="true">
+    <span {...iconRecipe} set:html={defaultIconSvgs.search} />
+  </span>
+  {
+    variant === 'command' ? (
+      <button
+        type="button"
+        {...recipeProps(s.trigger)}
+        data-var-ui-search-input-trigger
+        aria-label={ariaLabel}
+        aria-haspopup="dialog"
+        aria-controls={commandPaletteId}
+      >
+        <span {...recipeProps(s.triggerLabel)}>{placeholder}</span>
+      </button>
+    ) : (
+      <input
+        {...recipeProps(s.input)}
+        type="search"
+        name={name}
+        value={value}
+        placeholder={placeholder}
+        aria-label={ariaLabel}
+        autocomplete="off"
+        spellcheck="false"
+      />
+    )
+  }
+  {variant === 'command' ? (
+    <span {...recipeProps(s.shortcut)}>
+      <Kbd aria-hidden="true">{shortcut}</Kbd>
+    </span>
+  ) : null}
+</div>
+
+{
+  variant === 'command' ? (
+    <script>
+      import { initSearchInputs } from '../scripts/searchInput';
+      initSearchInputs();
+    </script>
+  ) : null
+}
+
+<style>
+  [data-var-ui-search-input][data-variant='command'] [data-var-ui-search-input-trigger] {
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    [data-var-ui-search-input][data-variant='command'] :global(.var-ui-kbd) {
+      display: none;
+    }
+  }
+</style>

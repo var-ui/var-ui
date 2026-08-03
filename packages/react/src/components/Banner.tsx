@@ -1,10 +1,10 @@
 import type { JSX, ReactNode } from 'react';
 import { Button as AriaButton } from 'react-aria-components';
-import { banner, type IconName } from '@var-ui/core';
+import { banner, type BannerTone, type BannerVariantProps, type IconName } from '@var-ui/core';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 
-export type BannerTone = 'info' | 'success' | 'warning' | 'danger';
+export type { BannerTone } from '@var-ui/core';
 
 const toneIcon: Record<BannerTone, IconName> = {
   info: 'info',
@@ -13,11 +13,7 @@ const toneIcon: Record<BannerTone, IconName> = {
   danger: 'error',
 };
 
-export type BannerProps = {
-  /** Semantic tone that drives color and the default icon. @default info */
-  tone?: BannerTone;
-  /** Surface treatment. @default subtle */
-  appearance?: 'subtle' | 'solid';
+export type BannerProps = BannerVariantProps & {
   /** Optional bold headline shown before the body text. */
   title?: string;
   /** Override the default tone glyph; pass null to hide the icon slot. */

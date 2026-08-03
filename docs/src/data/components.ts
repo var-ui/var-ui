@@ -77,6 +77,20 @@ export const componentRegistry: ComponentEntry[] = [
     importLine: "import { Select } from '@var-ui/react';",
   },
   {
+    slug: 'combobox',
+    name: 'Combobox',
+    category: 'data-input',
+    description: 'Headless combobox primitive for autocompletes and custom selects.',
+    importLine: "import { Combobox } from '@var-ui/react';",
+  },
+  {
+    slug: 'typeahead',
+    name: 'Typeahead',
+    category: 'data-input',
+    description: 'Search-as-you-type single-select built on Combobox.',
+    importLine: "import { Typeahead } from '@var-ui/react';",
+  },
+  {
     slug: 'field',
     name: 'Field',
     category: 'data-input',

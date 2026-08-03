@@ -1,5 +1,8 @@
 import { typestyles } from '../runtime';
+import { duration } from '../tokens/defaults/duration';
+import { easing } from '../tokens/defaults/easing';
 import { designTokens as t } from '../tokens';
+import { controlSizeVariants, controlSurfaceSize } from './controlSize';
 
 /** Single toggle button and segmented-control item styling. */
 export const toggleButton = typestyles.styles.component(
@@ -36,7 +39,7 @@ export const toggleButton = typestyles.styles.component(
         color: v.foreground.var,
         fontSize: t.fontSize.md.var,
         fontWeight: t.fontWeight.medium.var,
-        padding: `${t.space[2].var} ${t.space[4].var}`,
+        boxSizing: 'border-box',
         cursor: 'pointer',
         display: 'inline-flex',
         alignItems: 'center',
@@ -61,19 +64,39 @@ export const toggleButton = typestyles.styles.component(
         },
       },
       variants: {
-        size: {
-          sm: {
-            fontSize: t.fontSize.sm.var,
-            padding: `${t.space[1].var} ${t.space[3].var}`,
+        size: controlSizeVariants((size) => controlSurfaceSize(size)),
+        segmented: {
+          true: {
+            height: '100%',
+            minHeight: 0,
+            paddingBlock: 0,
+            border: 'none',
+            borderRadius: t.radius.full.var,
+            backgroundColor: 'transparent',
+            [v.foreground.name]: t.color.text.secondary.var,
+            fontWeight: t.fontWeight.normal.var,
+            boxShadow: 'none',
+            transition: `color ${duration.fast} ${easing.standard}`,
+            '&:hover': {
+              backgroundColor: 'transparent',
+              borderColor: 'transparent',
+            },
+            '&[data-selected], &[aria-pressed="true"]': {
+              [v.background.name]: 'transparent',
+              [v.border.name]: 'transparent',
+              [v.foreground.name]: t.color.text.primary.var,
+              fontWeight: t.fontWeight.semibold.var,
+              boxShadow: 'none',
+              '&:hover': {
+                [v.background.name]: 'transparent',
+                [v.border.name]: 'transparent',
+              },
+            },
           },
-          md: {},
-          lg: {
-            fontSize: t.fontSize.lg.var,
-            padding: `${t.space[3].var} ${t.space[5].var}`,
-          },
+          false: {},
         },
       },
-      defaultVariants: { size: 'md' },
+      defaultVariants: { size: 'md', segmented: 'false' },
     };
   },
   { layer: 'components' },

@@ -8,7 +8,9 @@ describe('html-api-docs', () => {
     expect(doc?.recipeName).toBe('button');
     expect(doc?.parts[0]?.className).toBe('var-ui-button');
     const names = doc?.parts[0]?.attributes.map((a) => a.name) ?? [];
-    expect(names).toEqual(expect.arrayContaining(['data-intent', 'data-size', 'data-layout']));
+    expect(names).toEqual(
+      expect.arrayContaining(['data-tone', 'data-appearance', 'data-size', 'data-layout']),
+    );
   });
 
   it('documents compound alert parts', () => {

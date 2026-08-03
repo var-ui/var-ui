@@ -16,11 +16,10 @@ import { space } from './defaults/space';
 import { stroke } from './defaults/stroke';
 import { transition } from './defaults/transition';
 import { zIndex } from './defaults/zIndex';
-import { basePaletteTokenValues } from './palette';
+import { palette } from './defaults/color/palette';
 
 /** Registered default token values (light color face). */
 export const tokenValues = {
-  palette: basePaletteTokenValues,
   space,
   size,
   opacity,
@@ -38,5 +37,8 @@ export const tokenValues = {
   breakpoint,
   zIndex,
   stroke,
-  color,
+  color: {
+    palette,
+    ...color,
+  },
 } as const;

@@ -1,0 +1,120 @@
+---
+import type { ComponentAttrsResult } from 'typestyles';
+import { commandPalette } from '@var-ui/core';
+import { recipeClassName, recipeProps } from '../utils';
+import type { CommandPaletteItem } from '../scripts/commandPaletteUtils';
+
+type CommandPaletteSlot =
+  | 'root'
+  | 'dialog'
+  | 'inputRow'
+  | 'inputIcon'
+  | 'input'
+  | 'results'
+  | 'resultLink'
+  | 'resultLinkActive'
+  | 'resultTitle'
+  | 'resultMeta'
+  | 'empty';
+type CommandPaletteSlots = Record<CommandPaletteSlot, ComponentAttrsResult>;
+type CommandPaletteRecipeFn = () => CommandPaletteSlots;
+
+type Props = {
+  id: string;
+  items: CommandPaletteItem[];
+  placeholder?: string;
+  'aria-label'?: string;
+  hotkey?: boolean;
+  className?: string;
+};
+
+const {
+  id,
+  items,
+  placeholder = 'Search…',
+  'aria-label': ariaLabel = placeholder,
+  hotkey = true,
+  className,
+} = Astro.props;
+
+const indexJson = JSON.stringify(items);
+const cp = (commandPalette as unknown as CommandPaletteRecipeFn)();
+const dialogRecipe = recipeProps(cp.root);
+const panelRecipe = recipeProps(cp.dialog, 'var-ui-command-palette__panel');
+const inputRowRecipe = recipeProps(cp.inputRow);
+const inputIconRecipe = recipeProps(cp.inputIcon);
+const inputRecipe = recipeProps(cp.input);
+const resultsRecipe = recipeProps(cp.results);
+const resultLinkClass = recipeClassName(cp.resultLink);
+const resultLinkActiveClass = recipeClassName(cp.resultLinkActive);
+const resultTitleClass = recipeClassName(cp.resultTitle);
+const resultMetaClass = recipeClassName(cp.resultMeta);
+const emptyClass = recipeClassName(cp.empty);
+---
+
+<div
+  id={id}
+  class:list={['', className]}
+  data-var-ui-command-palette-root
+  data-command-palette-id={id}
+  data-hotkey={hotkey ? 'true' : 'false'}
+  data-class-result-link={resultLinkClass}
+  data-class-result-link-active={resultLinkActiveClass}
+  data-class-result-title={resultTitleClass}
+  data-class-result-meta={resultMetaClass}
+  data-class-empty={emptyClass}
+  data-class-group="var-ui-command-palette__group"
+  data-class-group-label="var-ui-command-palette__groupLabel"
+>
+  <dialog
+    {...dialogRecipe}
+    data-var-ui-command-palette-dialog
+    aria-label={ariaLabel}
+  >
+    <div {...panelRecipe} data-var-ui-command-palette-panel>
+      <div {...inputRowRecipe}>
+        <span {...inputIconRecipe} aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            width="18"
+            height="18"
+          >
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M16.5 16.5L21 21"></path>
+          </svg>
+        </span>
+        <input
+          {...inputRecipe}
+          type="search"
+          data-var-ui-command-palette-input
+          placeholder={placeholder}
+          autocomplete="off"
+          spellcheck="false"
+          role="combobox"
+          aria-autocomplete="list"
+          aria-controls={`${id}-results`}
+          aria-expanded="true"
+        />
+      </div>
+      <div
+        {...resultsRecipe}
+        id={`${id}-results`}
+        data-var-ui-command-palette-results
+        role="listbox"
+      >
+      </div>
+    </div>
+  </dialog>
+
+  <script is:inline type="application/json" data-var-ui-command-palette-items set:html={indexJson} />
+</div>
+
+<script>
+  import { initCommandPalettes } from '../scripts/commandPalette';
+  initCommandPalettes();
+</script>

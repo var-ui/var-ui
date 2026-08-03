@@ -16,11 +16,33 @@ export type AstroComponentDoc = {
   slots: AstroSlotDoc[];
 };
 
+import {
+  buttonVariantPropDocs,
+  badgeVariantPropDocs,
+  bannerVariantPropDocs,
+  statusDotVariantPropDocs,
+  spinnerVariantPropDocs,
+  progressBarVariantPropDocs,
+  avatarVariantPropDocs,
+  collapsibleVariantPropDocs,
+} from '@var-ui/core/internal';
+
 const astroSources = import.meta.glob('../../../packages/astro/src/components/*.astro', {
   query: '?raw',
   import: 'default',
   eager: true,
 }) as Record<string, string>;
+
+const EXTENDED_PROP_DOCS: Record<string, AstroPropDoc[]> = {
+  ButtonVariantProps: buttonVariantPropDocs.map((prop) => ({ ...prop })),
+  BadgeVariantProps: badgeVariantPropDocs.map((prop) => ({ ...prop })),
+  BannerVariantProps: bannerVariantPropDocs.map((prop) => ({ ...prop })),
+  StatusDotVariantProps: statusDotVariantPropDocs.map((prop) => ({ ...prop })),
+  SpinnerVariantProps: spinnerVariantPropDocs.map((prop) => ({ ...prop })),
+  ProgressBarVariantProps: progressBarVariantPropDocs.map((prop) => ({ ...prop })),
+  AvatarVariantProps: avatarVariantPropDocs.map((prop) => ({ ...prop })),
+  CollapsibleVariantProps: collapsibleVariantPropDocs.map((prop) => ({ ...prop })),
+};
 
 function slugToComponentName(slug: string): string {
   return slug
@@ -35,26 +57,53 @@ function findSource(componentName: string): string | undefined {
   return key ? astroSources[key] : undefined;
 }
 
-function extractPropsBlock(source: string): string | undefined {
-  const start = source.search(/type\s+Props\s*=\s*\{/);
-  if (start === -1) return undefined;
-
-  const open = source.indexOf('{', start);
-  if (open === -1) return undefined;
+function extractBraceBlock(source: string, openIndex: number): string | undefined {
+  if (openIndex === -1) return undefined;
 
   let depth = 0;
-  for (let i = open; i < source.length; i++) {
+  for (let i = openIndex; i < source.length; i++) {
     const ch = source[i];
     if (ch === '{') depth++;
     if (ch === '}') {
       depth--;
       if (depth === 0) {
-        return source.slice(open + 1, i);
+        return source.slice(openIndex + 1, i);
       }
     }
   }
 
   return undefined;
+}
+
+type ExtractedProps = {
+  block?: string;
+  extendsType?: string;
+};
+
+function extractProps(source: string): ExtractedProps | undefined {
+  const interfaceMatch = source.match(/interface\s+Props\s+extends\s+(\w+)\s*\{/);
+  if (interfaceMatch) {
+    const open = source.indexOf('{', interfaceMatch.index!);
+    return {
+      extendsType: interfaceMatch[1],
+      block: extractBraceBlock(source, open),
+    };
+  }
+
+  const intersectionMatch = source.match(/type\s+Props\s*=\s*(\w+)\s*&\s*\{/);
+  if (intersectionMatch) {
+    const open = source.indexOf('{', intersectionMatch.index!);
+    return {
+      extendsType: intersectionMatch[1],
+      block: extractBraceBlock(source, open),
+    };
+  }
+
+  const start = source.search(/type\s+Props\s*=\s*\{/);
+  if (start === -1) return undefined;
+
+  const open = source.indexOf('{', start);
+  return { block: extractBraceBlock(source, open) };
 }
 
 function parseProps(block: string): AstroPropDoc[] {
@@ -157,9 +206,11 @@ export function getAstroComponentDoc(slug: string): AstroComponentDoc | null {
   const source = findSource(componentName);
   if (!source) return null;
 
-  const block = extractPropsBlock(source);
+  const extracted = extractProps(source);
   const defaults = parseDefaults(source);
-  const props = (block ? parseProps(block) : []).map((prop) => ({
+  const extended = extracted?.extendsType ? (EXTENDED_PROP_DOCS[extracted.extendsType] ?? []) : [];
+  const local = extracted?.block ? parseProps(extracted.block) : [];
+  const props = [...extended, ...local].map((prop) => ({
     ...prop,
     default: defaults[prop.name],
   }));

@@ -48,7 +48,8 @@ export function MultiSelector({
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const selectedLabels = options.filter((o) => value.includes(o.id)).map((o) => o.label);
-  const triggerText = selectedLabels.length === 0 ? placeholder : selectedLabels.join(', ');
+  const isPlaceholder = selectedLabels.length === 0;
+  const triggerText = isPlaceholder ? placeholder : selectedLabels.join(', ');
 
   function handleSelectionChange(keys: Selection) {
     if (keys === 'all') {
@@ -72,9 +73,15 @@ export function MultiSelector({
         aria-labelledby={label ? `${labelId} ${triggerTextId}` : undefined}
         onPress={() => setIsOpen((open) => !open)}
       >
-        <span id={triggerTextId}>{triggerText}</span>
-        <span {...recipeProps(ms.triggerIcon)}>
-          <Icon name="chevronDown" size="sm" />
+        <span
+          id={triggerTextId}
+          {...recipeProps(ms.triggerValue)}
+          data-placeholder={isPlaceholder || undefined}
+        >
+          {triggerText}
+        </span>
+        <span {...recipeProps(ms.triggerIcon)} aria-hidden>
+          <Icon name="arrowsUpDown" size="sm" />
         </span>
       </AriaButton>
       <Popover
@@ -84,6 +91,7 @@ export function MultiSelector({
         onOpenChange={setIsOpen}
       >
         <ListBox
+          {...recipeProps(ms.listbox)}
           items={options}
           selectionMode="multiple"
           selectedKeys={new Set(value)}

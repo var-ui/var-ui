@@ -47,15 +47,22 @@ export function Select({
     <AriaSelect {...props} {...recipeProps(s.root)}>
       {label ? <Label {...recipeProps(s.label)}>{label}</Label> : null}
       <AriaButton {...recipeProps(s.trigger)}>
-        <SelectValue>{({ defaultChildren }) => defaultChildren ?? placeholder}</SelectValue>
-        <span {...recipeProps(s.triggerIcon)}>
+        <SelectValue {...recipeProps(s.selectValue)}>
+          {({ defaultChildren, isPlaceholder }) => (isPlaceholder ? placeholder : defaultChildren)}
+        </SelectValue>
+        <span {...recipeProps(s.triggerIcon)} aria-hidden>
           <Icon name="chevronDown" size="sm" />
         </span>
       </AriaButton>
       <Popover {...recipeProps(s.popover)} UNSTABLE_portalContainer={portalContainer}>
-        <ListBox>
+        <ListBox {...recipeProps(s.listbox)}>
           {options.map((option) => (
-            <ListBoxItem key={option.id} id={option.id} {...recipeProps(s.item)}>
+            <ListBoxItem
+              key={option.id}
+              id={option.id}
+              textValue={option.label}
+              {...recipeProps(s.item)}
+            >
               {option.label}
             </ListBoxItem>
           ))}

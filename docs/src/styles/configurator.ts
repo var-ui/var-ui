@@ -1,0 +1,128 @@
+import { designTokens as t, styles, typestyles } from '@var-ui/core';
+
+export const configuratorStyles = typestyles.styles.component(
+  'component-configurator',
+  () => ({
+    slots: [
+      'root',
+      'workspace',
+      'preview',
+      'previewInner',
+      'controls',
+      'controlGroup',
+      'controlLabel',
+      'toneGrid',
+      'sizeGrid',
+      'toneSwatch',
+      'toneSwatchActive',
+      'toneCheck',
+      'code',
+    ],
+    root: {
+      marginBlock: '1.5rem',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: t.space[3].var,
+    },
+    workspace: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 15rem',
+      gap: 0,
+      borderRadius: t.radius.lg.var,
+      border: `1px solid ${t.color.border.default.var}`,
+      backgroundColor: t.color.background.surface.var,
+      overflow: 'hidden',
+      ...styles.media('md', 'max', {
+        gridTemplateColumns: '1fr',
+      }),
+    },
+    preview: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '12rem',
+      padding: t.space[6].var,
+      borderRight: `1px solid ${t.color.border.default.var}`,
+      backgroundColor: t.color.background.app.var,
+      ...styles.media('md', 'max', {
+        borderRight: 'none',
+        borderBottom: `1px solid ${t.color.border.default.var}`,
+      }),
+    },
+    previewInner: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    controls: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: t.space[4].var,
+      padding: t.space[4].var,
+      backgroundColor: t.color.background.surface.var,
+    },
+    controlGroup: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: t.space[2].var,
+    },
+    controlLabel: {
+      fontSize: t.fontSize.sm.var,
+      fontWeight: t.fontWeight.medium.var,
+      color: t.color.text.secondary.var,
+    },
+    toneGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(6, 1fr)',
+      gap: t.space[1].var,
+    },
+    sizeGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      gap: t.space[1].var,
+    },
+    toneSwatch: {
+      position: 'relative',
+      aspectRatio: '1',
+      borderRadius: t.radius.sm.var,
+      border: `2px solid transparent`,
+      cursor: 'pointer',
+      padding: 0,
+      '&:hover': {
+        borderColor: t.color.border.strong.var,
+      },
+      '&:focus-visible': {
+        outline: `2px solid ${t.color.border.focus.var}`,
+        outlineOffset: '2px',
+      },
+    },
+    toneSwatchActive: {
+      position: 'relative',
+      aspectRatio: '1',
+      borderRadius: t.radius.sm.var,
+      border: `2px solid ${t.color.text.primary.var}`,
+      cursor: 'pointer',
+      padding: 0,
+      '&:focus-visible': {
+        outline: `2px solid ${t.color.border.focus.var}`,
+        outlineOffset: '2px',
+      },
+    },
+    toneCheck: {
+      position: 'absolute',
+      inset: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#fff',
+      fontSize: '0.75rem',
+      fontWeight: t.fontWeight.bold.var,
+      textShadow: '0 1px 2px rgb(0 0 0 / 40%)',
+    },
+    code: {
+      borderRadius: t.radius.lg.var,
+      overflow: 'hidden',
+    },
+  }),
+  { layer: 'components' },
+);

@@ -7,11 +7,25 @@ import { cx, recipeClassName, recipeProps } from './utils';
 type CodeBlockVariant = 'default' | 'inline' | 'diff' | 'terminal';
 type FeedbackTone = 'success' | 'error' | null;
 
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 export type CodeBlockProps = {
-  /** Source code string to display. */
+  /** Source code string to display and copy. */
   code: string;
   /** Language tag shown in the header (e.g. `tsx`, `bash`). */
   language?: string;
+  /** Pre-highlighted HTML for the code body. Pair with `codeClassName` from your highlighter. */
+  codeHtml?: string;
+  /** Classes for the highlighted `<code>` element (e.g. `hljs language-tsx`). */
+  codeClassName?: string;
+  /** Pre-highlighted HTML per line when `showLineNumbers` is enabled. */
+  lineHtml?: string[];
   /** Optional filename shown in the header. */
   filename?: string;
   /** Additional CSS class names merged onto the root element. */
@@ -37,6 +51,9 @@ export type CodeBlockProps = {
 export function CodeBlock({
   code,
   language,
+  codeHtml,
+  codeClassName: highlightedCodeClassName,
+  lineHtml,
   filename,
   className,
   copyable = true,
@@ -65,6 +82,8 @@ export function CodeBlock({
   const lines = useMemo(() => code.replace(/\n$/, '').split('\n'), [code]);
   const terminal = variant === 'terminal';
   const inline = variant === 'inline';
+  const useHighlightedHtml = Boolean(codeHtml || lineHtml) && !terminal;
+  const resolvedCodeClassName = cx(recipeClassName(cb.code), highlightedCodeClassName);
 
   const feedbackClassName = cx(
     recipeClassName(cb.feedback),
@@ -175,6 +194,7 @@ export function CodeBlock({
             <code {...recipeProps(cb.code, recipeClassName(cb.lines))}>
               {lines.map((line, index) => {
                 const lineNumber = index + 1;
+                const lineContentHtml = lineHtml?.[index];
                 return (
                   <span
                     key={lineNumber}
@@ -186,13 +206,23 @@ export function CodeBlock({
                     <span {...recipeProps(cb.lineNumber)} aria-hidden="true">
                       {lineNumber}
                     </span>
-                    <span {...recipeProps(cb.lineContent)}>{line || ' '}</span>
+                    <span
+                      {...recipeProps(cb.lineContent)}
+                      {...(lineContentHtml
+                        ? { dangerouslySetInnerHTML: { __html: lineContentHtml } }
+                        : { children: line || ' ' })}
+                    />
                   </span>
                 );
               })}
             </code>
+          ) : useHighlightedHtml ? (
+            <code
+              {...recipeProps(cb.code, resolvedCodeClassName)}
+              dangerouslySetInnerHTML={{ __html: codeHtml! }}
+            />
           ) : (
-            <code {...recipeProps(cb.code)}>{code}</code>
+            <code {...recipeProps(cb.code)}>{escapeHtml(code)}</code>
           )}
         </pre>
       </div>

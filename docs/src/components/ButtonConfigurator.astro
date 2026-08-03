@@ -1,0 +1,7 @@
+---
+import ButtonConfiguratorIsland from './configurator/ButtonConfigurator';
+
+const framework = Astro.locals.framework;
+---
+
+<ButtonConfiguratorIsland client:load framework={framework} />

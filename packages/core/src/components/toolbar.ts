@@ -1,5 +1,5 @@
 import { typestyles } from '../runtime';
-import { designTokens as t } from '../tokens';
+import { controlSizeMetrics, controlSizeVariants } from './controlSize';
 
 /**
  * Layout chrome for a toolbar: a flex (or grid, when `layout: 'grid'`) row of
@@ -32,23 +32,11 @@ export const toolbar = typestyles.styles.component(
       },
     },
     variants: {
-      size: {
-        sm: {
-          root: { gap: t.space[2].var, minHeight: '2rem' },
-          startSlot: { gap: t.space[2].var },
-          endSlot: { gap: t.space[2].var },
-        },
-        md: {
-          root: { gap: t.space[3].var, minHeight: '2.5rem' },
-          startSlot: { gap: t.space[3].var },
-          endSlot: { gap: t.space[3].var },
-        },
-        lg: {
-          root: { gap: t.space[4].var, minHeight: '3rem' },
-          startSlot: { gap: t.space[4].var },
-          endSlot: { gap: t.space[4].var },
-        },
-      },
+      size: controlSizeVariants((size) => ({
+        root: { gap: controlSizeMetrics[size].gap, minHeight: controlSizeMetrics[size].height },
+        startSlot: { gap: controlSizeMetrics[size].gap },
+        endSlot: { gap: controlSizeMetrics[size].gap },
+      })),
       orientation: {
         horizontal: {},
         vertical: {

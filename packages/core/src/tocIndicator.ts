@@ -1,20 +1,24 @@
+/** CSS custom properties updated by `positionTocIndicator` on the TOC list element. */
+export const tocIndicatorCssVars = {
+  y: '--var-ui-toc-indicatory',
+  height: '--var-ui-toc-indicatorheight',
+  opacity: '--var-ui-toc-indicatoropacity',
+} as const;
+
 /** Position the shared TOC indicator to match the active link's row. */
 export function positionTocIndicator(list: HTMLElement, activeLink: HTMLElement | null): void {
-  const indicator = list.querySelector<HTMLElement>('[data-toc-indicator]');
-  if (!indicator) return;
-
   if (!activeLink) {
-    indicator.style.opacity = '0';
+    list.style.setProperty(tocIndicatorCssVars.opacity, '0');
     return;
   }
 
   const item = activeLink.closest('li');
   if (!item || item.parentElement !== list) {
-    indicator.style.opacity = '0';
+    list.style.setProperty(tocIndicatorCssVars.opacity, '0');
     return;
   }
 
-  indicator.style.opacity = '1';
-  indicator.style.height = `${item.offsetHeight}px`;
-  indicator.style.transform = `translateY(${item.offsetTop}px)`;
+  list.style.setProperty(tocIndicatorCssVars.opacity, '1');
+  list.style.setProperty(tocIndicatorCssVars.height, `${item.offsetHeight}px`);
+  list.style.setProperty(tocIndicatorCssVars.y, `${item.offsetTop}px`);
 }

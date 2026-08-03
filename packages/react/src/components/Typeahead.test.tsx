@@ -5,17 +5,6 @@ import userEvent from '@testing-library/user-event';
 import { IconProvider } from '../icons';
 import { Typeahead, type TypeaheadOption } from './Typeahead';
 
-// NOTE: `typeahead` isn't exported from `@var-ui/core`'s public barrel yet — a
-// separate integration pass wires that up once every concurrently-built
-// component lands. Pull the recipe straight from core's source for this test
-// file only, so this suite can run in isolation without editing shared
-// barrel files that other in-flight work depends on.
-vi.mock('@var-ui/core', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@var-ui/core')>();
-  const { typeahead } = await import('../../../core/src/components/typeahead');
-  return { ...actual, typeahead };
-});
-
 const OPTIONS: TypeaheadOption[] = [
   { id: 'apple', label: 'Apple' },
   { id: 'apricot', label: 'Apricot' },

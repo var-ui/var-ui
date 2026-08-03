@@ -2,9 +2,19 @@
 export const prerender = false;
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ButtonConfigurator from '../../components/ButtonConfigurator.astro';
+import ComponentDocTabs from '../../components/ComponentDocTabs.astro';
+import ComponentPageHeader from '../../components/ComponentPageHeader.astro';
+import ComponentStylesPanel from '../../components/ComponentStylesPanel.astro';
 import DemoHost from '../../components/DemoHost.astro';
+import HiddenPropsTable from '../../components/HiddenPropsTable.astro';
 import PropsTable from '../../components/PropsTable.astro';
-import { Toc } from '@var-ui/astro';
+import {
+  getComponentCategoryLabel,
+  getComponentEntry,
+  getComponentSourceLinks,
+  parseComponentDocTab,
+} from '../../lib/component-page';
 import { findMdxModule } from '../../lib/loadMdx';
 
 const slug = Astro.params.slug;
@@ -18,27 +28,65 @@ if (!loader) {
   return new Response(null, { status: 404, statusText: 'Not Found' });
 }
 
+const entry = getComponentEntry(slug);
+if (!entry) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
 const { Content, frontmatter } = await loader();
+const categoryLabel = getComponentCategoryLabel(slug);
+const sourceLinks = getComponentSourceLinks(slug);
+const initialTab = parseComponentDocTab(Astro.url.searchParams.get('tab') ?? Astro.url.hash.replace(/^#/, ''));
 ---
 
-<BaseLayout title={`${frontmatter.title} · Var UI`}>
-  <article class="docs-article">
-    <Content components={{ Demo: DemoHost, PropsTable }} />
-  </article>
-  <Toc
-    slot="toc"
-    title=""
-    label="On this page"
-    auto
-    contentSelector=".docs-article"
-    hideBelowXl
-    stickyTop="calc(var(--docs-header-height, 3.5rem) + 1.5rem)"
-  />
+<BaseLayout title={`${frontmatter.title} · Var UI`} contentWidth="full">
+  <div class="component-doc-page">
+    <ComponentPageHeader entry={entry} categoryLabel={categoryLabel} sourceLinks={sourceLinks} />
+
+    <ComponentDocTabs
+      className="component-doc-tabs"
+      tabs={[
+        { id: 'documentation', label: 'Documentation' },
+        { id: 'props', label: 'Props' },
+        { id: 'styles', label: 'Styles' },
+      ]}
+      defaultSelectedId={initialTab}
+      tocContentSelector=".component-doc-panel[data-panel='documentation']"
+    >
+      <div slot="documentation">
+        <article class="docs-article docs-article--documentation component-doc-panel" data-panel="documentation">
+          <Content components={{ Demo: DemoHost, PropsTable: HiddenPropsTable, ButtonConfigurator }} />
+        </article>
+      </div>
+      <div slot="props">
+        <section class="docs-article component-doc-panel" data-panel="props" aria-label="Props">
+          <PropsTable slug={slug} />
+        </section>
+      </div>
+      <div slot="styles">
+        <section class="docs-article component-doc-panel" data-panel="styles" aria-label="Styles">
+          <ComponentStylesPanel slug={slug} />
+        </section>
+      </div>
+    </ComponentDocTabs>
+  </div>
 </BaseLayout>
 
+<script>
+  import '../../scripts/componentPageTabs.ts';
+</script>
+
 <style>
+  .component-doc-page {
+    width: 100%;
+  }
+
+  .component-doc-tabs {
+    margin-block-start: 0.25rem;
+  }
+
   .docs-article {
-    max-width: 48rem;
+    min-width: 0;
   }
 
   .docs-article :global(h1) {
@@ -64,5 +112,15 @@ const { Content, frontmatter } = await loader();
 
   .docs-article :global(code) {
     font-size: 0.9em;
+  }
+
+  .docs-article--documentation :global(h1:first-of-type),
+  .docs-article--documentation :global(h1:first-of-type + p) {
+    display: none;
+  }
+
+  .docs-article--documentation :global(h2#props),
+  .docs-article--documentation :global(h2#props + *) {
+    display: none;
   }
 </style>

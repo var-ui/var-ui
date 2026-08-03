@@ -1,42 +1,21 @@
-import { createTocSpy, positionTocIndicator, toc, type TocHeading } from '@var-ui/core';
-import type { RecipeClass } from '../utils';
+import { createTocSpy, positionTocIndicator, type TocHeading } from '@var-ui/core/internal';
+import { toc } from '@var-ui/core';
 import { recipeClassName } from '../utils';
 
 const ROOT_SELECTOR = '[data-var-ui-toc]';
 const INITIALIZED_ATTR = 'data-var-ui-toc-initialized';
 
-function slotClass(slot: RecipeClass): string {
-  return recipeClassName(slot);
-}
-
-function ensureIndicator(list: HTMLOListElement): void {
-  if (list.querySelector('[data-toc-indicator]')) return;
-
-  const s = toc();
-  const indicator = document.createElement('span');
-  indicator.className = slotClass(s.indicator);
-  indicator.dataset.tocIndicator = '';
-  indicator.setAttribute('aria-hidden', 'true');
-  list.prepend(indicator);
-}
-
 function renderTocList(list: HTMLOListElement, headings: TocHeading[]): void {
   const s = toc();
-  ensureIndicator(list);
-
-  for (const child of [...list.children]) {
-    if (!(child instanceof HTMLElement) || !child.hasAttribute('data-toc-indicator')) {
-      child.remove();
-    }
-  }
+  list.replaceChildren();
 
   for (const heading of headings) {
     const item = document.createElement('li');
-    item.className = slotClass(s.item);
+    item.className = recipeClassName(s.item);
     if (heading.level === 3) item.dataset.nested = '';
 
     const link = document.createElement('a');
-    link.className = slotClass(s.link);
+    link.className = recipeClassName(s.link);
     link.href = `#${heading.id}`;
     link.textContent = heading.text;
     link.dataset.tocLink = heading.id;
@@ -92,11 +71,7 @@ export function initToc(root: HTMLElement): () => void {
     onHeadingsChange: (headings) => {
       if (headings.length < minHeadings) {
         root.hidden = true;
-        for (const child of [...list.children]) {
-          if (!(child instanceof HTMLElement) || !child.hasAttribute('data-toc-indicator')) {
-            child.remove();
-          }
-        }
+        list.replaceChildren();
         setActive(list, null);
         return;
       }

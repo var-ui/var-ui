@@ -4,7 +4,7 @@ export default function Preview() {
   return (
     <HStack gap="sm" wrap>
       <Button isDisabled>Disabled</Button>
-      <Button intent="primary" isDisabled>
+      <Button tone="accent" appearance="filled" isDisabled>
         Disabled primary
       </Button>
     </HStack>

@@ -7,4 +7,5 @@ export const radiusTokenSchema = {
   lg: atProperty.lengthPercentage,
   xl: atProperty.lengthPercentage,
   full: atProperty.lengthPercentage,
+  navItem: atProperty.lengthPercentage,
 } as const satisfies TokenSchema;

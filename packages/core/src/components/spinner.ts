@@ -1,6 +1,13 @@
 import { keyframes } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import {
+  semanticTone,
+  subtleBackgroundColor,
+  type ButtonTone,
+  type ControlSize,
+  type SpinnerAppearance,
+} from './semanticTone';
 
 const spin = keyframes.create('var-ui-spin', {
   from: { transform: 'rotate(0deg)' },
@@ -9,11 +16,6 @@ const spin = keyframes.create('var-ui-spin', {
 
 /**
  * Indeterminate loading ring. Use `progressBar` when progress is measurable.
- * Reduced-motion users get a slow, less dizzying rotation.
- *
- * ```tsx
- * <span className={spinner({ size: 'md' })} />
- * ```
  */
 export const spinner = typestyles.styles.component(
   'spinner',
@@ -49,12 +51,40 @@ export const spinner = typestyles.styles.component(
           lg: { [v.size.name]: '32px', borderWidth: '3px' },
         },
         tone: {
-          accent: {},
+          accent: { [v.indicatorColor.name]: semanticTone.accent.semantic },
+          success: { [v.indicatorColor.name]: semanticTone.success.semantic },
+          warning: { [v.indicatorColor.name]: semanticTone.warning.semantic },
+          danger: { [v.indicatorColor.name]: semanticTone.danger.semantic },
+          info: { [v.indicatorColor.name]: semanticTone.info.semantic },
           neutral: { [v.indicatorColor.name]: t.color.text.secondary.var },
         },
+        appearance: {
+          solid: {},
+          subtle: {
+            [v.trackColor.name]: subtleBackgroundColor(v.indicatorColor.var),
+          },
+        },
       },
-      defaultVariants: { size: 'md', tone: 'accent' },
+      defaultVariants: { size: 'md', tone: 'accent', appearance: 'solid' },
     };
   },
   { layer: 'components' },
 );
+
+export type SpinnerRecipeProps = NonNullable<Parameters<typeof spinner>[0]>;
+
+export type SpinnerVariantProps = {
+  size?: ControlSize;
+  tone?: ButtonTone;
+  appearance?: SpinnerAppearance;
+};
+
+export const spinnerVariantPropDocs = [
+  { name: 'size', type: 'ControlSize', required: false },
+  { name: 'tone', type: 'ButtonTone', required: false },
+  { name: 'appearance', type: 'SpinnerAppearance', required: false },
+] as const satisfies ReadonlyArray<{
+  name: keyof SpinnerVariantProps;
+  type: string;
+  required: false;
+}>;

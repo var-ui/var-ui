@@ -1,9 +1,10 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import {
+  appearanceSurface,
   semanticChannelAssignments,
-  subtleBackgroundColor,
-  subtleBorderColor,
+  type FeedbackTone,
+  type SurfaceAppearance,
 } from './semanticTone';
 
 /**
@@ -65,7 +66,7 @@ export const banner = typestyles.styles.component(
           display: 'inline-flex',
           padding: t.space[1].var,
           borderRadius: t.radius.sm.var,
-          '&:hover': { backgroundColor: subtleBackgroundColor(v.semantic.var) },
+          '&:hover': { backgroundColor: appearanceSurface(v, 'subtle').backgroundColor },
           '&:focus-visible': {
             outline: `2px solid ${t.color.border.focus.var}`,
             outlineOffset: '1px',
@@ -81,16 +82,15 @@ export const banner = typestyles.styles.component(
         },
         appearance: {
           subtle: {
-            root: {
-              backgroundColor: subtleBackgroundColor(v.semantic.var),
-              borderBlock: `1px solid ${subtleBorderColor(v.semantic.var)}`,
-              color: t.color.text.primary.var,
-            },
+            root: appearanceSurface(v, 'subtle', { includeBorder: false }),
           },
           solid: {
-            root: { backgroundColor: v.solidBg.var, color: v.solidFg.var },
+            root: appearanceSurface(v, 'solid', { includeBorder: false }),
             icon: { color: 'inherit' },
             title: { color: 'inherit' },
+          },
+          outline: {
+            root: appearanceSurface(v, 'outline', { includeBorder: false }),
           },
         },
       },
@@ -99,3 +99,19 @@ export const banner = typestyles.styles.component(
   },
   { layer: 'components' },
 );
+
+export type BannerRecipeProps = NonNullable<Parameters<typeof banner>[0]>;
+export type BannerTone = FeedbackTone;
+export type BannerVariantProps = {
+  tone?: BannerTone;
+  appearance?: SurfaceAppearance;
+};
+
+export const bannerVariantPropDocs = [
+  { name: 'tone', type: 'BannerTone', required: false },
+  { name: 'appearance', type: 'SurfaceAppearance', required: false },
+] as const satisfies ReadonlyArray<{
+  name: keyof BannerVariantProps;
+  type: string;
+  required: false;
+}>;

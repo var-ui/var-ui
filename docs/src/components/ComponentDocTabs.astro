@@ -1,0 +1,151 @@
+---
+import { Fragment } from 'astro/jsx-runtime';
+import { tabs as tabsRecipe } from '@var-ui/core';
+import { recipeProps } from '../lib/recipeProps';
+import { Toc } from '@var-ui/astro';
+
+type TabDef = { id: string; label: string };
+
+type Props = {
+  tabs: TabDef[];
+  defaultSelectedId?: string;
+  className?: string;
+  tocContentSelector: string;
+};
+
+const { tabs, defaultSelectedId, className, tocContentSelector } = Astro.props;
+const selected = defaultSelectedId ?? tabs[0]?.id;
+const t = tabsRecipe();
+const rootClass = recipeProps(t.root, className).className;
+const listClass = recipeProps(t.list).className;
+const tabClass = recipeProps(t.tab).className;
+
+const panelSlots = await Promise.all(
+  tabs.map(async (tab) => ({
+    id: tab.id,
+    content: Astro.slots.has(tab.id) ? await Astro.slots.render(tab.id) : null,
+  })),
+);
+---
+
+<div data-var-ui-tabs data-component-doc-tabs class={rootClass}>
+  <div role="tablist" class={listClass}>
+    {
+      tabs.map((tab) => (
+        <button
+          type="button"
+          role="tab"
+          id={`tab-${tab.id}`}
+          aria-controls={`panel-${tab.id}`}
+          aria-selected={tab.id === selected ? 'true' : 'false'}
+          tabindex={tab.id === selected ? 0 : -1}
+          data-selected={tab.id === selected ? '' : undefined}
+          class={tabClass}
+        >
+          {tab.label}
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="component-doc-tabs__body" data-component-doc-body>
+    <div class="component-doc-tabs__panels">
+      {
+        tabs.map((tab) => {
+          const slotContent = panelSlots.find((panel) => panel.id === tab.id)?.content;
+          return (
+            <div
+              role="tabpanel"
+              id={`panel-${tab.id}`}
+              aria-labelledby={`tab-${tab.id}`}
+              hidden={tab.id !== selected ? true : undefined}
+              class="component-doc-tabs__panel"
+            >
+              {slotContent ? <Fragment set:html={slotContent} /> : null}
+            </div>
+          );
+        })
+      }
+    </div>
+
+    <aside
+      class="component-doc-tabs__toc"
+      data-component-doc-toc
+      hidden={selected !== 'documentation' ? true : undefined}
+      aria-label="On this page"
+    >
+      <Toc
+        title="On this page"
+        label="On this page"
+        auto
+        contentSelector={tocContentSelector}
+        headingSelector="h2[id]:not(#props), h3[id]"
+        className="component-doc-toc"
+        stickyTop="calc(var(--docs-header-height, 3.5rem) + 1.5rem)"
+      />
+    </aside>
+  </div>
+</div>
+
+<style>
+  .component-doc-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .component-doc-tabs__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 13.75rem;
+    gap: 2.5rem;
+    align-items: start;
+    margin-block-start: 1.25rem;
+    padding-block-start: 1.25rem;
+  }
+
+  .component-doc-tabs__body:has(.component-doc-tabs__toc[hidden]) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .component-doc-tabs__panels {
+    min-width: 0;
+  }
+
+  .component-doc-tabs :global([role='tabpanel']) {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .component-doc-tabs__toc {
+    position: sticky;
+    top: calc(var(--docs-header-height, 3.5rem) + 1.25rem);
+    align-self: start;
+    min-width: 0;
+    max-height: calc(100dvh - var(--docs-header-height, 3.5rem) - 2rem);
+    overflow-y: auto;
+  }
+
+  .component-doc-tabs__toc[hidden] {
+    display: none;
+  }
+
+  .component-doc-tabs :global(.component-doc-toc) {
+    position: static;
+    top: auto;
+    padding: 0;
+    max-height: none;
+    overflow: visible;
+  }
+
+  @media (max-width: 960px) {
+    .component-doc-tabs__body {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .component-doc-tabs__toc {
+      display: none;
+    }
+  }
+</style>

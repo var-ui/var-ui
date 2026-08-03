@@ -1,9 +1,12 @@
+import { positionTabsIndicator } from '@var-ui/core/internal';
+
 export function createTabsController(root: HTMLElement): void {
   if (root.hasAttribute('data-var-ui-tabs-initialized')) return;
   root.setAttribute('data-var-ui-tabs-initialized', '');
 
-  const tablist = root.querySelector('[role="tablist"]');
-  if (!tablist) return;
+  const tablistEl = root.querySelector('[role="tablist"]');
+  if (!(tablistEl instanceof HTMLElement)) return;
+  const tablist = tablistEl;
 
   const tabs = Array.from(tablist.querySelectorAll<HTMLElement>('[role="tab"]'));
   const panels = Array.from(root.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
@@ -12,6 +15,12 @@ export function createTabsController(root: HTMLElement): void {
     const panelId = tab.getAttribute('aria-controls');
     if (!panelId) return null;
     return panels.find((panel) => panel.id === panelId) ?? null;
+  }
+
+  function positionIndicator(): void {
+    const activeTab = tablist.querySelector('[role="tab"][aria-selected="true"]');
+    if (!(activeTab instanceof HTMLElement)) return;
+    positionTabsIndicator(tablist, activeTab);
   }
 
   function selectTab(tab: HTMLElement): void {
@@ -33,6 +42,8 @@ export function createTabsController(root: HTMLElement): void {
         panel.setAttribute('hidden', '');
       }
     });
+
+    positionIndicator();
   }
 
   tabs.forEach((tab) => {
@@ -73,4 +84,6 @@ export function createTabsController(root: HTMLElement): void {
     selectTab(nextTab);
     nextTab.focus();
   });
+
+  positionIndicator();
 }

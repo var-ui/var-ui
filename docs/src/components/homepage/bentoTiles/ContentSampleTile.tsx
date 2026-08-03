@@ -1,6 +1,7 @@
 'use client';
 
-import { CodeBlock, Heading, Link, Text, Timestamp, VStack } from '@var-ui/react';
+import { HighlightedCodeBlock } from '../../HighlightedCodeBlock';
+import { Heading, Link, Text, Timestamp, VStack } from '@var-ui/react';
 
 export type ContentSampleTileProps = {
   className?: string;
@@ -21,7 +22,7 @@ export function ContentSampleTile({ className }: ContentSampleTileProps) {
           <code>SURFACE_ATTRIBUTE</code>). See <Link href="/theming">the theming guide</Link> for
           details.
         </Text>
-        <CodeBlock code={"import { Button } from '@var-ui/react';"} language="tsx" />
+        <HighlightedCodeBlock code={"import { Button } from '@var-ui/react';"} language="tsx" />
       </VStack>
     </div>
   );

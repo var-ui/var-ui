@@ -1,0 +1,22 @@
+---
+import { combobox } from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+const cb = combobox();
+---
+
+<div {...recipeProps(cb.root)}>
+  <label {...recipeProps(cb.label)} for="fruit-field">Favorite fruit</label>
+  <div {...recipeProps(cb.inputWrapper)}>
+    <input
+      {...recipeProps(cb.input)}
+      id="fruit-field"
+      type="text"
+      placeholder="Search fruits…"
+      role="combobox"
+      aria-invalid="true"
+    />
+  </div>
+  <p {...recipeProps(cb.description)}>Pick a fruit from the list.</p>
+  <p {...recipeProps(cb.error)}>Selection is required.</p>
+</div>

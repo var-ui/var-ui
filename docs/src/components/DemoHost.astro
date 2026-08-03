@@ -13,13 +13,15 @@ type Props = {
 const { id, title } = Astro.props;
 const framework = Astro.locals.framework;
 const code = demoSnippets[id][framework];
-const language = framework === 'react' ? 'tsx' : 'html';
+const language = framework === 'react' ? 'tsx' : framework === 'astro' ? 'astro' : 'html';
+const filename =
+  framework === 'react' ? 'Demo.tsx' : framework === 'astro' ? 'Demo.astro' : 'Demo.html';
 
 const AstroPreview = framework === 'astro' ? astroDemoMap[id] : undefined;
 const htmlMarkup = framework === 'html' ? htmlDemoMap[id]() : undefined;
 ---
 
-<DemoChrome code={code} language={language} title={title}>
+<DemoChrome code={code} language={language} filename={filename} framework={framework} title={title}>
   {framework === 'react' ? <DemoReactIsland client:load id={id} /> : null}
   {framework === 'astro' && AstroPreview ? <AstroPreview /> : null}
   {framework === 'html' && htmlMarkup != null ? <Fragment set:html={htmlMarkup} /> : null}

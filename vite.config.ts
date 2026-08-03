@@ -46,6 +46,13 @@ export default defineConfig({
     cache: true,
   },
   test: {
-    projects: ['packages/core', 'packages/react', 'packages/icons', 'packages/astro', 'docs'],
+    projects: [
+      'packages/core',
+      'packages/react',
+      'packages/form',
+      'packages/icons',
+      'packages/astro',
+      'docs',
+    ],
   },
 });

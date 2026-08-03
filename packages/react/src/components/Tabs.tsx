@@ -1,4 +1,5 @@
 import type { JSX, ReactNode } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import {
   Tab,
   TabList,
@@ -7,6 +8,7 @@ import {
   type TabsProps as RACTabsProps,
 } from 'react-aria-components';
 import { tabs as tabsStyles } from '@var-ui/core';
+import { positionTabsIndicator } from '@var-ui/core/internal';
 import { recipeProps } from './utils';
 
 type TabDefinition = {
@@ -20,11 +22,41 @@ export type TabsProps = Omit<RACTabsProps, 'children'> & {
   tabs: TabDefinition[];
 };
 
-export function Tabs({ tabs, ...props }: TabsProps): JSX.Element {
+export function Tabs({
+  tabs,
+  selectedKey,
+  defaultSelectedKey,
+  onSelectionChange,
+  ...props
+}: TabsProps): JSX.Element {
   const t = tabsStyles();
+  const listRef = useRef<HTMLDivElement>(null);
+  const isControlled = selectedKey !== undefined;
+  const [uncontrolledKey, setUncontrolledKey] = useState(defaultSelectedKey ?? tabs[0]?.id);
+  const activeKey = isControlled ? selectedKey : uncontrolledKey;
+
+  useLayoutEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+
+    const activeTab = list.querySelector<HTMLElement>('[role="tab"][aria-selected="true"]');
+    positionTabsIndicator(list, activeTab);
+  }, [activeKey, tabs]);
+
   return (
-    <AriaTabs {...props} {...recipeProps(t.root)}>
-      <TabList {...recipeProps(t.list)}>
+    <AriaTabs
+      {...props}
+      selectedKey={selectedKey}
+      defaultSelectedKey={defaultSelectedKey}
+      onSelectionChange={(key) => {
+        if (!isControlled) {
+          setUncontrolledKey(key);
+        }
+        onSelectionChange?.(key);
+      }}
+      {...recipeProps(t.root)}
+    >
+      <TabList ref={listRef} {...recipeProps(t.list)}>
         {tabs.map((tab) => (
           <Tab key={tab.id} id={tab.id} {...recipeProps(t.tab)}>
             {tab.label}

@@ -1,15 +1,9 @@
 import type { CSSProperties, JSX } from 'react';
-import { spinner } from '@var-ui/core';
+import { spinner, type SpinnerVariantProps } from '@var-ui/core';
 import { recipeProps } from './utils';
 
-export type SpinnerProps = {
-  /** Diameter of the spinner ring. @default md */
-  size?: 'sm' | 'md' | 'lg';
-  /** Color treatment. @default accent */
-  tone?: 'accent' | 'neutral';
-  /** Accessible loading announcement. @default Loading */
+export type SpinnerProps = SpinnerVariantProps & {
   label?: string;
-  /** Additional CSS class names merged onto the root element. */
   className?: string;
 };
 
@@ -25,22 +19,16 @@ const visuallyHidden: CSSProperties = {
   border: 0,
 };
 
-/**
- * Indeterminate loading indicator with a screen-reader-only status label.
- *
- * ```tsx
- * <Spinner size="lg" label="Loading results" />
- * ```
- */
 export function Spinner({
   size = 'md',
   tone = 'accent',
+  appearance = 'solid',
   label = 'Loading',
   className,
 }: SpinnerProps): JSX.Element {
   return (
     <span role="status" className={className}>
-      <span {...recipeProps(spinner({ size, tone }))} aria-hidden="true" />
+      <span {...recipeProps(spinner({ size, tone, appearance }))} aria-hidden="true" />
       <span style={visuallyHidden}>{label}</span>
     </span>
   );

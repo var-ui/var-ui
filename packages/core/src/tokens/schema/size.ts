@@ -11,4 +11,7 @@ export const sizeTokenSchema = {
     md: atProperty.length,
     lg: atProperty.length,
   },
+  nav: {
+    bar: atProperty.length,
+  },
 } as const satisfies TokenSchema;

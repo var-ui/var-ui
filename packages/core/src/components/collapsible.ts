@@ -28,15 +28,19 @@ export const collapsible = typestyles.styles.component(
       slots: ['root', 'trigger', 'triggerIcon', 'panel'],
       base: {
         root: {
+          [v.border.name]: t.color.border.default.var,
+          [v.background.name]: t.color.background.surface.var,
+          [v.triggerColor.name]: t.color.text.primary.var,
+          [v.hoverBg.name]: t.color.background.subtle.var,
           display: 'flex',
           flexDirection: 'column',
           minWidth: 0,
           // RAC Disclosure sets `data-expanded` on the root when open.
-          [`&[data-expanded] .var-ui-collapsible__trigger-icon`]: {
+          [`&[data-expanded] .var-ui-collapsible__triggerIcon`]: {
             transform: 'rotate(180deg)',
           },
           // Fallback when expanded state is only on the trigger button.
-          [`&:has([aria-expanded="true"]) .var-ui-collapsible__trigger-icon`]: {
+          [`&:has([aria-expanded="true"]) .var-ui-collapsible__triggerIcon`]: {
             transform: 'rotate(180deg)',
           },
         },
@@ -92,3 +96,18 @@ export const collapsible = typestyles.styles.component(
   },
   { layer: 'components' },
 );
+
+export type CollapsibleRecipeProps = NonNullable<Parameters<typeof collapsible>[0]>;
+export type CollapsibleVariant = NonNullable<CollapsibleRecipeProps['variant']>;
+
+export type CollapsibleVariantProps = {
+  variant?: CollapsibleVariant;
+};
+
+export const collapsibleVariantPropDocs = [
+  { name: 'variant', type: "'flush' | 'bordered'", required: false },
+] as const satisfies ReadonlyArray<{
+  name: keyof CollapsibleVariantProps;
+  type: string;
+  required: false;
+}>;

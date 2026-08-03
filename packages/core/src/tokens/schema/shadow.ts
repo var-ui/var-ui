@@ -1,14 +1,15 @@
 import type { TokenSchema } from 'typestyles';
+import { customToken } from './custom';
 
 export const shadowTokenSchema = {
-  xs: { syntax: '*' },
-  sm: { syntax: '*' },
-  md: { syntax: '*' },
-  lg: { syntax: '*' },
-  xl: { syntax: '*' },
+  xs: customToken,
+  sm: customToken,
+  md: customToken,
+  lg: customToken,
+  xl: customToken,
   elevation: {
-    low: { syntax: '*' },
-    med: { syntax: '*' },
-    high: { syntax: '*' },
+    low: customToken,
+    med: customToken,
+    high: customToken,
   },
 } as const satisfies TokenSchema;

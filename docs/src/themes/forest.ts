@@ -13,46 +13,47 @@ import {
   neoBrutalistBorderDarkStrong,
   neoBrutalistShadowOffsetDark,
   neoBrutalistShadowOffsetLight,
+  neoBrutalistShadowValues,
+  resolvedDarkColorModeWhen,
 } from './neo-brutalist-shadows';
 
 const forestDarkHue = 165;
 
-const forestLightSubtle = p.palette['sage-2'].var;
+const forestLightSubtle = p.color.palette['sage-2'].var;
 
 const forestLightColorValues = {
   background: {
-    app: p.palette['sage-1'].var,
-    surface: p.palette['neutral-1'].var,
+    app: p.color.palette['sage-1'].var,
+    surface: p.color.palette['neutral-1'].var,
     subtle: forestLightSubtle,
-    elevated: p.palette['neutral-1'].var,
-    popover: p.palette['neutral-1'].var,
+    elevated: p.color.palette['neutral-1'].var,
+    popover: p.color.palette['neutral-1'].var,
     muted: forestLightSubtle,
   },
   text: {
-    primary: p.palette['sage-10'].var,
-    secondary: p.palette['sage-7'].var,
+    primary: p.color.palette['sage-10'].var,
+    secondary: p.color.palette['sage-7'].var,
     onAccent: '#000',
-    onDanger: p.palette['neutral-1'].var,
-    onSuccess: p.palette['neutral-1'].var,
-    onWarning: p.palette['stone-10'].var,
-    onInfo: p.palette['neutral-1'].var,
+    onDanger: p.color.palette['neutral-1'].var,
+    onSuccess: p.color.palette['neutral-1'].var,
+    onWarning: p.color.palette['stone-10'].var,
+    onInfo: p.color.palette['neutral-1'].var,
   },
-  accent: { default: p.palette['green-6'].var, hover: p.palette['green-7'].var },
+  accent: { default: p.color.palette['green-6'].var, hover: p.color.palette['green-7'].var },
   border: {
     default: '#000',
     strong: '#000',
-    focus: p.palette['green-5'].var,
+    focus: p.color.palette['green-5'].var,
   },
-  shadow: { offset: neoBrutalistShadowOffsetLight(forestLightSubtle) },
-  danger: { default: p.palette['red-7'].var, solid: p.palette['red-8'].var },
-  success: { default: p.palette['green-7'].var, solid: p.palette['green-8'].var },
-  warning: { default: p.palette['amber-7'].var, onSolid: p.palette['stone-10'].var },
-  info: { default: p.palette['jade-7'].var, onSolid: p.palette['neutral-1'].var },
+  danger: { default: p.color.palette['red-7'].var, solid: p.color.palette['red-8'].var },
+  success: { default: p.color.palette['green-7'].var, solid: p.color.palette['green-8'].var },
+  warning: { default: p.color.palette['amber-7'].var, onSolid: p.color.palette['stone-10'].var },
+  info: { default: p.color.palette['jade-7'].var, onSolid: p.color.palette['neutral-1'].var },
   overlay: {
-    default: color.alpha(p.palette['sage-10'].var, 0.55, 'oklch'),
-    panel: p.palette['neutral-1'].var,
+    default: color.alpha(p.color.palette['sage-10'].var, 0.55, 'oklch'),
+    panel: p.color.palette['neutral-1'].var,
   },
-  link: { default: p.palette['green-6'].var, hover: p.palette['green-7'].var },
+  link: { default: p.color.palette['green-6'].var, hover: p.color.palette['green-7'].var },
   code: lightSyntaxValues,
 };
 
@@ -66,46 +67,46 @@ const forestDarkColorValues = {
     muted: color.oklch('31%', 0.018, 165),
   },
   text: {
-    primary: p.palette['sage-1'].var,
-    secondary: p.palette['sage-3'].var,
+    primary: p.color.palette['sage-1'].var,
+    secondary: p.color.palette['sage-3'].var,
     onAccent: '#000',
-    onDanger: p.palette['neutral-1'].var,
-    onSuccess: p.palette['neutral-1'].var,
-    onWarning: p.palette['stone-10'].var,
-    onInfo: p.palette['neutral-1'].var,
+    onDanger: p.color.palette['neutral-1'].var,
+    onSuccess: p.color.palette['neutral-1'].var,
+    onWarning: p.color.palette['stone-10'].var,
+    onInfo: p.color.palette['neutral-1'].var,
   },
-  accent: { default: p.palette['green-3'].var, hover: p.palette['green-2'].var },
+  accent: { default: p.color.palette['green-3'].var, hover: p.color.palette['green-2'].var },
   border: {
     default: neoBrutalistBorderDarkDefault(forestDarkHue),
     strong: neoBrutalistBorderDarkStrong(forestDarkHue),
-    focus: p.palette['green-4'].var,
+    focus: p.color.palette['green-4'].var,
   },
-  shadow: { offset: neoBrutalistShadowOffsetDark(forestDarkHue) },
-  danger: { default: p.palette['red-4'].var, solid: p.palette['red-7'].var },
-  success: { default: p.palette['green-4'].var, solid: p.palette['green-7'].var },
-  warning: { default: p.palette['amber-4'].var, onSolid: p.palette['stone-10'].var },
-  info: { default: p.palette['jade-4'].var, onSolid: p.palette['neutral-1'].var },
+  danger: { default: p.color.palette['red-4'].var, solid: p.color.palette['red-7'].var },
+  success: { default: p.color.palette['green-4'].var, solid: p.color.palette['green-7'].var },
+  warning: { default: p.color.palette['amber-4'].var, onSolid: p.color.palette['stone-10'].var },
+  info: { default: p.color.palette['jade-4'].var, onSolid: p.color.palette['neutral-1'].var },
   overlay: {
-    default: color.alpha(p.palette['sage-10'].var, 0.7, 'oklch'),
+    default: color.alpha(p.color.palette['sage-10'].var, 0.7, 'oklch'),
     panel: color.oklch('27%', 0.02, 165),
   },
-  link: { default: p.palette['green-3'].var, hover: p.palette['green-2'].var },
+  link: { default: p.color.palette['green-3'].var, hover: p.color.palette['green-2'].var },
   code: darkSyntaxValues,
 };
 
-const forestShadowValues = {
-  xs: `1px 1px 0 0 ${p.color.shadow.offset.var}`,
-  sm: `2px 2px 0 0 ${p.color.shadow.offset.var}`,
-  md: `3px 3px 0 0 ${p.color.shadow.offset.var}`,
-  lg: `4px 4px 0 0 ${p.color.shadow.offset.var}`,
-  xl: `5px 5px 0 0 ${p.color.shadow.offset.var}`,
+const forestLightShadowValues = {
+  ...neoBrutalistShadowValues(neoBrutalistShadowOffsetLight(forestLightSubtle)),
+  elevation: shadowElevationValues,
+} satisfies DesignTokens['shadow'];
+
+const forestDarkShadowValues = {
+  ...neoBrutalistShadowValues(neoBrutalistShadowOffsetDark(forestDarkHue)),
   elevation: shadowElevationValues,
 } satisfies DesignTokens['shadow'];
 
 export const forestPreset: DesignThemePreset = {
   tokens: {
     color: forestLightColorValues,
-    shadow: forestShadowValues,
+    shadow: forestLightShadowValues,
   },
   colorMode: {
     dark: forestDarkColorValues,
@@ -115,4 +116,11 @@ export const forestPreset: DesignThemePreset = {
 export const forestTheme = createDesignTheme({
   name: 'forest',
   ...forestPreset,
+  modes: [
+    {
+      id: 'dark-shadow',
+      overrides: { shadow: forestDarkShadowValues },
+      when: resolvedDarkColorModeWhen,
+    },
+  ],
 });

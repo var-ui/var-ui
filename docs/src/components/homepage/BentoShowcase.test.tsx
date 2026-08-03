@@ -34,16 +34,11 @@ describe('BentoShowcase', () => {
     expect(screen.getByText("You're on the Free plan")).toBeTruthy();
   });
 
-  it('applies the selected theme class and the ambient light/dark mode to the container', () => {
+  it('applies the selected theme class and inherits color-scheme from the docs site', () => {
     renderShowcase('forest');
-    const container = screen.getByTestId('bento-showcase');
+    const container = screen.getByTestId('bento-showcase') as HTMLElement;
     expect(container.className).toContain(forestTheme.className);
-    expect(container.getAttribute('data-mode')).toBe('light');
-  });
-
-  it('passes through a "system" ambient mode to the container', () => {
-    renderShowcase('default', 'system');
-    const container = screen.getByTestId('bento-showcase');
-    expect(container.getAttribute('data-mode')).toBe('system');
+    expect(container.getAttribute('data-mode')).toBeNull();
+    expect(container.style.colorScheme).toBe('inherit');
   });
 });

@@ -1,18 +1,22 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import {
   AppShell,
   ColorModeToggle,
+  cx,
   Layout,
   LayoutContent,
   LayoutPanel,
   MobileNav,
   MobileNavToggle,
+  recipeClassName,
   SideNav,
   ThemeScript,
   TopNav,
   TopNavHeading,
   TopNavItem,
 } from '@var-ui/astro';
+import { codeHljsScope } from '@/styles/codeHighlight';
 import { defaultThemeClassName } from '@var-ui/core';
 import DocsSearch from '../components/DocsSearch.astro';
 import DocsSidebarNav from '../components/DocsSidebarNav.astro';
@@ -23,7 +27,10 @@ import {
   topNav as topNavItems,
 } from '../data/navigation';
 
-const { title = 'Var UI' } = Astro.props;
+const { title = 'Var UI', contentWidth = 'default' } = Astro.props as {
+  title?: string;
+  contentWidth?: 'default' | 'full';
+};
 const framework = Astro.locals.framework;
 const pathname = Astro.url.pathname;
 
@@ -32,6 +39,8 @@ function normalizePath(path: string): string {
 }
 
 const currentPath = normalizePath(pathname);
+
+const hljsScopeClass = recipeClassName(codeHljsScope().root);
 
 const sidebarSections = currentPath.startsWith('/components')
   ? componentSidebarSections
@@ -51,8 +60,9 @@ function isSidebarLinkActive(link: string): boolean {
     <title>{title}</title>
     <ThemeScript themeClass={defaultThemeClassName} />
     <link rel="stylesheet" href="/typestyles.css" />
+    <ClientRouter />
   </head>
-  <body class="docs-body">
+  <body class={cx('docs-body', hljsScopeClass)}>
     <AppShell variant="wash" height="fill" contentPadding={0} mobileBreakpoint="md">
       <TopNav slot="topNav">
         <TopNavHeading slot="heading" heading="Var UI" headingHref="/" />
@@ -67,9 +77,15 @@ function isSidebarLinkActive(link: string): boolean {
         }
         <div slot="end" class="docs-top-nav__tools">
           {sidebarSections ? <MobileNavToggle /> : null}
-          <DocsSearch />
-          <FrameworkSwitcher />
-          <ColorModeToggle includeSystem size="sm" />
+          <div
+            class="docs-top-nav__tools-persist"
+            transition:persist="docs-top-nav-tools"
+            transition:animate="none"
+          >
+            <DocsSearch />
+            <FrameworkSwitcher />
+            <ColorModeToggle includeSystem size="md" />
+          </div>
         </div>
       </TopNav>
 
@@ -83,14 +99,14 @@ function isSidebarLinkActive(link: string): boolean {
 
       {
         sidebarSections ? (
-          <Layout height="fill" padding={0} class="docs-site-layout">
+          <Layout height="fill" padding={0} className="docs-site-layout">
             <LayoutPanel slot="start" side="start" width={280} hasDivider padding={0} isScrollable={false}>
               <SideNav label="Section navigation" collapsible>
                 <DocsSidebarNav sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
               </SideNav>
             </LayoutPanel>
             <LayoutContent label="Main content">
-              <div class="docs-content">
+              <div class:list={['docs-content', contentWidth === 'full' && 'docs-content--full']}>
                 <slot />
               </div>
             </LayoutContent>
@@ -111,7 +127,7 @@ function isSidebarLinkActive(link: string): boolean {
             }
           </Layout>
         ) : (
-          <Layout height="fill" padding={6} class="docs-site-layout">
+          <Layout height="fill" padding={6} className="docs-site-layout">
             <LayoutContent label="Main content">
               <div class="docs-content">
                 <slot />
@@ -121,6 +137,10 @@ function isSidebarLinkActive(link: string): boolean {
         )
       }
     </AppShell>
+    <script>
+      import '../../typestyles-entry.ts';
+      import '../scripts/reattachTypestyles.ts';
+    </script>
   </body>
 </html>
 
@@ -150,6 +170,12 @@ function isSidebarLinkActive(link: string): boolean {
     gap: 1rem;
   }
 
+  .docs-top-nav__tools-persist {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
   .docs-site-layout {
     flex: 1 1 auto;
     min-height: 0;
@@ -160,5 +186,12 @@ function isSidebarLinkActive(link: string): boolean {
     max-width: 60rem;
     margin: 0 auto;
     padding-bottom: 3rem;
+  }
+
+  .docs-content--full {
+    max-width: none;
+    margin: 0;
+    padding-inline: var(--var-ui-space-10);
+    padding-block: var(--var-ui-space-10);
   }
 </style>

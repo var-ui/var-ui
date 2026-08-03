@@ -38,7 +38,20 @@ export function atReducedMotion(style: VariantOptionStyle) {
   return typestyles.styles.atRuleBlock(reducedMotionAtRule, style);
 }
 
-/** Build a `conditions` entry — prefer `{ light, dark }` on color properties when possible. */
+/**
+ * Resolved dark-mode styles for component recipe slots — spread into a style object.
+ * Matches {@link themeWhen.colorModeResolvedDark} (explicit dark or system dark when not light).
+ */
+export function atDarkMode(style: VariantOptionStyle) {
+  return {
+    'html[data-mode="dark"] &': style,
+    '@media (prefers-color-scheme: dark)': {
+      'html:not([data-mode="light"]) &': style,
+    },
+  };
+}
+
+/** Build a `conditions` entry for `styles.override()` — prefer `{ light, dark }` on color properties when possible. */
 export const when = {
   dark: (style: VariantOptionStyle, id?: string): ConditionalOverride =>
     conditional(themeWhen.colorModeResolvedDark, style, id),

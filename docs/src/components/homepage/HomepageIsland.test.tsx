@@ -8,32 +8,40 @@ describe('HomepageIsland', () => {
     document.documentElement.removeAttribute('data-mode');
   });
 
-  it('syncs bento color mode when Astro ColorModeToggle updates document data-mode', async () => {
+  it('inherits color-scheme from the docs site on load and after toggle updates', async () => {
     localStorage.setItem('theme-mode', 'light');
+    document.documentElement.setAttribute('data-mode', 'light');
+    document.documentElement.style.colorScheme = 'light';
     render(<HomepageIsland />);
 
-    const container = screen.getByTestId('bento-showcase');
-    expect(container.getAttribute('data-mode')).toBe('light');
+    const container = screen.getByTestId('bento-showcase') as HTMLElement;
+    expect(container.style.colorScheme).toBe('inherit');
+    expect(container.getAttribute('data-mode')).toBeNull();
 
     await act(async () => {
       localStorage.setItem('theme-mode', 'dark');
       document.documentElement.setAttribute('data-mode', 'dark');
+      document.documentElement.style.colorScheme = 'dark';
     });
 
     await waitFor(() => {
-      expect(container.getAttribute('data-mode')).toBe('dark');
+      expect(container.style.colorScheme).toBe('inherit');
+      expect(container.getAttribute('data-mode')).toBeNull();
     });
   });
 
-  it('syncs bento color mode from storage events in other tabs', async () => {
+  it('keeps inheriting color-scheme when storage changes in other tabs', async () => {
     localStorage.setItem('theme-mode', 'light');
+    document.documentElement.setAttribute('data-mode', 'light');
     render(<HomepageIsland />);
 
-    const container = screen.getByTestId('bento-showcase');
-    expect(container.getAttribute('data-mode')).toBe('light');
+    const container = screen.getByTestId('bento-showcase') as HTMLElement;
+    expect(container.style.colorScheme).toBe('inherit');
 
     await act(async () => {
       localStorage.setItem('theme-mode', 'system');
+      document.documentElement.removeAttribute('data-mode');
+      document.documentElement.style.colorScheme = '';
       window.dispatchEvent(
         new StorageEvent('storage', {
           key: 'theme-mode',
@@ -44,7 +52,7 @@ describe('HomepageIsland', () => {
     });
 
     await waitFor(() => {
-      expect(container.getAttribute('data-mode')).toBe('system');
+      expect(container.style.colorScheme).toBe('inherit');
     });
   });
 });

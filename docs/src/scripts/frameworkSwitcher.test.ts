@@ -1,6 +1,15 @@
-import { afterEach, describe, expect, it, vi } from 'vite-plus/test';
-import { frameworkCookieWriteValue, initFrameworkSwitcher } from './frameworkSwitcher';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vite-plus/test';
+import {
+  frameworkCookieWriteValue,
+  initFrameworkSwitcher,
+  selectFrameworkInSwitcher,
+} from './frameworkSwitcher';
 import { FRAMEWORK_COOKIE } from '../lib/framework';
+
+class ResizeObserverMock {
+  observe(): void {}
+  disconnect(): void {}
+}
 
 describe('frameworkCookieWriteValue', () => {
   it('builds a cookie assignment for the chosen framework', () => {
@@ -10,7 +19,53 @@ describe('frameworkCookieWriteValue', () => {
   });
 });
 
+describe('selectFrameworkInSwitcher', () => {
+  afterEach(() => {
+    document.body.innerHTML = '';
+    vi.restoreAllMocks();
+  });
+
+  it('updates selection and cookie', () => {
+    document.body.innerHTML = `
+      <div data-framework-switcher>
+        <button type="button" data-framework="react" data-selected aria-pressed="true">React</button>
+        <button type="button" data-framework="html" aria-pressed="false">HTML</button>
+      </div>
+    `;
+
+    const root = document.querySelector<HTMLElement>('[data-framework-switcher]')!;
+
+    selectFrameworkInSwitcher(root, 'html');
+
+    expect(document.cookie).toContain(`${FRAMEWORK_COOKIE}=html`);
+    expect(document.documentElement.dataset.framework).toBe('html');
+    expect(root.querySelector('[data-framework="html"]')?.hasAttribute('data-selected')).toBe(true);
+    expect(root.querySelector('[data-framework="react"]')?.hasAttribute('data-selected')).toBe(
+      false,
+    );
+  });
+
+  it('is a no-op when the framework is already selected', () => {
+    document.body.innerHTML = `
+      <div data-framework-switcher>
+        <button type="button" data-framework="react" data-selected aria-pressed="true">React</button>
+      </div>
+    `;
+
+    const root = document.querySelector<HTMLElement>('[data-framework-switcher]')!;
+    const cookieBefore = document.cookie;
+
+    selectFrameworkInSwitcher(root, 'react');
+
+    expect(document.cookie).toBe(cookieBefore);
+  });
+});
+
 describe('initFrameworkSwitcher', () => {
+  beforeEach(() => {
+    vi.stubGlobal('ResizeObserver', ResizeObserverMock);
+  });
+
   afterEach(() => {
     document.body.innerHTML = '';
     vi.restoreAllMocks();
@@ -23,9 +78,6 @@ describe('initFrameworkSwitcher', () => {
       </div>
     `;
 
-    const reload = vi.fn();
-    vi.stubGlobal('location', { reload });
-
     initFrameworkSwitcher();
 
     const root = document.querySelector('[data-framework-switcher]');
@@ -34,7 +86,7 @@ describe('initFrameworkSwitcher', () => {
     document.querySelector<HTMLButtonElement>('[data-framework="html"]')?.click();
 
     expect(document.cookie).toContain(`${FRAMEWORK_COOKIE}=html`);
-    expect(reload).toHaveBeenCalledTimes(1);
+    expect(document.documentElement.dataset.framework).toBe('html');
   });
 
   it('does not double-bind the same root', () => {
@@ -44,13 +96,10 @@ describe('initFrameworkSwitcher', () => {
       </div>
     `;
 
-    const reload = vi.fn();
-    vi.stubGlobal('location', { reload });
-
     initFrameworkSwitcher();
     initFrameworkSwitcher();
 
     document.querySelector<HTMLButtonElement>('[data-framework="astro"]')?.click();
-    expect(reload).toHaveBeenCalledTimes(1);
+    expect(document.cookie).toContain(`${FRAMEWORK_COOKIE}=astro`);
   });
 });

@@ -1,17 +1,13 @@
 ---
-import { banner, defaultIconSvgs } from '@var-ui/core';
+import { banner, defaultIconSvgs, type BannerVariantProps } from '@var-ui/core';
 import { recipeProps } from '../utils';
 
-type BannerTone = 'info' | 'success' | 'warning' | 'danger';
-
-type Props = {
-  tone?: BannerTone;
-  appearance?: 'subtle' | 'solid';
+interface Props extends BannerVariantProps {
   title?: string;
   dismissible?: boolean;
   dismissLabel?: string;
   className?: string;
-};
+}
 
 const {
   tone = 'info',

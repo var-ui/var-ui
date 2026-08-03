@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import type { ButtonTone } from './semanticTone';
 
 /**
  * Identity avatar: image with initials fallback and an optional status well
@@ -77,6 +78,23 @@ export const avatar = typestyles.styles.component(
   },
   { layer: 'components' },
 );
+
+export type AvatarRecipeProps = NonNullable<Parameters<typeof avatar>[0]>;
+export type AvatarSize = NonNullable<AvatarRecipeProps['size']>;
+/** Presence indicator tones for the avatar status well. */
+export type AvatarStatusTone = Extract<ButtonTone, 'success' | 'warning' | 'danger' | 'neutral'>;
+
+export type AvatarVariantProps = {
+  size?: AvatarSize;
+};
+
+export const avatarVariantPropDocs = [
+  { name: 'size', type: 'AvatarSize', required: false },
+] as const satisfies ReadonlyArray<{
+  name: keyof AvatarVariantProps;
+  type: string;
+  required: false;
+}>;
 
 /**
  * Overlapping avatar row with a "+N" overflow chip.

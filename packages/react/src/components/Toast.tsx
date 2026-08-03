@@ -9,18 +9,24 @@ import {
   UNSTABLE_ToastRegion as AriaToastRegion,
 } from 'react-aria-components';
 import type { ComponentAttrsResult } from 'typestyles';
-import { toast as toastRecipe, type IconName } from '@var-ui/core';
+import {
+  toast as toastRecipe,
+  type IconName,
+  type ToastPlacement,
+  type ToastTone,
+  type ToastVariantProps,
+} from '@var-ui/core';
 import { Icon } from '../icons';
 import { useLayer } from '../layers/LayerProvider';
 import { recipeProps } from './utils';
 
-export type ToastTone = 'info' | 'success' | 'warning' | 'danger';
+export type { ToastTone, ToastPlacement } from '@var-ui/core';
+
 export type ToastContentData = {
   title: string;
   description?: string;
   tone?: ToastTone;
 };
-export type ToastPlacement = 'top-end' | 'top-start' | 'bottom-end' | 'bottom-start';
 
 const toneIcon: Record<ToastTone, IconName> = {
   info: 'info',
@@ -33,10 +39,7 @@ const DEFAULT_DURATION = 4000;
 const DEFAULT_MAX = 3;
 
 type ToastSlot = 'region' | 'item' | 'icon' | 'body' | 'title' | 'description' | 'close';
-type ToastRecipeFn = (args?: {
-  tone?: ToastTone;
-  placement?: ToastPlacement;
-}) => Record<ToastSlot, ComponentAttrsResult>;
+type ToastRecipeFn = (args?: ToastVariantProps) => Record<ToastSlot, ComponentAttrsResult>;
 // Slot recipe resolves to flat ComponentAttrsResult at the type level — see packages/core/src/components/toast.ts.
 const toastSlots = toastRecipe as unknown as ToastRecipeFn;
 
@@ -47,9 +50,7 @@ type ToastContextValue = {
 
 const ToastContext = createContext<ToastContextValue | null>(null);
 
-export type ToastProps = {
-  /** Semantic tone that drives color and the default icon. @default info */
-  tone?: ToastTone;
+export type ToastProps = Pick<ToastVariantProps, 'tone' | 'appearance'> & {
   /** Bold headline shown in the toast body. */
   title: string;
   /** Supporting copy shown below the title. */
@@ -71,13 +72,14 @@ export type ToastProps = {
  */
 export function Toast({
   tone = 'info',
+  appearance = 'subtle',
   title,
   description,
   onDismiss,
   dismissLabel = 'Dismiss',
   className,
 }: ToastProps): JSX.Element {
-  const t = toastSlots({ tone });
+  const t = toastSlots({ tone, appearance });
   return (
     <div {...recipeProps(t.item, className)} role="status">
       <span {...recipeProps(t.icon)}>

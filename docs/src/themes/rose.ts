@@ -13,46 +13,47 @@ import {
   neoBrutalistBorderDarkStrong,
   neoBrutalistShadowOffsetDark,
   neoBrutalistShadowOffsetLight,
+  neoBrutalistShadowValues,
+  resolvedDarkColorModeWhen,
 } from './neo-brutalist-shadows';
 
 const roseDarkHue = 355;
 
-const roseLightSubtle = p.palette['rose-2'].var;
+const roseLightSubtle = p.color.palette['rose-2'].var;
 
 const roseLightColorValues = {
   background: {
-    app: p.palette['rose-1'].var,
-    surface: p.palette['neutral-1'].var,
+    app: p.color.palette['rose-1'].var,
+    surface: p.color.palette['neutral-1'].var,
     subtle: roseLightSubtle,
-    elevated: p.palette['neutral-1'].var,
-    popover: p.palette['neutral-1'].var,
+    elevated: p.color.palette['neutral-1'].var,
+    popover: p.color.palette['neutral-1'].var,
     muted: roseLightSubtle,
   },
   text: {
-    primary: p.palette['rose-10'].var,
-    secondary: p.palette['rose-7'].var,
+    primary: p.color.palette['rose-10'].var,
+    secondary: p.color.palette['rose-7'].var,
     onAccent: '#000',
-    onDanger: p.palette['neutral-1'].var,
-    onSuccess: p.palette['neutral-1'].var,
-    onWarning: p.palette['stone-10'].var,
-    onInfo: p.palette['neutral-1'].var,
+    onDanger: p.color.palette['neutral-1'].var,
+    onSuccess: p.color.palette['neutral-1'].var,
+    onWarning: p.color.palette['stone-10'].var,
+    onInfo: p.color.palette['neutral-1'].var,
   },
-  accent: { default: p.palette['crimson-7'].var, hover: p.palette['crimson-8'].var },
+  accent: { default: p.color.palette['crimson-7'].var, hover: p.color.palette['crimson-8'].var },
   border: {
     default: '#000',
     strong: '#000',
-    focus: p.palette['crimson-5'].var,
+    focus: p.color.palette['crimson-5'].var,
   },
-  shadow: { offset: neoBrutalistShadowOffsetLight(roseLightSubtle) },
-  danger: { default: p.palette['red-7'].var, solid: p.palette['red-8'].var },
-  success: { default: p.palette['green-7'].var, solid: p.palette['green-8'].var },
-  warning: { default: p.palette['amber-7'].var, onSolid: p.palette['stone-10'].var },
-  info: { default: p.palette['plum-7'].var, onSolid: p.palette['neutral-1'].var },
+  danger: { default: p.color.palette['red-7'].var, solid: p.color.palette['red-8'].var },
+  success: { default: p.color.palette['green-7'].var, solid: p.color.palette['green-8'].var },
+  warning: { default: p.color.palette['amber-7'].var, onSolid: p.color.palette['stone-10'].var },
+  info: { default: p.color.palette['plum-7'].var, onSolid: p.color.palette['neutral-1'].var },
   overlay: {
-    default: color.alpha(p.palette['rose-10'].var, 0.55, 'oklch'),
-    panel: p.palette['neutral-1'].var,
+    default: color.alpha(p.color.palette['rose-10'].var, 0.55, 'oklch'),
+    panel: p.color.palette['neutral-1'].var,
   },
-  link: { default: p.palette['crimson-7'].var, hover: p.palette['crimson-8'].var },
+  link: { default: p.color.palette['crimson-7'].var, hover: p.color.palette['crimson-8'].var },
   code: lightSyntaxValues,
 };
 
@@ -66,46 +67,46 @@ const roseDarkColorValues = {
     muted: color.oklch('31%', 0.02, 355),
   },
   text: {
-    primary: p.palette['rose-1'].var,
-    secondary: p.palette['rose-3'].var,
+    primary: p.color.palette['rose-1'].var,
+    secondary: p.color.palette['rose-3'].var,
     onAccent: '#000',
-    onDanger: p.palette['neutral-1'].var,
-    onSuccess: p.palette['neutral-1'].var,
-    onWarning: p.palette['stone-10'].var,
-    onInfo: p.palette['neutral-1'].var,
+    onDanger: p.color.palette['neutral-1'].var,
+    onSuccess: p.color.palette['neutral-1'].var,
+    onWarning: p.color.palette['stone-10'].var,
+    onInfo: p.color.palette['neutral-1'].var,
   },
-  accent: { default: p.palette['rose-3'].var, hover: p.palette['rose-2'].var },
+  accent: { default: p.color.palette['rose-3'].var, hover: p.color.palette['rose-2'].var },
   border: {
     default: neoBrutalistBorderDarkDefault(roseDarkHue),
     strong: neoBrutalistBorderDarkStrong(roseDarkHue),
-    focus: p.palette['rose-4'].var,
+    focus: p.color.palette['rose-4'].var,
   },
-  shadow: { offset: neoBrutalistShadowOffsetDark(roseDarkHue) },
-  danger: { default: p.palette['red-4'].var, solid: p.palette['red-7'].var },
-  success: { default: p.palette['green-4'].var, solid: p.palette['green-7'].var },
-  warning: { default: p.palette['amber-4'].var, onSolid: p.palette['stone-10'].var },
-  info: { default: p.palette['plum-4'].var, onSolid: p.palette['neutral-1'].var },
+  danger: { default: p.color.palette['red-4'].var, solid: p.color.palette['red-7'].var },
+  success: { default: p.color.palette['green-4'].var, solid: p.color.palette['green-7'].var },
+  warning: { default: p.color.palette['amber-4'].var, onSolid: p.color.palette['stone-10'].var },
+  info: { default: p.color.palette['plum-4'].var, onSolid: p.color.palette['neutral-1'].var },
   overlay: {
-    default: color.alpha(p.palette['rose-10'].var, 0.7, 'oklch'),
+    default: color.alpha(p.color.palette['rose-10'].var, 0.7, 'oklch'),
     panel: color.oklch('27%', 0.022, 355),
   },
-  link: { default: p.palette['rose-3'].var, hover: p.palette['rose-2'].var },
+  link: { default: p.color.palette['rose-3'].var, hover: p.color.palette['rose-2'].var },
   code: darkSyntaxValues,
 };
 
-const roseShadowValues = {
-  xs: `1px 1px 0 0 ${p.color.shadow.offset.var}`,
-  sm: `2px 2px 0 0 ${p.color.shadow.offset.var}`,
-  md: `3px 3px 0 0 ${p.color.shadow.offset.var}`,
-  lg: `4px 4px 0 0 ${p.color.shadow.offset.var}`,
-  xl: `5px 5px 0 0 ${p.color.shadow.offset.var}`,
+const roseLightShadowValues = {
+  ...neoBrutalistShadowValues(neoBrutalistShadowOffsetLight(roseLightSubtle)),
+  elevation: shadowElevationValues,
+} satisfies DesignTokens['shadow'];
+
+const roseDarkShadowValues = {
+  ...neoBrutalistShadowValues(neoBrutalistShadowOffsetDark(roseDarkHue)),
   elevation: shadowElevationValues,
 } satisfies DesignTokens['shadow'];
 
 export const rosePreset: DesignThemePreset = {
   tokens: {
     color: roseLightColorValues,
-    shadow: roseShadowValues,
+    shadow: roseLightShadowValues,
   },
   colorMode: {
     dark: roseDarkColorValues,
@@ -115,4 +116,11 @@ export const rosePreset: DesignThemePreset = {
 export const roseTheme = createDesignTheme({
   name: 'rose',
   ...rosePreset,
+  modes: [
+    {
+      id: 'dark-shadow',
+      overrides: { shadow: roseDarkShadowValues },
+      when: resolvedDarkColorModeWhen,
+    },
+  ],
 });

@@ -1,0 +1,26 @@
+---
+title: Colors
+description: Primitive palette ramps and semantic color tokens in var-ui.
+---
+
+# Colors
+
+var-ui separates **primitive palette** steps from **semantic color** tokens. Components and
+recipes reference semantic tokens (e.g. `color.accent.default`) so themes can remap roles without
+touching component code.
+
+<ColorSwatches />
+
+## Using colors
+
+Import token refs from core:
+
+```ts
+import { designTokens } from '@var-ui/core';
+
+designTokens.color.palette['sky-7'].var; // var(--var-ui-color-palette-sky-7)
+designTokens.color.accent.default.var; // var(--var-ui-color-accent-default)
+```
+
+Override semantic colors in a theme via `createDesignTheme({ tokens, colorMode })`. See
+[Customize](/theming/customize) for details.

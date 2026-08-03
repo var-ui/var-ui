@@ -1,6 +1,11 @@
 export type ColorMode = 'light' | 'dark' | 'system';
 export type ResolvedColorMode = 'light' | 'dark';
 
+import {
+  observeSegmentedControlIndicator,
+  syncSegmentedControlIndicator,
+} from '@var-ui/core/internal';
+
 const VALID: ReadonlySet<string> = new Set(['light', 'dark', 'system']);
 
 export function readStoredColorMode(storageKey: string): ColorMode | null {
@@ -79,6 +84,9 @@ function syncToggleRoot(root: Element, storageKey: string): void {
       button.removeAttribute('data-selected');
     }
   });
+  if (root instanceof HTMLElement) {
+    syncSegmentedControlIndicator(root);
+  }
 }
 
 function syncColorModeToggles(storageKey?: string): void {
@@ -96,6 +104,9 @@ export function initColorModeToggle(): void {
     const storageKey = root.getAttribute('data-storage-key') ?? 'theme-mode';
 
     syncToggleRoot(root, storageKey);
+    if (root instanceof HTMLElement) {
+      observeSegmentedControlIndicator(root);
+    }
 
     root.querySelectorAll('[data-color-mode]').forEach((button) => {
       button.addEventListener('click', () => {

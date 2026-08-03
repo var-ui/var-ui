@@ -6,11 +6,13 @@ import {
   DisclosurePanel,
   Heading,
 } from 'react-aria-components';
-import { collapsible } from '@var-ui/core';
+import { collapsible, type CollapsibleVariantProps } from '@var-ui/core';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 
-export type CollapsibleProps = {
+export type { CollapsibleVariant } from '@var-ui/core';
+
+export type CollapsibleProps = CollapsibleVariantProps & {
   /** Stable id when used inside `CollapsibleGroup` (maps to RAC `Disclosure` id / expanded keys). */
   id?: string;
   /** Default trigger label when `trigger` is omitted. */
@@ -23,8 +25,6 @@ export type CollapsibleProps = {
   /** Uncontrolled initial expanded state. */
   defaultExpanded?: boolean;
   onExpandedChange?: (expanded: boolean) => void;
-  /** Visual treatment. @default flush */
-  variant?: 'flush' | 'bordered';
   className?: string;
 };
 

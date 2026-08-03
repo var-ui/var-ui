@@ -1,7 +1,12 @@
 import { keyframes } from 'typestyles';
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
-import { semanticTone, type SemanticToneKey } from './semanticTone';
+import {
+  semanticTone,
+  type ButtonTone,
+  type SemanticToneKey,
+  type ToneAppearance,
+} from './semanticTone';
 
 const pulse = keyframes.create('var-ui-status-pulse', {
   from: { boxShadow: '0 0 0 0 color-mix(in srgb, currentColor 45%, transparent)' },
@@ -15,10 +20,6 @@ function toneColor(key: SemanticToneKey) {
 /**
  * Semantic presence/status indicator. Pair with visible text or an
  * `aria-label` on the host element — the dot alone is decorative.
- *
- * ```tsx
- * <span className={statusDot({ tone: 'success', pulse: 'true' })} />
- * ```
  */
 export const statusDot = typestyles.styles.component(
   'status-dot',
@@ -35,6 +36,7 @@ export const statusDot = typestyles.styles.component(
         backgroundColor: 'currentColor',
         color: t.color.text.secondary.var,
         flexShrink: 0,
+        boxSizing: 'border-box',
       },
       variants: {
         tone: {
@@ -45,6 +47,16 @@ export const statusDot = typestyles.styles.component(
           danger: toneColor('danger'),
           info: toneColor('info'),
         },
+        appearance: {
+          filled: {},
+          outline: {
+            backgroundColor: 'transparent',
+            border: '2px solid currentColor',
+          },
+          subtle: {
+            backgroundColor: 'color-mix(in srgb, currentColor 35%, transparent)',
+          },
+        },
         pulse: {
           true: {
             animation: `${pulse} 1400ms ease-out infinite`,
@@ -53,8 +65,28 @@ export const statusDot = typestyles.styles.component(
           false: {},
         },
       },
-      defaultVariants: { tone: 'neutral', pulse: 'false' },
+      defaultVariants: { tone: 'neutral', appearance: 'filled', pulse: 'false' },
     };
   },
   { layer: 'components' },
 );
+
+export type StatusDotRecipeProps = NonNullable<Parameters<typeof statusDot>[0]>;
+
+export type StatusDotAppearance = Extract<ToneAppearance, 'filled' | 'outline' | 'subtle'>;
+
+export type StatusDotVariantProps = {
+  tone?: ButtonTone;
+  appearance?: StatusDotAppearance;
+  pulse?: boolean;
+};
+
+export const statusDotVariantPropDocs = [
+  { name: 'tone', type: 'ButtonTone', required: false },
+  { name: 'appearance', type: 'StatusDotAppearance', required: false },
+  { name: 'pulse', type: 'boolean', required: false },
+] as const satisfies ReadonlyArray<{
+  name: keyof StatusDotVariantProps;
+  type: string;
+  required: false;
+}>;

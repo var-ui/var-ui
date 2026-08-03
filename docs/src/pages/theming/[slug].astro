@@ -2,6 +2,7 @@
 export const prerender = false;
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ColorSwatches from '../../components/ColorSwatches.astro';
 import { findMdxModule } from '../../lib/loadMdx';
 
 const slug = Astro.params.slug;
@@ -16,17 +17,22 @@ if (!loader) {
 }
 
 const { Content, frontmatter } = await loader();
+const isColorsPage = slug === 'colors';
 ---
 
-<BaseLayout title={`${frontmatter.title} · Var UI`}>
-  <article class="docs-article">
-    <Content />
+<BaseLayout title={`${frontmatter.title} · Var UI`} contentWidth={isColorsPage ? 'full' : 'default'}>
+  <article class:list={['docs-article', isColorsPage && 'docs-article--colors']}>
+    <Content components={{ ColorSwatches }} />
   </article>
 </BaseLayout>
 
 <style>
   .docs-article {
     max-width: 48rem;
+  }
+
+  .docs-article--colors {
+    max-width: 72rem;
   }
 
   .docs-article :global(h1) {

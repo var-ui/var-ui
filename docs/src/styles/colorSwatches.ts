@@ -1,0 +1,137 @@
+import { designTokens as t, styles, typestyles } from '@var-ui/core';
+
+export const colorSwatchesStyles = typestyles.styles.component(
+  'color-swatches',
+  () => ({
+    slots: [
+      'root',
+      'section',
+      'sectionTitle',
+      'sectionDescription',
+      'paletteFamily',
+      'paletteFamilyName',
+      'paletteRamp',
+      'paletteSwatch',
+      'paletteStep',
+      'semanticGroup',
+      'semanticGroupTitle',
+      'semanticGrid',
+      'semanticCard',
+      'semanticPreview',
+      'semanticMeta',
+      'semanticToken',
+      'semanticVar',
+    ],
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: t.space[8].var,
+      marginBlock: '1.5rem',
+    },
+    section: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: t.space[4].var,
+    },
+    sectionTitle: {
+      margin: 0,
+      fontSize: t.fontSize.lg.var,
+      fontWeight: t.fontWeight.semibold.var,
+      color: t.color.text.primary.var,
+    },
+    sectionDescription: {
+      margin: 0,
+      fontSize: t.fontSize.sm.var,
+      color: t.color.text.secondary.var,
+      lineHeight: t.lineHeight.relaxed.var,
+    },
+    paletteFamily: {
+      display: 'grid',
+      gridTemplateColumns: '5.5rem 1fr',
+      alignItems: 'center',
+      gap: t.space[3].var,
+      ...styles.media('sm', 'max', {
+        gridTemplateColumns: '1fr',
+        gap: t.space[2].var,
+      }),
+    },
+    paletteFamilyName: {
+      fontSize: t.fontSize.sm.var,
+      fontWeight: t.fontWeight.medium.var,
+      color: t.color.text.secondary.var,
+      textTransform: 'capitalize',
+    },
+    paletteRamp: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(10, minmax(0, 1fr))',
+      gap: t.space[1].var,
+      ...styles.media('md', 'max', {
+        gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
+      }),
+      ...styles.media('sm', 'max', {
+        gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
+      }),
+    },
+    paletteSwatch: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'stretch',
+      gap: t.space[1].var,
+    },
+    paletteStep: {
+      aspectRatio: '1',
+      borderRadius: t.radius.sm.var,
+      border: `1px solid ${t.color.border.default.var}`,
+      cursor: 'default',
+    },
+    semanticGroup: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: t.space[3].var,
+    },
+    semanticGroupTitle: {
+      margin: 0,
+      fontSize: t.fontSize.md.var,
+      fontWeight: t.fontWeight.semibold.var,
+      color: t.color.text.primary.var,
+      textTransform: 'capitalize',
+    },
+    semanticGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(11rem, 1fr))',
+      gap: t.space[3].var,
+    },
+    semanticCard: {
+      display: 'flex',
+      flexDirection: 'column',
+      borderRadius: t.radius.md.var,
+      border: `1px solid ${t.color.border.default.var}`,
+      overflow: 'hidden',
+      backgroundColor: t.color.background.surface.var,
+    },
+    semanticPreview: {
+      height: '3.5rem',
+      borderBottom: `1px solid ${t.color.border.default.var}`,
+    },
+    semanticMeta: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: t.space[1].var,
+      padding: t.space[2].var,
+    },
+    semanticToken: {
+      fontSize: t.fontSize.xs.var,
+      fontWeight: t.fontWeight.medium.var,
+      color: t.color.text.primary.var,
+      fontFamily: t.fontFamily.mono.var,
+      wordBreak: 'break-word',
+    },
+    semanticVar: {
+      fontSize: t.fontSize.xs.var,
+      color: t.color.text.secondary.var,
+      fontFamily: t.fontFamily.mono.var,
+      wordBreak: 'break-all',
+    },
+  }),
+  { layer: 'components' },
+);

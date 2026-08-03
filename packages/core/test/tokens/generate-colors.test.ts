@@ -13,16 +13,17 @@ vi.mock('typestyles/color-scale', async (importOriginal) => {
   };
 });
 
-import { basePaletteTokenValues } from '../../src/tokens/palette';
+import { palette } from '../../src/tokens/defaults/color/palette';
 import { generateColors } from '../../src/tokens/generate-colors';
 import type { DesignColorValues } from '../../src/tokens/types';
 
-/** Snapshot of palette output before the color-scale extraction — guards byte-identical ramps. */
+/** Snapshot of representative static palette steps. */
 const PALETTE_BYTE_IDENTICAL_FIXTURE: Record<string, string> = {
-  'sky-7': 'oklch(47.00% 0.126 238)',
-  'neutral-1': 'oklch(97.00% 0 0)',
-  'red-7': 'oklch(47.00% 0.189 27)',
-  'gray-1': 'oklch(97.00% 0.002 264)',
+  'sky-7': 'oklch(46.60% 0.126 238)',
+  'neutral-1': 'oklch(98.01% 0 0)',
+  'neutral-2': 'oklch(95.57% 0 0)',
+  'red-7': 'oklch(46.60% 0.189 27)',
+  'gray-1': 'oklch(98.01% 0.002 264)',
 };
 
 function assertDesignColorShape(values: DesignColorValues): void {
@@ -49,7 +50,6 @@ function assertDesignColorShape(values: DesignColorValues): void {
     strong: expect.any(String),
     focus: expect.any(String),
   });
-  expect(values.shadow).toMatchObject({ offset: expect.any(String) });
   expect(values.danger).toMatchObject({ default: expect.any(String), solid: expect.any(String) });
   expect(values.success).toMatchObject({ default: expect.any(String), solid: expect.any(String) });
   expect(values.warning).toMatchObject({
@@ -78,9 +78,9 @@ function assertDesignColorShape(values: DesignColorValues): void {
 }
 
 describe('palette extraction', () => {
-  it('keeps representative palette steps byte-identical after generateRamp refactor', () => {
+  it('keeps representative static palette steps stable', () => {
     for (const [key, expected] of Object.entries(PALETTE_BYTE_IDENTICAL_FIXTURE)) {
-      expect(basePaletteTokenValues[key as keyof typeof basePaletteTokenValues]).toBe(expected);
+      expect(palette[key as keyof typeof palette]).toBe(expected);
     }
   });
 });

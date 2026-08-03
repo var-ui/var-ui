@@ -1,22 +1,23 @@
 import type { JSX } from 'react';
 import { Button as AriaButton, type ButtonProps as RACButtonProps } from 'react-aria-components';
-import { button } from '@var-ui/core';
+import { button, resolveButtonProps, type ButtonVariantProps } from '@var-ui/core';
 import { recipeProps } from './utils';
 
-export type ButtonProps = Omit<RACButtonProps, 'className'> & {
-  /** Additional CSS class names merged onto the root element. */
-  className?: string;
-  /** Visual weight of the button. @default secondary */
-  intent?: 'primary' | 'secondary' | 'ghost' | 'danger';
-  /** Control padding and type scale. @default md */
-  size?: 'sm' | 'md' | 'lg';
-};
+export type ButtonProps = Omit<RACButtonProps, 'className'> &
+  ButtonVariantProps & {
+    className?: string;
+  };
 
 export function Button({
   intent = 'secondary',
+  tone,
+  appearance,
   size = 'md',
   className,
   ...props
 }: ButtonProps): JSX.Element {
-  return <AriaButton {...props} {...recipeProps(button({ intent, size }), className)} />;
+  const recipeProps_ = button(
+    resolveButtonProps(tone != null ? { tone, appearance, size } : { intent, appearance, size }),
+  );
+  return <AriaButton {...props} {...recipeProps(recipeProps_, className)} />;
 }

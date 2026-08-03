@@ -1,6 +1,6 @@
 ---
 import { defaultIconSvgs, icon, segmentedControl, toggleButton } from '@var-ui/core';
-import { recipeClassName, recipeProps } from '../utils';
+import { recipeProps } from '../utils';
 
 type ColorModeToggleAppearance = 'icons' | 'labels' | 'iconsAndLabels';
 
@@ -23,10 +23,9 @@ const {
 } = Astro.props;
 
 const modes = (includeSystem ? ['light', 'dark', 'system'] : ['light', 'dark']) as const;
-const s = segmentedControl();
-const t = toggleButton({ size });
-const i = icon({ size: 'md' });
-const rootClass = recipeClassName(s.root, className);
+const s = segmentedControl({ size });
+const t = toggleButton({ segmented: true });
+const i = icon({ size: size === 'lg' ? 'lg' : size === 'sm' ? 'sm' : 'md' });
 const buttonRecipe = recipeProps(t);
 const iconRecipe = recipeProps(i);
 
@@ -40,7 +39,7 @@ const MODE_META = {
 <div
   role="group"
   aria-label={ariaLabel}
-  class={rootClass}
+  {...recipeProps(s.root, className)}
   data-var-ui-color-mode-toggle
   data-include-system={includeSystem ? 'true' : 'false'}
   data-storage-key={storageKey}

@@ -10,7 +10,6 @@ import { fontWeightTokenSchema } from './fontWeight';
 import { letterSpacingTokenSchema } from './letterSpacing';
 import { lineHeightTokenSchema } from './lineHeight';
 import { opacityTokenSchema } from './opacity';
-import { paletteTokenSchema } from './palette';
 import { radiusTokenSchema } from './radius';
 import { shadowTokenSchema } from './shadow';
 import { sizeTokenSchema } from './size';
@@ -24,7 +23,6 @@ import { zIndexTokenSchema } from './zIndex';
  * Leaves use `atProperty` presets so `@property` is emitted and refs expose `.var` for recipes.
  */
 export const tokenSchema = {
-  palette: paletteTokenSchema,
   space: spaceTokenSchema,
   size: sizeTokenSchema,
   opacity: opacityTokenSchema,

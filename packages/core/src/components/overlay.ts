@@ -3,8 +3,9 @@ import { designTokens as t } from '../tokens';
 
 /**
  * Shared floating-layer chrome: a dimmed fixed backdrop plus a centered
- * positioner. Dialog, AlertDialog, Lightbox, and CommandPalette overlays
- * compose these instead of re-declaring fixed-inset boxes.
+ * positioner. Dialog, AlertDialog, and Lightbox overlays compose these
+ * instead of re-declaring fixed-inset boxes. CommandPalette uses native
+ * `<dialog>::backdrop` instead.
  *
  * ```tsx
  * const o = overlay();

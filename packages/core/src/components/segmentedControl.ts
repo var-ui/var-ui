@@ -1,40 +1,139 @@
 import { typestyles } from '../runtime';
+import { atDarkMode, atReducedMotion } from '../theme-conditions';
+import { duration } from '../tokens/defaults/duration';
+import { easing } from '../tokens/defaults/easing';
 import { designTokens as t } from '../tokens';
+import { controlSizeVariants, segmentedControlSize } from './controlSize';
+
+const indicatorTransition = `transform ${duration.medium} ${easing.emphasized}, width ${duration.medium} ${easing.emphasized}, opacity ${duration.fast} ${easing.standard}`;
 
 /**
- * Segmented toggle group — connected corners on direct child toggle buttons.
+ * Segmented toggle group with a sliding surface indicator behind the active segment.
  */
 export const segmentedControl = typestyles.styles.component(
   'segmented-control',
   (c) => {
     const v = c.vars({
       trackBackground: {
-        value: t.color.background.subtle.var,
+        value: t.color.border.subtle.var,
         syntax: '<color>',
       },
-      trackBorder: {
-        value: t.color.border.default.var,
+      indicatorBackground: {
+        value: t.color.background.surface.var,
         syntax: '<color>',
+      },
+      segmentColor: {
+        value: t.color.text.secondary.var,
+        syntax: '<color>',
+      },
+      segmentSelectedColor: {
+        value: t.color.text.primary.var,
+        syntax: '<color>',
+      },
+      indicatorX: {
+        value: '0px',
+        syntax: '<length>',
+      },
+      indicatorWidth: {
+        value: '0px',
+        syntax: '<length>',
+      },
+      indicatorOpacity: {
+        value: '0',
+        syntax: '<number>',
       },
     });
     return {
       slots: ['root'],
-      root: {
-        display: 'inline-flex',
-        alignItems: 'stretch',
-        padding: t.space[1].var,
-        gap: t.space[1].var,
-        borderRadius: t.radius.md.var,
-        border: `1px solid ${v.trackBorder.var}`,
-        backgroundColor: v.trackBackground.var,
-        '& > *': {
-          borderRadius: t.radius.sm.var,
+      base: {
+        root: {
+          [v.trackBackground.name]: t.color.border.subtle.var,
+          [v.indicatorBackground.name]: t.color.background.surface.var,
+          [v.segmentColor.name]: t.color.text.secondary.var,
+          [v.segmentSelectedColor.name]: t.color.text.primary.var,
+          [v.indicatorX.name]: '0px',
+          [v.indicatorWidth.name]: '0px',
+          [v.indicatorOpacity.name]: '0',
+          position: 'relative',
+          display: 'inline-flex',
+          alignItems: 'stretch',
+          boxSizing: 'border-box',
+          padding: t.space[1].var,
+          gap: 0,
+          borderRadius: t.radius.full.var,
           border: 'none',
-        },
-        '& > * + *': {
-          marginInlineStart: 0,
+          backgroundColor: v.trackBackground.var,
+          isolation: 'isolate',
+          ...atDarkMode({
+            '&::after': {
+              boxShadow: 'none',
+            },
+          }),
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            top: t.space[1].var,
+            bottom: t.space[1].var,
+            insetInlineStart: 0,
+            width: v.indicatorWidth.var,
+            borderRadius: t.radius.full.var,
+            backgroundColor: v.indicatorBackground.var,
+            boxShadow: t.shadow.xs.var,
+            pointerEvents: 'none',
+            opacity: v.indicatorOpacity.var,
+            zIndex: 0,
+            transform: `translateX(${v.indicatorX.var})`,
+            transition: indicatorTransition,
+            ...atReducedMotion({ transition: 'none' }),
+          },
+          '& > *': {
+            position: 'relative',
+            zIndex: 1,
+            flex: '1 1 auto',
+            border: 'none',
+            borderRadius: t.radius.full.var,
+            backgroundColor: 'transparent',
+            color: v.segmentColor.var,
+            fontWeight: t.fontWeight.normal.var,
+            boxShadow: 'none',
+            transition: `color ${duration.fast} ${easing.standard}, font-weight ${duration.fast} ${easing.standard}`,
+            '&:hover': {
+              backgroundColor: 'transparent',
+              borderColor: 'transparent',
+            },
+            '&:focus-visible': {
+              outline: `2px solid ${t.color.border.focus.var}`,
+              outlineOffset: '1px',
+            },
+            '&[data-selected], &[aria-pressed="true"]': {
+              color: v.segmentSelectedColor.var,
+              fontWeight: t.fontWeight.semibold.var,
+              backgroundColor: 'transparent',
+              borderColor: 'transparent',
+              boxShadow: 'none',
+              '&:hover': {
+                backgroundColor: 'transparent',
+                borderColor: 'transparent',
+              },
+            },
+          },
         },
       },
+      variants: {
+        size: controlSizeVariants((size) => {
+          const metrics = segmentedControlSize(size);
+          return {
+            root: {
+              ...metrics.root,
+              '& > *': {
+                ...metrics.segment,
+                minWidth: metrics.segmentMinWidth,
+              },
+            },
+          };
+        }),
+      },
+      defaultVariants: { size: 'md' },
     };
   },
   { layer: 'components' },
