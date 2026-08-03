@@ -2,6 +2,7 @@
 import './codeHighlight';
 import './homeBento';
 import './configurator';
+import './themePlayground';
 import './demoChrome';
 import './colorSwatches';
 import './root';
