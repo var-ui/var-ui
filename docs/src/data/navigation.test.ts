@@ -36,12 +36,16 @@ describe('navigation', () => {
       '/theming/customize',
       '/theming/themes',
       '/theming/tokens',
+      '/theming/colors',
+      '/theming/playground',
     ]);
     expect(themingSidebar.map((item) => item.link)).toEqual([
       '/theming',
       '/theming/customize',
       '/theming/themes',
       '/theming/tokens',
+      '/theming/colors',
+      '/theming/playground',
     ]);
   });
 });
