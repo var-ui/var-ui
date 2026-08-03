@@ -6,11 +6,11 @@ import {
   DesignSystemProvider,
   IconProvider,
   LayerProvider,
+  SegmentedControl,
   readStoredColorMode,
   recipeClassName,
   type ColorMode,
 } from '@var-ui/react';
-import { SegmentedControl } from '../../../../packages/react/src/components/SegmentedControl';
 import type { Selection } from 'react-aria-components';
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { HighlightedCodeBlock } from '../HighlightedCodeBlock';
