@@ -12,7 +12,7 @@ import { LayoutTabsTile } from './bentoTiles/LayoutTabsTile';
 import { QuickActionsTile } from './bentoTiles/QuickActionsTile';
 import { SettingsFormTile } from './bentoTiles/SettingsFormTile';
 import { StatusFeedbackTile } from './bentoTiles/StatusFeedbackTile';
-import { SHOWCASE_THEMES, type ShowcaseThemeId } from './ThemeShowcaseSwitcher';
+import { SHOWCASE_THEMES, type ShowcaseThemeId } from './showcaseThemes';
 
 export type BentoShowcaseProps = {
   themeId: ShowcaseThemeId;
