@@ -21,6 +21,7 @@ describe('themeableComponents', () => {
           'layoutContentWidthAssignment',
           'layoutShellPaddingAssignments',
           'resolveButtonProps',
+          'resolveScrollAreaFade',
           'controlSurfaceSize',
           'controlSizeVariants',
           'controlFocusStyles',

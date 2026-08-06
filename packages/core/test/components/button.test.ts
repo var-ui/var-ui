@@ -26,7 +26,7 @@ describe('button', () => {
     button(resolveButtonProps({ elevated: true }));
     const css = getRegisteredCss();
     expect(css).toContain('[data-elevated]');
-    expect(css).toContain('var(--var-ui-shadow-elevation-low)');
+    expect(css).toContain('var(--var-ui-shadow-md)');
   });
 });
 

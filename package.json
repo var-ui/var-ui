@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "prepare": "vp config",
+    "verify": "vp run ci",
     "check": "vp check",
     "fmt": "vp fmt",
     "lint": "vp lint",
