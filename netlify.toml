@@ -1,7 +1,7 @@
+# Production deploys run via .github/workflows/docs-deploy.yml (Netlify CLI).
+# Skip Netlify Git-triggered builds to avoid duplicate deploys.
 [build]
-command = "vp run --filter @var-ui/docs... build"
-publish = "docs/dist"
-ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- docs packages package.json pnpm-lock.yaml pnpm-workspace.yaml .nvmrc"
+ignore = "exit 0"
 
 [build.environment]
 NODE_VERSION = "24"
