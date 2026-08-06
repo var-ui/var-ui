@@ -1,13 +1,37 @@
 'use client';
 
+import type { DocsFramework } from '@/lib/framework';
 import { HighlightedCodeBlock } from '../../HighlightedCodeBlock';
 import { Heading, Link, Text, Timestamp, VStack } from '@var-ui/react';
 
 export type ContentSampleTileProps = {
   className?: string;
+  framework?: DocsFramework;
 };
 
-export function ContentSampleTile({ className }: ContentSampleTileProps) {
+function frameworkImportSnippet(framework: DocsFramework): string {
+  switch (framework) {
+    case 'react':
+      return "import { Button } from '@var-ui/react';";
+    case 'astro':
+      return "import { Button } from '@var-ui/astro';";
+    case 'html':
+      return '<button type="button" class="var-ui-button">Click me</button>';
+  }
+}
+
+function frameworkCodeLanguage(framework: DocsFramework): string {
+  switch (framework) {
+    case 'react':
+      return 'tsx';
+    case 'astro':
+      return 'astro';
+    case 'html':
+      return 'html';
+  }
+}
+
+export function ContentSampleTile({ className, framework = 'react' }: ContentSampleTileProps) {
   return (
     <div className={className}>
       <VStack gap="sm">
@@ -22,7 +46,10 @@ export function ContentSampleTile({ className }: ContentSampleTileProps) {
           <code>SURFACE_ATTRIBUTE</code>). See <Link href="/theming">the theming guide</Link> for
           details.
         </Text>
-        <HighlightedCodeBlock code={"import { Button } from '@var-ui/react';"} language="tsx" />
+        <HighlightedCodeBlock
+          code={frameworkImportSnippet(framework)}
+          language={frameworkCodeLanguage(framework)}
+        />
       </VStack>
     </div>
   );

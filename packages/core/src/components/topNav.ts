@@ -24,68 +24,72 @@ import { designTokens as t } from '../tokens';
  * </nav>
  * ```
  */
+/** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
+export const topNavVarDefinitions = {
+  background: {
+    value: t.color.background.surface.var,
+    syntax: '<color>' as const,
+  },
+  border: {
+    value: t.color.border.default.var,
+    syntax: '<color>' as const,
+  },
+  headingColor: {
+    value: t.color.text.primary.var,
+    syntax: '<color>' as const,
+  },
+  itemColor: {
+    value: t.color.navItem.foreground.var,
+    syntax: '<color>' as const,
+  },
+  itemHoverBackground: {
+    value: t.color.navItem.hoverBackground.var,
+    syntax: '<color>' as const,
+  },
+  itemSelectedBackground: {
+    value: t.color.navItem.selectedBackground.var,
+    syntax: '<color>' as const,
+  },
+  itemSelectedColor: {
+    value: t.color.navItem.selectedForeground.var,
+    syntax: '<color>' as const,
+  },
+  menuTriggerColor: {
+    value: t.color.navItem.foreground.var,
+    syntax: '<color>' as const,
+  },
+  megaPanelBackground: {
+    value: t.color.background.surface.var,
+    syntax: '<color>' as const,
+  },
+  megaPanelBorder: {
+    value: t.color.border.default.var,
+    syntax: '<color>' as const,
+  },
+  megaItemColor: {
+    value: t.color.text.primary.var,
+    syntax: '<color>' as const,
+  },
+  megaItemHoverBackground: {
+    value: t.color.background.subtle.var,
+    syntax: '<color>' as const,
+  },
+  featuredCardBackground: {
+    value: t.color.background.subtle.var,
+    syntax: '<color>' as const,
+  },
+  featuredCardBorder: {
+    value: t.color.border.default.var,
+    syntax: '<color>' as const,
+  },
+} as const;
+
 export const topNav = typestyles.styles.component(
   'top-nav',
   (c) => {
-    const v = c.vars({
-      background: {
-        value: t.color.background.surface.var,
-        syntax: '<color>',
-      },
-      border: {
-        value: t.color.border.default.var,
-        syntax: '<color>',
-      },
-      headingColor: {
-        value: t.color.text.primary.var,
-        syntax: '<color>',
-      },
-      itemColor: {
-        value: t.color.navItem.foreground.var,
-        syntax: '<color>',
-      },
-      itemHoverBackground: {
-        value: t.color.navItem.hoverBackground.var,
-        syntax: '<color>',
-      },
-      itemSelectedBackground: {
-        value: t.color.navItem.selectedBackground.var,
-        syntax: '<color>',
-      },
-      itemSelectedColor: {
-        value: t.color.navItem.selectedForeground.var,
-        syntax: '<color>',
-      },
-      menuTriggerColor: {
-        value: t.color.navItem.foreground.var,
-        syntax: '<color>',
-      },
-      megaPanelBackground: {
-        value: t.color.background.surface.var,
-        syntax: '<color>',
-      },
-      megaPanelBorder: {
-        value: t.color.border.default.var,
-        syntax: '<color>',
-      },
-      megaItemColor: {
-        value: t.color.text.primary.var,
-        syntax: '<color>',
-      },
-      megaItemHoverBackground: {
-        value: t.color.background.subtle.var,
-        syntax: '<color>',
-      },
-      featuredCardBackground: {
-        value: t.color.background.subtle.var,
-        syntax: '<color>',
-      },
-      featuredCardBorder: {
-        value: t.color.border.default.var,
-        syntax: '<color>',
-      },
-    });
+    const v = c.vars(topNavVarDefinitions);
     return {
+      vars: topNavVarDefinitions,
       slots: [
         'root',
         'heading',
@@ -260,7 +264,9 @@ export const topNav = typestyles.styles.component(
         padding: t.space[4].var,
         borderRadius: t.radius.lg.var,
         backgroundColor: v.featuredCardBackground.var,
-        border: `1px solid ${v.featuredCardBorder.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.featuredCardBorder.var,
         minWidth: '16rem',
       },
     };

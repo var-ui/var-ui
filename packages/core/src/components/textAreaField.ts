@@ -31,7 +31,7 @@ export const textAreaField = typestyles.styles.component(
         syntax: '<color>',
       },
       errorColor: {
-        value: t.color.danger.default.var,
+        value: t.color.tone.danger.foreground.var,
         syntax: '<color>',
       },
     });
@@ -43,7 +43,9 @@ export const textAreaField = typestyles.styles.component(
         error: v.errorColor.var,
       }),
       input: {
-        border: `1px solid ${v.inputBorder.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.inputBorder.var,
         borderRadius: t.radius.md.var,
         padding: `${t.space[2].var} ${t.space[3].var}`,
         fontSize: t.fontSize.md.var,

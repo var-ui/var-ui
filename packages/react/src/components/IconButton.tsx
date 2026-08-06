@@ -18,14 +18,15 @@ export function IconButton({
   tone,
   appearance,
   size = 'md',
+  elevated,
   className,
   ...props
 }: IconButtonProps): JSX.Element {
   const recipeProps_ = button(
     resolveButtonProps(
       tone != null
-        ? { tone, appearance, size, layout: 'icon' }
-        : { intent, appearance, size, layout: 'icon' },
+        ? { tone, appearance, size, layout: 'icon', elevated }
+        : { intent, appearance, size, layout: 'icon', elevated },
     ),
   );
   return (

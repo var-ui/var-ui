@@ -1,0 +1,138 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import {
+  AppShell,
+  ColorModeToggle,
+  cx,
+  Layout,
+  LayoutContent,
+  recipeClassName,
+  ThemeScript,
+  TopNav,
+  TopNavHeading,
+  TopNavItem,
+} from '@var-ui/astro';
+import { codeHljsScope } from '@/styles/codeHighlight';
+import { defaultThemeClassName } from '@var-ui/core';
+import DocsSearch from '../components/DocsSearch.astro';
+import DocsThemePicker from '../components/DocsThemePicker.astro';
+import DocsThemeScript from '../components/DocsThemeScript.astro';
+import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
+import { topNav as topNavItems } from '../data/navigation';
+
+const { title = 'Var UI', bleed = false } = Astro.props as {
+  title?: string;
+  bleed?: boolean;
+};
+const framework = Astro.locals.framework;
+const pathname = Astro.url.pathname;
+
+function normalizePath(path: string): string {
+  return path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
+}
+
+const currentPath = normalizePath(pathname);
+const hljsScopeClass = recipeClassName(codeHljsScope().root);
+---
+
+<html lang="en" class={defaultThemeClassName} data-framework={framework}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <ThemeScript themeClass={defaultThemeClassName} />
+    <DocsThemeScript />
+    <link rel="stylesheet" href="/typestyles.css" />
+    <ClientRouter />
+  </head>
+  <body class={cx('docs-body', 'docs-body--playground', hljsScopeClass)}>
+    <AppShell variant="wash" height="fill" contentPadding={0} mobileBreakpoint="md">
+      <TopNav slot="topNav">
+        <TopNavHeading slot="heading" heading="Var UI" headingHref="/" />
+        {
+          topNavItems.map((item) => (
+            <TopNavItem
+              label={item.text}
+              href={item.link}
+              isSelected={currentPath.startsWith(item.match)}
+            />
+          ))
+        }
+        <div slot="end" class="docs-top-nav__tools">
+          <div
+            class="docs-top-nav__tools-persist"
+            transition:persist="docs-top-nav-tools"
+            transition:animate="none"
+          >
+            <DocsSearch />
+            <FrameworkSwitcher />
+            <ColorModeToggle includeSystem size="md" />
+          </div>
+        </div>
+      </TopNav>
+
+      <Layout height="fill" padding={0} className="docs-playground-layout">
+        <LayoutContent label="Playground">
+          <div class:list={['docs-playground-content', bleed && 'docs-playground-content--bleed']}>
+            <slot />
+          </div>
+        </LayoutContent>
+      </Layout>
+    </AppShell>
+    <DocsThemePicker />
+    <script>
+      import '../../typestyles-entry.ts';
+      import '../scripts/reattachTypestyles.ts';
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  html,
+  body.docs-body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body.docs-body {
+    overflow: hidden;
+  }
+
+  body.docs-body #var-ui-app-shell-main {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+  }
+</style>
+
+<style>
+  .docs-top-nav__tools {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .docs-top-nav__tools-persist {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .docs-playground-layout {
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
+  }
+
+  .docs-playground-content {
+    height: 100%;
+    min-height: 0;
+    padding: var(--var-ui-space-6);
+    box-sizing: border-box;
+  }
+
+  .docs-playground-content--bleed {
+    padding: 0;
+  }
+</style>

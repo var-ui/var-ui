@@ -1,5 +1,8 @@
 ---
+import type { DocsFramework } from '@/lib/framework';
 import ThemePlaygroundIsland from './theme-playground/ThemePlayground';
+
+const framework = Astro.locals.framework as DocsFramework;
 ---
 
-<ThemePlaygroundIsland client:load />
+<ThemePlaygroundIsland client:load framework={framework} />

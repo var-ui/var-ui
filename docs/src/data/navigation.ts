@@ -6,6 +6,7 @@ export const topNav = [
   { text: 'Docs', link: '/docs/getting-started', match: '/docs' },
   { text: 'Components', link: '/components', match: '/components' },
   { text: 'Theming', link: '/theming', match: '/theming' },
+  { text: 'Playground', link: '/playground', match: '/playground' },
 ] as const;
 
 export type SidebarItem = {
@@ -28,9 +29,17 @@ export const themingSidebarSections: readonly SidebarSection[] = [
       { text: 'Customize', link: '/theming/customize' },
       { text: 'Themes', link: '/theming/themes' },
       { text: 'Design tokens', link: '/theming/tokens' },
+      { text: 'CSS variables', link: '/theming/css-variables' },
       { text: 'Colors', link: '/theming/colors' },
-      { text: 'Playground', link: '/theming/playground' },
+      { text: 'Shadows', link: '/theming/shadows' },
     ],
+  },
+] as const;
+
+export const playgroundSidebarSections: readonly SidebarSection[] = [
+  {
+    title: 'Playground',
+    items: [{ text: 'Theme editor', link: '/playground' }],
   },
 ] as const;
 
@@ -62,8 +71,11 @@ export const componentSidebar = componentSidebarSections.flatMap((section) => se
 
 export const themingSidebar = themingSidebarSections[0]?.items ?? [];
 
+export const playgroundSidebar = playgroundSidebarSections.flatMap((section) => section.items);
+
 export const sidebar = {
   '/components': componentSidebarSections,
   '/docs': docsSidebar,
   '/theming': themingSidebarSections,
+  '/playground': playgroundSidebarSections,
 } as const;

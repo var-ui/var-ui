@@ -41,7 +41,9 @@ export const button = typestyles.styles.component(
     return {
       base: {
         appearance: 'none',
-        border: `1px solid ${v.border.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.border.var,
         borderRadius: t.radius.md.var,
         backgroundColor: v.background.var,
         color: v.foreground.var,
@@ -54,7 +56,8 @@ export const button = typestyles.styles.component(
         alignItems: 'center',
         justifyContent: 'center',
         gap: t.space[2].var,
-        transition: 'background-color 140ms ease, border-color 140ms ease, transform 80ms ease',
+        transition:
+          'background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease, transform 80ms ease',
         '&:active': {
           transform: 'translateY(1px)',
         },
@@ -87,12 +90,19 @@ export const button = typestyles.styles.component(
             width: 'auto',
           },
         },
+        elevated: {
+          true: {
+            boxShadow: t.shadow.md.var,
+          },
+          false: {},
+        },
       },
       defaultVariants: {
         tone: 'neutral',
         appearance: 'subtle',
         size: 'md',
         layout: 'default',
+        elevated: 'false',
       },
     };
   },
@@ -111,9 +121,11 @@ const INTENT_TO_VARIANTS: Record<ButtonIntent, { tone: ButtonTone; appearance: T
 
 export type ButtonRecipeProps = NonNullable<Parameters<typeof button>[0]>;
 
-export type ButtonOptions = ButtonRecipeProps & {
+export type ButtonOptions = Omit<ButtonRecipeProps, 'elevated'> & {
   /** Shorthand for common `tone` + `appearance` pairs. */
   intent?: ButtonIntent;
+  /** Applies a soft elevation shadow from the shadow design tokens. */
+  elevated?: boolean;
 };
 
 /** Recipe variant props shared by React, Astro, and other Button wrappers. */
@@ -126,6 +138,8 @@ export type ButtonVariantProps = {
   appearance?: ToneAppearance;
   size?: ButtonRecipeProps['size'];
   layout?: ButtonRecipeProps['layout'];
+  /** Applies a soft elevation shadow from the shadow design tokens. */
+  elevated?: boolean;
 };
 
 /** Prop metadata for Astro/docs props tables when `Props extends ButtonVariantProps`. */
@@ -135,6 +149,7 @@ export const buttonVariantPropDocs = [
   { name: 'appearance', type: 'ToneAppearance', required: false },
   { name: 'size', type: "'sm' | 'md' | 'lg'", required: false },
   { name: 'layout', type: "'default' | 'icon'", required: false },
+  { name: 'elevated', type: 'boolean', required: false },
 ] as const satisfies ReadonlyArray<{
   name: keyof ButtonVariantProps;
   type: string;
@@ -143,17 +158,21 @@ export const buttonVariantPropDocs = [
 
 /** Maps `intent` shorthand onto `tone` + `appearance` for `button(...)`. */
 export function resolveButtonProps(props?: ButtonOptions): ButtonRecipeProps {
-  const { intent, tone, appearance, ...rest } = props ?? {};
+  const { intent, tone, appearance, elevated, ...rest } = props ?? {};
+  const elevatedVariant: Pick<ButtonRecipeProps, 'elevated'> | Record<string, never> =
+    elevated != null ? { elevated: elevated ? 'true' : 'false' } : {};
   if (intent) {
     const mapped = INTENT_TO_VARIANTS[intent];
     return {
       ...rest,
+      ...elevatedVariant,
       tone: tone ?? mapped.tone,
       appearance: appearance ?? mapped.appearance,
     };
   }
   return {
     ...rest,
+    ...elevatedVariant,
     ...(tone != null ? { tone } : {}),
     ...(appearance != null ? { appearance } : {}),
   };

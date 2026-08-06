@@ -14,7 +14,7 @@ export const checkbox = typestyles.styles.component(
         syntax: '<color>',
       },
       boxForeground: {
-        value: t.color.text.onAccent.var,
+        value: t.color.tone.accent.foregroundOnBackground.var,
         syntax: '<color>',
       },
       groupLabelColor: {
@@ -34,7 +34,9 @@ export const checkbox = typestyles.styles.component(
         width: '18px',
         height: '18px',
         borderRadius: t.radius.sm.var,
-        border: `1px solid ${v.boxBorder.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.boxBorder.var,
         backgroundColor: v.boxBackground.var,
         display: 'inline-flex',
         alignItems: 'center',
@@ -43,8 +45,8 @@ export const checkbox = typestyles.styles.component(
         fontWeight: t.fontWeight.semibold.var,
         color: v.boxForeground.var,
         '&[data-selected]': {
-          [v.boxBackground.name]: t.color.accent.default.var,
-          [v.boxBorder.name]: t.color.accent.default.var,
+          [v.boxBackground.name]: t.color.tone.accent.background.var,
+          [v.boxBorder.name]: t.color.tone.accent.background.var,
         },
       },
       label: {

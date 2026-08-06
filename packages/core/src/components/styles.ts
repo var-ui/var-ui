@@ -20,7 +20,7 @@ export const layout = typestyles.styles.component(
     });
     return {
       base: {
-        fontFamily: t.fontFamily.sans.var,
+        fontFamily: t.fontFamily.body.var,
         color: v.foreground.var,
       },
       stack: {
@@ -31,7 +31,9 @@ export const layout = typestyles.styles.component(
         display: 'grid',
         gap: t.space[3].var,
         padding: t.space[4].var,
-        border: `1px solid ${v.sectionBorder.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.sectionBorder.var,
         borderRadius: t.radius.lg.var,
         backgroundColor: v.sectionBackground.var,
         boxShadow: t.shadow.xs.var,

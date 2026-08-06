@@ -8,18 +8,22 @@ export const acmeTheme = createDesignTheme({
   name: 'acme',
   colorMode: {
     light: {
-      accent: {
-        default: 'oklch(55% 0.2 290)',
-        hover: 'oklch(48% 0.2 290)',
+      tone: {
+        accent: {
+          foreground: 'oklch(55% 0.2 290)',
+          background: 'oklch(48% 0.2 290)',
+        },
       },
       border: {
         focus: 'oklch(55% 0.18 290)',
       },
     },
     dark: {
-      accent: {
-        default: 'oklch(72% 0.16 290)',
-        hover: 'oklch(78% 0.14 290)',
+      tone: {
+        accent: {
+          foreground: 'oklch(72% 0.16 290)',
+          background: 'oklch(78% 0.14 290)',
+        },
       },
       border: {
         focus: 'oklch(72% 0.16 290)',

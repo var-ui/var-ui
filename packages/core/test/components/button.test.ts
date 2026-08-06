@@ -11,7 +11,7 @@ describe('button', () => {
     expect(css).toContain('.var-ui-button[data-tone="accent"]');
     expect(css).toContain('.var-ui-button[data-tone="danger"]');
     expect(css).toContain('[data-appearance="filled"]');
-    expect(css).toContain('var(--var-ui-color-danger-solid)');
+    expect(css).toContain('var(--var-ui-color-tone-danger-background)');
   });
 
   it('maps intent shorthand to tone and appearance', () => {
@@ -20,6 +20,13 @@ describe('button', () => {
     const css = getRegisteredCss();
     expect(css).toContain('.var-ui-button[data-tone="accent"]');
     expect(css).toContain('[data-appearance="outline"]');
+  });
+
+  it('applies elevation shadow when elevated is true', () => {
+    button(resolveButtonProps({ elevated: true }));
+    const css = getRegisteredCss();
+    expect(css).toContain('[data-elevated]');
+    expect(css).toContain('var(--var-ui-shadow-elevation-low)');
   });
 });
 

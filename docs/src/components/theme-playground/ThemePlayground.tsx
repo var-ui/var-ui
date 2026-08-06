@@ -12,17 +12,16 @@ import {
   type ColorMode,
 } from '@var-ui/react';
 import type { Selection } from 'react-aria-components';
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useDocsFramework } from '@/lib/useDocsFramework';
+import type { DocsFramework } from '@/lib/framework';
 import { HighlightedCodeBlock } from '../HighlightedCodeBlock';
 import { BentoShowcase } from '../homepage/BentoShowcase';
-import { ThemeShowcaseSwitcher } from '../homepage/ThemeShowcaseSwitcher';
 import { themePlaygroundStyles } from '@/styles/themePlayground';
 import { generateThemeCode } from './generateThemeCode';
-import {
-  DEFAULT_THEME_PLAYGROUND_STATE,
-  type ThemePlaygroundState,
-  type ThemePlaygroundViewport,
-} from './themePlaygroundState';
+import { buildPreviewOverrideStyle } from './themePlaygroundTokens';
+import { useThemePlaygroundState } from './useThemePlaygroundState';
+import type { ThemePlaygroundViewport } from './themePlaygroundState';
 
 const STORAGE_KEY = 'theme-mode';
 
@@ -31,18 +30,13 @@ const VIEWPORT_OPTIONS = [
   { id: 'mobile' as const, label: 'Mobile' },
 ];
 
-function ControlGroup({ label, children }: { label: string; children: ReactNode }) {
-  const s = themePlaygroundStyles();
-  return (
-    <div className={recipeClassName(s.controlGroup)}>
-      <span className={recipeClassName(s.controlLabel)}>{label}</span>
-      {children}
-    </div>
-  );
-}
+export type ThemePlaygroundProps = {
+  framework?: DocsFramework;
+};
 
-export default function ThemePlayground() {
-  const [state, setState] = useState<ThemePlaygroundState>(DEFAULT_THEME_PLAYGROUND_STATE);
+export default function ThemePlayground({ framework: initialFramework }: ThemePlaygroundProps) {
+  const framework = useDocsFramework(initialFramework);
+  const { state, patchState } = useThemePlaygroundState();
   const [colorMode, setColorMode] = useState<ColorMode>(
     () => readStoredColorMode(STORAGE_KEY) ?? 'system',
   );
@@ -70,6 +64,7 @@ export default function ThemePlayground() {
     };
   }, [syncColorModeFromStorage]);
 
+  const previewStyle = useMemo(() => buildPreviewOverrideStyle(state), [state]);
   const codeOutput = useMemo(() => generateThemeCode(state), [state]);
 
   const handleExport = async () => {
@@ -90,14 +85,6 @@ export default function ThemePlayground() {
         <LayerProvider>
           <div className={recipeClassName(s.root)} data-theme-playground>
             <div className={recipeClassName(s.workspace)}>
-              <aside className={recipeClassName(s.controls)} aria-label="Theme options">
-                <ControlGroup label="Theme preset">
-                  <ThemeShowcaseSwitcher
-                    selected={state.presetId}
-                    onSelect={(presetId) => setState((prev) => ({ ...prev, presetId }))}
-                  />
-                </ControlGroup>
-              </aside>
               <div className={recipeClassName(s.preview)}>
                 <div className={recipeClassName(s.toolbar)}>
                   <SegmentedControl
@@ -107,7 +94,7 @@ export default function ThemePlayground() {
                     onSelectionChange={(keys: Selection) => {
                       if (keys === 'all') return;
                       const id = [...keys][0] as ThemePlaygroundViewport;
-                      if (id) setState((prev) => ({ ...prev, viewport: id }));
+                      if (id) patchState({ viewport: id });
                     }}
                   />
                   <Button appearance="outline" size="sm" onPress={handleExport}>
@@ -120,7 +107,11 @@ export default function ThemePlayground() {
                       state.viewport === 'mobile' ? s.previewFrameMobile : s.previewFrame,
                     )}
                   >
-                    <BentoShowcase themeId={state.presetId} />
+                    <BentoShowcase
+                      framework={framework}
+                      themeId={state.presetId}
+                      previewStyle={previewStyle}
+                    />
                   </div>
                 </div>
               </div>

@@ -14,7 +14,7 @@ const pulse = keyframes.create('var-ui-status-pulse', {
 });
 
 function toneColor(key: SemanticToneKey) {
-  return { color: semanticTone[key].semantic };
+  return { color: semanticTone[key].foreground };
 }
 
 /**
@@ -51,7 +51,9 @@ export const statusDot = typestyles.styles.component(
           filled: {},
           outline: {
             backgroundColor: 'transparent',
-            border: '2px solid currentColor',
+            borderWidth: t.borderWidth.thick.var,
+            borderStyle: 'solid',
+            borderColor: 'currentColor',
           },
           subtle: {
             backgroundColor: 'color-mix(in srgb, currentColor 35%, transparent)',

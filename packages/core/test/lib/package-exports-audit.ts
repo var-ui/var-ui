@@ -68,6 +68,7 @@ const recipeAdjacent = new Set([
 const semanticToneExports = new Set([
   'semanticTone',
   'subtleMix',
+  'subtleHoverMix',
   'subtleBackgroundColor',
   'subtleBorderColor',
   'filledHoverColor',
@@ -88,7 +89,7 @@ function categorizeRuntimeExport(name: string): ExportCategory {
   if (name.endsWith('Chrome')) return 'chrome';
   if (semanticToneExports.has(name)) return 'semantic-tone';
   if (
-    /^(designTokens|tokens|tokenValues|palette|generateColors|shadowElevation|darkSyntaxValues|lightSyntaxValues|PALETTE_|extendTokens|registerExtendMap|resetExtendTokenRegistry)/.test(
+    /^(designTokens|tokens|tokenValues|palette|generateColors|createToneFace|buildToneFace|onBackground|TONE_|shadowElevation|darkSyntaxValues|lightSyntaxValues|PALETTE_|extendTokens|registerExtendMap|resetExtendTokenRegistry)/.test(
       name,
     ) ||
     name.startsWith('Palette')
@@ -167,7 +168,7 @@ export function collectRuntimeExports(module: Record<string, unknown>): RuntimeE
 
 export function collectTypeOnlyExports(entryPath = defaultEntryPath): string[] {
   const configPath = join(pkgRoot, 'tsconfig.json');
-  const configFile = ts.readConfigFile(configPath, ts.sys.readFile);
+  const configFile = ts.readConfigFile(configPath, (path) => ts.sys.readFile(path));
   if (configFile.error) {
     throw new Error(
       ts.formatDiagnosticsWithColorAndContext([configFile.error], {

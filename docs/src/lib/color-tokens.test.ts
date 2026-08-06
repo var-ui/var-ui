@@ -11,19 +11,19 @@ describe('color-tokens', () => {
     const swatches = getPaletteSwatches();
     expect(swatches).toHaveLength(390);
     expect(swatches[0]).toMatchObject({
-      family: 'amber',
+      family: 'rose',
       step: '1',
-      token: 'amber-1',
-      cssVar: 'var(--var-ui-color-palette-amber-1)',
+      token: 'rose-1',
+      cssVar: 'var(--var-ui-color-palette-rose-1)',
     });
   });
 
   it('builds semantic swatches with css vars', () => {
     const swatches = getSemanticSwatches();
-    const accent = swatches.find((swatch) => swatch.token === 'color.accent.default');
+    const accent = swatches.find((swatch) => swatch.token === 'color.tone.accent.foreground');
     expect(accent).toMatchObject({
-      group: 'accent',
-      cssVar: 'var(--var-ui-color-accent-default)',
+      group: 'tone',
+      cssVar: 'var(--var-ui-color-tone-accent-foreground)',
     });
   });
 

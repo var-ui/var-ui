@@ -25,15 +25,15 @@ export const alert = typestyles.styles.component(
   (c) => {
     const v = c.vars({
       semantic: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.foreground.var,
         syntax: '<color>',
       },
       solidBg: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.background.var,
         syntax: '<color>',
       },
       solidFg: {
-        value: t.color.text.onAccent.var,
+        value: t.color.tone.accent.foregroundOnBackground.var,
         syntax: '<color>',
       },
     });

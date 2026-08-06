@@ -31,7 +31,9 @@ export const hoverCard = typestyles.styles.component(
     return {
       slots: ['root', 'title', 'content'],
       root: {
-        border: `1px solid ${v.border.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.border.var,
         borderRadius: t.radius.md.var,
         backgroundColor: v.background.var,
         boxShadow: t.shadow.md.var,

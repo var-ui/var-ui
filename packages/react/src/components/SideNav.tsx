@@ -17,6 +17,7 @@ import { IconButton } from './IconButton';
 import { ResizeHandle } from './ResizeHandle';
 import { Text } from './Typography';
 import { Tooltip } from './Tooltip';
+import { ScrollArea } from './ScrollArea';
 import { recipeProps } from './utils';
 
 export type SideNavCollapsibleConfig = {
@@ -465,7 +466,13 @@ export function SideNav({
             {topContent != null ? <div {...recipeProps(s.topContent)}>{topContent}</div> : null}
           </div>
         ) : null}
-        <div {...recipeProps(s.scrollable)}>{children}</div>
+        <ScrollArea
+          fade={isCollapsed ? false : 'vertical'}
+          orientation="vertical"
+          className={recipeProps(s.scrollArea).className}
+        >
+          <div {...recipeProps(s.scrollable)}>{children}</div>
+        </ScrollArea>
         {hasFooter ? (
           <div {...recipeProps(s.footer)}>
             {footerIcons != null ? <div {...recipeProps(s.footerIcons)}>{footerIcons}</div> : null}

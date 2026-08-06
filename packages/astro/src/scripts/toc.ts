@@ -5,6 +5,8 @@ import { recipeClassName } from '../utils';
 const ROOT_SELECTOR = '[data-var-ui-toc]';
 const INITIALIZED_ATTR = 'data-var-ui-toc-initialized';
 
+const cleanups = new WeakMap<HTMLElement, () => void>();
+
 function renderTocList(list: HTMLOListElement, headings: TocHeading[]): void {
   const s = toc();
   list.replaceChildren();
@@ -43,9 +45,16 @@ export function setActive(list: HTMLOListElement, id: string | null): void {
   positionTocIndicator(list, activeLink);
 }
 
+function disposeToc(root: HTMLElement): void {
+  const cleanup = cleanups.get(root);
+  if (!cleanup) return;
+  cleanup();
+  cleanups.delete(root);
+  root.removeAttribute(INITIALIZED_ATTR);
+}
+
 export function initToc(root: HTMLElement): () => void {
-  if (root.hasAttribute(INITIALIZED_ATTR)) return () => {};
-  root.setAttribute(INITIALIZED_ATTR, '');
+  if (root.hasAttribute(INITIALIZED_ATTR)) return () => disposeToc(root);
 
   const isAuto = root.dataset.auto === 'true' || root.dataset.auto === '';
   if (!isAuto) return () => {};
@@ -63,7 +72,9 @@ export function initToc(root: HTMLElement): () => void {
     : undefined;
   const headingSelector = root.dataset.headingSelector;
 
-  return createTocSpy({
+  root.setAttribute(INITIALIZED_ATTR, '');
+
+  const cleanup = createTocSpy({
     contentRoot,
     headingSelector,
     minHeadings,
@@ -83,10 +94,15 @@ export function initToc(root: HTMLElement): () => void {
       setActive(list, activeId);
     },
   });
+
+  cleanups.set(root, cleanup);
+
+  return () => disposeToc(root);
 }
 
 export function initTocs(): void {
   document.querySelectorAll<HTMLElement>(ROOT_SELECTOR).forEach((root) => {
+    if (root.hasAttribute(INITIALIZED_ATTR)) return;
     initToc(root);
   });
 }

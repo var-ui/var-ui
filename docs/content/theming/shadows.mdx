@@ -1,0 +1,40 @@
+---
+title: Shadows
+description: Box-shadow and elevation tokens in var-ui.
+---
+
+# Shadows
+
+var-ui ships layered **box-shadow** tokens and a softer **elevation** scale. Each token stacks
+multiple shadows with a consistent top-left light source (vertical offset is 2× horizontal).
+Shadows tint from primary text color via `color-mix`, so they stay legible in both light and
+dark mode without separate dark overrides.
+
+<ShadowSwatches />
+
+## Using shadows
+
+Import token refs from core:
+
+```ts
+import { designTokens } from '@var-ui/core';
+
+designTokens.shadow.md.var; // var(--var-ui-shadow-md)
+designTokens.shadow.elevation.low.var; // var(--var-ui-shadow-elevation-low)
+```
+
+Use them directly as `box-shadow` values in recipes or plain CSS:
+
+```css
+.card {
+  box-shadow: var(--var-ui-shadow-md);
+}
+
+.floating-panel {
+  box-shadow: var(--var-ui-shadow-elevation-high);
+}
+```
+
+Override shadows in a theme via `createDesignTheme({ tokens: { shadow: … } })`. Neo-brutalist
+presets (Rose, Amber) swap in hard offset shadows while keeping the same token names — see
+[Themes](/theming/themes) for examples.

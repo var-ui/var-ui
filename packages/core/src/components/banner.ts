@@ -20,9 +20,9 @@ export const banner = typestyles.styles.component(
   'banner',
   (c) => {
     const v = c.vars({
-      semantic: { value: t.color.accent.default.var, syntax: '<color>' },
-      solidBg: { value: t.color.accent.default.var, syntax: '<color>' },
-      solidFg: { value: t.color.text.onAccent.var, syntax: '<color>' },
+      semantic: { value: t.color.tone.accent.foreground.var, syntax: '<color>' },
+      solidBg: { value: t.color.tone.accent.background.var, syntax: '<color>' },
+      solidFg: { value: t.color.tone.accent.foregroundOnBackground.var, syntax: '<color>' },
     });
     return {
       slots: ['root', 'icon', 'content', 'title', 'actions', 'dismiss'],

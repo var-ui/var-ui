@@ -1,0 +1,28 @@
+---
+import { slider } from '@var-ui/core';
+import { recipeProps } from '../../../lib/recipeProps';
+
+const s = slider();
+const value = 40;
+---
+
+<div {...recipeProps(s.root)} role="group" aria-label="Volume">
+  <label {...recipeProps(s.label)}>
+    <span>Volume</span>
+    <span {...recipeProps(s.output)}>{value}</span>
+  </label>
+  <div {...recipeProps(s.control)}>
+    <div {...recipeProps(s.track)}>
+      <div {...recipeProps(s.fill)} style={`width: ${value}%`}></div>
+    </div>
+    <div
+      {...recipeProps(s.thumb)}
+      role="slider"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow={value}
+      tabindex="0"
+      style={`top: 50%; left: ${value}%; transform: translate(-50%, -50%)`}
+    ></div>
+  </div>
+</div>

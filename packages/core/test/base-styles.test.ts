@@ -10,6 +10,8 @@ describe('base-styles', () => {
     expect(css).toContain('scroll-behavior: auto');
     expect(css).toMatch(/body\s*\{[^}]*margin:\s*0/);
     expect(css).toContain('var(--var-ui-fontFamily-mono)');
+    expect(css).toContain('var(--var-ui-fontFamily-display)');
+    expect(css).toContain('var(--var-ui-fontFamily-body)');
     expect(css).toContain('text-decoration: underline');
     expect(css).toMatch(/@layer\s+reset/);
     expect(css).toMatch(/@layer\s+base/);

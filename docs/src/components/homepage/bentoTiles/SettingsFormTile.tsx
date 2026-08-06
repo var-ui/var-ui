@@ -1,6 +1,15 @@
 'use client';
 
-import { Button, Checkbox, Field, Heading, RadioGroup, Switch, VStack } from '@var-ui/react';
+import {
+  Button,
+  Checkbox,
+  Heading,
+  PinInput,
+  RadioGroup,
+  Slider,
+  Switch,
+  VStack,
+} from '@var-ui/react';
 
 export type SettingsFormTileProps = {
   className?: string;
@@ -13,6 +22,7 @@ export function SettingsFormTile({ className }: SettingsFormTileProps) {
         <Heading level={3} size="sm">
           Notification preferences
         </Heading>
+        <PinInput defaultValue="1234" label="Verification code" length={4} />
         <Switch>Email digest</Switch>
         <Checkbox>Push notifications</Checkbox>
         <RadioGroup
@@ -22,9 +32,7 @@ export function SettingsFormTile({ className }: SettingsFormTileProps) {
             { value: 'weekly', label: 'Weekly' },
           ]}
         />
-        <Field description="Applies instantly." htmlFor="quiet-hours-volume" label="Alert volume">
-          <input id="quiet-hours-volume" type="range" />
-        </Field>
+        <Slider defaultValue={40} description="Applies instantly." label="Alert volume" />
         <Button intent="primary">Save preferences</Button>
       </VStack>
     </div>

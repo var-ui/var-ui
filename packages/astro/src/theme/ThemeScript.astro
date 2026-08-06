@@ -7,16 +7,34 @@ const { themeClass, storageKey = 'theme-mode' } = Astro.props;
 ---
 <meta name="color-scheme" content="light dark" />
 <script is:inline define:vars={{ themeClass, storageKey }}>
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const stored = localStorage.getItem(storageKey);
-  const mode =
-    stored === 'light' || stored === 'dark' || stored === 'system'
-      ? stored
-      : prefersDark
-        ? 'dark'
-        : 'light';
-  const resolved = mode === 'system' ? (prefersDark ? 'dark' : 'light') : mode;
-  document.documentElement.classList.add(themeClass);
-  document.documentElement.setAttribute('data-mode', mode);
-  document.documentElement.style.colorScheme = mode === 'system' ? '' : resolved;
+  function applyThemeTo(doc) {
+    const root = doc.documentElement;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const stored = localStorage.getItem(storageKey);
+    root.classList.add(themeClass);
+    if (stored === 'system') {
+      root.removeAttribute('data-mode');
+      root.style.colorScheme = '';
+    } else if (stored === 'light' || stored === 'dark') {
+      root.setAttribute('data-mode', stored);
+      root.style.colorScheme = stored;
+    } else {
+      const fallback = prefersDark ? 'dark' : 'light';
+      root.setAttribute('data-mode', fallback);
+      root.style.colorScheme = fallback;
+    }
+  }
+
+  applyThemeTo(document);
+
+  const navKey = `__varUiThemeNav:${storageKey}`;
+  if (!window[navKey]) {
+    window[navKey] = true;
+    document.addEventListener('astro:before-swap', (event) => {
+      applyThemeTo(event.newDocument);
+    });
+    document.addEventListener('astro:after-swap', () => {
+      applyThemeTo(document);
+    });
+  }
 </script>

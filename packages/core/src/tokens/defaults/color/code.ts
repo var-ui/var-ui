@@ -1,7 +1,7 @@
 import { tokens } from '../../declare';
 import type { DesignTokens } from '../../types';
 
-export const lightCodeValues = {
+export const lightCodeValues: DesignTokens['color']['code'] = {
   base: tokens.color.palette['gray-10'].var,
   keyword: tokens.color.palette['purple-6'].var,
   title: tokens.color.palette['blue-6'].var,
@@ -16,9 +16,9 @@ export const lightCodeValues = {
   additionBackground: tokens.color.palette['emerald-1'].var,
   deletion: tokens.color.palette['red-6'].var,
   deletionBackground: tokens.color.palette['red-1'].var,
-} satisfies DesignTokens['color']['code'];
+};
 
-export const darkCodeValues = {
+export const darkCodeValues: DesignTokens['color']['code'] = {
   base: tokens.color.palette['gray-3'].var,
   keyword: tokens.color.palette['violet-4'].var,
   title: tokens.color.palette['blue-4'].var,
@@ -33,7 +33,7 @@ export const darkCodeValues = {
   additionBackground: tokens.color.palette['emerald-10'].var,
   deletion: tokens.color.palette['red-4'].var,
   deletionBackground: tokens.color.palette['red-10'].var,
-} satisfies DesignTokens['color']['code'];
+};
 
-export const code = lightCodeValues;
-export const darkCode = darkCodeValues;
+export const code: DesignTokens['color']['code'] = lightCodeValues;
+export const darkCode: DesignTokens['color']['code'] = darkCodeValues;

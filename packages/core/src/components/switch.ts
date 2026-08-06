@@ -30,7 +30,7 @@ export const switchStyles = typestyles.styles.component(
         backgroundColor: v.trackBackground.var,
         transition: 'background-color 140ms ease',
         '&[data-selected]': {
-          [v.trackBackground.name]: t.color.accent.default.var,
+          [v.trackBackground.name]: t.color.tone.accent.background.var,
         },
       },
       thumb: {

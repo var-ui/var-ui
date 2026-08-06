@@ -5,4 +5,8 @@ import './configurator';
 import './themePlayground';
 import './demoChrome';
 import './colorSwatches';
+import './shadowSwatches';
+import './playgroundShell';
+import './playgroundSidebar';
+import './docsThemePicker';
 import './root';

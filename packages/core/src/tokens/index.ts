@@ -5,7 +5,11 @@ export type {
   DesignThemeTokenValues,
   DesignTokens,
 } from './types';
-export { palette } from './defaults/color/palette';
+export {
+  palette,
+  PALETTE_ACCESSIBLE_STEP_GAP,
+  paletteStepsAreAccessible,
+} from './defaults/color/palette';
 export {
   PALETTE_FAMILIES,
   PALETTE_STEPS,
@@ -18,6 +22,21 @@ export { tokenValues } from './preset';
 export { darkSyntaxValues, lightSyntaxValues } from './defaults/color';
 export { shadowElevationValues } from './defaults/shadow';
 export { generateColors } from './generate-colors';
+export {
+  createToneFace,
+  buildToneFace,
+  onBackground,
+  TONE_BORDER_ALPHA,
+  TONE_SUBTLE_ALPHA,
+} from './tone-face';
+export type {
+  ModeAwareToneFaceValues,
+  ModeAwareToneTokens,
+  ToneFaceInput,
+  ToneFaceModeInput,
+  ToneFaceValues,
+} from './tone-face';
+export { TONE_KEYS, type ToneKey } from './schema/color/tone';
 export type {
   GenerateColorsInput,
   GenerateColorsResult,

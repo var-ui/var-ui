@@ -17,14 +17,15 @@ export const SIDE_NAV_COLLAPSED_WIDTH = 56;
  *     <div className={s.heading}>…</div>
  *     <div className={s.topContent}>…</div>
  *   </div>
- *   <div className={s.scrollable}>
+ *   <ScrollArea className={s.scrollArea}>
+ *     <div className={s.scrollable}>
  *     <div className={s.section}>
  *       <div className={s.sectionTitle}>Main</div>
  *       <a className={s.item} data-selected>
  *         <span className={s.itemLabel}>Dashboard</span>
  *       </a>
  *     </div>
- *   </div>
+ *   </ScrollArea>
  *   <div className={s.footer}>
  *     <div className={s.footerIcons}>…</div>
  *     <button className={s.collapseButton} />
@@ -32,48 +33,52 @@ export const SIDE_NAV_COLLAPSED_WIDTH = 56;
  * </nav>
  * ```
  */
+/** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
+export const sideNavVarDefinitions = {
+  background: {
+    value: t.color.background.surface.var,
+    syntax: '<color>' as const,
+  },
+  border: {
+    value: t.color.border.default.var,
+    syntax: '<color>' as const,
+  },
+  headingColor: {
+    value: t.color.text.primary.var,
+    syntax: '<color>' as const,
+  },
+  sectionTitleColor: {
+    value: t.color.text.secondary.var,
+    syntax: '<color>' as const,
+  },
+  itemColor: {
+    value: t.color.navItem.foreground.var,
+    syntax: '<color>' as const,
+  },
+  itemHoverBackground: {
+    value: t.color.navItem.hoverBackground.var,
+    syntax: '<color>' as const,
+  },
+  itemSelectedBackground: {
+    value: t.color.navItem.selectedBackground.var,
+    syntax: '<color>' as const,
+  },
+  itemSelectedColor: {
+    value: t.color.navItem.selectedForeground.var,
+    syntax: '<color>' as const,
+  },
+} as const;
+
 export const sideNav = typestyles.styles.component(
   'side-nav',
   (c) => {
-    const v = c.vars({
-      background: {
-        value: t.color.background.surface.var,
-        syntax: '<color>',
-      },
-      border: {
-        value: t.color.border.default.var,
-        syntax: '<color>',
-      },
-      headingColor: {
-        value: t.color.text.primary.var,
-        syntax: '<color>',
-      },
-      sectionTitleColor: {
-        value: t.color.text.secondary.var,
-        syntax: '<color>',
-      },
-      itemColor: {
-        value: t.color.navItem.foreground.var,
-        syntax: '<color>',
-      },
-      itemHoverBackground: {
-        value: t.color.navItem.hoverBackground.var,
-        syntax: '<color>',
-      },
-      itemSelectedBackground: {
-        value: t.color.navItem.selectedBackground.var,
-        syntax: '<color>',
-      },
-      itemSelectedColor: {
-        value: t.color.navItem.selectedForeground.var,
-        syntax: '<color>',
-      },
-    });
+    const v = c.vars(sideNavVarDefinitions);
     return {
       slots: [
         'root',
         'stickyTop',
         'topContent',
+        'scrollArea',
         'scrollable',
         'footer',
         'footerIcons',
@@ -84,15 +89,8 @@ export const sideNav = typestyles.styles.component(
         'itemLabel',
         'collapseButton',
       ],
+      vars: sideNavVarDefinitions,
       root: {
-        [v.background.name]: t.color.background.surface.var,
-        [v.border.name]: t.color.border.default.var,
-        [v.headingColor.name]: t.color.text.primary.var,
-        [v.sectionTitleColor.name]: t.color.text.secondary.var,
-        [v.itemColor.name]: t.color.navItem.foreground.var,
-        [v.itemHoverBackground.name]: t.color.navItem.hoverBackground.var,
-        [v.itemSelectedBackground.name]: t.color.navItem.selectedBackground.var,
-        [v.itemSelectedColor.name]: t.color.navItem.selectedForeground.var,
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
@@ -101,10 +99,15 @@ export const sideNav = typestyles.styles.component(
         minWidth: 0,
         height: '100%',
         backgroundColor: v.background.var,
-        borderInlineEnd: `1px solid ${v.border.var}`,
         '&[data-collapsed]': {
           alignItems: 'center',
           width: '3.5rem',
+        },
+        '&[data-collapsed] .var-ui-scroll-area__fadeTop': {
+          display: 'none',
+        },
+        '&[data-collapsed] .var-ui-scroll-area__fadeBottom': {
+          display: 'none',
         },
       },
       stickyTop: {
@@ -114,7 +117,9 @@ export const sideNav = typestyles.styles.component(
         flexDirection: 'column',
         gap: t.space[2].var,
         padding: t.space[3].var,
-        borderBottom: `1px solid ${v.border.var}`,
+        borderBottomWidth: t.borderWidth.default.var,
+        borderBottomStyle: 'solid',
+        borderBottomColor: v.border.var,
         backgroundColor: v.background.var,
         zIndex: 1,
         '[data-collapsed] &': {
@@ -127,10 +132,16 @@ export const sideNav = typestyles.styles.component(
         flexDirection: 'column',
         gap: t.space[2].var,
       },
-      scrollable: {
+      scrollArea: {
         flex: '1 1 auto',
         minHeight: 0,
-        overflowY: 'auto',
+        '--var-ui-scroll-area-fadecolor': v.background.var,
+        '[data-collapsed] &': {
+          overflow: 'hidden',
+        },
+      },
+      scrollable: {
+        flex: '1 1 auto',
         display: 'flex',
         flexDirection: 'column',
         gap: t.space[4].var,
@@ -138,7 +149,6 @@ export const sideNav = typestyles.styles.component(
         '[data-collapsed] &': {
           gap: t.space[2].var,
           padding: t.space[2].var,
-          overflow: 'hidden',
         },
       },
       footer: {
@@ -149,7 +159,9 @@ export const sideNav = typestyles.styles.component(
         justifyContent: 'space-between',
         gap: t.space[2].var,
         padding: t.space[3].var,
-        borderTop: `1px solid ${v.border.var}`,
+        borderTopWidth: t.borderWidth.default.var,
+        borderTopStyle: 'solid',
+        borderTopColor: v.border.var,
         backgroundColor: v.background.var,
         '[data-collapsed] &': {
           justifyContent: 'center',

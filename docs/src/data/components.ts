@@ -63,6 +63,20 @@ export const componentRegistry: ComponentEntry[] = [
     importLine: "import { Switch } from '@var-ui/react';",
   },
   {
+    slug: 'slider',
+    name: 'Slider',
+    category: 'data-input',
+    description: 'Numeric value control on a draggable track.',
+    importLine: "import { Slider } from '@var-ui/react';",
+  },
+  {
+    slug: 'pin-input',
+    name: 'PinInput',
+    category: 'data-input',
+    description: 'One-time code entry for email and SMS verification flows.',
+    importLine: "import { PinInput } from '@var-ui/react';",
+  },
+  {
     slug: 'radio-group',
     name: 'RadioGroup',
     category: 'data-input',

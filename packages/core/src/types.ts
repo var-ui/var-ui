@@ -18,6 +18,8 @@ export type {
   StylableOverride,
   ThemeCondition,
   VariantOptionStyle,
+  ComponentVarValues,
+  InferVarDefinitions,
 } from 'typestyles';
 
 export { colorModes, conditional } from 'typestyles';

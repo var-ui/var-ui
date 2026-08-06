@@ -23,6 +23,7 @@ describe('themeableComponents', () => {
           'resolveButtonProps',
           'controlSurfaceSize',
           'controlSizeVariants',
+          'controlFocusStyles',
         ].includes(name) &&
         !name.endsWith('Chrome') &&
         !name.startsWith('create'),

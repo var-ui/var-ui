@@ -1,59 +1,67 @@
 import { designTokens as t } from '../tokens';
+import type { ToneKey } from '../tokens/schema/color/tone';
 
 /** Shared semantic keys: alert `info` maps to `accent`; badge `accent` / `tip` map here directly. */
-export type SemanticToneKey = 'accent' | 'success' | 'warning' | 'danger' | 'info';
+export type SemanticToneKey = ToneKey;
 
 /** Cross-component appearance axis (Mantine-style variants mapped to var-ui naming). */
 export type ToneAppearance = 'filled' | 'outline' | 'subtle' | 'ghost';
 
-/** Tint amounts for subtle surfaces (badge + alert `appearance: subtle`). */
+/** Default subtle tint (matches `tone.*.subtleBackground` token generation). */
 export const subtleMix = {
   surface: '12%',
   border: '38%',
 } as const;
 
-export function subtleBackgroundColor(driver: string): string {
-  return `color-mix(in srgb, ${driver} ${subtleMix.surface}, ${t.color.background.surface.var})`;
+/** Stronger tint for outline hover (appears from transparent). */
+export const subtleHoverMix = {
+  surface: '18%',
+} as const;
+
+export function filledHoverColor(background: string): string {
+  return `color-mix(in oklch, ${background} 88%, black)`;
 }
 
-export function subtleBorderColor(driver: string): string {
-  return `color-mix(in srgb, ${driver} ${subtleMix.border}, ${t.color.border.default.var})`;
+export function subtleBackgroundColor(foreground: string): string {
+  return `color-mix(in srgb, ${foreground} ${subtleMix.surface}, ${t.color.background.surface.var})`;
 }
 
-export function filledHoverColor(solidBg: string): string {
-  return `color-mix(in oklch, ${solidBg} 88%, black)`;
+export function subtleBorderColor(foreground: string): string {
+  return `color-mix(in srgb, ${foreground} ${subtleMix.border}, ${t.color.border.default.var})`;
+}
+
+/** Darken an existing subtle wash — mirrors filled hover (mix toward black). */
+export function subtleHoverBackground(foreground: string): string {
+  return `color-mix(in oklch, ${subtleBackgroundColor(foreground)} 88%, black)`;
+}
+
+/** Tint used when outline/ghost surfaces pick up a subtle fill on hover. */
+export function subtleHoverTint(foreground: string): string {
+  return `color-mix(in srgb, ${foreground} ${subtleHoverMix.surface}, ${t.color.background.surface.var})`;
+}
+
+function isNeutralSemantic(semanticVar: string): boolean {
+  return semanticVar === t.color.text.primary.var;
+}
+
+function toneChannels(key: SemanticToneKey) {
+  const tone = t.color.tone[key];
+  return {
+    foreground: tone.foreground.var,
+    background: tone.background.var,
+    foregroundOnBackground: tone.foregroundOnBackground.var,
+    subtleBackground: tone.subtleBackground.var,
+    border: tone.border.var,
+  };
 }
 
 export const semanticTone = {
-  accent: {
-    semantic: t.color.accent.default.var,
-    solidBg: t.color.accent.default.var,
-    solidFg: t.color.text.onAccent.var,
-  },
-  success: {
-    semantic: t.color.success.default.var,
-    solidBg: t.color.success.solid.var,
-    solidFg: t.color.text.onSuccess.var,
-  },
-  warning: {
-    semantic: t.color.warning.default.var,
-    solidBg: t.color.warning.default.var,
-    solidFg: t.color.warning.onSolid.var,
-  },
-  danger: {
-    semantic: t.color.danger.default.var,
-    solidBg: t.color.danger.solid.var,
-    solidFg: t.color.text.onDanger.var,
-  },
-  info: {
-    semantic: t.color.info.default.var,
-    solidBg: t.color.info.default.var,
-    solidFg: t.color.text.onInfo.var,
-  },
-} as const satisfies Record<
-  SemanticToneKey,
-  { semantic: string; solidBg: string; solidFg: string }
->;
+  accent: toneChannels('accent'),
+  success: toneChannels('success'),
+  warning: toneChannels('warning'),
+  danger: toneChannels('danger'),
+  info: toneChannels('info'),
+} as const;
 
 type SemanticChannelRefs = {
   semantic: { name: string };
@@ -111,9 +119,9 @@ export type ProgressBarTone = Exclude<SemanticToneKey, 'info'>;
 export function semanticChannelAssignments(v: SemanticChannelRefs, key: SemanticToneKey) {
   const ch = semanticTone[key];
   return {
-    [v.semantic.name]: ch.semantic,
-    [v.solidBg.name]: ch.solidBg,
-    [v.solidFg.name]: ch.solidFg,
+    [v.semantic.name]: ch.foreground,
+    [v.solidBg.name]: ch.background,
+    [v.solidFg.name]: ch.foregroundOnBackground,
   };
 }
 
@@ -148,18 +156,27 @@ export function controlAppearancePaint(v: ControlPaintRefs, appearance: ToneAppe
         [v.background.name]: 'transparent',
         [v.foreground.name]: v.semantic.var,
         '&:hover': {
-          [v.background.name]: subtleBackgroundColor(v.semantic.var),
+          [v.background.name]: subtleHoverTint(v.semantic.var),
           [v.border.name]: v.semantic.var,
         },
       };
     case 'subtle':
+      if (isNeutralSemantic(v.semantic.var)) {
+        return {
+          [v.border.name]: t.color.border.default.var,
+          [v.background.name]: t.color.background.surface.var,
+          [v.foreground.name]: v.semantic.var,
+          '&:hover': {
+            [v.border.name]: t.color.border.strong.var,
+          },
+        };
+      }
       return {
         [v.border.name]: subtleBorderColor(v.semantic.var),
         [v.background.name]: subtleBackgroundColor(v.semantic.var),
         [v.foreground.name]: v.semantic.var,
         '&:hover': {
-          [v.background.name]:
-            `color-mix(in srgb, ${v.semantic.var} 18%, ${t.color.background.surface.var})`,
+          [v.border.name]: v.semantic.var,
         },
       };
     case 'ghost':
@@ -174,6 +191,24 @@ export function controlAppearancePaint(v: ControlPaintRefs, appearance: ToneAppe
   }
 }
 
+/** Resolve tokenized subtle background from a tone foreground channel var. */
+function toneSubtleBackgroundFor(foregroundVar: string): string {
+  for (const key of Object.keys(semanticTone) as SemanticToneKey[]) {
+    const ch = semanticTone[key];
+    if (ch.foreground === foregroundVar) return ch.subtleBackground;
+  }
+  return subtleBackgroundColor(foregroundVar);
+}
+
+/** Resolve tokenized border from a tone foreground channel var. */
+function toneBorderFor(foregroundVar: string): string {
+  for (const key of Object.keys(semanticTone) as SemanticToneKey[]) {
+    const ch = semanticTone[key];
+    if (ch.foreground === foregroundVar) return ch.border;
+  }
+  return foregroundVar;
+}
+
 /**
  * Central tone × appearance resolver for bordered controls (button, badge, etc.).
  * Assigns border/background/foreground custom properties and hover recipes.
@@ -183,41 +218,40 @@ export function tonePaint(v: TonePaintRefs, key: SemanticToneKey, appearance: To
   switch (appearance) {
     case 'filled':
       return {
-        [v.border.name]: ch.solidBg,
-        [v.background.name]: ch.solidBg,
-        [v.foreground.name]: ch.solidFg,
+        [v.border.name]: ch.background,
+        [v.background.name]: ch.background,
+        [v.foreground.name]: ch.foregroundOnBackground,
         '&:hover': {
-          [v.background.name]: filledHoverColor(ch.solidBg),
-          [v.border.name]: filledHoverColor(ch.solidBg),
+          [v.background.name]: filledHoverColor(ch.background),
+          [v.border.name]: filledHoverColor(ch.background),
         },
       };
     case 'outline':
       return {
-        [v.border.name]: ch.semantic,
+        [v.border.name]: ch.foreground,
         [v.background.name]: 'transparent',
-        [v.foreground.name]: ch.semantic,
+        [v.foreground.name]: ch.foreground,
         '&:hover': {
-          [v.background.name]: subtleBackgroundColor(ch.semantic),
-          [v.border.name]: ch.semantic,
+          [v.background.name]: ch.subtleBackground,
+          [v.border.name]: ch.foreground,
         },
       };
     case 'subtle':
       return {
-        [v.border.name]: subtleBorderColor(ch.semantic),
-        [v.background.name]: subtleBackgroundColor(ch.semantic),
-        [v.foreground.name]: ch.semantic,
+        [v.border.name]: subtleBorderColor(ch.foreground),
+        [v.background.name]: subtleBackgroundColor(ch.foreground),
+        [v.foreground.name]: ch.foreground,
         '&:hover': {
-          [v.background.name]:
-            `color-mix(in srgb, ${ch.semantic} 18%, ${t.color.background.surface.var})`,
+          [v.border.name]: ch.foreground,
         },
       };
     case 'ghost':
       return {
         [v.border.name]: 'transparent',
         [v.background.name]: 'transparent',
-        [v.foreground.name]: ch.semantic,
+        [v.foreground.name]: ch.foreground,
         '&:hover': {
-          [v.background.name]: subtleBackgroundColor(ch.semantic),
+          [v.background.name]: subtleBackgroundColor(ch.foreground),
         },
       };
   }
@@ -233,27 +267,27 @@ export function badgeTonePaint(
   switch (appearance) {
     case 'filled':
       return {
-        [v.borderColor.name]: ch.solidBg,
-        [v.backgroundColor.name]: ch.solidBg,
-        [v.textColor.name]: ch.solidFg,
+        [v.borderColor.name]: ch.background,
+        [v.backgroundColor.name]: ch.background,
+        [v.textColor.name]: ch.foregroundOnBackground,
       };
     case 'outline':
       return {
-        [v.borderColor.name]: ch.semantic,
+        [v.borderColor.name]: ch.foreground,
         [v.backgroundColor.name]: 'transparent',
-        [v.textColor.name]: ch.semantic,
+        [v.textColor.name]: ch.foreground,
       };
     case 'subtle':
       return {
-        [v.borderColor.name]: subtleBorderColor(ch.semantic),
-        [v.backgroundColor.name]: subtleBackgroundColor(ch.semantic),
-        [v.textColor.name]: ch.semantic,
+        [v.borderColor.name]: ch.border,
+        [v.backgroundColor.name]: ch.subtleBackground,
+        [v.textColor.name]: ch.foreground,
       };
     case 'ghost':
       return {
         [v.borderColor.name]: 'transparent',
         [v.backgroundColor.name]: 'transparent',
-        [v.textColor.name]: ch.semantic,
+        [v.textColor.name]: ch.foreground,
       };
   }
 }
@@ -269,7 +303,13 @@ export function appearanceSurface(
     return {
       backgroundColor: v.solidBg.var,
       color: v.solidFg.var,
-      ...(includeBorder ? { border: `1px solid ${v.solidBg.var}` } : {}),
+      ...(includeBorder
+        ? {
+            borderWidth: t.borderWidth.default.var,
+            borderStyle: 'solid',
+            borderColor: v.solidBg.var,
+          }
+        : {}),
     };
   }
   if (appearance === 'outline') {
@@ -277,16 +317,34 @@ export function appearanceSurface(
       backgroundColor: 'transparent',
       color: t.color.text.primary.var,
       ...(includeBorder
-        ? { border: `1px solid ${v.semantic.var}` }
-        : { borderBlock: `1px solid ${v.semantic.var}` }),
+        ? {
+            borderWidth: t.borderWidth.default.var,
+            borderStyle: 'solid',
+            borderColor: v.semantic.var,
+          }
+        : {
+            borderBlockWidth: t.borderWidth.default.var,
+            borderBlockStyle: 'solid',
+            borderBlockColor: v.semantic.var,
+          }),
     };
   }
+  const subtleBg = toneSubtleBackgroundFor(v.semantic.var);
+  const subtleBorder = toneBorderFor(v.semantic.var);
   return {
-    backgroundColor: subtleBackgroundColor(v.semantic.var),
+    backgroundColor: subtleBg,
     color: t.color.text.primary.var,
     ...(includeBorder
-      ? { border: `1px solid ${subtleBorderColor(v.semantic.var)}` }
-      : { borderBlock: `1px solid ${subtleBorderColor(v.semantic.var)}` }),
+      ? {
+          borderWidth: t.borderWidth.default.var,
+          borderStyle: 'solid',
+          borderColor: subtleBorder,
+        }
+      : {
+          borderBlockWidth: t.borderWidth.default.var,
+          borderBlockStyle: 'solid',
+          borderBlockColor: subtleBorder,
+        }),
   };
 }
 
@@ -319,8 +377,7 @@ export function buttonTonePaint(v: TonePaintRefs, tone: ButtonTone, appearance: 
           [v.background.name]: t.color.background.surface.var,
           [v.foreground.name]: t.color.text.primary.var,
           '&:hover': {
-            borderColor: t.color.border.strong.var,
-            backgroundColor: t.color.background.subtle.var,
+            [v.border.name]: t.color.border.strong.var,
           },
         };
       case 'ghost':

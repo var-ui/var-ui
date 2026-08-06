@@ -2,7 +2,6 @@ import type { JSX } from 'react';
 import {
   Label,
   Slider as AriaSlider,
-  SliderFill,
   SliderOutput,
   SliderThumb,
   SliderTrack,
@@ -39,14 +38,19 @@ export function Slider({
       <SliderTrack {...recipeProps(s.control)}>
         {({ state }) => (
           <>
-            <div {...recipeProps(s.track)} />
-            <SliderFill
-              {...recipeProps(s.fill)}
+            <div {...recipeProps(s.track)}>
+              <div
+                {...recipeProps(s.fill)}
+                style={{ width: `${state.getThumbPercent(0) * 100}%` }}
+              />
+            </div>
+            <SliderThumb
+              {...recipeProps(s.thumb)}
               style={{
-                width: `${state.getThumbPercent(0) * 100}%`,
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
               }}
             />
-            <SliderThumb {...recipeProps(s.thumb)} />
           </>
         )}
       </SliderTrack>

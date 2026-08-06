@@ -8,7 +8,11 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@var-ui/core": ["../core/src/index.ts"],
+      "@var-ui/core/*": ["../core/src/*"]
+    }
   },
   "include": ["src"]
 }

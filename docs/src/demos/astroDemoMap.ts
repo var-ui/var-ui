@@ -30,6 +30,8 @@ import TextAreaFieldDefault from './text-area-field/default/astro.astro';
 import CheckboxDefault from './checkbox/default/astro.astro';
 import RadioGroupDefault from './radio-group/default/astro.astro';
 import SwitchDefault from './switch/default/astro.astro';
+import SliderDefault from './slider/default/astro.astro';
+import PinInputDefault from './pin-input/default/astro.astro';
 import SelectDefault from './select/default/astro.astro';
 import SelectOptions from './select/options/astro.astro';
 import ComboboxDefault from './combobox/default/astro.astro';
@@ -83,6 +85,8 @@ export const astroDemoMap = {
   'checkbox.default': CheckboxDefault,
   'radio-group.default': RadioGroupDefault,
   'switch.default': SwitchDefault,
+  'slider.default': SliderDefault,
+  'pin-input.default': PinInputDefault,
   'select.default': SelectDefault,
   'select.options': SelectOptions,
   'combobox.default': ComboboxDefault,

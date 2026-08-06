@@ -33,6 +33,8 @@ export type DemoId =
   | 'checkbox.default'
   | 'radio-group.default'
   | 'switch.default'
+  | 'slider.default'
+  | 'pin-input.default'
   | 'select.default'
   | 'select.options'
   | 'combobox.default'

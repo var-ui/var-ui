@@ -34,7 +34,9 @@ export const radio = typestyles.styles.component(
         width: '18px',
         height: '18px',
         borderRadius: t.radius.full.var,
-        border: `1px solid ${v.controlBorder.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.controlBorder.var,
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -47,7 +49,7 @@ export const radio = typestyles.styles.component(
           transition: 'background-color 120ms ease',
         },
         '&[data-selected]::before': {
-          [v.indicatorBackground.name]: t.color.accent.default.var,
+          [v.indicatorBackground.name]: t.color.tone.accent.background.var,
         },
       },
       label: {

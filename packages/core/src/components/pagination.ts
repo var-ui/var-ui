@@ -84,7 +84,7 @@ export const pagination = typestyles.styles.component(
           },
         },
         dotActive: {
-          backgroundColor: t.color.accent.default.var,
+          backgroundColor: t.color.tone.accent.background.var,
         },
         pageSizeGroup: {
           display: 'flex',

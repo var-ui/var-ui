@@ -43,22 +43,61 @@ export function setColorMode(mode: ColorMode, storageKey = 'theme-mode'): void {
   syncColorModeToggles(storageKey);
 }
 
+function prefersDarkColorScheme(): boolean {
+  return (
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
+}
+
 /** Boot path used by ThemeScript (class + data-mode + color-scheme). */
-export function bootTheme(themeClass: string, storageKey = 'theme-mode'): ColorMode {
-  const prefersDark =
-    typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+export function applyThemeBoot(
+  doc: Document,
+  themeClass: string,
+  storageKey = 'theme-mode',
+): ColorMode {
+  const root = doc.documentElement;
+  const prefersDark = prefersDarkColorScheme();
   const stored = readStoredColorMode(storageKey);
   const mode: ColorMode = stored ?? (prefersDark ? 'dark' : 'light');
 
-  document.documentElement.classList.add(themeClass);
+  root.classList.add(themeClass);
   if (stored === 'system') {
-    applyColorModeToDocument('system');
+    root.removeAttribute('data-mode');
+    root.style.colorScheme = '';
   } else if (stored === 'light' || stored === 'dark') {
-    applyColorModeToDocument(stored);
+    root.setAttribute('data-mode', stored);
+    root.style.colorScheme = stored;
   } else {
-    applyColorModeToDocument(prefersDark ? 'dark' : 'light');
+    const fallback = prefersDark ? 'dark' : 'light';
+    root.setAttribute('data-mode', fallback);
+    root.style.colorScheme = fallback;
   }
   return mode;
+}
+
+export function bootTheme(themeClass: string, storageKey = 'theme-mode'): ColorMode {
+  return applyThemeBoot(document, themeClass, storageKey);
+}
+
+type AstroBeforeSwapEvent = Event & { newDocument: Document };
+
+const themeNavigationBound = new WeakSet<object>();
+
+/** Keep stored color mode on the incoming document during Astro view transitions. */
+export function watchThemeOnNavigation(themeClass: string, storageKey = 'theme-mode'): void {
+  const boundKey = { themeClass, storageKey };
+  if (themeNavigationBound.has(boundKey)) return;
+  themeNavigationBound.add(boundKey);
+
+  document.addEventListener('astro:before-swap', (event) => {
+    applyThemeBoot((event as AstroBeforeSwapEvent).newDocument, themeClass, storageKey);
+  });
+
+  document.addEventListener('astro:after-swap', () => {
+    bootTheme(themeClass, storageKey);
+  });
 }
 
 function readEffectiveColorMode(storageKey: string): ColorMode {

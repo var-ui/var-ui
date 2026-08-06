@@ -574,6 +574,18 @@
       "types": "./dist/components/Pagination.d.mts",
       "import": "./dist/components/Pagination.mjs"
     },
+    "./components/PinInput": {
+      "types": "./dist/components/PinInput.d.mts",
+      "import": "./dist/components/PinInput.mjs"
+    },
+    "./pin-input": {
+      "types": "./dist/components/PinInput.d.mts",
+      "import": "./dist/components/PinInput.mjs"
+    },
+    "./PinInput": {
+      "types": "./dist/components/PinInput.d.mts",
+      "import": "./dist/components/PinInput.mjs"
+    },
     "./components/Popover": {
       "types": "./dist/components/Popover.d.mts",
       "import": "./dist/components/Popover.mjs"
@@ -621,6 +633,30 @@
     "./ResizeHandle": {
       "types": "./dist/components/ResizeHandle.d.mts",
       "import": "./dist/components/ResizeHandle.mjs"
+    },
+    "./components/ScrollArea": {
+      "types": "./dist/components/ScrollArea.d.mts",
+      "import": "./dist/components/ScrollArea.mjs"
+    },
+    "./scroll-area": {
+      "types": "./dist/components/ScrollArea.d.mts",
+      "import": "./dist/components/ScrollArea.mjs"
+    },
+    "./ScrollArea": {
+      "types": "./dist/components/ScrollArea.d.mts",
+      "import": "./dist/components/ScrollArea.mjs"
+    },
+    "./components/SearchInput": {
+      "types": "./dist/components/SearchInput.d.mts",
+      "import": "./dist/components/SearchInput.mjs"
+    },
+    "./search-input": {
+      "types": "./dist/components/SearchInput.d.mts",
+      "import": "./dist/components/SearchInput.mjs"
+    },
+    "./SearchInput": {
+      "types": "./dist/components/SearchInput.d.mts",
+      "import": "./dist/components/SearchInput.mjs"
     },
     "./components/Section": {
       "types": "./dist/components/Section.d.mts",
@@ -681,6 +717,18 @@
     "./Skeleton": {
       "types": "./dist/components/Skeleton.d.mts",
       "import": "./dist/components/Skeleton.mjs"
+    },
+    "./components/Slider": {
+      "types": "./dist/components/Slider.d.mts",
+      "import": "./dist/components/Slider.mjs"
+    },
+    "./slider": {
+      "types": "./dist/components/Slider.d.mts",
+      "import": "./dist/components/Slider.mjs"
+    },
+    "./Slider": {
+      "types": "./dist/components/Slider.d.mts",
+      "import": "./dist/components/Slider.mjs"
     },
     "./components/Spinner": {
       "types": "./dist/components/Spinner.d.mts",

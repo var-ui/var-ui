@@ -1,0 +1,72 @@
+---
+import { recipeClassName } from '@var-ui/astro';
+import { formatCssVarName, getShadowSwatches, groupShadowSwatches } from '@/lib/shadow-tokens';
+import { shadowSwatchesStyles } from '@/styles/shadowSwatches';
+
+const shadowGroups = groupShadowSwatches(getShadowSwatches());
+const boxShadows = shadowGroups.get('box') ?? [];
+const elevationShadows = shadowGroups.get('elevation') ?? [];
+const c = shadowSwatchesStyles();
+---
+
+<div class={recipeClassName(c.root)}>
+  <section class={recipeClassName(c.section)} aria-labelledby="box-shadow-heading">
+    <h2 id="box-shadow-heading" class={recipeClassName(c.sectionTitle)}>Box shadows</h2>
+    <p class={recipeClassName(c.sectionDescription)}>
+      Compound <code>box-shadow</code> tokens from <code>shadow.xs</code> through
+      <code>shadow.xl</code>. Each level layers multiple shadows with a consistent top-left light
+      source. Tint is derived from primary text color, so shadows follow light and dark mode
+      automatically.
+    </p>
+
+    <div class={recipeClassName(c.grid)} role="list" aria-label="Box shadow tokens">
+      {
+        boxShadows.map((swatch) => (
+          <div class={recipeClassName(c.card)} role="listitem" title={swatch.defaultValue}>
+            <div class={recipeClassName(c.preview)}>
+              <div
+                class={recipeClassName(c.previewSurface)}
+                style={{ boxShadow: swatch.cssVar }}
+                aria-hidden="true"
+              />
+            </div>
+            <div class={recipeClassName(c.meta)}>
+              <span class={recipeClassName(c.token)}>{swatch.token.replace('shadow.', '')}</span>
+              <span class={recipeClassName(c.cssVar)}>{formatCssVarName(swatch.cssVar)}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class={recipeClassName(c.section)} aria-labelledby="elevation-shadow-heading">
+    <h2 id="elevation-shadow-heading" class={recipeClassName(c.sectionTitle)}>Elevation</h2>
+    <p class={recipeClassName(c.sectionDescription)}>
+      Softer elevation steps under <code>shadow.elevation</code> for surfaces that need subtle depth
+      without the stronger box-shadow scale.
+    </p>
+
+    <div class={recipeClassName(c.grid)} role="list" aria-label="Elevation shadow tokens">
+      {
+        elevationShadows.map((swatch) => (
+          <div class={recipeClassName(c.card)} role="listitem" title={swatch.defaultValue}>
+            <div class={recipeClassName(c.preview)}>
+              <div
+                class={recipeClassName(c.previewSurface)}
+                style={{ boxShadow: swatch.cssVar }}
+                aria-hidden="true"
+              />
+            </div>
+            <div class={recipeClassName(c.meta)}>
+              <span class={recipeClassName(c.token)}>
+                {swatch.token.replace('shadow.elevation.', 'elevation.')}
+              </span>
+              <span class={recipeClassName(c.cssVar)}>{formatCssVarName(swatch.cssVar)}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</div>

@@ -22,7 +22,7 @@ export const card = typestyles.styles.component(
         syntax: '<color>',
       },
       linkTitleColor: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.foreground.var,
         syntax: '<color>',
       },
     });
@@ -43,7 +43,9 @@ export const card = typestyles.styles.component(
         gap: t.space[2].var,
         padding: t.space[4].var,
         borderRadius: t.radius.md.var,
-        border: `1px solid ${v.border.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.border.var,
         backgroundColor: v.background.var,
         transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
       },

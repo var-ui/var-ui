@@ -1,4 +1,5 @@
 // Showcase theme presets — side-effect imports register @font-face rules at build time.
+import './default';
 import './ai-glow';
 import './new-wave';
 import './windows-95';

@@ -37,13 +37,37 @@ export const table = typestyles.styles.component(
     });
 
     const rowDivider = {
-      header: { borderBottom: `1px solid ${v.borderColor.var}` },
-      row: { borderBottom: `1px solid ${v.borderColor.var}` },
-      footer: { borderTop: `1px solid ${v.borderColor.var}` },
+      header: {
+        borderBottomWidth: t.borderWidth.default.var,
+        borderBottomStyle: 'solid',
+        borderBottomColor: v.borderColor.var,
+      },
+      row: {
+        borderBottomWidth: t.borderWidth.default.var,
+        borderBottomStyle: 'solid',
+        borderBottomColor: v.borderColor.var,
+      },
+      footer: {
+        borderTopWidth: t.borderWidth.default.var,
+        borderTopStyle: 'solid',
+        borderTopColor: v.borderColor.var,
+      },
     };
     const columnDivider = {
-      headerCell: { '&:not(:last-child)': { borderRight: `1px solid ${v.borderColor.var}` } },
-      cell: { '&:not(:last-child)': { borderRight: `1px solid ${v.borderColor.var}` } },
+      headerCell: {
+        '&:not(:last-child)': {
+          borderRightWidth: t.borderWidth.default.var,
+          borderRightStyle: 'solid',
+          borderRightColor: v.borderColor.var,
+        },
+      },
+      cell: {
+        '&:not(:last-child)': {
+          borderRightWidth: t.borderWidth.default.var,
+          borderRightStyle: 'solid',
+          borderRightColor: v.borderColor.var,
+        },
+      },
     };
 
     return {
@@ -53,6 +77,7 @@ export const table = typestyles.styles.component(
         'caption',
         'header',
         'headerCell',
+        'resizeHandle',
         'body',
         'row',
         'cell',
@@ -81,6 +106,7 @@ export const table = typestyles.styles.component(
         },
         header: {},
         headerCell: {
+          position: 'relative',
           textAlign: 'left',
           fontWeight: t.fontWeight.semibold.var,
           fontSize: t.fontSize.sm.var,
@@ -89,6 +115,16 @@ export const table = typestyles.styles.component(
           padding: `${v.cellPaddingY.var} ${v.cellPaddingX.var}`,
           '&[data-align="center"]': { textAlign: 'center' },
           '&[data-align="end"]': { textAlign: 'right' },
+        },
+        resizeHandle: {
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          display: 'flex',
+          alignItems: 'stretch',
+          transform: 'translateX(50%)',
+          zIndex: 2,
         },
         body: {},
         row: {},
@@ -163,6 +199,10 @@ export const table = typestyles.styles.component(
             },
           },
         },
+        layout: {
+          auto: {},
+          fixed: { table: { tableLayout: 'fixed' } },
+        },
       },
       defaultVariants: {
         density: 'balanced',
@@ -171,6 +211,7 @@ export const table = typestyles.styles.component(
         hasHover: false,
         stickyHeader: false,
         textOverflow: 'wrap',
+        layout: 'auto',
       },
     };
   },

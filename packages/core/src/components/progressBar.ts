@@ -24,7 +24,7 @@ export const progressBar = typestyles.styles.component(
         syntax: '<color>',
       },
       fillColor: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.foreground.var,
         syntax: '<color>',
       },
     });
@@ -50,7 +50,10 @@ export const progressBar = typestyles.styles.component(
       },
       variants: {
         tone: Object.fromEntries(
-          toneKeys.map((key) => [key, { root: { [v.fillColor.name]: semanticTone[key].solidBg } }]),
+          toneKeys.map((key) => [
+            key,
+            { root: { [v.fillColor.name]: semanticTone[key].background } },
+          ]),
         ) as Record<ProgressBarTone, { root: Record<string, string> }>,
         appearance: {
           solid: {},

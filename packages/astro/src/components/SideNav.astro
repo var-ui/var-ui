@@ -2,6 +2,7 @@
 import { sideNav } from '@var-ui/core';
 import SideNavCollapseButton from './SideNavCollapseButton.astro';
 import ResizeHandle from './ResizeHandle.astro';
+import ScrollArea from './ScrollArea.astro';
 import { recipeProps } from '../utils';
 
 type SideNavCollapsibleConfig = {
@@ -61,7 +62,11 @@ const hasFooterZone = hasFooter || hasFooterIcons || hasCollapseButton;
       </div>
     )
   }
-  <div {...recipeProps(s.scrollable)}><slot /></div>
+  <ScrollArea fade="vertical" className={recipeProps(s.scrollArea).className}>
+    <div {...recipeProps(s.scrollable)}>
+      <slot />
+    </div>
+  </ScrollArea>
   {
     hasFooterZone && (
       <div {...recipeProps(s.footer)}>

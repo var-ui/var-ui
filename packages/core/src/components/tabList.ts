@@ -50,7 +50,7 @@ export const tabList = typestyles.styles.component<typeof TAB_LIST_SLOTS, TabLis
         syntax: '<color>',
       },
       indicatorColor: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.foreground.var,
         syntax: '<color>',
       },
       dividerColor: {
@@ -78,10 +78,14 @@ export const tabList = typestyles.styles.component<typeof TAB_LIST_SLOTS, TabLis
             flex: '1 1 auto',
           },
           '&[data-has-divider][data-orientation="horizontal"]': {
-            borderBottom: `1px solid ${v.dividerColor.var}`,
+            borderBottomWidth: t.borderWidth.default.var,
+            borderBottomStyle: 'solid',
+            borderBottomColor: v.dividerColor.var,
           },
           '&[data-has-divider][data-orientation="vertical"]': {
-            borderInlineEnd: `1px solid ${v.dividerColor.var}`,
+            borderInlineEndWidth: t.borderWidth.default.var,
+            borderInlineEndStyle: 'solid',
+            borderInlineEndColor: v.dividerColor.var,
           },
         },
         tab: {

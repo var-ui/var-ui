@@ -15,7 +15,7 @@ export const dateInput = typestyles.styles.component(
         syntax: '<color>',
       },
       errorColor: {
-        value: t.color.danger.default.var,
+        value: t.color.tone.danger.foreground.var,
         syntax: '<color>',
       },
       groupBackground: {
@@ -67,11 +67,11 @@ export const dateInput = typestyles.styles.component(
         syntax: '<color>',
       },
       cellSelectedBackground: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.background.var,
         syntax: '<color>',
       },
       cellSelectedColor: {
-        value: t.color.text.onAccent.var,
+        value: t.color.tone.accent.foregroundOnBackground.var,
         syntax: '<color>',
       },
       cellDisabledColor: {
@@ -145,7 +145,9 @@ export const dateInput = typestyles.styles.component(
         },
       },
       popover: {
-        border: `1px solid ${v.popoverBorder.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.popoverBorder.var,
         borderRadius: t.radius.md.var,
         backgroundColor: v.popoverBackground.var,
         boxShadow: t.shadow.md.var,

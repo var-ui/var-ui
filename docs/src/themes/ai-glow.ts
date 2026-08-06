@@ -1,6 +1,7 @@
 import { color } from 'typestyles/color';
 import {
   createDesignTheme,
+  createToneFace,
   designTokens as p,
   darkSyntaxValues,
   groteskMono,
@@ -38,6 +39,69 @@ const aiGlowDarkSyntaxValues = {
   section: '#67E8F9',
 };
 
+const aiGlowTone = {
+  accent: createToneFace({
+    light: {
+      foreground: '#0EA5E9',
+      background: '#0EA5E9',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: '#67E8F9',
+      background: '#67E8F9',
+      darkForeground: '#FFFFFF',
+    },
+  }),
+  danger: createToneFace({
+    light: {
+      foreground: p.color.palette['red-7'].var,
+      background: p.color.palette['red-8'].var,
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: p.color.palette['red-4'].var,
+      background: p.color.palette['red-7'].var,
+      darkForeground: '#FFFFFF',
+    },
+  }),
+  success: createToneFace({
+    light: {
+      foreground: '#0F9F6E',
+      background: '#047857',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: '#6EE7B7',
+      background: '#047857',
+      darkForeground: '#FFFFFF',
+    },
+  }),
+  warning: createToneFace({
+    light: {
+      foreground: '#B45309',
+      background: '#B45309',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: '#FCD34D',
+      background: '#FCD34D',
+      darkForeground: '#211400',
+    },
+  }),
+  info: createToneFace({
+    light: {
+      foreground: '#2563EB',
+      background: '#2563EB',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: '#67E8F9',
+      background: '#67E8F9',
+      darkForeground: '#08111A',
+    },
+  }),
+};
+
 const aiGlowLightColorValues = {
   background: {
     app: '#F8F5FF',
@@ -50,22 +114,13 @@ const aiGlowLightColorValues = {
   text: {
     primary: '#201A3D',
     secondary: '#5B527B',
-    onAccent: '#FFFFFF',
-    onDanger: '#FFFFFF',
-    onSuccess: '#FFFFFF',
-    onWarning: '#FFFFFF',
-    onInfo: '#FFFFFF',
   },
-  accent: { default: '#0EA5E9', hover: '#7C3AED' },
+  tone: aiGlowTone,
   border: {
     default: 'color-mix(in oklch, #0EA5E9 28%, #FFFFFF)',
     strong: 'color-mix(in oklch, #F59E0B 38%, #FFFFFF)',
     focus: '#DB2777',
   },
-  danger: { default: p.color.palette['red-7'].var, solid: p.color.palette['red-8'].var },
-  success: { default: '#0F9F6E', solid: '#047857' },
-  warning: { default: '#B45309', onSolid: '#FFFFFF' },
-  info: { default: '#2563EB', onSolid: '#FFFFFF' },
   overlay: {
     default: color.alpha('#201A3D', 0.42, 'oklch'),
     panel: '#FFFFFF',
@@ -86,22 +141,12 @@ const aiGlowDarkColorValues = {
   text: {
     primary: '#FAF7FF',
     secondary: '#C9C0EA',
-    onAccent: '#FFFFFF',
-    onDanger: '#FFFFFF',
-    onSuccess: '#FFFFFF',
-    onWarning: '#211400',
-    onInfo: '#08111A',
   },
-  accent: { default: '#67E8F9', hover: '#F0ABFC' },
   border: {
     default: 'color-mix(in oklch, #67E8F9 34%, #111025)',
     strong: 'color-mix(in oklch, #FDE68A 42%, #111025)',
     focus: '#F0ABFC',
   },
-  danger: { default: p.color.palette['red-4'].var, solid: p.color.palette['red-7'].var },
-  success: { default: '#6EE7B7', solid: '#047857' },
-  warning: { default: '#FCD34D', onSolid: '#211400' },
-  info: { default: '#67E8F9', onSolid: '#08111A' },
   overlay: {
     default: color.alpha('#05040F', 0.76, 'oklch'),
     panel: '#211B3B',

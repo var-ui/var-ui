@@ -6,7 +6,7 @@ description: Semantic tokens that power var-ui components and layouts.
 # Design tokens
 
 var-ui exposes semantic tokens for color, spacing, typography, motion, and
-elevation. Components reference tokens (e.g. `t.color.accent.default`) instead
+elevation. Components reference tokens (e.g. `t.color.tone.accent.foreground`) instead
 of hard-coded values so themes can swap palettes without touching recipes.
 
 Import the shared refs from core:
@@ -64,5 +64,5 @@ Override defaults via `createDesignTheme({ tokens: { color: { code: … } } })` 
 | `deletion` / `deletionBackground` | Diff deletions                            |
 
 See the [Colors](/theming/colors) reference for palette ramps and semantic color
-swatches. Other token namespaces (spacing, typography, motion) are documented in
-`packages/core/src/tokens/`; example theme presets live under `docs/src/themes/`.
+swatches, [Shadows](/theming/shadows) for elevation tokens, and [CSS variables](/theming/css-variables) for the full custom property
+catalog. Example theme presets live under `docs/src/themes/`.

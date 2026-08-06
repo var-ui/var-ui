@@ -5,7 +5,7 @@ import { designTokens as t } from '../tokens';
 export const link = typestyles.styles.class(
   'link',
   {
-    color: t.color.accent.default.var,
+    color: t.color.link.default.var,
     fontSize: t.fontSize.md.var,
     textDecoration: 'none',
     fontWeight: t.fontWeight.medium.var,

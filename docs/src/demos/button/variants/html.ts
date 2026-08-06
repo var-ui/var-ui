@@ -2,6 +2,13 @@ import { button, stack, resolveButtonProps } from '@var-ui/core';
 import { recipeProps } from '../../../lib/recipeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
+const tones = ['neutral', 'accent', 'success', 'warning', 'danger', 'info'] as const;
+const appearances = ['filled', 'outline', 'subtle', 'ghost'] as const;
+
+function toneLabel(tone: (typeof tones)[number]) {
+  return tone.charAt(0).toUpperCase() + tone.slice(1);
+}
+
 function buttonTag(label: string, options: Parameters<typeof resolveButtonProps>[0]): string {
   return serializeHtmlTag(
     'button',
@@ -11,43 +18,23 @@ function buttonTag(label: string, options: Parameters<typeof resolveButtonProps>
 }
 
 export function render(): string {
-  const appearances = stack({
+  const row = stack({
     direction: 'row',
     gap: 'sm',
     align: 'center',
     justify: 'start',
     wrap: 'wrap',
   });
-  const tones = stack({
-    direction: 'row',
-    gap: 'sm',
-    align: 'center',
-    justify: 'start',
-    wrap: 'wrap',
-  });
-  const root = stack({ direction: 'column', gap: 'md', align: 'stretch', justify: 'start' });
+  const root = stack({ direction: 'column', gap: 'lg', align: 'stretch', justify: 'start' });
 
-  const appearanceRow = serializeHtmlTag(
-    'div',
-    recipeProps(appearances),
-    [
-      buttonTag('Filled', { tone: 'accent', appearance: 'filled' }),
-      buttonTag('Outline', { tone: 'accent', appearance: 'outline' }),
-      buttonTag('Subtle', { tone: 'accent', appearance: 'subtle' }),
-      buttonTag('Ghost', { tone: 'accent', appearance: 'ghost' }),
-    ].join(''),
-  );
-  const toneRow = serializeHtmlTag(
-    'div',
-    recipeProps(tones),
-    [
-      buttonTag('Accent', { tone: 'accent', appearance: 'filled' }),
-      buttonTag('Success', { tone: 'success', appearance: 'filled' }),
-      buttonTag('Warning', { tone: 'warning', appearance: 'filled' }),
-      buttonTag('Danger', { tone: 'danger', appearance: 'filled' }),
-      buttonTag('Info', { tone: 'info', appearance: 'filled' }),
-    ].join(''),
-  );
+  const rows = appearances
+    .map((appearance) => {
+      const buttons = tones
+        .map((tone) => buttonTag(toneLabel(tone), { tone, appearance }))
+        .join('');
+      return serializeHtmlTag('div', recipeProps(row), buttons);
+    })
+    .join('');
 
-  return serializeHtmlTag('div', recipeProps(root), `${appearanceRow}${toneRow}`);
+  return serializeHtmlTag('div', recipeProps(root), rows);
 }

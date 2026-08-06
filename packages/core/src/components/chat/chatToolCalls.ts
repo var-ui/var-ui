@@ -87,9 +87,9 @@ export const chatToolCalls = typestyles.styles.component(
     variants: {
       status: {
         pending: { statusIcon: { color: t.color.text.secondary.var } },
-        running: { statusIcon: { color: semanticTone.accent.semantic } },
-        complete: { statusIcon: { color: semanticTone.success.semantic } },
-        error: { statusIcon: { color: semanticTone.danger.semantic } },
+        running: { statusIcon: { color: semanticTone.accent.foreground } },
+        complete: { statusIcon: { color: semanticTone.success.foreground } },
+        error: { statusIcon: { color: semanticTone.danger.foreground } },
       },
       expanded: {
         true: { chevron: { transform: 'rotate(180deg)' } },

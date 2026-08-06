@@ -13,8 +13,8 @@ export type FontSlotConfig = {
 };
 
 export type DefineFontsInput = {
+  body?: FontSlotConfig;
   display?: FontSlotConfig;
-  sans?: FontSlotConfig;
   mono?: FontSlotConfig;
 };
 
@@ -22,8 +22,8 @@ export type DefineFontsResult = {
   fonts: FontFaceDefinition[];
   tokens: {
     fontFamily: {
+      body?: string;
       display?: string;
-      sans?: string;
       mono?: string;
     };
   };

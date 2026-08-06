@@ -1,39 +1,24 @@
 import { Button, HStack, VStack } from '@var-ui/react';
 
+const tones = ['neutral', 'accent', 'success', 'warning', 'danger', 'info'] as const;
+const appearances = ['filled', 'outline', 'subtle', 'ghost'] as const;
+
+function toneLabel(tone: (typeof tones)[number]) {
+  return tone.charAt(0).toUpperCase() + tone.slice(1);
+}
+
 export default function Preview() {
   return (
-    <VStack gap="md">
-      <HStack gap="sm" wrap>
-        <Button tone="accent" appearance="filled">
-          Filled
-        </Button>
-        <Button tone="accent" appearance="outline">
-          Outline
-        </Button>
-        <Button tone="accent" appearance="subtle">
-          Subtle
-        </Button>
-        <Button tone="accent" appearance="ghost">
-          Ghost
-        </Button>
-      </HStack>
-      <HStack gap="sm" wrap>
-        <Button tone="accent" appearance="filled">
-          Accent
-        </Button>
-        <Button tone="success" appearance="filled">
-          Success
-        </Button>
-        <Button tone="warning" appearance="filled">
-          Warning
-        </Button>
-        <Button tone="danger" appearance="filled">
-          Danger
-        </Button>
-        <Button tone="info" appearance="filled">
-          Info
-        </Button>
-      </HStack>
+    <VStack gap="lg">
+      {appearances.map((appearance) => (
+        <HStack key={appearance} gap="sm" wrap>
+          {tones.map((tone) => (
+            <Button key={tone} tone={tone} appearance={appearance}>
+              {toneLabel(tone)}
+            </Button>
+          ))}
+        </HStack>
+      ))}
     </VStack>
   );
 }

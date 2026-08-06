@@ -276,7 +276,9 @@ export const appShell = typestyles.styles.component<typeof APP_SHELL_SLOTS, AppS
           section: {
             root: {
               [v.background.name]: t.color.background.surface.var,
-              border: `1px solid ${v.border.var}`,
+              borderWidth: t.borderWidth.default.var,
+              borderStyle: 'solid',
+              borderColor: v.border.var,
               borderRadius: t.radius.lg.var,
               boxShadow: t.shadow.xs.var,
             },

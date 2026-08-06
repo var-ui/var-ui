@@ -1,12 +1,76 @@
 import { color } from 'typestyles/color';
 import {
   createDesignTheme,
+  createToneFace,
   designTokens as p,
   darkSyntaxValues,
   lightSyntaxValues,
   typestyles,
   type DesignThemePreset,
 } from '@var-ui/core';
+
+const classicTone = {
+  accent: createToneFace({
+    light: {
+      foreground: '#000000',
+      background: '#000000',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: '#FFFFFF',
+      background: '#FFFFFF',
+      darkForeground: '#000000',
+    },
+  }),
+  danger: createToneFace({
+    light: {
+      foreground: '#000000',
+      background: '#000000',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: p.color.palette['red-3'].var,
+      background: p.color.palette['red-3'].var,
+      darkForeground: '#000000',
+    },
+  }),
+  success: createToneFace({
+    light: {
+      foreground: '#000000',
+      background: '#000000',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: p.color.palette['green-3'].var,
+      background: p.color.palette['green-3'].var,
+      darkForeground: '#000000',
+    },
+  }),
+  warning: createToneFace({
+    light: {
+      foreground: '#000000',
+      background: '#000000',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: p.color.palette['amber-3'].var,
+      background: p.color.palette['amber-3'].var,
+      darkForeground: '#000000',
+    },
+  }),
+  info: createToneFace({
+    light: {
+      foreground: '#000000',
+      background: '#000000',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: '#FFFFFF',
+      background: '#FFFFFF',
+      darkForeground: '#000000',
+    },
+  }),
+};
 
 const classicLightColorValues = {
   background: {
@@ -20,23 +84,14 @@ const classicLightColorValues = {
   text: {
     primary: '#000000',
     secondary: '#333333',
-    onAccent: '#FFFFFF',
-    onDanger: '#FFFFFF',
-    onSuccess: '#FFFFFF',
-    onWarning: '#FFFFFF',
-    onInfo: '#FFFFFF',
   },
-  accent: { default: '#000000', hover: '#333333' },
+  tone: classicTone,
   border: {
     default: '#000000',
     strong: '#000000',
     focus: '#000000',
   },
   shadow: { offset: '#000000' },
-  danger: { default: '#000000', solid: '#000000' },
-  success: { default: '#000000', solid: '#000000' },
-  warning: { default: '#000000', onSolid: '#FFFFFF' },
-  info: { default: '#000000', onSolid: '#FFFFFF' },
   overlay: {
     default: color.alpha('#000000', 0.45, 'srgb'),
     panel: '#FFFFFF',
@@ -57,23 +112,13 @@ const classicDarkColorValues = {
   text: {
     primary: '#FFFFFF',
     secondary: '#D8D8D8',
-    onAccent: '#000000',
-    onDanger: '#000000',
-    onSuccess: '#000000',
-    onWarning: '#000000',
-    onInfo: '#000000',
   },
-  accent: { default: '#FFFFFF', hover: '#E0E0E0' },
   border: {
     default: '#FFFFFF',
     strong: '#FFFFFF',
     focus: '#FFFFFF',
   },
   shadow: { offset: '#FFFFFF' },
-  danger: { default: p.color.palette['red-3'].var, solid: p.color.palette['red-3'].var },
-  success: { default: p.color.palette['green-3'].var, solid: p.color.palette['green-3'].var },
-  warning: { default: p.color.palette['amber-3'].var, onSolid: '#000000' },
-  info: { default: '#FFFFFF', onSolid: '#000000' },
   overlay: {
     default: color.alpha('#000000', 0.72, 'srgb'),
     panel: '#202020',
@@ -85,7 +130,7 @@ const classicDarkColorValues = {
 const classicPrimitiveValues = {
   fontFamily: {
     display: 'Chicago, "Geneva", Monaco, "Courier New", ui-monospace, monospace',
-    sans: 'Chicago, "Geneva", Monaco, "Courier New", ui-monospace, monospace',
+    body: 'Chicago, "Geneva", Monaco, "Courier New", ui-monospace, monospace',
     mono: 'Monaco, "Courier New", ui-monospace, monospace',
   },
   fontSize: {

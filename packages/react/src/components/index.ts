@@ -25,6 +25,7 @@ export {
 export { ContextMenu, type ContextMenuProps } from './ContextMenu';
 export { MoreMenu, type MoreMenuProps } from './MoreMenu';
 export { Slider, type SliderProps } from './Slider';
+export { PinInput, type PinInputProps, type PinInputType } from './PinInput';
 export { NumberInput, type NumberInputProps } from './NumberInput';
 export { Link, type LinkProps } from './Link';
 export { TextField, type TextFieldProps } from './TextField';
@@ -114,6 +115,7 @@ export {
 export { Divider, type DividerProps } from './Divider';
 export { Grid, type GridProps } from './Grid';
 export { Section, type SectionProps } from './Section';
+export { ScrollArea, type ScrollAreaProps } from './ScrollArea';
 export { HStack, Stack, VStack, type StackProps } from './Stack';
 export {
   Avatar,
@@ -157,6 +159,7 @@ export {
   type UseToastReturn,
 } from './Toast';
 export { Toolbar, type ToolbarProps } from './Toolbar';
+export { SearchInput, type SearchInputProps } from './SearchInput';
 export { FileInput, type FileInputProps } from './FileInput';
 export {
   InputGroup,

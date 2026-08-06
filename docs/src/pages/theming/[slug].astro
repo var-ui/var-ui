@@ -3,7 +3,8 @@ export const prerender = false;
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ColorSwatches from '../../components/ColorSwatches.astro';
-import ThemePlayground from '../../components/ThemePlayground.astro';
+import CssVariableReference from '../../components/CssVariableReference.astro';
+import ShadowSwatches from '../../components/ShadowSwatches.astro';
 import { findMdxModule } from '../../lib/loadMdx';
 
 const slug = Astro.params.slug;
@@ -18,12 +19,16 @@ if (!loader) {
 }
 
 const { Content, frontmatter } = await loader();
-const isFullWidth = slug === 'colors' || slug === 'playground';
 ---
 
-<BaseLayout title={`${frontmatter.title} · Var UI`} contentWidth={isFullWidth ? 'full' : 'default'}>
-  <article class:list={['docs-article', isFullWidth && `docs-article--${slug}`]}>
-    <Content components={{ ColorSwatches, ThemePlayground }} />
+<BaseLayout title={`${frontmatter.title} · Var UI`}>
+  <article
+    class:list={[
+      'docs-article',
+      (slug === 'colors' || slug === 'shadows') && 'docs-article--wide',
+    ]}
+  >
+    <Content components={{ ColorSwatches, CssVariableReference, ShadowSwatches }} />
   </article>
 </BaseLayout>
 
@@ -32,12 +37,8 @@ const isFullWidth = slug === 'colors' || slug === 'playground';
     max-width: 48rem;
   }
 
-  .docs-article--colors {
+  .docs-article--wide {
     max-width: 72rem;
-  }
-
-  .docs-article--playground {
-    max-width: 90rem;
   }
 
   .docs-article :global(h1) {

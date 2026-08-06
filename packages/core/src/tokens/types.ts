@@ -1,4 +1,4 @@
-import type { InferValuesFromSchema } from 'typestyles';
+import type { InferValuesFromSchema, ModeAwareTokenLeaf } from 'typestyles';
 import type { FontFaceDefinition } from '../fonts/types';
 import type { tokenSchema } from './schema';
 
@@ -8,6 +8,15 @@ type DeepPartial<T> = T extends string | number
     ? readonly DeepPartial<U>[]
     : T extends object
       ? { [K in keyof T]?: DeepPartial<T[K]> }
+      : T;
+
+/** Color token overrides may use inline `{ light, dark }` leaves on scalar color values. */
+export type DeepPartialColor<T> = T extends string | number
+  ? ModeAwareTokenLeaf | string | number
+  : T extends readonly (infer U)[]
+    ? readonly DeepPartialColor<U>[]
+    : T extends object
+      ? { [K in keyof T]?: DeepPartialColor<T[K]> }
       : T;
 
 /** Require every key from a schema-derived token value tree (for default registration). */
@@ -27,11 +36,13 @@ export type SemanticColorTokens = Omit<DesignTokens['color'], 'palette'>;
 
 /** Token namespaces a theme surface can override. */
 export type DesignThemeTokenValues = {
-  [K in ThemeOverridableNamespace]?: DeepPartial<DesignTokens[K]>;
+  [K in ThemeOverridableNamespace]?: K extends 'color'
+    ? DeepPartialColor<DesignTokens[K]>
+    : DeepPartial<DesignTokens[K]>;
 };
 
 /** Ambient light/dark color patches — compiled into TypeStyles color modes. */
-export type DesignColorValues = DeepPartial<DesignTokens['color']>;
+export type DesignColorValues = DeepPartialColor<DesignTokens['color']>;
 
 export type DesignThemeColorMode = {
   light?: DesignColorValues;

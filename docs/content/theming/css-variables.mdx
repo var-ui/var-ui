@@ -1,0 +1,98 @@
+---
+title: CSS variables
+description: Theme and style var-ui with CSS custom properties — design tokens and component variables.
+---
+
+# CSS variables
+
+var-ui themes are CSS custom properties. **Design tokens** (`--var-ui-space-4`,
+`--var-ui-color-accent-default`) are the global vocabulary recipes and layouts share.
+**Component variables** (`--var-ui-button-background`) are scoped to a single recipe
+and inherit through nested theme boundaries.
+
+Use CSS variables when you want plain stylesheets, one-off overrides, or app chrome that
+is not tied to a `createDesignTheme` config.
+
+## Quick start
+
+Import core styles so tokens are registered on `:root` (or wrap your app with
+`DesignSystemProvider`):
+
+```ts
+import '@var-ui/core/styles';
+```
+
+Reference tokens in your CSS:
+
+```css
+.marketing-hero {
+  padding: var(--var-ui-space-8);
+  background: var(--var-ui-color-background-subtle);
+  color: var(--var-ui-color-text-primary);
+  border-radius: var(--var-ui-radius-lg);
+  box-shadow: var(--var-ui-shadow-md);
+}
+
+.marketing-hero a {
+  color: var(--var-ui-color-link-default);
+}
+```
+
+Override a single button surface inside a custom theme class:
+
+```css
+.theme-var-ui-acme .var-ui-button {
+  --var-ui-button-background: var(--var-ui-color-accent-default);
+  --var-ui-button-foreground: var(--var-ui-color-text-on-accent);
+}
+```
+
+Typed refs mirror the same names in TypeScript:
+
+```ts
+import { designTokens } from '@var-ui/core';
+
+designTokens.space[8].var; // var(--var-ui-space-8)
+designTokens.color.tone.accent.foreground.var; // var(--var-ui-color-tone-accent-foreground)
+```
+
+## Light and dark mode
+
+Semantic color tokens compile to `light-dark()` on the theme surface, so a single custom
+property responds to the active color mode. Set `color-scheme` and `data-color-mode` on a
+theme wrapper (as `DesignSystemProvider` does) or follow the same pattern in plain HTML.
+
+Override light and dark faces with `createDesignTheme({ tokens, colorMode })` — see
+[Customize](/theming/customize). For raw CSS, set the variable on the themed ancestor;
+the compiled value already encodes both faces.
+
+## Custom theme tokens
+
+`createDesignTheme({ extend })` and `extendTokens()` mint additional namespaces
+(`--var-ui-brand-glow`, etc.) that behave like built-in tokens. They appear on the theme
+class alongside built-ins.
+
+## Variable naming
+
+| Layer         | Pattern                                  | Example                                               |
+| ------------- | ---------------------------------------- | ----------------------------------------------------- |
+| Design token  | `--var-ui-{namespace}-{key}`             | `--var-ui-fontSize-md`, `--var-ui-color-text-primary` |
+| Palette step  | `--var-ui-color-palette-{family}-{step}` | `--var-ui-color-palette-sky-7`                        |
+| Component var | `--var-ui-{recipe}-{surface}`            | `--var-ui-button-background`                          |
+
+Token namespaces match `packages/core/src/tokens/schema`. Component names match recipe
+namespaces (`button`, `text-field`, `docs-prose`).
+
+## Reference
+
+The tables below are generated from `@var-ui/core` at build time — design tokens from
+`tokenValues` / `designTokens`, component variables from registered recipe CSS.
+
+<CssVariableReference />
+
+## Related
+
+- [Design tokens](/theming/tokens) — token roles and syntax highlighting
+- [Colors](/theming/colors) — palette ramps and semantic color swatches
+- [Customize](/theming/customize) — typed overrides and `extend` tokens
+- [Themes](/theming/themes) — `createDesignTheme` and `DesignSystemProvider`

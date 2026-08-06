@@ -71,7 +71,9 @@ export const list = typestyles.styles.component(
           '&[data-interactive]:active': { backgroundColor: v.pressBg.var },
           '&[data-disabled]': { opacity: t.opacity.disabled.var, pointerEvents: 'none' },
           '[data-has-dividers] >&:not(:last-child)': {
-            borderBottom: `1px solid ${v.dividerColor.var}`,
+            borderBottomWidth: t.borderWidth.default.var,
+            borderBottomStyle: 'solid',
+            borderBottomColor: v.dividerColor.var,
           },
         },
         label: {

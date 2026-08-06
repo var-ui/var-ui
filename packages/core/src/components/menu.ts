@@ -1,44 +1,48 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
+/** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
+export const menuVarDefinitions = {
+  popoverBackground: {
+    value: t.color.background.surface.var,
+    syntax: '<color>' as const,
+  },
+  popoverBorder: {
+    value: t.color.border.default.var,
+    syntax: '<color>' as const,
+  },
+  itemForeground: {
+    value: t.color.text.primary.var,
+    syntax: '<color>' as const,
+  },
+  itemFocusedBackground: {
+    value: t.color.background.subtle.var,
+    syntax: '<color>' as const,
+  },
+  itemDisabledForeground: {
+    value: t.color.text.secondary.var,
+    syntax: '<color>' as const,
+  },
+  sectionHeaderForeground: {
+    value: t.color.text.secondary.var,
+    syntax: '<color>' as const,
+  },
+  separatorColor: {
+    value: t.color.border.default.var,
+    syntax: '<color>' as const,
+  },
+  dangerForeground: {
+    value: t.color.tone.danger.foreground.var,
+    syntax: '<color>' as const,
+  },
+} as const;
+
 export const menu = typestyles.styles.component(
   'menu',
   (c) => {
-    const v = c.vars({
-      popoverBackground: {
-        value: t.color.background.surface.var,
-        syntax: '<color>',
-      },
-      popoverBorder: {
-        value: t.color.border.default.var,
-        syntax: '<color>',
-      },
-      itemForeground: {
-        value: t.color.text.primary.var,
-        syntax: '<color>',
-      },
-      itemFocusedBackground: {
-        value: t.color.background.subtle.var,
-        syntax: '<color>',
-      },
-      itemDisabledForeground: {
-        value: t.color.text.secondary.var,
-        syntax: '<color>',
-      },
-      sectionHeaderForeground: {
-        value: t.color.text.secondary.var,
-        syntax: '<color>',
-      },
-      separatorColor: {
-        value: t.color.border.default.var,
-        syntax: '<color>',
-      },
-      dangerForeground: {
-        value: t.color.danger.default.var,
-        syntax: '<color>',
-      },
-    });
+    const v = c.vars(menuVarDefinitions);
     return {
+      vars: menuVarDefinitions,
       slots: [
         'popover',
         'menu',
@@ -53,7 +57,9 @@ export const menu = typestyles.styles.component(
         'submenuChevron',
       ],
       popover: {
-        border: `1px solid ${v.popoverBorder.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.popoverBorder.var,
         borderRadius: t.radius.md.var,
         backgroundColor: v.popoverBackground.var,
         boxShadow: t.shadow.md.var,

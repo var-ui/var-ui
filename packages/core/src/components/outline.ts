@@ -14,7 +14,9 @@ export const outline = typestyles.styles.component(
       slots: ['root', 'title', 'list', 'link', 'linkActive', 'linkNested'],
       root: {
         paddingInlineStart: t.space[2].var,
-        borderInlineStart: `1px solid ${v.border.var}`,
+        borderInlineStartWidth: t.borderWidth.default.var,
+        borderInlineStartStyle: 'solid',
+        borderInlineStartColor: v.border.var,
       },
       title: {
         margin: 0,

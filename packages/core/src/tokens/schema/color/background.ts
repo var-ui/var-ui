@@ -9,5 +9,4 @@ export const backgroundTokenSchema = {
   muted: atProperty.color,
   secondary: atProperty.color,
   tertiary: atProperty.color,
-  info: atProperty.color,
 } as const satisfies TokenSchema;

@@ -7,6 +7,8 @@ import {
   type ColorMode,
 } from '@var-ui/react';
 import { useCallback, useEffect, useState } from 'react';
+import type { DocsFramework } from '@/lib/framework';
+import { useDocsFramework } from '@/lib/useDocsFramework';
 import { BentoShowcase } from './BentoShowcase';
 import { ThemeShowcaseSwitcher, type ShowcaseThemeId } from './ThemeShowcaseSwitcher';
 
@@ -16,14 +18,19 @@ function readInitialColorMode(): ColorMode {
   return readStoredColorMode(STORAGE_KEY) ?? 'system';
 }
 
+export type HomepageIslandProps = {
+  framework?: DocsFramework;
+};
+
 /**
- * Homepage product theater: always `@var-ui/react` tiles (portals, themes, RAC).
- * Framework cookie / DemoHost registry does not drive this surface.
+ * Homepage product theater: bento tiles follow the docs framework switcher
+ * (`@var-ui/react`, `@var-ui/astro` markup, or core HTML recipes).
  *
  * Color mode is controlled and synced with Astro header `ColorModeToggle`, which writes
  * `theme-mode` + `document.documentElement[data-mode]` in-tab (no `storage` event).
  */
-export default function HomepageIsland() {
+export default function HomepageIsland({ framework: initialFramework }: HomepageIslandProps) {
+  const framework = useDocsFramework(initialFramework);
   const [showcaseThemeId, setShowcaseThemeId] = useState<ShowcaseThemeId>('default');
   const [colorMode, setColorMode] = useState<ColorMode>(readInitialColorMode);
 
@@ -73,7 +80,7 @@ export default function HomepageIsland() {
       <IconProvider icons={defaultIcons}>
         <LayerProvider>
           <ThemeShowcaseSwitcher onSelect={setShowcaseThemeId} selected={showcaseThemeId} />
-          <BentoShowcase themeId={showcaseThemeId} />
+          <BentoShowcase framework={framework} themeId={showcaseThemeId} />
         </LayerProvider>
       </IconProvider>
     </DesignSystemProvider>

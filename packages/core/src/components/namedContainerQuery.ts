@@ -1,4 +1,5 @@
 import { typestyles } from '../runtime';
+import { designTokens as t } from '../tokens';
 
 /**
  * Example: one readable `container-name` from `typestyles.styles.containerRef` (here: `{scopeId}-product-shell`),
@@ -18,7 +19,9 @@ export const namedContainerQuery = {
       maxWidth: '40rem',
       margin: '0 auto',
       padding: '1rem',
-      border: '1px solid color-mix(in srgb, currentColor 12%, transparent)',
+      borderWidth: t.borderWidth.default.var,
+      borderStyle: 'solid',
+      borderColor: 'color-mix(in srgb, currentColor 12%, transparent)',
       borderRadius: '12px',
     },
     { layer: 'components' },

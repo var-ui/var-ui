@@ -1,5 +1,100 @@
 ---
-import ColorSwatchesIsland from './ColorSwatches';
+import { PALETTE_FAMILIES } from '@var-ui/core';
+import { recipeClassName } from '@var-ui/astro';
+import {
+  formatCssVarName,
+  getPaletteSwatches,
+  getSemanticSwatches,
+  groupSemanticSwatches,
+} from '@/lib/color-tokens';
+import { colorSwatchesStyles } from '@/styles/colorSwatches';
+
+const allPaletteSwatches = getPaletteSwatches();
+const paletteByFamily = PALETTE_FAMILIES.map((family) => ({
+  family,
+  swatches: allPaletteSwatches.filter((swatch) => swatch.family === family),
+}));
+
+const semanticGroups = groupSemanticSwatches(getSemanticSwatches());
+const c = colorSwatchesStyles();
 ---
 
-<ColorSwatchesIsland client:load />
+<div class={recipeClassName(c.root)}>
+  <section class={recipeClassName(c.section)} aria-labelledby="palette-heading">
+    <h2 id="palette-heading" class={recipeClassName(c.sectionTitle)}>Palette</h2>
+    <p class={recipeClassName(c.sectionDescription)}>
+      Primitive color ramps generated from OKLCH. Each family has ten steps from lightest (1) to
+      darkest (10). Reference with <code>designTokens.color.palette['family-step']</code>.
+    </p>
+
+    {
+      paletteByFamily.map(({ family, swatches }) => (
+        <div class={recipeClassName(c.paletteFamily)}>
+          <span class={recipeClassName(c.paletteFamilyName)}>{family}</span>
+          <div
+            class={recipeClassName(c.paletteRamp)}
+            role="list"
+            aria-label={`${family} palette`}
+          >
+            {swatches.map((swatch) => (
+              <div
+                class={recipeClassName(c.paletteSwatch)}
+                role="listitem"
+                title={`palette.${swatch.token} — ${swatch.value}`}
+              >
+                <div
+                  class={recipeClassName(c.paletteStep)}
+                  style={{ backgroundColor: swatch.cssVar }}
+                  aria-hidden="true"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </section>
+
+  <section class={recipeClassName(c.section)} aria-labelledby="semantic-heading">
+    <h2 id="semantic-heading" class={recipeClassName(c.sectionTitle)}>Semantic colors</h2>
+    <p class={recipeClassName(c.sectionDescription)}>
+      UI role tokens that map to palette steps or computed mixes. Swatches follow the site color
+      mode — toggle light/dark in the header to compare faces.
+    </p>
+
+    {
+      [...semanticGroups.entries()].map(([group, swatches]) => (
+        <div class={recipeClassName(c.semanticGroup)}>
+          <h3 class={recipeClassName(c.semanticGroupTitle)}>{group}</h3>
+          <div
+            class={recipeClassName(c.semanticGrid)}
+            role="list"
+            aria-label={`${group} colors`}
+          >
+            {swatches.map((swatch) => (
+              <div
+                class={recipeClassName(c.semanticCard)}
+                role="listitem"
+                title={swatch.defaultValue}
+              >
+                <div
+                  class={recipeClassName(c.semanticPreview)}
+                  style={{ backgroundColor: swatch.cssVar }}
+                  aria-hidden="true"
+                />
+                <div class={recipeClassName(c.semanticMeta)}>
+                  <span class={recipeClassName(c.semanticToken)}>
+                    {swatch.token.replace(`color.${group}.`, '')}
+                  </span>
+                  <span class={recipeClassName(c.semanticVar)}>
+                    {formatCssVarName(swatch.cssVar)}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </section>
+</div>

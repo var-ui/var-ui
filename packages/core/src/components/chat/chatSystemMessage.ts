@@ -9,8 +9,8 @@ function tonePaint(
   const ch = semanticTone[key];
   return {
     root: {
-      [v.color.name]: ch.semantic,
-      [v.background.name]: subtleBackgroundColor(ch.semantic),
+      [v.color.name]: ch.foreground,
+      [v.background.name]: subtleBackgroundColor(ch.foreground),
     },
   };
 }

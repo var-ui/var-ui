@@ -36,7 +36,7 @@ export const select = typestyles.styles.component(
         syntax: '<color>',
       },
       itemSelectedColor: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.foreground.var,
         syntax: '<color>',
       },
       itemFocusedBackground: {
@@ -78,7 +78,9 @@ export const select = typestyles.styles.component(
           width: '100%',
           textAlign: 'left',
           boxSizing: 'border-box',
-          border: `1px solid ${v.triggerBorder.var}`,
+          borderWidth: t.borderWidth.default.var,
+          borderStyle: 'solid',
+          borderColor: v.triggerBorder.var,
           borderRadius: t.radius.md.var,
           backgroundColor: v.triggerBackground.var,
           color: v.triggerForeground.var,
@@ -102,6 +104,7 @@ export const select = typestyles.styles.component(
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
+          color: t.color.text.primary.var,
           '&[data-placeholder]': {
             color: v.placeholderColor.var,
           },

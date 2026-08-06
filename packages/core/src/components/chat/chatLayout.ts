@@ -39,7 +39,9 @@ export const chatLayout = typestyles.styles.component(
           gap: t.space[2].var,
           padding: t.space[3].var,
           backgroundColor: v.background.var,
-          borderTop: `1px solid ${v.border.var}`,
+          borderTopWidth: t.borderWidth.default.var,
+          borderTopStyle: 'solid',
+          borderTopColor: v.border.var,
         },
       },
       variants: {

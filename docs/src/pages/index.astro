@@ -1,12 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HomepageIsland from '../components/homepage/HomepageIsland';
+
+const framework = Astro.locals.framework;
 ---
 
-<!--
-  Homepage bento is product theater with @var-ui/react (client:load island).
-  Framework cookie does not switch tile implementations — DemoHost registry is for /components.
--->
 <BaseLayout title="Var UI">
   <h1>Var UI</h1>
   <p>
@@ -14,7 +12,7 @@ import HomepageIsland from '../components/homepage/HomepageIsland';
     docs, browse components, or learn about theming from the navigation above.
   </p>
 
-  <HomepageIsland client:load />
+  <HomepageIsland client:load framework={framework} />
 
   <h2>Explore</h2>
   <ul>

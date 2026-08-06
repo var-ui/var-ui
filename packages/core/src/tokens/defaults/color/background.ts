@@ -10,7 +10,6 @@ export const background = {
   muted: tokens.color.background.subtle.var,
   secondary: tokens.color.palette['neutral-2'].var,
   tertiary: tokens.color.palette['neutral-3'].var,
-  info: tokens.color.palette['blue-1'].var,
 } satisfies DesignTokens['color']['background'];
 
 export const darkBackground = {
@@ -22,5 +21,4 @@ export const darkBackground = {
   muted: tokens.color.background.subtle.var,
   secondary: tokens.color.palette['neutral-8'].var,
   tertiary: tokens.color.palette['neutral-7'].var,
-  info: tokens.color.palette['blue-9'].var,
 } satisfies DesignTokens['color']['background'];

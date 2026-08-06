@@ -15,7 +15,7 @@ export const tokenizer = typestyles.styles.component(
         syntax: '<color>',
       },
       errorColor: {
-        value: t.color.danger.default.var,
+        value: t.color.tone.danger.foreground.var,
         syntax: '<color>',
       },
       groupBackground: {
@@ -87,7 +87,9 @@ export const tokenizer = typestyles.styles.component(
         flexWrap: 'wrap',
         alignItems: 'center',
         gap: t.space[1].var,
-        border: `1px solid ${v.groupBorder.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.groupBorder.var,
         borderRadius: t.radius.md.var,
         padding: t.space[2].var,
         backgroundColor: v.groupBackground.var,
@@ -136,7 +138,9 @@ export const tokenizer = typestyles.styles.component(
         color: v.inputForeground.var,
       },
       popover: {
-        border: `1px solid ${v.popoverBorder.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.popoverBorder.var,
         borderRadius: t.radius.md.var,
         backgroundColor: v.popoverBackground.var,
         boxShadow: t.shadow.md.var,

@@ -84,7 +84,9 @@ export const collapsible = typestyles.styles.component(
           flush: {},
           bordered: {
             root: {
-              border: `1px solid ${v.border.var}`,
+              borderWidth: t.borderWidth.default.var,
+              borderStyle: 'solid',
+              borderColor: v.border.var,
               borderRadius: t.radius.md.var,
               backgroundColor: v.background.var,
             },

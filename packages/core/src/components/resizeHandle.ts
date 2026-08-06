@@ -24,7 +24,7 @@ export const resizeHandle = typestyles.styles.component(
         syntax: '<color>',
       },
       focusRing: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.foreground.var,
         syntax: '<color>',
       },
     });

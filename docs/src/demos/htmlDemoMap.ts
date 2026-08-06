@@ -30,6 +30,8 @@ import { render as renderTextAreaFieldDefault } from './text-area-field/default/
 import { render as renderCheckboxDefault } from './checkbox/default/html';
 import { render as renderRadioGroupDefault } from './radio-group/default/html';
 import { render as renderSwitchDefault } from './switch/default/html';
+import { render as renderSliderDefault } from './slider/default/html';
+import { render as renderPinInputDefault } from './pin-input/default/html';
 import { render as renderSelectDefault } from './select/default/html';
 import { render as renderSelectOptions } from './select/options/html';
 import { render as renderComboboxDefault } from './combobox/default/html';
@@ -83,6 +85,8 @@ export const htmlDemoMap = {
   'checkbox.default': renderCheckboxDefault,
   'radio-group.default': renderRadioGroupDefault,
   'switch.default': renderSwitchDefault,
+  'slider.default': renderSliderDefault,
+  'pin-input.default': renderPinInputDefault,
   'select.default': renderSelectDefault,
   'select.options': renderSelectOptions,
   'combobox.default': renderComboboxDefault,

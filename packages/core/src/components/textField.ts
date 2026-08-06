@@ -32,7 +32,7 @@ export const textField = typestyles.styles.component(
         syntax: '<color>',
       },
       errorColor: {
-        value: t.color.danger.default.var,
+        value: t.color.tone.danger.foreground.var,
         syntax: '<color>',
       },
     });
@@ -52,7 +52,9 @@ export const textField = typestyles.styles.component(
         description: chrome.description,
         error: chrome.error,
         input: {
-          border: `1px solid ${v.inputBorder.var}`,
+          borderWidth: t.borderWidth.default.var,
+          borderStyle: 'solid',
+          borderColor: v.inputBorder.var,
           borderRadius: t.radius.md.var,
           backgroundColor: v.inputBackground.var,
           color: v.inputForeground.var,

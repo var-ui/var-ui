@@ -46,7 +46,7 @@ export const homeBento = typestyles.styles.component(
       height: '2.25rem',
       paddingInline: t.space[3].var,
       borderRadius: t.radius.sm.var,
-      border: `1px solid ${t.color.accent.default.var}`,
+      border: `1px solid ${t.color.tone.accent.foreground.var}`,
       backgroundColor: t.color.background.subtle.var,
       color: t.color.text.primary.var,
       fontSize: t.fontSize.sm.var,

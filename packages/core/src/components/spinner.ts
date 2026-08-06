@@ -22,7 +22,7 @@ export const spinner = typestyles.styles.component(
   (c) => {
     const v = c.vars({
       indicatorColor: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.foreground.var,
         syntax: '<color>',
       },
       trackColor: {
@@ -37,7 +37,9 @@ export const spinner = typestyles.styles.component(
         width: v.size.var,
         height: v.size.var,
         borderRadius: '50%',
-        border: `2px solid ${v.trackColor.var}`,
+        borderWidth: t.borderWidth.thick.var,
+        borderStyle: 'solid',
+        borderColor: v.trackColor.var,
         borderTopColor: v.indicatorColor.var,
         animation: `${spin} 800ms linear infinite`,
         '@media (prefers-reduced-motion: reduce)': {
@@ -51,11 +53,11 @@ export const spinner = typestyles.styles.component(
           lg: { [v.size.name]: '32px', borderWidth: '3px' },
         },
         tone: {
-          accent: { [v.indicatorColor.name]: semanticTone.accent.semantic },
-          success: { [v.indicatorColor.name]: semanticTone.success.semantic },
-          warning: { [v.indicatorColor.name]: semanticTone.warning.semantic },
-          danger: { [v.indicatorColor.name]: semanticTone.danger.semantic },
-          info: { [v.indicatorColor.name]: semanticTone.info.semantic },
+          accent: { [v.indicatorColor.name]: semanticTone.accent.foreground },
+          success: { [v.indicatorColor.name]: semanticTone.success.foreground },
+          warning: { [v.indicatorColor.name]: semanticTone.warning.foreground },
+          danger: { [v.indicatorColor.name]: semanticTone.danger.foreground },
+          info: { [v.indicatorColor.name]: semanticTone.info.foreground },
           neutral: { [v.indicatorColor.name]: t.color.text.secondary.var },
         },
         appearance: {

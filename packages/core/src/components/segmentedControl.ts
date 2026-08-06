@@ -7,53 +7,50 @@ import { controlSizeVariants, segmentedControlSize } from './controlSize';
 
 const indicatorTransition = `transform ${duration.medium} ${easing.emphasized}, width ${duration.medium} ${easing.emphasized}, opacity ${duration.fast} ${easing.standard}`;
 
+/** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
+export const segmentedControlVarDefinitions = {
+  trackBackground: {
+    value: t.color.border.subtle.var,
+    syntax: '<color>' as const,
+  },
+  indicatorBackground: {
+    value: t.color.background.surface.var,
+    syntax: '<color>' as const,
+  },
+  segmentColor: {
+    value: t.color.text.secondary.var,
+    syntax: '<color>' as const,
+  },
+  segmentSelectedColor: {
+    value: t.color.text.primary.var,
+    syntax: '<color>' as const,
+  },
+  indicatorX: {
+    value: '0px',
+    syntax: '<length>' as const,
+  },
+  indicatorWidth: {
+    value: '0px',
+    syntax: '<length>' as const,
+  },
+  indicatorOpacity: {
+    value: '0',
+    syntax: '<number>' as const,
+  },
+} as const;
+
 /**
  * Segmented toggle group with a sliding surface indicator behind the active segment.
  */
 export const segmentedControl = typestyles.styles.component(
   'segmented-control',
   (c) => {
-    const v = c.vars({
-      trackBackground: {
-        value: t.color.border.subtle.var,
-        syntax: '<color>',
-      },
-      indicatorBackground: {
-        value: t.color.background.surface.var,
-        syntax: '<color>',
-      },
-      segmentColor: {
-        value: t.color.text.secondary.var,
-        syntax: '<color>',
-      },
-      segmentSelectedColor: {
-        value: t.color.text.primary.var,
-        syntax: '<color>',
-      },
-      indicatorX: {
-        value: '0px',
-        syntax: '<length>',
-      },
-      indicatorWidth: {
-        value: '0px',
-        syntax: '<length>',
-      },
-      indicatorOpacity: {
-        value: '0',
-        syntax: '<number>',
-      },
-    });
+    const v = c.vars(segmentedControlVarDefinitions);
     return {
+      vars: segmentedControlVarDefinitions,
       slots: ['root'],
       base: {
         root: {
-          [v.trackBackground.name]: t.color.border.subtle.var,
-          [v.indicatorBackground.name]: t.color.background.surface.var,
-          [v.segmentColor.name]: t.color.text.secondary.var,
-          [v.segmentSelectedColor.name]: t.color.text.primary.var,
-          [v.indicatorX.name]: '0px',
-          [v.indicatorWidth.name]: '0px',
-          [v.indicatorOpacity.name]: '0',
           position: 'relative',
           display: 'inline-flex',
           alignItems: 'stretch',

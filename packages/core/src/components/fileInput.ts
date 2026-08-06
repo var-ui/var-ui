@@ -21,7 +21,7 @@ export const fileInput = typestyles.styles.component(
         syntax: '<color>',
       },
       errorColor: {
-        value: t.color.danger.default.var,
+        value: t.color.tone.danger.foreground.var,
         syntax: '<color>',
       },
       dropzoneBackground: {
@@ -75,7 +75,9 @@ export const fileInput = typestyles.styles.component(
         alignItems: 'center',
         justifyContent: 'center',
         gap: t.space[2].var,
-        border: `1px dashed ${v.dropzoneBorder.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'dashed',
+        borderColor: v.dropzoneBorder.var,
         borderRadius: t.radius.md.var,
         padding: `${t.space[6].var} ${t.space[4].var}`,
         backgroundColor: v.dropzoneBackground.var,
@@ -83,8 +85,8 @@ export const fileInput = typestyles.styles.component(
         textAlign: 'center',
         transition: 'background-color 140ms ease, border-color 140ms ease',
         '&[data-drag-over]': {
-          [v.dropzoneBorder.name]: t.color.accent.default.var,
-          [v.dropzoneBackground.name]: t.color.accent.subtle.var,
+          [v.dropzoneBorder.name]: t.color.tone.accent.foreground.var,
+          [v.dropzoneBackground.name]: t.color.tone.accent.subtleBackground.var,
         },
         '&[data-disabled]': {
           opacity: 0.5,

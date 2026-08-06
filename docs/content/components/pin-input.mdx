@@ -1,0 +1,22 @@
+---
+title: PinInput
+description: One-time code entry for email and SMS verification flows.
+---
+
+# PinInput
+
+One-time code entry for email and SMS verification flows.
+
+## Examples
+
+### Default
+
+<Demo id="pin-input.default" />
+
+## Props
+
+<PropsTable slug="pin-input" />
+
+## Accessibility
+
+Uses a `role="group"` wrapper with one text input per digit. Each cell has an `aria-label` for its position, and the first cell sets `autocomplete="one-time-code"` so mobile browsers can suggest codes from SMS.

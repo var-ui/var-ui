@@ -1,6 +1,7 @@
 import { color } from 'typestyles/color';
 import {
   createDesignTheme,
+  createToneFace,
   designTokens as p,
   darkSyntaxValues,
   lightSyntaxValues,
@@ -28,6 +29,69 @@ const win95DarkSyntaxValues = {
   comment: '#B0B0B0',
 };
 
+const win95Tone = {
+  accent: createToneFace({
+    light: {
+      foreground: '#000080',
+      background: '#000080',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: '#1084D0',
+      background: '#1084D0',
+      darkForeground: '#FFFFFF',
+    },
+  }),
+  danger: createToneFace({
+    light: {
+      foreground: '#800000',
+      background: '#800000',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: p.color.palette['red-4'].var,
+      background: '#800000',
+      darkForeground: '#FFFFFF',
+    },
+  }),
+  success: createToneFace({
+    light: {
+      foreground: '#008000',
+      background: '#008000',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: p.color.palette['green-4'].var,
+      background: '#008000',
+      darkForeground: '#FFFFFF',
+    },
+  }),
+  warning: createToneFace({
+    light: {
+      foreground: '#808000',
+      background: '#808000',
+      darkForeground: '#000000',
+    },
+    dark: {
+      foreground: p.color.palette['amber-4'].var,
+      background: p.color.palette['amber-4'].var,
+      darkForeground: '#000000',
+    },
+  }),
+  info: createToneFace({
+    light: {
+      foreground: '#000080',
+      background: '#000080',
+      darkForeground: '#FFFFFF',
+    },
+    dark: {
+      foreground: '#38A8F0',
+      background: '#38A8F0',
+      darkForeground: '#000000',
+    },
+  }),
+};
+
 const win95LightColorValues = {
   background: {
     app: '#C0C0C0',
@@ -40,22 +104,13 @@ const win95LightColorValues = {
   text: {
     primary: '#000000',
     secondary: '#202020',
-    onAccent: '#FFFFFF',
-    onDanger: '#FFFFFF',
-    onSuccess: '#FFFFFF',
-    onWarning: '#000000',
-    onInfo: '#FFFFFF',
   },
-  accent: { default: '#000080', hover: '#1084D0' },
+  tone: win95Tone,
   border: {
     default: '#808080',
     strong: '#000000',
     focus: '#000080',
   },
-  danger: { default: '#800000', solid: '#800000' },
-  success: { default: '#008000', solid: '#008000' },
-  warning: { default: '#808000', onSolid: '#000000' },
-  info: { default: '#000080', onSolid: '#FFFFFF' },
   overlay: {
     default: color.alpha('#000000', 0.5, 'srgb'),
     panel: '#F0F0F0',
@@ -76,22 +131,12 @@ const win95DarkColorValues = {
   text: {
     primary: '#F2F2F2',
     secondary: '#CFCFCF',
-    onAccent: '#FFFFFF',
-    onDanger: '#FFFFFF',
-    onSuccess: '#FFFFFF',
-    onWarning: '#000000',
-    onInfo: '#000000',
   },
-  accent: { default: '#1084D0', hover: '#38A8F0' },
   border: {
     default: '#808080',
     strong: '#FFFFFF',
     focus: '#38A8F0',
   },
-  danger: { default: p.color.palette['red-4'].var, solid: '#800000' },
-  success: { default: p.color.palette['green-4'].var, solid: '#008000' },
-  warning: { default: p.color.palette['amber-4'].var, onSolid: '#000000' },
-  info: { default: '#38A8F0', onSolid: '#000000' },
   overlay: {
     default: color.alpha('#000000', 0.7, 'srgb'),
     panel: '#555555',
@@ -103,7 +148,7 @@ const win95DarkColorValues = {
 const win95PrimitiveValues = {
   fontFamily: {
     display: '"MS Sans Serif", "Microsoft Sans Serif", Arial, system-ui, sans-serif',
-    sans: '"MS Sans Serif", "Microsoft Sans Serif", Arial, system-ui, sans-serif',
+    body: '"MS Sans Serif", "Microsoft Sans Serif", Arial, system-ui, sans-serif',
     mono: '"Lucida Console", "Courier New", ui-monospace, monospace',
   },
   fontSize: {

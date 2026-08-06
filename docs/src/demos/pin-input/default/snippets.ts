@@ -1,0 +1,34 @@
+import type { DemoSnippets } from '../../types';
+
+export const snippets = {
+  react: `import { PinInput } from '@var-ui/react';
+
+<PinInput label="Verification code" length={4} defaultValue="1234" autoFocus />`,
+  astro: `---
+import { pinInput } from '@var-ui/core';
+
+const p = pinInput();
+const length = 4;
+const value = '1234';
+---
+
+<div class:list={[p.root]}>
+  <label class:list={[p.label]} id="pin-input-label">Verification code</label>
+  <div class:list={[p.group]} role="group" aria-labelledby="pin-input-label">
+    {Array.from({ length }).map((_, index) => (
+      <input
+        class:list={[p.cell]}
+        type="text"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        maxlength="1"
+        autocomplete={index === 0 ? 'one-time-code' : 'off'}
+        aria-label={\`Digit \${index + 1} of \${length}\`}
+        value={value[index] ?? ''}
+        autofocus={index === length - 1}
+      />
+    ))}
+  </div>
+</div>`,
+  html: `<div class="var-ui-pin-input"><label class="var-ui-pin-input__label" id="pin-input-demo-label">Verification code</label><div class="var-ui-pin-input__group" role="group" aria-labelledby="pin-input-demo-label"><input class="var-ui-pin-input__cell" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="one-time-code" aria-label="Digit 1 of 4" value="1" /><input class="var-ui-pin-input__cell" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off" aria-label="Digit 2 of 4" value="2" /><input class="var-ui-pin-input__cell" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off" aria-label="Digit 3 of 4" value="3" /><input class="var-ui-pin-input__cell" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off" aria-label="Digit 4 of 4" value="4" autofocus /></div></div>`,
+} satisfies DemoSnippets;

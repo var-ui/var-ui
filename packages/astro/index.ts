@@ -7,6 +7,7 @@ export { default as VStack } from './src/components/VStack.astro';
 export { default as Grid } from './src/components/Grid.astro';
 export { default as Center } from './src/components/Center.astro';
 export { default as Section } from './src/components/Section.astro';
+export { default as ScrollArea } from './src/components/ScrollArea.astro';
 export { default as Divider } from './src/components/Divider.astro';
 export { default as AspectRatio } from './src/components/AspectRatio.astro';
 export { default as Badge } from './src/components/Badge.astro';
@@ -69,12 +70,14 @@ export { createResizeHandle } from './src/scripts/resizeHandle';
 export { copyText, initCodeBlockCopy } from './src/scripts/codeBlockCopy';
 export {
   applyColorModeToDocument,
+  applyThemeBoot,
   bootTheme,
   initColorModeToggle,
   persistColorMode,
   readStoredColorMode,
   resolveColorMode,
   setColorMode,
+  watchThemeOnNavigation,
 } from './src/scripts/colorMode';
 export {
   getCommandPaletteController,

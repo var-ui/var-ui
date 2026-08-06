@@ -17,11 +17,11 @@ export const tabs = typestyles.styles.component(
         syntax: '<color>',
       },
       railWidth: {
-        value: '2px',
+        value: t.borderWidth.thick.var,
         syntax: '<length>',
       },
       railRadius: {
-        value: '1px',
+        value: t.borderWidth.thick.var,
         syntax: '<length>',
       },
       tabColor: {
@@ -115,9 +115,6 @@ export const tabs = typestyles.styles.component(
       },
       panel: {
         padding: t.space[3].var,
-        backgroundColor: v.panelBackground.var,
-        borderRadius: t.radius.md.var,
-        border: `1px solid ${v.panelBorder.var}`,
       },
     };
   },

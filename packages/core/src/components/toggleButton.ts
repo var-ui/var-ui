@@ -22,18 +22,20 @@ export const toggleButton = typestyles.styles.component(
         syntax: '<color>',
       },
       selectedBackground: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.background.var,
         syntax: '<color>',
       },
       selectedForeground: {
-        value: t.color.text.onAccent.var,
+        value: t.color.tone.accent.foregroundOnBackground.var,
         syntax: '<color>',
       },
     });
     return {
       base: {
         appearance: 'none',
-        border: `1px solid ${v.border.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.border.var,
         borderRadius: t.radius.md.var,
         backgroundColor: v.background.var,
         color: v.foreground.var,
@@ -58,8 +60,8 @@ export const toggleButton = typestyles.styles.component(
           [v.border.name]: v.selectedBackground.var,
           [v.foreground.name]: v.selectedForeground.var,
           '&:hover': {
-            [v.background.name]: t.color.accent.hover.var,
-            [v.border.name]: t.color.accent.hover.var,
+            [v.background.name]: t.color.link.hover.var,
+            [v.border.name]: t.color.link.hover.var,
           },
         },
       },

@@ -10,6 +10,21 @@ import type { DesignTokens } from '../../types';
 
 export type BaseColorPalette = Record<PaletteStep, string>;
 
+/**
+ * Within a single palette family, subtract the lighter step from the darker step (both 0–10).
+ * When that gap is **greater than** {@link PALETTE_ACCESSIBLE_STEP_GAP}, text/background pairs
+ * meet WCAG AA contrast (4.5:1) for every family in {@link baseColorPalettes}.
+ *
+ * Examples: `blue-1` on `blue-10` (gap 9), `red-0` on `red-9` (gap 9).
+ * Pairs with gap ≤ 8 may still pass but are not guaranteed on chromatic ramps.
+ */
+export const PALETTE_ACCESSIBLE_STEP_GAP = 8;
+
+/** Returns whether two steps in the same ramp are far enough apart for accessible contrast. */
+export function paletteStepsAreAccessible(lighter: PaletteStep, darker: PaletteStep): boolean {
+  return Number(darker) - Number(lighter) > PALETTE_ACCESSIBLE_STEP_GAP;
+}
+
 /** Per-family OKLCH hue — edit here when retuning a ramp. */
 export const paletteHue = {
   amber: 72,
@@ -53,7 +68,8 @@ export const paletteHue = {
   zinc: 268,
 } as const;
 
-/** Shared OKLCH lightness ramp (steps 0–10). Step 0 is pure white; 1–10 map to Tailwind v4 stops 50–300, 500–950 (400 omitted). */
+/** Shared OKLCH lightness ramp (steps 0–10). Step 0 is pure white; 1–10 map to Tailwind v4 stops 50–300, 500–950 (400 omitted).
+ *  Spacing is tuned so step gaps > {@link PALETTE_ACCESSIBLE_STEP_GAP} yield WCAG AA contrast within each family. */
 export const lightness = [
   '100%',
   '98.01%', // 50

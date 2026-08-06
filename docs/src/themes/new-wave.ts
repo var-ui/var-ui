@@ -1,6 +1,7 @@
 import { color } from 'typestyles/color';
 import {
   createDesignTheme,
+  createToneFace,
   designTokens as p,
   darkSyntaxValues,
   groteskMono,
@@ -27,6 +28,69 @@ const newWaveDarkSyntaxValues = {
   section: '#00D7FF',
 };
 
+const newWaveTone = {
+  accent: createToneFace({
+    light: {
+      foreground: '#FF4FD8',
+      background: '#FF4FD8',
+      darkForeground: '#151329',
+    },
+    dark: {
+      foreground: '#8BFF5C',
+      background: '#8BFF5C',
+      darkForeground: '#151329',
+    },
+  }),
+  danger: createToneFace({
+    light: {
+      foreground: p.color.palette['red-7'].var,
+      background: p.color.palette['red-8'].var,
+      darkForeground: p.color.palette['neutral-1'].var,
+    },
+    dark: {
+      foreground: p.color.palette['red-4'].var,
+      background: p.color.palette['red-7'].var,
+      darkForeground: p.color.palette['neutral-1'].var,
+    },
+  }),
+  success: createToneFace({
+    light: {
+      foreground: '#00A878',
+      background: '#00845F',
+      darkForeground: p.color.palette['neutral-1'].var,
+    },
+    dark: {
+      foreground: '#8BFF5C',
+      background: '#00A878',
+      darkForeground: p.color.palette['neutral-1'].var,
+    },
+  }),
+  warning: createToneFace({
+    light: {
+      foreground: '#F06C00',
+      background: '#F06C00',
+      darkForeground: '#151329',
+    },
+    dark: {
+      foreground: '#FFF45C',
+      background: '#FFF45C',
+      darkForeground: '#151329',
+    },
+  }),
+  info: createToneFace({
+    light: {
+      foreground: '#5D5FEF',
+      background: '#5D5FEF',
+      darkForeground: p.color.palette['neutral-1'].var,
+    },
+    dark: {
+      foreground: '#00D7FF',
+      background: '#00D7FF',
+      darkForeground: '#151329',
+    },
+  }),
+};
+
 const newWaveLightColorValues = {
   background: {
     app: '#FFF45C',
@@ -39,22 +103,13 @@ const newWaveLightColorValues = {
   text: {
     primary: '#151329',
     secondary: '#4F3D7A',
-    onAccent: '#151329',
-    onDanger: p.color.palette['neutral-1'].var,
-    onSuccess: p.color.palette['neutral-1'].var,
-    onWarning: '#151329',
-    onInfo: p.color.palette['neutral-1'].var,
   },
-  accent: { default: '#FF4FD8', hover: '#D934B6' },
+  tone: newWaveTone,
   border: {
     default: '#151329',
     strong: '#151329',
     focus: '#00D7FF',
   },
-  danger: { default: p.color.palette['red-7'].var, solid: p.color.palette['red-8'].var },
-  success: { default: '#00A878', solid: '#00845F' },
-  warning: { default: '#F06C00', onSolid: '#151329' },
-  info: { default: '#5D5FEF', onSolid: p.color.palette['neutral-1'].var },
   overlay: {
     default: color.alpha('#151329', 0.55, 'oklch'),
     panel: '#FFFFFF',
@@ -75,22 +130,12 @@ const newWaveDarkColorValues = {
   text: {
     primary: '#FFF8A8',
     secondary: '#B9B0F7',
-    onAccent: '#151329',
-    onDanger: p.color.palette['neutral-1'].var,
-    onSuccess: p.color.palette['neutral-1'].var,
-    onWarning: '#151329',
-    onInfo: '#151329',
   },
-  accent: { default: '#8BFF5C', hover: '#B9FF66' },
   border: {
     default: '#00D7FF',
     strong: '#00D7FF',
     focus: '#FF4FD8',
   },
-  danger: { default: p.color.palette['red-4'].var, solid: p.color.palette['red-7'].var },
-  success: { default: '#8BFF5C', solid: '#00A878' },
-  warning: { default: '#FFF45C', onSolid: '#151329' },
-  info: { default: '#00D7FF', onSolid: '#151329' },
   overlay: {
     default: color.alpha('#05040F', 0.78, 'oklch'),
     panel: '#25204E',
@@ -102,7 +147,7 @@ const newWaveDarkColorValues = {
 const newWavePrimitiveValues = {
   fontFamily: {
     display: '"Arial Black", Impact, "Space Grotesk", system-ui, sans-serif',
-    sans: '"Trebuchet MS", "Space Grotesk", system-ui, sans-serif',
+    body: '"Trebuchet MS", "Space Grotesk", system-ui, sans-serif',
     mono: '"JetBrains Mono", ui-monospace, "SF Mono", Monaco, Consolas, monospace',
   },
   fontSize: {

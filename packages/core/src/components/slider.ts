@@ -15,7 +15,7 @@ export const slider = typestyles.styles.component(
         syntax: '<color>',
       },
       fillBackground: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.foreground.var,
         syntax: '<color>',
       },
       thumbBackground: {
@@ -23,7 +23,7 @@ export const slider = typestyles.styles.component(
         syntax: '<color>',
       },
       thumbBorder: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.foreground.var,
         syntax: '<color>',
       },
       outputColor: {
@@ -35,8 +35,32 @@ export const slider = typestyles.styles.component(
         syntax: '<color>',
       },
       errorColor: {
-        value: t.color.danger.default.var,
+        value: t.color.tone.danger.foreground.var,
         syntax: '<color>',
+      },
+      trackHeight: {
+        value: t.space[1].var,
+        syntax: '<length>',
+      },
+      thumbSize: {
+        value: t.size.icon.md.var,
+        syntax: '<length>',
+      },
+      controlHeight: {
+        value: t.size.icon.lg.var,
+        syntax: '<length>',
+      },
+      thumbBorderWidth: {
+        value: t.borderWidth.thick.var,
+        syntax: '<length>',
+      },
+      focusOutlineWidth: {
+        value: t.borderWidth.thick.var,
+        syntax: '<length>',
+      },
+      focusOutlineOffset: {
+        value: t.space[1].var,
+        syntax: '<length>',
       },
     });
     const chrome = fieldChrome({
@@ -58,7 +82,7 @@ export const slider = typestyles.styles.component(
       ],
       root: {
         ...chrome.root,
-        minWidth: '240px',
+        minWidth: `calc(15 * ${t.space[4].var})`,
       },
       label: {
         ...chrome.label,
@@ -70,35 +94,42 @@ export const slider = typestyles.styles.component(
       description: chrome.description,
       error: chrome.error,
       control: {
-        display: 'grid',
+        position: 'relative',
+        display: 'flex',
         alignItems: 'center',
         width: '100%',
-        height: '1.25rem',
+        height: v.controlHeight.var,
       },
       track: {
-        gridArea: '1 / 1',
-        height: '4px',
+        position: 'relative',
+        width: '100%',
+        height: v.trackHeight.var,
         borderRadius: t.radius.full.var,
         backgroundColor: v.trackBackground.var,
+        overflow: 'hidden',
+        pointerEvents: 'none',
       },
       fill: {
-        gridArea: '1 / 1',
-        height: '4px',
-        borderRadius: t.radius.full.var,
+        height: '100%',
+        borderRadius: 'inherit',
         backgroundColor: v.fillBackground.var,
+        pointerEvents: 'none',
       },
       thumb: {
-        gridArea: '1 / 1',
-        width: '1rem',
-        height: '1rem',
+        position: 'absolute',
+        top: '50%',
+        width: v.thumbSize.var,
+        height: v.thumbSize.var,
+        boxSizing: 'border-box',
         borderRadius: t.radius.full.var,
-        border: `2px solid ${v.thumbBorder.var}`,
+        borderWidth: v.thumbBorderWidth.var,
+        borderStyle: 'solid',
+        borderColor: v.thumbBorder.var,
         backgroundColor: v.thumbBackground.var,
         boxShadow: t.shadow.sm.var,
-        justifySelf: 'start',
         '&:focus-visible': {
-          outline: `2px solid ${t.color.border.focus.var}`,
-          outlineOffset: '2px',
+          outline: `${v.focusOutlineWidth.var} solid ${t.color.border.focus.var}`,
+          outlineOffset: v.focusOutlineOffset.var,
         },
       },
       output: {

@@ -1,5 +1,5 @@
 import { categoryLabels, componentRegistry } from '@/data/components';
-import { docsSidebar, themingSidebar } from '@/data/navigation';
+import { docsSidebar, playgroundSidebar, themingSidebar } from '@/data/navigation';
 
 export type DocsSearchItem = {
   id: string;
@@ -26,6 +26,7 @@ function sidebarItems(
 export function buildDocsSearchIndex(): DocsSearchItem[] {
   const docs = sidebarItems(docsSidebar, 'Docs', 'Docs');
   const theming = sidebarItems(themingSidebar, 'Theming', 'Theming');
+  const playground = sidebarItems(playgroundSidebar, 'Playground', 'Playground');
   const components = componentRegistry.map((entry) => ({
     id: `/components/${entry.slug}`,
     title: entry.name,
@@ -34,5 +35,5 @@ export function buildDocsSearchIndex(): DocsSearchItem[] {
     keywords: [entry.slug, entry.category, entry.description],
   }));
 
-  return [...docs, ...theming, ...components];
+  return [...docs, ...theming, ...playground, ...components];
 }

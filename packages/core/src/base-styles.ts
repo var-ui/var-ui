@@ -31,7 +31,7 @@ export function registerBaseStyles(): void {
     {
       margin: 0,
       minHeight: '100%',
-      fontFamily: t.fontFamily.sans.var,
+      fontFamily: t.fontFamily.body.var,
       fontSize: t.fontSize.md.var,
       lineHeight: t.lineHeight.normal.var,
       WebkitFontSmoothing: 'antialiased',
@@ -48,6 +48,7 @@ export function registerBaseStyles(): void {
   typestyles.global.style(
     'h1, h2, h3, h4, h5, h6',
     {
+      fontFamily: t.fontFamily.display.var,
       fontWeight: t.fontWeight.semibold.var,
       lineHeight: t.lineHeight.tight.var,
       color: t.color.text.primary.var,
@@ -115,7 +116,7 @@ export function registerBaseStyles(): void {
   typestyles.global.style(
     'a',
     {
-      color: t.color.accent.default.var,
+      color: t.color.link.default.var,
       textDecoration: 'underline',
       textDecorationThickness: '1px',
       textUnderlineOffset: '2px',
@@ -128,7 +129,7 @@ export function registerBaseStyles(): void {
   typestyles.global.style(
     'a:hover',
     {
-      color: t.color.accent.hover.var,
+      color: t.color.link.hover.var,
     },
     { layer: baseLayer },
   );
@@ -149,7 +150,7 @@ export function registerBaseStyles(): void {
       fontFamily: t.fontFamily.mono.var,
       fontSize: '0.9em',
       fontWeight: t.fontWeight.medium.var,
-      color: t.color.accent.hover.var,
+      color: t.color.link.hover.var,
     },
     { layer: baseLayer },
   );
@@ -171,7 +172,9 @@ export function registerBaseStyles(): void {
       backgroundColor: t.color.background.subtle.var,
       padding: t.space[3].var,
       borderRadius: t.radius.md.var,
-      border: `1px solid ${t.color.border.default.var}`,
+      borderWidth: t.borderWidth.default.var,
+      borderStyle: 'solid',
+      borderColor: t.color.border.default.var,
       overflow: 'auto',
       marginBottom: t.space[3].var,
     },
@@ -219,7 +222,9 @@ export function registerBaseStyles(): void {
     'hr',
     {
       border: 'none',
-      borderTop: `1px solid ${t.color.border.default.var}`,
+      borderTopWidth: t.borderWidth.default.var,
+      borderTopStyle: 'solid',
+      borderTopColor: t.color.border.default.var,
       margin: `${t.space[5].var} 0`,
     },
     { layer: baseLayer },
@@ -255,7 +260,9 @@ export function registerBaseStyles(): void {
     {
       margin: `${t.space[4].var} 0`,
       paddingLeft: t.space[4].var,
-      borderLeft: `${t.borderWidth.thick.var} solid ${t.color.border.strong.var}`,
+      borderLeftWidth: t.borderWidth.thick.var,
+      borderLeftStyle: 'solid',
+      borderLeftColor: t.color.border.strong.var,
       color: t.color.text.secondary.var,
     },
     { layer: baseLayer },
@@ -268,7 +275,9 @@ export function registerBaseStyles(): void {
       borderCollapse: 'collapse',
       marginBottom: t.space[4].var,
       fontSize: t.fontSize.sm.var,
-      border: `${t.borderWidth.default.var} solid ${t.color.border.default.var}`,
+      borderWidth: t.borderWidth.default.var,
+      borderStyle: 'solid',
+      borderColor: t.color.border.default.var,
     },
     { layer: baseLayer },
   );
@@ -278,7 +287,9 @@ export function registerBaseStyles(): void {
     {
       textAlign: 'left',
       padding: `${t.space[2].var} ${t.space[3].var}`,
-      borderBottom: `1px solid ${t.color.border.default.var}`,
+      borderBottomWidth: t.borderWidth.default.var,
+      borderBottomStyle: 'solid',
+      borderBottomColor: t.color.border.default.var,
       verticalAlign: 'top',
     },
     { layer: baseLayer },

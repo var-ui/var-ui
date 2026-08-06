@@ -90,7 +90,9 @@ export const codeBlock = typestyles.styles.component(
         'lineDeleted',
       ],
       root: {
-        border: `${t.borderWidth.default.var} solid ${v.border.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.border.var,
         borderRadius: t.radius.lg.var,
         backgroundColor: v.background.var,
         overflow: 'hidden',
@@ -102,7 +104,9 @@ export const codeBlock = typestyles.styles.component(
         alignItems: 'center',
         gap: t.space[1].var,
         borderRadius: t.radius.md.var,
-        border: `${t.borderWidth.default.var} solid ${v.border.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.border.var,
         padding: '2px 8px',
         backgroundColor: v.backgroundInline.var,
       },
@@ -120,7 +124,9 @@ export const codeBlock = typestyles.styles.component(
         gap: t.space[2].var,
         paddingBlock: t.space[1].var,
         paddingInline: t.space[3].var,
-        borderBottom: `${t.borderWidth.default.var} solid ${v.border.var}`,
+        borderBottomWidth: t.borderWidth.default.var,
+        borderBottomStyle: 'solid',
+        borderBottomColor: v.border.var,
         backgroundColor: v.backgroundHeader.var,
       },
       headerTerminal: {
@@ -151,7 +157,7 @@ export const codeBlock = typestyles.styles.component(
         whiteSpace: 'nowrap',
       },
       languageTerminal: {
-        color: t.color.text.onAccent.var,
+        color: t.color.tone.accent.foregroundOnBackground.var,
         borderColor: 'rgb(255 255 255 / 0.2)',
       },
       actions: {
@@ -192,18 +198,18 @@ export const codeBlock = typestyles.styles.component(
           outlineOffset: '2px',
         },
         '&[data-copied]': {
-          color: t.color.success.default.var,
+          color: t.color.tone.success.foreground.var,
         },
         '&[data-error]': {
-          color: t.color.danger.default.var,
+          color: t.color.tone.danger.foreground.var,
         },
       },
       copyButtonIdle: {},
       copyButtonCopied: {
-        color: t.color.success.default.var,
+        color: t.color.tone.success.foreground.var,
       },
       copyButtonError: {
-        color: t.color.danger.default.var,
+        color: t.color.tone.danger.foreground.var,
       },
       feedback: {
         fontSize: t.fontSize.sm.var,
@@ -220,24 +226,26 @@ export const codeBlock = typestyles.styles.component(
         right: t.space[3].var,
         top: t.space[3].var,
         zIndex: 1,
-        border: `${t.borderWidth.default.var} solid ${v.border.var}`,
+        borderWidth: t.borderWidth.default.var,
+        borderStyle: 'solid',
+        borderColor: v.border.var,
         backgroundColor: v.background.var,
         borderRadius: t.radius.md.var,
         padding: `2px ${t.space[2].var}`,
         boxShadow: t.shadow.sm.var,
       },
       feedbackSuccess: {
-        color: t.color.success.default.var,
+        color: t.color.tone.success.foreground.var,
       },
       feedbackError: {
-        color: t.color.danger.default.var,
+        color: t.color.tone.danger.foreground.var,
       },
       body: {
         padding: 0,
         backgroundColor: v.background.var,
       },
       bodyTerminal: {
-        color: t.color.text.onAccent.var,
+        color: t.color.tone.accent.foregroundOnBackground.var,
       },
       bodyScrollable: {
         overflowX: 'auto',
@@ -254,7 +262,7 @@ export const codeBlock = typestyles.styles.component(
         borderRadius: 0,
       },
       preTerminal: {
-        color: t.color.text.onAccent.var,
+        color: t.color.tone.accent.foregroundOnBackground.var,
       },
       preWrap: {
         whiteSpace: 'pre-wrap',

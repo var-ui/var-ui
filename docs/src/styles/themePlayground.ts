@@ -1,4 +1,4 @@
-import { designTokens as t, styles, typestyles } from '@var-ui/core';
+import { designTokens as t, typestyles } from '@var-ui/core';
 
 export const themePlaygroundStyles = typestyles.styles.component(
   'theme-playground',
@@ -6,7 +6,6 @@ export const themePlaygroundStyles = typestyles.styles.component(
     slots: [
       'root',
       'workspace',
-      'controls',
       'preview',
       'previewInner',
       'previewFrame',
@@ -15,40 +14,35 @@ export const themePlaygroundStyles = typestyles.styles.component(
       'code',
       'controlGroup',
       'controlLabel',
+      'controlTabs',
+      'baseStyles',
+      'colorList',
+      'colorField',
+      'colorFieldLabel',
+      'colorRow',
+      'colorSwatch',
+      'deferredTab',
     ],
     root: {
       display: 'flex',
       flexDirection: 'column',
       gap: t.space[3].var,
+      height: '100%',
+      minHeight: 0,
     },
     workspace: {
-      display: 'grid',
-      gridTemplateColumns: '15rem 1fr',
-      gap: 0,
-      borderRadius: t.radius.lg.var,
-      border: `1px solid ${t.color.border.default.var}`,
-      backgroundColor: t.color.background.surface.var,
-      overflow: 'hidden',
-      ...styles.media('md', 'max', {
-        gridTemplateColumns: '1fr',
-      }),
-    },
-    controls: {
       display: 'flex',
       flexDirection: 'column',
-      gap: t.space[4].var,
-      padding: t.space[4].var,
-      borderRight: `1px solid ${t.color.border.default.var}`,
+      flex: 1,
+      minHeight: 0,
       backgroundColor: t.color.background.surface.var,
-      ...styles.media('md', 'max', {
-        borderRight: 'none',
-        borderBottom: `1px solid ${t.color.border.default.var}`,
-      }),
+      overflow: 'hidden',
     },
     preview: {
       display: 'flex',
       flexDirection: 'column',
-      minHeight: '24rem',
+      flex: 1,
+      minHeight: 0,
       backgroundColor: t.color.background.app.var,
     },
     toolbar: {
@@ -61,6 +55,7 @@ export const themePlaygroundStyles = typestyles.styles.component(
     },
     previewInner: {
       flex: 1,
+      minHeight: 0,
       padding: t.space[4].var,
       overflow: 'auto',
     },
@@ -82,9 +77,72 @@ export const themePlaygroundStyles = typestyles.styles.component(
       fontWeight: t.fontWeight.medium.var,
       color: t.color.text.secondary.var,
     },
+    controlTabs: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: t.space[3].var,
+      minHeight: 0,
+    },
+    baseStyles: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: t.space[4].var,
+    },
+    colorList: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: t.space[3].var,
+    },
+    colorField: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: t.space[1].var,
+    },
+    colorFieldLabel: {
+      fontSize: t.fontSize.xs.var,
+      color: t.color.text.secondary.var,
+    },
+    colorRow: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: t.space[2].var,
+    },
+    colorSwatch: {
+      width: '1.5rem',
+      height: '1.5rem',
+      borderRadius: t.radius.sm.var,
+      border: `1px solid ${t.color.border.default.var}`,
+      flexShrink: 0,
+    },
+    deferredTab: {
+      fontSize: t.fontSize.sm.var,
+      color: t.color.text.secondary.var,
+      lineHeight: t.lineHeight.relaxed.var,
+    },
     code: {
+      flexShrink: 0,
+      height: '14rem',
+      maxHeight: '14rem',
       borderRadius: t.radius.lg.var,
+      border: `1px solid ${t.color.border.default.var}`,
       overflow: 'hidden',
+      '& [data-codeblock]': {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        maxHeight: '100%',
+        border: 'none',
+        boxShadow: 'none',
+        borderRadius: 0,
+      },
+      '& [data-codeblock-header]': {
+        flexShrink: 0,
+      },
+      '& [data-codeblock-body]': {
+        flex: 1,
+        minHeight: 0,
+        overflow: 'auto',
+      },
     },
   }),
   { layer: 'components' },

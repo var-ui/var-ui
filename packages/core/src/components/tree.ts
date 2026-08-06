@@ -43,7 +43,7 @@ export const tree = typestyles.styles.component(
         syntax: '<color>',
       },
       selectedBg: {
-        value: t.color.accent.subtle.var,
+        value: t.color.tone.accent.subtleBackground.var,
         syntax: '<color>',
       },
       indentSize: { value: t.space[4].var, syntax: '<length>' },

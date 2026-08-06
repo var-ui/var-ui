@@ -26,6 +26,17 @@ export {
   type UseTablePaginationResult,
 } from './useTablePagination';
 export {
+  useTableFilter,
+  type UseTableFilterOptions,
+  type UseTableFilterResult,
+} from './useTableFilter';
+export {
+  useColumnResize,
+  type ColumnWidths,
+  type UseColumnResizeOptions,
+  type UseColumnResizeResult,
+} from './useColumnResize';
+export {
   useTreeFocus,
   type TreeFocusItem,
   type UseTreeFocusOptions,

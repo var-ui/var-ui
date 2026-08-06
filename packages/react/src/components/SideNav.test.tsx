@@ -68,6 +68,19 @@ describe('SideNav', () => {
     expect(screen.getByText('Alpha')).toBeTruthy();
   });
 
+  it('uses ScrollArea with vertical fade for the scrollable section list', () => {
+    const { container } = wrap(
+      <SideNav>
+        <SideNav.Item label="Dashboard" href="/" />
+      </SideNav>,
+    );
+
+    const scrollArea = container.querySelector('.var-ui-scroll-area');
+    expect(scrollArea).toBeTruthy();
+    expect(scrollArea?.getAttribute('data-fade')).toBe('vertical');
+    expect(scrollArea?.querySelector('.var-ui-scroll-area__viewport')).toBeTruthy();
+  });
+
   it('renders a resize handle only when resizable, and hides it once the nav collapses', async () => {
     const { rerender } = wrap(<SideNav resizable>content</SideNav>);
     expect(screen.getByRole('separator')).toBeTruthy();

@@ -13,11 +13,14 @@ export function Button({
   tone,
   appearance,
   size = 'md',
+  elevated,
   className,
   ...props
 }: ButtonProps): JSX.Element {
   const recipeProps_ = button(
-    resolveButtonProps(tone != null ? { tone, appearance, size } : { intent, appearance, size }),
+    resolveButtonProps(
+      tone != null ? { tone, appearance, size, elevated } : { intent, appearance, size, elevated },
+    ),
   );
   return <AriaButton {...props} {...recipeProps(recipeProps_, className)} />;
 }

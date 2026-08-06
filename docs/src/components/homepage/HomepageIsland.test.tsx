@@ -6,6 +6,16 @@ describe('HomepageIsland', () => {
   beforeEach(() => {
     localStorage.clear();
     document.documentElement.removeAttribute('data-mode');
+    document.documentElement.removeAttribute('data-framework');
+  });
+
+  it('renders bento tiles for the selected docs framework', () => {
+    document.documentElement.dataset.framework = 'html';
+    render(<HomepageIsland framework="html" />);
+
+    const showcase = screen.getByTestId('bento-showcase');
+    expect(showcase.getAttribute('data-framework')).toBe('html');
+    expect(showcase.querySelector('.var-ui-alert')).toBeTruthy();
   });
 
   it('inherits color-scheme from the docs site on load and after toggle updates', async () => {

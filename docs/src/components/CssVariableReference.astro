@@ -1,0 +1,23 @@
+---
+import { flattenTokenReferenceRows } from '@/lib/theme-css-variables';
+import { cssVariableReferenceStyles } from '@/styles/cssVariableReference';
+import { recipeClassName } from '@var-ui/astro';
+import TokenReferenceTable from './TokenReferenceTable';
+
+const rows = flattenTokenReferenceRows();
+const designCount = rows.filter((row) => row.kind === 'design').length;
+const componentCount = rows.filter((row) => row.kind === 'component').length;
+const c = cssVariableReferenceStyles();
+---
+
+<div class={recipeClassName(c.root)}>
+  <section class={recipeClassName(c.section)} aria-labelledby="token-reference-heading">
+    <h2 id="token-reference-heading" class={recipeClassName(c.sectionTitle)}>Token catalog</h2>
+    <p class={recipeClassName(c.sectionDescription)}>
+      {designCount} design tokens and {componentCount} component variables from
+      <code>@var-ui/core</code>, generated at build time. Search, sort, and resize columns to explore
+      the full catalog.
+    </p>
+    <TokenReferenceTable client:load rows={rows} />
+  </section>
+</div>

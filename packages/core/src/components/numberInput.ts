@@ -28,7 +28,7 @@ export const numberInput = typestyles.styles.component(
         syntax: '<color>',
       },
       errorColor: {
-        value: t.color.danger.default.var,
+        value: t.color.tone.danger.foreground.var,
         syntax: '<color>',
       },
       stepperBackground: {
@@ -61,7 +61,9 @@ export const numberInput = typestyles.styles.component(
           flex: 1,
           minWidth: 0,
           boxSizing: 'border-box',
-          border: `1px solid ${v.inputBorder.var}`,
+          borderWidth: t.borderWidth.default.var,
+          borderStyle: 'solid',
+          borderColor: v.inputBorder.var,
           borderRadius: `${t.radius.md.var} 0 0 ${t.radius.md.var}`,
           backgroundColor: v.inputBackground.var,
           color: v.inputForeground.var,
@@ -74,7 +76,9 @@ export const numberInput = typestyles.styles.component(
         stepper: {
           display: 'flex',
           flexDirection: 'column',
-          border: `1px solid ${v.inputBorder.var}`,
+          borderWidth: t.borderWidth.default.var,
+          borderStyle: 'solid',
+          borderColor: v.inputBorder.var,
           borderInlineStart: 'none',
           borderRadius: `0 ${t.radius.md.var} ${t.radius.md.var} 0`,
           overflow: 'hidden',

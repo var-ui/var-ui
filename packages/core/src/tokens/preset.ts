@@ -17,8 +17,9 @@ import { stroke } from './defaults/stroke';
 import { transition } from './defaults/transition';
 import { zIndex } from './defaults/zIndex';
 import { palette } from './defaults/color/palette';
+import type { DesignTokens } from './types';
 
-/** Registered default token values (light color face). */
+/** Registered default token values. Tone uses inline `{ light, dark }` leaves split at theme compile time. */
 export const tokenValues = {
   space,
   size,
@@ -41,4 +42,4 @@ export const tokenValues = {
     palette,
     ...color,
   },
-} as const;
+} as DesignTokens;

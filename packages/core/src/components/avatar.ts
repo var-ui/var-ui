@@ -17,7 +17,7 @@ export const avatar = typestyles.styles.component(
     const v = c.vars({
       size: { value: '32px', syntax: '<length>' },
       background: {
-        value: t.color.accent.subtle.var,
+        value: t.color.tone.accent.subtleBackground.var,
         syntax: '<color>',
       },
       foreground: {
@@ -61,7 +61,9 @@ export const avatar = typestyles.styles.component(
           bottom: '-1px',
           display: 'inline-flex',
           borderRadius: '50%',
-          border: `2px solid ${t.color.background.surface.var}`,
+          borderWidth: t.borderWidth.thick.var,
+          borderStyle: 'solid',
+          borderColor: t.color.background.surface.var,
         },
       },
       variants: {

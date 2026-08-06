@@ -19,6 +19,7 @@ export const heading = typestyles.styles.component(
       base: {
         margin: 0,
         color: v.color.var,
+        fontFamily: t.fontFamily.display.var,
         fontWeight: t.fontWeight.semibold.var,
         lineHeight: t.lineHeight.tight.var,
         letterSpacing: '-0.01em',

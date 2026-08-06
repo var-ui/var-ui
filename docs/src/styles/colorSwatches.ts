@@ -31,7 +31,7 @@ export const colorSwatchesStyles = typestyles.styles.component(
     section: {
       display: 'flex',
       flexDirection: 'column',
-      gap: t.space[4].var,
+      gap: t.space[1].var,
     },
     sectionTitle: {
       margin: 0,
@@ -81,7 +81,6 @@ export const colorSwatchesStyles = typestyles.styles.component(
     paletteStep: {
       aspectRatio: '1',
       borderRadius: t.radius.sm.var,
-      border: `1px solid ${t.color.border.default.var}`,
       cursor: 'default',
     },
     semanticGroup: {

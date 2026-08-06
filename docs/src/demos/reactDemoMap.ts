@@ -31,6 +31,8 @@ import TextAreaFieldDefault from './text-area-field/default/react';
 import CheckboxDefault from './checkbox/default/react';
 import RadioGroupDefault from './radio-group/default/react';
 import SwitchDefault from './switch/default/react';
+import SliderDefault from './slider/default/react';
+import PinInputDefault from './pin-input/default/react';
 import SelectDefault from './select/default/react';
 import SelectOptions from './select/options/react';
 import ComboboxDefault from './combobox/default/react';
@@ -84,6 +86,8 @@ export const reactDemoMap = {
   'checkbox.default': CheckboxDefault,
   'radio-group.default': RadioGroupDefault,
   'switch.default': SwitchDefault,
+  'slider.default': SliderDefault,
+  'pin-input.default': PinInputDefault,
   'select.default': SelectDefault,
   'select.options': SelectOptions,
   'combobox.default': ComboboxDefault,

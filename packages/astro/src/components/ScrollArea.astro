@@ -1,0 +1,43 @@
+---
+import { resolveScrollAreaFade, scrollArea, type ScrollAreaFade, type ScrollAreaOrientation } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  orientation?: ScrollAreaOrientation;
+  fade?: boolean | ScrollAreaFade;
+  className?: string;
+  viewportClassName?: string;
+};
+
+const { orientation = 'vertical', fade = false, className, viewportClassName } = Astro.props;
+const fadeMode = resolveScrollAreaFade(fade, orientation);
+const s = scrollArea({ fade: fadeMode, orientation });
+const showVerticalFade = fadeMode === 'vertical' || fadeMode === 'both';
+const showHorizontalFade = fadeMode === 'horizontal' || fadeMode === 'both';
+---
+
+<div {...recipeProps(s.root, className)}>
+  <div {...recipeProps(s.viewport, viewportClassName)}>
+    {
+      showVerticalFade ? (
+        <div aria-hidden="true" {...recipeProps(s.fadeTop)} data-edge="block-start" />
+      ) : null
+    }
+    {
+      showHorizontalFade ? (
+        <div aria-hidden="true" {...recipeProps(s.fadeStart)} data-edge="inline-start" />
+      ) : null
+      }
+    <slot />
+    {
+      showHorizontalFade ? (
+        <div aria-hidden="true" {...recipeProps(s.fadeEnd)} data-edge="inline-end" />
+      ) : null
+    }
+    {
+      showVerticalFade ? (
+        <div aria-hidden="true" {...recipeProps(s.fadeBottom)} data-edge="block-end" />
+      ) : null
+    }
+  </div>
+</div>

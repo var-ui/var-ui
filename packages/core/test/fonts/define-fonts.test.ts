@@ -4,7 +4,7 @@ import { defineFonts } from '../../src/fonts/define-fonts';
 describe('defineFonts', () => {
   it('builds font stacks and collects faces', () => {
     const result = defineFonts({
-      sans: {
+      body: {
         face: {
           family: 'Space Grotesk',
           src: "url('/fonts/space-grotesk-latin.woff2') format('woff2')",
@@ -22,7 +22,7 @@ describe('defineFonts', () => {
     });
 
     expect(result.fonts).toHaveLength(2);
-    expect(result.tokens.fontFamily.sans).toBe(
+    expect(result.tokens.fontFamily.body).toBe(
       '"Space Grotesk", ui-sans-serif, system-ui, sans-serif',
     );
     expect(result.tokens.fontFamily.mono).toBe('"JetBrains Mono", ui-monospace, monospace');
@@ -30,13 +30,13 @@ describe('defineFonts', () => {
 
   it('omits undefined slots', () => {
     const result = defineFonts({
-      sans: {
+      body: {
         face: { family: 'Inter', src: "url('/fonts/inter.woff2') format('woff2')" },
         fallback: 'sans-serif',
       },
     });
 
-    expect(result.tokens.fontFamily).toEqual({ sans: '"Inter", sans-serif' });
+    expect(result.tokens.fontFamily).toEqual({ body: '"Inter", sans-serif' });
     expect(result.tokens.fontFamily.mono).toBeUndefined();
   });
 });

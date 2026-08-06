@@ -20,25 +20,45 @@ import { codeHljsScope } from '@/styles/codeHighlight';
 import { defaultThemeClassName } from '@var-ui/core';
 import DocsSearch from '../components/DocsSearch.astro';
 import DocsSidebarNav from '../components/DocsSidebarNav.astro';
+import DocsThemePicker from '../components/DocsThemePicker.astro';
+import DocsThemeScript from '../components/DocsThemeScript.astro';
+import DocsToc from '../components/DocsToc.astro';
 import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
 import {
   componentSidebarSections,
   themingSidebarSections,
   topNav as topNavItems,
 } from '../data/navigation';
+import {
+  DOCS_TOC_CONTENT_SELECTOR,
+  normalizeDocsPath,
+  shouldShowDocsToc,
+} from '../lib/docs-toc';
 
-const { title = 'Var UI', contentWidth = 'default' } = Astro.props as {
+const {
+  title = 'Var UI',
+  contentWidth = 'default',
+  showToc: showTocProp,
+  tocContentSelector = DOCS_TOC_CONTENT_SELECTOR,
+} = Astro.props as {
   title?: string;
   contentWidth?: 'default' | 'full';
+  /** When omitted, TOC is shown on standard article pages (not homepage, playground, etc.). */
+  showToc?: boolean;
+  tocContentSelector?: string;
 };
 const framework = Astro.locals.framework;
 const pathname = Astro.url.pathname;
 
-function normalizePath(path: string): string {
-  return path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
-}
-
-const currentPath = normalizePath(pathname);
+const currentPath = normalizeDocsPath(pathname);
+const hasTocSlot = Astro.slots.has('toc');
+const showAutoToc =
+  showTocProp === false
+    ? false
+    : showTocProp === true
+      ? true
+      : !hasTocSlot && shouldShowDocsToc(currentPath);
+const showTocPanel = hasTocSlot || showAutoToc;
 
 const hljsScopeClass = recipeClassName(codeHljsScope().root);
 
@@ -49,7 +69,7 @@ const sidebarSections = currentPath.startsWith('/components')
     : null;
 
 function isSidebarLinkActive(link: string): boolean {
-  return currentPath === normalizePath(link);
+  return currentPath === normalizeDocsPath(link);
 }
 ---
 
@@ -59,6 +79,7 @@ function isSidebarLinkActive(link: string): boolean {
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
     <ThemeScript themeClass={defaultThemeClassName} />
+    <DocsThemeScript />
     <link rel="stylesheet" href="/typestyles.css" />
     <ClientRouter />
   </head>
@@ -106,40 +127,53 @@ function isSidebarLinkActive(link: string): boolean {
               </SideNav>
             </LayoutPanel>
             <LayoutContent label="Main content">
-              <div class:list={['docs-content', contentWidth === 'full' && 'docs-content--full']}>
-                <slot />
-              </div>
+              {
+                showTocPanel ? (
+                  <div class="docs-page-body">
+                    <div class:list={['docs-content', contentWidth === 'full' && 'docs-content--full']}>
+                      <slot />
+                    </div>
+                    <aside class="docs-page-toc" aria-label="On this page">
+                      {hasTocSlot ? <slot name="toc" /> : <DocsToc contentSelector={tocContentSelector} />}
+                    </aside>
+                  </div>
+                ) : (
+                  <div class:list={['docs-content', contentWidth === 'full' && 'docs-content--full']}>
+                    <slot />
+                  </div>
+                )
+              }
             </LayoutContent>
-            {
-              Astro.slots.has('toc') ? (
-                <LayoutPanel
-                  slot="end"
-                  side="end"
-                  width={220}
-                  hasDivider
-                  padding={0}
-                  isScrollable
-                  label="On this page"
-                >
-                  <slot name="toc" />
-                </LayoutPanel>
-              ) : null
-            }
           </Layout>
         ) : (
-          <Layout height="fill" padding={6} className="docs-site-layout">
+          <Layout height="fill" padding={showTocPanel ? 0 : 6} className="docs-site-layout">
             <LayoutContent label="Main content">
-              <div class="docs-content">
-                <slot />
-              </div>
+              {
+                showTocPanel ? (
+                  <div class="docs-page-body">
+                    <div class="docs-content">
+                      <slot />
+                    </div>
+                    <aside class="docs-page-toc" aria-label="On this page">
+                      {hasTocSlot ? <slot name="toc" /> : <DocsToc contentSelector={tocContentSelector} />}
+                    </aside>
+                  </div>
+                ) : (
+                  <div class="docs-content">
+                    <slot />
+                  </div>
+                )
+              }
             </LayoutContent>
           </Layout>
         )
       }
     </AppShell>
+    <DocsThemePicker />
     <script>
       import '../../typestyles-entry.ts';
       import '../scripts/reattachTypestyles.ts';
+      import '../scripts/docsToc.ts';
     </script>
   </body>
 </html>
@@ -186,6 +220,52 @@ function isSidebarLinkActive(link: string): boolean {
     max-width: 60rem;
     margin: 0 auto;
     padding-bottom: 3rem;
+  }
+
+  .docs-page-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 13.75rem;
+    gap: 2.5rem;
+    align-items: start;
+    padding-inline: var(--var-ui-space-10);
+    padding-block: var(--var-ui-space-10);
+    padding-bottom: 3rem;
+    box-sizing: border-box;
+    min-height: 100%;
+  }
+
+  .docs-page-body .docs-content {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+
+  .docs-page-toc {
+    position: sticky;
+    top: calc(var(--docs-header-height, 3.5rem) + 1.25rem);
+    align-self: start;
+    min-width: 0;
+    max-height: calc(100dvh - var(--docs-header-height, 3.5rem) - 2rem);
+    overflow-y: auto;
+  }
+
+  .docs-page-body :global(.docs-page-toc-nav) {
+    position: static;
+    top: auto;
+    padding: 0;
+    max-height: none;
+    overflow: visible;
+  }
+
+  @media (max-width: 960px) {
+    .docs-page-body {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .docs-page-toc {
+      display: none;
+    }
   }
 
   .docs-content--full {

@@ -38,11 +38,11 @@ export const toc = typestyles.styles.component(
         syntax: '<color>',
       },
       railWidth: {
-        value: '2px',
+        value: t.borderWidth.thick.var,
         syntax: '<length>',
       },
       railRadius: {
-        value: '1px',
+        value: t.borderWidth.thick.var,
         syntax: '<length>',
       },
       indicatorY: {

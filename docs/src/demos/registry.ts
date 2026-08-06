@@ -30,6 +30,8 @@ import { snippets as textAreaFieldDefaultSnippets } from './text-area-field/defa
 import { snippets as checkboxDefaultSnippets } from './checkbox/default/snippets';
 import { snippets as radioGroupDefaultSnippets } from './radio-group/default/snippets';
 import { snippets as switchDefaultSnippets } from './switch/default/snippets';
+import { snippets as sliderDefaultSnippets } from './slider/default/snippets';
+import { snippets as pinInputDefaultSnippets } from './pin-input/default/snippets';
 import { snippets as selectDefaultSnippets } from './select/default/snippets';
 import { snippets as selectOptionsSnippets } from './select/options/snippets';
 import { snippets as comboboxDefaultSnippets } from './combobox/default/snippets';
@@ -84,6 +86,8 @@ export const DEMO_IDS = [
   'checkbox.default',
   'radio-group.default',
   'switch.default',
+  'slider.default',
+  'pin-input.default',
   'select.default',
   'select.options',
   'combobox.default',
@@ -137,6 +141,8 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'checkbox.default': checkboxDefaultSnippets,
   'radio-group.default': radioGroupDefaultSnippets,
   'switch.default': switchDefaultSnippets,
+  'slider.default': sliderDefaultSnippets,
+  'pin-input.default': pinInputDefaultSnippets,
   'select.default': selectDefaultSnippets,
   'select.options': selectOptionsSnippets,
   'combobox.default': comboboxDefaultSnippets,
@@ -190,6 +196,8 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'checkbox.default': () => import('./checkbox/default/react'),
   'radio-group.default': () => import('./radio-group/default/react'),
   'switch.default': () => import('./switch/default/react'),
+  'slider.default': () => import('./slider/default/react'),
+  'pin-input.default': () => import('./pin-input/default/react'),
   'select.default': () => import('./select/default/react'),
   'select.options': () => import('./select/options/react'),
   'combobox.default': () => import('./combobox/default/react'),
@@ -366,6 +374,16 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'switch.default',
     snippets: demoSnippets['switch.default'],
     react: reactDemoLoaders['switch.default'],
+  },
+  'slider.default': {
+    id: 'slider.default',
+    snippets: demoSnippets['slider.default'],
+    react: reactDemoLoaders['slider.default'],
+  },
+  'pin-input.default': {
+    id: 'pin-input.default',
+    snippets: demoSnippets['pin-input.default'],
+    react: reactDemoLoaders['pin-input.default'],
   },
   'select.default': {
     id: 'select.default',

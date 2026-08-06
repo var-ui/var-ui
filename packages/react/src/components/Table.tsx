@@ -23,6 +23,12 @@ export type TableProps<T extends Record<string, unknown> = Record<string, unknow
   hasHover?: boolean;
   stickyHeader?: boolean;
   textOverflow?: 'wrap' | 'truncate';
+  /** @default 'auto' */
+  layout?: 'auto' | 'fixed';
+  /** Column keys in display order — required with `columnWidths` for `<colgroup>`. */
+  columnOrder?: string[];
+  /** Explicit column widths keyed by column id. */
+  columnWidths?: Record<string, string>;
   columns?: TableColumnDef<T>[];
   data?: T[];
   getRowId?: (row: T) => string;
@@ -43,6 +49,7 @@ export type TableColumnProps = {
   allowsSorting?: boolean;
   sortDirection?: SortDirection | 'none';
   onSort?: () => void;
+  resizeHandle?: ReactNode;
   className?: string;
 };
 
@@ -58,6 +65,7 @@ export type TableCellProps = {
   children?: ReactNode;
   align?: TableColumnAlign;
   isRowHeader?: boolean;
+  colSpan?: number;
   className?: string;
 };
 export type TableCaptionProps = { children?: ReactNode; className?: string };
@@ -123,10 +131,19 @@ export function TableColumn({
   allowsSorting = false,
   sortDirection = 'none',
   onSort,
+  resizeHandle,
   className,
 }: TableColumnProps): JSX.Element {
   const { styles: s } = useTableContext();
   const style: CSSProperties | undefined = width != null ? { width } : undefined;
+  const label = allowsSorting ? (
+    <button type="button" style={sortButtonStyle} onClick={onSort}>
+      {children}
+      <Icon name={sortIconName(sortDirection)} size="sm" />
+    </button>
+  ) : (
+    children
+  );
 
   return (
     <th
@@ -137,14 +154,8 @@ export function TableColumn({
       aria-sort={allowsSorting ? sortDirection : undefined}
       style={style}
     >
-      {allowsSorting ? (
-        <button type="button" style={sortButtonStyle} onClick={onSort}>
-          {children}
-          <Icon name={sortIconName(sortDirection)} size="sm" />
-        </button>
-      ) : (
-        children
-      )}
+      {label}
+      {resizeHandle != null ? <span {...recipeProps(s.resizeHandle)}>{resizeHandle}</span> : null}
     </th>
   );
 }
@@ -154,6 +165,7 @@ export function TableCell({
   children,
   align,
   isRowHeader = false,
+  colSpan,
   className,
 }: TableCellProps): JSX.Element {
   const { styles: s } = useTableContext();
@@ -161,6 +173,7 @@ export function TableCell({
   return (
     <Tag
       {...(isRowHeader ? { scope: 'row' } : {})}
+      colSpan={colSpan}
       {...recipeProps(s.cell, className)}
       data-align={align !== 'start' ? align : undefined}
     >
@@ -230,6 +243,9 @@ export function Table<T extends Record<string, unknown> = Record<string, unknown
   hasHover = false,
   stickyHeader = false,
   textOverflow = 'wrap',
+  layout = 'auto',
+  columnOrder,
+  columnWidths,
   columns,
   data,
   getRowId,
@@ -248,8 +264,18 @@ export function Table<T extends Record<string, unknown> = Record<string, unknown
     hasHover: hasHover ? true : false,
     stickyHeader: stickyHeader ? true : false,
     textOverflow,
+    layout,
   });
   const rows = data ?? [];
+
+  const colgroup =
+    layout === 'fixed' && columnOrder != null && columnWidths != null ? (
+      <colgroup>
+        {columnOrder.map((key) => (
+          <col key={key} style={{ width: columnWidths[key] }} />
+        ))}
+      </colgroup>
+    ) : null;
 
   function renderDataMode(dataColumns: TableColumnDef<T>[]): ReactNode {
     return (
@@ -314,6 +340,7 @@ export function Table<T extends Record<string, unknown> = Record<string, unknown
       <div {...recipeProps(s.root, className)}>
         <table {...recipeProps(s.table)}>
           {caption != null ? <TableCaption>{caption}</TableCaption> : null}
+          {colgroup}
           {content}
         </table>
       </div>

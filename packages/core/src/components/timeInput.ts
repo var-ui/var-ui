@@ -26,7 +26,7 @@ export const timeInput = typestyles.styles.component(
         value: t.color.text.secondary.var,
         syntax: '<color>',
       },
-      errorColor: { value: t.color.danger.default.var, syntax: '<color>' },
+      errorColor: { value: t.color.tone.danger.foreground.var, syntax: '<color>' },
       groupBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',

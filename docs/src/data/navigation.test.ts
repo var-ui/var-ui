@@ -4,6 +4,8 @@ import {
   componentSidebar,
   componentSidebarSections,
   docsSidebar,
+  playgroundSidebar,
+  playgroundSidebarSections,
   themingSidebar,
   themingSidebarSections,
   topNav,
@@ -15,6 +17,7 @@ describe('navigation', () => {
       '/docs/getting-started',
       '/components',
       '/theming',
+      '/playground',
     ]);
   });
 
@@ -36,16 +39,23 @@ describe('navigation', () => {
       '/theming/customize',
       '/theming/themes',
       '/theming/tokens',
+      '/theming/css-variables',
       '/theming/colors',
-      '/theming/playground',
+      '/theming/shadows',
     ]);
     expect(themingSidebar.map((item) => item.link)).toEqual([
       '/theming',
       '/theming/customize',
       '/theming/themes',
       '/theming/tokens',
+      '/theming/css-variables',
       '/theming/colors',
-      '/theming/playground',
+      '/theming/shadows',
     ]);
+  });
+
+  it('lists playground editor pages', () => {
+    expect(playgroundSidebarSections[0]?.items.map((item) => item.link)).toEqual(['/playground']);
+    expect(playgroundSidebar.map((item) => item.link)).toEqual(['/playground']);
   });
 });

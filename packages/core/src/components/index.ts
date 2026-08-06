@@ -13,10 +13,10 @@ export {
   type ButtonVariantProps,
 } from './button';
 export { buttonGroup } from './buttonGroup';
-export { menu } from './menu';
+export { menu, menuVarDefinitions } from './menu';
 export { numberInput } from './numberInput';
 export { searchInput, type SearchInputVariantProps } from './searchInput';
-export { segmentedControl } from './segmentedControl';
+export { segmentedControl, segmentedControlVarDefinitions } from './segmentedControl';
 export { slider } from './slider';
 export { toggleButton } from './toggleButton';
 export { toolbar } from './toolbar';
@@ -89,6 +89,7 @@ export {
   layoutFooter,
   layoutContent,
   layoutPanel,
+  layoutPanelVarDefinitions,
   getLayoutShellVars,
   layoutContentWidthAssignment,
   layoutShellPaddingAssignments,
@@ -97,17 +98,26 @@ export {
 export { overflowList } from './overflowList';
 export { overlay } from './overlay';
 export { pagination } from './pagination';
+export { pinInput } from './pinInput';
 export { resizeHandle } from './resizeHandle';
+export {
+  scrollArea,
+  resolveScrollAreaFade,
+  type ScrollAreaFade,
+  type ScrollAreaOrientation,
+  type ScrollAreaRecipeProps,
+  type ScrollAreaVariantProps,
+} from './scrollArea';
 export {
   progressBar,
   type ProgressBarRecipeProps,
   type ProgressBarVariantProps,
 } from './progressBar';
 export { section } from './section';
-export { sideNav, SIDE_NAV_COLLAPSED_WIDTH } from './sideNav';
+export { sideNav, SIDE_NAV_COLLAPSED_WIDTH, sideNavVarDefinitions } from './sideNav';
 export { toc } from './toc';
 export { mobileNav } from './mobileNav';
-export { topNav } from './topNav';
+export { topNav, topNavVarDefinitions } from './topNav';
 export { skeleton } from './skeleton';
 export { spinner, type SpinnerRecipeProps, type SpinnerVariantProps } from './spinner';
 export { stack } from './stack';

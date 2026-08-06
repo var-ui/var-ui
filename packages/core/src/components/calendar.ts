@@ -31,11 +31,11 @@ export const calendar = typestyles.styles.component(
         syntax: '<color>',
       },
       cellSelectedBackground: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.background.var,
         syntax: '<color>',
       },
       cellSelectedColor: {
-        value: t.color.text.onAccent.var,
+        value: t.color.tone.accent.foregroundOnBackground.var,
         syntax: '<color>',
       },
       cellDisabledColor: {

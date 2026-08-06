@@ -13,12 +13,13 @@ const {
   tone,
   appearance,
   size = 'md',
+  elevated,
   className,
   type = 'button',
   disabled,
 } = Astro.props;
 const rp = recipeProps(
-  button(resolveButtonProps({ intent, tone, appearance, size })),
+  button(resolveButtonProps({ intent, tone, appearance, size, elevated })),
   className,
 );
 ---

@@ -8,6 +8,8 @@ import { registerGlobals } from '../src/document-globals';
 import { styles } from '../src/runtime';
 import { button, resolveButtonProps } from '../src/components/button';
 import { badge } from '../src/components/badge';
+import { layoutPanel } from '../src/components/layout';
+import { sideNav } from '../src/components/sideNav';
 import { designTokens } from '../src/tokens';
 
 /** Runtime uses scopeId `var-ui` — theme classes are `theme-var-ui-<name>`. */
@@ -38,11 +40,15 @@ describe('createDesignTheme', () => {
       name: 'color-only-dark',
       tokens: { fontSize: { md: '20px' } },
       colorMode: {
-        dark: { accent: { default: '#ff0000', hover: '#cc0000' } },
+        dark: {
+          tone: {
+            accent: { foreground: '#ff0000', background: '#ff0000' },
+          },
+        },
       },
     });
     const css = getRegisteredCss();
-    expect(css).toMatch(/--var-ui-color-accent-default:\s*light-dark\(/);
+    expect(css).toMatch(/--var-ui-color-tone-accent-foreground:\s*light-dark\(/);
     expect(css).toContain('light-dark(');
     expect(css).toContain('#ff0000');
     expect(css).toContain('--var-ui-fontSize-md: 20px');
@@ -53,16 +59,18 @@ describe('createDesignTheme', () => {
       name: 'ref-accent',
       colorMode: {
         light: {
-          accent: {
-            default: designTokens.color.palette['sky-7'].var,
-            hover: designTokens.color.palette['sky-8'].var,
+          tone: {
+            accent: {
+              foreground: designTokens.color.palette['sky-7'].var,
+              background: designTokens.color.palette['sky-7'].var,
+            },
           },
         },
       },
     });
     const css = getRegisteredCss();
     expect(css).toMatch(
-      /--var-ui-color-accent-default:\s*light-dark\(var\(--var-ui-color-palette-sky-7\)/,
+      /--var-ui-color-tone-accent-foreground:\s*light-dark\(var\(--var-ui-color-palette-sky-7\)/,
     );
   });
 
@@ -84,7 +92,7 @@ describe('createDesignTheme', () => {
     const css = getRegisteredCss();
     expect(css).not.toContain(`${themeClass('ambient-only')} [${SURFACE_ATTRIBUTE}="dark"]`);
     expect(css).not.toContain(`${themeClass('ambient-only')}[data-mode="dark"]`);
-    expect(css).toMatch(/--var-ui-color-accent-default:\s*light-dark\(/);
+    expect(css).toMatch(/--var-ui-color-tone-accent-foreground:\s*light-dark\(/);
   });
 
   it('does not emit prefers-color-scheme color token rules on the theme class', () => {
@@ -100,20 +108,16 @@ describe('createDesignTheme', () => {
     expect(css).toMatch(/--var-ui-color-background-app:\s*light-dark\(/);
   });
 
-  it('deep-merges partial colorMode onto the default preset with light-dark()', () => {
+  it('compiles inline { light, dark } leaves in tokens.color to light-dark()', () => {
     createDesignTheme({
-      name: 'partial-palette',
-      colorMode: {
-        light: {
-          accent: {
-            default: 'oklch(55% 0.2 290)',
-            hover: 'oklch(48% 0.2 290)',
-          },
-        },
-        dark: {
-          accent: {
-            default: 'oklch(72% 0.16 290)',
-            hover: 'oklch(78% 0.14 290)',
+      name: 'inline-mode-leaves',
+      tokens: {
+        color: {
+          background: {
+            app: {
+              light: 'oklch(95% 0.02 150)',
+              dark: 'oklch(23% 0.02 165)',
+            },
           },
         },
       },
@@ -121,10 +125,39 @@ describe('createDesignTheme', () => {
 
     const css = getRegisteredCss();
     expect(css).toMatch(
-      /--var-ui-color-accent-default:\s*light-dark\(oklch\(55% 0\.2 290\), oklch\(72% 0\.16 290\)\)/,
+      /--var-ui-color-background-app:\s*light-dark\(oklch\(95% 0\.02 150\), oklch\(23% 0\.02 165\)\)/,
+    );
+  });
+
+  it('deep-merges partial colorMode onto the default preset with light-dark()', () => {
+    createDesignTheme({
+      name: 'partial-palette',
+      colorMode: {
+        light: {
+          tone: {
+            accent: {
+              foreground: 'oklch(55% 0.2 290)',
+              background: 'oklch(55% 0.2 290)',
+            },
+          },
+        },
+        dark: {
+          tone: {
+            accent: {
+              foreground: 'oklch(72% 0.16 290)',
+              background: 'oklch(72% 0.16 290)',
+            },
+          },
+        },
+      },
+    });
+
+    const css = getRegisteredCss();
+    expect(css).toMatch(
+      /--var-ui-color-tone-accent-foreground:\s*light-dark\(oklch\(55% 0\.2 290\), oklch\(72% 0\.16 290\)\)/,
     );
     expect(css).toMatch(
-      /--var-ui-color-background-app:\s*light-dark\(var\(--var-ui-color-palette-neutral-1\)/,
+      /--var-ui-color-background-app:\s*light-dark\(var\(--var-ui-color-palette-neutral-0\)/,
     );
   });
 
@@ -209,6 +242,40 @@ describe('createDesignTheme', () => {
     expect(css).toMatch(/@layer overrides/);
     expect(css).toContain(`${themeClass('acme-components')} .var-ui-button`);
     expect(css).toContain('text-transform: uppercase');
+  });
+
+  it('components emits typed vars overrides on the var host slot', () => {
+    sideNav();
+
+    createDesignTheme({
+      name: 'acme-nav-vars',
+      components: {
+        sideNav: {
+          vars: { border: 'transparent' },
+        },
+      },
+    });
+
+    const css = getRegisteredCss();
+    expect(css).toContain(`${themeClass('acme-nav-vars')} .var-ui-side-nav`);
+    expect(css).toContain('--var-ui-side-nav-border: transparent');
+  });
+
+  it('components emits layoutPanel vars on the panel host slot', () => {
+    layoutPanel();
+
+    createDesignTheme({
+      name: 'acme-layout-panel-vars',
+      components: {
+        layoutPanel: {
+          vars: { border: 'transparent' },
+        },
+      },
+    });
+
+    const css = getRegisteredCss();
+    expect(css).toContain(`${themeClass('acme-layout-panel-vars')} .var-ui-layout-panel__panel`);
+    expect(css).toContain('--var-ui-layout-panel-border: transparent');
   });
 
   it('components accepts plain objects and per-key factories', () => {

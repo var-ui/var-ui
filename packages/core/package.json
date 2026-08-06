@@ -246,6 +246,14 @@
       "types": "./dist/components/commandPalette.d.mts",
       "import": "./dist/components/commandPalette.mjs"
     },
+    "./components/controlFocus": {
+      "types": "./dist/components/controlFocus.d.mts",
+      "import": "./dist/components/controlFocus.mjs"
+    },
+    "./controlFocus": {
+      "types": "./dist/components/controlFocus.d.mts",
+      "import": "./dist/components/controlFocus.mjs"
+    },
     "./components/controlSize": {
       "types": "./dist/components/controlSize.d.mts",
       "import": "./dist/components/controlSize.mjs"
@@ -486,6 +494,14 @@
       "types": "./dist/components/pagination.d.mts",
       "import": "./dist/components/pagination.mjs"
     },
+    "./components/pinInput": {
+      "types": "./dist/components/pinInput.d.mts",
+      "import": "./dist/components/pinInput.mjs"
+    },
+    "./pinInput": {
+      "types": "./dist/components/pinInput.d.mts",
+      "import": "./dist/components/pinInput.mjs"
+    },
     "./components/popover": {
       "types": "./dist/components/popover.d.mts",
       "import": "./dist/components/popover.mjs"
@@ -525,6 +541,14 @@
     "./resizeHandle": {
       "types": "./dist/components/resizeHandle.d.mts",
       "import": "./dist/components/resizeHandle.mjs"
+    },
+    "./components/scrollArea": {
+      "types": "./dist/components/scrollArea.d.mts",
+      "import": "./dist/components/scrollArea.mjs"
+    },
+    "./scrollArea": {
+      "types": "./dist/components/scrollArea.d.mts",
+      "import": "./dist/components/scrollArea.mjs"
     },
     "./components/searchInput": {
       "types": "./dist/components/searchInput.d.mts",

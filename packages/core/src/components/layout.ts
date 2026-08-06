@@ -135,7 +135,9 @@ export const layoutHeader = typestyles.styles.component<
           paddingBlockEnd: shell.padding.outer.y.var,
           '&[data-divider], [data-divider-header] &': {
             paddingBlockEnd: shell.padding.inner.y.var,
-            borderBlockEnd: `1px solid ${v.border.var}`,
+            borderBlockEndWidth: t.borderWidth.default.var,
+            borderBlockEndStyle: 'solid',
+            borderBlockEndColor: v.border.var,
           },
         },
         headerInner: {
@@ -182,7 +184,9 @@ export const layoutFooter = typestyles.styles.component<
           paddingBlockStart: shell.padding.outer.y.var,
           '&[data-divider], [data-divider-footer] &': {
             paddingBlockStart: shell.padding.inner.y.var,
-            borderBlockStart: `1px solid ${v.border.var}`,
+            borderBlockStartWidth: t.borderWidth.default.var,
+            borderBlockStartStyle: 'solid',
+            borderBlockStartColor: v.border.var,
           },
         },
         footerInner: {
@@ -258,28 +262,41 @@ export const layoutContent = typestyles.styles.component(
   { layer: 'components' },
 );
 
+const LAYOUT_PANEL_SLOTS = ['panel', 'overlay', 'overlayBackdrop'] as const;
+
+export const layoutPanelVarDefinitions = {
+  border: { value: t.color.border.default.var, syntax: '<color>' as const },
+  overlayBackground: {
+    value: t.color.overlay.backdrop.var,
+    syntax: '<color>' as const,
+  },
+  panelBackground: {
+    value: t.color.background.surface.var,
+    syntax: '<color>' as const,
+  },
+} as const;
+
+type LayoutPanelVariantDefs = {
+  isScrollable: { true: object; false: object };
+  hasDivider: { true: object; false: object };
+  padding: { inherit: object; '0': object };
+};
+
 /**
  * Fixed-width side panel for {@link layout} start/end slots, plus overlay
  * slots for responsive drawer mode. Divider borders target the content-facing
  * edge via `data-side`; negative margins collapse inner padding when seamless.
  */
-export const layoutPanel = typestyles.styles.component(
+export const layoutPanel = typestyles.styles.component<
+  typeof LAYOUT_PANEL_SLOTS,
+  LayoutPanelVariantDefs
+>(
   'layout-panel',
   (c) => {
     const shell = getLayoutShellVars();
-    const v = c.vars({
-      border: { value: t.color.border.default.var, syntax: '<color>' },
-      overlayBackground: {
-        value: t.color.overlay.backdrop.var,
-        syntax: '<color>',
-      },
-      panelBackground: {
-        value: t.color.background.surface.var,
-        syntax: '<color>',
-      },
-    });
+    const v = c.vars(layoutPanelVarDefinitions);
     return {
-      slots: ['panel', 'overlay', 'overlayBackdrop'],
+      slots: LAYOUT_PANEL_SLOTS,
       base: {
         panel: {
           flexShrink: 0,
@@ -329,11 +346,15 @@ export const layoutPanel = typestyles.styles.component(
           boxShadow: t.shadow.lg.var,
           '&[data-side="start"]': {
             insetInlineStart: 0,
-            borderInlineEnd: `1px solid ${v.border.var}`,
+            borderInlineEndWidth: t.borderWidth.default.var,
+            borderInlineEndStyle: 'solid',
+            borderInlineEndColor: v.border.var,
           },
           '&[data-side="end"]': {
             insetInlineEnd: 0,
-            borderInlineStart: `1px solid ${v.border.var}`,
+            borderInlineStartWidth: t.borderWidth.default.var,
+            borderInlineStartStyle: 'solid',
+            borderInlineStartColor: v.border.var,
           },
         },
       },
@@ -352,10 +373,14 @@ export const layoutPanel = typestyles.styles.component(
           true: {
             panel: {
               '&[data-side="start"]': {
-                borderInlineEnd: `1px solid ${v.border.var}`,
+                borderInlineEndWidth: t.borderWidth.default.var,
+                borderInlineEndStyle: 'solid',
+                borderInlineEndColor: v.border.var,
               },
               '&[data-side="end"]': {
-                borderInlineStart: `1px solid ${v.border.var}`,
+                borderInlineStartWidth: t.borderWidth.default.var,
+                borderInlineStartStyle: 'solid',
+                borderInlineStartColor: v.border.var,
               },
             },
           },

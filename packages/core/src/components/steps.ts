@@ -10,11 +10,11 @@ export const steps = typestyles.styles.component(
         syntax: '<color>',
       },
       indicatorBackground: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.background.var,
         syntax: '<color>',
       },
       indicatorForeground: {
-        value: t.color.text.onAccent.var,
+        value: t.color.tone.accent.foregroundOnBackground.var,
         syntax: '<color>',
       },
     });

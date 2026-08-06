@@ -1,6 +1,6 @@
 import type { DefineFontsInput, DefineFontsResult, FontFaceDefinition } from './types';
 
-const FONT_SLOTS = ['display', 'sans', 'mono'] as const;
+const FONT_SLOTS = ['body', 'display', 'mono'] as const;
 
 function fontStack(face: FontFaceDefinition, fallback: string): string {
   return `${JSON.stringify(face.family)}, ${fallback}`;

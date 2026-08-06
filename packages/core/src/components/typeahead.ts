@@ -17,7 +17,7 @@ export const typeahead = typestyles.styles.component(
         syntax: '<color>',
       },
       errorColor: {
-        value: t.color.danger.default.var,
+        value: t.color.tone.danger.foreground.var,
         syntax: '<color>',
       },
       inputBackground: {
@@ -45,7 +45,7 @@ export const typeahead = typestyles.styles.component(
         syntax: '<color>',
       },
       itemSelectedColor: {
-        value: t.color.accent.default.var,
+        value: t.color.tone.accent.foreground.var,
         syntax: '<color>',
       },
       itemFocusedBackground: {
@@ -91,7 +91,9 @@ export const typeahead = typestyles.styles.component(
           gap: t.space[2].var,
           width: '100%',
           boxSizing: 'border-box',
-          border: `1px solid ${v.inputBorder.var}`,
+          borderWidth: t.borderWidth.default.var,
+          borderStyle: 'solid',
+          borderColor: v.inputBorder.var,
           borderRadius: t.radius.md.var,
           backgroundColor: v.inputBackground.var,
           transition: 'border-color 140ms ease, box-shadow 140ms ease',

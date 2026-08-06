@@ -29,6 +29,31 @@ function isTokenRef(value: unknown): value is TokenRef {
   return Boolean(value && typeof value === 'object' && 'var' in value);
 }
 
+function isModeAwareColorLeaf(
+  value: unknown,
+): value is { light?: string | number; dark?: string | number } {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const record = value as Record<string, unknown>;
+  const keys = Object.keys(record);
+  if (keys.length === 0) return false;
+  if (!keys.includes('light') && !keys.includes('dark')) return false;
+  return Object.values(record).every(
+    (entry) => typeof entry === 'string' || typeof entry === 'number',
+  );
+}
+
+/** Scalar default for docs display (palette refs, OKLCH, or mode-aware light/dark). */
+export function formatColorDefaultValue(value: unknown): string {
+  if (typeof value === 'string') return value;
+  if (isModeAwareColorLeaf(value)) {
+    const light = value.light != null ? String(value.light) : undefined;
+    const dark = value.dark != null ? String(value.dark) : undefined;
+    if (light && dark && light !== dark) return `${light} / ${dark}`;
+    return light ?? dark ?? '';
+  }
+  return '';
+}
+
 function walkColorTokens(
   values: Record<string, unknown>,
   refs: Record<string, unknown>,
@@ -44,6 +69,15 @@ function walkColorTokens(
         path: [...path, key].join('.'),
         cssVar: ref.var,
         defaultValue: value,
+      });
+      continue;
+    }
+
+    if (isModeAwareColorLeaf(value) && isTokenRef(ref)) {
+      results.push({
+        path: [...path, key].join('.'),
+        cssVar: ref.var,
+        defaultValue: formatColorDefaultValue(value),
       });
       continue;
     }
@@ -70,7 +104,7 @@ export function getPaletteSwatches(): PaletteSwatch[] {
         step,
         token,
         cssVar: designTokens.color.palette[token].var,
-        value: tokenValues.color.palette[token],
+        value: formatColorDefaultValue(tokenValues.color.palette[token]),
       };
     }),
   );

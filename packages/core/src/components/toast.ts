@@ -19,9 +19,9 @@ export const toast = typestyles.styles.component(
   'toast',
   (c) => {
     const v = c.vars({
-      semantic: { value: t.color.accent.default.var, syntax: '<color>' },
-      solidBg: { value: t.color.accent.default.var, syntax: '<color>' },
-      solidFg: { value: t.color.text.onAccent.var, syntax: '<color>' },
+      semantic: { value: t.color.tone.accent.foreground.var, syntax: '<color>' },
+      solidBg: { value: t.color.tone.accent.background.var, syntax: '<color>' },
+      solidFg: { value: t.color.tone.accent.foregroundOnBackground.var, syntax: '<color>' },
       titleColor: { value: t.color.text.primary.var, syntax: '<color>' },
       descriptionColor: {
         value: t.color.text.secondary.var,

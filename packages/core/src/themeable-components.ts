@@ -1,4 +1,4 @@
-import type { OverrideConfigFor } from 'typestyles';
+import type { ComponentVarValues, OverrideConfigFor } from 'typestyles';
 import { alert } from './components/alert';
 import { appShell } from './components/appShell';
 import { aspectRatio } from './components/aspectRatio';
@@ -48,8 +48,9 @@ import {
   layoutFooter,
   layoutHeader,
   layoutPanel,
+  layoutPanelVarDefinitions,
 } from './components/layout';
-import { menu } from './components/menu';
+import { menu, menuVarDefinitions } from './components/menu';
 import { mobileNav } from './components/mobileNav';
 import { multiSelector } from './components/multiSelector';
 import { numberInput } from './components/numberInput';
@@ -57,18 +58,20 @@ import { outline } from './components/outline';
 import { overflowList } from './components/overflowList';
 import { overlay } from './components/overlay';
 import { pagination } from './components/pagination';
+import { pinInput } from './components/pinInput';
 import { popover } from './components/popover';
 import { progressBar } from './components/progressBar';
 import { proseContent } from './components/proseContent';
 import { radio } from './components/radio';
 import { resizeHandle } from './components/resizeHandle';
+import { scrollArea } from './components/scrollArea';
 import { section } from './components/section';
 import { searchInput } from './components/searchInput';
-import { segmentedControl } from './components/segmentedControl';
+import { segmentedControl, segmentedControlVarDefinitions } from './components/segmentedControl';
 import { select } from './components/select';
-import { sideNav } from './components/sideNav';
+import { sideNav, sideNavVarDefinitions } from './components/sideNav';
 import { tabList } from './components/tabList';
-import { topNav } from './components/topNav';
+import { topNav, topNavVarDefinitions } from './components/topNav';
 import { skeleton } from './components/skeleton';
 import { slider } from './components/slider';
 import { spinner } from './components/spinner';
@@ -156,11 +159,13 @@ export const themeableComponents = {
   overflowList,
   overlay,
   pagination,
+  pinInput,
   popover,
   progressBar,
   proseContent,
   radio,
   resizeHandle,
+  scrollArea,
   searchInput,
   section,
   segmentedControl,
@@ -194,12 +199,24 @@ export const themeableComponents = {
 
 export type ThemeableComponentName = keyof typeof themeableComponents;
 
+/** Recipes with exported `*VarDefinitions` for typed `vars` in theme overrides. */
+type ThemeComponentVarDefinitions = {
+  menu: typeof menuVarDefinitions;
+  sideNav: typeof sideNavVarDefinitions;
+  topNav: typeof topNavVarDefinitions;
+  layoutPanel: typeof layoutPanelVarDefinitions;
+  segmentedControl: typeof segmentedControlVarDefinitions;
+};
+
 export type { OverrideConfigFor };
 
 /** Override config for one registry entry in {@link themeableComponents}. */
-export type ThemeComponentOverrideFor<K extends ThemeableComponentName> = OverrideConfigFor<
-  (typeof themeableComponents)[K]
->;
+export type ThemeComponentOverrideFor<K extends ThemeableComponentName> =
+  K extends keyof ThemeComponentVarDefinitions
+    ? Omit<OverrideConfigFor<(typeof themeableComponents)[K]>, 'vars'> & {
+        vars?: Partial<ComponentVarValues<ThemeComponentVarDefinitions[K]>>;
+      }
+    : OverrideConfigFor<(typeof themeableComponents)[K]>;
 
 /** Union of all themeable recipe override shapes (escape hatch / docs). */
 export type ThemeComponentOverride = {

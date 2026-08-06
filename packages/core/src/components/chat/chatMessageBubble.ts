@@ -49,8 +49,8 @@ export const chatMessageBubble = typestyles.styles.component(
         sender: {
           user: {
             root: {
-              [v.senderBackground.name]: t.color.accent.default.var,
-              [v.senderText.name]: t.color.text.onAccent.var,
+              [v.senderBackground.name]: t.color.tone.accent.background.var,
+              [v.senderText.name]: t.color.tone.accent.foregroundOnBackground.var,
             },
           },
           assistant: {

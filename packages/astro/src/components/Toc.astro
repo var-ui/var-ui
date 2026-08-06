@@ -54,5 +54,11 @@ const rootStyle = stickyTop ? `--var-ui-toc-sticky-top: ${stickyTop}` : undefine
 
 <script>
   import { initTocs } from '../scripts/toc';
-  initTocs();
+
+  function onPageLoad(): void {
+    initTocs();
+  }
+
+  onPageLoad();
+  document.addEventListener('astro:page-load', onPageLoad);
 </script>

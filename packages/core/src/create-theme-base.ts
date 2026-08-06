@@ -5,6 +5,7 @@ import { typestyles } from './runtime';
 import { dark } from './tokens/defaults/color';
 import { tokenValues } from './tokens/preset';
 import { designTokens } from './tokens/declare';
+import { splitModeAwareColorValues } from './split-mode-aware-colors';
 import type {
   DesignColorValues,
   DesignTheme,
@@ -74,9 +75,13 @@ export function createDesignThemeBase<const E extends ExtendMap = Record<string,
     (tokenOverrides ?? {}) as ThemeOverrides,
   ) as DesignThemeTokenValues;
 
+  const { base: baseColor, darkPatch: inlineDarkColorPatch } = splitModeAwareColorValues(
+    mergedTokens.color,
+  );
+
   const base = {
     ...omitColor(mergedTokens),
-    color: mergedTokens.color,
+    color: baseColor,
     ...extendResult?.overrides,
   } as ThemeOverrides;
 
@@ -87,7 +92,10 @@ export function createDesignThemeBase<const E extends ExtendMap = Record<string,
         color: deepMergeColor(preset.colorMode?.light, colorMode?.light),
       },
       dark: {
-        color: deepMergeColor(preset.colorMode?.dark, colorMode?.dark),
+        color: deepMergeColor(
+          deepMergeColor(preset.colorMode?.dark, inlineDarkColorPatch),
+          colorMode?.dark,
+        ),
       },
     },
     modes: modes ?? [],
