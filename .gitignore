@@ -6,3 +6,6 @@ dist-types
 .DS_Store
 docs/src/pages.gen.ts
 .worktrees/
+
+# Local Netlify folder
+.netlify

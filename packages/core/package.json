@@ -799,8 +799,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "vp pack && node ../../scripts/generate-subpath-exports.mjs",
-    "pack": "vp pack && node ../../scripts/generate-subpath-exports.mjs",
+    "build": "vp pack && node ../../scripts/generate-subpath-exports.mjs core",
+    "pack": "vp pack && node ../../scripts/generate-subpath-exports.mjs core",
     "dev": "vp pack --watch"
   },
   "dependencies": {

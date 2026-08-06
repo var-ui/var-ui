@@ -4,7 +4,7 @@
  *
  * Usage: node scripts/generate-subpath-exports.mjs
  */
-import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -12,6 +12,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 /** @returns {string[]} paths relative to `dir` without `.mjs` (e.g. `button`, `chat/chatComposer`). */
 function listMjsFiles(dir, relativeDir = '') {
+  if (!existsSync(dir)) return [];
   const entries = [];
   for (const name of readdirSync(dir)) {
     const path = join(dir, name);
@@ -136,5 +137,9 @@ function generateReactExports() {
   console.log(`Updated react exports (${Object.keys(exports).length} subpaths)`);
 }
 
-generateCoreExports();
-generateReactExports();
+const targets = process.argv.slice(2);
+const runCore = targets.length === 0 || targets.includes('core');
+const runReact = targets.length === 0 || targets.includes('react');
+
+if (runCore) generateCoreExports();
+if (runReact) generateReactExports();

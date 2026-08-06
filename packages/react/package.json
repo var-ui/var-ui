@@ -1143,8 +1143,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "vp pack && node ../../scripts/generate-subpath-exports.mjs",
-    "pack": "vp pack && node ../../scripts/generate-subpath-exports.mjs",
+    "build": "vp pack && node ../../scripts/generate-subpath-exports.mjs react",
+    "pack": "vp pack && node ../../scripts/generate-subpath-exports.mjs react",
     "dev": "vp pack --watch"
   },
   "dependencies": {
