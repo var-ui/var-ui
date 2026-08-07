@@ -8,7 +8,7 @@ export type ComponentConfiguratorProps = {
   controls: ReactNode;
   code: string;
   language: string;
-  filename: string;
+  filename?: string;
 };
 
 export function ComponentConfigurator({
@@ -31,7 +31,7 @@ export function ComponentConfigurator({
         </aside>
       </div>
       <div className={recipeClassName(c.code)}>
-        <HighlightedCodeBlock code={code} language={language} filename={filename} />
+        <HighlightedCodeBlock code={code} language={language} {...(filename ? { filename } : {})} />
       </div>
     </div>
   );

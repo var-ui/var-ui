@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vite-plus/test';
 import {
   getComponentCategoryLabel,
+  getComponentDocTabs,
   getComponentEntry,
   getComponentSourceLinks,
+  hasComponentPlayground,
   parseComponentDocTab,
 } from './component-page';
 
@@ -31,10 +33,28 @@ describe('component-page', () => {
     expect(links.some((link) => link.href.includes('/chat/chatMessage.ts'))).toBe(true);
   });
 
+  it('includes playground tab only for supported components', () => {
+    expect(hasComponentPlayground('button')).toBe(true);
+    expect(hasComponentPlayground('card')).toBe(false);
+    expect(getComponentDocTabs('button').map((tab) => tab.id)).toEqual([
+      'documentation',
+      'playground',
+      'props',
+      'styles',
+    ]);
+    expect(getComponentDocTabs('card').map((tab) => tab.id)).toEqual([
+      'documentation',
+      'props',
+      'styles',
+    ]);
+  });
+
   it('parses tab ids from query or hash values', () => {
-    expect(parseComponentDocTab('props')).toBe('props');
-    expect(parseComponentDocTab('STYLES')).toBe('styles');
-    expect(parseComponentDocTab('nope')).toBe('documentation');
-    expect(parseComponentDocTab(undefined)).toBe('documentation');
+    expect(parseComponentDocTab('props', 'button')).toBe('props');
+    expect(parseComponentDocTab('playground', 'button')).toBe('playground');
+    expect(parseComponentDocTab('playground', 'card')).toBe('documentation');
+    expect(parseComponentDocTab('STYLES', 'button')).toBe('styles');
+    expect(parseComponentDocTab('nope', 'button')).toBe('documentation');
+    expect(parseComponentDocTab(undefined, 'button')).toBe('documentation');
   });
 });

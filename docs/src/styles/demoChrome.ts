@@ -22,7 +22,9 @@ export const demoChrome = typestyles.styles.component(
     },
     card: {
       borderRadius: t.radius.lg.var,
-      border: `1px solid ${t.color.border.default.var}`,
+      borderWidth: t.borderWidth.default.var,
+      borderStyle: 'solid',
+      borderColor: t.color.border.default.var,
       backgroundColor: t.color.background.surface.var,
       overflow: 'hidden',
     },
@@ -42,8 +44,9 @@ export const demoChrome = typestyles.styles.component(
     },
     code: {
       position: 'relative',
-      borderTop: `1px solid ${t.color.border.default.var}`,
-      backgroundColor: t.color.background.subtle.var,
+      borderTopWidth: t.borderWidth.default.var,
+      borderTopStyle: 'solid',
+      borderTopColor: t.color.border.default.var,
     },
     codeBlock: {
       '& [data-codeblock]': {
@@ -53,7 +56,9 @@ export const demoChrome = typestyles.styles.component(
         backgroundColor: 'transparent',
       },
       '& [data-codeblock-header]': {
-        borderBottom: `1px solid ${t.color.border.default.var}`,
+        borderBottomWidth: t.borderWidth.default.var,
+        borderBottomStyle: 'solid',
+        borderBottomColor: t.color.border.default.var,
         backgroundColor: t.color.background.subtle.var,
       },
       '&[data-demo-framework="react"] [data-codeblock-header] [class*="code-block__title"]::before':
@@ -118,10 +123,10 @@ export const demoChrome = typestyles.styles.component(
       '& [data-codeblock-header] [class*="code-block__language"]': {
         display: 'none',
       },
-      '& [data-codeblock-body]': {
-        backgroundColor: t.color.background.subtle.var,
-        transition: 'max-height 0.2s ease',
-      },
+      // '& [data-codeblock-body]': {
+      //   backgroundColor: t.color.background.subtle.var,
+      //   transition: 'max-height 0.2s ease',
+      // },
       '& [data-codeblock-copy-text]': {
         position: 'absolute',
         width: '1px',
@@ -140,14 +145,16 @@ export const demoChrome = typestyles.styles.component(
       bottom: '2.75rem',
       height: '3.5rem',
       pointerEvents: 'none',
-      background: `linear-gradient(to bottom, transparent, ${t.color.background.subtle.var})`,
+      background: `linear-gradient(to bottom, transparent, ${t.color.background.surface.var})`,
     },
     expand: {
       display: 'flex',
       justifyContent: 'center',
       paddingBlock: t.space[2].var,
-      borderTop: `1px solid ${t.color.border.default.var}`,
-      backgroundColor: t.color.background.subtle.var,
+      borderTopWidth: t.borderWidth.default.var,
+      borderTopStyle: 'solid',
+      borderTopColor: t.color.border.default.var,
+      // backgroundColor: t.color.background.subtle.var,
     },
     expandButton: {
       appearance: 'none',

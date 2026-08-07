@@ -49,7 +49,7 @@ describe('initCodeBlockCopy', () => {
     `;
   }
 
-  it('updates button text, icon, and feedback on success', async () => {
+  it('updates button text, icon, and feedback on success with custom label', async () => {
     const writeText = vi.fn().mockResolvedValue(undefined);
     // @ts-expect-error test stub
     globalThis.navigator = { clipboard: { writeText } };
@@ -72,6 +72,22 @@ describe('initCodeBlockCopy', () => {
     const feedback = document.querySelector('[data-codeblock-feedback]')!;
     expect(feedback.textContent).toBe('Saved to clipboard');
     expect(feedback.classList.contains('feedback-success')).toBe(true);
+  });
+
+  it('does not duplicate default copied label in inline feedback', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    // @ts-expect-error test stub
+    globalThis.navigator = { clipboard: { writeText } };
+
+    mountCopyButton();
+    initCodeBlockCopy();
+
+    const btn = document.querySelector<HTMLButtonElement>('[data-var-ui-code-copy]')!;
+    btn.click();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(btn.querySelector('[data-codeblock-copy-text]')?.textContent).toBe('Copied');
+    expect(document.querySelector('[data-codeblock-feedback]')?.textContent).toBe('');
   });
 
   it('updates button text and feedback on error', async () => {

@@ -31,6 +31,6 @@ describe('semanticTone resolver', () => {
       'filled',
     );
     expect(paint['--background']).toBeDefined();
-    expect(paint['&:hover']).toBeDefined();
+    expect(paint['&:hover:not([disabled])']).toBeDefined();
   });
 });

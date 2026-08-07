@@ -112,27 +112,27 @@ function buildToneFaces(
     accent: buildToneFace({
       foreground: accentForeground,
       background: accentBackground,
-      darkForeground: onFilledFallback,
+      onFilledFallback: onFilledFallback,
     }),
     danger: buildToneFace({
       foreground: dangerForeground,
       background: dangerBackground,
-      darkForeground: onFilledFallback,
+      onFilledFallback: onFilledFallback,
     }),
     success: buildToneFace({
       foreground: successForeground,
       background: successBackground,
-      darkForeground: onFilledFallback,
+      onFilledFallback: onFilledFallback,
     }),
     warning: buildToneFace({
       foreground: warningForeground,
       background: warningBackground,
-      darkForeground: onFilledFallback,
+      onFilledFallback: onFilledFallback,
     }),
     info: buildToneFace({
       foreground: infoForeground,
       background: infoBackground,
-      darkForeground: onFilledFallback,
+      onFilledFallback: onFilledFallback,
     }),
   };
 }

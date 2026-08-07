@@ -104,8 +104,9 @@ export function CodeBlock({
       await navigator.clipboard.writeText(code);
       setIsCopied(true);
       setHasError(false);
-      setFeedbackText(copiedLabel);
-      setFeedbackTone('success');
+      // Button label already reads "Copied"; skip inline feedback when labels match.
+      setFeedbackText(copiedLabel === 'Copied' ? '' : copiedLabel);
+      setFeedbackTone(copiedLabel === 'Copied' ? null : 'success');
     } catch {
       setIsCopied(false);
       setHasError(true);

@@ -1,4 +1,4 @@
-import type { ButtonTone, ToneAppearance } from '@var-ui/core';
+import { designTokens as t, type ButtonTone, type ToneAppearance } from '@var-ui/core';
 import type { DocsFramework } from '@/lib/framework';
 
 export type ButtonConfiguratorState = {
@@ -6,6 +6,7 @@ export type ButtonConfiguratorState = {
   tone: ButtonTone;
   size: 'sm' | 'md' | 'lg';
   isDisabled: boolean;
+  elevated: boolean;
   label: string;
 };
 
@@ -17,12 +18,12 @@ const APPEARANCE_OPTIONS: { id: ToneAppearance; label: string }[] = [
 ];
 
 const TONE_OPTIONS: { id: ButtonTone; label: string; swatch: string }[] = [
-  { id: 'neutral', label: 'Neutral', swatch: 'var(--var-ui-color-text-secondary)' },
-  { id: 'accent', label: 'Accent', swatch: 'var(--var-ui-color-accent-default)' },
-  { id: 'success', label: 'Success', swatch: 'var(--var-ui-color-success-default)' },
-  { id: 'warning', label: 'Warning', swatch: 'var(--var-ui-color-warning-default)' },
-  { id: 'danger', label: 'Danger', swatch: 'var(--var-ui-color-danger-default)' },
-  { id: 'info', label: 'Info', swatch: 'var(--var-ui-color-info-default)' },
+  { id: 'neutral', label: 'Neutral', swatch: t.color.text.secondary.var },
+  { id: 'accent', label: 'Accent', swatch: t.color.tone.accent.foreground.var },
+  { id: 'success', label: 'Success', swatch: t.color.tone.success.foreground.var },
+  { id: 'warning', label: 'Warning', swatch: t.color.tone.warning.foreground.var },
+  { id: 'danger', label: 'Danger', swatch: t.color.tone.danger.foreground.var },
+  { id: 'info', label: 'Info', swatch: t.color.tone.info.foreground.var },
 ];
 
 const SIZE_OPTIONS = ['sm', 'md', 'lg'] as const;
@@ -34,6 +35,7 @@ function reactProps(state: ButtonConfiguratorState): string {
   if (state.tone !== 'neutral') attrs.push(`tone="${state.tone}"`);
   if (state.appearance !== 'subtle') attrs.push(`appearance="${state.appearance}"`);
   if (state.size !== 'md') attrs.push(`size="${state.size}"`);
+  if (state.elevated) attrs.push('elevated');
   if (state.isDisabled) attrs.push('isDisabled');
   return attrs.length > 0 ? ` ${attrs.join(' ')}` : '';
 }
@@ -43,6 +45,7 @@ function astroProps(state: ButtonConfiguratorState): string {
   if (state.tone !== 'neutral') attrs.push(`tone="${state.tone}"`);
   if (state.appearance !== 'subtle') attrs.push(`appearance="${state.appearance}"`);
   if (state.size !== 'md') attrs.push(`size="${state.size}"`);
+  if (state.elevated) attrs.push('elevated');
   if (state.isDisabled) attrs.push('disabled');
   return attrs.length > 0 ? ` ${attrs.join(' ')}` : '';
 }
@@ -56,6 +59,7 @@ function htmlAttrs(state: ButtonConfiguratorState): string {
     `data-size="${state.size}"`,
     'data-layout="default"',
   ];
+  if (state.elevated) attrs.push('data-elevated');
   if (state.isDisabled) attrs.push('disabled');
   return attrs.join(' ');
 }

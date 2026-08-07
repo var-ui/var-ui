@@ -6,7 +6,26 @@ import {
   groteskMono,
   lightSyntaxValues,
   type DesignThemePreset,
+  type DesignTokens,
 } from '@var-ui/core';
+
+/** Zero-offset, zero-blur spread ring using the mode-aware border color. */
+function forestSpreadShadow(spread: number): string {
+  return `0 0 0 ${spread}px color-mix(in oklch, ${p.color.tone.accent.border.var} 25%, transparent)`;
+}
+
+const forestFlatShadow = {
+  xs: forestSpreadShadow(2),
+  sm: forestSpreadShadow(4),
+  md: forestSpreadShadow(6),
+  lg: forestSpreadShadow(8),
+  xl: forestSpreadShadow(10),
+  elevation: {
+    low: forestSpreadShadow(2),
+    med: forestSpreadShadow(4),
+    high: forestSpreadShadow(6),
+  },
+} satisfies DesignTokens['shadow'];
 
 const newsreaderNormalFace = {
   family: 'Newsreader',
@@ -101,60 +120,60 @@ export const forestPreset: DesignThemePreset = {
           light: {
             foreground: p.color.palette['grass-6'].var,
             background: p.color.palette['grass-6'].var,
-            darkForeground: p.color.palette['grass-2'].var,
+            onFilledFallback: p.color.palette['grass-2'].var,
           },
           dark: {
             foreground: p.color.palette['grass-3'].var,
             background: p.color.palette['grass-3'].var,
-            darkForeground: p.color.palette['grass-9'].var,
+            onFilledFallback: p.color.palette['grass-9'].var,
           },
         }),
         danger: createToneFace({
           light: {
-            foreground: p.color.palette['red-7'].var,
-            background: p.color.palette['red-8'].var,
-            darkForeground: p.color.palette['neutral-1'].var,
+            foreground: p.color.palette['ruby-7'].var,
+            background: p.color.palette['ruby-8'].var,
+            onFilledFallback: p.color.palette['ruby-1'].var,
           },
           dark: {
-            foreground: p.color.palette['red-4'].var,
-            background: p.color.palette['red-7'].var,
-            darkForeground: p.color.palette['neutral-1'].var,
+            foreground: p.color.palette['ruby-3'].var,
+            background: p.color.palette['ruby-3'].var,
+            onFilledFallback: p.color.palette['ruby-9'].var,
           },
         }),
         success: createToneFace({
           light: {
-            foreground: p.color.palette['green-7'].var,
-            background: p.color.palette['green-8'].var,
-            darkForeground: p.color.palette['neutral-1'].var,
+            foreground: p.color.palette['lime-7'].var,
+            background: p.color.palette['lime-8'].var,
+            onFilledFallback: p.color.palette['lime-1'].var,
           },
           dark: {
-            foreground: p.color.palette['green-4'].var,
-            background: p.color.palette['green-7'].var,
-            darkForeground: p.color.palette['neutral-1'].var,
+            foreground: p.color.palette['lime-3'].var,
+            background: p.color.palette['lime-3'].var,
+            onFilledFallback: p.color.palette['lime-9'].var,
           },
         }),
         warning: createToneFace({
           light: {
-            foreground: p.color.palette['amber-7'].var,
-            background: p.color.palette['amber-7'].var,
-            darkForeground: p.color.palette['stone-10'].var,
+            foreground: p.color.palette['gold-7'].var,
+            background: p.color.palette['gold-8'].var,
+            onFilledFallback: p.color.palette['gold-1'].var,
           },
           dark: {
-            foreground: p.color.palette['amber-4'].var,
-            background: p.color.palette['amber-4'].var,
-            darkForeground: p.color.palette['stone-10'].var,
+            foreground: p.color.palette['gold-3'].var,
+            background: p.color.palette['gold-3'].var,
+            onFilledFallback: p.color.palette['gold-9'].var,
           },
         }),
         info: createToneFace({
           light: {
             foreground: p.color.palette['jade-7'].var,
-            background: p.color.palette['jade-7'].var,
-            darkForeground: p.color.palette['neutral-1'].var,
+            background: p.color.palette['jade-8'].var,
+            onFilledFallback: p.color.palette['jade-1'].var,
           },
           dark: {
-            foreground: p.color.palette['jade-4'].var,
-            background: p.color.palette['jade-4'].var,
-            darkForeground: p.color.palette['neutral-1'].var,
+            foreground: p.color.palette['jade-3'].var,
+            background: p.color.palette['jade-3'].var,
+            onFilledFallback: p.color.palette['jade-9'].var,
           },
         }),
       },
@@ -197,8 +216,15 @@ export const forestPreset: DesignThemePreset = {
     },
     borderWidth: {
       thin: '0',
-      default: '1px',
+      default: '2px',
       thick: '4px',
+    },
+    shadow: forestFlatShadow,
+    radius: {
+      sm: '4px',
+      md: '8px',
+      lg: '16px',
+      xl: '32px',
     },
   },
 };

@@ -99,7 +99,6 @@ export function Toc({
   headingSelector,
   minHeadings = 2,
   headerOffset,
-  hideBelowXl = false,
   stickyTop,
   className,
   label,
@@ -129,7 +128,7 @@ export function Toc({
     positionTocIndicator(list, activeLink);
   }, [activeId, headings, children]);
 
-  const s = tocStyles({ hideBelow: hideBelowXl ? 'xl' : 'none' });
+  const s = tocStyles();
   const resolvedLabel = label ?? (typeof title === 'string' ? title : 'On this page');
   const rootStyle = stickyTop
     ? ({ '--var-ui-toc-sticky-top': stickyTop } as CSSProperties)

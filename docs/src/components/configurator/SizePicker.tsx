@@ -28,13 +28,7 @@ export function SizePicker({ value, onChange }: SizePickerProps) {
             aria-checked={isActive}
             aria-label={size}
             title={size}
-            className={recipeClassName(isActive ? c.toneSwatchActive : c.toneSwatch)}
-            style={{
-              backgroundColor: 'var(--var-ui-color-background-subtle)',
-              color: 'var(--var-ui-color-text-primary)',
-              fontSize: '0.75rem',
-              fontWeight: 600,
-            }}
+            className={recipeClassName(isActive ? c.optionButtonActive : c.optionButton)}
             onClick={() => onChange(size)}
           >
             {SIZE_LABELS[size]}

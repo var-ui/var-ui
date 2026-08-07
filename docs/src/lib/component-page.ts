@@ -92,14 +92,35 @@ export function getComponentSourceLinks(slug: string): ComponentSourceLink[] {
   return links;
 }
 
-export type ComponentDocTab = 'documentation' | 'props' | 'styles';
+export type ComponentDocTab = 'documentation' | 'playground' | 'props' | 'styles';
 
-const TAB_IDS: ComponentDocTab[] = ['documentation', 'props', 'styles'];
+export type ComponentDocTabDef = { id: ComponentDocTab; label: string };
+
+const COMPONENT_PLAYGROUNDS = new Set(['button']);
+
+/** Whether a component docs slug has an interactive playground tab. */
+export function hasComponentPlayground(slug: string): boolean {
+  return COMPONENT_PLAYGROUNDS.has(slug);
+}
+
+/** Tab definitions for a component docs page. */
+export function getComponentDocTabs(slug: string): ComponentDocTabDef[] {
+  const tabs: ComponentDocTabDef[] = [{ id: 'documentation', label: 'Documentation' }];
+  if (hasComponentPlayground(slug)) {
+    tabs.push({ id: 'playground', label: 'Playground' });
+  }
+  tabs.push({ id: 'props', label: 'Props' }, { id: 'styles', label: 'Styles' });
+  return tabs;
+}
 
 /** Parse `?tab=` or `#tab` into a supported component docs tab id. */
-export function parseComponentDocTab(value: string | null | undefined): ComponentDocTab {
+export function parseComponentDocTab(
+  value: string | null | undefined,
+  slug: string,
+): ComponentDocTab {
+  const available = getComponentDocTabs(slug).map((tab) => tab.id);
   const normalized = value?.trim().toLowerCase();
-  if (normalized && TAB_IDS.includes(normalized as ComponentDocTab)) {
+  if (normalized && available.includes(normalized as ComponentDocTab)) {
     return normalized as ComponentDocTab;
   }
   return 'documentation';

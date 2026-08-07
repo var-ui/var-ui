@@ -61,7 +61,9 @@ export const cssVariableReferenceStyles = typestyles.styles.component(
     },
     tableWrap: {
       overflowX: 'auto',
-      border: `1px solid ${t.color.border.default.var}`,
+      borderWidth: t.borderWidth.default.var,
+      borderStyle: 'solid',
+      borderColor: t.color.border.default.var,
       borderRadius: t.radius.md.var,
     },
     table: {
@@ -73,7 +75,9 @@ export const cssVariableReferenceStyles = typestyles.styles.component(
         padding: `${t.space[2].var} ${t.space[3].var}`,
         textAlign: 'left',
         verticalAlign: 'top',
-        borderBottom: `1px solid ${t.color.border.subtle.var}`,
+        borderBottomWidth: t.borderWidth.default.var,
+        borderBottomStyle: 'solid',
+        borderBottomColor: t.color.border.subtle.var,
       },
       '& th': {
         fontWeight: t.fontWeight.medium.var,

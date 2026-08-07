@@ -52,10 +52,19 @@ function setCopySuccess(btn: HTMLButtonElement, copiedLabel: string): void {
 
   const feedback = getFeedback(btn);
   if (feedback) {
-    feedback.textContent = copiedLabel;
-    swapClasses(feedback, feedback.getAttribute('data-class-success'), [
-      feedback.getAttribute('data-class-error') ?? '',
-    ]);
+    // Button label already reads "Copied"; skip inline feedback when labels match.
+    if (copiedLabel === 'Copied') {
+      feedback.textContent = '';
+      swapClasses(feedback, null, [
+        feedback.getAttribute('data-class-success') ?? '',
+        feedback.getAttribute('data-class-error') ?? '',
+      ]);
+    } else {
+      feedback.textContent = copiedLabel;
+      swapClasses(feedback, feedback.getAttribute('data-class-success'), [
+        feedback.getAttribute('data-class-error') ?? '',
+      ]);
+    }
   }
 }
 

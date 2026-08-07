@@ -33,60 +33,60 @@ const newWaveTone = {
     light: {
       foreground: '#FF4FD8',
       background: '#FF4FD8',
-      darkForeground: '#151329',
+      onFilledFallback: '#151329',
     },
     dark: {
       foreground: '#8BFF5C',
       background: '#8BFF5C',
-      darkForeground: '#151329',
+      onFilledFallback: '#151329',
     },
   }),
   danger: createToneFace({
     light: {
       foreground: p.color.palette['red-7'].var,
       background: p.color.palette['red-8'].var,
-      darkForeground: p.color.palette['neutral-1'].var,
+      onFilledFallback: p.color.palette['neutral-1'].var,
     },
     dark: {
       foreground: p.color.palette['red-4'].var,
       background: p.color.palette['red-7'].var,
-      darkForeground: p.color.palette['neutral-1'].var,
+      onFilledFallback: p.color.palette['neutral-1'].var,
     },
   }),
   success: createToneFace({
     light: {
       foreground: '#00A878',
       background: '#00845F',
-      darkForeground: p.color.palette['neutral-1'].var,
+      onFilledFallback: p.color.palette['neutral-1'].var,
     },
     dark: {
       foreground: '#8BFF5C',
       background: '#00A878',
-      darkForeground: p.color.palette['neutral-1'].var,
+      onFilledFallback: p.color.palette['neutral-1'].var,
     },
   }),
   warning: createToneFace({
     light: {
       foreground: '#F06C00',
       background: '#F06C00',
-      darkForeground: '#151329',
+      onFilledFallback: '#151329',
     },
     dark: {
       foreground: '#FFF45C',
       background: '#FFF45C',
-      darkForeground: '#151329',
+      onFilledFallback: '#151329',
     },
   }),
   info: createToneFace({
     light: {
       foreground: '#5D5FEF',
       background: '#5D5FEF',
-      darkForeground: p.color.palette['neutral-1'].var,
+      onFilledFallback: p.color.palette['neutral-1'].var,
     },
     dark: {
       foreground: '#00D7FF',
       background: '#00D7FF',
-      darkForeground: '#151329',
+      onFilledFallback: '#151329',
     },
   }),
 };

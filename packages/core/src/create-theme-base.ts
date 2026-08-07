@@ -4,7 +4,7 @@ import { registerFontFace } from './fonts/register-font-face';
 import { typestyles } from './runtime';
 import { dark } from './tokens/defaults/color';
 import { tokenValues } from './tokens/preset';
-import { designTokens } from './tokens/declare';
+import { t } from './tokens/declare';
 import { splitModeAwareColorValues } from './split-mode-aware-colors';
 import type {
   DesignColorValues,
@@ -29,9 +29,9 @@ const builtInPreset: DesignThemePreset = {
 type ColorPatch = DesignColorValues;
 
 /** Combine the registered token tree with optional `extend` namespace refs. */
-function mergeDesignTokenRefs(extendRefs?: Record<string, unknown>): typeof designTokens {
-  if (!extendRefs || Object.keys(extendRefs).length === 0) return designTokens;
-  return new Proxy(designTokens, {
+function mergeDesignTokenRefs(extendRefs?: Record<string, unknown>): typeof t {
+  if (!extendRefs || Object.keys(extendRefs).length === 0) return t;
+  return new Proxy(t, {
     get(target, prop, receiver) {
       if (typeof prop === 'string' && prop in extendRefs) {
         return extendRefs[prop];

@@ -6,7 +6,7 @@ describe('buildToneFace', () => {
     const face = buildToneFace({
       foreground: 'oklch(50% 0.2 250)',
       background: 'oklch(40% 0.2 250)',
-      darkForeground: 'oklch(10% 0 0)',
+      onFilledFallback: 'oklch(10% 0 0)',
     });
 
     expect(face.foreground).toBe('oklch(50% 0.2 250)');
@@ -22,12 +22,12 @@ describe('createToneFace', () => {
       light: {
         foreground: 'oklch(50% 0.2 250)',
         background: 'oklch(40% 0.2 250)',
-        darkForeground: 'oklch(10% 0 0)',
+        onFilledFallback: 'oklch(10% 0 0)',
       },
       dark: {
         foreground: 'oklch(70% 0.15 250)',
         background: 'oklch(55% 0.15 250)',
-        darkForeground: 'oklch(10% 0 0)',
+        onFilledFallback: 'oklch(10% 0 0)',
       },
     });
 

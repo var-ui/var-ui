@@ -11,7 +11,7 @@ export type ToneFaceInput = {
   foreground: string;
   background: string;
   /** Text on `background` when contrast against white is insufficient. */
-  darkForeground?: string;
+  onFilledFallback?: string;
   /** Filled-surface text; computed from `background` when omitted and resolvable. */
   foregroundOnBackground?: string;
 };
@@ -35,8 +35,8 @@ function isResolvableColor(value: string): boolean {
 }
 
 /** Resolve accessible text on a filled tone background. */
-export function onBackground(background: string, darkForeground: string): string {
-  return contrastRatio(WHITE, background) >= 4.5 ? WHITE : darkForeground;
+export function onBackground(background: string, onFilledFallback: string): string {
+  return contrastRatio(WHITE, background) >= 4.5 ? WHITE : onFilledFallback;
 }
 
 /** Build a single-mode tone face from ramp foreground/background anchors. */
@@ -46,12 +46,12 @@ export function buildToneFace(
 ): ToneFaceValues {
   const subtleAlpha = options?.subtleAlpha ?? TONE_SUBTLE_ALPHA;
   const borderAlpha = options?.borderAlpha ?? TONE_BORDER_ALPHA;
-  const darkForeground = input.darkForeground ?? input.foreground;
+  const onFilledFallback = input.onFilledFallback ?? input.foreground;
   const foregroundOnBackground =
     input.foregroundOnBackground ??
     (isResolvableColor(input.background)
-      ? onBackground(input.background, darkForeground)
-      : darkForeground);
+      ? onBackground(input.background, onFilledFallback)
+      : onFilledFallback);
 
   return {
     background: input.background,

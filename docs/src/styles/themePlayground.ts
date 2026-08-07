@@ -51,7 +51,9 @@ export const themePlaygroundStyles = typestyles.styles.component(
       justifyContent: 'flex-end',
       gap: t.space[2].var,
       padding: t.space[3].var,
-      borderBottom: `1px solid ${t.color.border.default.var}`,
+      borderBottomWidth: t.borderWidth.default.var,
+      borderBottomStyle: 'solid',
+      borderBottomColor: t.color.border.default.var,
     },
     previewInner: {
       flex: 1,
@@ -111,7 +113,9 @@ export const themePlaygroundStyles = typestyles.styles.component(
       width: '1.5rem',
       height: '1.5rem',
       borderRadius: t.radius.sm.var,
-      border: `1px solid ${t.color.border.default.var}`,
+      borderWidth: t.borderWidth.default.var,
+      borderStyle: 'solid',
+      borderColor: t.color.border.default.var,
       flexShrink: 0,
     },
     deferredTab: {
@@ -124,7 +128,9 @@ export const themePlaygroundStyles = typestyles.styles.component(
       height: '14rem',
       maxHeight: '14rem',
       borderRadius: t.radius.lg.var,
-      border: `1px solid ${t.color.border.default.var}`,
+      borderWidth: t.borderWidth.default.var,
+      borderStyle: 'solid',
+      borderColor: t.color.border.default.var,
       overflow: 'hidden',
       '& [data-codeblock]': {
         display: 'flex',

@@ -5,4 +5,4 @@ import { tokenSchema } from './schema';
 export const tokens = typestyles.tokens.declare(tokenSchema);
 
 /** Alias kept for recipe imports (`designTokens as t`). */
-export const designTokens = tokens;
+export const t = tokens;

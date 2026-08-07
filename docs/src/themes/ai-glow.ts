@@ -44,60 +44,60 @@ const aiGlowTone = {
     light: {
       foreground: '#0EA5E9',
       background: '#0EA5E9',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
     dark: {
       foreground: '#67E8F9',
       background: '#67E8F9',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
   }),
   danger: createToneFace({
     light: {
       foreground: p.color.palette['red-7'].var,
       background: p.color.palette['red-8'].var,
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
     dark: {
       foreground: p.color.palette['red-4'].var,
       background: p.color.palette['red-7'].var,
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
   }),
   success: createToneFace({
     light: {
       foreground: '#0F9F6E',
       background: '#047857',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
     dark: {
       foreground: '#6EE7B7',
       background: '#047857',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
   }),
   warning: createToneFace({
     light: {
       foreground: '#B45309',
       background: '#B45309',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
     dark: {
       foreground: '#FCD34D',
       background: '#FCD34D',
-      darkForeground: '#211400',
+      onFilledFallback: '#211400',
     },
   }),
   info: createToneFace({
     light: {
       foreground: '#2563EB',
       background: '#2563EB',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
     dark: {
       foreground: '#67E8F9',
       background: '#67E8F9',
-      darkForeground: '#08111A',
+      onFilledFallback: '#08111A',
     },
   }),
 };

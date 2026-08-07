@@ -1,56 +1,60 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
+/** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
+export const codeBlockVarDefinitions = {
+  border: {
+    value: t.color.border.default.var,
+    syntax: '<color>' as const,
+  },
+  background: {
+    value: t.color.background.surface.var,
+    syntax: '<color>' as const,
+  },
+  backgroundInline: {
+    value: t.color.background.subtle.var,
+    syntax: '<color>' as const,
+  },
+  backgroundHeader: {
+    value: t.color.background.subtle.var,
+    syntax: '<color>' as const,
+  },
+  filenameColor: {
+    value: t.color.text.primary.var,
+    syntax: '<color>' as const,
+  },
+  languageColor: {
+    value: t.color.text.secondary.var,
+    syntax: '<color>' as const,
+  },
+  copyButtonColor: {
+    value: t.color.text.secondary.var,
+    syntax: '<color>' as const,
+  },
+  copyButtonHoverBackground: {
+    value: t.color.background.subtle.var,
+    syntax: '<color>' as const,
+  },
+  feedbackColor: {
+    value: t.color.text.secondary.var,
+    syntax: '<color>' as const,
+  },
+  lineNumberColor: {
+    value: t.color.text.secondary.var,
+    syntax: '<color>' as const,
+  },
+  lineHighlightBackground: {
+    value: t.color.background.subtle.var,
+    syntax: '<color>' as const,
+  },
+} as const;
+
 export const codeBlock = typestyles.styles.component(
   'code-block',
   (c) => {
-    const v = c.vars({
-      border: {
-        value: t.color.border.default.var,
-        syntax: '<color>',
-      },
-      background: {
-        value: t.color.background.surface.var,
-        syntax: '<color>',
-      },
-      backgroundInline: {
-        value: t.color.background.subtle.var,
-        syntax: '<color>',
-      },
-      backgroundHeader: {
-        value: t.color.background.subtle.var,
-        syntax: '<color>',
-      },
-      filenameColor: {
-        value: t.color.text.primary.var,
-        syntax: '<color>',
-      },
-      languageColor: {
-        value: t.color.text.secondary.var,
-        syntax: '<color>',
-      },
-      copyButtonColor: {
-        value: t.color.text.secondary.var,
-        syntax: '<color>',
-      },
-      copyButtonHoverBackground: {
-        value: t.color.background.subtle.var,
-        syntax: '<color>',
-      },
-      feedbackColor: {
-        value: t.color.text.secondary.var,
-        syntax: '<color>',
-      },
-      lineNumberColor: {
-        value: t.color.text.secondary.var,
-        syntax: '<color>',
-      },
-      lineHighlightBackground: {
-        value: t.color.background.subtle.var,
-        syntax: '<color>',
-      },
-    });
+    const vars = c.vars(codeBlockVarDefinitions);
     return {
+      vars,
       slots: [
         'root',
         'rootDefault',
@@ -92,9 +96,9 @@ export const codeBlock = typestyles.styles.component(
       root: {
         borderWidth: t.borderWidth.default.var,
         borderStyle: 'solid',
-        borderColor: v.border.var,
+        borderColor: vars.border.var,
         borderRadius: t.radius.lg.var,
-        backgroundColor: v.background.var,
+        backgroundColor: vars.background.var,
         overflow: 'hidden',
         boxShadow: t.shadow.lg.var,
       },
@@ -106,9 +110,9 @@ export const codeBlock = typestyles.styles.component(
         borderRadius: t.radius.md.var,
         borderWidth: t.borderWidth.default.var,
         borderStyle: 'solid',
-        borderColor: v.border.var,
+        borderColor: vars.border.var,
         padding: '2px 8px',
-        backgroundColor: v.backgroundInline.var,
+        backgroundColor: vars.backgroundInline.var,
       },
       rootDiff: {
         borderColor: t.color.border.strong.var,
@@ -126,12 +130,12 @@ export const codeBlock = typestyles.styles.component(
         paddingInline: t.space[3].var,
         borderBottomWidth: t.borderWidth.default.var,
         borderBottomStyle: 'solid',
-        borderBottomColor: v.border.var,
-        backgroundColor: v.backgroundHeader.var,
+        borderBottomColor: vars.border.var,
+        backgroundColor: vars.backgroundHeader.var,
       },
       headerTerminal: {
         borderBottomColor: t.color.border.strong.var,
-        backgroundColor: v.backgroundHeader.var,
+        backgroundColor: vars.backgroundHeader.var,
       },
       title: {
         display: 'flex',
@@ -142,7 +146,7 @@ export const codeBlock = typestyles.styles.component(
       filename: {
         fontSize: t.fontSize.sm.var,
         fontWeight: t.fontWeight.medium.var,
-        color: v.filenameColor.var,
+        color: vars.filenameColor.var,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
@@ -153,7 +157,7 @@ export const codeBlock = typestyles.styles.component(
         fontFamily: t.fontFamily.mono.var,
         textTransform: 'uppercase',
         letterSpacing: '0.06em',
-        color: v.languageColor.var,
+        color: vars.languageColor.var,
         whiteSpace: 'nowrap',
       },
       languageTerminal: {
@@ -178,7 +182,7 @@ export const codeBlock = typestyles.styles.component(
         gap: t.space[1].var,
         border: 'none',
         backgroundColor: 'transparent',
-        color: v.copyButtonColor.var,
+        color: vars.copyButtonColor.var,
         borderRadius: t.radius.sm.var,
         paddingBlock: t.space[1].var,
         paddingInline: t.space[2].var,
@@ -190,8 +194,8 @@ export const codeBlock = typestyles.styles.component(
         cursor: 'pointer',
         transition: t.transition.colorShift.var,
         '&:hover': {
-          color: v.filenameColor.var,
-          backgroundColor: v.copyButtonHoverBackground.var,
+          color: vars.filenameColor.var,
+          backgroundColor: vars.copyButtonHoverBackground.var,
         },
         '&:focus-visible': {
           outline: `${t.borderWidth.thin.var} solid ${t.color.border.focus.var}`,
@@ -213,7 +217,7 @@ export const codeBlock = typestyles.styles.component(
       },
       feedback: {
         fontSize: t.fontSize.sm.var,
-        color: v.feedbackColor.var,
+        color: vars.feedbackColor.var,
         minHeight: '1lh',
       },
       feedbackInline: {
@@ -228,8 +232,8 @@ export const codeBlock = typestyles.styles.component(
         zIndex: 1,
         borderWidth: t.borderWidth.default.var,
         borderStyle: 'solid',
-        borderColor: v.border.var,
-        backgroundColor: v.background.var,
+        borderColor: vars.border.var,
+        backgroundColor: vars.background.var,
         borderRadius: t.radius.md.var,
         padding: `2px ${t.space[2].var}`,
         boxShadow: t.shadow.sm.var,
@@ -242,7 +246,7 @@ export const codeBlock = typestyles.styles.component(
       },
       body: {
         padding: 0,
-        backgroundColor: v.background.var,
+        backgroundColor: vars.background.var,
       },
       bodyTerminal: {
         color: t.color.tone.accent.foregroundOnBackground.var,
@@ -292,7 +296,7 @@ export const codeBlock = typestyles.styles.component(
         minWidth: '2ch',
         textAlign: 'right',
         fontSize: t.fontSize.sm.var,
-        color: v.lineNumberColor.var,
+        color: vars.lineNumberColor.var,
         opacity: 0.8,
         userSelect: 'none',
       },
@@ -300,7 +304,7 @@ export const codeBlock = typestyles.styles.component(
         minWidth: 0,
       },
       lineHighlighted: {
-        backgroundColor: v.lineHighlightBackground.var,
+        backgroundColor: vars.lineHighlightBackground.var,
       },
       lineAdded: {
         backgroundColor: 'rgb(16 185 129 / 0.12)',

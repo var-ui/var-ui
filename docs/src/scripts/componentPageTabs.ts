@@ -1,23 +1,25 @@
 import { createTabsController } from '../../../packages/astro/src/scripts/tabs';
 
-const TAB_IDS = ['documentation', 'props', 'styles'] as const;
 const INITIALIZED_ATTR = 'data-component-doc-tabs-initialized';
 
-type ComponentDocTab = (typeof TAB_IDS)[number];
-
-function parseTab(value: string | null | undefined): ComponentDocTab {
-  const normalized = value?.trim().toLowerCase();
-  return TAB_IDS.includes(normalized as ComponentDocTab)
-    ? (normalized as ComponentDocTab)
-    : 'documentation';
+function getTabIds(root: HTMLElement): string[] {
+  return Array.from(root.querySelectorAll<HTMLElement>('[role="tab"]')).map((tab) =>
+    tab.id.replace(/^tab-/, ''),
+  );
 }
 
-function tabIdFromLocation(): ComponentDocTab {
+function parseTab(value: string | null | undefined, available: string[]): string {
+  const normalized = value?.trim().toLowerCase();
+  return normalized && available.includes(normalized) ? normalized : 'documentation';
+}
+
+function tabIdFromLocation(root: HTMLElement): string {
+  const available = getTabIds(root);
   const params = new URLSearchParams(window.location.search);
   const fromQuery = params.get('tab');
-  if (fromQuery) return parseTab(fromQuery);
+  if (fromQuery) return parseTab(fromQuery, available);
   const fromHash = window.location.hash.replace(/^#/, '');
-  return parseTab(fromHash);
+  return parseTab(fromHash, available);
 }
 
 function selectTabById(root: HTMLElement, tabId: string): void {
@@ -52,7 +54,8 @@ export function initComponentDocTabs(): void {
 
     createTabsController(root);
 
-    const initialTab = tabIdFromLocation();
+    const availableTabs = getTabIds(root);
+    const initialTab = tabIdFromLocation(root);
     if (initialTab !== 'documentation') {
       requestAnimationFrame(() => {
         selectTabById(root, initialTab);
@@ -65,7 +68,7 @@ export function initComponentDocTabs(): void {
     root.querySelectorAll<HTMLElement>('[role="tab"]').forEach((tab) => {
       tab.addEventListener('click', () => {
         const tabId = tab.id.replace(/^tab-/, '');
-        if (TAB_IDS.includes(tabId as ComponentDocTab)) {
+        if (availableTabs.includes(tabId)) {
           syncLocation(tabId);
         }
         requestAnimationFrame(() => syncTocVisibility(root));

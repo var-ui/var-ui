@@ -61,6 +61,7 @@ export const tabs = typestyles.styles.component(
     // const indicatorTransition = `transform ${t.duration.medium.var} ${t.easing.standard.var}, width ${t.duration.fast.var} ${t.easing.standard.var}, opacity ${t.duration.fast.var} ${t.easing.standard.var}`;
 
     return {
+      vars: v,
       slots: ['root', 'list', 'tab', 'panel'],
       root: {
         display: 'grid',

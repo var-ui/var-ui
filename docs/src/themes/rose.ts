@@ -27,60 +27,60 @@ const roseTone = {
     light: {
       foreground: p.color.palette['crimson-7'].var,
       background: p.color.palette['crimson-7'].var,
-      darkForeground: '#000',
+      onFilledFallback: '#000',
     },
     dark: {
       foreground: p.color.palette['rose-3'].var,
       background: p.color.palette['rose-3'].var,
-      darkForeground: '#000',
+      onFilledFallback: '#000',
     },
   }),
   danger: createToneFace({
     light: {
       foreground: p.color.palette['red-7'].var,
       background: p.color.palette['red-8'].var,
-      darkForeground: p.color.palette['neutral-1'].var,
+      onFilledFallback: p.color.palette['neutral-1'].var,
     },
     dark: {
       foreground: p.color.palette['red-4'].var,
       background: p.color.palette['red-7'].var,
-      darkForeground: p.color.palette['neutral-1'].var,
+      onFilledFallback: p.color.palette['neutral-1'].var,
     },
   }),
   success: createToneFace({
     light: {
       foreground: p.color.palette['green-7'].var,
       background: p.color.palette['green-8'].var,
-      darkForeground: p.color.palette['neutral-1'].var,
+      onFilledFallback: p.color.palette['neutral-1'].var,
     },
     dark: {
       foreground: p.color.palette['green-4'].var,
       background: p.color.palette['green-7'].var,
-      darkForeground: p.color.palette['neutral-1'].var,
+      onFilledFallback: p.color.palette['neutral-1'].var,
     },
   }),
   warning: createToneFace({
     light: {
       foreground: p.color.palette['amber-7'].var,
       background: p.color.palette['amber-7'].var,
-      darkForeground: p.color.palette['stone-10'].var,
+      onFilledFallback: p.color.palette['stone-10'].var,
     },
     dark: {
       foreground: p.color.palette['amber-4'].var,
       background: p.color.palette['amber-4'].var,
-      darkForeground: p.color.palette['stone-10'].var,
+      onFilledFallback: p.color.palette['stone-10'].var,
     },
   }),
   info: createToneFace({
     light: {
       foreground: p.color.palette['plum-7'].var,
       background: p.color.palette['plum-7'].var,
-      darkForeground: p.color.palette['neutral-1'].var,
+      onFilledFallback: p.color.palette['neutral-1'].var,
     },
     dark: {
       foreground: p.color.palette['plum-4'].var,
       background: p.color.palette['plum-4'].var,
-      darkForeground: p.color.palette['neutral-1'].var,
+      onFilledFallback: p.color.palette['neutral-1'].var,
     },
   }),
 };

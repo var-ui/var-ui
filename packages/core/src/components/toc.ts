@@ -76,6 +76,7 @@ export const toc = typestyles.styles.component(
     });
 
     return {
+      vars: v,
       slots: ['root', 'title', 'list', 'item', 'link'],
       root: {
         position: 'sticky',

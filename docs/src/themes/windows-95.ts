@@ -34,60 +34,60 @@ const win95Tone = {
     light: {
       foreground: '#000080',
       background: '#000080',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
     dark: {
       foreground: '#1084D0',
       background: '#1084D0',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
   }),
   danger: createToneFace({
     light: {
       foreground: '#800000',
       background: '#800000',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
     dark: {
       foreground: p.color.palette['red-4'].var,
       background: '#800000',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
   }),
   success: createToneFace({
     light: {
       foreground: '#008000',
       background: '#008000',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
     dark: {
       foreground: p.color.palette['green-4'].var,
       background: '#008000',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
   }),
   warning: createToneFace({
     light: {
       foreground: '#808000',
       background: '#808000',
-      darkForeground: '#000000',
+      onFilledFallback: '#000000',
     },
     dark: {
       foreground: p.color.palette['amber-4'].var,
       background: p.color.palette['amber-4'].var,
-      darkForeground: '#000000',
+      onFilledFallback: '#000000',
     },
   }),
   info: createToneFace({
     light: {
       foreground: '#000080',
       background: '#000080',
-      darkForeground: '#FFFFFF',
+      onFilledFallback: '#FFFFFF',
     },
     dark: {
       foreground: '#38A8F0',
       background: '#38A8F0',
-      darkForeground: '#000000',
+      onFilledFallback: '#000000',
     },
   }),
 };

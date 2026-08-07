@@ -65,6 +65,10 @@ export const button = typestyles.styles.component(
           outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '2px',
         },
+        '&[disabled]': {
+          opacity: 0.5,
+          cursor: 'not-allowed',
+        },
       },
       variants: {
         tone: {

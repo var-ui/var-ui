@@ -144,9 +144,7 @@ const feedbackClassName = cx(
               terminal && recipeClassName(cb.preTerminal),
             ),
           )}
-          data-codeblock-pre
-        >
-          {showLineNumbers ? (
+          data-codeblock-pre>{showLineNumbers ? (
             <code {...recipeProps(cb.code, recipeClassName(cb.lines))}>
               {lines.map((line, index) => {
                 const lineNumber = index + 1;
@@ -177,8 +175,7 @@ const feedbackClassName = cx(
             <code {...recipeProps(cb.code, resolvedCodeClassName)} set:html={codeHtml} />
           ) : (
             <code {...recipeProps(cb.code)}>{escapeHtml(code)}</code>
-          )}
-        </pre>
+          )}</pre>
       </div>
     </div>
   )

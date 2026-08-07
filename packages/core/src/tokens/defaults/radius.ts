@@ -5,7 +5,7 @@ import type { DesignTokens } from '../types';
 const RADIUS_STEPS = [1, 2, 3, 4] as const;
 const RADIUS_NAMES = ['sm', 'md', 'lg', 'xl'] as const;
 const radiusScale = generateLinearScale({
-  base: 4,
+  base: 2,
   multiplier: 1.25,
   steps: [...RADIUS_STEPS],
 });

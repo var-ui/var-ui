@@ -32,12 +32,12 @@ describe('splitModeAwareColorValues', () => {
       light: {
         foreground: '#111',
         background: '#222',
-        darkForeground: '#000',
+        onFilledFallback: '#000',
       },
       dark: {
         foreground: '#eee',
         background: '#333',
-        darkForeground: '#000',
+        onFilledFallback: '#000',
       },
     });
 

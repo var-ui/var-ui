@@ -2,12 +2,13 @@
 
 import type { ButtonTone, ToneAppearance } from '@var-ui/core';
 import { defaultIcons } from '@var-ui/icons';
-import { Button, IconProvider, Select, Switch, recipeClassName } from '@var-ui/react';
+import { Button, IconProvider, Switch, recipeClassName } from '@var-ui/react';
 import { useMemo, useState } from 'react';
 import type { DocsFramework } from '@/lib/framework';
 import { configuratorStyles } from '@/styles/configurator';
+import { AppearancePicker } from './AppearancePicker';
 import { ComponentConfigurator } from './ComponentConfigurator';
-import { APPEARANCE_OPTIONS, generateButtonCode, type ButtonConfiguratorState } from './buttonCode';
+import { generateButtonCode, type ButtonConfiguratorState } from './buttonCode';
 import { SizePicker } from './SizePicker';
 import { ToneSwatchPicker } from './ToneSwatchPicker';
 
@@ -20,6 +21,7 @@ const DEFAULT_STATE: ButtonConfiguratorState = {
   tone: 'neutral',
   size: 'md',
   isDisabled: false,
+  elevated: false,
   label: 'Button',
 };
 
@@ -46,6 +48,7 @@ export default function ButtonConfigurator({ framework }: ButtonConfiguratorProp
             tone={state.tone}
             appearance={state.appearance}
             size={state.size}
+            elevated={state.elevated}
             isDisabled={state.isDisabled}
           >
             {state.label}
@@ -54,13 +57,9 @@ export default function ButtonConfigurator({ framework }: ButtonConfiguratorProp
         controls={
           <>
             <ControlGroup label="Appearance">
-              <Select
-                aria-label="Appearance"
-                options={APPEARANCE_OPTIONS}
-                selectedKey={state.appearance}
-                onSelectionChange={(key) => {
-                  if (key) setState((s) => ({ ...s, appearance: key as ToneAppearance }));
-                }}
+              <AppearancePicker
+                value={state.appearance}
+                onChange={(appearance: ToneAppearance) => setState((s) => ({ ...s, appearance }))}
               />
             </ControlGroup>
 
@@ -87,11 +86,20 @@ export default function ButtonConfigurator({ framework }: ButtonConfiguratorProp
                 Disabled
               </Switch>
             </ControlGroup>
+
+            <ControlGroup label="Elevated">
+              <Switch
+                aria-label="Elevated"
+                isSelected={state.elevated}
+                onChange={(elevated) => setState((s) => ({ ...s, elevated }))}
+              >
+                Elevated
+              </Switch>
+            </ControlGroup>
           </>
         }
         code={codeOutput.code}
         language={codeOutput.language}
-        filename={codeOutput.filename}
       />
     </IconProvider>
   );

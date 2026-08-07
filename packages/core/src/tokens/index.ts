@@ -17,7 +17,7 @@ export {
   type PaletteStep,
   type PaletteTokenKey,
 } from './schema/color/palette';
-export { designTokens, tokens } from './declare';
+export { t as designTokens, tokens } from './declare';
 export { tokenValues } from './preset';
 export { darkSyntaxValues, lightSyntaxValues } from './defaults/color';
 export { shadowElevationValues } from './defaults/shadow';

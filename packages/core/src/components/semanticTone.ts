@@ -18,6 +18,9 @@ export const subtleHoverMix = {
   surface: '18%',
 } as const;
 
+/** Hover paint only when the control is not disabled (pairs with button `&[disabled]`). */
+const hoverWhenEnabled = '&:hover:not([disabled])';
+
 export function filledHoverColor(background: string): string {
   return `color-mix(in oklch, ${background} 88%, black)`;
 }
@@ -145,7 +148,7 @@ export function controlAppearancePaint(v: ControlPaintRefs, appearance: ToneAppe
         [v.border.name]: v.solidBg.var,
         [v.background.name]: v.solidBg.var,
         [v.foreground.name]: v.solidFg.var,
-        '&:hover': {
+        [hoverWhenEnabled]: {
           [v.background.name]: filledHoverColor(v.solidBg.var),
           [v.border.name]: filledHoverColor(v.solidBg.var),
         },
@@ -155,7 +158,7 @@ export function controlAppearancePaint(v: ControlPaintRefs, appearance: ToneAppe
         [v.border.name]: v.semantic.var,
         [v.background.name]: 'transparent',
         [v.foreground.name]: v.semantic.var,
-        '&:hover': {
+        [hoverWhenEnabled]: {
           [v.background.name]: subtleHoverTint(v.semantic.var),
           [v.border.name]: v.semantic.var,
         },
@@ -166,7 +169,7 @@ export function controlAppearancePaint(v: ControlPaintRefs, appearance: ToneAppe
           [v.border.name]: t.color.border.default.var,
           [v.background.name]: t.color.background.surface.var,
           [v.foreground.name]: v.semantic.var,
-          '&:hover': {
+          [hoverWhenEnabled]: {
             [v.border.name]: t.color.border.strong.var,
           },
         };
@@ -175,7 +178,7 @@ export function controlAppearancePaint(v: ControlPaintRefs, appearance: ToneAppe
         [v.border.name]: subtleBorderColor(v.semantic.var),
         [v.background.name]: subtleBackgroundColor(v.semantic.var),
         [v.foreground.name]: v.semantic.var,
-        '&:hover': {
+        [hoverWhenEnabled]: {
           [v.border.name]: v.semantic.var,
         },
       };
@@ -184,7 +187,7 @@ export function controlAppearancePaint(v: ControlPaintRefs, appearance: ToneAppe
         [v.border.name]: 'transparent',
         [v.background.name]: 'transparent',
         [v.foreground.name]: v.semantic.var,
-        '&:hover': {
+        [hoverWhenEnabled]: {
           [v.background.name]: subtleBackgroundColor(v.semantic.var),
         },
       };
@@ -221,7 +224,7 @@ export function tonePaint(v: TonePaintRefs, key: SemanticToneKey, appearance: To
         [v.border.name]: ch.background,
         [v.background.name]: ch.background,
         [v.foreground.name]: ch.foregroundOnBackground,
-        '&:hover': {
+        [hoverWhenEnabled]: {
           [v.background.name]: filledHoverColor(ch.background),
           [v.border.name]: filledHoverColor(ch.background),
         },
@@ -231,7 +234,7 @@ export function tonePaint(v: TonePaintRefs, key: SemanticToneKey, appearance: To
         [v.border.name]: ch.foreground,
         [v.background.name]: 'transparent',
         [v.foreground.name]: ch.foreground,
-        '&:hover': {
+        [hoverWhenEnabled]: {
           [v.background.name]: ch.subtleBackground,
           [v.border.name]: ch.foreground,
         },
@@ -241,7 +244,7 @@ export function tonePaint(v: TonePaintRefs, key: SemanticToneKey, appearance: To
         [v.border.name]: subtleBorderColor(ch.foreground),
         [v.background.name]: subtleBackgroundColor(ch.foreground),
         [v.foreground.name]: ch.foreground,
-        '&:hover': {
+        [hoverWhenEnabled]: {
           [v.border.name]: ch.foreground,
         },
       };
@@ -250,7 +253,7 @@ export function tonePaint(v: TonePaintRefs, key: SemanticToneKey, appearance: To
         [v.border.name]: 'transparent',
         [v.background.name]: 'transparent',
         [v.foreground.name]: ch.foreground,
-        '&:hover': {
+        [hoverWhenEnabled]: {
           [v.background.name]: subtleBackgroundColor(ch.foreground),
         },
       };
@@ -357,7 +360,7 @@ export function buttonTonePaint(v: TonePaintRefs, tone: ButtonTone, appearance: 
           [v.border.name]: t.color.text.primary.var,
           [v.background.name]: t.color.text.primary.var,
           [v.foreground.name]: t.color.background.surface.var,
-          '&:hover': {
+          [hoverWhenEnabled]: {
             [v.background.name]: `color-mix(in oklch, ${t.color.text.primary.var} 88%, black)`,
             [v.border.name]: `color-mix(in oklch, ${t.color.text.primary.var} 88%, black)`,
           },
@@ -367,7 +370,7 @@ export function buttonTonePaint(v: TonePaintRefs, tone: ButtonTone, appearance: 
           [v.border.name]: t.color.border.strong.var,
           [v.background.name]: 'transparent',
           [v.foreground.name]: t.color.text.primary.var,
-          '&:hover': {
+          [hoverWhenEnabled]: {
             backgroundColor: t.color.background.subtle.var,
           },
         };
@@ -376,7 +379,7 @@ export function buttonTonePaint(v: TonePaintRefs, tone: ButtonTone, appearance: 
           [v.border.name]: t.color.border.default.var,
           [v.background.name]: t.color.background.surface.var,
           [v.foreground.name]: t.color.text.primary.var,
-          '&:hover': {
+          [hoverWhenEnabled]: {
             [v.border.name]: t.color.border.strong.var,
           },
         };
@@ -385,7 +388,7 @@ export function buttonTonePaint(v: TonePaintRefs, tone: ButtonTone, appearance: 
           [v.border.name]: 'transparent',
           [v.background.name]: 'transparent',
           [v.foreground.name]: t.color.text.primary.var,
-          '&:hover': {
+          [hoverWhenEnabled]: {
             backgroundColor: t.color.background.subtle.var,
           },
         };

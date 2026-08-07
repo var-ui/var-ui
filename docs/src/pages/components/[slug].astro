@@ -11,8 +11,10 @@ import HiddenPropsTable from '../../components/HiddenPropsTable.astro';
 import PropsTable from '../../components/PropsTable.astro';
 import {
   getComponentCategoryLabel,
+  getComponentDocTabs,
   getComponentEntry,
   getComponentSourceLinks,
+  hasComponentPlayground,
   parseComponentDocTab,
 } from '../../lib/component-page';
 import { findMdxModule } from '../../lib/loadMdx';
@@ -36,7 +38,11 @@ if (!entry) {
 const { Content, frontmatter } = await loader();
 const categoryLabel = getComponentCategoryLabel(slug);
 const sourceLinks = getComponentSourceLinks(slug);
-const initialTab = parseComponentDocTab(Astro.url.searchParams.get('tab') ?? Astro.url.hash.replace(/^#/, ''));
+const docTabs = getComponentDocTabs(slug);
+const initialTab = parseComponentDocTab(
+  Astro.url.searchParams.get('tab') ?? Astro.url.hash.replace(/^#/, ''),
+  slug,
+);
 ---
 
 <BaseLayout title={`${frontmatter.title} · Var UI`} contentWidth="full">
@@ -45,19 +51,28 @@ const initialTab = parseComponentDocTab(Astro.url.searchParams.get('tab') ?? Ast
 
     <ComponentDocTabs
       className="component-doc-tabs"
-      tabs={[
-        { id: 'documentation', label: 'Documentation' },
-        { id: 'props', label: 'Props' },
-        { id: 'styles', label: 'Styles' },
-      ]}
+      tabs={docTabs}
       defaultSelectedId={initialTab}
       tocContentSelector=".component-doc-panel[data-panel='documentation']"
     >
       <div slot="documentation">
         <article class="docs-article docs-article--documentation component-doc-panel" data-panel="documentation">
-          <Content components={{ Demo: DemoHost, PropsTable: HiddenPropsTable, ButtonConfigurator }} />
+          <Content components={{ Demo: DemoHost, PropsTable: HiddenPropsTable }} />
         </article>
       </div>
+      {
+        hasComponentPlayground(slug) ? (
+          <div slot="playground">
+            <section
+              class="docs-article component-doc-panel"
+              data-panel="playground"
+              aria-label="Playground"
+            >
+              {slug === 'button' ? <ButtonConfigurator /> : null}
+            </section>
+          </div>
+        ) : null
+      }
       <div slot="props">
         <section class="docs-article component-doc-panel" data-panel="props" aria-label="Props">
           <PropsTable slug={slug} />

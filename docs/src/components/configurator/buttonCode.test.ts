@@ -7,6 +7,7 @@ describe('generateButtonCode', () => {
     tone: 'neutral' as const,
     size: 'md' as const,
     isDisabled: false,
+    elevated: false,
     label: 'Button',
   };
 
@@ -55,5 +56,12 @@ describe('generateButtonCode', () => {
     expect(code).toContain('data-tone="success"');
     expect(code).toContain('data-appearance="filled"');
     expect(code).toContain('data-size="sm"');
+  });
+
+  it('includes elevated when enabled', () => {
+    const elevated = { ...base, elevated: true };
+    expect(generateButtonCode('react', elevated).code).toContain('elevated');
+    expect(generateButtonCode('astro', elevated).code).toContain('elevated');
+    expect(generateButtonCode('html', elevated).code).toContain('data-elevated');
   });
 });
