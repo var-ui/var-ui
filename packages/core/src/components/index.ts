@@ -31,7 +31,7 @@ export { timeInput } from './timeInput';
 export { typeahead } from './typeahead';
 export { tokenizer } from './tokenizer';
 export { multiSelector } from './multiSelector';
-export { codeBlock } from './codeBlock';
+export { codeBlock, codeBlockVarDefinitions } from './codeBlock';
 export { commandPalette } from './commandPalette';
 export {
   alert,
@@ -114,10 +114,10 @@ export {
   type ProgressBarVariantProps,
 } from './progressBar';
 export { section } from './section';
-export { sideNav, SIDE_NAV_COLLAPSED_WIDTH } from './sideNav';
-export { toc } from './toc';
+export { sideNav, sideNavVarDefinitions, SIDE_NAV_COLLAPSED_WIDTH } from './sideNav';
+export { toc, tocVarDefinitions } from './toc';
 export { mobileNav } from './mobileNav';
-export { topNav } from './topNav';
+export { topNav, topNavVarDefinitions } from './topNav';
 export { skeleton } from './skeleton';
 export { spinner, type SpinnerRecipeProps, type SpinnerVariantProps } from './spinner';
 export { stack } from './stack';
@@ -135,7 +135,7 @@ export { tree } from './tree';
 export { radio } from './radio';
 export { select } from './select';
 export { switchStyles } from './switch';
-export { tabs } from './tabs';
+export { tabs, tabsVarDefinitions } from './tabs';
 export { tabList } from './tabList';
 export { thumbnail } from './thumbnail';
 export { textAreaField } from './textAreaField';

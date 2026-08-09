@@ -2,6 +2,54 @@ import { typestyles } from '../runtime';
 import { atReducedMotion } from '../theme-conditions';
 import { designTokens as t } from '../tokens';
 
+/** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
+export const tabsVarDefinitions = {
+  railColor: {
+    value: t.color.border.subtle.var,
+    syntax: '<color>' as const,
+  },
+  railWidth: {
+    value: t.borderWidth.thick.var,
+    syntax: '<length>' as const,
+  },
+  railRadius: {
+    value: t.borderWidth.thick.var,
+    syntax: '<length>' as const,
+  },
+  tabColor: {
+    value: t.color.text.secondary.var,
+    syntax: '<color>' as const,
+  },
+  tabSelectedColor: {
+    value: t.color.text.primary.var,
+    syntax: '<color>' as const,
+  },
+  tabIndicatorColor: {
+    value: t.color.text.primary.var,
+    syntax: '<color>' as const,
+  },
+  indicatorX: {
+    value: '0px',
+    syntax: '<length>' as const,
+  },
+  indicatorWidth: {
+    value: '0px',
+    syntax: '<length>' as const,
+  },
+  indicatorOpacity: {
+    value: '0',
+    syntax: '<number>' as const,
+  },
+  panelBackground: {
+    value: t.color.background.subtle.var,
+    syntax: '<color>' as const,
+  },
+  panelBorder: {
+    value: t.color.border.default.var,
+    syntax: '<color>' as const,
+  },
+} as const;
+
 /**
  * Tab panels for in-page content switching. Pair with the React `Tabs` compound
  * or Astro `Tabs` binding. Active tabs use `data-selected` and
@@ -11,57 +59,12 @@ import { designTokens as t } from '../tokens';
 export const tabs = typestyles.styles.component(
   'tabs',
   (c) => {
-    const v = c.vars({
-      railColor: {
-        value: t.color.border.subtle.var,
-        syntax: '<color>',
-      },
-      railWidth: {
-        value: t.borderWidth.thick.var,
-        syntax: '<length>',
-      },
-      railRadius: {
-        value: t.borderWidth.thick.var,
-        syntax: '<length>',
-      },
-      tabColor: {
-        value: t.color.text.secondary.var,
-        syntax: '<color>',
-      },
-      tabSelectedColor: {
-        value: t.color.text.primary.var,
-        syntax: '<color>',
-      },
-      tabIndicatorColor: {
-        value: t.color.text.primary.var,
-        syntax: '<color>',
-      },
-      indicatorX: {
-        value: '0px',
-        syntax: '<length>',
-      },
-      indicatorWidth: {
-        value: '0px',
-        syntax: '<length>',
-      },
-      indicatorOpacity: {
-        value: '0',
-        syntax: '<number>',
-      },
-      panelBackground: {
-        value: t.color.background.subtle.var,
-        syntax: '<color>',
-      },
-      panelBorder: {
-        value: t.color.border.default.var,
-        syntax: '<color>',
-      },
-    });
+    const v = c.vars(tabsVarDefinitions);
 
     // const indicatorTransition = `transform ${t.duration.medium.var} ${t.easing.standard.var}, width ${t.duration.fast.var} ${t.easing.standard.var}, opacity ${t.duration.fast.var} ${t.easing.standard.var}`;
 
     return {
-      vars: v,
+      vars: tabsVarDefinitions,
       slots: ['root', 'list', 'tab', 'panel'],
       root: {
         display: 'grid',

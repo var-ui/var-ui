@@ -10,6 +10,62 @@ const listIndent = t.space[3].var;
 const nestedIndent = t.space[2].var;
 const indicatorTransition = `transform ${duration.medium} ${easing.standard}, height ${duration.fast} ${easing.standard}, opacity ${duration.fast} ${easing.standard}`;
 
+/** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
+export const tocVarDefinitions = {
+  stickyTop: {
+    value: t.space[5].var,
+    syntax: '<length>' as const,
+  },
+  stickyMaxHeightOffset: {
+    value: t.space[6].var,
+    syntax: '<length>' as const,
+  },
+  titleColor: {
+    value: t.color.text.secondary.var,
+    syntax: '<color>' as const,
+  },
+  railColor: {
+    value: t.color.border.subtle.var,
+    syntax: '<color>' as const,
+  },
+  railWidth: {
+    value: t.borderWidth.thick.var,
+    syntax: '<length>' as const,
+  },
+  railRadius: {
+    value: t.borderWidth.thick.var,
+    syntax: '<length>' as const,
+  },
+  indicatorY: {
+    value: '0px',
+    syntax: '<length>' as const,
+  },
+  indicatorHeight: {
+    value: '0px',
+    syntax: '<length>' as const,
+  },
+  indicatorOpacity: {
+    value: '0',
+    syntax: '<number>' as const,
+  },
+  linkColor: {
+    value: t.color.text.secondary.var,
+    syntax: '<color>' as const,
+  },
+  linkHoverColor: {
+    value: t.color.text.primary.var,
+    syntax: '<color>' as const,
+  },
+  linkSelectedColor: {
+    value: t.color.text.primary.var,
+    syntax: '<color>' as const,
+  },
+  linkSelectedIndicator: {
+    value: t.color.text.primary.var,
+    syntax: '<color>' as const,
+  },
+} as const;
+
 /**
  * In-page table of contents for long-form docs. Pair with the React `Toc`
  * compound or Astro `Toc` / `TocItem` bindings. Active items use
@@ -20,63 +76,10 @@ const indicatorTransition = `transform ${duration.medium} ${easing.standard}, he
 export const toc = typestyles.styles.component(
   'toc',
   (c) => {
-    const v = c.vars({
-      stickyTop: {
-        value: t.space[5].var,
-        syntax: '<length>',
-      },
-      stickyMaxHeightOffset: {
-        value: t.space[6].var,
-        syntax: '<length>',
-      },
-      titleColor: {
-        value: t.color.text.secondary.var,
-        syntax: '<color>',
-      },
-      railColor: {
-        value: t.color.border.subtle.var,
-        syntax: '<color>',
-      },
-      railWidth: {
-        value: t.borderWidth.thick.var,
-        syntax: '<length>',
-      },
-      railRadius: {
-        value: t.borderWidth.thick.var,
-        syntax: '<length>',
-      },
-      indicatorY: {
-        value: '0px',
-        syntax: '<length>',
-      },
-      indicatorHeight: {
-        value: '0px',
-        syntax: '<length>',
-      },
-      indicatorOpacity: {
-        value: '0',
-        syntax: '<number>',
-      },
-      linkColor: {
-        value: t.color.text.secondary.var,
-        syntax: '<color>',
-      },
-      linkHoverColor: {
-        value: t.color.text.primary.var,
-        syntax: '<color>',
-      },
-      linkSelectedColor: {
-        value: t.color.text.primary.var,
-        syntax: '<color>',
-      },
-      linkSelectedIndicator: {
-        value: t.color.text.primary.var,
-        syntax: '<color>',
-      },
-    });
+    const v = c.vars(tocVarDefinitions);
 
     return {
-      vars: v,
+      vars: tocVarDefinitions,
       slots: ['root', 'title', 'list', 'item', 'link'],
       root: {
         position: 'sticky',

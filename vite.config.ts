@@ -46,13 +46,14 @@ export default defineConfig({
     cache: true,
     tasks: {
       ci: {
+        cache: false,
         command: [
+          'vp run --no-cache -F @var-ui/core -F @var-ui/react -F @var-ui/icons build',
           'vp check',
           'vp test run',
-          'vp run @var-ui/example-astro-app#check',
-          'vp run @var-ui/example-astro-app#build',
+          'vp run --no-cache @var-ui/example-astro-app#check',
+          'vp run --no-cache @var-ui/example-astro-app#build',
         ],
-        dependsOn: ['@var-ui/core#build', '@var-ui/react#build', '@var-ui/icons#build'],
       },
     },
   },

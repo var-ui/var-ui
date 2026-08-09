@@ -52,9 +52,9 @@ export const codeBlockVarDefinitions = {
 export const codeBlock = typestyles.styles.component(
   'code-block',
   (c) => {
-    const vars = c.vars(codeBlockVarDefinitions);
+    const v = c.vars(codeBlockVarDefinitions);
     return {
-      vars,
+      vars: codeBlockVarDefinitions,
       slots: [
         'root',
         'rootDefault',
@@ -96,9 +96,9 @@ export const codeBlock = typestyles.styles.component(
       root: {
         borderWidth: t.borderWidth.default.var,
         borderStyle: 'solid',
-        borderColor: vars.border.var,
+        borderColor: v.border.var,
         borderRadius: t.radius.lg.var,
-        backgroundColor: vars.background.var,
+        backgroundColor: v.background.var,
         overflow: 'hidden',
         boxShadow: t.shadow.lg.var,
       },
@@ -110,9 +110,9 @@ export const codeBlock = typestyles.styles.component(
         borderRadius: t.radius.md.var,
         borderWidth: t.borderWidth.default.var,
         borderStyle: 'solid',
-        borderColor: vars.border.var,
+        borderColor: v.border.var,
         padding: '2px 8px',
-        backgroundColor: vars.backgroundInline.var,
+        backgroundColor: v.backgroundInline.var,
       },
       rootDiff: {
         borderColor: t.color.border.strong.var,
@@ -130,12 +130,12 @@ export const codeBlock = typestyles.styles.component(
         paddingInline: t.space[3].var,
         borderBottomWidth: t.borderWidth.default.var,
         borderBottomStyle: 'solid',
-        borderBottomColor: vars.border.var,
-        backgroundColor: vars.backgroundHeader.var,
+        borderBottomColor: v.border.var,
+        backgroundColor: v.backgroundHeader.var,
       },
       headerTerminal: {
         borderBottomColor: t.color.border.strong.var,
-        backgroundColor: vars.backgroundHeader.var,
+        backgroundColor: v.backgroundHeader.var,
       },
       title: {
         display: 'flex',
@@ -146,7 +146,7 @@ export const codeBlock = typestyles.styles.component(
       filename: {
         fontSize: t.fontSize.sm.var,
         fontWeight: t.fontWeight.medium.var,
-        color: vars.filenameColor.var,
+        color: v.filenameColor.var,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
@@ -157,7 +157,7 @@ export const codeBlock = typestyles.styles.component(
         fontFamily: t.fontFamily.mono.var,
         textTransform: 'uppercase',
         letterSpacing: '0.06em',
-        color: vars.languageColor.var,
+        color: v.languageColor.var,
         whiteSpace: 'nowrap',
       },
       languageTerminal: {
@@ -182,7 +182,7 @@ export const codeBlock = typestyles.styles.component(
         gap: t.space[1].var,
         border: 'none',
         backgroundColor: 'transparent',
-        color: vars.copyButtonColor.var,
+        color: v.copyButtonColor.var,
         borderRadius: t.radius.sm.var,
         paddingBlock: t.space[1].var,
         paddingInline: t.space[2].var,
@@ -194,8 +194,8 @@ export const codeBlock = typestyles.styles.component(
         cursor: 'pointer',
         transition: t.transition.colorShift.var,
         '&:hover': {
-          color: vars.filenameColor.var,
-          backgroundColor: vars.copyButtonHoverBackground.var,
+          color: v.filenameColor.var,
+          backgroundColor: v.copyButtonHoverBackground.var,
         },
         '&:focus-visible': {
           outline: `${t.borderWidth.thin.var} solid ${t.color.border.focus.var}`,
@@ -217,7 +217,7 @@ export const codeBlock = typestyles.styles.component(
       },
       feedback: {
         fontSize: t.fontSize.sm.var,
-        color: vars.feedbackColor.var,
+        color: v.feedbackColor.var,
         minHeight: '1lh',
       },
       feedbackInline: {
@@ -232,8 +232,8 @@ export const codeBlock = typestyles.styles.component(
         zIndex: 1,
         borderWidth: t.borderWidth.default.var,
         borderStyle: 'solid',
-        borderColor: vars.border.var,
-        backgroundColor: vars.background.var,
+        borderColor: v.border.var,
+        backgroundColor: v.background.var,
         borderRadius: t.radius.md.var,
         padding: `2px ${t.space[2].var}`,
         boxShadow: t.shadow.sm.var,
@@ -246,7 +246,7 @@ export const codeBlock = typestyles.styles.component(
       },
       body: {
         padding: 0,
-        backgroundColor: vars.background.var,
+        backgroundColor: v.background.var,
       },
       bodyTerminal: {
         color: t.color.tone.accent.foregroundOnBackground.var,
@@ -296,7 +296,7 @@ export const codeBlock = typestyles.styles.component(
         minWidth: '2ch',
         textAlign: 'right',
         fontSize: t.fontSize.sm.var,
-        color: vars.lineNumberColor.var,
+        color: v.lineNumberColor.var,
         opacity: 0.8,
         userSelect: 'none',
       },
@@ -304,7 +304,7 @@ export const codeBlock = typestyles.styles.component(
         minWidth: 0,
       },
       lineHighlighted: {
-        backgroundColor: vars.lineHighlightBackground.var,
+        backgroundColor: v.lineHighlightBackground.var,
       },
       lineAdded: {
         backgroundColor: 'rgb(16 185 129 / 0.12)',
