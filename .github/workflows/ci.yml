@@ -21,7 +21,7 @@ jobs:
           node-version: '24'
           cache: true
 
-      - run: pnpm verify
+      - run: vp run ci
 
   deploy-docs:
     needs: check
@@ -55,7 +55,7 @@ jobs:
 
       - name: Build docs
         if: github.event_name == 'workflow_dispatch' || steps.changes.outputs.docs == 'true'
-        run: pnpm run build
+        run: vp run build
 
       - name: Deploy to Netlify
         if: github.event_name == 'workflow_dispatch' || steps.changes.outputs.docs == 'true'
@@ -97,7 +97,7 @@ jobs:
 
       - name: Build docs
         if: steps.changes.outputs.docs == 'true'
-        run: pnpm run build
+        run: vp run build
 
       - name: Deploy preview to Netlify
         id: deploy
