@@ -20,16 +20,24 @@ vp config --hooks --no-agent
 
 ## Commands
 
-| Command           | Description                           |
-| ----------------- | ------------------------------------- |
-| `vp install`      | Install dependencies                  |
-| `vp check`        | Format, lint, and type-check          |
-| `vp check --fix`  | Auto-fix formatting and lint issues   |
-| `vp test run`     | Run tests                             |
-| `vp run -r build` | Build all publishable packages        |
-| `vp run -r pack`  | Alias for package builds              |
-| `vp dev`          | Start the example Vite app            |
-| `vp run ready`    | Full validation: check → test → build |
+Use `vp` for day-to-day workflow. Root `pnpm <script>` is an equivalent alias when a script exists below. Run `vp run` to list every available task.
+
+| What you want              | `vp`                           | `pnpm` (alias)             |
+| -------------------------- | ------------------------------ | -------------------------- |
+| Install dependencies       | `vp install`                   | —                          |
+| Format, lint, type-check   | `vp check`                     | `pnpm check`               |
+| Auto-fix format and lint   | `vp check --fix`               | —                          |
+| Run tests                  | `vp test run`                  | `pnpm test`                |
+| Update test snapshots      | `vp test run -u`               | `pnpm test:update`         |
+| Run core package tests     | `vp test run packages/core`    | `pnpm test:core`           |
+| Update core snapshots      | `vp test run packages/core -u` | `pnpm test:core:update`    |
+| Build publishable packages | `vp run build`                 | `pnpm build`               |
+| Bundle budget checks       | `vp run test:bundle-budgets`   | `pnpm test:bundle-budgets` |
+| Example Vite app           | `vp run dev`                   | `pnpm dev`                 |
+| Docs site                  | `vp run docs:dev`              | `pnpm docs:dev`            |
+| Full validation            | `vp run ready`                 | `pnpm ready`               |
+| CI pipeline                | `vp run verify`                | `pnpm verify`              |
+| List all tasks             | `vp run`                       | —                          |
 
 Configuration lives in the root `vite.config.ts` — lint (Oxlint), formatting (Oxfmt), staged-file checks, Vitest projects, and task caching are all defined there. Per-package `vite.config.ts` files hold `vp pack` settings.
 

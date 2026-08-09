@@ -6,6 +6,8 @@ This project is using Vite+, a unified toolchain built on top of Vite, Rolldown,
 
 Docs are local at `node_modules/vite-plus/docs` or online at https://viteplus.dev/guide/.
 
+Use `vp` for workflow commands (`vp check`, `vp test run`, `vp run <task>`). Root `pnpm <script>` is equivalent when the script exists in `package.json`. Run `vp run` to list all available tasks.
+
 ## Review Checklist
 
 - [ ] Run `vp install` after pulling remote changes and before getting started.

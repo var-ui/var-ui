@@ -4,25 +4,8 @@ import {
   createToneFace,
   designTokens as t,
   lightSyntaxValues,
-  typestyles,
   type DesignThemePreset,
 } from '@var-ui/core';
-
-const classicLightShadow = {
-  xs: '-1px 1px 0 0 #000000',
-  sm: '-1px 1px 0 0 #000000',
-  md: '-2px 2px 0 0 #000000',
-  lg: '-3px 3px 0 0 #000000',
-  xl: '-4px 4px 0 0 #000000',
-};
-
-const classicDarkShadow = {
-  xs: '-1px 1px 0 0 #FFFFFF',
-  sm: '-1px 1px 0 0 #FFFFFF',
-  md: '-2px 2px 0 0 #FFFFFF',
-  lg: '-3px 3px 0 0 #FFFFFF',
-  xl: '-4px 4px 0 0 #FFFFFF',
-};
 
 export const classicSystemPreset: DesignThemePreset = {
   tokens: {

@@ -35,8 +35,6 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
       "layoutPanelVarDefinitions",
       "menuVarDefinitions",
       "segmentedControlVarDefinitions",
-      "sideNavVarDefinitions",
-      "topNavVarDefinitions",
     ],
     "recipe": [
       "alert",
@@ -182,7 +180,7 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
       "helper": 5,
       "icons": 4,
       "layout": 6,
-      "object": 6,
+      "object": 4,
       "recipe": 94,
       "runtime": 3,
       "semantic-tone": 1,
@@ -192,10 +190,10 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
     "runtimeByKind": {
       "function": 115,
       "number": 4,
-      "object": 29,
+      "object": 27,
       "string": 4,
     },
-    "runtimeExports": 152,
+    "runtimeExports": 150,
     "typeOnlyExports": 102,
   },
   "typeOnlyExports": [
