@@ -59,7 +59,7 @@ jobs:
 
       - name: Deploy to Netlify
         if: github.event_name == 'workflow_dispatch' || steps.changes.outputs.docs == 'true'
-        run: npx netlify-cli@24 deploy --prod --dir=dist --message "Deploy from ${{ github.sha }}"
+        run: npx netlify-cli@24 deploy --prod --dir=dist --no-build --message "Deploy from ${{ github.sha }}"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -105,6 +105,7 @@ jobs:
         run: |
           npx netlify-cli@24 deploy \
             --dir=dist \
+            --no-build \
             --alias=deploy-preview-${{ github.event.pull_request.number }} \
             --message "PR #${{ github.event.pull_request.number }}: ${{ github.sha }}" \
             --json > deploy.json
