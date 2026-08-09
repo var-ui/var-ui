@@ -57,7 +57,8 @@ jobs:
 
       - name: Deploy to Netlify
         if: github.event_name == 'workflow_dispatch' || steps.changes.outputs.docs == 'true'
-        run: npx netlify-cli@24 deploy --prod --filter @var-ui/docs --dir=docs/dist --no-build --message "Deploy from ${{ github.sha }}"
+        working-directory: docs
+        run: npx netlify-cli@24 deploy --prod --filter @var-ui/docs --dir=dist --functions=.netlify/v1/functions --no-build --message "Deploy from ${{ github.sha }}"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -98,10 +99,12 @@ jobs:
       - name: Deploy preview to Netlify
         id: deploy
         if: steps.changes.outputs.docs == 'true'
+        working-directory: docs
         run: |
           npx netlify-cli@24 deploy \
             --filter @var-ui/docs \
-            --dir=docs/dist \
+            --dir=dist \
+            --functions=.netlify/v1/functions \
             --no-build \
             --alias=deploy-preview-${{ github.event.pull_request.number }} \
             --message "PR #${{ github.event.pull_request.number }}: ${{ github.sha }}" \
