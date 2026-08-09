@@ -2,6 +2,8 @@
 # Skip Netlify Git-triggered builds to avoid duplicate deploys.
 # CI builds with `vp run build` then deploys with `netlify deploy --no-build`.
 [build]
+base = "docs"
+publish = "dist"
 ignore = "exit 0"
 
 [build.environment]
