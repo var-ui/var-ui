@@ -24,72 +24,70 @@ import { designTokens as t } from '../tokens';
  * </nav>
  * ```
  */
-/** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
-export const topNavVarDefinitions = {
-  background: {
-    value: t.color.background.surface.var,
-    syntax: '<color>' as const,
-  },
-  border: {
-    value: t.color.border.default.var,
-    syntax: '<color>' as const,
-  },
-  headingColor: {
-    value: t.color.text.primary.var,
-    syntax: '<color>' as const,
-  },
-  itemColor: {
-    value: t.color.navItem.foreground.var,
-    syntax: '<color>' as const,
-  },
-  itemHoverBackground: {
-    value: t.color.navItem.hoverBackground.var,
-    syntax: '<color>' as const,
-  },
-  itemSelectedBackground: {
-    value: t.color.navItem.selectedBackground.var,
-    syntax: '<color>' as const,
-  },
-  itemSelectedColor: {
-    value: t.color.navItem.selectedForeground.var,
-    syntax: '<color>' as const,
-  },
-  menuTriggerColor: {
-    value: t.color.navItem.foreground.var,
-    syntax: '<color>' as const,
-  },
-  megaPanelBackground: {
-    value: t.color.background.surface.var,
-    syntax: '<color>' as const,
-  },
-  megaPanelBorder: {
-    value: t.color.border.default.var,
-    syntax: '<color>' as const,
-  },
-  megaItemColor: {
-    value: t.color.text.primary.var,
-    syntax: '<color>' as const,
-  },
-  megaItemHoverBackground: {
-    value: t.color.background.subtle.var,
-    syntax: '<color>' as const,
-  },
-  featuredCardBackground: {
-    value: t.color.background.subtle.var,
-    syntax: '<color>' as const,
-  },
-  featuredCardBorder: {
-    value: t.color.border.default.var,
-    syntax: '<color>' as const,
-  },
-} as const;
 
 export const topNav = typestyles.styles.component(
   'top-nav',
   (c) => {
-    const v = c.vars(topNavVarDefinitions);
+    const vars = c.vars({
+      background: {
+        value: t.color.background.surface.var,
+        syntax: '<color>' as const,
+      },
+      border: {
+        value: t.color.border.strong.var,
+        syntax: '<color>' as const,
+      },
+      headingColor: {
+        value: t.color.text.primary.var,
+        syntax: '<color>' as const,
+      },
+      itemColor: {
+        value: t.color.navItem.foreground.var,
+        syntax: '<color>' as const,
+      },
+      itemHoverBackground: {
+        value: t.color.navItem.hoverBackground.var,
+        syntax: '<color>' as const,
+      },
+      itemSelectedBackground: {
+        value: t.color.navItem.selectedBackground.var,
+        syntax: '<color>' as const,
+      },
+      itemSelectedColor: {
+        value: t.color.navItem.selectedForeground.var,
+        syntax: '<color>' as const,
+      },
+      menuTriggerColor: {
+        value: t.color.navItem.foreground.var,
+        syntax: '<color>' as const,
+      },
+      megaPanelBackground: {
+        value: t.color.background.surface.var,
+        syntax: '<color>' as const,
+      },
+      megaPanelBorder: {
+        value: t.color.border.default.var,
+        syntax: '<color>' as const,
+      },
+      megaItemColor: {
+        value: t.color.text.primary.var,
+        syntax: '<color>' as const,
+      },
+      megaItemHoverBackground: {
+        value: t.color.background.subtle.var,
+        syntax: '<color>' as const,
+      },
+      featuredCardBackground: {
+        value: t.color.background.subtle.var,
+        syntax: '<color>' as const,
+      },
+      featuredCardBorder: {
+        value: t.color.border.default.var,
+        syntax: '<color>' as const,
+      },
+    });
     return {
-      vars: topNavVarDefinitions,
+      vars,
       slots: [
         'root',
         'heading',
@@ -110,10 +108,11 @@ export const topNav = typestyles.styles.component(
         minHeight: t.size.nav.bar.var,
         paddingBlock: 0,
         paddingInline: t.space[4].var,
-        backgroundColor: v.background.var,
+        backgroundColor: vars.background.var,
         borderBottomWidth: t.borderWidth.default.var,
         borderBottomStyle: 'solid',
-        borderBottomColor: v.border.var,
+        borderBottomColor: vars.border.var,
+        boxShadow: t.shadow.sm.var,
         '&[data-layout="grid"]': {
           display: 'grid',
           gridTemplateColumns: '1fr auto 1fr',
@@ -127,7 +126,7 @@ export const topNav = typestyles.styles.component(
         flexShrink: 0,
         fontSize: t.fontSize.md.var,
         fontWeight: t.fontWeight.semibold.var,
-        color: v.headingColor.var,
+        color: vars.headingColor.var,
       },
       start: {
         display: 'flex',
@@ -166,26 +165,26 @@ export const topNav = typestyles.styles.component(
         borderRadius: t.radius.navItem.var,
         border: 'none',
         backgroundColor: 'transparent',
-        color: v.itemColor.var,
+        color: vars.itemColor.var,
         fontSize: t.fontSize.md.var,
         textDecoration: 'none',
         cursor: 'pointer',
         outline: 'none',
         whiteSpace: 'nowrap',
         '&:hover': {
-          backgroundColor: v.itemHoverBackground.var,
+          backgroundColor: vars.itemHoverBackground.var,
         },
         '&:focus-visible': {
           outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '2px',
         },
         '&[data-selected]': {
-          backgroundColor: v.itemSelectedBackground.var,
-          color: v.itemSelectedColor.var,
+          backgroundColor: vars.itemSelectedBackground.var,
+          color: vars.itemSelectedColor.var,
           fontWeight: t.fontWeight.medium.var,
         },
         '&[data-disabled]': {
-          color: v.itemColor.var,
+          color: vars.itemColor.var,
           opacity: 0.5,
           cursor: 'not-allowed',
           pointerEvents: 'none',
@@ -199,13 +198,13 @@ export const topNav = typestyles.styles.component(
         borderRadius: t.radius.navItem.var,
         border: 'none',
         backgroundColor: 'transparent',
-        color: v.menuTriggerColor.var,
+        color: vars.menuTriggerColor.var,
         fontSize: t.fontSize.md.var,
         cursor: 'pointer',
         outline: 'none',
         whiteSpace: 'nowrap',
         '&:hover': {
-          backgroundColor: v.itemHoverBackground.var,
+          backgroundColor: vars.itemHoverBackground.var,
         },
         '&:focus-visible': {
           outline: `2px solid ${t.color.border.focus.var}`,
@@ -227,10 +226,10 @@ export const topNav = typestyles.styles.component(
         gap: t.space[6].var,
         paddingBlock: t.space[6].var,
         paddingInline: t.space[6].var,
-        backgroundColor: v.megaPanelBackground.var,
+        backgroundColor: vars.megaPanelBackground.var,
         borderBottomWidth: t.borderWidth.default.var,
         borderBottomStyle: 'solid',
-        borderBottomColor: v.megaPanelBorder.var,
+        borderBottomColor: vars.megaPanelBorder.var,
         boxShadow: t.shadow.md.var,
         zIndex: 1,
       },
@@ -240,12 +239,12 @@ export const topNav = typestyles.styles.component(
         gap: t.space[1].var,
         padding: t.space[3].var,
         borderRadius: t.radius.navItem.var,
-        color: v.megaItemColor.var,
+        color: vars.megaItemColor.var,
         textDecoration: 'none',
         cursor: 'pointer',
         outline: 'none',
         '&:hover': {
-          backgroundColor: v.megaItemHoverBackground.var,
+          backgroundColor: vars.megaItemHoverBackground.var,
         },
         '&:focus-visible': {
           outline: `2px solid ${t.color.border.focus.var}`,
@@ -263,10 +262,10 @@ export const topNav = typestyles.styles.component(
         gap: t.space[2].var,
         padding: t.space[4].var,
         borderRadius: t.radius.lg.var,
-        backgroundColor: v.featuredCardBackground.var,
+        backgroundColor: vars.featuredCardBackground.var,
         borderWidth: t.borderWidth.default.var,
         borderStyle: 'solid',
-        borderColor: v.featuredCardBorder.var,
+        borderColor: vars.featuredCardBorder.var,
         minWidth: '16rem',
       },
     };

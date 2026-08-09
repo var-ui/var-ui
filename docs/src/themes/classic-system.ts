@@ -59,7 +59,13 @@ export const classicSystemPreset: DesignThemePreset = {
       default: '2px',
       thick: '4px',
     },
-    shadow: classicLightShadow,
+    shadow: {
+      xs: `-1px 1px 0 0 ${t.color.border.default.var}`,
+      sm: `-1px 1px 0 0 ${t.color.border.default.var}`,
+      md: `-2px 2px 0 0 ${t.color.border.default.var}`,
+      lg: `-3px 3px 0 0 ${t.color.border.default.var}`,
+      xl: `-4px 4px 0 0 ${t.color.border.default.var}`,
+    },
     duration: {
       fast: '80ms',
       medium: '100ms',
@@ -77,17 +83,17 @@ export const classicSystemPreset: DesignThemePreset = {
       background: {
         app: {
           light: t.color.palette['sand-2'].var,
-          dark: t.color.palette['sand-10'].var,
+          dark: t.color.palette['mist-10'].var,
           // dark: '#000000',
         },
         surface: {
           light: t.color.palette['sand-2'].var,
-          dark: t.color.palette['sand-10'].var,
+          dark: t.color.palette['mist-10'].var,
           // dark: '#000000',
         },
         subtle: {
           light: t.color.palette['sand-2'].var,
-          dark: t.color.palette['sand-10'].var,
+          dark: t.color.palette['mist-10'].var,
           // dark: '#000000',
         },
         elevated: {
@@ -126,18 +132,40 @@ export const classicSystemPreset: DesignThemePreset = {
             onFilledFallback: t.color.text.primary.var,
           },
         }),
-        danger: createToneFace({
-          light: {
-            foreground: t.color.text.primary.var,
-            background: t.color.palette['red-3'].var,
-            onFilledFallback: t.color.text.primary.var,
+        danger: {
+          foreground: {
+            light: t.color.palette['red-8'].var,
+            dark: t.color.palette['red-3'].var,
           },
-          dark: {
-            foreground: t.color.text.primary.var,
-            background: t.color.palette['red-3'].var,
-            onFilledFallback: t.color.text.primary.var,
+          background: {
+            light: t.color.palette['red-3'].var,
+            dark: t.color.palette['red-3'].var,
           },
-        }),
+          subtleBackground: {
+            light: color.alpha(t.color.palette['red-8'].var, 0.25),
+            dark: color.alpha(t.color.palette['red-3'].var, 0.25),
+          },
+          border: {
+            light: t.color.palette['red-3'].var,
+            dark: t.color.palette['red-3'].var,
+          },
+          foregroundOnBackground: {
+            light: t.color.palette['red-9'].var,
+            dark: t.color.palette['red-9'].var,
+          },
+        },
+        // danger: createToneFace({
+        //   light: {
+        //     foreground: t.color.text.primary.var,
+        //     background: t.color.palette['red-3'].var,
+        //     onFilledFallback: t.color.text.primary.var,
+        //   },
+        //   dark: {
+        //     foreground: t.color.text.primary.var,
+        //     background: t.color.palette['red-3'].var,
+        //     onFilledFallback: t.color.text.primary.var,
+        //   },
+        // }),
         success: createToneFace({
           light: {
             foreground: t.color.text.primary.var,
@@ -178,21 +206,21 @@ export const classicSystemPreset: DesignThemePreset = {
       border: {
         default: {
           light: '#000000',
-          // dark: t.color.palette['stone-6'].var,
-          dark: '#000000',
+          dark: color.oklch(1, 0, 0, 0.25),
+          // dark: '#000000',
         },
         strong: {
           light: '#000000',
-          // dark: t.color.palette['stone-6'].var,
-          dark: '#000000',
+          dark: color.oklch(1, 0, 0, 0.5),
+          // dark: '#000000',
         },
         focus: {
           light: '#000000',
           dark: '#FFFFFF',
         },
         subtle: {
-          light: t.color.palette['sand-4'].var,
-          dark: t.color.palette['sand-4'].var,
+          light: t.color.palette['sand-8'].var,
+          dark: color.oklch(1, 0, 0, 0.125),
         },
       },
       overlay: {
@@ -223,21 +251,21 @@ export const classicSystemPreset: DesignThemePreset = {
 export const classicSystemTheme = createDesignTheme({
   name: 'classic-system',
   ...classicSystemPreset,
-  modes: [
-    {
-      id: 'dark-elevation-shadow',
-      overrides: { shadow: classicDarkShadow },
-      when: typestyles.tokens.when.or(
-        typestyles.tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
-        typestyles.tokens.when.and(
-          typestyles.tokens.when.not(
-            typestyles.tokens.when.attr('data-mode', 'light', { scope: 'self' }),
-          ),
-          typestyles.tokens.when.prefersDark,
-        ),
-      ),
-    },
-  ],
+  // modes: [
+  //   {
+  //     id: 'dark-elevation-shadow',
+  //     overrides: { shadow: classicDarkShadow },
+  //     when: typestyles.tokens.when.or(
+  //       typestyles.tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
+  //       typestyles.tokens.when.and(
+  //         typestyles.tokens.when.not(
+  //           typestyles.tokens.when.attr('data-mode', 'light', { scope: 'self' }),
+  //         ),
+  //         typestyles.tokens.when.prefersDark,
+  //       ),
+  //     ),
+  //   },
+  // ],
   components: {
     tabs: () => ({
       vars: {
@@ -247,11 +275,17 @@ export const classicSystemTheme = createDesignTheme({
     segmentedControl: () => ({
       base: {
         root: {
+          borderWidth: t.borderWidth.default.var,
+          borderStyle: 'solid',
+          borderColor: t.color.border.default.var,
+          padding: 0,
           '&::after': {
             boxShadow: 'none',
-            borderWidth: t.borderWidth.default.var,
-            borderStyle: 'solid',
-            borderColor: t.color.border.default.var,
+            top: 0,
+            bottom: 0,
+            // borderWidth: t.borderWidth.default.var,
+            // borderStyle: 'solid',
+            // borderColor: t.color.border.default.var,
           },
         },
       },

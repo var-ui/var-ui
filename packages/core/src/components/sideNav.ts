@@ -33,46 +33,44 @@ export const SIDE_NAV_COLLAPSED_WIDTH = 56;
  * </nav>
  * ```
  */
-/** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
-export const sideNavVarDefinitions = {
-  background: {
-    value: t.color.background.surface.var,
-    syntax: '<color>' as const,
-  },
-  border: {
-    value: t.color.border.default.var,
-    syntax: '<color>' as const,
-  },
-  headingColor: {
-    value: t.color.text.primary.var,
-    syntax: '<color>' as const,
-  },
-  sectionTitleColor: {
-    value: t.color.text.secondary.var,
-    syntax: '<color>' as const,
-  },
-  itemColor: {
-    value: t.color.navItem.foreground.var,
-    syntax: '<color>' as const,
-  },
-  itemHoverBackground: {
-    value: t.color.navItem.hoverBackground.var,
-    syntax: '<color>' as const,
-  },
-  itemSelectedBackground: {
-    value: t.color.navItem.selectedBackground.var,
-    syntax: '<color>' as const,
-  },
-  itemSelectedColor: {
-    value: t.color.navItem.selectedForeground.var,
-    syntax: '<color>' as const,
-  },
-} as const;
 
 export const sideNav = typestyles.styles.component(
   'side-nav',
   (c) => {
-    const v = c.vars(sideNavVarDefinitions);
+    const vars = c.vars({
+      background: {
+        value: t.color.background.surface.var,
+        syntax: '<color>' as const,
+      },
+      border: {
+        value: t.color.border.default.var,
+        syntax: '<color>' as const,
+      },
+      headingColor: {
+        value: t.color.text.primary.var,
+        syntax: '<color>' as const,
+      },
+      sectionTitleColor: {
+        value: t.color.text.secondary.var,
+        syntax: '<color>' as const,
+      },
+      itemColor: {
+        value: t.color.navItem.foreground.var,
+        syntax: '<color>' as const,
+      },
+      itemHoverBackground: {
+        value: t.color.navItem.hoverBackground.var,
+        syntax: '<color>' as const,
+      },
+      itemSelectedBackground: {
+        value: t.color.navItem.selectedBackground.var,
+        syntax: '<color>' as const,
+      },
+      itemSelectedColor: {
+        value: t.color.navItem.selectedForeground.var,
+        syntax: '<color>' as const,
+      },
+    });
     return {
       slots: [
         'root',
@@ -89,7 +87,7 @@ export const sideNav = typestyles.styles.component(
         'itemLabel',
         'collapseButton',
       ],
-      vars: sideNavVarDefinitions,
+      vars,
       root: {
         position: 'relative',
         display: 'flex',
@@ -98,7 +96,7 @@ export const sideNav = typestyles.styles.component(
         minHeight: 0,
         minWidth: 0,
         height: '100%',
-        backgroundColor: v.background.var,
+        backgroundColor: vars.background.var,
         '&[data-collapsed]': {
           alignItems: 'center',
           width: '3.5rem',
@@ -119,8 +117,8 @@ export const sideNav = typestyles.styles.component(
         padding: t.space[3].var,
         borderBottomWidth: t.borderWidth.default.var,
         borderBottomStyle: 'solid',
-        borderBottomColor: v.border.var,
-        backgroundColor: v.background.var,
+        borderBottomColor: vars.border.var,
+        backgroundColor: vars.background.var,
         zIndex: 1,
         '[data-collapsed] &': {
           padding: t.space[2].var,
@@ -135,7 +133,7 @@ export const sideNav = typestyles.styles.component(
       scrollArea: {
         flex: '1 1 auto',
         minHeight: 0,
-        '--var-ui-scroll-area-fadecolor': v.background.var,
+        '--var-ui-scroll-area-fadecolor': vars.background.var,
         '[data-collapsed] &': {
           overflow: 'hidden',
         },
@@ -161,8 +159,8 @@ export const sideNav = typestyles.styles.component(
         padding: t.space[3].var,
         borderTopWidth: t.borderWidth.default.var,
         borderTopStyle: 'solid',
-        borderTopColor: v.border.var,
-        backgroundColor: v.background.var,
+        borderTopColor: vars.border.var,
+        backgroundColor: vars.background.var,
         '[data-collapsed] &': {
           justifyContent: 'center',
           padding: t.space[2].var,
@@ -179,7 +177,7 @@ export const sideNav = typestyles.styles.component(
         gap: t.space[2].var,
         fontSize: t.fontSize.md.var,
         fontWeight: t.fontWeight.semibold.var,
-        color: v.headingColor.var,
+        color: vars.headingColor.var,
       },
       section: {
         display: 'flex',
@@ -195,7 +193,7 @@ export const sideNav = typestyles.styles.component(
         fontWeight: t.fontWeight.semibold.var,
         letterSpacing: '0.06em',
         textTransform: 'uppercase',
-        color: v.sectionTitleColor.var,
+        color: vars.sectionTitleColor.var,
         '[data-collapsed] &': {
           display: 'none',
         },
@@ -206,36 +204,36 @@ export const sideNav = typestyles.styles.component(
         gap: t.space[2].var,
         padding: `${t.space[2].var} ${t.space[2].var}`,
         borderRadius: t.radius.navItem.var,
-        color: v.itemColor.var,
+        color: vars.itemColor.var,
         textDecoration: 'none',
         cursor: 'pointer',
         outline: 'none',
         transition: `background-color ${t.duration.fast.var} ${t.easing.standard.var}, color ${t.duration.fast.var} ${t.easing.standard.var}`,
         '&:hover:not([data-selected]):not([data-disabled])': {
-          backgroundColor: v.itemHoverBackground.var,
-          color: v.itemColor.var,
+          backgroundColor: vars.itemHoverBackground.var,
+          color: vars.itemColor.var,
         },
         '&:focus-visible': {
           outline: `2px solid ${t.color.border.focus.var}`,
           outlineOffset: '2px',
         },
         '&[data-selected]': {
-          backgroundColor: v.itemSelectedBackground.var,
-          color: v.itemSelectedColor.var,
+          backgroundColor: vars.itemSelectedBackground.var,
+          color: vars.itemSelectedColor.var,
           fontWeight: t.fontWeight.medium.var,
         },
         '&[data-selected]:hover': {
-          backgroundColor: v.itemSelectedBackground.var,
-          color: v.itemSelectedColor.var,
+          backgroundColor: vars.itemSelectedBackground.var,
+          color: vars.itemSelectedColor.var,
         },
         '&:active:not([data-disabled])': {
           backgroundColor: t.color.navItem.activeBackground.var,
         },
         '&[data-selected]:active': {
-          backgroundColor: v.itemSelectedBackground.var,
+          backgroundColor: vars.itemSelectedBackground.var,
         },
         '&[data-disabled]': {
-          color: v.itemColor.var,
+          color: vars.itemColor.var,
           opacity: t.opacity.disabled.var,
           cursor: 'not-allowed',
           pointerEvents: 'none',
@@ -270,10 +268,10 @@ export const sideNav = typestyles.styles.component(
         borderRadius: t.radius.navItem.var,
         border: 'none',
         backgroundColor: 'transparent',
-        color: v.itemColor.var,
+        color: vars.itemColor.var,
         cursor: 'pointer',
         '&:hover': {
-          backgroundColor: v.itemHoverBackground.var,
+          backgroundColor: vars.itemHoverBackground.var,
         },
         '&:focus-visible': {
           outline: `2px solid ${t.color.border.focus.var}`,

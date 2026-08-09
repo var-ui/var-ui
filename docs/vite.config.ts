@@ -35,6 +35,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@var-ui/core/theme-constants': `${root}/packages/core/src/theme-constants.ts`,
+      '@var-ui/core/styles': `${root}/packages/core/src/styles.ts`,
+      '@var-ui/core/base-styles': `${root}/packages/core/src/base-styles.ts`,
       '@var-ui/core/internal': `${root}/packages/core/src/internal.ts`,
       '@var-ui/core': `${root}/packages/core/src/index.ts`,
       '@var-ui/react': `${root}/packages/react/src/index.ts`,

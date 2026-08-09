@@ -69,9 +69,9 @@ import { section } from './components/section';
 import { searchInput } from './components/searchInput';
 import { segmentedControl, segmentedControlVarDefinitions } from './components/segmentedControl';
 import { select } from './components/select';
-import { sideNav, sideNavVarDefinitions } from './components/sideNav';
+import { sideNav } from './components/sideNav';
 import { tabList } from './components/tabList';
-import { topNav, topNavVarDefinitions } from './components/topNav';
+import { topNav } from './components/topNav';
 import { skeleton } from './components/skeleton';
 import { slider } from './components/slider';
 import { spinner } from './components/spinner';
@@ -202,8 +202,6 @@ export type ThemeableComponentName = keyof typeof themeableComponents;
 /** Recipes with exported `*VarDefinitions` for typed `vars` in theme overrides. */
 type ThemeComponentVarDefinitions = {
   menu: typeof menuVarDefinitions;
-  sideNav: typeof sideNavVarDefinitions;
-  topNav: typeof topNavVarDefinitions;
   layoutPanel: typeof layoutPanelVarDefinitions;
   segmentedControl: typeof segmentedControlVarDefinitions;
 };

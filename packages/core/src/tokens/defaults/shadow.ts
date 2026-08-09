@@ -26,10 +26,10 @@ function layeredShadow(layers: readonly ShadowLayer[]): string {
 
 /** Compound box-shadow tokens — use directly as `box-shadow` values. */
 export const shadow = {
-  xs: layeredShadow([{ x: 0.5, y: 1, blur: 1, tint: 12 }]),
+  xs: layeredShadow([{ x: 0.5, y: 1, blur: 2, tint: 8 }]),
   sm: layeredShadow([
-    { x: 0.5, y: 1, blur: 1, tint: 10 },
-    { x: 1, y: 2, blur: 2, tint: 10 },
+    { x: 0.5, y: 1, blur: 2, tint: 8 },
+    { x: 1, y: 2, blur: 4, tint: 8 },
   ]),
   md: layeredShadow([
     { x: 1, y: 2, blur: 2, tint: 8 },

@@ -114,10 +114,10 @@ export {
   type ProgressBarVariantProps,
 } from './progressBar';
 export { section } from './section';
-export { sideNav, SIDE_NAV_COLLAPSED_WIDTH, sideNavVarDefinitions } from './sideNav';
+export { sideNav, SIDE_NAV_COLLAPSED_WIDTH } from './sideNav';
 export { toc } from './toc';
 export { mobileNav } from './mobileNav';
-export { topNav, topNavVarDefinitions } from './topNav';
+export { topNav } from './topNav';
 export { skeleton } from './skeleton';
 export { spinner, type SpinnerRecipeProps, type SpinnerVariantProps } from './spinner';
 export { stack } from './stack';
