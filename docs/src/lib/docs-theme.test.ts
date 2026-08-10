@@ -9,10 +9,12 @@ import {
   readStoredDocsThemeId,
   setDocsTheme,
 } from './docs-theme';
+import { resetDocsThemeStylesForTests } from './docs-theme-styles';
 
 describe('docs-theme', () => {
   beforeEach(() => {
     localStorage.clear();
+    resetDocsThemeStylesForTests();
     document.documentElement.className = defaultThemeClassName;
   });
 
@@ -21,8 +23,9 @@ describe('docs-theme', () => {
     expect(getDocsThemeClassName('default')).toBe(defaultThemeClassName);
   });
 
-  it('persists and applies a selected theme class on the document root', () => {
+  it('persists and applies a selected theme class on the document root', async () => {
     setDocsTheme('forest');
+    await Promise.resolve();
     expect(localStorage.getItem(DOCS_THEME_STORAGE_KEY)).toBe('forest');
     expect(readStoredDocsThemeId()).toBe('forest');
     expect(document.documentElement.classList.contains(forestTheme.className)).toBe(true);

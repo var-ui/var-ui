@@ -1,4 +1,5 @@
 ---
+import { LAZY_DOCS_THEME_IDS } from '../lib/showcase-theme-ids';
 import { SHOWCASE_THEMES } from './homepage/showcaseThemes';
 import { defaultThemeClassName } from '@var-ui/core';
 import { DOCS_THEME_STORAGE_KEY } from '../lib/docs-theme';
@@ -6,17 +7,48 @@ import { DOCS_THEME_STORAGE_KEY } from '../lib/docs-theme';
 const themeMap = Object.fromEntries(SHOWCASE_THEMES.map((theme) => [theme.id, theme.className]));
 const allClasses = SHOWCASE_THEMES.map((theme) => theme.className);
 const defaultThemeId = 'default';
+const lazyThemeIds = LAZY_DOCS_THEME_IDS;
 ---
 
-<script is:inline define:vars={{ themeMap, allClasses, defaultThemeId, storageKey: DOCS_THEME_STORAGE_KEY, defaultThemeClassName }}>
+<script is:inline define:vars={{ themeMap, allClasses, defaultThemeId, lazyThemeIds, storageKey: DOCS_THEME_STORAGE_KEY, defaultThemeClassName }}>
+  function ensureThemeStyles(themeId, onReady) {
+    if (themeId === defaultThemeId || !lazyThemeIds.includes(themeId)) {
+      onReady();
+      return;
+    }
+
+    const href = `/themes/${themeId}.css`;
+    const existing = document.querySelector(`link[data-docs-theme-style="${themeId}"]`);
+    if (existing) {
+      if (existing.sheet) {
+        onReady();
+      } else {
+        existing.addEventListener('load', onReady, { once: true });
+      }
+      return;
+    }
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    link.dataset.docsThemeStyle = themeId;
+    link.addEventListener('load', onReady, { once: true });
+    link.addEventListener('error', onReady, { once: true });
+    document.head.appendChild(link);
+  }
+
   function applyDocsTheme(doc) {
     const root = doc.documentElement;
     const stored = localStorage.getItem(storageKey);
-    const className = themeMap[stored] ?? themeMap[defaultThemeId] ?? defaultThemeClassName;
-    for (const cls of allClasses) {
-      root.classList.remove(cls);
-    }
-    root.classList.add(className);
+    const themeId = stored && themeMap[stored] ? stored : defaultThemeId;
+    const className = themeMap[themeId] ?? themeMap[defaultThemeId] ?? defaultThemeClassName;
+
+    ensureThemeStyles(themeId, () => {
+      for (const cls of allClasses) {
+        root.classList.remove(cls);
+      }
+      root.classList.add(className);
+    });
   }
 
   applyDocsTheme(document);

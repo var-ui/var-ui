@@ -1,11 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HomepageIsland from '../components/homepage/HomepageIsland';
+import homepagePreloads from 'virtual:homepage-preloads';
 
 const framework = Astro.locals.framework;
 ---
 
 <BaseLayout title="Var UI">
+  <Fragment slot="head">
+    {homepagePreloads.map((href) => <link rel="modulepreload" href={href} crossorigin />)}
+  </Fragment>
   <h1>Var UI</h1>
   <p>
     An open-source design system built on TypeStyles and React Aria Components. Explore the

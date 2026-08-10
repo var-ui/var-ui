@@ -5,6 +5,8 @@ dist-types
 *.log
 .DS_Store
 docs/src/pages.gen.ts
+docs/src/lib/.cache/
+docs/public/themes/*.css
 .worktrees/
 
 # Local Netlify folder

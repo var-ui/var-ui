@@ -1,4 +1,4 @@
-// Showcase theme presets — side-effect imports register @font-face rules at build time.
+// Showcase theme presets — side-effect imports register themes for JS consumers of `@/themes`.
 import './default';
 import './ai-glow';
 import './new-wave';

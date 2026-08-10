@@ -16,8 +16,14 @@ export default defineConfig({
         if (id === 'astro:transitions/client') {
           return '\0astro-transitions-client-stub';
         }
+        if (id === 'virtual:homepage-preloads') {
+          return '\0virtual-homepage-preloads-stub';
+        }
       },
       load(id) {
+        if (id === '\0virtual-homepage-preloads-stub') {
+          return 'export default [];';
+        }
         if (id === '\0astro-transitions-client-stub') {
           return 'export const navigate = () => Promise.resolve();';
         }

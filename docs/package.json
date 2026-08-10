@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build",
+    "prebuild": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build && node scripts/build-theme-styles.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",

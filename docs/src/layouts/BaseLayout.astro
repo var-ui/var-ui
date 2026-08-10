@@ -82,6 +82,7 @@ function isSidebarLinkActive(link: string): boolean {
     <DocsThemeScript />
     <link rel="stylesheet" href="/typestyles.css" />
     <ClientRouter />
+    <slot name="head" />
   </head>
   <body class={cx('docs-body', hljsScopeClass)}>
     <AppShell variant="wash" height="fill" contentPadding={0} mobileBreakpoint="md">

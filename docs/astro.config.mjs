@@ -7,6 +7,8 @@ import { defineConfig } from 'astro/config';
 import rehypeSlug from 'rehype-slug';
 import { extractPropsPlugin } from './src/lib/extract-props-plugin.ts';
 import { varUiCodeTheme } from './src/lib/shikiCodeTheme.ts';
+import { docsThemeStylesDevPlugin } from './src/lib/docs-theme-styles-dev-plugin.ts';
+import { homepagePreloadPlugin } from './src/lib/homepage-preload-plugin.ts';
 import { rolldownJsxOptionsCompat } from './src/lib/rolldown-jsx-options.ts';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -26,6 +28,8 @@ export default defineConfig({
       extractPropsPlugin(docsRoot),
       typestylesVite({ extract: { modules: ['typestyles-entry.ts'] } }),
       rolldownJsxOptionsCompat(),
+      homepagePreloadPlugin(),
+      docsThemeStylesDevPlugin(docsRoot),
     ],
     resolve: {
       alias: {

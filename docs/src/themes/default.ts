@@ -2,7 +2,6 @@ import { createDesignTheme } from '@var-ui/core';
 
 /**
  * Ensures the default theme surface CSS is extracted into `typestyles.css`.
- * BaseLayout applies `defaultThemeClassName` on `<html>`; without this import the
- * built stylesheet only includes custom showcase themes from `src/themes/*`.
+ * Other showcase themes are extracted to `/themes/<id>.css` via `typestyles-themes/*`.
  */
 export const defaultTheme = createDesignTheme({ name: 'default' });

@@ -1,5 +1,6 @@
 import { defaultThemeClassName } from '@var-ui/core';
 import { SHOWCASE_THEMES, type ShowcaseThemeId } from '@/components/homepage/showcaseThemes';
+import { ensureDocsThemeStyles } from './docs-theme-styles';
 
 export const DOCS_THEME_STORAGE_KEY = 'docs-theme-id';
 
@@ -22,13 +23,24 @@ export function getDocsThemeClassName(themeId: ShowcaseThemeId): string {
 
 export const ALL_DOCS_THEME_CLASS_NAMES = SHOWCASE_THEMES.map((theme) => theme.className);
 
-export function applyDocsThemeToDocument(themeId: ShowcaseThemeId, doc: Document = document): void {
+function applyDocsThemeClassToRoot(themeId: ShowcaseThemeId, doc: Document): void {
   const className = getDocsThemeClassName(themeId);
   const root = doc.documentElement;
   for (const cls of ALL_DOCS_THEME_CLASS_NAMES) {
     root.classList.remove(cls);
   }
   root.classList.add(className);
+}
+
+export function applyDocsThemeToDocument(themeId: ShowcaseThemeId, doc: Document = document): void {
+  const apply = () => applyDocsThemeClassToRoot(themeId, doc);
+
+  if (typeof document !== 'undefined' && doc === document) {
+    ensureDocsThemeStyles(themeId, apply);
+    return;
+  }
+
+  apply();
 }
 
 export function setDocsTheme(themeId: ShowcaseThemeId): void {
