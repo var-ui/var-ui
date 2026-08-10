@@ -81,4 +81,50 @@ describe('initCommandPalette', () => {
 
     expect(root.hasAttribute('data-var-ui-command-palette-initialized')).toBe(true);
   });
+
+  it('syncs aria-expanded on the search trigger button and combobox input', () => {
+    HTMLDialogElement.prototype.showModal = function showModal(this: HTMLDialogElement) {
+      this.open = true;
+    };
+    HTMLDialogElement.prototype.close = function close(this: HTMLDialogElement) {
+      this.open = false;
+    };
+
+    document.body.innerHTML = `
+      <div data-var-ui-search-input data-variant="command" data-command-palette="palette">
+        <button type="button" data-var-ui-search-input-trigger aria-expanded="false">Search</button>
+      </div>
+      <div
+        id="palette"
+        data-var-ui-command-palette-root
+        data-command-palette-id="palette"
+        data-hotkey="false"
+      >
+        <dialog data-var-ui-command-palette-dialog aria-label="Search">
+          <div data-var-ui-command-palette-panel>
+            <input data-var-ui-command-palette-input role="combobox" aria-expanded="false" />
+            <div data-var-ui-command-palette-results role="listbox"></div>
+          </div>
+        </dialog>
+        <script type="application/json" data-var-ui-command-palette-items>[]</script>
+      </div>
+    `;
+
+    const root = document.getElementById('palette') as HTMLElement;
+    const trigger = document.querySelector(
+      '[data-var-ui-search-input-trigger]',
+    ) as HTMLButtonElement;
+    const input = root.querySelector('[data-var-ui-command-palette-input]') as HTMLInputElement;
+
+    initCommandPalette(root);
+    getCommandPaletteController(root)?.open();
+
+    expect(trigger.getAttribute('aria-expanded')).toBe('true');
+    expect(input.getAttribute('aria-expanded')).toBe('true');
+
+    getCommandPaletteController(root)?.close();
+
+    expect(trigger.getAttribute('aria-expanded')).toBe('false');
+    expect(input.getAttribute('aria-expanded')).toBe('false');
+  });
 });

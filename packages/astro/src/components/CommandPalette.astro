@@ -68,6 +68,7 @@ const emptyClass = recipeClassName(cp.empty);
 >
   <dialog
     {...dialogRecipe}
+    id={`${id}-dialog`}
     data-var-ui-command-palette-dialog
     aria-label={ariaLabel}
   >
@@ -98,7 +99,7 @@ const emptyClass = recipeClassName(cp.empty);
           role="combobox"
           aria-autocomplete="list"
           aria-controls={`${id}-results`}
-          aria-expanded="true"
+          aria-expanded="false"
         />
       </div>
       <div

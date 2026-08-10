@@ -102,9 +102,10 @@ export function initCommandPalette(root: HTMLElement): () => void {
   }
 
   function syncTriggerState(open: boolean): void {
+    input.setAttribute('aria-expanded', String(open));
     if (!paletteId) return;
     document
-      .querySelectorAll(`[data-command-palette="${paletteId}"]`)
+      .querySelectorAll(`[data-command-palette="${paletteId}"] [data-var-ui-search-input-trigger]`)
       .forEach((trigger) => trigger.setAttribute('aria-expanded', String(open)));
   }
 

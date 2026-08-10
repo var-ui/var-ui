@@ -41,7 +41,6 @@ const iconRecipe = recipeProps(icon({ size: size === 'lg' ? 'lg' : size === 'sm'
   data-var-ui-search-input
   data-variant={variant}
   data-command-palette={commandPaletteId}
-  aria-expanded="false"
 >
   <span {...recipeProps(s.icon)} aria-hidden="true">
     <span {...iconRecipe} set:html={defaultIconSvgs.search} />
@@ -54,7 +53,8 @@ const iconRecipe = recipeProps(icon({ size: size === 'lg' ? 'lg' : size === 'sm'
         data-var-ui-search-input-trigger
         aria-label={ariaLabel}
         aria-haspopup="dialog"
-        aria-controls={commandPaletteId}
+        aria-controls={commandPaletteId ? `${commandPaletteId}-dialog` : undefined}
+        aria-expanded="false"
       >
         <span {...recipeProps(s.triggerLabel)}>{placeholder}</span>
       </button>
