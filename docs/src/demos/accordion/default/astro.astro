@@ -1,0 +1,23 @@
+---
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionPanel,
+} from '@var-ui/astro';
+---
+
+<Accordion type="single">
+  <AccordionItem id="billing" defaultExpanded>
+    <AccordionTrigger>Billing</AccordionTrigger>
+    <AccordionPanel>
+      <p>Update payment method and view invoices.</p>
+    </AccordionPanel>
+  </AccordionItem>
+  <AccordionItem id="shipping">
+    <AccordionTrigger>Shipping</AccordionTrigger>
+    <AccordionPanel>
+      <p>Manage delivery addresses and preferences.</p>
+    </AccordionPanel>
+  </AccordionItem>
+</Accordion>

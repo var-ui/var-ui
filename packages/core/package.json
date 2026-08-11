@@ -46,6 +46,14 @@
       "types": "./dist/internal.d.mts",
       "import": "./dist/internal.mjs"
     },
+    "./components/accordionGroup": {
+      "types": "./dist/components/accordionGroup.d.mts",
+      "import": "./dist/components/accordionGroup.mjs"
+    },
+    "./accordionGroup": {
+      "types": "./dist/components/accordionGroup.d.mts",
+      "import": "./dist/components/accordionGroup.mjs"
+    },
     "./components/alert": {
       "types": "./dist/components/alert.d.mts",
       "import": "./dist/components/alert.mjs"
@@ -214,6 +222,22 @@
       "types": "./dist/components/checkbox.d.mts",
       "import": "./dist/components/checkbox.mjs"
     },
+    "./components/chip": {
+      "types": "./dist/components/chip.d.mts",
+      "import": "./dist/components/chip.mjs"
+    },
+    "./chip": {
+      "types": "./dist/components/chip.d.mts",
+      "import": "./dist/components/chip.mjs"
+    },
+    "./components/chipGroup": {
+      "types": "./dist/components/chipGroup.d.mts",
+      "import": "./dist/components/chipGroup.mjs"
+    },
+    "./chipGroup": {
+      "types": "./dist/components/chipGroup.d.mts",
+      "import": "./dist/components/chipGroup.mjs"
+    },
     "./components/codeBlock": {
       "types": "./dist/components/codeBlock.d.mts",
       "import": "./dist/components/codeBlock.mjs"
@@ -229,6 +253,22 @@
     "./collapsible": {
       "types": "./dist/components/collapsible.d.mts",
       "import": "./dist/components/collapsible.mjs"
+    },
+    "./components/colorField": {
+      "types": "./dist/components/colorField.d.mts",
+      "import": "./dist/components/colorField.mjs"
+    },
+    "./colorField": {
+      "types": "./dist/components/colorField.d.mts",
+      "import": "./dist/components/colorField.mjs"
+    },
+    "./components/colorPicker": {
+      "types": "./dist/components/colorPicker.d.mts",
+      "import": "./dist/components/colorPicker.mjs"
+    },
+    "./colorPicker": {
+      "types": "./dist/components/colorPicker.d.mts",
+      "import": "./dist/components/colorPicker.mjs"
     },
     "./components/combobox": {
       "types": "./dist/components/combobox.d.mts",
@@ -261,6 +301,14 @@
     "./controlSize": {
       "types": "./dist/components/controlSize.d.mts",
       "import": "./dist/components/controlSize.mjs"
+    },
+    "./components/copyButton": {
+      "types": "./dist/components/copyButton.d.mts",
+      "import": "./dist/components/copyButton.mjs"
+    },
+    "./copyButton": {
+      "types": "./dist/components/copyButton.d.mts",
+      "import": "./dist/components/copyButton.mjs"
     },
     "./components/dateInput": {
       "types": "./dist/components/dateInput.d.mts",
@@ -422,6 +470,14 @@
       "types": "./dist/components/list.d.mts",
       "import": "./dist/components/list.mjs"
     },
+    "./components/loadingOverlay": {
+      "types": "./dist/components/loadingOverlay.d.mts",
+      "import": "./dist/components/loadingOverlay.mjs"
+    },
+    "./loadingOverlay": {
+      "types": "./dist/components/loadingOverlay.d.mts",
+      "import": "./dist/components/loadingOverlay.mjs"
+    },
     "./components/menu": {
       "types": "./dist/components/menu.d.mts",
       "import": "./dist/components/menu.mjs"
@@ -493,6 +549,14 @@
     "./pagination": {
       "types": "./dist/components/pagination.d.mts",
       "import": "./dist/components/pagination.mjs"
+    },
+    "./components/passwordField": {
+      "types": "./dist/components/passwordField.d.mts",
+      "import": "./dist/components/passwordField.mjs"
+    },
+    "./passwordField": {
+      "types": "./dist/components/passwordField.d.mts",
+      "import": "./dist/components/passwordField.mjs"
     },
     "./components/pinInput": {
       "types": "./dist/components/pinInput.d.mts",
@@ -597,6 +661,14 @@
     "./sideNav": {
       "types": "./dist/components/sideNav.d.mts",
       "import": "./dist/components/sideNav.mjs"
+    },
+    "./components/simpleGrid": {
+      "types": "./dist/components/simpleGrid.d.mts",
+      "import": "./dist/components/simpleGrid.mjs"
+    },
+    "./simpleGrid": {
+      "types": "./dist/components/simpleGrid.d.mts",
+      "import": "./dist/components/simpleGrid.mjs"
     },
     "./components/skeleton": {
       "types": "./dist/components/skeleton.d.mts",
@@ -713,6 +785,14 @@
     "./timeInput": {
       "types": "./dist/components/timeInput.d.mts",
       "import": "./dist/components/timeInput.mjs"
+    },
+    "./components/timeline": {
+      "types": "./dist/components/timeline.d.mts",
+      "import": "./dist/components/timeline.mjs"
+    },
+    "./timeline": {
+      "types": "./dist/components/timeline.d.mts",
+      "import": "./dist/components/timeline.mjs"
     },
     "./components/toast": {
       "types": "./dist/components/toast.d.mts",

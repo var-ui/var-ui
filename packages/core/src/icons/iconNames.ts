@@ -28,6 +28,8 @@ export const iconNameList = [
   'colorModeLight',
   'colorModeDark',
   'colorModeSystem',
+  'eye',
+  'eyeOff',
 ] as const;
 
 export type IconName = (typeof iconNameList)[number];

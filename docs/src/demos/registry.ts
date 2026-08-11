@@ -41,6 +41,10 @@ import { snippets as typeaheadFieldSnippets } from './typeahead/field/snippets';
 import { snippets as tabsDefaultSnippets } from './tabs/default/snippets';
 import { snippets as dialogDefaultSnippets } from './dialog/default/snippets';
 import { snippets as layoutDefaultSnippets } from './layout/default/snippets';
+import { snippets as chipDefaultSnippets } from './chip/default/snippets';
+import { snippets as timelineDefaultSnippets } from './timeline/default/snippets';
+import { snippets as toastDefaultSnippets } from './toast/default/snippets';
+import { snippets as accordionDefaultSnippets } from './accordion/default/snippets';
 import { snippets as collapsibleDefaultSnippets } from './collapsible/default/snippets';
 import { snippets as chatLayoutDefaultSnippets } from './chat-layout/default/snippets';
 import { snippets as chatMessageListDefaultSnippets } from './chat-message-list/default/snippets';
@@ -97,6 +101,10 @@ export const DEMO_IDS = [
   'tabs.default',
   'dialog.default',
   'layout.default',
+  'chip.default',
+  'timeline.default',
+  'toast.default',
+  'accordion.default',
   'collapsible.default',
   'chat-layout.default',
   'chat-message-list.default',
@@ -152,6 +160,10 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'tabs.default': tabsDefaultSnippets,
   'dialog.default': dialogDefaultSnippets,
   'layout.default': layoutDefaultSnippets,
+  'chip.default': chipDefaultSnippets,
+  'timeline.default': timelineDefaultSnippets,
+  'toast.default': toastDefaultSnippets,
+  'accordion.default': accordionDefaultSnippets,
   'collapsible.default': collapsibleDefaultSnippets,
   'chat-layout.default': chatLayoutDefaultSnippets,
   'chat-message-list.default': chatMessageListDefaultSnippets,
@@ -207,6 +219,10 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'tabs.default': () => import('./tabs/default/react'),
   'dialog.default': () => import('./dialog/default/react'),
   'layout.default': () => import('./layout/default/react'),
+  'chip.default': () => import('./chip/default/react'),
+  'timeline.default': () => import('./timeline/default/react'),
+  'toast.default': () => import('./toast/default/react'),
+  'accordion.default': () => import('./accordion/default/react'),
   'collapsible.default': () => import('./collapsible/default/react'),
   'chat-layout.default': () => import('./chat-layout/default/react'),
   'chat-message-list.default': () => import('./chat-message-list/default/react'),
@@ -429,6 +445,26 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'layout.default',
     snippets: demoSnippets['layout.default'],
     react: reactDemoLoaders['layout.default'],
+  },
+  'chip.default': {
+    id: 'chip.default',
+    snippets: demoSnippets['chip.default'],
+    react: reactDemoLoaders['chip.default'],
+  },
+  'timeline.default': {
+    id: 'timeline.default',
+    snippets: demoSnippets['timeline.default'],
+    react: reactDemoLoaders['timeline.default'],
+  },
+  'toast.default': {
+    id: 'toast.default',
+    snippets: demoSnippets['toast.default'],
+    react: reactDemoLoaders['toast.default'],
+  },
+  'accordion.default': {
+    id: 'accordion.default',
+    snippets: demoSnippets['accordion.default'],
+    react: reactDemoLoaders['accordion.default'],
   },
   'collapsible.default': {
     id: 'collapsible.default',

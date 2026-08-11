@@ -1,0 +1,25 @@
+---
+import { timeline, type TimelineTone, type TimelineVariantProps } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+interface Props extends TimelineVariantProps {
+  title?: string;
+  description?: string;
+  timestamp?: string;
+  tone?: TimelineTone;
+  className?: string;
+}
+
+const { title, description, timestamp, tone, size = 'md', className } = Astro.props;
+const styles = timeline({ size, tone: tone ?? 'accent' });
+---
+
+<li {...recipeProps(styles.item, className)} data-active>
+  <div {...recipeProps(styles.bullet)} data-active data-tone={tone ?? 'accent'} aria-hidden="true"></div>
+  <div {...recipeProps(styles.body)}>
+    {title ? <div {...recipeProps(styles.title)}>{title}</div> : null}
+    {timestamp ? <div {...recipeProps(styles.timestamp)}>{timestamp}</div> : null}
+    {description ? <div {...recipeProps(styles.description)}>{description}</div> : null}
+    <slot />
+  </div>
+</li>

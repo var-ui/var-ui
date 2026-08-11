@@ -42,6 +42,10 @@ import TypeaheadField from './typeahead/field/react';
 import TabsDefault from './tabs/default/react';
 import DialogDefault from './dialog/default/react';
 import LayoutDefault from './layout/default/react';
+import ChipDefault from './chip/default/react';
+import TimelineDefault from './timeline/default/react';
+import ToastDefault from './toast/default/react';
+import AccordionDefault from './accordion/default/react';
 import CollapsibleDefault from './collapsible/default/react';
 import ChatLayoutDefault from './chat-layout/default/react';
 import ChatMessageListDefault from './chat-message-list/default/react';
@@ -97,6 +101,10 @@ export const reactDemoMap = {
   'tabs.default': TabsDefault,
   'dialog.default': DialogDefault,
   'layout.default': LayoutDefault,
+  'chip.default': ChipDefault,
+  'timeline.default': TimelineDefault,
+  'toast.default': ToastDefault,
+  'accordion.default': AccordionDefault,
   'collapsible.default': CollapsibleDefault,
   'chat-layout.default': ChatLayoutDefault,
   'chat-message-list.default': ChatMessageListDefault,

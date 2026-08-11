@@ -91,6 +91,26 @@ export const collapsible = typestyles.styles.component(
               backgroundColor: v.background.var,
             },
           },
+          accordion: {
+            root: {
+              borderRadius: 0,
+              borderWidth: 0,
+              borderBottomWidth: t.borderWidth.default.var,
+              borderBottomStyle: 'solid',
+              borderBottomColor: v.border.var,
+              '&:last-child': {
+                borderBottomWidth: 0,
+              },
+            },
+            trigger: {
+              padding: `${t.space[3].var} ${t.space[4].var}`,
+            },
+            panel: {
+              paddingInline: t.space[4].var,
+              paddingBlockEnd: t.space[4].var,
+              paddingBlockStart: 0,
+            },
+          },
         },
       },
       defaultVariants: { variant: 'flush' },
@@ -107,7 +127,7 @@ export type CollapsibleVariantProps = {
 };
 
 export const collapsibleVariantPropDocs = [
-  { name: 'variant', type: "'flush' | 'bordered'", required: false },
+  { name: 'variant', type: "'flush' | 'bordered' | 'accordion'", required: false },
 ] as const satisfies ReadonlyArray<{
   name: keyof CollapsibleVariantProps;
   type: string;

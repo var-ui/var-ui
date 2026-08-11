@@ -126,6 +126,13 @@ export const componentRegistry: ComponentEntry[] = [
     importLine: "import { Badge } from '@var-ui/react';",
   },
   {
+    slug: 'chip',
+    name: 'Chip',
+    category: 'feedback',
+    description: 'Pill-shaped labels for filters and removable tags.',
+    importLine: "import { Chip, ChipGroup, Pill } from '@var-ui/react';",
+  },
+  {
     slug: 'banner',
     name: 'Banner',
     category: 'feedback',
@@ -147,6 +154,13 @@ export const componentRegistry: ComponentEntry[] = [
     importLine: "import { ProgressBar } from '@var-ui/react';",
   },
   {
+    slug: 'toast',
+    name: 'Toast',
+    category: 'feedback',
+    description: 'Transient viewport notifications with imperative API.',
+    importLine: "import { ToastProvider, toast, useToast } from '@var-ui/react';",
+  },
+  {
     slug: 'empty-state',
     name: 'EmptyState',
     category: 'feedback',
@@ -166,6 +180,13 @@ export const componentRegistry: ComponentEntry[] = [
     category: 'overlay',
     description: 'Tabbed content panels.',
     importLine: "import { Tabs } from '@var-ui/react';",
+  },
+  {
+    slug: 'accordion',
+    name: 'Accordion',
+    category: 'layout',
+    description: 'Multi-panel expand/collapse disclosure.',
+    importLine: "import { Accordion } from '@var-ui/react';",
   },
   {
     slug: 'collapsible',
@@ -257,6 +278,13 @@ export const componentRegistry: ComponentEntry[] = [
     category: 'content',
     description: 'Formatted date/time display.',
     importLine: "import { Timestamp } from '@var-ui/react';",
+  },
+  {
+    slug: 'timeline',
+    name: 'Timeline',
+    category: 'content',
+    description: 'Vertical activity feed with bullets and connecting lines.',
+    importLine: "import { Timeline } from '@var-ui/react';",
   },
   {
     slug: 'thumbnail',

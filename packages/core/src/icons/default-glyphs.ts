@@ -29,6 +29,9 @@ export const defaultGlyphInnerHtml = {
   colorModeDark: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />',
   colorModeSystem:
     '<rect height="12" rx="1.5" width="18" x="3" y="4" /><path d="M8 20h8M12 16v4" />',
+  eye: '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" /><circle cx="12" cy="12" r="3" />',
+  eyeOff:
+    '<path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c6.5 0 10 7 10 7a18.5 18.5 0 0 1-2.16 3.19M6.12 6.12A18.5 18.5 0 0 0 2 12s3.5 7 10 7a10.94 10.94 0 0 0 4.24-.9M2 2l20 20" />',
 } as const satisfies Partial<Record<IconName, string>>;
 
 export type DefaultGlyphName = keyof typeof defaultGlyphInnerHtml;

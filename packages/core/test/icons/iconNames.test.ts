@@ -27,6 +27,8 @@ describe('icon system (core)', () => {
         'colorModeLight',
         'colorModeDark',
         'colorModeSystem',
+        'eye',
+        'eyeOff',
       ].sort(),
     );
   });

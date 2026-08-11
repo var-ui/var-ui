@@ -194,8 +194,79 @@ import { Collapsible } from '@var-ui/astro';
 ```
 
 v0.1 omits controlled `isExpanded` / `onExpandedChange` and `CollapsibleGroup`; use
-multiple standalone `Collapsible` instances or add client-side state in your app if you
-need accordion behavior.
+[`Accordion`](#accordion) for multi-panel layouts or standalone `Collapsible` for a single panel.
+
+## Accordion
+
+Multi-panel expand/collapse built on native `<details>` / `<summary>` with a small script for
+single-open mode, keyboard navigation, and optional `collapsible={false}`.
+
+```astro
+---
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionPanel,
+} from '@var-ui/astro';
+---
+<Accordion type="single">
+  <AccordionItem id="billing" defaultExpanded>
+    <AccordionTrigger>Billing</AccordionTrigger>
+    <AccordionPanel>
+      <p>Update payment method and view invoices.</p>
+    </AccordionPanel>
+  </AccordionItem>
+  <AccordionItem id="shipping">
+    <AccordionTrigger>Shipping</AccordionTrigger>
+    <AccordionPanel>
+      <p>Manage delivery addresses and preferences.</p>
+    </AccordionPanel>
+  </AccordionItem>
+</Accordion>
+```
+
+`AccordionItem` also accepts a `title` prop instead of `AccordionTrigger`. Set
+`defaultExpanded` on each item for the initial open state. When `variant="flush"` is used on
+`Accordion`, pass `variant="flush"` to each `AccordionItem` as well.
+
+## Toast
+
+Presentational toast markup for static docs or SSR previews:
+
+```astro
+---
+import { Toast } from '@var-ui/astro';
+---
+<Toast tone="success" title="Saved" description="Your draft was stored." />
+```
+
+For live notification queues without React, mount a `ToastRegion` and call the imperative
+`toast` API from any client script:
+
+```astro
+---
+import { ToastRegion } from '@var-ui/astro';
+---
+<ToastRegion placement="bottom-end" />
+
+<button type="button" id="save-btn">Save</button>
+
+<script>
+  import { toast } from '@var-ui/astro';
+
+  document.getElementById('save-btn')?.addEventListener('click', () => {
+    toast.show({
+      tone: 'success',
+      title: 'Saved',
+      description: 'Your draft was stored.',
+    });
+  });
+</script>
+```
+
+`toast.show()`, `toast.update(id, patch)`, `toast.dismiss(id)`, and `toast.dismissAll()` mirror
+the React imperative API. `toast()` is shorthand for `toast.show()`.
 
 ## Interactivity ladder
 

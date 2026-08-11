@@ -27,6 +27,14 @@ export const select = typestyles.styles.component(
         value: t.color.text.secondary.var,
         syntax: '<color>',
       },
+      descriptionColor: {
+        value: t.color.text.secondary.var,
+        syntax: '<color>',
+      },
+      errorColor: {
+        value: t.color.tone.danger.foreground.var,
+        syntax: '<color>',
+      },
       popoverBackground: {
         value: t.color.background.surface.var,
         syntax: '<color>',
@@ -44,8 +52,11 @@ export const select = typestyles.styles.component(
         syntax: '<color>',
       },
     });
-    // Select has no description/error slots — reuse only the shared root/label chrome.
-    const chrome = fieldChrome({ label: v.labelColor.var, description: '', error: '' });
+    const chrome = fieldChrome({
+      label: v.labelColor.var,
+      description: v.descriptionColor.var,
+      error: v.errorColor.var,
+    });
     const panel = dropdownPopoverChrome({
       popoverBorder: v.popoverBorder,
       popoverBackground: v.popoverBackground,
@@ -59,6 +70,8 @@ export const select = typestyles.styles.component(
         'trigger',
         'selectValue',
         'triggerIcon',
+        'description',
+        'error',
         'popover',
         'listbox',
         'item',
@@ -69,6 +82,8 @@ export const select = typestyles.styles.component(
           minWidth: '240px',
         },
         label: chrome.label,
+        description: chrome.description,
+        error: chrome.error,
         trigger: {
           appearance: 'none',
           display: 'flex',

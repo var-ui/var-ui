@@ -1,0 +1,25 @@
+---
+title: Toast
+description: Transient notifications anchored to the viewport.
+---
+
+# Toast
+
+For live notification queues without React, mount a `ToastRegion` and call the imperative
+`toast` API from any client script. In React apps, use `ToastProvider` with `useToast()` or
+`toast` from `@var-ui/react`.
+
+## Examples
+
+### Default
+
+<Demo id="toast.default" />
+
+## Props
+
+<PropsTable slug="toast" />
+
+## Accessibility
+
+Toasts render in a live region with appropriate status semantics. Dismiss controls
+expose an accessible name and keyboard support via React Aria Components.

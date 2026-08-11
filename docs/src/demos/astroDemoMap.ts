@@ -41,6 +41,10 @@ import TypeaheadField from './typeahead/field/astro.astro';
 import TabsDefault from './tabs/default/astro.astro';
 import DialogDefault from './dialog/default/astro.astro';
 import LayoutDefault from './layout/default/astro.astro';
+import ChipDefault from './chip/default/astro.astro';
+import TimelineDefault from './timeline/default/astro.astro';
+import ToastDefault from './toast/default/astro.astro';
+import AccordionDefault from './accordion/default/astro.astro';
 import CollapsibleDefault from './collapsible/default/astro.astro';
 import ChatLayoutDefault from './chat-layout/default/astro.astro';
 import ChatMessageListDefault from './chat-message-list/default/astro.astro';
@@ -96,6 +100,10 @@ export const astroDemoMap = {
   'tabs.default': TabsDefault,
   'dialog.default': DialogDefault,
   'layout.default': LayoutDefault,
+  'chip.default': ChipDefault,
+  'timeline.default': TimelineDefault,
+  'toast.default': ToastDefault,
+  'accordion.default': AccordionDefault,
   'collapsible.default': CollapsibleDefault,
   'chat-layout.default': ChatLayoutDefault,
   'chat-message-list.default': ChatMessageListDefault,

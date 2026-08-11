@@ -1,0 +1,24 @@
+---
+title: Timeline
+description: Vertical activity feed with bullets and connecting lines.
+---
+
+# Timeline
+
+Display a chronological list of events with bullets and connector lines. Use `activeIndex`
+to mark progress through a flow — later items render as pending.
+
+## Examples
+
+### Default
+
+<Demo id="timeline.default" />
+
+## Props
+
+<PropsTable slug="timeline" />
+
+## Accessibility
+
+Timeline items render as an ordered list (`<ol>` / `<li>`). Bullets are decorative and
+marked `aria-hidden` when they contain no meaningful content.

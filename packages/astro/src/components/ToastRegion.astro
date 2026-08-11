@@ -1,0 +1,33 @@
+---
+import { toast as toastRecipe, type ToastPlacement } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  /** Screen corner the region anchors to. @default bottom-end */
+  placement?: ToastPlacement;
+  /** Maximum number of toasts visible at once. @default 3 */
+  maxVisible?: number;
+  className?: string;
+};
+
+const { placement = 'bottom-end', maxVisible = 3, className } = Astro.props;
+const region = toastRecipe({ placement });
+---
+
+<div
+  data-var-ui-toast-region
+  data-max-visible={maxVisible}
+  {...recipeProps(region.region, className)}
+  aria-live="polite"
+  aria-relevant="additions"
+>
+</div>
+
+<script>
+  import { initToastRegion } from '../scripts/toast';
+
+  const root = document.currentScript?.previousElementSibling;
+  if (root instanceof HTMLElement) {
+    initToastRegion(root);
+  }
+</script>

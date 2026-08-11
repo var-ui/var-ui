@@ -22,6 +22,18 @@
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs"
     },
+    "./components/Accordion": {
+      "types": "./dist/components/Accordion.d.mts",
+      "import": "./dist/components/Accordion.mjs"
+    },
+    "./accordion": {
+      "types": "./dist/components/Accordion.d.mts",
+      "import": "./dist/components/Accordion.mjs"
+    },
+    "./Accordion": {
+      "types": "./dist/components/Accordion.d.mts",
+      "import": "./dist/components/Accordion.mjs"
+    },
     "./components/Alert": {
       "types": "./dist/components/Alert.d.mts",
       "import": "./dist/components/Alert.mjs"
@@ -201,6 +213,18 @@
     "./CheckboxGroup": {
       "types": "./dist/components/CheckboxGroup.d.mts",
       "import": "./dist/components/CheckboxGroup.mjs"
+    },
+    "./components/Chip": {
+      "types": "./dist/components/Chip.d.mts",
+      "import": "./dist/components/Chip.mjs"
+    },
+    "./chip": {
+      "types": "./dist/components/Chip.d.mts",
+      "import": "./dist/components/Chip.mjs"
+    },
+    "./Chip": {
+      "types": "./dist/components/Chip.d.mts",
+      "import": "./dist/components/Chip.mjs"
     },
     "./components/CodeBlock": {
       "types": "./dist/components/CodeBlock.d.mts",
@@ -873,6 +897,18 @@
     "./TimeInput": {
       "types": "./dist/components/TimeInput.d.mts",
       "import": "./dist/components/TimeInput.mjs"
+    },
+    "./components/Timeline": {
+      "types": "./dist/components/Timeline.d.mts",
+      "import": "./dist/components/Timeline.mjs"
+    },
+    "./timeline": {
+      "types": "./dist/components/Timeline.d.mts",
+      "import": "./dist/components/Timeline.mjs"
+    },
+    "./Timeline": {
+      "types": "./dist/components/Timeline.d.mts",
+      "import": "./dist/components/Timeline.mjs"
     },
     "./components/Timestamp": {
       "types": "./dist/components/Timestamp.d.mts",

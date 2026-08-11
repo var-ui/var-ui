@@ -4,6 +4,8 @@ import { appShell } from './components/appShell';
 import { aspectRatio } from './components/aspectRatio';
 import { avatar, avatarGroup } from './components/avatar';
 import { badge } from './components/badge';
+import { chip } from './components/chip';
+import { chipGroup } from './components/chipGroup';
 import { banner } from './components/banner';
 import { breadcrumbs } from './components/breadcrumbs';
 import { button, linkButton } from './components/button';
@@ -21,9 +23,13 @@ import { chatSystemMessage } from './components/chat/chatSystemMessage';
 import { chatToolCalls } from './components/chat/chatToolCalls';
 import { checkbox } from './components/checkbox';
 import { codeBlock, codeBlockVarDefinitions } from './components/codeBlock';
+import { accordionGroup } from './components/accordionGroup';
 import { collapsible } from './components/collapsible';
+import { colorField } from './components/colorField';
+import { colorPicker, colorSwatch } from './components/colorPicker';
 import { combobox } from './components/combobox';
 import { commandPalette } from './components/commandPalette';
+import { copyButton } from './components/copyButton';
 import { dateInput } from './components/dateInput';
 import { dateRangeInput } from './components/dateRangeInput';
 import { dateTimeInput } from './components/dateTimeInput';
@@ -42,6 +48,7 @@ import { inputGroup } from './components/inputGroup';
 import { kbd } from './components/kbd';
 import { link } from './components/link';
 import { list } from './components/list';
+import { loadingOverlay } from './components/loadingOverlay';
 import {
   layout,
   layoutContent,
@@ -58,6 +65,7 @@ import { outline } from './components/outline';
 import { overflowList } from './components/overflowList';
 import { overlay } from './components/overlay';
 import { pagination } from './components/pagination';
+import { passwordField } from './components/passwordField';
 import { pinInput } from './components/pinInput';
 import { popover } from './components/popover';
 import { progressBar } from './components/progressBar';
@@ -70,6 +78,7 @@ import { searchInput } from './components/searchInput';
 import { segmentedControl, segmentedControlVarDefinitions } from './components/segmentedControl';
 import { select } from './components/select';
 import { sideNav, sideNavVarDefinitions } from './components/sideNav';
+import { simpleGrid } from './components/simpleGrid';
 import { tabList } from './components/tabList';
 import { topNav, topNavVarDefinitions } from './components/topNav';
 import { skeleton } from './components/skeleton';
@@ -86,6 +95,7 @@ import { textField } from './components/textField';
 import { thumbnail } from './components/thumbnail';
 import { timeInput } from './components/timeInput';
 import { toc, tocVarDefinitions } from './components/toc';
+import { timeline } from './components/timeline';
 import { toast } from './components/toast';
 import { toggleButton } from './components/toggleButton';
 import { tokenizer } from './components/tokenizer';
@@ -106,6 +116,8 @@ export const themeableComponents = {
   avatar,
   avatarGroup,
   badge,
+  chip,
+  chipGroup,
   banner,
   breadcrumbs,
   button,
@@ -123,9 +135,14 @@ export const themeableComponents = {
   chatToolCalls,
   checkbox,
   codeBlock,
+  accordionGroup,
   collapsible,
+  colorField,
+  colorPicker,
+  colorSwatch,
   combobox,
   commandPalette,
+  copyButton,
   dateInput,
   dateRangeInput,
   dateTimeInput,
@@ -146,6 +163,7 @@ export const themeableComponents = {
   link,
   linkButton,
   list,
+  loadingOverlay,
   layout,
   layoutContent,
   layoutFooter,
@@ -159,6 +177,7 @@ export const themeableComponents = {
   overflowList,
   overlay,
   pagination,
+  passwordField,
   pinInput,
   popover,
   progressBar,
@@ -171,6 +190,7 @@ export const themeableComponents = {
   segmentedControl,
   select,
   sideNav,
+  simpleGrid,
   tabList,
   topNav,
   skeleton,
@@ -187,6 +207,7 @@ export const themeableComponents = {
   textField,
   thumbnail,
   timeInput,
+  timeline,
   toc,
   toast,
   toggleButton,

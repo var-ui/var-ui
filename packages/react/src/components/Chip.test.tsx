@@ -1,0 +1,107 @@
+import { describe, expect, it, vi } from 'vite-plus/test';
+import { useState } from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { IconProvider } from '../icons';
+import { Chip, ChipGroup, Pill } from './Chip';
+
+function wrap(ui: React.ReactNode) {
+  return render(<IconProvider icons={{}}>{ui}</IconProvider>);
+}
+
+describe('Chip', () => {
+  it('renders static label text', () => {
+    wrap(<Chip tone="accent">Beta</Chip>);
+    expect(screen.getByText('Beta')).toBeTruthy();
+  });
+
+  it('toggles selection state', async () => {
+    const onChange = vi.fn();
+    wrap(
+      <Chip isSelected={false} onChange={onChange}>
+        React
+      </Chip>,
+    );
+    await userEvent.click(screen.getByRole('button', { name: 'React' }));
+    expect(onChange).toHaveBeenCalledWith(true);
+  });
+
+  it('calls onRemove from a removable chip', async () => {
+    const onRemove = vi.fn();
+    wrap(<Chip onRemove={onRemove}>TypeScript</Chip>);
+    await userEvent.click(screen.getByRole('button', { name: 'Remove' }));
+    expect(onRemove).toHaveBeenCalled();
+  });
+});
+
+describe('Pill', () => {
+  it('requires and wires onRemove', async () => {
+    const onRemove = vi.fn();
+    wrap(<Pill onRemove={onRemove}>Documentation</Pill>);
+    await userEvent.click(screen.getByRole('button', { name: 'Remove' }));
+    expect(onRemove).toHaveBeenCalled();
+  });
+});
+
+describe('ChipGroup', () => {
+  it('selects multiple chips in multiple mode', async () => {
+    function Demo() {
+      const [keys, setKeys] = useState<Set<string>>(() => new Set(['react']));
+      return (
+        <ChipGroup
+          selectionMode="multiple"
+          selectedKeys={keys}
+          onSelectionChange={(next) => setKeys(new Set([...next].map(String)))}
+          aria-label="Frameworks"
+        >
+          <Chip value="react">React</Chip>
+          <Chip value="vue">Vue</Chip>
+        </ChipGroup>
+      );
+    }
+    wrap(<Demo />);
+    expect(screen.getByRole('button', { name: 'React' }).getAttribute('aria-pressed')).toBe('true');
+    await userEvent.click(screen.getByRole('button', { name: 'Vue' }));
+    expect(screen.getByRole('button', { name: 'Vue' }).getAttribute('aria-pressed')).toBe('true');
+    expect(screen.getByRole('button', { name: 'React' }).getAttribute('aria-pressed')).toBe('true');
+  });
+
+  it('allows only one selection in single mode', async () => {
+    function Demo() {
+      const [keys, setKeys] = useState<Set<string>>(() => new Set(['react']));
+      return (
+        <ChipGroup
+          selectionMode="single"
+          selectedKeys={keys}
+          onSelectionChange={(next) => setKeys(new Set([...next].map(String)))}
+          aria-label="Frameworks"
+        >
+          <Chip value="react">React</Chip>
+          <Chip value="vue">Vue</Chip>
+        </ChipGroup>
+      );
+    }
+    wrap(<Demo />);
+    await userEvent.click(screen.getByRole('radio', { name: 'Vue' }));
+    expect(screen.getByRole('radio', { name: 'Vue' }).getAttribute('aria-checked')).toBe('true');
+    expect(screen.getByRole('radio', { name: 'React' }).getAttribute('aria-checked')).toBe('false');
+  });
+
+  it('renders from options', () => {
+    wrap(
+      <ChipGroup
+        options={[
+          { value: 'docs', label: 'Docs' },
+          { value: 'api', label: 'API' },
+        ]}
+        aria-label="Sections"
+      />,
+    );
+    expect(screen.getByRole('button', { name: 'Docs' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'API' })).toBeTruthy();
+  });
+
+  it('throws when Chip has value outside ChipGroup', () => {
+    expect(() => wrap(<Chip value="solo">Solo</Chip>)).toThrow(/ChipGroup/);
+  });
+});

@@ -1,0 +1,26 @@
+---
+title: Accordion
+description: Multi-panel expand/collapse disclosure for FAQs and settings.
+---
+
+# Accordion
+
+Stacked disclosure panels built on React Aria `DisclosureGroup`. Use the compound
+`Accordion.Item`, `Accordion.Trigger`, and `Accordion.Panel` API for FAQ and settings
+layouts. For a single standalone panel, use [`Collapsible`](/components/collapsible).
+
+## Examples
+
+### Default
+
+<Demo id="accordion.default" />
+
+## Props
+
+<PropsTable slug="accordion" />
+
+## Accessibility
+
+Each trigger is a button with `aria-expanded`. In single mode, opening one panel
+closes the others. Triggers support `Home`, `End`, `ArrowUp`, and `ArrowDown` for
+keyboard navigation between sections.

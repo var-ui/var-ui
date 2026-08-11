@@ -1,0 +1,14 @@
+---
+import { collapsible, defaultIconSvgs, type CollapsibleVariantProps } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+interface Props extends CollapsibleVariantProps {}
+
+const { variant = 'accordion' } = Astro.props;
+const c = collapsible({ variant });
+---
+
+<span slot="trigger">
+  <span {...recipeProps(c.triggerIcon)} set:html={defaultIconSvgs.chevronDown} />
+  <slot />
+</span>

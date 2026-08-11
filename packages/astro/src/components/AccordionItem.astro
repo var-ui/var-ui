@@ -1,0 +1,54 @@
+---
+import { collapsible, defaultIconSvgs, type CollapsibleVariantProps } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+interface Props extends CollapsibleVariantProps {
+  /** Stable id for the panel. */
+  id: string;
+  /** Default trigger label when `AccordionTrigger` is omitted. */
+  title?: string;
+  defaultExpanded?: boolean;
+  className?: string;
+}
+
+const {
+  id,
+  title,
+  defaultExpanded = false,
+  variant = 'accordion',
+  className,
+} = Astro.props;
+
+const c = collapsible({ variant });
+const hasTriggerSlot = Astro.slots.has('trigger');
+---
+
+<details
+  data-var-ui-accordion-item
+  data-accordion-id={id}
+  id={id}
+  open={defaultExpanded || undefined}
+  {...recipeProps(c.root, className)}
+>
+  <summary {...recipeProps(c.trigger)} data-var-ui-accordion-trigger>
+    {
+      hasTriggerSlot ? (
+        <slot name="trigger" />
+      ) : (
+        <>
+          <span {...recipeProps(c.triggerIcon)} set:html={defaultIconSvgs.chevronDown} />
+          {title}
+        </>
+      )
+    }
+  </summary>
+  {
+    Astro.slots.has('panel') ? (
+      <slot name="panel" />
+    ) : (
+      <div {...recipeProps(c.panel)}>
+        <slot />
+      </div>
+    )
+  }
+</details>

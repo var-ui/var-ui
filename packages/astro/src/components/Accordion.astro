@@ -1,0 +1,29 @@
+---
+import { accordionGroup, type AccordionGroupVariantProps } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = AccordionGroupVariantProps & {
+  /** When `single`, only one panel may be open at a time. @default single */
+  type?: 'single' | 'multiple';
+  /** When `type` is `single`, allow closing every panel. @default true */
+  collapsible?: boolean;
+  className?: string;
+};
+
+const { type = 'single', collapsible = true, variant = 'bordered', className } = Astro.props;
+const group = accordionGroup({ variant: variant ?? 'bordered' });
+---
+
+<div
+  data-var-ui-accordion
+  data-accordion-type={type}
+  data-collapsible={collapsible ? 'true' : 'false'}
+  {...recipeProps(group.root, className)}
+>
+  <slot />
+</div>
+
+<script>
+  import { initAccordions } from '../scripts/accordion';
+  initAccordions();
+</script>

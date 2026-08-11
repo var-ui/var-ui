@@ -41,6 +41,10 @@ import { render as renderTypeaheadField } from './typeahead/field/html';
 import { render as renderTabsDefault } from './tabs/default/html';
 import { render as renderDialogDefault } from './dialog/default/html';
 import { render as renderLayoutDefault } from './layout/default/html';
+import { render as renderChipDefault } from './chip/default/html';
+import { render as renderTimelineDefault } from './timeline/default/html';
+import { render as renderToastDefault } from './toast/default/html';
+import { render as renderAccordionDefault } from './accordion/default/html';
 import { render as renderCollapsibleDefault } from './collapsible/default/html';
 import { render as renderChatLayoutDefault } from './chat-layout/default/html';
 import { render as renderChatMessageListDefault } from './chat-message-list/default/html';
@@ -96,6 +100,10 @@ export const htmlDemoMap = {
   'tabs.default': renderTabsDefault,
   'dialog.default': renderDialogDefault,
   'layout.default': renderLayoutDefault,
+  'chip.default': renderChipDefault,
+  'timeline.default': renderTimelineDefault,
+  'toast.default': renderToastDefault,
+  'accordion.default': renderAccordionDefault,
   'collapsible.default': renderCollapsibleDefault,
   'chat-layout.default': renderChatLayoutDefault,
   'chat-message-list.default': renderChatMessageListDefault,

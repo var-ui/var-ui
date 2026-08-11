@@ -1,0 +1,19 @@
+---
+import { ToastRegion } from '@var-ui/astro';
+---
+
+<ToastRegion placement="bottom-end" />
+
+<button type="button" id="toast-demo-save">Save</button>
+
+<script>
+  import { toast } from '@var-ui/astro';
+
+  document.getElementById('toast-demo-save')?.addEventListener('click', () => {
+    toast.show({
+      tone: 'success',
+      title: 'Saved',
+      description: 'Your draft was stored.',
+    });
+  });
+</script>

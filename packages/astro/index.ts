@@ -11,6 +11,8 @@ export { default as ScrollArea } from './src/components/ScrollArea.astro';
 export { default as Divider } from './src/components/Divider.astro';
 export { default as AspectRatio } from './src/components/AspectRatio.astro';
 export { default as Badge } from './src/components/Badge.astro';
+export { default as Chip } from './src/components/Chip.astro';
+export { default as Pill } from './src/components/Pill.astro';
 export { default as Kbd } from './src/components/Kbd.astro';
 export { default as Heading } from './src/components/Heading.astro';
 export { default as Text } from './src/components/Text.astro';
@@ -26,12 +28,20 @@ export { default as Button } from './src/components/Button.astro';
 export { default as Link } from './src/components/Link.astro';
 export { default as Alert } from './src/components/Alert.astro';
 export { default as Banner } from './src/components/Banner.astro';
+export { default as Toast } from './src/components/Toast.astro';
+export { default as ToastRegion } from './src/components/ToastRegion.astro';
 export { default as CodeBlock } from './src/components/CodeBlock.astro';
 export { default as Steps } from './src/components/Steps.astro';
+export { default as Timeline } from './src/components/Timeline.astro';
+export { default as TimelineItem } from './src/components/TimelineItem.astro';
 export { default as Breadcrumbs } from './src/components/Breadcrumbs.astro';
 export { default as Toc } from './src/components/Toc.astro';
 export { default as TocItem } from './src/components/TocItem.astro';
 export { default as Collapsible } from './src/components/Collapsible.astro';
+export { default as Accordion } from './src/components/Accordion.astro';
+export { default as AccordionItem } from './src/components/AccordionItem.astro';
+export { default as AccordionTrigger } from './src/components/AccordionTrigger.astro';
+export { default as AccordionPanel } from './src/components/AccordionPanel.astro';
 export { default as Tabs } from './src/components/Tabs.astro';
 export { default as Layout } from './src/components/Layout.astro';
 export { default as LayoutHeader } from './src/components/LayoutHeader.astro';
@@ -66,6 +76,15 @@ export {
 } from './src/scripts/mobileNav';
 export { initSideNav, initSideNavs } from './src/scripts/sideNav';
 export { initToc, initTocs } from './src/scripts/toc';
+export { createAccordionController, initAccordions } from './src/scripts/accordion';
+export {
+  getToastController,
+  initToastRegion,
+  initToastRegions,
+  toast,
+  type ToastController,
+  type ToastShowInput,
+} from './src/scripts/toast';
 export { createResizeHandle } from './src/scripts/resizeHandle';
 export { copyText, initCodeBlockCopy } from './src/scripts/codeBlockCopy';
 export {

@@ -1,11 +1,10 @@
 import type { JSX, ReactNode } from 'react';
-import { createContext, useContext, useMemo } from 'react';
+import { createContext, useContext, useEffect, useMemo } from 'react';
 import {
   Button as AriaButton,
   Text,
   UNSTABLE_Toast as AriaToast,
   UNSTABLE_ToastContent as AriaToastContent,
-  UNSTABLE_ToastQueue,
   UNSTABLE_ToastRegion as AriaToastRegion,
 } from 'react-aria-components';
 import type { ComponentAttrsResult } from 'typestyles';
@@ -18,15 +17,15 @@ import {
 } from '@var-ui/core';
 import { Icon } from '../icons';
 import { useLayer } from '../layers/LayerProvider';
+import { registerToastQueue, unregisterToastQueue } from '../toast/imperativeToast';
+import { ToastQueue } from '../toast/toastQueue';
+import type { ToastContentData } from '../toast/types';
 import { recipeProps } from './utils';
 
 export type { ToastTone, ToastPlacement } from '@var-ui/core';
-
-export type ToastContentData = {
-  title: string;
-  description?: string;
-  tone?: ToastTone;
-};
+export type { ToastContentData } from '../toast/types';
+export { toast, type ImperativeToast, type ToastShowInput } from '../toast/imperativeToast';
+export { ToastQueue } from '../toast/toastQueue';
 
 const toneIcon: Record<ToastTone, IconName> = {
   info: 'info',
@@ -44,7 +43,7 @@ type ToastRecipeFn = (args?: ToastVariantProps) => Record<ToastSlot, ComponentAt
 const toastSlots = toastRecipe as unknown as ToastRecipeFn;
 
 type ToastContextValue = {
-  queue: UNSTABLE_ToastQueue<ToastContentData>;
+  queue: ToastQueue;
   placement: ToastPlacement;
 };
 
@@ -100,7 +99,7 @@ export function Toast({
 
 export type ToastRegionProps = {
   /** The toast queue to display. Construct one with `new ToastQueue()` for a declarative, provider-free setup. */
-  queue: UNSTABLE_ToastQueue<ToastContentData>;
+  queue: ToastQueue;
   /** Screen corner the region anchors to. @default bottom-end */
   placement?: ToastPlacement;
   /** Additional CSS class names merged onto the region element. */
@@ -175,11 +174,14 @@ export function ToastProvider({
   placement = 'bottom-end',
   maxVisibleToasts = DEFAULT_MAX,
 }: ToastProviderProps): JSX.Element {
-  const queue = useMemo(
-    () => new UNSTABLE_ToastQueue<ToastContentData>({ maxVisibleToasts }),
-    [maxVisibleToasts],
-  );
+  const queue = useMemo(() => new ToastQueue({ maxVisibleToasts }), [maxVisibleToasts]);
   const value = useMemo(() => ({ queue, placement }), [queue, placement]);
+
+  useEffect(() => {
+    registerToastQueue(queue);
+    return () => unregisterToastQueue(queue);
+  }, [queue]);
+
   return (
     <ToastContext.Provider value={value}>
       {children}
@@ -209,5 +211,3 @@ export function useToast(): UseToastReturn {
     dismiss: (id) => ctx.queue.close(id),
   };
 }
-
-export { UNSTABLE_ToastQueue as ToastQueue } from 'react-aria-components';

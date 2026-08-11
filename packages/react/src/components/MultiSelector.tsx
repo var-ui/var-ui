@@ -9,6 +9,7 @@ import {
 } from 'react-aria-components';
 import { multiSelector } from '@var-ui/core';
 import { Icon } from '../icons';
+import type { FieldMeta } from './utils';
 import { recipeProps } from './utils';
 
 export type MultiSelectorOption = {
@@ -18,9 +19,7 @@ export type MultiSelectorOption = {
   label: string;
 };
 
-export type MultiSelectorProps = {
-  /** Field label rendered above the trigger. */
-  label?: string;
+export type MultiSelectorProps = FieldMeta & {
   /** Options shown in the dropdown listbox. */
   options: MultiSelectorOption[];
   /** Currently selected option ids. */
@@ -35,6 +34,8 @@ export type MultiSelectorProps = {
 
 export function MultiSelector({
   label,
+  description,
+  errorMessage,
   options,
   value,
   onChange,
@@ -112,6 +113,12 @@ export function MultiSelector({
           )}
         </ListBox>
       </Popover>
+      {description ? <p {...recipeProps(ms.description)}>{description}</p> : null}
+      {errorMessage ? (
+        <p {...recipeProps(ms.error)} role="alert">
+          {errorMessage}
+        </p>
+      ) : null}
     </div>
   );
 }

@@ -32,7 +32,10 @@ export { typeahead } from './typeahead';
 export { tokenizer } from './tokenizer';
 export { multiSelector } from './multiSelector';
 export { codeBlock, codeBlockVarDefinitions } from './codeBlock';
+export { colorField } from './colorField';
+export { colorPicker, colorSwatch } from './colorPicker';
 export { commandPalette } from './commandPalette';
+export { copyButton } from './copyButton';
 export {
   alert,
   type AlertRecipeProps,
@@ -50,6 +53,8 @@ export {
   type AvatarVariantProps,
 } from './avatar';
 export { badge, type BadgeRecipeProps, type BadgeTone, type BadgeVariantProps } from './badge';
+export { chip, type ChipRecipeProps, type ChipTone, type ChipVariantProps } from './chip';
+export { chipGroup, type ChipGroupRecipeProps } from './chipGroup';
 export { banner, type BannerRecipeProps, type BannerTone, type BannerVariantProps } from './banner';
 export { breadcrumbs } from './breadcrumbs';
 export {
@@ -65,6 +70,13 @@ export { hoverCard } from './hoverCard';
 export { card } from './card';
 export { carousel } from './carousel';
 export { steps } from './steps';
+export {
+  timeline,
+  type TimelineRecipeProps,
+  type TimelineSize,
+  type TimelineTone,
+  type TimelineVariantProps,
+} from './timeline';
 export { fileTree } from './fileTree';
 export { aspectRatio } from './aspectRatio';
 export { center } from './center';
@@ -77,6 +89,12 @@ export { heading, textBlock } from './typography';
 export { icon } from './icon';
 export { kbd } from './kbd';
 export { outline } from './outline';
+export {
+  accordionGroup,
+  type AccordionGroupRecipeProps,
+  type AccordionGroupVariant,
+  type AccordionGroupVariantProps,
+} from './accordionGroup';
 export {
   collapsible,
   type CollapsibleRecipeProps,
@@ -98,6 +116,7 @@ export {
 export { overflowList } from './overflowList';
 export { overlay } from './overlay';
 export { pagination } from './pagination';
+export { passwordField } from './passwordField';
 export { pinInput } from './pinInput';
 export { resizeHandle } from './resizeHandle';
 export {
@@ -115,6 +134,7 @@ export {
 } from './progressBar';
 export { section } from './section';
 export { sideNav, sideNavVarDefinitions, SIDE_NAV_COLLAPSED_WIDTH } from './sideNav';
+export { simpleGrid } from './simpleGrid';
 export { toc, tocVarDefinitions } from './toc';
 export { mobileNav } from './mobileNav';
 export { topNav, topNavVarDefinitions } from './topNav';
@@ -130,6 +150,7 @@ export {
 export { dialog } from './dialog';
 export { link } from './link';
 export { list } from './list';
+export { loadingOverlay } from './loadingOverlay';
 export { table } from './table';
 export { tree } from './tree';
 export { radio } from './radio';

@@ -22,11 +22,16 @@ export {
   type MenuItemDefinition,
   type MenuSectionDefinition,
 } from './DropdownMenu';
+export { ColorInput, type ColorInputProps } from './ColorInput';
+export { ColorPicker, type ColorPickerProps } from './ColorPicker';
+export { ColorSwatch, type ColorSwatchProps } from './ColorSwatch';
 export { ContextMenu, type ContextMenuProps } from './ContextMenu';
+export { CopyButton, type CopyButtonProps, type CopyButtonRenderProps } from './CopyButton';
 export { MoreMenu, type MoreMenuProps } from './MoreMenu';
 export { Slider, type SliderProps } from './Slider';
 export { PinInput, type PinInputProps, type PinInputType } from './PinInput';
 export { NumberInput, type NumberInputProps } from './NumberInput';
+export { LoadingOverlay, type LoadingOverlayProps } from './LoadingOverlay';
 export { Link, type LinkProps } from './Link';
 export { TextField, type TextFieldProps } from './TextField';
 export { TextAreaField, type TextAreaFieldProps } from './TextAreaField';
@@ -72,6 +77,14 @@ export {
   type DescriptionListProps,
 } from './DescriptionList';
 export { Outline, type OutlineItemData, type OutlineItemProps, type OutlineProps } from './Outline';
+export {
+  Accordion,
+  type AccordionItemProps,
+  type AccordionPanelProps,
+  type AccordionProps,
+  type AccordionTriggerProps,
+  type AccordionVariant,
+} from './Accordion';
 export {
   Collapsible,
   CollapsibleGroup,
@@ -125,10 +138,27 @@ export {
   type AvatarSize,
 } from './Avatar';
 export { Badge, type BadgeProps } from './Badge';
+export {
+  Chip,
+  ChipGroup,
+  Pill,
+  type ChipGroupKey,
+  type ChipGroupOption,
+  type ChipGroupProps,
+  type ChipProps,
+  type PillProps,
+} from './Chip';
 export { Banner, type BannerProps, type BannerTone } from './Banner';
 export { Card, ClickableCard, type CardProps, type ClickableCardProps } from './Card';
 export { Carousel, type CarouselProps } from './Carousel';
 export { Thumbnail, type ThumbnailProps } from './Thumbnail';
+export {
+  Timeline,
+  TimelineItem,
+  type TimelineItemData,
+  type TimelineItemProps,
+  type TimelineProps,
+} from './Timeline';
 export { Timestamp, type TimestampProps } from './Timestamp';
 export { EmptyState, type EmptyStateProps } from './EmptyState';
 export {
@@ -138,6 +168,7 @@ export {
   type FileTreeProps,
 } from './FileTree';
 export { Kbd, type KbdProps } from './Kbd';
+export { SimpleGrid, type SimpleGridProps } from './SimpleGrid';
 export { Skeleton, type SkeletonProps } from './Skeleton';
 export { StatusDot, type StatusDotProps } from './StatusDot';
 export { Steps, type StepsProps } from './Steps';
@@ -149,12 +180,15 @@ export {
   ToastProvider,
   ToastQueue,
   ToastRegion,
+  toast,
   useToast,
+  type ImperativeToast,
   type ToastContentData,
   type ToastPlacement,
   type ToastProps,
   type ToastProviderProps,
   type ToastRegionProps,
+  type ToastShowInput,
   type ToastTone,
   type UseToastReturn,
 } from './Toast';
@@ -200,6 +234,7 @@ export {
   type PaginationProps,
   type PaginationVariant,
 } from './Pagination';
+export { PasswordInput, type PasswordInputProps } from './PasswordInput';
 export {
   SideNav,
   SideNavCollapseButton,

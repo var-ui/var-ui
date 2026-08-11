@@ -1,0 +1,29 @@
+---
+import { toast as toastRecipe, defaultIconSvgs, type ToastTone } from '@var-ui/core';
+import { recipeProps } from '../utils';
+
+type Props = {
+  tone?: ToastTone;
+  title: string;
+  description?: string;
+  className?: string;
+};
+
+const toneIcon: Record<ToastTone, keyof typeof defaultIconSvgs> = {
+  info: 'info',
+  success: 'success',
+  warning: 'warning',
+  danger: 'error',
+};
+
+const { tone = 'info', title, description, className } = Astro.props;
+const t = toastRecipe({ tone, appearance: 'subtle' });
+---
+
+<div {...recipeProps(t.item, className)} role="status">
+  <span {...recipeProps(t.icon)} set:html={defaultIconSvgs[toneIcon[tone]]} />
+  <div {...recipeProps(t.body)}>
+    <div {...recipeProps(t.title)}>{title}</div>
+    {description ? <div {...recipeProps(t.description)}>{description}</div> : null}
+  </div>
+</div>

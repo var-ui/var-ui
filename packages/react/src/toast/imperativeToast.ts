@@ -1,0 +1,62 @@
+import type { ToastQueue } from './toastQueue';
+import type { ToastContentData } from './types';
+
+const DEFAULT_DURATION = 4000;
+
+let activeQueue: ToastQueue | null = null;
+
+export function registerToastQueue(queue: ToastQueue): void {
+  activeQueue = queue;
+}
+
+export function unregisterToastQueue(queue: ToastQueue): void {
+  if (activeQueue === queue) {
+    activeQueue = null;
+  }
+}
+
+export type ToastShowInput = ToastContentData & {
+  /** Auto-dismiss delay in ms. Pass `0` to disable. @default 4000 */
+  durationMs?: number;
+};
+
+function showToast(content: ToastShowInput): string {
+  if (!activeQueue) {
+    return '';
+  }
+  const { durationMs = DEFAULT_DURATION, ...data } = content;
+  return activeQueue.add(data, {
+    timeout: durationMs === 0 ? undefined : durationMs,
+  });
+}
+
+export type ImperativeToast = {
+  /** Enqueues a toast and returns its id. */
+  show: (content: ToastShowInput) => string;
+  /** Dismisses a toast by id. */
+  dismiss: (id: string) => void;
+  /** Alias for `dismiss`. */
+  hide: (id: string) => void;
+  /** Dismisses every queued toast. */
+  dismissAll: () => void;
+  /** Merges fields into an existing toast. Returns false when the id is not found. */
+  update: (id: string, patch: Partial<ToastContentData>) => boolean;
+};
+
+export const toast: ImperativeToast & ((content: ToastShowInput) => string) = Object.assign(
+  showToast,
+  {
+    show: showToast,
+    dismiss: (id: string) => {
+      activeQueue?.close(id);
+    },
+    hide: (id: string) => {
+      activeQueue?.close(id);
+    },
+    dismissAll: () => {
+      activeQueue?.clear();
+    },
+    update: (id: string, patch: Partial<ToastContentData>) =>
+      activeQueue?.update(id, patch) ?? false,
+  },
+);
