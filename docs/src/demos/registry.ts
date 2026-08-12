@@ -56,15 +56,21 @@ import { snippets as chatSendButtonDefaultSnippets } from './chat-send-button/de
 import { snippets as chatSystemMessageDefaultSnippets } from './chat-system-message/default/snippets';
 import { snippets as chatToolCallsDefaultSnippets } from './chat-tool-calls/default/snippets';
 import { snippets as kbdDefaultSnippets } from './kbd/default/snippets';
+import { snippets as kbdComboSnippets } from './kbd/combo/snippets';
 import { snippets as skeletonDefaultSnippets } from './skeleton/default/snippets';
+import { snippets as skeletonShapesSnippets } from './skeleton/shapes/snippets';
 import { snippets as statusDotDefaultSnippets } from './status-dot/default/snippets';
+import { snippets as statusDotTonesSnippets } from './status-dot/tones/snippets';
 import { snippets as stepsDefaultSnippets } from './steps/default/snippets';
 import { snippets as stepsActiveSnippets } from './steps/active/snippets';
 import { snippets as loadingOverlayDefaultSnippets } from './loading-overlay/default/snippets';
 import { snippets as loadingOverlayVisibleSnippets } from './loading-overlay/visible/snippets';
 import { snippets as listDefaultSnippets } from './list/default/snippets';
+import { snippets as listIconsSnippets } from './list/icons/snippets';
 import { snippets as descriptionListDefaultSnippets } from './description-list/default/snippets';
+import { snippets as descriptionListHorizontalSnippets } from './description-list/horizontal/snippets';
 import { snippets as outlineDefaultSnippets } from './outline/default/snippets';
+import { snippets as outlineNestedSnippets } from './outline/nested/snippets';
 import { snippets as tocDefaultSnippets } from './toc/default/snippets';
 import { snippets as tocNestedSnippets } from './toc/nested/snippets';
 import { snippets as breadcrumbsDefaultSnippets } from './breadcrumbs/default/snippets';
@@ -154,8 +160,11 @@ import { snippets as colorInputControlledSnippets } from './color-input/controll
 import { snippets as colorPickerDefaultSnippets } from './color-picker/default/snippets';
 import { snippets as colorPickerSwatchSnippets } from './color-picker/swatch/snippets';
 import { snippets as tableDefaultSnippets } from './table/default/snippets';
+import { snippets as tableStripedSnippets } from './table/striped/snippets';
 import { snippets as treeDefaultSnippets } from './tree/default/snippets';
+import { snippets as treeExpandedSnippets } from './tree/expanded/snippets';
 import { snippets as fileTreeDefaultSnippets } from './file-tree/default/snippets';
+import { snippets as fileTreeNestedSnippets } from './file-tree/nested/snippets';
 
 export type { DemoEntry, DemoId, DemoSnippets };
 
@@ -217,15 +226,21 @@ export const DEMO_IDS = [
   'chat-system-message.default',
   'chat-tool-calls.default',
   'kbd.default',
+  'kbd.combo',
   'skeleton.default',
+  'skeleton.shapes',
   'status-dot.default',
+  'status-dot.tones',
   'steps.default',
   'steps.active',
   'loading-overlay.default',
   'loading-overlay.visible',
   'list.default',
+  'list.icons',
   'description-list.default',
+  'description-list.horizontal',
   'outline.default',
+  'outline.nested',
   'toc.default',
   'toc.nested',
   'breadcrumbs.default',
@@ -315,8 +330,11 @@ export const DEMO_IDS = [
   'color-picker.default',
   'color-picker.swatch',
   'table.default',
+  'table.striped',
   'tree.default',
+  'tree.expanded',
   'file-tree.default',
+  'file-tree.nested',
 ] as const satisfies readonly DemoId[];
 
 export const demoSnippets: Record<DemoId, DemoSnippets> = {
@@ -377,15 +395,21 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'chat-system-message.default': chatSystemMessageDefaultSnippets,
   'chat-tool-calls.default': chatToolCallsDefaultSnippets,
   'kbd.default': kbdDefaultSnippets,
+  'kbd.combo': kbdComboSnippets,
   'skeleton.default': skeletonDefaultSnippets,
+  'skeleton.shapes': skeletonShapesSnippets,
   'status-dot.default': statusDotDefaultSnippets,
+  'status-dot.tones': statusDotTonesSnippets,
   'steps.default': stepsDefaultSnippets,
   'steps.active': stepsActiveSnippets,
   'loading-overlay.default': loadingOverlayDefaultSnippets,
   'loading-overlay.visible': loadingOverlayVisibleSnippets,
   'list.default': listDefaultSnippets,
+  'list.icons': listIconsSnippets,
   'description-list.default': descriptionListDefaultSnippets,
+  'description-list.horizontal': descriptionListHorizontalSnippets,
   'outline.default': outlineDefaultSnippets,
+  'outline.nested': outlineNestedSnippets,
   'toc.default': tocDefaultSnippets,
   'toc.nested': tocNestedSnippets,
   'breadcrumbs.default': breadcrumbsDefaultSnippets,
@@ -475,8 +499,11 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'color-picker.default': colorPickerDefaultSnippets,
   'color-picker.swatch': colorPickerSwatchSnippets,
   'table.default': tableDefaultSnippets,
+  'table.striped': tableStripedSnippets,
   'tree.default': treeDefaultSnippets,
+  'tree.expanded': treeExpandedSnippets,
   'file-tree.default': fileTreeDefaultSnippets,
+  'file-tree.nested': fileTreeNestedSnippets,
 };
 
 export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
@@ -537,15 +564,21 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'chat-system-message.default': () => import('./chat-system-message/default/react'),
   'chat-tool-calls.default': () => import('./chat-tool-calls/default/react'),
   'kbd.default': () => import('./kbd/default/react'),
+  'kbd.combo': () => import('./kbd/combo/react'),
   'skeleton.default': () => import('./skeleton/default/react'),
+  'skeleton.shapes': () => import('./skeleton/shapes/react'),
   'status-dot.default': () => import('./status-dot/default/react'),
+  'status-dot.tones': () => import('./status-dot/tones/react'),
   'steps.default': () => import('./steps/default/react'),
   'steps.active': () => import('./steps/active/react'),
   'loading-overlay.default': () => import('./loading-overlay/default/react'),
   'loading-overlay.visible': () => import('./loading-overlay/visible/react'),
   'list.default': () => import('./list/default/react'),
+  'list.icons': () => import('./list/icons/react'),
   'description-list.default': () => import('./description-list/default/react'),
+  'description-list.horizontal': () => import('./description-list/horizontal/react'),
   'outline.default': () => import('./outline/default/react'),
+  'outline.nested': () => import('./outline/nested/react'),
   'toc.default': () => import('./toc/default/react'),
   'toc.nested': () => import('./toc/nested/react'),
   'breadcrumbs.default': () => import('./breadcrumbs/default/react'),
@@ -635,8 +668,11 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'color-picker.default': () => import('./color-picker/default/react'),
   'color-picker.swatch': () => import('./color-picker/swatch/react'),
   'table.default': () => import('./table/default/react'),
+  'table.striped': () => import('./table/striped/react'),
   'tree.default': () => import('./tree/default/react'),
+  'tree.expanded': () => import('./tree/expanded/react'),
   'file-tree.default': () => import('./file-tree/default/react'),
+  'file-tree.nested': () => import('./file-tree/nested/react'),
 };
 
 export const demoRegistry: Record<DemoId, DemoEntry> = {
@@ -925,15 +961,30 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['kbd.default'],
     react: reactDemoLoaders['kbd.default'],
   },
+  'kbd.combo': {
+    id: 'kbd.combo',
+    snippets: demoSnippets['kbd.combo'],
+    react: reactDemoLoaders['kbd.combo'],
+  },
   'skeleton.default': {
     id: 'skeleton.default',
     snippets: demoSnippets['skeleton.default'],
     react: reactDemoLoaders['skeleton.default'],
   },
+  'skeleton.shapes': {
+    id: 'skeleton.shapes',
+    snippets: demoSnippets['skeleton.shapes'],
+    react: reactDemoLoaders['skeleton.shapes'],
+  },
   'status-dot.default': {
     id: 'status-dot.default',
     snippets: demoSnippets['status-dot.default'],
     react: reactDemoLoaders['status-dot.default'],
+  },
+  'status-dot.tones': {
+    id: 'status-dot.tones',
+    snippets: demoSnippets['status-dot.tones'],
+    react: reactDemoLoaders['status-dot.tones'],
   },
   'steps.default': {
     id: 'steps.default',
@@ -960,15 +1011,30 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['list.default'],
     react: reactDemoLoaders['list.default'],
   },
+  'list.icons': {
+    id: 'list.icons',
+    snippets: demoSnippets['list.icons'],
+    react: reactDemoLoaders['list.icons'],
+  },
   'description-list.default': {
     id: 'description-list.default',
     snippets: demoSnippets['description-list.default'],
     react: reactDemoLoaders['description-list.default'],
   },
+  'description-list.horizontal': {
+    id: 'description-list.horizontal',
+    snippets: demoSnippets['description-list.horizontal'],
+    react: reactDemoLoaders['description-list.horizontal'],
+  },
   'outline.default': {
     id: 'outline.default',
     snippets: demoSnippets['outline.default'],
     react: reactDemoLoaders['outline.default'],
+  },
+  'outline.nested': {
+    id: 'outline.nested',
+    snippets: demoSnippets['outline.nested'],
+    react: reactDemoLoaders['outline.nested'],
   },
   'toc.default': {
     id: 'toc.default',
@@ -1415,15 +1481,30 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['table.default'],
     react: reactDemoLoaders['table.default'],
   },
+  'table.striped': {
+    id: 'table.striped',
+    snippets: demoSnippets['table.striped'],
+    react: reactDemoLoaders['table.striped'],
+  },
   'tree.default': {
     id: 'tree.default',
     snippets: demoSnippets['tree.default'],
     react: reactDemoLoaders['tree.default'],
   },
+  'tree.expanded': {
+    id: 'tree.expanded',
+    snippets: demoSnippets['tree.expanded'],
+    react: reactDemoLoaders['tree.expanded'],
+  },
   'file-tree.default': {
     id: 'file-tree.default',
     snippets: demoSnippets['file-tree.default'],
     react: reactDemoLoaders['file-tree.default'],
+  },
+  'file-tree.nested': {
+    id: 'file-tree.nested',
+    snippets: demoSnippets['file-tree.nested'],
+    react: reactDemoLoaders['file-tree.nested'],
   },
 };
 

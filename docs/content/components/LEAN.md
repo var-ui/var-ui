@@ -4,12 +4,4 @@ Pages below ship with a single default demo and props table. Remove a slug when 
 
 ## Lean pages
 
-- [ ] outline
-- [ ] table
-- [ ] tree
-- [ ] file-tree
-- [ ] list
-- [ ] description-list
-- [ ] kbd
-- [ ] skeleton
-- [ ] status-dot
+_No lean pages remaining._

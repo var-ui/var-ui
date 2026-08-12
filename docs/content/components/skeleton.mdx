@@ -5,14 +5,26 @@ description: Placeholder shimmer for loading content.
 
 # Skeleton
 
-Placeholder shimmer for loading content.
+Placeholder shimmer blocks while content loads. Size with `style` width/height; pick a `shape` that matches the eventual layout.
 
 ## Examples
 
 ### Default
 
+A single text-shaped placeholder.
+
 <Demo id="skeleton.default" />
+
+### Shapes
+
+Mix `text`, `rect`, and `circle` to sketch a profile row or card while data loads.
+
+<Demo id="skeleton.shapes" />
 
 ## Props
 
 <PropsTable slug="skeleton" />
+
+## Accessibility
+
+Skeleton is decorative (`aria-hidden`). Announce loading on a parent region with `aria-busy` / live text rather than on the shimmer itself.

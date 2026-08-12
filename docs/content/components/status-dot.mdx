@@ -5,14 +5,26 @@ description: Compact status indicator with tone and pulse options.
 
 # StatusDot
 
-Compact status indicator with tone and pulse options.
+Compact presence/status indicator. Pair with visible text or an `aria-label` — the dot alone is decorative.
 
 ## Examples
 
 ### Default
 
+A filled success dot labeled for assistive tech.
+
 <Demo id="status-dot.default" />
+
+### Tones and pulse
+
+Use semantic `tone`s for status, and `pulse` for in-progress states (respects reduced motion).
+
+<Demo id="status-dot.tones" />
 
 ## Props
 
 <PropsTable slug="status-dot" />
+
+## Accessibility
+
+Provide an `aria-label` when the meaning isn’t in adjacent text (sets `role="img"`). Prefer visible labels for color-blind users; `pulse` animation is disabled under `prefers-reduced-motion`.

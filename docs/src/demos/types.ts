@@ -59,15 +59,21 @@ export type DemoId =
   | 'chat-system-message.default'
   | 'chat-tool-calls.default'
   | 'kbd.default'
+  | 'kbd.combo'
   | 'skeleton.default'
+  | 'skeleton.shapes'
   | 'status-dot.default'
+  | 'status-dot.tones'
   | 'steps.default'
   | 'steps.active'
   | 'loading-overlay.default'
   | 'loading-overlay.visible'
   | 'list.default'
+  | 'list.icons'
   | 'description-list.default'
+  | 'description-list.horizontal'
   | 'outline.default'
+  | 'outline.nested'
   | 'toc.default'
   | 'toc.nested'
   | 'breadcrumbs.default'
@@ -157,8 +163,11 @@ export type DemoId =
   | 'color-picker.default'
   | 'color-picker.swatch'
   | 'table.default'
+  | 'table.striped'
   | 'tree.default'
-  | 'file-tree.default';
+  | 'tree.expanded'
+  | 'file-tree.default'
+  | 'file-tree.nested';
 
 export type DemoSnippets = Record<DocsFramework, string>;
 

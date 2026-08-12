@@ -5,14 +5,26 @@ description: Presentational file/folder tree with FileTree.Folder and FileTree.F
 
 # FileTree
 
-Presentational file/folder tree with `FileTree.Folder` and `FileTree.File` parts.
+Presentational file/folder tree for docs and static previews. Nest `FileTree.Folder` and `FileTree.File` — not interactive (use `Tree` for expand/selection).
 
 ## Examples
 
 ### Default
 
+A single folder with a couple of files.
+
 <Demo id="file-tree.default" />
+
+### Nested folders
+
+Nest folders for multi-package or monorepo layouts.
+
+<Demo id="file-tree.nested" />
 
 ## Props
 
 <PropsTable slug="file-tree" />
+
+## Accessibility
+
+Renders nested lists of folder/file names for visual structure. It is not a keyboard tree widget — use `Tree` when users need expand/collapse or selection. Prefer clear `name` strings; do not rely on color alone to distinguish folders from files.

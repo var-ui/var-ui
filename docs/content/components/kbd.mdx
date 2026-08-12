@@ -5,14 +5,26 @@ description: Keyboard key cap for shortcut hints.
 
 # Kbd
 
-Keyboard key cap for shortcut hints.
+Inline keyboard key caps for shortcut hints in docs, menus, and empty states.
 
 ## Examples
 
 ### Default
 
+A single shortcut rendered as adjacent key caps.
+
 <Demo id="kbd.default" />
+
+### Key combo
+
+Compose several `Kbd`s in sequence for multi-key shortcuts (⌘K, ⌘S).
+
+<Demo id="kbd.combo" />
 
 ## Props
 
 <PropsTable slug="kbd" />
+
+## Accessibility
+
+`Kbd` renders a semantic `<kbd>`. Keep surrounding copy so the shortcut is understandable without relying on the glyph alone (for example “Press ⌘ K to open”).

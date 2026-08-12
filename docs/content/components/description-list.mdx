@@ -5,14 +5,26 @@ description: Label/value pairs via DescriptionList.Item for metadata displays.
 
 # DescriptionList
 
-Label/value pairs via `DescriptionList.Item` for metadata displays.
+Semantic key/value display using `<dl>` / `<dt>` / `<dd>`. Compose with `DescriptionList.Item` or an `items` array; optionally collapse with `maxItems`.
 
 ## Examples
 
 ### Default
 
+A titled single-column metadata block.
+
 <Demo id="description-list.default" />
+
+### Horizontal multi-column
+
+Set `columns="multi"` with `labelPosition="start"` for side-by-side label/value pairs in a multi-column grid.
+
+<Demo id="description-list.horizontal" />
 
 ## Props
 
 <PropsTable slug="description-list" />
+
+## Accessibility
+
+Uses native description-list semantics (`dl`/`dt`/`dd`). Keep labels short and unique within the list. When `maxItems` enables “Show more”, the toggle is a real button for keyboard users.

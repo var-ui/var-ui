@@ -57,15 +57,21 @@ import ChatSendButtonDefault from './chat-send-button/default/react';
 import ChatSystemMessageDefault from './chat-system-message/default/react';
 import ChatToolCallsDefault from './chat-tool-calls/default/react';
 import KbdDefault from './kbd/default/react';
+import KbdCombo from './kbd/combo/react';
 import SkeletonDefault from './skeleton/default/react';
+import SkeletonShapes from './skeleton/shapes/react';
 import StatusDotDefault from './status-dot/default/react';
+import StatusDotTones from './status-dot/tones/react';
 import StepsDefault from './steps/default/react';
 import StepsActive from './steps/active/react';
 import LoadingOverlayDefault from './loading-overlay/default/react';
 import LoadingOverlayVisible from './loading-overlay/visible/react';
 import ListDefault from './list/default/react';
+import ListIcons from './list/icons/react';
 import DescriptionListDefault from './description-list/default/react';
+import DescriptionListHorizontal from './description-list/horizontal/react';
 import OutlineDefault from './outline/default/react';
+import OutlineNested from './outline/nested/react';
 import TocDefault from './toc/default/react';
 import TocNested from './toc/nested/react';
 import BreadcrumbsDefault from './breadcrumbs/default/react';
@@ -155,8 +161,11 @@ import ColorInputControlled from './color-input/controlled/react';
 import ColorPickerDefault from './color-picker/default/react';
 import ColorPickerSwatch from './color-picker/swatch/react';
 import TableDefault from './table/default/react';
+import TableStriped from './table/striped/react';
 import TreeDefault from './tree/default/react';
+import TreeExpanded from './tree/expanded/react';
 import FileTreeDefault from './file-tree/default/react';
+import FileTreeNested from './file-tree/nested/react';
 
 /** Static React preview map — DemoReactIsland resolves demos by id (components are not serializable island props). */
 export const reactDemoMap = {
@@ -217,15 +226,21 @@ export const reactDemoMap = {
   'chat-system-message.default': ChatSystemMessageDefault,
   'chat-tool-calls.default': ChatToolCallsDefault,
   'kbd.default': KbdDefault,
+  'kbd.combo': KbdCombo,
   'skeleton.default': SkeletonDefault,
+  'skeleton.shapes': SkeletonShapes,
   'status-dot.default': StatusDotDefault,
+  'status-dot.tones': StatusDotTones,
   'steps.default': StepsDefault,
   'steps.active': StepsActive,
   'loading-overlay.default': LoadingOverlayDefault,
   'loading-overlay.visible': LoadingOverlayVisible,
   'list.default': ListDefault,
+  'list.icons': ListIcons,
   'description-list.default': DescriptionListDefault,
+  'description-list.horizontal': DescriptionListHorizontal,
   'outline.default': OutlineDefault,
+  'outline.nested': OutlineNested,
   'toc.default': TocDefault,
   'toc.nested': TocNested,
   'breadcrumbs.default': BreadcrumbsDefault,
@@ -315,8 +330,11 @@ export const reactDemoMap = {
   'color-picker.default': ColorPickerDefault,
   'color-picker.swatch': ColorPickerSwatch,
   'table.default': TableDefault,
+  'table.striped': TableStriped,
   'tree.default': TreeDefault,
+  'tree.expanded': TreeExpanded,
   'file-tree.default': FileTreeDefault,
+  'file-tree.nested': FileTreeNested,
 } as const satisfies Record<DemoId, ComponentType>;
 
 export const reactDemoIds = Object.keys(reactDemoMap) as DemoId[];
