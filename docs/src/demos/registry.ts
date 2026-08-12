@@ -131,9 +131,13 @@ import { snippets as dateTimeInputGranularitySnippets } from './date-time-input/
 import { snippets as timeInputDefaultSnippets } from './time-input/default/snippets';
 import { snippets as timeInputControlledSnippets } from './time-input/controlled/snippets';
 import { snippets as tokenizerDefaultSnippets } from './tokenizer/default/snippets';
+import { snippets as tokenizerSelectedSnippets } from './tokenizer/selected/snippets';
 import { snippets as multiSelectorDefaultSnippets } from './multi-selector/default/snippets';
+import { snippets as multiSelectorControlledSnippets } from './multi-selector/controlled/snippets';
 import { snippets as colorInputDefaultSnippets } from './color-input/default/snippets';
+import { snippets as colorInputControlledSnippets } from './color-input/controlled/snippets';
 import { snippets as colorPickerDefaultSnippets } from './color-picker/default/snippets';
+import { snippets as colorPickerSwatchSnippets } from './color-picker/swatch/snippets';
 import { snippets as tableDefaultSnippets } from './table/default/snippets';
 import { snippets as treeDefaultSnippets } from './tree/default/snippets';
 import { snippets as fileTreeDefaultSnippets } from './file-tree/default/snippets';
@@ -273,9 +277,13 @@ export const DEMO_IDS = [
   'time-input.default',
   'time-input.controlled',
   'tokenizer.default',
+  'tokenizer.selected',
   'multi-selector.default',
+  'multi-selector.controlled',
   'color-input.default',
+  'color-input.controlled',
   'color-picker.default',
+  'color-picker.swatch',
   'table.default',
   'tree.default',
   'file-tree.default',
@@ -414,9 +422,13 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'time-input.default': timeInputDefaultSnippets,
   'time-input.controlled': timeInputControlledSnippets,
   'tokenizer.default': tokenizerDefaultSnippets,
+  'tokenizer.selected': tokenizerSelectedSnippets,
   'multi-selector.default': multiSelectorDefaultSnippets,
+  'multi-selector.controlled': multiSelectorControlledSnippets,
   'color-input.default': colorInputDefaultSnippets,
+  'color-input.controlled': colorInputControlledSnippets,
   'color-picker.default': colorPickerDefaultSnippets,
+  'color-picker.swatch': colorPickerSwatchSnippets,
   'table.default': tableDefaultSnippets,
   'tree.default': treeDefaultSnippets,
   'file-tree.default': fileTreeDefaultSnippets,
@@ -555,9 +567,13 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'time-input.default': () => import('./time-input/default/react'),
   'time-input.controlled': () => import('./time-input/controlled/react'),
   'tokenizer.default': () => import('./tokenizer/default/react'),
+  'tokenizer.selected': () => import('./tokenizer/selected/react'),
   'multi-selector.default': () => import('./multi-selector/default/react'),
+  'multi-selector.controlled': () => import('./multi-selector/controlled/react'),
   'color-input.default': () => import('./color-input/default/react'),
+  'color-input.controlled': () => import('./color-input/controlled/react'),
   'color-picker.default': () => import('./color-picker/default/react'),
+  'color-picker.swatch': () => import('./color-picker/swatch/react'),
   'table.default': () => import('./table/default/react'),
   'tree.default': () => import('./tree/default/react'),
   'file-tree.default': () => import('./file-tree/default/react'),
@@ -1224,20 +1240,40 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['tokenizer.default'],
     react: reactDemoLoaders['tokenizer.default'],
   },
+  'tokenizer.selected': {
+    id: 'tokenizer.selected',
+    snippets: demoSnippets['tokenizer.selected'],
+    react: reactDemoLoaders['tokenizer.selected'],
+  },
   'multi-selector.default': {
     id: 'multi-selector.default',
     snippets: demoSnippets['multi-selector.default'],
     react: reactDemoLoaders['multi-selector.default'],
+  },
+  'multi-selector.controlled': {
+    id: 'multi-selector.controlled',
+    snippets: demoSnippets['multi-selector.controlled'],
+    react: reactDemoLoaders['multi-selector.controlled'],
   },
   'color-input.default': {
     id: 'color-input.default',
     snippets: demoSnippets['color-input.default'],
     react: reactDemoLoaders['color-input.default'],
   },
+  'color-input.controlled': {
+    id: 'color-input.controlled',
+    snippets: demoSnippets['color-input.controlled'],
+    react: reactDemoLoaders['color-input.controlled'],
+  },
   'color-picker.default': {
     id: 'color-picker.default',
     snippets: demoSnippets['color-picker.default'],
     react: reactDemoLoaders['color-picker.default'],
+  },
+  'color-picker.swatch': {
+    id: 'color-picker.swatch',
+    snippets: demoSnippets['color-picker.swatch'],
+    react: reactDemoLoaders['color-picker.swatch'],
   },
   'table.default': {
     id: 'table.default',

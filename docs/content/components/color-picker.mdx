@@ -5,14 +5,26 @@ description: HSV color picker with optional ColorSwatch presets.
 
 # ColorPicker
 
-HSV color picker with optional `ColorSwatch` presets.
+Full HSV color picker with a saturation panel, hue slider, optional alpha slider, and built-in preset swatches. This page also documents `ColorSwatch` — a compact chip for external palettes wired to the same controlled color.
 
 ## Examples
 
 ### Default
 
+Seed with `defaultValue` (or control via `value` / `onChange`). Built-in swatches come from `DEFAULT_COLOR_SWATCHES` unless you pass `swatches`.
+
 <Demo id="color-picker.default" />
+
+### With ColorSwatch
+
+Hide the picker’s built-in row (`swatches={[]}`) and drive the color from standalone `ColorSwatch` buttons — useful when presets live outside the picker chrome.
+
+<Demo id="color-picker.swatch" />
 
 ## Props
 
 <PropsTable slug="color-picker" />
+
+## Accessibility
+
+Saturation uses `role="application"` with arrow-key nudges; hue and alpha are `role="slider"`. Built-in swatches are a `listbox` of `option`s with `aria-selected`. Standalone `ColorSwatch` is a button with `aria-pressed` when `selected`. Give every external swatch an `aria-label` (the hex or a color name).

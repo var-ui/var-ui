@@ -8,6 +8,6 @@ const options = [
 ];
 
 export default function Preview() {
-  const [value, setValue] = useState([options[0]!]);
+  const [value, setValue] = useState<typeof options>([]);
   return <Tokenizer label="Tags" options={options} value={value} onChange={setValue} />;
 }

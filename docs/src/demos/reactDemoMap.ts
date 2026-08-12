@@ -132,9 +132,13 @@ import DateTimeInputGranularity from './date-time-input/granularity/react';
 import TimeInputDefault from './time-input/default/react';
 import TimeInputControlled from './time-input/controlled/react';
 import TokenizerDefault from './tokenizer/default/react';
+import TokenizerSelected from './tokenizer/selected/react';
 import MultiSelectorDefault from './multi-selector/default/react';
+import MultiSelectorControlled from './multi-selector/controlled/react';
 import ColorInputDefault from './color-input/default/react';
+import ColorInputControlled from './color-input/controlled/react';
 import ColorPickerDefault from './color-picker/default/react';
+import ColorPickerSwatch from './color-picker/swatch/react';
 import TableDefault from './table/default/react';
 import TreeDefault from './tree/default/react';
 import FileTreeDefault from './file-tree/default/react';
@@ -273,9 +277,13 @@ export const reactDemoMap = {
   'time-input.default': TimeInputDefault,
   'time-input.controlled': TimeInputControlled,
   'tokenizer.default': TokenizerDefault,
+  'tokenizer.selected': TokenizerSelected,
   'multi-selector.default': MultiSelectorDefault,
+  'multi-selector.controlled': MultiSelectorControlled,
   'color-input.default': ColorInputDefault,
+  'color-input.controlled': ColorInputControlled,
   'color-picker.default': ColorPickerDefault,
+  'color-picker.swatch': ColorPickerSwatch,
   'table.default': TableDefault,
   'tree.default': TreeDefault,
   'file-tree.default': FileTreeDefault,

@@ -134,9 +134,13 @@ export type DemoId =
   | 'time-input.default'
   | 'time-input.controlled'
   | 'tokenizer.default'
+  | 'tokenizer.selected'
   | 'multi-selector.default'
+  | 'multi-selector.controlled'
   | 'color-input.default'
+  | 'color-input.controlled'
   | 'color-picker.default'
+  | 'color-picker.swatch'
   | 'table.default'
   | 'tree.default'
   | 'file-tree.default';

@@ -5,14 +5,26 @@ description: Token field for selecting multiple tagged values.
 
 # Tokenizer
 
-Token field for selecting multiple tagged values.
+Combo-style field that turns selected options into removable tags. Always controlled via `value` / `onChange` — pass the full option objects, not just ids. Selected ids are filtered out of the dropdown so you cannot add the same token twice.
 
 ## Examples
 
 ### Default
 
+Pass `options` as `{ id, label }[]` and keep selected tokens in React state. Type to filter, pick from the list, or press Backspace on an empty input to remove the last tag.
+
 <Demo id="tokenizer.default" />
+
+### Pre-selected tags
+
+Seed `value` with one or more options to show an existing selection. Pair with `description` or `errorMessage` for field chrome.
+
+<Demo id="tokenizer.selected" />
 
 ## Props
 
 <PropsTable slug="tokenizer" />
+
+## Accessibility
+
+Built on React Aria `ComboBox` plus `TagGroup` / `TagList`. The group exposes a labeled remove control on each chip (`Remove {label}`). Keep `label` visible so the field and the selected-tag list share a clear accessible name; use `description` / `errorMessage` for the same helper and validation copy sighted users see. Keyboard: arrow through suggestions, Enter to add, Backspace on an empty input removes the last token.

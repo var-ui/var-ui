@@ -1,18 +1,30 @@
 ---
 title: MultiSelector
-description: Multi-select combobox for choosing several options.
+description: Multi-select dropdown for choosing several options.
 ---
 
 # MultiSelector
 
-Multi-select combobox for choosing several options.
+Dropdown that selects multiple options at once. Always controlled via `value` (option ids) and `onChange`. The trigger summarizes the current selection as a comma-separated label list.
 
 ## Examples
 
 ### Default
 
+Pass `options` as `{ id, label }[]` and seed `value` with the selected ids.
+
 <Demo id="multi-selector.default" />
+
+### Controlled selection
+
+Keep the selected ids in React state and update them from `onChange`. The trigger text and any app UI that depends on the selection stay in sync.
+
+<Demo id="multi-selector.controlled" />
 
 ## Props
 
 <PropsTable slug="multi-selector" />
+
+## Accessibility
+
+The trigger is a button labeled by the field `label` plus the current summary text. The popover listbox uses `selectionMode="multiple"` with checkbox affordances on each item. Keep `label` visible, and use `description` / `errorMessage` (the error message is `role="alert"`) so assistive tech gets the same help and validation copy as sighted users.

@@ -5,14 +5,26 @@ description: Hex color field with swatch trigger and picker popover.
 
 # ColorInput
 
-Hex color field with swatch trigger and picker popover.
+Hex text field with a swatch button that opens a full HSV `ColorPicker` popover. Accepts controlled (`value` / `onChange`) or uncontrolled (`defaultValue`) hex strings. Invalid typed hex is ignored until blur, when the field snaps back to the last valid color.
 
 ## Examples
 
 ### Default
 
+Pass a `label` and seed with `defaultValue` (or control via `value` / `onChange`).
+
 <Demo id="color-input.default" />
+
+### Controlled value
+
+Drive the field with `value` and `onChange` when the hex must stay in sync with app state — typing a valid hex or picking from the popover both update the same value.
+
+<Demo id="color-input.controlled" />
 
 ## Props
 
 <PropsTable slug="color-input" />
+
+## Accessibility
+
+The text control is a labeled native input (`aria-invalid` when `errorMessage` is set). The swatch is a separate button with `aria-label="Open color picker"` that opens a dialog popover containing the picker. Keep `label` visible, and use `description` / `errorMessage` so assistive tech gets the same help and validation copy as sighted users.
