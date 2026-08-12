@@ -1,6 +1,6 @@
 {
   "name": "@var-ui/docs-components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "Optional Var UI docs plugin for design-system catalogs — demos, props extract, framework switcher, component page chrome",
   "keywords": [
