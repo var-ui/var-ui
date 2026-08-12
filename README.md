@@ -50,7 +50,8 @@ Configuration lives in the root `vite.config.ts` — lint (Oxlint), formatting (
 | `@var-ui/astro`             | Astro components (no React)                    |
 | `@var-ui/example-vite-app`  | Example consumer app (`examples/vite-app`)     |
 | `@var-ui/example-astro-app` | Example Astro consumer (`examples/astro-app`)  |
-| `@var-ui/docs`              | Documentation site (Vocs)                      |
+| `@var-ui/docs`              | Astro documentation kit (`packages/docs`)      |
+| `@var-ui/docs-site`         | Documentation site (`docs/`)                   |
 
 ## Publishing
 

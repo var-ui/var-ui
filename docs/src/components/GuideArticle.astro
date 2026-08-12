@@ -1,0 +1,78 @@
+---
+/**
+ * Shared guide article for configured content collections.
+ */
+import { getEntry, render } from 'astro:content';
+import config from 'virtual:var-docs/config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import * as mdxComponents from '../lib/guide-mdx-components';
+import { matchGuideRoute, resolveGuideRouteConfig } from '@var-ui/docs/utils';
+
+const pathname = Astro.url.pathname;
+const matched = matchGuideRoute(pathname, resolveGuideRouteConfig(config.routes));
+
+if (!matched) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+const entry = await getEntry(matched.collection as 'docs' | 'theming', matched.id);
+if (!entry) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+const { Content } = await render(entry);
+const title = `${entry.data.title} · Var UI`;
+const wide = entry.data.wide === true;
+const showToc = entry.data.tableOfContents !== false;
+
+Astro.locals.varDocsRoute = {
+  collection: matched.collection,
+  id: matched.id,
+  pathname: matched.pathname,
+  title: entry.data.title,
+  description: entry.data.description,
+  template: entry.data.template,
+};
+---
+
+<BaseLayout title={title} showToc={showToc}>
+  <article class:list={['docs-article', wide && 'docs-article--wide']}>
+    <Content components={{ ...mdxComponents }} />
+  </article>
+</BaseLayout>
+
+<style>
+  .docs-article {
+    max-width: 48rem;
+  }
+
+  .docs-article--wide {
+    max-width: 72rem;
+  }
+
+  .docs-article :global(h1) {
+    margin-block: 0 0.5rem;
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .docs-article :global(h2) {
+    margin-block: 2rem 0.75rem;
+    font-size: 1.35rem;
+  }
+
+  .docs-article :global(h3) {
+    margin-block: 1.5rem 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .docs-article :global(p),
+  .docs-article :global(li) {
+    margin-block: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .docs-article :global(code) {
+    font-size: 0.9em;
+  }
+</style>

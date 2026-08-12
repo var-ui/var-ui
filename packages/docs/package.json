@@ -1,0 +1,80 @@
+{
+  "name": "@var-ui/docs",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Astro documentation kit built with Var UI — shell, TOC, search, and createDesignTheme() theming (including syntax highlighting)",
+  "keywords": [
+    "astro",
+    "documentation",
+    "typestyles",
+    "var-ui",
+    "withastro"
+  ],
+  "homepage": "https://github.com/var-ui/var-ui/tree/main/packages/docs#readme",
+  "bugs": "https://github.com/var-ui/var-ui/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/var-ui/var-ui.git",
+    "directory": "packages/docs"
+  },
+  "files": [
+    "index.ts",
+    "src",
+    "README.md"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./schema": "./schema.ts",
+    "./utils": "./src/utils/index.ts",
+    "./shiki": "./src/utils/shiki-theme.ts",
+    "./middleware": "./src/middleware.ts",
+    "./routes/guide.astro": "./src/routes/guide.astro",
+    "./DocsPage": "./src/components/DocsPage.astro",
+    "./DocsSidebar": "./src/components/DocsSidebar.astro",
+    "./DocsToc": "./src/components/DocsToc.astro",
+    "./DocsSearch": "./src/components/DocsSearch.astro",
+    "./DocsThemePicker": "./src/components/DocsThemePicker.astro",
+    "./DocsThemeScript": "./src/components/DocsThemeScript.astro",
+    "./theme-css": "./src/integrations/theme-css-extract.ts"
+  },
+  "scripts": {
+    "test": "vp test run"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.0",
+    "@typestyles/build-runner": "^0.5.2",
+    "rehype-slug": "^6.0.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@typestyles/vite": "catalog:",
+    "@var-ui/astro": "workspace:*",
+    "@var-ui/core": "workspace:*",
+    "@var-ui/icons": "workspace:*",
+    "@var-ui/react": "workspace:*",
+    "astro": "catalog:",
+    "jsdom": "^26.0.0",
+    "react": "catalog:",
+    "react-aria-components": "catalog:",
+    "react-dom": "catalog:",
+    "typestyles": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "@typestyles/build-runner": "^0.5.2",
+    "@typestyles/vite": "catalog:",
+    "@var-ui/astro": "workspace:^",
+    "@var-ui/core": "workspace:^",
+    "@var-ui/icons": "workspace:^",
+    "@var-ui/react": "workspace:^",
+    "astro": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typestyles": "catalog:"
+  }
+}

@@ -1,0 +1,89 @@
+---
+/**
+ * Shared guide page for docs + theming collections.
+ * Layout and MDX shortcodes come from virtual modules configured in `varDocs()`.
+ */
+import { getEntry, render } from 'astro:content';
+import Layout from 'virtual:var-docs/components/Layout';
+import * as mdxComponents from 'virtual:var-docs/mdx-components';
+import config from 'virtual:var-docs/config';
+import { matchGuideRoute, resolveGuideRouteConfig } from '../utils/routing';
+
+export const prerender = false;
+
+const pathname = Astro.url.pathname;
+const routes = resolveGuideRouteConfig(config.routes);
+const matched = matchGuideRoute(pathname, routes);
+
+if (!matched) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+const entry = await getEntry(matched.collection, matched.id);
+if (!entry) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+const { Content } = await render(entry);
+const data = entry.data as {
+  title: string;
+  description?: string;
+  template: 'guide' | 'splash';
+  tableOfContents: boolean;
+  wide: boolean;
+};
+const title = `${data.title} · ${config.title}`;
+const wide = data.wide === true;
+const showToc = data.tableOfContents !== false;
+
+Astro.locals.varDocsRoute = {
+  collection: matched.collection,
+  id: matched.id,
+  pathname: matched.pathname,
+  title: data.title,
+  description: data.description,
+  template: data.template,
+};
+---
+
+<Layout title={title} showToc={showToc}>
+  <article class:list={['docs-article', wide && 'docs-article--wide']}>
+    <Content components={{ ...mdxComponents }} />
+  </article>
+</Layout>
+
+<style>
+  .docs-article {
+    max-width: 48rem;
+  }
+
+  .docs-article--wide {
+    max-width: 72rem;
+  }
+
+  .docs-article :global(h1) {
+    margin-block: 0 0.5rem;
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .docs-article :global(h2) {
+    margin-block: 2rem 0.75rem;
+    font-size: 1.35rem;
+  }
+
+  .docs-article :global(h3) {
+    margin-block: 1.5rem 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .docs-article :global(p),
+  .docs-article :global(li) {
+    margin-block: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .docs-article :global(code) {
+    font-size: 0.9em;
+  }
+</style>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vite-plus/test';
-import { extractThemeOnlyCss } from './extract-theme-css';
+import { extractThemeOnlyCss } from '@var-ui/docs/utils';
 
 const FULL_EXTRACTION_FIXTURE = `
 @layer components {

@@ -1,30 +1,8 @@
 ---
-import { CommandPalette, SearchInput } from '@var-ui/astro';
+import DocsSearch from '@var-ui/docs/DocsSearch';
 import { buildDocsSearchIndex } from '../lib/search-index';
 
 const items = buildDocsSearchIndex();
-const paletteId = 'docs-search';
 ---
 
-<div class="docs-search">
-  <SearchInput
-    variant="command"
-    size="md"
-    commandPalette={paletteId}
-    placeholder="Search docs…"
-    aria-label="Search docs"
-  />
-  <CommandPalette
-    id={paletteId}
-    items={items}
-    placeholder="Search docs…"
-    aria-label="Search docs"
-  />
-</div>
-
-<style>
-  .docs-search {
-    display: inline-flex;
-    align-items: center;
-  }
-</style>
+<DocsSearch items={items} />

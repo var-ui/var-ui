@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["vite/client"]
+  },
+  "include": [
+    "index.ts",
+    "schema.ts",
+    "src/**/*.ts",
+    "src/**/*.astro",
+    "src/env.d.ts",
+    "src/virtual.d.ts"
+  ]
+}

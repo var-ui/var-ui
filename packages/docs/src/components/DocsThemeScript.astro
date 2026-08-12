@@ -1,0 +1,85 @@
+---
+import config from 'virtual:var-docs/config';
+import {
+  createThemeClassMap,
+  getLazyThemePresets,
+  resolveThemePresets,
+} from '../utils/theme/presets';
+
+const presets = resolveThemePresets(config.theme.presets);
+const themeMap = createThemeClassMap(presets);
+const allClasses = presets.map((theme) => theme.className);
+const defaultThemeId = presets[0]?.id ?? 'default';
+const lazyThemeIds = getLazyThemePresets(presets).map((theme) => theme.id);
+const storageKey = config.theme.storageKey;
+const defaultThemeClassName = config.theme.defaultClassName;
+---
+
+{
+  presets.length > 0 ? (
+    <script
+      is:inline
+      define:vars={{
+        themeMap,
+        allClasses,
+        defaultThemeId,
+        lazyThemeIds,
+        storageKey,
+        defaultThemeClassName,
+      }}
+    >
+      function ensureThemeStyles(themeId, onReady) {
+        if (themeId === defaultThemeId || !lazyThemeIds.includes(themeId)) {
+          onReady();
+          return;
+        }
+
+        const href = `/themes/${themeId}.css`;
+        const existing = document.querySelector(`link[data-docs-theme-style="${themeId}"]`);
+        if (existing) {
+          if (existing.sheet) {
+            onReady();
+          } else {
+            existing.addEventListener('load', onReady, { once: true });
+          }
+          return;
+        }
+
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+        link.dataset.docsThemeStyle = themeId;
+        link.addEventListener('load', onReady, { once: true });
+        link.addEventListener('error', onReady, { once: true });
+        document.head.appendChild(link);
+      }
+
+      function applyDocsTheme(doc) {
+        const root = doc.documentElement;
+        const stored = localStorage.getItem(storageKey);
+        const themeId = stored && themeMap[stored] ? stored : defaultThemeId;
+        const className = themeMap[themeId] ?? themeMap[defaultThemeId] ?? defaultThemeClassName;
+
+        ensureThemeStyles(themeId, () => {
+          for (const cls of allClasses) {
+            root.classList.remove(cls);
+          }
+          root.classList.add(className);
+        });
+      }
+
+      applyDocsTheme(document);
+
+      const navKey = '__varUiDocsThemeNav';
+      if (!window[navKey]) {
+        window[navKey] = true;
+        document.addEventListener('astro:before-swap', (event) => {
+          applyDocsTheme(event.newDocument);
+        });
+        document.addEventListener('astro:after-swap', () => {
+          applyDocsTheme(document);
+        });
+      }
+    </script>
+  ) : null
+}

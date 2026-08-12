@@ -1,49 +1,30 @@
 import { defaultThemeClassName } from '@var-ui/core';
-import { SHOWCASE_THEMES, type ShowcaseThemeId } from '@/components/homepage/showcaseThemes';
-import { ensureDocsThemeStyles } from './docs-theme-styles';
+import { docsThemePresets, type ShowcaseThemeId } from '@/themes/presets';
+import { createDocsThemeController } from '@var-ui/docs/utils';
 
-export const DOCS_THEME_STORAGE_KEY = 'docs-theme-id';
+const controller = createDocsThemeController(docsThemePresets, {
+  fallbackClassName: defaultThemeClassName,
+});
 
-const THEME_IDS = new Set<string>(SHOWCASE_THEMES.map((theme) => theme.id));
+export const DOCS_THEME_STORAGE_KEY = controller.storageKey;
+export const ALL_DOCS_THEME_CLASS_NAMES = controller.allClassNames;
 
 export function isShowcaseThemeId(value: string | null | undefined): value is ShowcaseThemeId {
-  return value != null && THEME_IDS.has(value);
+  return controller.isThemeId(value);
 }
 
 export function readStoredDocsThemeId(): ShowcaseThemeId {
-  if (typeof localStorage === 'undefined') return 'default';
-  const stored = localStorage.getItem(DOCS_THEME_STORAGE_KEY);
-  return isShowcaseThemeId(stored) ? stored : 'default';
+  return controller.readStoredThemeId() as ShowcaseThemeId;
 }
 
 export function getDocsThemeClassName(themeId: ShowcaseThemeId): string {
-  const theme = SHOWCASE_THEMES.find((entry) => entry.id === themeId);
-  return theme?.className ?? defaultThemeClassName;
+  return controller.getThemeClassName(themeId);
 }
 
-export const ALL_DOCS_THEME_CLASS_NAMES = SHOWCASE_THEMES.map((theme) => theme.className);
-
-function applyDocsThemeClassToRoot(themeId: ShowcaseThemeId, doc: Document): void {
-  const className = getDocsThemeClassName(themeId);
-  const root = doc.documentElement;
-  for (const cls of ALL_DOCS_THEME_CLASS_NAMES) {
-    root.classList.remove(cls);
-  }
-  root.classList.add(className);
-}
-
-export function applyDocsThemeToDocument(themeId: ShowcaseThemeId, doc: Document = document): void {
-  const apply = () => applyDocsThemeClassToRoot(themeId, doc);
-
-  if (typeof document !== 'undefined' && doc === document) {
-    ensureDocsThemeStyles(themeId, apply);
-    return;
-  }
-
-  apply();
+export function applyDocsThemeToDocument(themeId: ShowcaseThemeId, doc?: Document): void {
+  controller.applyThemeToDocument(themeId, doc);
 }
 
 export function setDocsTheme(themeId: ShowcaseThemeId): void {
-  localStorage.setItem(DOCS_THEME_STORAGE_KEY, themeId);
-  applyDocsThemeToDocument(themeId);
+  controller.setTheme(themeId);
 }

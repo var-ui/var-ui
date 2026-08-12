@@ -64,6 +64,7 @@ export default defineConfig({
       'packages/form',
       'packages/icons',
       'packages/astro',
+      'packages/docs',
       'docs',
     ],
   },

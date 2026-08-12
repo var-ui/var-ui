@@ -1,10 +1,12 @@
 # Production deploys and PR previews run via .github/workflows/ci.yml (Netlify CLI).
 # Skip Netlify Git-triggered builds to avoid duplicate deploys.
-# CI: netlify deploy --filter @var-ui/docs --dir=docs/dist --functions=.netlify/v1/functions --no-build
+# CI: netlify deploy --filter @var-ui/docs-site --dir=docs/dist --functions=.netlify/v1/functions --no-build
 # (--filter scopes functions to the package; do not prefix paths with docs/)
+#
+# Do not set `base = "docs"` — @astrojs/netlify resolves this relative to the docs
+# package cwd during `astro dev`, producing a non-existent `docs/docs` path.
 [build]
-base = "docs"
-publish = "dist"
+publish = "docs/dist"
 ignore = "exit 0"
 
 [build.environment]

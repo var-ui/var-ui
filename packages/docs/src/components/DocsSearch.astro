@@ -1,0 +1,39 @@
+---
+import { CommandPalette, SearchInput } from '@var-ui/astro';
+import type { DocsSearchItem } from '../types';
+
+type Props = {
+  items: readonly DocsSearchItem[];
+  placeholder?: string;
+  id?: string;
+};
+
+const {
+  items,
+  placeholder = 'Search docs…',
+  id: paletteId = 'docs-search',
+} = Astro.props;
+---
+
+<div class="docs-search">
+  <SearchInput
+    variant="command"
+    size="md"
+    commandPalette={paletteId}
+    placeholder={placeholder}
+    aria-label={placeholder}
+  />
+  <CommandPalette
+    id={paletteId}
+    items={[...items]}
+    placeholder={placeholder}
+    aria-label={placeholder}
+  />
+</div>
+
+<style>
+  .docs-search {
+    display: inline-flex;
+    align-items: center;
+  }
+</style>

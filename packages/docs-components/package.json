@@ -1,0 +1,60 @@
+{
+  "name": "@var-ui/docs-components",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Optional Var UI docs plugin for design-system catalogs — demos, props extract, framework switcher, component page chrome",
+  "keywords": [
+    "astro",
+    "documentation",
+    "var-ui",
+    "withastro"
+  ],
+  "homepage": "https://github.com/var-ui/var-ui/tree/main/packages/docs-components#readme",
+  "bugs": "https://github.com/var-ui/var-ui/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/var-ui/var-ui.git",
+    "directory": "packages/docs-components"
+  },
+  "files": [
+    "index.ts",
+    "schema.ts",
+    "src",
+    "README.md"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./schema": "./schema.ts",
+    "./framework": "./src/framework.ts",
+    "./middleware": "./src/middleware.ts",
+    "./FrameworkSwitcher": "./src/components/FrameworkSwitcher.astro",
+    "./ComponentDocTabs": "./src/components/ComponentDocTabs.astro",
+    "./HiddenPropsTable": "./src/components/HiddenPropsTable.astro",
+    "./scripts/componentPageTabs": "./src/scripts/componentPageTabs.ts",
+    "./scripts/frameworkSwitcher": "./src/scripts/frameworkSwitcher.ts"
+  },
+  "scripts": {
+    "test": "vp test run"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@var-ui/astro": "workspace:*",
+    "@var-ui/core": "workspace:*",
+    "@var-ui/docs": "workspace:*",
+    "astro": "catalog:",
+    "jsdom": "^26.0.0",
+    "typestyles": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "@var-ui/astro": "workspace:^",
+    "@var-ui/core": "workspace:^",
+    "@var-ui/docs": "workspace:^",
+    "astro": "catalog:"
+  }
+}

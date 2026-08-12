@@ -1,0 +1,27 @@
+---
+import { Toc } from '@var-ui/astro';
+import {
+  DOCS_TOC_CONTENT_SELECTOR,
+  DOCS_TOC_HEADING_SELECTOR,
+} from '../utils/docs-toc';
+
+type Props = {
+  contentSelector?: string;
+  headingSelector?: string;
+};
+
+const {
+  contentSelector = DOCS_TOC_CONTENT_SELECTOR,
+  headingSelector = DOCS_TOC_HEADING_SELECTOR,
+} = Astro.props;
+---
+
+<Toc
+  title="On this page"
+  label="On this page"
+  auto
+  contentSelector={contentSelector}
+  headingSelector={headingSelector}
+  className="docs-page-toc-nav"
+  stickyTop="calc(var(--docs-header-height, 3.5rem) + 1.5rem)"
+/>

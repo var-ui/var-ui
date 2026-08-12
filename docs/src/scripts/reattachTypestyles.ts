@@ -1,9 +1,6 @@
-import { ensureDocumentStylesAttached } from 'typestyles';
+import { reattachTypestyles } from '@var-ui/docs/utils';
 
-/** Re-inject runtime theme CSS after Astro view transitions swap the document head. */
-export function reattachTypestyles(): void {
-  ensureDocumentStylesAttached();
-}
+export { reattachTypestyles };
 
 function onPageLoad(): void {
   reattachTypestyles();

@@ -1,13 +1,8 @@
 import { categoryLabels, componentRegistry } from '@/data/components';
 import { docsSidebar, playgroundSidebar, themingSidebar } from '@/data/navigation';
+import type { DocsSearchItem } from '@var-ui/docs/utils';
 
-export type DocsSearchItem = {
-  id: string;
-  title: string;
-  meta?: string;
-  keywords?: string[];
-  group?: string;
-};
+export type { DocsSearchItem };
 
 function sidebarItems(
   items: ReadonlyArray<{ text: string; link: string }>,

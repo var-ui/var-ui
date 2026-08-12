@@ -1,0 +1,21 @@
+---
+import config from 'virtual:var-docs/config';
+import DocsThemePickerIsland from './DocsThemePicker';
+
+const presets = config.theme.presets ?? [];
+const storageKey = config.theme.storageKey;
+const fallbackClassName = config.theme.defaultClassName;
+---
+
+{
+  presets.length > 0 ? (
+    <div transition:persist="docs-theme-picker">
+      <DocsThemePickerIsland
+        client:load
+        presets={presets}
+        storageKey={storageKey}
+        fallbackClassName={fallbackClassName}
+      />
+    </div>
+  ) : null
+}

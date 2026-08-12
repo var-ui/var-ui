@@ -1,0 +1,284 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import {
+  AppShell,
+  ColorModeToggle,
+  cx,
+  Layout,
+  LayoutContent,
+  LayoutPanel,
+  MobileNav,
+  MobileNavToggle,
+  SideNav,
+  ThemeScript,
+  TopNav,
+  TopNavHeading,
+  TopNavItem,
+} from '@var-ui/astro';
+import DocsSearch from './DocsSearch.astro';
+import DocsSidebar from './DocsSidebar.astro';
+import DocsToc from './DocsToc.astro';
+import type { DocsBrand, DocsSearchItem, SidebarSection, TopNavItem as TopNavItemType } from '../types';
+import config from 'virtual:var-docs/config';
+import {
+  DOCS_TOC_CONTENT_SELECTOR,
+  normalizeDocsPath,
+  shouldShowDocsToc,
+} from '../utils/docs-toc';
+import { resolveGuideRouteConfig } from '../utils/routing';
+
+const {
+  title = 'Docs',
+  contentWidth = 'default',
+  showToc: showTocProp,
+  tocContentSelector = DOCS_TOC_CONTENT_SELECTOR,
+  tocExtraPaths = [],
+  themeClassName,
+  bodyClassName,
+  topNav,
+  sidebarSections = null,
+  searchItems = [],
+  brand = { heading: 'Docs', href: '/' },
+  htmlAttributes = {},
+} = Astro.props as {
+  title?: string;
+  contentWidth?: 'default' | 'full';
+  showToc?: boolean;
+  tocContentSelector?: string;
+  /** Exact paths that should show auto TOC beyond configured guide prefixes. */
+  tocExtraPaths?: readonly string[];
+  themeClassName: string;
+  bodyClassName?: string;
+  topNav: readonly TopNavItemType[];
+  sidebarSections?: readonly SidebarSection[] | null;
+  searchItems?: readonly DocsSearchItem[];
+  brand?: DocsBrand;
+  /** Extra attributes on `<html>` (e.g. `data-framework`). */
+  htmlAttributes?: Record<string, string | undefined>;
+};
+
+const pathname = Astro.url.pathname;
+const currentPath = normalizeDocsPath(pathname);
+const hasTocSlot = Astro.slots.has('toc');
+const guidePrefixes = resolveGuideRouteConfig(config.routes).map((route) => route.prefix);
+const showAutoToc =
+  showTocProp === false
+    ? false
+    : showTocProp === true
+      ? true
+      : !hasTocSlot &&
+        shouldShowDocsToc(currentPath, {
+          guidePrefixes,
+          extraPaths: tocExtraPaths,
+        });
+const showTocPanel = hasTocSlot || showAutoToc;
+const hasToolsSlot = Astro.slots.has('tools');
+const hasThemePickerSlot = Astro.slots.has('themePicker');
+const hasThemeScriptSlot = Astro.slots.has('themeScript');
+
+function isSidebarLinkActive(link: string): boolean {
+  return currentPath === normalizeDocsPath(link);
+}
+---
+
+<html lang="en" class={themeClassName} {...htmlAttributes}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <ThemeScript themeClass={themeClassName} />
+    {hasThemeScriptSlot ? <slot name="themeScript" /> : null}
+    <link rel="stylesheet" href="/typestyles.css" />
+    <ClientRouter />
+    <slot name="head" />
+  </head>
+  <body class={cx('docs-body', bodyClassName)}>
+    <AppShell variant="wash" height="fill" contentPadding={0} mobileBreakpoint="md">
+      <TopNav slot="topNav">
+        <TopNavHeading slot="heading" heading={brand.heading} headingHref={brand.href} />
+        {
+          topNav.map((item) => (
+            <TopNavItem
+              label={item.text}
+              href={item.link}
+              isSelected={currentPath.startsWith(item.match)}
+            />
+          ))
+        }
+        <div slot="end" class="docs-top-nav__tools">
+          {sidebarSections ? <MobileNavToggle /> : null}
+          <div
+            class="docs-top-nav__tools-persist"
+            transition:persist="docs-top-nav-tools"
+            transition:animate="none"
+          >
+            <DocsSearch items={searchItems} />
+            {hasToolsSlot ? <slot name="tools" /> : null}
+            <ColorModeToggle includeSystem size="md" />
+          </div>
+        </div>
+      </TopNav>
+
+      {
+        sidebarSections && (
+          <MobileNav slot="mobileNav" header="Menu">
+            <DocsSidebar sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
+          </MobileNav>
+        )
+      }
+
+      {
+        sidebarSections ? (
+          <Layout height="fill" padding={0} className="docs-site-layout">
+            <LayoutPanel slot="start" side="start" width={280} hasDivider padding={0} isScrollable={false}>
+              <SideNav label="Section navigation" collapsible>
+                <DocsSidebar sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
+              </SideNav>
+            </LayoutPanel>
+            <LayoutContent label="Main content">
+              {
+                showTocPanel ? (
+                  <div class="docs-page-body">
+                    <div class:list={['docs-content', contentWidth === 'full' && 'docs-content--full']}>
+                      <slot />
+                    </div>
+                    <aside class="docs-page-toc" aria-label="On this page">
+                      {hasTocSlot ? <slot name="toc" /> : <DocsToc contentSelector={tocContentSelector} />}
+                    </aside>
+                  </div>
+                ) : (
+                  <div class:list={['docs-content', contentWidth === 'full' && 'docs-content--full']}>
+                    <slot />
+                  </div>
+                )
+              }
+            </LayoutContent>
+          </Layout>
+        ) : (
+          <Layout height="fill" padding={showTocPanel ? 0 : 6} className="docs-site-layout">
+            <LayoutContent label="Main content">
+              {
+                showTocPanel ? (
+                  <div class="docs-page-body">
+                    <div class="docs-content">
+                      <slot />
+                    </div>
+                    <aside class="docs-page-toc" aria-label="On this page">
+                      {hasTocSlot ? <slot name="toc" /> : <DocsToc contentSelector={tocContentSelector} />}
+                    </aside>
+                  </div>
+                ) : (
+                  <div class="docs-content">
+                    <slot />
+                  </div>
+                )
+              }
+            </LayoutContent>
+          </Layout>
+        )
+      }
+    </AppShell>
+    {hasThemePickerSlot ? <slot name="themePicker" /> : null}
+    <script>
+      import '../scripts/docsPageClient.ts';
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  html,
+  body.docs-body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body.docs-body {
+    overflow: hidden;
+  }
+
+  body.docs-body #var-ui-app-shell-main {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+  }
+</style>
+
+<style>
+  .docs-top-nav__tools {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .docs-top-nav__tools-persist {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .docs-site-layout {
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
+  }
+
+  .docs-content {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding-bottom: 3rem;
+  }
+
+  .docs-page-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 13.75rem;
+    gap: 2.5rem;
+    align-items: start;
+    padding-inline: var(--var-ui-space-10);
+    padding-block: var(--var-ui-space-10);
+    padding-bottom: 3rem;
+    box-sizing: border-box;
+    min-height: 100%;
+  }
+
+  .docs-page-body .docs-content {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+
+  .docs-page-toc {
+    position: sticky;
+    top: calc(var(--docs-header-height, 3.5rem) + 1.25rem);
+    align-self: start;
+    min-width: 0;
+    max-height: calc(100dvh - var(--docs-header-height, 3.5rem) - 2rem);
+    overflow-y: auto;
+  }
+
+  .docs-page-body :global(.docs-page-toc-nav) {
+    position: static;
+    top: auto;
+    padding: 0;
+    max-height: none;
+    overflow: visible;
+  }
+
+  @media (max-width: 960px) {
+    .docs-page-body {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .docs-page-toc {
+      display: none;
+    }
+  }
+
+  .docs-content--full {
+    max-width: none;
+    margin: 0;
+    padding-inline: var(--var-ui-space-10);
+    padding-block: var(--var-ui-space-10);
+  }
+</style>

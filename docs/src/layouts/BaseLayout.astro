@@ -1,278 +1,66 @@
 ---
-import { ClientRouter } from 'astro:transitions';
-import {
-  AppShell,
-  ColorModeToggle,
-  cx,
-  Layout,
-  LayoutContent,
-  LayoutPanel,
-  MobileNav,
-  MobileNavToggle,
-  recipeClassName,
-  SideNav,
-  ThemeScript,
-  TopNav,
-  TopNavHeading,
-  TopNavItem,
-} from '@var-ui/astro';
+import DocsPage from '../../../packages/docs/src/components/DocsPage.astro';
+import { recipeClassName } from '@var-ui/astro';
 import { codeHljsScope } from '@/styles/codeHighlight';
 import { defaultThemeClassName } from '@var-ui/core';
-import DocsSearch from '../components/DocsSearch.astro';
-import DocsSidebarNav from '../components/DocsSidebarNav.astro';
 import DocsThemePicker from '../components/DocsThemePicker.astro';
 import DocsThemeScript from '../components/DocsThemeScript.astro';
-import DocsToc from '../components/DocsToc.astro';
 import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
 import {
   componentSidebarSections,
   themingSidebarSections,
   topNav as topNavItems,
 } from '../data/navigation';
-import {
-  DOCS_TOC_CONTENT_SELECTOR,
-  normalizeDocsPath,
-  shouldShowDocsToc,
-} from '../lib/docs-toc';
+import { buildDocsSearchIndex } from '../lib/search-index';
+import { normalizeDocsPath } from '@var-ui/docs/utils';
 
 const {
   title = 'Var UI',
   contentWidth = 'default',
   showToc: showTocProp,
-  tocContentSelector = DOCS_TOC_CONTENT_SELECTOR,
+  tocContentSelector,
 } = Astro.props as {
   title?: string;
   contentWidth?: 'default' | 'full';
-  /** When omitted, TOC is shown on standard article pages (not homepage, playground, etc.). */
   showToc?: boolean;
   tocContentSelector?: string;
 };
+
 const framework = Astro.locals.framework;
-const pathname = Astro.url.pathname;
-
-const currentPath = normalizeDocsPath(pathname);
-const hasTocSlot = Astro.slots.has('toc');
-const showAutoToc =
-  showTocProp === false
-    ? false
-    : showTocProp === true
-      ? true
-      : !hasTocSlot && shouldShowDocsToc(currentPath);
-const showTocPanel = hasTocSlot || showAutoToc;
-
-const hljsScopeClass = recipeClassName(codeHljsScope().root);
-
+const currentPath = normalizeDocsPath(Astro.url.pathname);
 const sidebarSections = currentPath.startsWith('/components')
   ? componentSidebarSections
   : currentPath.startsWith('/theming')
     ? themingSidebarSections
     : null;
 
-function isSidebarLinkActive(link: string): boolean {
-  return currentPath === normalizeDocsPath(link);
-}
+const hljsScopeClass = recipeClassName(codeHljsScope().root);
+const searchItems = buildDocsSearchIndex();
 ---
 
-<html lang="en" class={defaultThemeClassName} data-framework={framework}>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{title}</title>
-    <ThemeScript themeClass={defaultThemeClassName} />
-    <DocsThemeScript />
-    <link rel="stylesheet" href="/typestyles.css" />
-    <ClientRouter />
-    <slot name="head" />
-  </head>
-  <body class={cx('docs-body', hljsScopeClass)}>
-    <AppShell variant="wash" height="fill" contentPadding={0} mobileBreakpoint="md">
-      <TopNav slot="topNav">
-        <TopNavHeading slot="heading" heading="Var UI" headingHref="/" />
-        {
-          topNavItems.map((item) => (
-            <TopNavItem
-              label={item.text}
-              href={item.link}
-              isSelected={currentPath.startsWith(item.match)}
-            />
-          ))
-        }
-        <div slot="end" class="docs-top-nav__tools">
-          {sidebarSections ? <MobileNavToggle /> : null}
-          <div
-            class="docs-top-nav__tools-persist"
-            transition:persist="docs-top-nav-tools"
-            transition:animate="none"
-          >
-            <DocsSearch />
-            <FrameworkSwitcher />
-            <ColorModeToggle includeSystem size="md" />
-          </div>
-        </div>
-      </TopNav>
+<DocsPage
+  title={title}
+  contentWidth={contentWidth}
+  showToc={showTocProp}
+  tocContentSelector={tocContentSelector}
+  themeClassName={defaultThemeClassName}
+  bodyClassName={hljsScopeClass}
+  topNav={topNavItems}
+  sidebarSections={sidebarSections}
+  searchItems={searchItems}
+  brand={{ heading: 'Var UI', href: '/' }}
+  tocExtraPaths={['/components']}
+  htmlAttributes={{ 'data-framework': framework }}
+>
+  <DocsThemeScript slot="themeScript" />
+  <FrameworkSwitcher slot="tools" />
+  <DocsThemePicker slot="themePicker" />
+  <slot name="head" slot="head" />
+  <slot name="toc" slot="toc" />
+  <slot />
+</DocsPage>
 
-      {
-        sidebarSections && (
-          <MobileNav slot="mobileNav" header="Menu">
-            <DocsSidebarNav sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
-          </MobileNav>
-        )
-      }
-
-      {
-        sidebarSections ? (
-          <Layout height="fill" padding={0} className="docs-site-layout">
-            <LayoutPanel slot="start" side="start" width={280} hasDivider padding={0} isScrollable={false}>
-              <SideNav label="Section navigation" collapsible>
-                <DocsSidebarNav sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
-              </SideNav>
-            </LayoutPanel>
-            <LayoutContent label="Main content">
-              {
-                showTocPanel ? (
-                  <div class="docs-page-body">
-                    <div class:list={['docs-content', contentWidth === 'full' && 'docs-content--full']}>
-                      <slot />
-                    </div>
-                    <aside class="docs-page-toc" aria-label="On this page">
-                      {hasTocSlot ? <slot name="toc" /> : <DocsToc contentSelector={tocContentSelector} />}
-                    </aside>
-                  </div>
-                ) : (
-                  <div class:list={['docs-content', contentWidth === 'full' && 'docs-content--full']}>
-                    <slot />
-                  </div>
-                )
-              }
-            </LayoutContent>
-          </Layout>
-        ) : (
-          <Layout height="fill" padding={showTocPanel ? 0 : 6} className="docs-site-layout">
-            <LayoutContent label="Main content">
-              {
-                showTocPanel ? (
-                  <div class="docs-page-body">
-                    <div class="docs-content">
-                      <slot />
-                    </div>
-                    <aside class="docs-page-toc" aria-label="On this page">
-                      {hasTocSlot ? <slot name="toc" /> : <DocsToc contentSelector={tocContentSelector} />}
-                    </aside>
-                  </div>
-                ) : (
-                  <div class="docs-content">
-                    <slot />
-                  </div>
-                )
-              }
-            </LayoutContent>
-          </Layout>
-        )
-      }
-    </AppShell>
-    <DocsThemePicker />
-    <script>
-      import '../../typestyles-entry.ts';
-      import '../scripts/reattachTypestyles.ts';
-      import '../scripts/docsToc.ts';
-    </script>
-  </body>
-</html>
-
-<style is:global>
-  html,
-  body.docs-body {
-    height: 100%;
-    margin: 0;
-  }
-
-  body.docs-body {
-    overflow: hidden;
-  }
-
-  body.docs-body #var-ui-app-shell-main {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    padding: 0;
-  }
-</style>
-
-<style>
-  .docs-top-nav__tools {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .docs-top-nav__tools-persist {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .docs-site-layout {
-    flex: 1 1 auto;
-    min-height: 0;
-    min-width: 0;
-  }
-
-  .docs-content {
-    max-width: 60rem;
-    margin: 0 auto;
-    padding-bottom: 3rem;
-  }
-
-  .docs-page-body {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 13.75rem;
-    gap: 2.5rem;
-    align-items: start;
-    padding-inline: var(--var-ui-space-10);
-    padding-block: var(--var-ui-space-10);
-    padding-bottom: 3rem;
-    box-sizing: border-box;
-    min-height: 100%;
-  }
-
-  .docs-page-body .docs-content {
-    max-width: none;
-    margin: 0;
-    padding: 0;
-    min-width: 0;
-  }
-
-  .docs-page-toc {
-    position: sticky;
-    top: calc(var(--docs-header-height, 3.5rem) + 1.25rem);
-    align-self: start;
-    min-width: 0;
-    max-height: calc(100dvh - var(--docs-header-height, 3.5rem) - 2rem);
-    overflow-y: auto;
-  }
-
-  .docs-page-body :global(.docs-page-toc-nav) {
-    position: static;
-    top: auto;
-    padding: 0;
-    max-height: none;
-    overflow: visible;
-  }
-
-  @media (max-width: 960px) {
-    .docs-page-body {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .docs-page-toc {
-      display: none;
-    }
-  }
-
-  .docs-content--full {
-    max-width: none;
-    margin: 0;
-    padding-inline: var(--var-ui-space-10);
-    padding-block: var(--var-ui-space-10);
-  }
-</style>
+<script>
+  import '../../typestyles-entry.ts';
+  import '../scripts/docsToc.ts';
+</script>

@@ -3,11 +3,11 @@ export const prerender = false;
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ButtonConfigurator from '../../components/ButtonConfigurator.astro';
-import ComponentDocTabs from '../../components/ComponentDocTabs.astro';
+import ComponentDocTabs from '@var-ui/docs-components/ComponentDocTabs';
 import ComponentPageHeader from '../../components/ComponentPageHeader.astro';
 import ComponentStylesPanel from '../../components/ComponentStylesPanel.astro';
 import DemoHost from '../../components/DemoHost.astro';
-import HiddenPropsTable from '../../components/HiddenPropsTable.astro';
+import HiddenPropsTable from '@var-ui/docs-components/HiddenPropsTable';
 import PropsTable from '../../components/PropsTable.astro';
 import {
   getComponentCategoryLabel,
@@ -88,7 +88,7 @@ const initialTab = parseComponentDocTab(
 </BaseLayout>
 
 <script>
-  import '../../scripts/componentPageTabs.ts';
+  import '@var-ui/docs-components/scripts/componentPageTabs';
 </script>
 
 <style>

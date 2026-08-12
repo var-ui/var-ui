@@ -1,12 +1,12 @@
 {
-  "name": "@var-ui/docs",
+  "name": "@var-ui/docs-site",
   "version": "0.0.0",
   "private": true,
   "description": "Documentation site for var-ui",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build && node scripts/build-theme-styles.mjs",
+    "prebuild": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
@@ -19,6 +19,8 @@
     "@astrojs/react": "^4.3.0",
     "@var-ui/astro": "workspace:*",
     "@var-ui/core": "workspace:*",
+    "@var-ui/docs": "workspace:*",
+    "@var-ui/docs-components": "workspace:*",
     "@var-ui/icons": "workspace:*",
     "@var-ui/react": "workspace:*",
     "astro": "catalog:",

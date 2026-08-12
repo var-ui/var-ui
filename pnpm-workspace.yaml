@@ -28,7 +28,7 @@ catalog:
 
 overrides:
   vite: 'catalog:'
-  '@var-ui/docs>vite': 'npm:vite@^6.4.1'
+  '@var-ui/docs-site>vite': 'npm:vite@^6.4.1'
 
 peerDependencyRules:
   allowAny:

@@ -10,7 +10,7 @@ import {
   recipeClassName,
   recipeProps,
 } from '@var-ui/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Header,
   Menu as AriaMenu,
@@ -18,14 +18,16 @@ import {
   MenuTrigger,
   Popover,
 } from 'react-aria-components';
-import {
-  DOCS_THEME_STORAGE_KEY,
-  isShowcaseThemeId,
-  readStoredDocsThemeId,
-  setDocsTheme,
-} from '@/lib/docs-theme';
-import { docsThemePicker } from '@/styles/docsThemePicker';
-import { SHOWCASE_THEMES, type ShowcaseThemeId } from './homepage/showcaseThemes';
+import { createDocsThemeController, type DocsThemeController } from '../utils/theme/docs-theme';
+import type { DocsThemePreset } from '../utils/theme/presets';
+import { docsThemePicker } from '../styles/docsThemePicker';
+
+export type DocsThemePickerProps = {
+  presets: DocsThemePreset[];
+  storageKey?: string;
+  defaultThemeId?: string;
+  fallbackClassName?: string;
+};
 
 function ThemePickerIcon({ swatch }: { swatch: string }) {
   return (
@@ -48,12 +50,16 @@ function ThemePickerIcon({ swatch }: { swatch: string }) {
 }
 
 function ThemePickerMenu({
+  presets,
   selectedId,
   onSelect,
+  isThemeId,
   itemSwatchClassName,
 }: {
-  selectedId: ShowcaseThemeId;
-  onSelect: (id: ShowcaseThemeId) => void;
+  presets: DocsThemePreset[];
+  selectedId: string;
+  onSelect: (id: string) => void;
+  isThemeId: DocsThemeController['isThemeId'];
   itemSwatchClassName: string;
 }) {
   const m = menu();
@@ -66,20 +72,23 @@ function ThemePickerMenu({
       selectedKeys={[selectedId]}
       onSelectionChange={(keys) => {
         const nextId = keys === 'all' ? null : String(Array.from(keys)[0]);
-        if (isShowcaseThemeId(nextId)) {
+        if (isThemeId(nextId)) {
           onSelect(nextId);
         }
       }}
     >
       <Header {...recipeProps(m.sectionHeader)}>Theme</Header>
-      {SHOWCASE_THEMES.map((theme) => (
+      {presets.map((theme) => (
         <AriaMenuItem key={theme.id} id={theme.id} textValue={theme.label} {...recipeProps(m.item)}>
           {({ isSelected }) => (
             <>
               <span {...recipeProps(m.itemCheck)}>
                 {isSelected ? <Icon name="check" size="sm" /> : null}
               </span>
-              <span className={itemSwatchClassName} style={{ backgroundColor: theme.swatch }} />
+              <span
+                className={itemSwatchClassName}
+                style={{ backgroundColor: theme.swatch ?? 'currentColor' }}
+              />
               <span {...recipeProps(m.itemLabel)}>{theme.label}</span>
             </>
           )}
@@ -89,26 +98,46 @@ function ThemePickerMenu({
   );
 }
 
-export default function DocsThemePicker() {
-  const s = docsThemePicker();
-  const [selectedId, setSelectedId] = useState<ShowcaseThemeId>(() => readStoredDocsThemeId());
+export default function DocsThemePicker({
+  presets,
+  storageKey,
+  defaultThemeId,
+  fallbackClassName,
+}: DocsThemePickerProps) {
+  const controller = useMemo(
+    () =>
+      createDocsThemeController(presets, {
+        storageKey,
+        defaultThemeId,
+        fallbackClassName,
+      }),
+    [presets, storageKey, defaultThemeId, fallbackClassName],
+  );
 
-  const handleSelect = useCallback((themeId: ShowcaseThemeId) => {
-    setDocsTheme(themeId);
-    setSelectedId(themeId);
-  }, []);
+  const s = docsThemePicker();
+  const [selectedId, setSelectedId] = useState(() => controller.readStoredThemeId());
+
+  const handleSelect = useCallback(
+    (themeId: string) => {
+      controller.setTheme(themeId);
+      setSelectedId(themeId);
+    },
+    [controller],
+  );
 
   useEffect(() => {
     const onStorage = (event: StorageEvent) => {
-      if (event.key === DOCS_THEME_STORAGE_KEY) {
-        setSelectedId(readStoredDocsThemeId());
+      if (event.key === controller.storageKey) {
+        setSelectedId(controller.readStoredThemeId());
       }
     };
     window.addEventListener('storage', onStorage);
     return () => window.removeEventListener('storage', onStorage);
-  }, []);
+  }, [controller]);
 
-  const selected = SHOWCASE_THEMES.find((theme) => theme.id === selectedId) ?? SHOWCASE_THEMES[0];
+  if (presets.length === 0) return null;
+
+  const selected = presets.find((theme) => theme.id === selectedId) ?? presets[0]!;
 
   return (
     <IconProvider icons={defaultIcons}>
@@ -124,14 +153,16 @@ export default function DocsThemePicker() {
               tone="accent"
               icon={
                 <Icon size="lg">
-                  <ThemePickerIcon swatch={selected.swatch} />
+                  <ThemePickerIcon swatch={selected.swatch ?? '#64748b'} />
                 </Icon>
               }
             />
             <Popover {...recipeProps(menu().popover)} placement="top end" offset={10}>
               <ThemePickerMenu
+                presets={presets}
                 selectedId={selectedId}
                 onSelect={handleSelect}
+                isThemeId={controller.isThemeId}
                 itemSwatchClassName={recipeClassName(s.itemSwatch)}
               />
             </Popover>

@@ -1,4 +1,7 @@
 import { categoryLabels, componentRegistry, type ComponentCategory } from './components';
+import type { SidebarItem, SidebarSection } from '@var-ui/docs/utils';
+
+export type { SidebarItem, SidebarSection };
 
 export const githubUrl = 'https://github.com/var-ui/var-ui';
 
@@ -8,16 +11,6 @@ export const topNav = [
   { text: 'Theming', link: '/theming', match: '/theming' },
   { text: 'Playground', link: '/playground', match: '/playground' },
 ] as const;
-
-export type SidebarItem = {
-  text: string;
-  link: string;
-};
-
-export type SidebarSection = {
-  title: string;
-  items: readonly SidebarItem[];
-};
 
 export const docsSidebar = [{ text: 'Getting started', link: '/docs/getting-started' }] as const;
 
