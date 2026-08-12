@@ -5,14 +5,26 @@ description: Mobile drawer navigation with MobileNav.Toggle and provider.
 
 # MobileNav
 
-Mobile drawer navigation with `MobileNav.Toggle` and `MobileNavProvider` for shared open state.
+Slide-out mobile navigation drawer built on React Aria Modal — focus trap, Escape, and backdrop dismissal included. Control open state with `isOpen` / `onOpenChange`, or share state through `MobileNavProvider` + `MobileNav.Toggle`.
 
 ## Examples
 
 ### Default
 
+Controlled open state from a button.
+
 <Demo id="mobile-nav.default" />
+
+### Provider and toggle
+
+Wrap the hamburger and drawer in `MobileNavProvider` so `MobileNav.Toggle` and `MobileNav` share open state without prop drilling. `AppShell` already provides this at the mobile breakpoint.
+
+<Demo id="mobile-nav.toggle" />
 
 ## Props
 
 <PropsTable slug="mobile-nav" />
+
+## Accessibility
+
+The panel is a dialog (`label` defaults to `"Navigation"`) with a labeled close control. `MobileNav.Toggle` sets `aria-expanded` from provider or explicit `isOpen`, and defaults to `aria-label="Open navigation"`. Prefer the provider pattern when the toggle lives in top chrome and the drawer is a sibling (as in `AppShell`).

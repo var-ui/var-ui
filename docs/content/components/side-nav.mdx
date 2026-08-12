@@ -5,14 +5,26 @@ description: Collapsible side navigation with Section, Item, and Heading parts.
 
 # SideNav
 
-Collapsible side navigation with `SideNav.Section`, `SideNav.Item`, and `SideNav.Heading` parts.
+Persistent side navigation with sticky header/footer zones around a scrollable middle. Compose with `SideNav.Heading`, `SideNav.Section`, and `SideNav.Item` (link via `href` or button via `onPress`). Optional `collapsible` icon-only mode and `resizable` width.
 
 ## Examples
 
 ### Default
 
+Brand in `header`, then a section of items.
+
 <Demo id="side-nav.default" />
+
+### Sections
+
+Group related destinations with multiple `SideNav.Section`s — each can take `title`, `subtitle`, and several `SideNav.Item`s.
+
+<Demo id="side-nav.sections" />
 
 ## Props
 
 <PropsTable slug="side-nav" />
+
+## Accessibility
+
+The root is a `nav` landmark (`label` defaults to `"Side navigation"`). Selected items set `aria-current="page"`. In collapsed icon-only mode, item labels surface via tooltips and the collapse control uses `"Collapse navigation"` / `"Expand navigation"`. Nested collapsible items expose expand/collapse buttons and a `role="group"` submenu.

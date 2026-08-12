@@ -66,15 +66,20 @@ import { snippets as outlineDefaultSnippets } from './outline/default/snippets';
 import { snippets as tocDefaultSnippets } from './toc/default/snippets';
 import { snippets as breadcrumbsDefaultSnippets } from './breadcrumbs/default/snippets';
 import { snippets as appShellDefaultSnippets } from './app-shell/default/snippets';
+import { snippets as appShellLayoutSnippets } from './app-shell/layout/snippets';
 import { snippets as simpleGridDefaultSnippets } from './simple-grid/default/snippets';
 import { snippets as scrollAreaDefaultSnippets } from './scroll-area/default/snippets';
 import { snippets as overflowListDefaultSnippets } from './overflow-list/default/snippets';
 import { snippets as resizeHandleDefaultSnippets } from './resize-handle/default/snippets';
 import { snippets as paginationDefaultSnippets } from './pagination/default/snippets';
 import { snippets as sideNavDefaultSnippets } from './side-nav/default/snippets';
+import { snippets as sideNavSectionsSnippets } from './side-nav/sections/snippets';
 import { snippets as topNavDefaultSnippets } from './top-nav/default/snippets';
+import { snippets as topNavMenuSnippets } from './top-nav/menu/snippets';
 import { snippets as topNavMegaMenuDefaultSnippets } from './top-nav-mega-menu/default/snippets';
+import { snippets as topNavMegaMenuFeaturedSnippets } from './top-nav-mega-menu/featured/snippets';
 import { snippets as mobileNavDefaultSnippets } from './mobile-nav/default/snippets';
+import { snippets as mobileNavToggleSnippets } from './mobile-nav/toggle/snippets';
 import { snippets as tabListDefaultSnippets } from './tab-list/default/snippets';
 import { snippets as alertDialogDefaultSnippets } from './alert-dialog/default/snippets';
 import { snippets as alertDialogConfirmSnippets } from './alert-dialog/confirm/snippets';
@@ -212,15 +217,20 @@ export const DEMO_IDS = [
   'toc.default',
   'breadcrumbs.default',
   'app-shell.default',
+  'app-shell.layout',
   'simple-grid.default',
   'scroll-area.default',
   'overflow-list.default',
   'resize-handle.default',
   'pagination.default',
   'side-nav.default',
+  'side-nav.sections',
   'top-nav.default',
+  'top-nav.menu',
   'top-nav-mega-menu.default',
+  'top-nav-mega-menu.featured',
   'mobile-nav.default',
+  'mobile-nav.toggle',
   'tab-list.default',
   'alert-dialog.default',
   'alert-dialog.confirm',
@@ -357,15 +367,20 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'toc.default': tocDefaultSnippets,
   'breadcrumbs.default': breadcrumbsDefaultSnippets,
   'app-shell.default': appShellDefaultSnippets,
+  'app-shell.layout': appShellLayoutSnippets,
   'simple-grid.default': simpleGridDefaultSnippets,
   'scroll-area.default': scrollAreaDefaultSnippets,
   'overflow-list.default': overflowListDefaultSnippets,
   'resize-handle.default': resizeHandleDefaultSnippets,
   'pagination.default': paginationDefaultSnippets,
   'side-nav.default': sideNavDefaultSnippets,
+  'side-nav.sections': sideNavSectionsSnippets,
   'top-nav.default': topNavDefaultSnippets,
+  'top-nav.menu': topNavMenuSnippets,
   'top-nav-mega-menu.default': topNavMegaMenuDefaultSnippets,
+  'top-nav-mega-menu.featured': topNavMegaMenuFeaturedSnippets,
   'mobile-nav.default': mobileNavDefaultSnippets,
+  'mobile-nav.toggle': mobileNavToggleSnippets,
   'tab-list.default': tabListDefaultSnippets,
   'alert-dialog.default': alertDialogDefaultSnippets,
   'alert-dialog.confirm': alertDialogConfirmSnippets,
@@ -502,15 +517,20 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'toc.default': () => import('./toc/default/react'),
   'breadcrumbs.default': () => import('./breadcrumbs/default/react'),
   'app-shell.default': () => import('./app-shell/default/react'),
+  'app-shell.layout': () => import('./app-shell/layout/react'),
   'simple-grid.default': () => import('./simple-grid/default/react'),
   'scroll-area.default': () => import('./scroll-area/default/react'),
   'overflow-list.default': () => import('./overflow-list/default/react'),
   'resize-handle.default': () => import('./resize-handle/default/react'),
   'pagination.default': () => import('./pagination/default/react'),
   'side-nav.default': () => import('./side-nav/default/react'),
+  'side-nav.sections': () => import('./side-nav/sections/react'),
   'top-nav.default': () => import('./top-nav/default/react'),
+  'top-nav.menu': () => import('./top-nav/menu/react'),
   'top-nav-mega-menu.default': () => import('./top-nav-mega-menu/default/react'),
+  'top-nav-mega-menu.featured': () => import('./top-nav-mega-menu/featured/react'),
   'mobile-nav.default': () => import('./mobile-nav/default/react'),
+  'mobile-nav.toggle': () => import('./mobile-nav/toggle/react'),
   'tab-list.default': () => import('./tab-list/default/react'),
   'alert-dialog.default': () => import('./alert-dialog/default/react'),
   'alert-dialog.confirm': () => import('./alert-dialog/confirm/react'),
@@ -915,6 +935,11 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['app-shell.default'],
     react: reactDemoLoaders['app-shell.default'],
   },
+  'app-shell.layout': {
+    id: 'app-shell.layout',
+    snippets: demoSnippets['app-shell.layout'],
+    react: reactDemoLoaders['app-shell.layout'],
+  },
   'simple-grid.default': {
     id: 'simple-grid.default',
     snippets: demoSnippets['simple-grid.default'],
@@ -945,20 +970,40 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['side-nav.default'],
     react: reactDemoLoaders['side-nav.default'],
   },
+  'side-nav.sections': {
+    id: 'side-nav.sections',
+    snippets: demoSnippets['side-nav.sections'],
+    react: reactDemoLoaders['side-nav.sections'],
+  },
   'top-nav.default': {
     id: 'top-nav.default',
     snippets: demoSnippets['top-nav.default'],
     react: reactDemoLoaders['top-nav.default'],
+  },
+  'top-nav.menu': {
+    id: 'top-nav.menu',
+    snippets: demoSnippets['top-nav.menu'],
+    react: reactDemoLoaders['top-nav.menu'],
   },
   'top-nav-mega-menu.default': {
     id: 'top-nav-mega-menu.default',
     snippets: demoSnippets['top-nav-mega-menu.default'],
     react: reactDemoLoaders['top-nav-mega-menu.default'],
   },
+  'top-nav-mega-menu.featured': {
+    id: 'top-nav-mega-menu.featured',
+    snippets: demoSnippets['top-nav-mega-menu.featured'],
+    react: reactDemoLoaders['top-nav-mega-menu.featured'],
+  },
   'mobile-nav.default': {
     id: 'mobile-nav.default',
     snippets: demoSnippets['mobile-nav.default'],
     react: reactDemoLoaders['mobile-nav.default'],
+  },
+  'mobile-nav.toggle': {
+    id: 'mobile-nav.toggle',
+    snippets: demoSnippets['mobile-nav.toggle'],
+    react: reactDemoLoaders['mobile-nav.toggle'],
   },
   'tab-list.default': {
     id: 'tab-list.default',

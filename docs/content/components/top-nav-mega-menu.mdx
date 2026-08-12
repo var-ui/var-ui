@@ -5,14 +5,26 @@ description: Full-width mega menu panel for TopNav.
 
 # TopNavMegaMenu
 
-Full-width mega menu panel for TopNav.
+Full-width panel below the top bar for richer navigation. Pass `items` and optional `featured` (usually a `TopNav.MegaMenu.FeaturedCard`). Opens on hover/focus after a short delay; dismiss with Escape or an outside click. Also available as `TopNav.MegaMenu`.
 
 ## Examples
 
 ### Default
 
+A mega menu trigger with a short item list and a featured card.
+
 <Demo id="top-nav-mega-menu.default" />
+
+### Featured card
+
+Use `TopNav.MegaMenu.FeaturedCard` for the right-hand promo slot — title, description, optional `href`, and an `action` control.
+
+<Demo id="top-nav-mega-menu.featured" />
 
 ## Props
 
 <PropsTable slug="top-nav-mega-menu" />
+
+## Accessibility
+
+The trigger exposes `aria-expanded` and `aria-haspopup`. Escape closes the panel and returns focus to the trigger. Prefer clear item titles and featured-card copy so the panel works without relying on imagery alone.

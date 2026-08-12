@@ -5,14 +5,26 @@ description: Top application bar with TopNav.Item and menu slots.
 
 # TopNav
 
-Top application bar with `TopNav.Item`, `TopNav.Menu`, and related parts.
+Top application bar with heading, start/center/end zones, and optional menus. Place `TopNav.Item` links in the start zone (or as `children`), and use `TopNav.Menu` / `TopNav.MegaMenu` for richer flyouts.
 
 ## Examples
 
 ### Default
 
+A simple bar of selected and unselected items.
+
 <Demo id="top-nav.default" />
+
+### Items and menu
+
+Mix `TopNav.Item`s with a `TopNav.Menu` hover/focus popover of rich items (title + optional description).
+
+<Demo id="top-nav.menu" />
 
 ## Props
 
 <PropsTable slug="top-nav" />
+
+## Accessibility
+
+The root is a `nav` landmark (`label` defaults to `"Top navigation"`). Selected items set `aria-current="page"`; icon-only items keep `label` as `aria-label`. `TopNav.Menu` opens on hover or keyboard focus via `HoverCard` — keep item titles clear so the popover list is usable without relying on icons alone.
