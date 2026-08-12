@@ -78,11 +78,17 @@ import TopNavMegaMenuDefault from './top-nav-mega-menu/default/react';
 import MobileNavDefault from './mobile-nav/default/react';
 import TabListDefault from './tab-list/default/react';
 import AlertDialogDefault from './alert-dialog/default/react';
+import AlertDialogConfirm from './alert-dialog/confirm/react';
 import DrawerDefault from './drawer/default/react';
+import DrawerPlacement from './drawer/placement/react';
 import TooltipDefault from './tooltip/default/react';
+import TooltipPlacement from './tooltip/placement/react';
 import PopoverDefault from './popover/default/react';
+import PopoverActions from './popover/actions/react';
 import HoverCardDefault from './hover-card/default/react';
+import HoverCardRich from './hover-card/rich/react';
 import CommandPaletteDefault from './command-palette/default/react';
+import CommandPaletteGrouped from './command-palette/grouped/react';
 import IconButtonDefault from './icon-button/default/react';
 import IconButtonSizes from './icon-button/sizes/react';
 import ButtonGroupDefault from './button-group/default/react';
@@ -202,11 +208,17 @@ export const reactDemoMap = {
   'mobile-nav.default': MobileNavDefault,
   'tab-list.default': TabListDefault,
   'alert-dialog.default': AlertDialogDefault,
+  'alert-dialog.confirm': AlertDialogConfirm,
   'drawer.default': DrawerDefault,
+  'drawer.placement': DrawerPlacement,
   'tooltip.default': TooltipDefault,
+  'tooltip.placement': TooltipPlacement,
   'popover.default': PopoverDefault,
+  'popover.actions': PopoverActions,
   'hover-card.default': HoverCardDefault,
+  'hover-card.rich': HoverCardRich,
   'command-palette.default': CommandPaletteDefault,
+  'command-palette.grouped': CommandPaletteGrouped,
   'icon-button.default': IconButtonDefault,
   'icon-button.sizes': IconButtonSizes,
   'button-group.default': ButtonGroupDefault,

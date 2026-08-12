@@ -77,11 +77,17 @@ import { snippets as topNavMegaMenuDefaultSnippets } from './top-nav-mega-menu/d
 import { snippets as mobileNavDefaultSnippets } from './mobile-nav/default/snippets';
 import { snippets as tabListDefaultSnippets } from './tab-list/default/snippets';
 import { snippets as alertDialogDefaultSnippets } from './alert-dialog/default/snippets';
+import { snippets as alertDialogConfirmSnippets } from './alert-dialog/confirm/snippets';
 import { snippets as drawerDefaultSnippets } from './drawer/default/snippets';
+import { snippets as drawerPlacementSnippets } from './drawer/placement/snippets';
 import { snippets as tooltipDefaultSnippets } from './tooltip/default/snippets';
+import { snippets as tooltipPlacementSnippets } from './tooltip/placement/snippets';
 import { snippets as popoverDefaultSnippets } from './popover/default/snippets';
+import { snippets as popoverActionsSnippets } from './popover/actions/snippets';
 import { snippets as hoverCardDefaultSnippets } from './hover-card/default/snippets';
+import { snippets as hoverCardRichSnippets } from './hover-card/rich/snippets';
 import { snippets as commandPaletteDefaultSnippets } from './command-palette/default/snippets';
+import { snippets as commandPaletteGroupedSnippets } from './command-palette/grouped/snippets';
 import { snippets as iconButtonDefaultSnippets } from './icon-button/default/snippets';
 import { snippets as iconButtonSizesSnippets } from './icon-button/sizes/snippets';
 import { snippets as buttonGroupDefaultSnippets } from './button-group/default/snippets';
@@ -202,11 +208,17 @@ export const DEMO_IDS = [
   'mobile-nav.default',
   'tab-list.default',
   'alert-dialog.default',
+  'alert-dialog.confirm',
   'drawer.default',
+  'drawer.placement',
   'tooltip.default',
+  'tooltip.placement',
   'popover.default',
+  'popover.actions',
   'hover-card.default',
+  'hover-card.rich',
   'command-palette.default',
+  'command-palette.grouped',
   'icon-button.default',
   'icon-button.sizes',
   'button-group.default',
@@ -326,11 +338,17 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'mobile-nav.default': mobileNavDefaultSnippets,
   'tab-list.default': tabListDefaultSnippets,
   'alert-dialog.default': alertDialogDefaultSnippets,
+  'alert-dialog.confirm': alertDialogConfirmSnippets,
   'drawer.default': drawerDefaultSnippets,
+  'drawer.placement': drawerPlacementSnippets,
   'tooltip.default': tooltipDefaultSnippets,
+  'tooltip.placement': tooltipPlacementSnippets,
   'popover.default': popoverDefaultSnippets,
+  'popover.actions': popoverActionsSnippets,
   'hover-card.default': hoverCardDefaultSnippets,
+  'hover-card.rich': hoverCardRichSnippets,
   'command-palette.default': commandPaletteDefaultSnippets,
+  'command-palette.grouped': commandPaletteGroupedSnippets,
   'icon-button.default': iconButtonDefaultSnippets,
   'icon-button.sizes': iconButtonSizesSnippets,
   'button-group.default': buttonGroupDefaultSnippets,
@@ -450,11 +468,17 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'mobile-nav.default': () => import('./mobile-nav/default/react'),
   'tab-list.default': () => import('./tab-list/default/react'),
   'alert-dialog.default': () => import('./alert-dialog/default/react'),
+  'alert-dialog.confirm': () => import('./alert-dialog/confirm/react'),
   'drawer.default': () => import('./drawer/default/react'),
+  'drawer.placement': () => import('./drawer/placement/react'),
   'tooltip.default': () => import('./tooltip/default/react'),
+  'tooltip.placement': () => import('./tooltip/placement/react'),
   'popover.default': () => import('./popover/default/react'),
+  'popover.actions': () => import('./popover/actions/react'),
   'hover-card.default': () => import('./hover-card/default/react'),
+  'hover-card.rich': () => import('./hover-card/rich/react'),
   'command-palette.default': () => import('./command-palette/default/react'),
+  'command-palette.grouped': () => import('./command-palette/grouped/react'),
   'icon-button.default': () => import('./icon-button/default/react'),
   'icon-button.sizes': () => import('./icon-button/sizes/react'),
   'button-group.default': () => import('./button-group/default/react'),
@@ -886,30 +910,60 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['alert-dialog.default'],
     react: reactDemoLoaders['alert-dialog.default'],
   },
+  'alert-dialog.confirm': {
+    id: 'alert-dialog.confirm',
+    snippets: demoSnippets['alert-dialog.confirm'],
+    react: reactDemoLoaders['alert-dialog.confirm'],
+  },
   'drawer.default': {
     id: 'drawer.default',
     snippets: demoSnippets['drawer.default'],
     react: reactDemoLoaders['drawer.default'],
+  },
+  'drawer.placement': {
+    id: 'drawer.placement',
+    snippets: demoSnippets['drawer.placement'],
+    react: reactDemoLoaders['drawer.placement'],
   },
   'tooltip.default': {
     id: 'tooltip.default',
     snippets: demoSnippets['tooltip.default'],
     react: reactDemoLoaders['tooltip.default'],
   },
+  'tooltip.placement': {
+    id: 'tooltip.placement',
+    snippets: demoSnippets['tooltip.placement'],
+    react: reactDemoLoaders['tooltip.placement'],
+  },
   'popover.default': {
     id: 'popover.default',
     snippets: demoSnippets['popover.default'],
     react: reactDemoLoaders['popover.default'],
+  },
+  'popover.actions': {
+    id: 'popover.actions',
+    snippets: demoSnippets['popover.actions'],
+    react: reactDemoLoaders['popover.actions'],
   },
   'hover-card.default': {
     id: 'hover-card.default',
     snippets: demoSnippets['hover-card.default'],
     react: reactDemoLoaders['hover-card.default'],
   },
+  'hover-card.rich': {
+    id: 'hover-card.rich',
+    snippets: demoSnippets['hover-card.rich'],
+    react: reactDemoLoaders['hover-card.rich'],
+  },
   'command-palette.default': {
     id: 'command-palette.default',
     snippets: demoSnippets['command-palette.default'],
     react: reactDemoLoaders['command-palette.default'],
+  },
+  'command-palette.grouped': {
+    id: 'command-palette.grouped',
+    snippets: demoSnippets['command-palette.grouped'],
+    react: reactDemoLoaders['command-palette.grouped'],
   },
   'icon-button.default': {
     id: 'icon-button.default',

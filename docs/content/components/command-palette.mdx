@@ -5,14 +5,26 @@ description: Searchable command palette for quick actions and navigation.
 
 # CommandPalette
 
-Searchable command palette for quick actions and navigation.
+⌘K-style searchable command overlay. You own `isOpen` / `onOpenChange` and typically close inside `onAction`. Items match on `title`, `meta`, and optional `keywords`.
 
 ## Examples
 
 ### Default
 
+Open from a button (demos disable the global hotkey so pages stay calm).
+
 <Demo id="command-palette.default" />
+
+### Grouped results via meta
+
+Use `meta` (and `keywords`) so related commands are scannable and searchable even when titles are short.
+
+<Demo id="command-palette.grouped" />
 
 ## Props
 
 <PropsTable slug="command-palette" />
+
+## Accessibility
+
+When open, focus moves to the search field; arrow keys move through results, Enter activates, Escape closes. Provide clear `title` text — `meta` is secondary. The default hotkey is ⌘K / Ctrl+K (`hotkey`); disable it in embedded demos if it would fight the host page.

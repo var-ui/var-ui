@@ -1,18 +1,30 @@
 ---
 title: HoverCard
-description: Rich preview card shown on hover or focus.
+description: Rich preview shown on hover or focus.
 ---
 
 # HoverCard
 
-Rich preview card shown on hover or focus.
+Rich preview shown on hover or focus. Unlike `Tooltip`, content may include interactive elements (links). Open/close delays are independent (`openDelay` / `closeDelay`).
 
 ## Examples
 
 ### Default
 
+Wrap a focusable `trigger` (often a `Link`) and pass preview children.
+
 <Demo id="hover-card.default" />
+
+### Rich content
+
+Add a `title` plus denser body copy or links for profile / entity previews.
+
+<Demo id="hover-card.rich" />
 
 ## Props
 
 <PropsTable slug="hover-card" />
+
+## Accessibility
+
+Opens on hover and focus without trapping focus, so users can move into the card to activate links. Prefer generous hit targets on the trigger. For click-only panels use `Popover`.

@@ -1,18 +1,30 @@
 ---
 title: AlertDialog
-description: Confirmation modal for destructive or important actions.
+description: Modal confirmation for important or destructive actions.
 ---
 
 # AlertDialog
 
-Confirmation modal for destructive or important actions.
+Modal confirmation for important or destructive actions. Uses `role="alertdialog"`, a cancel action, and a confirm action that calls `onConfirm` (cancel / Escape never call `onConfirm`).
 
 ## Examples
 
 ### Default
 
+Pass `triggerLabel` for a built-in open button. Set `isDestructive` to style confirm as danger and autofocus Cancel.
+
 <Demo id="alert-dialog.default" />
+
+### Confirm pattern
+
+Non-destructive confirms use the primary intent. Customize `cancelLabel` / `confirmLabel` to match the task.
+
+<Demo id="alert-dialog.confirm" />
 
 ## Props
 
 <PropsTable slug="alert-dialog" />
+
+## Accessibility
+
+Renders as an alertdialog with a focus trap. Destructive flows autofocus Cancel so Enter does not immediately confirm. Escape and the cancel button dismiss without calling `onConfirm`. Prefer a clear `title` and short `description` that name the irreversible consequence.

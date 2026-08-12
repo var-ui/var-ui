@@ -5,14 +5,26 @@ description: Slide-over panel for secondary flows.
 
 # Drawer
 
-Slide-over panel for secondary flows.
+Slide-over panel for secondary flows (settings, details, filters). Built on React Aria Modal with focus trap, Escape, and backdrop dismissal. Control open state with `isOpen` / `onOpenChange`.
 
 ## Examples
 
 ### Default
 
+Open from a button; `placement` defaults to `end`.
+
 <Demo id="drawer.default" />
+
+### Placement
+
+Use `placement` (`start`, `end`, or `bottom`) to match the layout edge that owns the flow.
+
+<Demo id="drawer.placement" />
 
 ## Props
 
 <PropsTable slug="drawer" />
+
+## Accessibility
+
+Focus moves into the panel when opened and returns to the trigger on close. Provide `title` or `label` for an accessible name. The close control defaults to `aria-label="Close"`. Prefer drawers for multi-step or longer secondary UI; use `AlertDialog` for short confirmations.

@@ -1,18 +1,30 @@
 ---
 title: Popover
-description: Anchored panel opened by a trigger control.
+description: Click-triggered panel for short interactive content.
 ---
 
 # Popover
 
-Anchored panel opened by a trigger control.
+Click-triggered panel for short interactive content. Unlike `Tooltip` / `HoverCard`, it opens on press and can host actions.
 
 ## Examples
 
 ### Default
 
+Pass a `trigger` element and optional `title`.
+
 <Demo id="popover.default" />
+
+### With actions
+
+Put buttons or links in the body for lightweight confirm or follow-up flows without a full dialog.
+
+<Demo id="popover.actions" />
 
 ## Props
 
 <PropsTable slug="popover" />
+
+## Accessibility
+
+Built on React Aria `DialogTrigger` / `Popover`. Focus moves into the panel; Escape closes. Keep content focused — for blocking decisions use `AlertDialog` or `Dialog`.

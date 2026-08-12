@@ -1,18 +1,30 @@
 ---
 title: Tooltip
-description: Short hint shown on hover or focus.
+description: Brief hint shown on hover or focus.
 ---
 
 # Tooltip
 
-Short hint shown on hover or focus.
+Brief hint shown on hover or focus of a single trigger. Prefer tooltips for supplemental labels — not essential instructions.
 
 ## Examples
 
 ### Default
 
+Wrap one focusable child and pass `content`.
+
 <Demo id="tooltip.default" />
+
+### Placement and delay
+
+Set `placement` relative to the trigger and `delay` (ms) before open. Default delay is 500ms.
+
+<Demo id="tooltip.placement" />
 
 ## Props
 
 <PropsTable slug="tooltip" />
+
+## Accessibility
+
+Tooltips appear on hover and keyboard focus. Keep copy short; do not put interactive content in a tooltip (use `HoverCard` or `Popover` instead). The trigger must already have an accessible name — tooltips supplement, they do not replace labels.
