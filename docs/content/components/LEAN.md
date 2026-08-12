@@ -31,9 +31,6 @@ Pages below ship with a single default demo and props table. Remove a slug when 
 - [ ] popover
 - [ ] hover-card
 - [ ] command-palette
-- [ ] dropdown-menu
-- [ ] context-menu
-- [ ] more-menu
 - [ ] number-input
 - [ ] password-input
 - [ ] search-input

@@ -1,18 +1,30 @@
 ---
 title: MoreMenu
-description: Overflow actions menu with a built-in more icon trigger.
+description: Icon-only overflow menu for secondary actions.
 ---
 
 # MoreMenu
 
-Overflow actions menu with a built-in more icon trigger.
+Icon-only overflow menu for secondary actions. Wraps `DropdownMenu` with an `IconButton` using the `moreHorizontal` glyph — pass the same `sections` shape as other menus.
 
 ## Examples
 
 ### Default
 
+A compact trigger with a short item list, including an optional `danger` action.
+
 <Demo id="more-menu.default" />
+
+### Overflow item set
+
+Use denser overflow lists for share / duplicate / archive / delete patterns in toolbars and cards.
+
+<Demo id="more-menu.overflow" />
 
 ## Props
 
 <PropsTable slug="more-menu" />
+
+## Accessibility
+
+The trigger is an `IconButton`, so `aria-label` defaults to “More options” (override with the `aria-label` prop). Menu keyboard behavior matches `DropdownMenu`. Prefer MoreMenu when the primary actions stay visible and only secondary commands hide behind overflow.

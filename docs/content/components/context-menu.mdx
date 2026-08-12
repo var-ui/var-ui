@@ -1,18 +1,30 @@
 ---
 title: ContextMenu
-description: Menu opened via right-click or long-press on a target.
+description: Right-click menu anchored to a host surface.
 ---
 
 # ContextMenu
 
-Menu opened via right-click or long-press on a target.
+Right-click menu anchored to a single host element. Shares `sections` / `MenuContent` with `DropdownMenu`. The child must be a DOM element `Pressable` can attach a ref to (e.g. a `div`).
 
 ## Examples
 
 ### Default
 
+Wrap a surface and pass menu `sections`. Right-click (or the platform context-menu gesture) opens the menu.
+
 <Demo id="context-menu.default" />
+
+### Sectioned actions
+
+Group related commands into labeled sections — the same shape as `DropdownMenu`.
+
+<Demo id="context-menu.sections" />
 
 ## Props
 
 <PropsTable slug="context-menu" />
+
+## Accessibility
+
+Opening is pointer-driven (context menu). Once open, keyboard navigation matches `DropdownMenu` (arrows, Enter, Escape). Ensure the host surface is large enough to target and that essential actions are also available without right-click for keyboard-only users.

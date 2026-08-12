@@ -96,8 +96,11 @@ import SegmentedControlControlled from './segmented-control/controlled/react';
 import ColorModeToggleDefault from './color-mode-toggle/default/react';
 import ColorModeToggleAppearance from './color-mode-toggle/appearance/react';
 import DropdownMenuDefault from './dropdown-menu/default/react';
+import DropdownMenuSections from './dropdown-menu/sections/react';
 import ContextMenuDefault from './context-menu/default/react';
+import ContextMenuSections from './context-menu/sections/react';
 import MoreMenuDefault from './more-menu/default/react';
+import MoreMenuOverflow from './more-menu/overflow/react';
 import ToolbarDefault from './toolbar/default/react';
 import ToolbarSlots from './toolbar/slots/react';
 import NumberInputDefault from './number-input/default/react';
@@ -217,8 +220,11 @@ export const reactDemoMap = {
   'color-mode-toggle.default': ColorModeToggleDefault,
   'color-mode-toggle.appearance': ColorModeToggleAppearance,
   'dropdown-menu.default': DropdownMenuDefault,
+  'dropdown-menu.sections': DropdownMenuSections,
   'context-menu.default': ContextMenuDefault,
+  'context-menu.sections': ContextMenuSections,
   'more-menu.default': MoreMenuDefault,
+  'more-menu.overflow': MoreMenuOverflow,
   'toolbar.default': ToolbarDefault,
   'toolbar.slots': ToolbarSlots,
   'number-input.default': NumberInputDefault,

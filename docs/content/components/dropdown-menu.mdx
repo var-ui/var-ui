@@ -5,14 +5,26 @@ description: Action menu opened from a trigger; MenuContent renders sections and
 
 # DropdownMenu
 
-Action menu opened from a trigger. `MenuContent` renders sections and items inside the menu.
+Action menu opened from a trigger button. Pass `sections` of items (optional section labels, shortcuts, `danger`, `disabled`). The same `MenuContent` primitive powers `ContextMenu` and `MoreMenu`.
 
 ## Examples
 
 ### Default
 
+Provide a `trigger` element (usually a `Button`) and a flat list of items in one section.
+
 <Demo id="dropdown-menu.default" />
+
+### Sections and destructive items
+
+Use multiple sections with optional `label`s. Set `danger` on destructive actions and `shortcut` for keyboard hints.
+
+<Demo id="dropdown-menu.sections" />
 
 ## Props
 
 <PropsTable slug="dropdown-menu" />
+
+## Accessibility
+
+Built on React Aria `MenuTrigger` / `Menu`. The trigger receives focus; arrow keys move between items, Enter/Space activates, Escape closes. Give destructive items clear labels (“Delete…”) — `danger` is visual only. Disabled items stay in the list but are not activatable.

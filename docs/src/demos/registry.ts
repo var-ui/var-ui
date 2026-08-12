@@ -95,8 +95,11 @@ import { snippets as segmentedControlControlledSnippets } from './segmented-cont
 import { snippets as colorModeToggleDefaultSnippets } from './color-mode-toggle/default/snippets';
 import { snippets as colorModeToggleAppearanceSnippets } from './color-mode-toggle/appearance/snippets';
 import { snippets as dropdownMenuDefaultSnippets } from './dropdown-menu/default/snippets';
+import { snippets as dropdownMenuSectionsSnippets } from './dropdown-menu/sections/snippets';
 import { snippets as contextMenuDefaultSnippets } from './context-menu/default/snippets';
+import { snippets as contextMenuSectionsSnippets } from './context-menu/sections/snippets';
 import { snippets as moreMenuDefaultSnippets } from './more-menu/default/snippets';
+import { snippets as moreMenuOverflowSnippets } from './more-menu/overflow/snippets';
 import { snippets as toolbarDefaultSnippets } from './toolbar/default/snippets';
 import { snippets as toolbarSlotsSnippets } from './toolbar/slots/snippets';
 import { snippets as numberInputDefaultSnippets } from './number-input/default/snippets';
@@ -217,8 +220,11 @@ export const DEMO_IDS = [
   'color-mode-toggle.default',
   'color-mode-toggle.appearance',
   'dropdown-menu.default',
+  'dropdown-menu.sections',
   'context-menu.default',
+  'context-menu.sections',
   'more-menu.default',
+  'more-menu.overflow',
   'toolbar.default',
   'toolbar.slots',
   'number-input.default',
@@ -338,8 +344,11 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'color-mode-toggle.default': colorModeToggleDefaultSnippets,
   'color-mode-toggle.appearance': colorModeToggleAppearanceSnippets,
   'dropdown-menu.default': dropdownMenuDefaultSnippets,
+  'dropdown-menu.sections': dropdownMenuSectionsSnippets,
   'context-menu.default': contextMenuDefaultSnippets,
+  'context-menu.sections': contextMenuSectionsSnippets,
   'more-menu.default': moreMenuDefaultSnippets,
+  'more-menu.overflow': moreMenuOverflowSnippets,
   'toolbar.default': toolbarDefaultSnippets,
   'toolbar.slots': toolbarSlotsSnippets,
   'number-input.default': numberInputDefaultSnippets,
@@ -459,8 +468,11 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'color-mode-toggle.default': () => import('./color-mode-toggle/default/react'),
   'color-mode-toggle.appearance': () => import('./color-mode-toggle/appearance/react'),
   'dropdown-menu.default': () => import('./dropdown-menu/default/react'),
+  'dropdown-menu.sections': () => import('./dropdown-menu/sections/react'),
   'context-menu.default': () => import('./context-menu/default/react'),
+  'context-menu.sections': () => import('./context-menu/sections/react'),
   'more-menu.default': () => import('./more-menu/default/react'),
+  'more-menu.overflow': () => import('./more-menu/overflow/react'),
   'toolbar.default': () => import('./toolbar/default/react'),
   'toolbar.slots': () => import('./toolbar/slots/react'),
   'number-input.default': () => import('./number-input/default/react'),
@@ -964,15 +976,30 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['dropdown-menu.default'],
     react: reactDemoLoaders['dropdown-menu.default'],
   },
+  'dropdown-menu.sections': {
+    id: 'dropdown-menu.sections',
+    snippets: demoSnippets['dropdown-menu.sections'],
+    react: reactDemoLoaders['dropdown-menu.sections'],
+  },
   'context-menu.default': {
     id: 'context-menu.default',
     snippets: demoSnippets['context-menu.default'],
     react: reactDemoLoaders['context-menu.default'],
   },
+  'context-menu.sections': {
+    id: 'context-menu.sections',
+    snippets: demoSnippets['context-menu.sections'],
+    react: reactDemoLoaders['context-menu.sections'],
+  },
   'more-menu.default': {
     id: 'more-menu.default',
     snippets: demoSnippets['more-menu.default'],
     react: reactDemoLoaders['more-menu.default'],
+  },
+  'more-menu.overflow': {
+    id: 'more-menu.overflow',
+    snippets: demoSnippets['more-menu.overflow'],
+    react: reactDemoLoaders['more-menu.overflow'],
   },
   'toolbar.default': {
     id: 'toolbar.default',
