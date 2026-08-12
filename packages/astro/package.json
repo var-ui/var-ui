@@ -1,6 +1,6 @@
 {
   "name": "@var-ui/astro",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Astro components for the var-ui design system",
   "keywords": [
     "astro-component",
