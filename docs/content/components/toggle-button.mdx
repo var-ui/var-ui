@@ -5,14 +5,26 @@ description: Pressable toggle that stays selected until pressed again.
 
 # ToggleButton
 
-Pressable toggle that stays selected until pressed again.
+Pressable toggle that stays selected until pressed again. Use for formatting tools, filters, and other on/off actions that are not mutually exclusive (use `SegmentedControl` for exclusive choices).
 
 ## Examples
 
 ### Default
 
+Uncontrolled toggles start unselected; press to flip `aria-pressed`.
+
 <Demo id="toggle-button.default" />
+
+### Pressed state
+
+Use `defaultSelected` for an initially pressed uncontrolled toggle, or `isSelected` + `onChange` for controlled selection.
+
+<Demo id="toggle-button.pressed" />
 
 ## Props
 
 <PropsTable slug="toggle-button" />
+
+## Accessibility
+
+Built on React Aria `ToggleButton`. Selection is exposed as `aria-pressed`. Prefer visible text (or pair an icon with `aria-label`) so the pressed state is meaningful to screen reader users.

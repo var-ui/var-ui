@@ -84,15 +84,22 @@ import PopoverDefault from './popover/default/react';
 import HoverCardDefault from './hover-card/default/react';
 import CommandPaletteDefault from './command-palette/default/react';
 import IconButtonDefault from './icon-button/default/react';
+import IconButtonSizes from './icon-button/sizes/react';
 import ButtonGroupDefault from './button-group/default/react';
+import ButtonGroupIcons from './button-group/icons/react';
 import CopyButtonDefault from './copy-button/default/react';
+import CopyButtonLabels from './copy-button/labels/react';
 import ToggleButtonDefault from './toggle-button/default/react';
+import ToggleButtonPressed from './toggle-button/pressed/react';
 import SegmentedControlDefault from './segmented-control/default/react';
+import SegmentedControlControlled from './segmented-control/controlled/react';
 import ColorModeToggleDefault from './color-mode-toggle/default/react';
+import ColorModeToggleAppearance from './color-mode-toggle/appearance/react';
 import DropdownMenuDefault from './dropdown-menu/default/react';
 import ContextMenuDefault from './context-menu/default/react';
 import MoreMenuDefault from './more-menu/default/react';
 import ToolbarDefault from './toolbar/default/react';
+import ToolbarSlots from './toolbar/slots/react';
 import NumberInputDefault from './number-input/default/react';
 import PasswordInputDefault from './password-input/default/react';
 import SearchInputDefault from './search-input/default/react';
@@ -198,15 +205,22 @@ export const reactDemoMap = {
   'hover-card.default': HoverCardDefault,
   'command-palette.default': CommandPaletteDefault,
   'icon-button.default': IconButtonDefault,
+  'icon-button.sizes': IconButtonSizes,
   'button-group.default': ButtonGroupDefault,
+  'button-group.icons': ButtonGroupIcons,
   'copy-button.default': CopyButtonDefault,
+  'copy-button.labels': CopyButtonLabels,
   'toggle-button.default': ToggleButtonDefault,
+  'toggle-button.pressed': ToggleButtonPressed,
   'segmented-control.default': SegmentedControlDefault,
+  'segmented-control.controlled': SegmentedControlControlled,
   'color-mode-toggle.default': ColorModeToggleDefault,
+  'color-mode-toggle.appearance': ColorModeToggleAppearance,
   'dropdown-menu.default': DropdownMenuDefault,
   'context-menu.default': ContextMenuDefault,
   'more-menu.default': MoreMenuDefault,
   'toolbar.default': ToolbarDefault,
+  'toolbar.slots': ToolbarSlots,
   'number-input.default': NumberInputDefault,
   'password-input.default': PasswordInputDefault,
   'search-input.default': SearchInputDefault,

@@ -5,14 +5,26 @@ description: Accessible toolbar landmark for grouped controls.
 
 # Toolbar
 
-Accessible toolbar landmark for grouped controls.
+Accessible toolbar landmark for grouped controls. Place actions in `startContent`, optional `centerContent`, and `endContent`. A required `label` becomes the toolbar’s `aria-label`.
 
 ## Examples
 
 ### Default
 
+Start and end slots with buttons — flex layout when center is omitted.
+
 <Demo id="toolbar.default" />
+
+### Slots
+
+Provide `startContent`, `centerContent`, and `endContent` together; center forces a grid layout so the middle stays visually centered.
+
+<Demo id="toolbar.slots" />
 
 ## Props
 
 <PropsTable slug="toolbar" />
+
+## Accessibility
+
+Renders `role="toolbar"` with `aria-label` from `label` and `aria-orientation` from `orientation`. Children keep their natural tab order — there is no roving tabindex / arrow-key navigation yet. Ensure each child control has its own accessible name.

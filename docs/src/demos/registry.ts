@@ -83,15 +83,22 @@ import { snippets as popoverDefaultSnippets } from './popover/default/snippets';
 import { snippets as hoverCardDefaultSnippets } from './hover-card/default/snippets';
 import { snippets as commandPaletteDefaultSnippets } from './command-palette/default/snippets';
 import { snippets as iconButtonDefaultSnippets } from './icon-button/default/snippets';
+import { snippets as iconButtonSizesSnippets } from './icon-button/sizes/snippets';
 import { snippets as buttonGroupDefaultSnippets } from './button-group/default/snippets';
+import { snippets as buttonGroupIconsSnippets } from './button-group/icons/snippets';
 import { snippets as copyButtonDefaultSnippets } from './copy-button/default/snippets';
+import { snippets as copyButtonLabelsSnippets } from './copy-button/labels/snippets';
 import { snippets as toggleButtonDefaultSnippets } from './toggle-button/default/snippets';
+import { snippets as toggleButtonPressedSnippets } from './toggle-button/pressed/snippets';
 import { snippets as segmentedControlDefaultSnippets } from './segmented-control/default/snippets';
+import { snippets as segmentedControlControlledSnippets } from './segmented-control/controlled/snippets';
 import { snippets as colorModeToggleDefaultSnippets } from './color-mode-toggle/default/snippets';
+import { snippets as colorModeToggleAppearanceSnippets } from './color-mode-toggle/appearance/snippets';
 import { snippets as dropdownMenuDefaultSnippets } from './dropdown-menu/default/snippets';
 import { snippets as contextMenuDefaultSnippets } from './context-menu/default/snippets';
 import { snippets as moreMenuDefaultSnippets } from './more-menu/default/snippets';
 import { snippets as toolbarDefaultSnippets } from './toolbar/default/snippets';
+import { snippets as toolbarSlotsSnippets } from './toolbar/slots/snippets';
 import { snippets as numberInputDefaultSnippets } from './number-input/default/snippets';
 import { snippets as passwordInputDefaultSnippets } from './password-input/default/snippets';
 import { snippets as searchInputDefaultSnippets } from './search-input/default/snippets';
@@ -198,15 +205,22 @@ export const DEMO_IDS = [
   'hover-card.default',
   'command-palette.default',
   'icon-button.default',
+  'icon-button.sizes',
   'button-group.default',
+  'button-group.icons',
   'copy-button.default',
+  'copy-button.labels',
   'toggle-button.default',
+  'toggle-button.pressed',
   'segmented-control.default',
+  'segmented-control.controlled',
   'color-mode-toggle.default',
+  'color-mode-toggle.appearance',
   'dropdown-menu.default',
   'context-menu.default',
   'more-menu.default',
   'toolbar.default',
+  'toolbar.slots',
   'number-input.default',
   'password-input.default',
   'search-input.default',
@@ -312,15 +326,22 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'hover-card.default': hoverCardDefaultSnippets,
   'command-palette.default': commandPaletteDefaultSnippets,
   'icon-button.default': iconButtonDefaultSnippets,
+  'icon-button.sizes': iconButtonSizesSnippets,
   'button-group.default': buttonGroupDefaultSnippets,
+  'button-group.icons': buttonGroupIconsSnippets,
   'copy-button.default': copyButtonDefaultSnippets,
+  'copy-button.labels': copyButtonLabelsSnippets,
   'toggle-button.default': toggleButtonDefaultSnippets,
+  'toggle-button.pressed': toggleButtonPressedSnippets,
   'segmented-control.default': segmentedControlDefaultSnippets,
+  'segmented-control.controlled': segmentedControlControlledSnippets,
   'color-mode-toggle.default': colorModeToggleDefaultSnippets,
+  'color-mode-toggle.appearance': colorModeToggleAppearanceSnippets,
   'dropdown-menu.default': dropdownMenuDefaultSnippets,
   'context-menu.default': contextMenuDefaultSnippets,
   'more-menu.default': moreMenuDefaultSnippets,
   'toolbar.default': toolbarDefaultSnippets,
+  'toolbar.slots': toolbarSlotsSnippets,
   'number-input.default': numberInputDefaultSnippets,
   'password-input.default': passwordInputDefaultSnippets,
   'search-input.default': searchInputDefaultSnippets,
@@ -426,15 +447,22 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'hover-card.default': () => import('./hover-card/default/react'),
   'command-palette.default': () => import('./command-palette/default/react'),
   'icon-button.default': () => import('./icon-button/default/react'),
+  'icon-button.sizes': () => import('./icon-button/sizes/react'),
   'button-group.default': () => import('./button-group/default/react'),
+  'button-group.icons': () => import('./button-group/icons/react'),
   'copy-button.default': () => import('./copy-button/default/react'),
+  'copy-button.labels': () => import('./copy-button/labels/react'),
   'toggle-button.default': () => import('./toggle-button/default/react'),
+  'toggle-button.pressed': () => import('./toggle-button/pressed/react'),
   'segmented-control.default': () => import('./segmented-control/default/react'),
+  'segmented-control.controlled': () => import('./segmented-control/controlled/react'),
   'color-mode-toggle.default': () => import('./color-mode-toggle/default/react'),
+  'color-mode-toggle.appearance': () => import('./color-mode-toggle/appearance/react'),
   'dropdown-menu.default': () => import('./dropdown-menu/default/react'),
   'context-menu.default': () => import('./context-menu/default/react'),
   'more-menu.default': () => import('./more-menu/default/react'),
   'toolbar.default': () => import('./toolbar/default/react'),
+  'toolbar.slots': () => import('./toolbar/slots/react'),
   'number-input.default': () => import('./number-input/default/react'),
   'password-input.default': () => import('./password-input/default/react'),
   'search-input.default': () => import('./search-input/default/react'),
@@ -876,30 +904,60 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['icon-button.default'],
     react: reactDemoLoaders['icon-button.default'],
   },
+  'icon-button.sizes': {
+    id: 'icon-button.sizes',
+    snippets: demoSnippets['icon-button.sizes'],
+    react: reactDemoLoaders['icon-button.sizes'],
+  },
   'button-group.default': {
     id: 'button-group.default',
     snippets: demoSnippets['button-group.default'],
     react: reactDemoLoaders['button-group.default'],
+  },
+  'button-group.icons': {
+    id: 'button-group.icons',
+    snippets: demoSnippets['button-group.icons'],
+    react: reactDemoLoaders['button-group.icons'],
   },
   'copy-button.default': {
     id: 'copy-button.default',
     snippets: demoSnippets['copy-button.default'],
     react: reactDemoLoaders['copy-button.default'],
   },
+  'copy-button.labels': {
+    id: 'copy-button.labels',
+    snippets: demoSnippets['copy-button.labels'],
+    react: reactDemoLoaders['copy-button.labels'],
+  },
   'toggle-button.default': {
     id: 'toggle-button.default',
     snippets: demoSnippets['toggle-button.default'],
     react: reactDemoLoaders['toggle-button.default'],
+  },
+  'toggle-button.pressed': {
+    id: 'toggle-button.pressed',
+    snippets: demoSnippets['toggle-button.pressed'],
+    react: reactDemoLoaders['toggle-button.pressed'],
   },
   'segmented-control.default': {
     id: 'segmented-control.default',
     snippets: demoSnippets['segmented-control.default'],
     react: reactDemoLoaders['segmented-control.default'],
   },
+  'segmented-control.controlled': {
+    id: 'segmented-control.controlled',
+    snippets: demoSnippets['segmented-control.controlled'],
+    react: reactDemoLoaders['segmented-control.controlled'],
+  },
   'color-mode-toggle.default': {
     id: 'color-mode-toggle.default',
     snippets: demoSnippets['color-mode-toggle.default'],
     react: reactDemoLoaders['color-mode-toggle.default'],
+  },
+  'color-mode-toggle.appearance': {
+    id: 'color-mode-toggle.appearance',
+    snippets: demoSnippets['color-mode-toggle.appearance'],
+    react: reactDemoLoaders['color-mode-toggle.appearance'],
   },
   'dropdown-menu.default': {
     id: 'dropdown-menu.default',
@@ -920,6 +978,11 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'toolbar.default',
     snippets: demoSnippets['toolbar.default'],
     react: reactDemoLoaders['toolbar.default'],
+  },
+  'toolbar.slots': {
+    id: 'toolbar.slots',
+    snippets: demoSnippets['toolbar.slots'],
+    react: reactDemoLoaders['toolbar.slots'],
   },
   'number-input.default': {
     id: 'number-input.default',

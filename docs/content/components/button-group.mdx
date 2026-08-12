@@ -5,14 +5,26 @@ description: Groups related buttons into a connected control.
 
 # ButtonGroup
 
-Groups related buttons into a connected control.
+Groups related buttons into a connected control with shared borders. Works with `Button`, `IconButton`, and mixes of both.
 
 ## Examples
 
 ### Default
 
+Wrap adjacent `Button`s so they render as one segmented strip.
+
 <Demo id="button-group.default" />
+
+### With icons
+
+Mix `IconButton` and `Button` children when the group needs compact icon actions alongside a labeled control.
+
+<Demo id="button-group.icons" />
 
 ## Props
 
 <PropsTable slug="button-group" />
+
+## Accessibility
+
+Renders a `role="group"` container. Each child keeps its own accessible name — use `aria-label` on icon-only members. Focus stays on individual buttons (no roving tabindex on the group itself).

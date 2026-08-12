@@ -5,14 +5,26 @@ description: Copies a value to the clipboard with visual feedback.
 
 # CopyButton
 
-Copies a value to the clipboard with visual feedback.
+Copies a value to the clipboard with visual feedback. Defaults to an icon + label button; pass a render-prop `children` function when you need custom chrome.
 
 ## Examples
 
 ### Default
 
+Provide the `value` written to the clipboard. Labels default to “Copy” / “Copied” / “Error”.
+
 <Demo id="copy-button.default" />
+
+### Custom labels
+
+Override `copyLabel` and `copiedLabel` (and optionally `errorLabel`) for context-specific copy.
+
+<Demo id="copy-button.labels" />
 
 ## Props
 
 <PropsTable slug="copy-button" />
+
+## Accessibility
+
+The default control is a native `button` whose `aria-label` tracks the current state label (`copyLabel`, `copiedLabel`, or `errorLabel`). After a successful copy, the label updates so assistive tech hears the confirmation. Prefer clear verbs over icon-only copy affordances unless you supply an explicit render-prop with its own accessible name.

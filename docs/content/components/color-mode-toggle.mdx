@@ -5,14 +5,26 @@ description: Switch between light, dark, and optional system color modes.
 
 # ColorModeToggle
 
-Switch between light, dark, and optional system color modes.
+Switch between light, dark, and optional system color modes. Built on `SegmentedControl`. Inside `DesignSystemProvider` it reads context; otherwise pass both `colorMode` and `onColorModeChange`.
 
 ## Examples
 
 ### Default
 
+Icon-only segments for light and dark. Controlled demos pass `colorMode` / `onColorModeChange`.
+
 <Demo id="color-mode-toggle.default" />
+
+### Appearance
+
+Set `appearance` to `labels` or `iconsAndLabels`, and `includeSystem` to add a System segment.
+
+<Demo id="color-mode-toggle.appearance" />
 
 ## Props
 
 <PropsTable slug="color-mode-toggle" />
+
+## Accessibility
+
+Defaults to `aria-label="Color mode"` on the group. Icon-only appearance adds per-segment `aria-label`s (“Light”, “Dark”, “System”). Prefer `labels` or `iconsAndLabels` when the control is not accompanied by nearby explanatory text.

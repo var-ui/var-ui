@@ -5,14 +5,26 @@ description: Icon-only button for compact toolbars and controls.
 
 # IconButton
 
-Icon-only button for compact toolbars and controls.
+Icon-only button for compact toolbars and controls. Shares `tone` / `appearance` / `intent` / `size` with `Button`, and always uses `layout="icon"`. Pair with `ButtonGroup` or `Toolbar` for dense action rows.
 
 ## Examples
 
 ### Default
 
+Pass a semantic `name` from the icon registry and a required `aria-label` — the control has no visible text.
+
 <Demo id="icon-button.default" />
+
+### Sizes and intents
+
+Use `size` (`sm` / `md` / `lg`) and the same `intent` shorthand as `Button` (`primary`, `secondary`, `ghost`, `danger`, …).
+
+<Demo id="icon-button.sizes" />
 
 ## Props
 
 <PropsTable slug="icon-button" />
+
+## Accessibility
+
+`aria-label` is required because there is no text content. Built on React Aria `Button`, so keyboard activation and disabled semantics match `Button`. Prefer a short action name (“Close”, “Search”) over describing the glyph.
