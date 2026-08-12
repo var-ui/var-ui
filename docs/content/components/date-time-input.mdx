@@ -5,14 +5,26 @@ description: Segmented date and time field with calendar popover.
 
 # DateTimeInput
 
-Segmented date and time field with calendar popover.
+Combined date and time field: month/day/year plus hour/minute (and optional seconds / day-period) segments, with a popover calendar for the date portion. Defaults to `granularity="minute"`. Values typically use `CalendarDateTime` from `@internationalized/date`.
 
 ## Examples
 
 ### Default
 
+Pass a `label` and a `CalendarDateTime` `defaultValue` (or control via `value` / `onChange`).
+
 <Demo id="date-time-input.default" />
+
+### Granularity
+
+Set `granularity` to control the smallest editable time unit. `"second"` adds a seconds segment; `"day"` hides time segments entirely.
+
+<Demo id="date-time-input.granularity" />
 
 ## Props
 
 <PropsTable slug="date-time-input" />
+
+## Accessibility
+
+Built on React Aria `DatePicker` with time granularity. Date and time segments are individually focusable spinbuttons; the calendar trigger opens a dialog for picking the day (time stays in the text field). Keep `label` visible, and use `description` / `errorMessage` for helper and validation copy.

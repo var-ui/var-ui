@@ -122,10 +122,15 @@ import InputGroupAddons from './input-group/addons/react';
 import CheckboxGroupDefault from './checkbox-group/default/react';
 import CheckboxGroupDefaults from './checkbox-group/defaults/react';
 import CalendarDefault from './calendar/default/react';
+import CalendarMin from './calendar/min/react';
 import DateInputDefault from './date-input/default/react';
+import DateInputError from './date-input/error/react';
 import DateRangeInputDefault from './date-range-input/default/react';
+import DateRangeInputRange from './date-range-input/range/react';
 import DateTimeInputDefault from './date-time-input/default/react';
+import DateTimeInputGranularity from './date-time-input/granularity/react';
 import TimeInputDefault from './time-input/default/react';
+import TimeInputControlled from './time-input/controlled/react';
 import TokenizerDefault from './tokenizer/default/react';
 import MultiSelectorDefault from './multi-selector/default/react';
 import ColorInputDefault from './color-input/default/react';
@@ -258,10 +263,15 @@ export const reactDemoMap = {
   'checkbox-group.default': CheckboxGroupDefault,
   'checkbox-group.defaults': CheckboxGroupDefaults,
   'calendar.default': CalendarDefault,
+  'calendar.min': CalendarMin,
   'date-input.default': DateInputDefault,
+  'date-input.error': DateInputError,
   'date-range-input.default': DateRangeInputDefault,
+  'date-range-input.range': DateRangeInputRange,
   'date-time-input.default': DateTimeInputDefault,
+  'date-time-input.granularity': DateTimeInputGranularity,
   'time-input.default': TimeInputDefault,
+  'time-input.controlled': TimeInputControlled,
   'tokenizer.default': TokenizerDefault,
   'multi-selector.default': MultiSelectorDefault,
   'color-input.default': ColorInputDefault,

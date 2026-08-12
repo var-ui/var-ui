@@ -121,10 +121,15 @@ import { snippets as inputGroupAddonsSnippets } from './input-group/addons/snipp
 import { snippets as checkboxGroupDefaultSnippets } from './checkbox-group/default/snippets';
 import { snippets as checkboxGroupDefaultsSnippets } from './checkbox-group/defaults/snippets';
 import { snippets as calendarDefaultSnippets } from './calendar/default/snippets';
+import { snippets as calendarMinSnippets } from './calendar/min/snippets';
 import { snippets as dateInputDefaultSnippets } from './date-input/default/snippets';
+import { snippets as dateInputErrorSnippets } from './date-input/error/snippets';
 import { snippets as dateRangeInputDefaultSnippets } from './date-range-input/default/snippets';
+import { snippets as dateRangeInputRangeSnippets } from './date-range-input/range/snippets';
 import { snippets as dateTimeInputDefaultSnippets } from './date-time-input/default/snippets';
+import { snippets as dateTimeInputGranularitySnippets } from './date-time-input/granularity/snippets';
 import { snippets as timeInputDefaultSnippets } from './time-input/default/snippets';
+import { snippets as timeInputControlledSnippets } from './time-input/controlled/snippets';
 import { snippets as tokenizerDefaultSnippets } from './tokenizer/default/snippets';
 import { snippets as multiSelectorDefaultSnippets } from './multi-selector/default/snippets';
 import { snippets as colorInputDefaultSnippets } from './color-input/default/snippets';
@@ -258,10 +263,15 @@ export const DEMO_IDS = [
   'checkbox-group.default',
   'checkbox-group.defaults',
   'calendar.default',
+  'calendar.min',
   'date-input.default',
+  'date-input.error',
   'date-range-input.default',
+  'date-range-input.range',
   'date-time-input.default',
+  'date-time-input.granularity',
   'time-input.default',
+  'time-input.controlled',
   'tokenizer.default',
   'multi-selector.default',
   'color-input.default',
@@ -394,10 +404,15 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'checkbox-group.default': checkboxGroupDefaultSnippets,
   'checkbox-group.defaults': checkboxGroupDefaultsSnippets,
   'calendar.default': calendarDefaultSnippets,
+  'calendar.min': calendarMinSnippets,
   'date-input.default': dateInputDefaultSnippets,
+  'date-input.error': dateInputErrorSnippets,
   'date-range-input.default': dateRangeInputDefaultSnippets,
+  'date-range-input.range': dateRangeInputRangeSnippets,
   'date-time-input.default': dateTimeInputDefaultSnippets,
+  'date-time-input.granularity': dateTimeInputGranularitySnippets,
   'time-input.default': timeInputDefaultSnippets,
+  'time-input.controlled': timeInputControlledSnippets,
   'tokenizer.default': tokenizerDefaultSnippets,
   'multi-selector.default': multiSelectorDefaultSnippets,
   'color-input.default': colorInputDefaultSnippets,
@@ -530,10 +545,15 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'checkbox-group.default': () => import('./checkbox-group/default/react'),
   'checkbox-group.defaults': () => import('./checkbox-group/defaults/react'),
   'calendar.default': () => import('./calendar/default/react'),
+  'calendar.min': () => import('./calendar/min/react'),
   'date-input.default': () => import('./date-input/default/react'),
+  'date-input.error': () => import('./date-input/error/react'),
   'date-range-input.default': () => import('./date-range-input/default/react'),
+  'date-range-input.range': () => import('./date-range-input/range/react'),
   'date-time-input.default': () => import('./date-time-input/default/react'),
+  'date-time-input.granularity': () => import('./date-time-input/granularity/react'),
   'time-input.default': () => import('./time-input/default/react'),
+  'time-input.controlled': () => import('./time-input/controlled/react'),
   'tokenizer.default': () => import('./tokenizer/default/react'),
   'multi-selector.default': () => import('./multi-selector/default/react'),
   'color-input.default': () => import('./color-input/default/react'),
@@ -1154,25 +1174,50 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['calendar.default'],
     react: reactDemoLoaders['calendar.default'],
   },
+  'calendar.min': {
+    id: 'calendar.min',
+    snippets: demoSnippets['calendar.min'],
+    react: reactDemoLoaders['calendar.min'],
+  },
   'date-input.default': {
     id: 'date-input.default',
     snippets: demoSnippets['date-input.default'],
     react: reactDemoLoaders['date-input.default'],
+  },
+  'date-input.error': {
+    id: 'date-input.error',
+    snippets: demoSnippets['date-input.error'],
+    react: reactDemoLoaders['date-input.error'],
   },
   'date-range-input.default': {
     id: 'date-range-input.default',
     snippets: demoSnippets['date-range-input.default'],
     react: reactDemoLoaders['date-range-input.default'],
   },
+  'date-range-input.range': {
+    id: 'date-range-input.range',
+    snippets: demoSnippets['date-range-input.range'],
+    react: reactDemoLoaders['date-range-input.range'],
+  },
   'date-time-input.default': {
     id: 'date-time-input.default',
     snippets: demoSnippets['date-time-input.default'],
     react: reactDemoLoaders['date-time-input.default'],
   },
+  'date-time-input.granularity': {
+    id: 'date-time-input.granularity',
+    snippets: demoSnippets['date-time-input.granularity'],
+    react: reactDemoLoaders['date-time-input.granularity'],
+  },
   'time-input.default': {
     id: 'time-input.default',
     snippets: demoSnippets['time-input.default'],
     react: reactDemoLoaders['time-input.default'],
+  },
+  'time-input.controlled': {
+    id: 'time-input.controlled',
+    snippets: demoSnippets['time-input.controlled'],
+    react: reactDemoLoaders['time-input.controlled'],
   },
   'tokenizer.default': {
     id: 'tokenizer.default',

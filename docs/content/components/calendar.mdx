@@ -5,14 +5,26 @@ description: Month grid for selecting a single date.
 
 # Calendar
 
-Month grid for selecting a single date.
+Standalone month-grid date picker — no popover, no text input. Compose with form chrome elsewhere when you need a labeled field; use `DateInput` when you want segmented typing plus a calendar popover.
 
 ## Examples
 
 ### Default
 
+Control selection with `value` / `onChange` and `@internationalized/date` (`CalendarDate`). Provide an `aria-label` when there is no visible label.
+
 <Demo id="calendar.default" />
+
+### Minimum date
+
+Pass `minValue` to block dates before a bound. Past (or earlier) days are unavailable while the selected value stays controlled.
+
+<Demo id="calendar.min" />
 
 ## Props
 
 <PropsTable slug="calendar" />
+
+## Accessibility
+
+Built on React Aria `Calendar`. Cells are keyboard-navigable within the grid; previous/next month controls are labeled buttons. Always supply a visible label or `aria-label`. Pair with `minValue` / `maxValue` when the allowed range matters — unavailable dates are announced as disabled.

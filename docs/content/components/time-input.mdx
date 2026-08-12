@@ -5,14 +5,26 @@ description: Segmented time-of-day field.
 
 # TimeInput
 
-Segmented time-of-day field.
+Time-only segmented field (hour, minute, and day-period when applicable). No popover or calendar — the simplest of the date/time cluster. Values use `Time` from `@internationalized/date`.
 
 ## Examples
 
 ### Default
 
+Pass a `label` and seed with `defaultValue` (or control via `value` / `onChange`).
+
 <Demo id="time-input.default" />
+
+### Controlled
+
+Keep the time in React state with `value` / `onChange`. Guard for `null` if the field can be cleared.
+
+<Demo id="time-input.controlled" />
 
 ## Props
 
 <PropsTable slug="time-input" />
+
+## Accessibility
+
+Built on React Aria `TimeField`. Each time unit is a focusable spinbutton. Keep `label` visible, and use `description` / `errorMessage` so assistive tech gets the same help and validation copy as sighted users. Arrow keys adjust the focused segment.

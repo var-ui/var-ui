@@ -5,14 +5,26 @@ description: Segmented start/end date field with range calendar.
 
 # DateRangeInput
 
-Segmented start/end date field with range calendar.
+Start/end date field with segmented entry for both sides and a popover range calendar. The controlled `value` is a **range object** `{ start, end }` of `@internationalized/date` values (typically `CalendarDate`), not two separate props.
 
 ## Examples
 
 ### Default
 
+Seed both ends with `defaultValue={{ start, end }}`.
+
 <Demo id="date-range-input.default" />
+
+### Controlled range
+
+Drive selection with `value` / `onChange`. `onChange` receives the full range (or `null` when cleared).
+
+<Demo id="date-range-input.range" />
 
 ## Props
 
 <PropsTable slug="date-range-input" />
+
+## Accessibility
+
+Built on React Aria `DateRangePicker`. Start and end each expose month/day/year spinbutton segments; the trigger opens a dialog with a range calendar grid. Keep `label` visible, and use `description` / `errorMessage` for helper and validation text announced with the field.
