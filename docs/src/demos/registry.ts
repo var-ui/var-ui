@@ -109,11 +109,17 @@ import { snippets as moreMenuOverflowSnippets } from './more-menu/overflow/snipp
 import { snippets as toolbarDefaultSnippets } from './toolbar/default/snippets';
 import { snippets as toolbarSlotsSnippets } from './toolbar/slots/snippets';
 import { snippets as numberInputDefaultSnippets } from './number-input/default/snippets';
+import { snippets as numberInputBoundsSnippets } from './number-input/bounds/snippets';
 import { snippets as passwordInputDefaultSnippets } from './password-input/default/snippets';
+import { snippets as passwordInputErrorSnippets } from './password-input/error/snippets';
 import { snippets as searchInputDefaultSnippets } from './search-input/default/snippets';
+import { snippets as searchInputControlledSnippets } from './search-input/controlled/snippets';
 import { snippets as fileInputDefaultSnippets } from './file-input/default/snippets';
+import { snippets as fileInputMultipleSnippets } from './file-input/multiple/snippets';
 import { snippets as inputGroupDefaultSnippets } from './input-group/default/snippets';
+import { snippets as inputGroupAddonsSnippets } from './input-group/addons/snippets';
 import { snippets as checkboxGroupDefaultSnippets } from './checkbox-group/default/snippets';
+import { snippets as checkboxGroupDefaultsSnippets } from './checkbox-group/defaults/snippets';
 import { snippets as calendarDefaultSnippets } from './calendar/default/snippets';
 import { snippets as dateInputDefaultSnippets } from './date-input/default/snippets';
 import { snippets as dateRangeInputDefaultSnippets } from './date-range-input/default/snippets';
@@ -240,11 +246,17 @@ export const DEMO_IDS = [
   'toolbar.default',
   'toolbar.slots',
   'number-input.default',
+  'number-input.bounds',
   'password-input.default',
+  'password-input.error',
   'search-input.default',
+  'search-input.controlled',
   'file-input.default',
+  'file-input.multiple',
   'input-group.default',
+  'input-group.addons',
   'checkbox-group.default',
+  'checkbox-group.defaults',
   'calendar.default',
   'date-input.default',
   'date-range-input.default',
@@ -370,11 +382,17 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'toolbar.default': toolbarDefaultSnippets,
   'toolbar.slots': toolbarSlotsSnippets,
   'number-input.default': numberInputDefaultSnippets,
+  'number-input.bounds': numberInputBoundsSnippets,
   'password-input.default': passwordInputDefaultSnippets,
+  'password-input.error': passwordInputErrorSnippets,
   'search-input.default': searchInputDefaultSnippets,
+  'search-input.controlled': searchInputControlledSnippets,
   'file-input.default': fileInputDefaultSnippets,
+  'file-input.multiple': fileInputMultipleSnippets,
   'input-group.default': inputGroupDefaultSnippets,
+  'input-group.addons': inputGroupAddonsSnippets,
   'checkbox-group.default': checkboxGroupDefaultSnippets,
+  'checkbox-group.defaults': checkboxGroupDefaultsSnippets,
   'calendar.default': calendarDefaultSnippets,
   'date-input.default': dateInputDefaultSnippets,
   'date-range-input.default': dateRangeInputDefaultSnippets,
@@ -500,11 +518,17 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'toolbar.default': () => import('./toolbar/default/react'),
   'toolbar.slots': () => import('./toolbar/slots/react'),
   'number-input.default': () => import('./number-input/default/react'),
+  'number-input.bounds': () => import('./number-input/bounds/react'),
   'password-input.default': () => import('./password-input/default/react'),
+  'password-input.error': () => import('./password-input/error/react'),
   'search-input.default': () => import('./search-input/default/react'),
+  'search-input.controlled': () => import('./search-input/controlled/react'),
   'file-input.default': () => import('./file-input/default/react'),
+  'file-input.multiple': () => import('./file-input/multiple/react'),
   'input-group.default': () => import('./input-group/default/react'),
+  'input-group.addons': () => import('./input-group/addons/react'),
   'checkbox-group.default': () => import('./checkbox-group/default/react'),
+  'checkbox-group.defaults': () => import('./checkbox-group/defaults/react'),
   'calendar.default': () => import('./calendar/default/react'),
   'date-input.default': () => import('./date-input/default/react'),
   'date-range-input.default': () => import('./date-range-input/default/react'),
@@ -1070,30 +1094,60 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['number-input.default'],
     react: reactDemoLoaders['number-input.default'],
   },
+  'number-input.bounds': {
+    id: 'number-input.bounds',
+    snippets: demoSnippets['number-input.bounds'],
+    react: reactDemoLoaders['number-input.bounds'],
+  },
   'password-input.default': {
     id: 'password-input.default',
     snippets: demoSnippets['password-input.default'],
     react: reactDemoLoaders['password-input.default'],
+  },
+  'password-input.error': {
+    id: 'password-input.error',
+    snippets: demoSnippets['password-input.error'],
+    react: reactDemoLoaders['password-input.error'],
   },
   'search-input.default': {
     id: 'search-input.default',
     snippets: demoSnippets['search-input.default'],
     react: reactDemoLoaders['search-input.default'],
   },
+  'search-input.controlled': {
+    id: 'search-input.controlled',
+    snippets: demoSnippets['search-input.controlled'],
+    react: reactDemoLoaders['search-input.controlled'],
+  },
   'file-input.default': {
     id: 'file-input.default',
     snippets: demoSnippets['file-input.default'],
     react: reactDemoLoaders['file-input.default'],
+  },
+  'file-input.multiple': {
+    id: 'file-input.multiple',
+    snippets: demoSnippets['file-input.multiple'],
+    react: reactDemoLoaders['file-input.multiple'],
   },
   'input-group.default': {
     id: 'input-group.default',
     snippets: demoSnippets['input-group.default'],
     react: reactDemoLoaders['input-group.default'],
   },
+  'input-group.addons': {
+    id: 'input-group.addons',
+    snippets: demoSnippets['input-group.addons'],
+    react: reactDemoLoaders['input-group.addons'],
+  },
   'checkbox-group.default': {
     id: 'checkbox-group.default',
     snippets: demoSnippets['checkbox-group.default'],
     react: reactDemoLoaders['checkbox-group.default'],
+  },
+  'checkbox-group.defaults': {
+    id: 'checkbox-group.defaults',
+    snippets: demoSnippets['checkbox-group.defaults'],
+    react: reactDemoLoaders['checkbox-group.defaults'],
   },
   'calendar.default': {
     id: 'calendar.default',

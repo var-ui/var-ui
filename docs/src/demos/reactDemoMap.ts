@@ -110,11 +110,17 @@ import MoreMenuOverflow from './more-menu/overflow/react';
 import ToolbarDefault from './toolbar/default/react';
 import ToolbarSlots from './toolbar/slots/react';
 import NumberInputDefault from './number-input/default/react';
+import NumberInputBounds from './number-input/bounds/react';
 import PasswordInputDefault from './password-input/default/react';
+import PasswordInputError from './password-input/error/react';
 import SearchInputDefault from './search-input/default/react';
+import SearchInputControlled from './search-input/controlled/react';
 import FileInputDefault from './file-input/default/react';
+import FileInputMultiple from './file-input/multiple/react';
 import InputGroupDefault from './input-group/default/react';
+import InputGroupAddons from './input-group/addons/react';
 import CheckboxGroupDefault from './checkbox-group/default/react';
+import CheckboxGroupDefaults from './checkbox-group/defaults/react';
 import CalendarDefault from './calendar/default/react';
 import DateInputDefault from './date-input/default/react';
 import DateRangeInputDefault from './date-range-input/default/react';
@@ -240,11 +246,17 @@ export const reactDemoMap = {
   'toolbar.default': ToolbarDefault,
   'toolbar.slots': ToolbarSlots,
   'number-input.default': NumberInputDefault,
+  'number-input.bounds': NumberInputBounds,
   'password-input.default': PasswordInputDefault,
+  'password-input.error': PasswordInputError,
   'search-input.default': SearchInputDefault,
+  'search-input.controlled': SearchInputControlled,
   'file-input.default': FileInputDefault,
+  'file-input.multiple': FileInputMultiple,
   'input-group.default': InputGroupDefault,
+  'input-group.addons': InputGroupAddons,
   'checkbox-group.default': CheckboxGroupDefault,
+  'checkbox-group.defaults': CheckboxGroupDefaults,
   'calendar.default': CalendarDefault,
   'date-input.default': DateInputDefault,
   'date-range-input.default': DateRangeInputDefault,

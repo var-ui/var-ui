@@ -5,14 +5,26 @@ description: Numeric field with increment and decrement steppers.
 
 # NumberInput
 
-Numeric field with increment and decrement steppers.
+Numeric field with increment and decrement steppers. Built on React Aria `NumberField` with a stepper group for keyboard- and pointer-friendly adjustments. Prefer this over a plain text field when the value must stay numeric.
 
 ## Examples
 
 ### Default
 
+Pass a `label` and seed with `defaultValue` (or control via `value` / `onChange`).
+
 <Demo id="number-input.default" />
+
+### Bounds and step
+
+Clamp the range with `minValue` / `maxValue` and set `step` for how far each stepper click (or arrow key) moves.
+
+<Demo id="number-input.bounds" />
 
 ## Props
 
 <PropsTable slug="number-input" />
+
+## Accessibility
+
+Built on React Aria `NumberField`. The increment and decrement controls expose `aria-label`s (“Increase” / “Decrease”). Pair with `label`, and use `description` / `errorMessage` so assistive tech gets the same help and validation copy as sighted users. Arrow keys adjust the value within any configured bounds.

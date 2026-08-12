@@ -5,14 +5,26 @@ description: Composes InputGroupInput with InputGroupText addons.
 
 # InputGroup
 
-Composes `InputGroupInput` with `InputGroupText` addons for prefixed or suffixed fields.
+Composes bare `InputGroupInput` controls with `InputGroupText` addons for prefixed or suffixed fields. Owns its own field chrome rather than wrapping `TextField` / `NumberInput`.
 
 ## Examples
 
 ### Default
 
+Place an `InputGroupText` addon before (or after) an `InputGroupInput` inside the group.
+
 <Demo id="input-group.default" />
+
+### Prefix and suffix addons
+
+Stack multiple `InputGroupText` children on either side of the input so borders join into one control.
+
+<Demo id="input-group.addons" />
 
 ## Props
 
 <PropsTable slug="input-group" />
+
+## Accessibility
+
+The outer control uses `role="group"` with `aria-labelledby` pointing at the visible label. Give each `InputGroupInput` its own accessible name (`aria-label` or `aria-labelledby`) — addon text is visual chrome and is not announced as the input’s name. `errorMessage` is exposed with `role="alert"`.

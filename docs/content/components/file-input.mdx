@@ -5,14 +5,26 @@ description: File picker dropzone with accept and size constraints.
 
 # FileInput
 
-File picker dropzone with accept and size constraints.
+File picker dropzone with click-to-browse, drag-and-drop, and client-side `accept` / `maxSize` / `maxFiles` validation. Always controlled via `value` and `onChange`.
 
 ## Examples
 
 ### Default
 
+Pass a required `label`, controlled `value` / `onChange`, and optional `accept` filters.
+
 <Demo id="file-input.default" />
+
+### Multiple files
+
+Set `multiple` so `value` is a `File[]` (or `null` when cleared). Optionally cap the count with `maxFiles`.
+
+<Demo id="file-input.multiple" />
 
 ## Props
 
 <PropsTable slug="file-input" />
+
+## Accessibility
+
+The dropzone is a focusable `role="button"` activated with Enter/Space, labelled by the visible field label and described by `description` / error text. The native file input is visually hidden (`aria-hidden`) and opened programmatically. The clear control has an explicit `aria-label` (“Clear …”).

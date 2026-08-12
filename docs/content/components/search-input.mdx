@@ -5,14 +5,26 @@ description: Compact search field for toolbars and filters.
 
 # SearchInput
 
-Compact search field for toolbars and filters.
+Compact search field for toolbars and data-table filters. Wraps the `searchInput` recipe (`variant="default"` — command-style triggers belong in `CommandPalette`).
 
 ## Examples
 
 ### Default
 
+Set `placeholder` and an `aria-label` (defaults to the placeholder when omitted).
+
 <Demo id="search-input.default" />
+
+### Controlled value
+
+Drive the field with `value` and `onChange` when the query must stay in sync with app state.
+
+<Demo id="search-input.controlled" />
 
 ## Props
 
 <PropsTable slug="search-input" />
+
+## Accessibility
+
+The underlying control is a native `type="search"` input. Always provide an accessible name via `aria-label` (or rely on the default that mirrors `placeholder`). The leading search icon is `aria-hidden` so it is not announced twice.

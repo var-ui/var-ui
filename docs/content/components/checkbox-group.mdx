@@ -5,14 +5,26 @@ description: Group of checkboxes for multi-select options.
 
 # CheckboxGroup
 
-Group of checkboxes for multi-select options.
+Group of checkboxes for multi-select options. Pass `options` as `{ value, label }` pairs; selection is a string array via React Aria `CheckboxGroup`.
 
 ## Examples
 
 ### Default
 
+Provide a group `label` and `options`. Selection starts empty unless you seed it.
+
 <Demo id="checkbox-group.default" />
+
+### Default values
+
+Seed an uncontrolled group with `defaultValue` (string array). Use `value` + `onChange` when selection must stay controlled.
+
+<Demo id="checkbox-group.defaults" />
 
 ## Props
 
 <PropsTable slug="checkbox-group" />
+
+## Accessibility
+
+Built on React Aria `CheckboxGroup`. The group label associates with the set of checkboxes; each option keeps its own label beside the control. Keyboard users can move between options and toggle with Space. Prefer a visible group `label` so the purpose of the set is clear.
