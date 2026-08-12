@@ -1,18 +1,30 @@
 ---
 title: Pagination
-description: Page navigation controls for lists and tables.
+description: Controlled page navigation controls for lists and tables.
 ---
 
 # Pagination
 
-Page navigation controls for lists and tables.
+Controlled page controls with previous/next and optional page numbers, count text, compact labels, or dots. Own `page` in state and pass `onChange`.
 
 ## Examples
 
 ### Default
 
+Five pages with the current page highlighted.
+
 <Demo id="pagination.default" />
+
+### Controlled page
+
+Drive `page` / `onChange` from local state — useful when you also render range copy or sync with a data fetch.
+
+<Demo id="pagination.controlled" />
 
 ## Props
 
 <PropsTable slug="pagination" />
+
+## Accessibility
+
+The root is a `nav` landmark (`label` defaults to `"Pagination"`). Prev/next use icon buttons with clear `aria-label`s; the active page sets `aria-current="page"`. Ellipsis spans are `aria-hidden`.

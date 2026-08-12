@@ -65,14 +65,18 @@ import ListDefault from './list/default/react';
 import DescriptionListDefault from './description-list/default/react';
 import OutlineDefault from './outline/default/react';
 import TocDefault from './toc/default/react';
+import TocNested from './toc/nested/react';
 import BreadcrumbsDefault from './breadcrumbs/default/react';
+import BreadcrumbsCollapse from './breadcrumbs/collapse/react';
 import AppShellDefault from './app-shell/default/react';
 import AppShellLayout from './app-shell/layout/react';
 import SimpleGridDefault from './simple-grid/default/react';
 import ScrollAreaDefault from './scroll-area/default/react';
 import OverflowListDefault from './overflow-list/default/react';
 import ResizeHandleDefault from './resize-handle/default/react';
+import ResizeHandleVertical from './resize-handle/vertical/react';
 import PaginationDefault from './pagination/default/react';
+import PaginationControlled from './pagination/controlled/react';
 import SideNavDefault from './side-nav/default/react';
 import SideNavSections from './side-nav/sections/react';
 import TopNavDefault from './top-nav/default/react';
@@ -82,6 +86,7 @@ import TopNavMegaMenuFeatured from './top-nav-mega-menu/featured/react';
 import MobileNavDefault from './mobile-nav/default/react';
 import MobileNavToggle from './mobile-nav/toggle/react';
 import TabListDefault from './tab-list/default/react';
+import TabListOverflow from './tab-list/overflow/react';
 import AlertDialogDefault from './alert-dialog/default/react';
 import AlertDialogConfirm from './alert-dialog/confirm/react';
 import DrawerDefault from './drawer/default/react';
@@ -215,14 +220,18 @@ export const reactDemoMap = {
   'description-list.default': DescriptionListDefault,
   'outline.default': OutlineDefault,
   'toc.default': TocDefault,
+  'toc.nested': TocNested,
   'breadcrumbs.default': BreadcrumbsDefault,
+  'breadcrumbs.collapse': BreadcrumbsCollapse,
   'app-shell.default': AppShellDefault,
   'app-shell.layout': AppShellLayout,
   'simple-grid.default': SimpleGridDefault,
   'scroll-area.default': ScrollAreaDefault,
   'overflow-list.default': OverflowListDefault,
   'resize-handle.default': ResizeHandleDefault,
+  'resize-handle.vertical': ResizeHandleVertical,
   'pagination.default': PaginationDefault,
+  'pagination.controlled': PaginationControlled,
   'side-nav.default': SideNavDefault,
   'side-nav.sections': SideNavSections,
   'top-nav.default': TopNavDefault,
@@ -232,6 +241,7 @@ export const reactDemoMap = {
   'mobile-nav.default': MobileNavDefault,
   'mobile-nav.toggle': MobileNavToggle,
   'tab-list.default': TabListDefault,
+  'tab-list.overflow': TabListOverflow,
   'alert-dialog.default': AlertDialogDefault,
   'alert-dialog.confirm': AlertDialogConfirm,
   'drawer.default': DrawerDefault,

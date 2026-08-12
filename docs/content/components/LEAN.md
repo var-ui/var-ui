@@ -4,22 +4,17 @@ Pages below ship with a single default demo and props table. Remove a slug when 
 
 ## Lean pages
 
-- [ ] kbd
-- [ ] skeleton
-- [ ] status-dot
+- [ ] outline
+- [ ] simple-grid
+- [ ] scroll-area
+- [ ] overflow-list
+- [ ] table
+- [ ] tree
+- [ ] file-tree
 - [ ] steps
 - [ ] loading-overlay
 - [ ] list
 - [ ] description-list
-- [ ] outline
-- [ ] toc
-- [ ] breadcrumbs
-- [ ] simple-grid
-- [ ] scroll-area
-- [ ] overflow-list
-- [ ] resize-handle
-- [ ] pagination
-- [ ] tab-list
-- [ ] table
-- [ ] tree
-- [ ] file-tree
+- [ ] kbd
+- [ ] skeleton
+- [ ] status-dot

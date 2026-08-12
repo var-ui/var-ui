@@ -1,18 +1,30 @@
 ---
 title: ResizeHandle
-description: Draggable handle for resizing adjacent panels.
+description: Draggable separator for resizing adjacent panels.
 ---
 
 # ResizeHandle
 
-Draggable handle for resizing adjacent panels.
+Accessible drag/keyboard separator for single-region resize. Bind `value` / `minValue` / `maxValue` / `onChange` (often via `useResizable().handleProps`).
 
 ## Examples
 
 ### Default
 
+Horizontal resize between a sidebar and main (default `direction="horizontal"`).
+
 <Demo id="resize-handle.default" />
+
+### Vertical
+
+Set `direction="vertical"` to resize stacked panels along the block axis.
+
+<Demo id="resize-handle.vertical" />
 
 ## Props
 
 <PropsTable slug="resize-handle" />
+
+## Accessibility
+
+Renders as `role="separator"` with `aria-orientation`, `aria-valuenow` / `min` / `max`, and a required `aria-label`. Arrow keys nudge by 10px (50px with Shift); Home/End jump to bounds; Enter/double-click fire `onCollapse` when provided.

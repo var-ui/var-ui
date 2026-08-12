@@ -64,14 +64,18 @@ import { snippets as listDefaultSnippets } from './list/default/snippets';
 import { snippets as descriptionListDefaultSnippets } from './description-list/default/snippets';
 import { snippets as outlineDefaultSnippets } from './outline/default/snippets';
 import { snippets as tocDefaultSnippets } from './toc/default/snippets';
+import { snippets as tocNestedSnippets } from './toc/nested/snippets';
 import { snippets as breadcrumbsDefaultSnippets } from './breadcrumbs/default/snippets';
+import { snippets as breadcrumbsCollapseSnippets } from './breadcrumbs/collapse/snippets';
 import { snippets as appShellDefaultSnippets } from './app-shell/default/snippets';
 import { snippets as appShellLayoutSnippets } from './app-shell/layout/snippets';
 import { snippets as simpleGridDefaultSnippets } from './simple-grid/default/snippets';
 import { snippets as scrollAreaDefaultSnippets } from './scroll-area/default/snippets';
 import { snippets as overflowListDefaultSnippets } from './overflow-list/default/snippets';
 import { snippets as resizeHandleDefaultSnippets } from './resize-handle/default/snippets';
+import { snippets as resizeHandleVerticalSnippets } from './resize-handle/vertical/snippets';
 import { snippets as paginationDefaultSnippets } from './pagination/default/snippets';
+import { snippets as paginationControlledSnippets } from './pagination/controlled/snippets';
 import { snippets as sideNavDefaultSnippets } from './side-nav/default/snippets';
 import { snippets as sideNavSectionsSnippets } from './side-nav/sections/snippets';
 import { snippets as topNavDefaultSnippets } from './top-nav/default/snippets';
@@ -81,6 +85,7 @@ import { snippets as topNavMegaMenuFeaturedSnippets } from './top-nav-mega-menu/
 import { snippets as mobileNavDefaultSnippets } from './mobile-nav/default/snippets';
 import { snippets as mobileNavToggleSnippets } from './mobile-nav/toggle/snippets';
 import { snippets as tabListDefaultSnippets } from './tab-list/default/snippets';
+import { snippets as tabListOverflowSnippets } from './tab-list/overflow/snippets';
 import { snippets as alertDialogDefaultSnippets } from './alert-dialog/default/snippets';
 import { snippets as alertDialogConfirmSnippets } from './alert-dialog/confirm/snippets';
 import { snippets as drawerDefaultSnippets } from './drawer/default/snippets';
@@ -215,14 +220,18 @@ export const DEMO_IDS = [
   'description-list.default',
   'outline.default',
   'toc.default',
+  'toc.nested',
   'breadcrumbs.default',
+  'breadcrumbs.collapse',
   'app-shell.default',
   'app-shell.layout',
   'simple-grid.default',
   'scroll-area.default',
   'overflow-list.default',
   'resize-handle.default',
+  'resize-handle.vertical',
   'pagination.default',
+  'pagination.controlled',
   'side-nav.default',
   'side-nav.sections',
   'top-nav.default',
@@ -232,6 +241,7 @@ export const DEMO_IDS = [
   'mobile-nav.default',
   'mobile-nav.toggle',
   'tab-list.default',
+  'tab-list.overflow',
   'alert-dialog.default',
   'alert-dialog.confirm',
   'drawer.default',
@@ -365,14 +375,18 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'description-list.default': descriptionListDefaultSnippets,
   'outline.default': outlineDefaultSnippets,
   'toc.default': tocDefaultSnippets,
+  'toc.nested': tocNestedSnippets,
   'breadcrumbs.default': breadcrumbsDefaultSnippets,
+  'breadcrumbs.collapse': breadcrumbsCollapseSnippets,
   'app-shell.default': appShellDefaultSnippets,
   'app-shell.layout': appShellLayoutSnippets,
   'simple-grid.default': simpleGridDefaultSnippets,
   'scroll-area.default': scrollAreaDefaultSnippets,
   'overflow-list.default': overflowListDefaultSnippets,
   'resize-handle.default': resizeHandleDefaultSnippets,
+  'resize-handle.vertical': resizeHandleVerticalSnippets,
   'pagination.default': paginationDefaultSnippets,
+  'pagination.controlled': paginationControlledSnippets,
   'side-nav.default': sideNavDefaultSnippets,
   'side-nav.sections': sideNavSectionsSnippets,
   'top-nav.default': topNavDefaultSnippets,
@@ -382,6 +396,7 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'mobile-nav.default': mobileNavDefaultSnippets,
   'mobile-nav.toggle': mobileNavToggleSnippets,
   'tab-list.default': tabListDefaultSnippets,
+  'tab-list.overflow': tabListOverflowSnippets,
   'alert-dialog.default': alertDialogDefaultSnippets,
   'alert-dialog.confirm': alertDialogConfirmSnippets,
   'drawer.default': drawerDefaultSnippets,
@@ -515,14 +530,18 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'description-list.default': () => import('./description-list/default/react'),
   'outline.default': () => import('./outline/default/react'),
   'toc.default': () => import('./toc/default/react'),
+  'toc.nested': () => import('./toc/nested/react'),
   'breadcrumbs.default': () => import('./breadcrumbs/default/react'),
+  'breadcrumbs.collapse': () => import('./breadcrumbs/collapse/react'),
   'app-shell.default': () => import('./app-shell/default/react'),
   'app-shell.layout': () => import('./app-shell/layout/react'),
   'simple-grid.default': () => import('./simple-grid/default/react'),
   'scroll-area.default': () => import('./scroll-area/default/react'),
   'overflow-list.default': () => import('./overflow-list/default/react'),
   'resize-handle.default': () => import('./resize-handle/default/react'),
+  'resize-handle.vertical': () => import('./resize-handle/vertical/react'),
   'pagination.default': () => import('./pagination/default/react'),
+  'pagination.controlled': () => import('./pagination/controlled/react'),
   'side-nav.default': () => import('./side-nav/default/react'),
   'side-nav.sections': () => import('./side-nav/sections/react'),
   'top-nav.default': () => import('./top-nav/default/react'),
@@ -532,6 +551,7 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'mobile-nav.default': () => import('./mobile-nav/default/react'),
   'mobile-nav.toggle': () => import('./mobile-nav/toggle/react'),
   'tab-list.default': () => import('./tab-list/default/react'),
+  'tab-list.overflow': () => import('./tab-list/overflow/react'),
   'alert-dialog.default': () => import('./alert-dialog/default/react'),
   'alert-dialog.confirm': () => import('./alert-dialog/confirm/react'),
   'drawer.default': () => import('./drawer/default/react'),
@@ -925,10 +945,20 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['toc.default'],
     react: reactDemoLoaders['toc.default'],
   },
+  'toc.nested': {
+    id: 'toc.nested',
+    snippets: demoSnippets['toc.nested'],
+    react: reactDemoLoaders['toc.nested'],
+  },
   'breadcrumbs.default': {
     id: 'breadcrumbs.default',
     snippets: demoSnippets['breadcrumbs.default'],
     react: reactDemoLoaders['breadcrumbs.default'],
+  },
+  'breadcrumbs.collapse': {
+    id: 'breadcrumbs.collapse',
+    snippets: demoSnippets['breadcrumbs.collapse'],
+    react: reactDemoLoaders['breadcrumbs.collapse'],
   },
   'app-shell.default': {
     id: 'app-shell.default',
@@ -960,10 +990,20 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['resize-handle.default'],
     react: reactDemoLoaders['resize-handle.default'],
   },
+  'resize-handle.vertical': {
+    id: 'resize-handle.vertical',
+    snippets: demoSnippets['resize-handle.vertical'],
+    react: reactDemoLoaders['resize-handle.vertical'],
+  },
   'pagination.default': {
     id: 'pagination.default',
     snippets: demoSnippets['pagination.default'],
     react: reactDemoLoaders['pagination.default'],
+  },
+  'pagination.controlled': {
+    id: 'pagination.controlled',
+    snippets: demoSnippets['pagination.controlled'],
+    react: reactDemoLoaders['pagination.controlled'],
   },
   'side-nav.default': {
     id: 'side-nav.default',
@@ -1009,6 +1049,11 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'tab-list.default',
     snippets: demoSnippets['tab-list.default'],
     react: reactDemoLoaders['tab-list.default'],
+  },
+  'tab-list.overflow': {
+    id: 'tab-list.overflow',
+    snippets: demoSnippets['tab-list.overflow'],
+    react: reactDemoLoaders['tab-list.overflow'],
   },
   'alert-dialog.default': {
     id: 'alert-dialog.default',

@@ -1,18 +1,30 @@
 ---
 title: TabList
-description: Horizontal tab strip with TabList.Tab items.
+description: Horizontal tab strip with TabList.Tab items and optional overflow menu.
 ---
 
 # TabList
 
-Horizontal tab strip with `TabList.Tab` and optional `TabList.Menu` overflow.
+Nav landmark tabs for switching views or routes — no panels. Compose `TabList.Tab` rows and an optional `TabList.Menu` overflow trigger. Controlled via `value` / `onChange`.
 
 ## Examples
 
 ### Default
 
+A short strip of selected and unselected tabs.
+
 <Demo id="tab-list.default" />
+
+### Overflow menu
+
+Keep primary tabs visible and tuck the rest into `TabList.Menu` — selecting an option updates the same controlled `value`.
+
+<Demo id="tab-list.overflow" />
 
 ## Props
 
 <PropsTable slug="tab-list" />
+
+## Accessibility
+
+The root is a `nav` landmark (`label` defaults to `"Tabs"`). Tabs are plain buttons or links with roving tabindex (Arrow / Home / End); link tabs set `aria-current="page"` when selected. `TabList.Menu` options join the same value set for keyboard focus order.

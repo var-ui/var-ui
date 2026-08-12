@@ -1,18 +1,30 @@
 ---
 title: Breadcrumbs
-description: Hierarchical navigation trail for the current page.
+description: Hierarchical navigation trail with optional collapse.
 ---
 
 # Breadcrumbs
 
-Hierarchical navigation trail for the current page.
+Hierarchical trail for the current page. Pass `items` with stable `id`s; omit `href` on the current crumb.
 
 ## Examples
 
 ### Default
 
+A short trail ending on the current page.
+
 <Demo id="breadcrumbs.default" />
+
+### Collapse
+
+Set `maxItems` so long trails collapse to an ellipsis that expands on click (`itemsBeforeCollapse` / `itemsAfterCollapse` default to 1).
+
+<Demo id="breadcrumbs.collapse" />
 
 ## Props
 
 <PropsTable slug="breadcrumbs" />
+
+## Accessibility
+
+The root is a `nav` landmark (`label` defaults to `"Breadcrumb"`). Built on RAC breadcrumbs; the ellipsis control is a button labeled “Show all breadcrumbs”.

@@ -5,14 +5,26 @@ description: Table of contents with Toc.Item links for in-page navigation.
 
 # Toc
 
-Table of contents with `Toc.Item` links for in-page navigation.
+In-page table of contents. Compose manual `Toc.Item`s or enable `auto` to scan headings in a content root.
 
 ## Examples
 
 ### Default
 
+A flat list of section anchors with one selected item.
+
 <Demo id="toc.default" />
+
+### Nested items
+
+Mark subsection links with `isNested` (matches auto mode’s `h3` indent).
+
+<Demo id="toc.nested" />
 
 ## Props
 
 <PropsTable slug="toc" />
+
+## Accessibility
+
+The root is a `nav` landmark. Selected items set `aria-current="location"`. Prefer stable heading `id`s so `href="#…"` targets resolve.
