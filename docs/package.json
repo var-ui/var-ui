@@ -17,6 +17,7 @@
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/netlify": "^6.5.0",
     "@astrojs/react": "^4.3.0",
+    "@internationalized/date": "catalog:",
     "@var-ui/astro": "workspace:*",
     "@var-ui/core": "workspace:*",
     "@var-ui/docs": "workspace:*",

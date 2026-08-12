@@ -55,6 +55,20 @@ import ChatComposerDefault from './chat-composer/default/astro.astro';
 import ChatSendButtonDefault from './chat-send-button/default/astro.astro';
 import ChatSystemMessageDefault from './chat-system-message/default/astro.astro';
 import ChatToolCallsDefault from './chat-tool-calls/default/astro.astro';
+import KbdDefault from './kbd/default/astro.astro';
+import SkeletonDefault from './skeleton/default/astro.astro';
+import StatusDotDefault from './status-dot/default/astro.astro';
+import StepsDefault from './steps/default/astro.astro';
+import TocDefault from './toc/default/astro.astro';
+import BreadcrumbsDefault from './breadcrumbs/default/astro.astro';
+import AppShellDefault from './app-shell/default/astro.astro';
+import ScrollAreaDefault from './scroll-area/default/astro.astro';
+import ResizeHandleDefault from './resize-handle/default/astro.astro';
+import SideNavDefault from './side-nav/default/astro.astro';
+import TopNavDefault from './top-nav/default/astro.astro';
+import MobileNavDefault from './mobile-nav/default/astro.astro';
+import CommandPaletteDefault from './command-palette/default/astro.astro';
+import SearchInputDefault from './search-input/default/astro.astro';
 
 /** Static Astro preview map — DemoHost imports this (Astro cannot dynamic-import by string). */
 export const astroDemoMap = {
@@ -114,6 +128,20 @@ export const astroDemoMap = {
   'chat-send-button.default': ChatSendButtonDefault,
   'chat-system-message.default': ChatSystemMessageDefault,
   'chat-tool-calls.default': ChatToolCallsDefault,
-} as const satisfies Record<DemoId, unknown>;
+  'kbd.default': KbdDefault,
+  'skeleton.default': SkeletonDefault,
+  'status-dot.default': StatusDotDefault,
+  'steps.default': StepsDefault,
+  'toc.default': TocDefault,
+  'breadcrumbs.default': BreadcrumbsDefault,
+  'app-shell.default': AppShellDefault,
+  'scroll-area.default': ScrollAreaDefault,
+  'resize-handle.default': ResizeHandleDefault,
+  'side-nav.default': SideNavDefault,
+  'top-nav.default': TopNavDefault,
+  'mobile-nav.default': MobileNavDefault,
+  'command-palette.default': CommandPaletteDefault,
+  'search-input.default': SearchInputDefault,
+} as const satisfies Partial<Record<DemoId, unknown>>;
 
 export const astroDemoIds = Object.keys(astroDemoMap) as DemoId[];

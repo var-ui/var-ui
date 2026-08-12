@@ -18,7 +18,7 @@ const filename =
   framework === 'react' ? 'Demo.tsx' : framework === 'astro' ? 'Demo.astro' : 'Demo.html';
 
 const AstroPreview = framework === 'astro' ? astroDemoMap[id] : undefined;
-const htmlMarkup = framework === 'html' ? htmlDemoMap[id]() : undefined;
+const htmlMarkup = framework === 'html' ? htmlDemoMap[id]?.() : undefined;
 ---
 
 <DemoChrome code={code} language={language} filename={filename} framework={framework} title={title}>

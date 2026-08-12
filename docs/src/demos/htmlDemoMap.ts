@@ -55,6 +55,20 @@ import { render as renderChatComposerDefault } from './chat-composer/default/htm
 import { render as renderChatSendButtonDefault } from './chat-send-button/default/html';
 import { render as renderChatSystemMessageDefault } from './chat-system-message/default/html';
 import { render as renderChatToolCallsDefault } from './chat-tool-calls/default/html';
+import { render as renderKbdDefault } from './kbd/default/html';
+import { render as renderSkeletonDefault } from './skeleton/default/html';
+import { render as renderStatusDotDefault } from './status-dot/default/html';
+import { render as renderStepsDefault } from './steps/default/html';
+import { render as renderTocDefault } from './toc/default/html';
+import { render as renderBreadcrumbsDefault } from './breadcrumbs/default/html';
+import { render as renderAppShellDefault } from './app-shell/default/html';
+import { render as renderScrollAreaDefault } from './scroll-area/default/html';
+import { render as renderResizeHandleDefault } from './resize-handle/default/html';
+import { render as renderSideNavDefault } from './side-nav/default/html';
+import { render as renderTopNavDefault } from './top-nav/default/html';
+import { render as renderMobileNavDefault } from './mobile-nav/default/html';
+import { render as renderCommandPaletteDefault } from './command-palette/default/html';
+import { render as renderSearchInputDefault } from './search-input/default/html';
 
 /** Static HTML preview renderers keyed by demo id — consumed by DemoHost. */
 export const htmlDemoMap = {
@@ -114,6 +128,20 @@ export const htmlDemoMap = {
   'chat-send-button.default': renderChatSendButtonDefault,
   'chat-system-message.default': renderChatSystemMessageDefault,
   'chat-tool-calls.default': renderChatToolCallsDefault,
-} as const satisfies Record<DemoId, () => string>;
+  'kbd.default': renderKbdDefault,
+  'skeleton.default': renderSkeletonDefault,
+  'status-dot.default': renderStatusDotDefault,
+  'steps.default': renderStepsDefault,
+  'toc.default': renderTocDefault,
+  'breadcrumbs.default': renderBreadcrumbsDefault,
+  'app-shell.default': renderAppShellDefault,
+  'scroll-area.default': renderScrollAreaDefault,
+  'resize-handle.default': renderResizeHandleDefault,
+  'side-nav.default': renderSideNavDefault,
+  'top-nav.default': renderTopNavDefault,
+  'mobile-nav.default': renderMobileNavDefault,
+  'command-palette.default': renderCommandPaletteDefault,
+  'search-input.default': renderSearchInputDefault,
+} as const satisfies Partial<Record<DemoId, () => string>>;
 
 export const htmlDemoIds = Object.keys(htmlDemoMap) as DemoId[];

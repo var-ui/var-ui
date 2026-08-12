@@ -56,6 +56,61 @@ import ChatComposerDefault from './chat-composer/default/react';
 import ChatSendButtonDefault from './chat-send-button/default/react';
 import ChatSystemMessageDefault from './chat-system-message/default/react';
 import ChatToolCallsDefault from './chat-tool-calls/default/react';
+import KbdDefault from './kbd/default/react';
+import SkeletonDefault from './skeleton/default/react';
+import StatusDotDefault from './status-dot/default/react';
+import StepsDefault from './steps/default/react';
+import LoadingOverlayDefault from './loading-overlay/default/react';
+import ListDefault from './list/default/react';
+import DescriptionListDefault from './description-list/default/react';
+import OutlineDefault from './outline/default/react';
+import TocDefault from './toc/default/react';
+import BreadcrumbsDefault from './breadcrumbs/default/react';
+import AppShellDefault from './app-shell/default/react';
+import SimpleGridDefault from './simple-grid/default/react';
+import ScrollAreaDefault from './scroll-area/default/react';
+import OverflowListDefault from './overflow-list/default/react';
+import ResizeHandleDefault from './resize-handle/default/react';
+import PaginationDefault from './pagination/default/react';
+import SideNavDefault from './side-nav/default/react';
+import TopNavDefault from './top-nav/default/react';
+import TopNavMegaMenuDefault from './top-nav-mega-menu/default/react';
+import MobileNavDefault from './mobile-nav/default/react';
+import TabListDefault from './tab-list/default/react';
+import AlertDialogDefault from './alert-dialog/default/react';
+import DrawerDefault from './drawer/default/react';
+import TooltipDefault from './tooltip/default/react';
+import PopoverDefault from './popover/default/react';
+import HoverCardDefault from './hover-card/default/react';
+import CommandPaletteDefault from './command-palette/default/react';
+import IconButtonDefault from './icon-button/default/react';
+import ButtonGroupDefault from './button-group/default/react';
+import CopyButtonDefault from './copy-button/default/react';
+import ToggleButtonDefault from './toggle-button/default/react';
+import SegmentedControlDefault from './segmented-control/default/react';
+import ColorModeToggleDefault from './color-mode-toggle/default/react';
+import DropdownMenuDefault from './dropdown-menu/default/react';
+import ContextMenuDefault from './context-menu/default/react';
+import MoreMenuDefault from './more-menu/default/react';
+import ToolbarDefault from './toolbar/default/react';
+import NumberInputDefault from './number-input/default/react';
+import PasswordInputDefault from './password-input/default/react';
+import SearchInputDefault from './search-input/default/react';
+import FileInputDefault from './file-input/default/react';
+import InputGroupDefault from './input-group/default/react';
+import CheckboxGroupDefault from './checkbox-group/default/react';
+import CalendarDefault from './calendar/default/react';
+import DateInputDefault from './date-input/default/react';
+import DateRangeInputDefault from './date-range-input/default/react';
+import DateTimeInputDefault from './date-time-input/default/react';
+import TimeInputDefault from './time-input/default/react';
+import TokenizerDefault from './tokenizer/default/react';
+import MultiSelectorDefault from './multi-selector/default/react';
+import ColorInputDefault from './color-input/default/react';
+import ColorPickerDefault from './color-picker/default/react';
+import TableDefault from './table/default/react';
+import TreeDefault from './tree/default/react';
+import FileTreeDefault from './file-tree/default/react';
 
 /** Static React preview map — DemoReactIsland resolves demos by id (components are not serializable island props). */
 export const reactDemoMap = {
@@ -115,6 +170,61 @@ export const reactDemoMap = {
   'chat-send-button.default': ChatSendButtonDefault,
   'chat-system-message.default': ChatSystemMessageDefault,
   'chat-tool-calls.default': ChatToolCallsDefault,
+  'kbd.default': KbdDefault,
+  'skeleton.default': SkeletonDefault,
+  'status-dot.default': StatusDotDefault,
+  'steps.default': StepsDefault,
+  'loading-overlay.default': LoadingOverlayDefault,
+  'list.default': ListDefault,
+  'description-list.default': DescriptionListDefault,
+  'outline.default': OutlineDefault,
+  'toc.default': TocDefault,
+  'breadcrumbs.default': BreadcrumbsDefault,
+  'app-shell.default': AppShellDefault,
+  'simple-grid.default': SimpleGridDefault,
+  'scroll-area.default': ScrollAreaDefault,
+  'overflow-list.default': OverflowListDefault,
+  'resize-handle.default': ResizeHandleDefault,
+  'pagination.default': PaginationDefault,
+  'side-nav.default': SideNavDefault,
+  'top-nav.default': TopNavDefault,
+  'top-nav-mega-menu.default': TopNavMegaMenuDefault,
+  'mobile-nav.default': MobileNavDefault,
+  'tab-list.default': TabListDefault,
+  'alert-dialog.default': AlertDialogDefault,
+  'drawer.default': DrawerDefault,
+  'tooltip.default': TooltipDefault,
+  'popover.default': PopoverDefault,
+  'hover-card.default': HoverCardDefault,
+  'command-palette.default': CommandPaletteDefault,
+  'icon-button.default': IconButtonDefault,
+  'button-group.default': ButtonGroupDefault,
+  'copy-button.default': CopyButtonDefault,
+  'toggle-button.default': ToggleButtonDefault,
+  'segmented-control.default': SegmentedControlDefault,
+  'color-mode-toggle.default': ColorModeToggleDefault,
+  'dropdown-menu.default': DropdownMenuDefault,
+  'context-menu.default': ContextMenuDefault,
+  'more-menu.default': MoreMenuDefault,
+  'toolbar.default': ToolbarDefault,
+  'number-input.default': NumberInputDefault,
+  'password-input.default': PasswordInputDefault,
+  'search-input.default': SearchInputDefault,
+  'file-input.default': FileInputDefault,
+  'input-group.default': InputGroupDefault,
+  'checkbox-group.default': CheckboxGroupDefault,
+  'calendar.default': CalendarDefault,
+  'date-input.default': DateInputDefault,
+  'date-range-input.default': DateRangeInputDefault,
+  'date-time-input.default': DateTimeInputDefault,
+  'time-input.default': TimeInputDefault,
+  'tokenizer.default': TokenizerDefault,
+  'multi-selector.default': MultiSelectorDefault,
+  'color-input.default': ColorInputDefault,
+  'color-picker.default': ColorPickerDefault,
+  'table.default': TableDefault,
+  'tree.default': TreeDefault,
+  'file-tree.default': FileTreeDefault,
 } as const satisfies Record<DemoId, ComponentType>;
 
 export const reactDemoIds = Object.keys(reactDemoMap) as DemoId[];

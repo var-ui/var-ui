@@ -55,6 +55,61 @@ import { snippets as chatComposerDefaultSnippets } from './chat-composer/default
 import { snippets as chatSendButtonDefaultSnippets } from './chat-send-button/default/snippets';
 import { snippets as chatSystemMessageDefaultSnippets } from './chat-system-message/default/snippets';
 import { snippets as chatToolCallsDefaultSnippets } from './chat-tool-calls/default/snippets';
+import { snippets as kbdDefaultSnippets } from './kbd/default/snippets';
+import { snippets as skeletonDefaultSnippets } from './skeleton/default/snippets';
+import { snippets as statusDotDefaultSnippets } from './status-dot/default/snippets';
+import { snippets as stepsDefaultSnippets } from './steps/default/snippets';
+import { snippets as loadingOverlayDefaultSnippets } from './loading-overlay/default/snippets';
+import { snippets as listDefaultSnippets } from './list/default/snippets';
+import { snippets as descriptionListDefaultSnippets } from './description-list/default/snippets';
+import { snippets as outlineDefaultSnippets } from './outline/default/snippets';
+import { snippets as tocDefaultSnippets } from './toc/default/snippets';
+import { snippets as breadcrumbsDefaultSnippets } from './breadcrumbs/default/snippets';
+import { snippets as appShellDefaultSnippets } from './app-shell/default/snippets';
+import { snippets as simpleGridDefaultSnippets } from './simple-grid/default/snippets';
+import { snippets as scrollAreaDefaultSnippets } from './scroll-area/default/snippets';
+import { snippets as overflowListDefaultSnippets } from './overflow-list/default/snippets';
+import { snippets as resizeHandleDefaultSnippets } from './resize-handle/default/snippets';
+import { snippets as paginationDefaultSnippets } from './pagination/default/snippets';
+import { snippets as sideNavDefaultSnippets } from './side-nav/default/snippets';
+import { snippets as topNavDefaultSnippets } from './top-nav/default/snippets';
+import { snippets as topNavMegaMenuDefaultSnippets } from './top-nav-mega-menu/default/snippets';
+import { snippets as mobileNavDefaultSnippets } from './mobile-nav/default/snippets';
+import { snippets as tabListDefaultSnippets } from './tab-list/default/snippets';
+import { snippets as alertDialogDefaultSnippets } from './alert-dialog/default/snippets';
+import { snippets as drawerDefaultSnippets } from './drawer/default/snippets';
+import { snippets as tooltipDefaultSnippets } from './tooltip/default/snippets';
+import { snippets as popoverDefaultSnippets } from './popover/default/snippets';
+import { snippets as hoverCardDefaultSnippets } from './hover-card/default/snippets';
+import { snippets as commandPaletteDefaultSnippets } from './command-palette/default/snippets';
+import { snippets as iconButtonDefaultSnippets } from './icon-button/default/snippets';
+import { snippets as buttonGroupDefaultSnippets } from './button-group/default/snippets';
+import { snippets as copyButtonDefaultSnippets } from './copy-button/default/snippets';
+import { snippets as toggleButtonDefaultSnippets } from './toggle-button/default/snippets';
+import { snippets as segmentedControlDefaultSnippets } from './segmented-control/default/snippets';
+import { snippets as colorModeToggleDefaultSnippets } from './color-mode-toggle/default/snippets';
+import { snippets as dropdownMenuDefaultSnippets } from './dropdown-menu/default/snippets';
+import { snippets as contextMenuDefaultSnippets } from './context-menu/default/snippets';
+import { snippets as moreMenuDefaultSnippets } from './more-menu/default/snippets';
+import { snippets as toolbarDefaultSnippets } from './toolbar/default/snippets';
+import { snippets as numberInputDefaultSnippets } from './number-input/default/snippets';
+import { snippets as passwordInputDefaultSnippets } from './password-input/default/snippets';
+import { snippets as searchInputDefaultSnippets } from './search-input/default/snippets';
+import { snippets as fileInputDefaultSnippets } from './file-input/default/snippets';
+import { snippets as inputGroupDefaultSnippets } from './input-group/default/snippets';
+import { snippets as checkboxGroupDefaultSnippets } from './checkbox-group/default/snippets';
+import { snippets as calendarDefaultSnippets } from './calendar/default/snippets';
+import { snippets as dateInputDefaultSnippets } from './date-input/default/snippets';
+import { snippets as dateRangeInputDefaultSnippets } from './date-range-input/default/snippets';
+import { snippets as dateTimeInputDefaultSnippets } from './date-time-input/default/snippets';
+import { snippets as timeInputDefaultSnippets } from './time-input/default/snippets';
+import { snippets as tokenizerDefaultSnippets } from './tokenizer/default/snippets';
+import { snippets as multiSelectorDefaultSnippets } from './multi-selector/default/snippets';
+import { snippets as colorInputDefaultSnippets } from './color-input/default/snippets';
+import { snippets as colorPickerDefaultSnippets } from './color-picker/default/snippets';
+import { snippets as tableDefaultSnippets } from './table/default/snippets';
+import { snippets as treeDefaultSnippets } from './tree/default/snippets';
+import { snippets as fileTreeDefaultSnippets } from './file-tree/default/snippets';
 
 export type { DemoEntry, DemoId, DemoSnippets };
 
@@ -115,6 +170,61 @@ export const DEMO_IDS = [
   'chat-send-button.default',
   'chat-system-message.default',
   'chat-tool-calls.default',
+  'kbd.default',
+  'skeleton.default',
+  'status-dot.default',
+  'steps.default',
+  'loading-overlay.default',
+  'list.default',
+  'description-list.default',
+  'outline.default',
+  'toc.default',
+  'breadcrumbs.default',
+  'app-shell.default',
+  'simple-grid.default',
+  'scroll-area.default',
+  'overflow-list.default',
+  'resize-handle.default',
+  'pagination.default',
+  'side-nav.default',
+  'top-nav.default',
+  'top-nav-mega-menu.default',
+  'mobile-nav.default',
+  'tab-list.default',
+  'alert-dialog.default',
+  'drawer.default',
+  'tooltip.default',
+  'popover.default',
+  'hover-card.default',
+  'command-palette.default',
+  'icon-button.default',
+  'button-group.default',
+  'copy-button.default',
+  'toggle-button.default',
+  'segmented-control.default',
+  'color-mode-toggle.default',
+  'dropdown-menu.default',
+  'context-menu.default',
+  'more-menu.default',
+  'toolbar.default',
+  'number-input.default',
+  'password-input.default',
+  'search-input.default',
+  'file-input.default',
+  'input-group.default',
+  'checkbox-group.default',
+  'calendar.default',
+  'date-input.default',
+  'date-range-input.default',
+  'date-time-input.default',
+  'time-input.default',
+  'tokenizer.default',
+  'multi-selector.default',
+  'color-input.default',
+  'color-picker.default',
+  'table.default',
+  'tree.default',
+  'file-tree.default',
 ] as const satisfies readonly DemoId[];
 
 export const demoSnippets: Record<DemoId, DemoSnippets> = {
@@ -174,6 +284,61 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'chat-send-button.default': chatSendButtonDefaultSnippets,
   'chat-system-message.default': chatSystemMessageDefaultSnippets,
   'chat-tool-calls.default': chatToolCallsDefaultSnippets,
+  'kbd.default': kbdDefaultSnippets,
+  'skeleton.default': skeletonDefaultSnippets,
+  'status-dot.default': statusDotDefaultSnippets,
+  'steps.default': stepsDefaultSnippets,
+  'loading-overlay.default': loadingOverlayDefaultSnippets,
+  'list.default': listDefaultSnippets,
+  'description-list.default': descriptionListDefaultSnippets,
+  'outline.default': outlineDefaultSnippets,
+  'toc.default': tocDefaultSnippets,
+  'breadcrumbs.default': breadcrumbsDefaultSnippets,
+  'app-shell.default': appShellDefaultSnippets,
+  'simple-grid.default': simpleGridDefaultSnippets,
+  'scroll-area.default': scrollAreaDefaultSnippets,
+  'overflow-list.default': overflowListDefaultSnippets,
+  'resize-handle.default': resizeHandleDefaultSnippets,
+  'pagination.default': paginationDefaultSnippets,
+  'side-nav.default': sideNavDefaultSnippets,
+  'top-nav.default': topNavDefaultSnippets,
+  'top-nav-mega-menu.default': topNavMegaMenuDefaultSnippets,
+  'mobile-nav.default': mobileNavDefaultSnippets,
+  'tab-list.default': tabListDefaultSnippets,
+  'alert-dialog.default': alertDialogDefaultSnippets,
+  'drawer.default': drawerDefaultSnippets,
+  'tooltip.default': tooltipDefaultSnippets,
+  'popover.default': popoverDefaultSnippets,
+  'hover-card.default': hoverCardDefaultSnippets,
+  'command-palette.default': commandPaletteDefaultSnippets,
+  'icon-button.default': iconButtonDefaultSnippets,
+  'button-group.default': buttonGroupDefaultSnippets,
+  'copy-button.default': copyButtonDefaultSnippets,
+  'toggle-button.default': toggleButtonDefaultSnippets,
+  'segmented-control.default': segmentedControlDefaultSnippets,
+  'color-mode-toggle.default': colorModeToggleDefaultSnippets,
+  'dropdown-menu.default': dropdownMenuDefaultSnippets,
+  'context-menu.default': contextMenuDefaultSnippets,
+  'more-menu.default': moreMenuDefaultSnippets,
+  'toolbar.default': toolbarDefaultSnippets,
+  'number-input.default': numberInputDefaultSnippets,
+  'password-input.default': passwordInputDefaultSnippets,
+  'search-input.default': searchInputDefaultSnippets,
+  'file-input.default': fileInputDefaultSnippets,
+  'input-group.default': inputGroupDefaultSnippets,
+  'checkbox-group.default': checkboxGroupDefaultSnippets,
+  'calendar.default': calendarDefaultSnippets,
+  'date-input.default': dateInputDefaultSnippets,
+  'date-range-input.default': dateRangeInputDefaultSnippets,
+  'date-time-input.default': dateTimeInputDefaultSnippets,
+  'time-input.default': timeInputDefaultSnippets,
+  'tokenizer.default': tokenizerDefaultSnippets,
+  'multi-selector.default': multiSelectorDefaultSnippets,
+  'color-input.default': colorInputDefaultSnippets,
+  'color-picker.default': colorPickerDefaultSnippets,
+  'table.default': tableDefaultSnippets,
+  'tree.default': treeDefaultSnippets,
+  'file-tree.default': fileTreeDefaultSnippets,
 };
 
 export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
@@ -233,6 +398,61 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'chat-send-button.default': () => import('./chat-send-button/default/react'),
   'chat-system-message.default': () => import('./chat-system-message/default/react'),
   'chat-tool-calls.default': () => import('./chat-tool-calls/default/react'),
+  'kbd.default': () => import('./kbd/default/react'),
+  'skeleton.default': () => import('./skeleton/default/react'),
+  'status-dot.default': () => import('./status-dot/default/react'),
+  'steps.default': () => import('./steps/default/react'),
+  'loading-overlay.default': () => import('./loading-overlay/default/react'),
+  'list.default': () => import('./list/default/react'),
+  'description-list.default': () => import('./description-list/default/react'),
+  'outline.default': () => import('./outline/default/react'),
+  'toc.default': () => import('./toc/default/react'),
+  'breadcrumbs.default': () => import('./breadcrumbs/default/react'),
+  'app-shell.default': () => import('./app-shell/default/react'),
+  'simple-grid.default': () => import('./simple-grid/default/react'),
+  'scroll-area.default': () => import('./scroll-area/default/react'),
+  'overflow-list.default': () => import('./overflow-list/default/react'),
+  'resize-handle.default': () => import('./resize-handle/default/react'),
+  'pagination.default': () => import('./pagination/default/react'),
+  'side-nav.default': () => import('./side-nav/default/react'),
+  'top-nav.default': () => import('./top-nav/default/react'),
+  'top-nav-mega-menu.default': () => import('./top-nav-mega-menu/default/react'),
+  'mobile-nav.default': () => import('./mobile-nav/default/react'),
+  'tab-list.default': () => import('./tab-list/default/react'),
+  'alert-dialog.default': () => import('./alert-dialog/default/react'),
+  'drawer.default': () => import('./drawer/default/react'),
+  'tooltip.default': () => import('./tooltip/default/react'),
+  'popover.default': () => import('./popover/default/react'),
+  'hover-card.default': () => import('./hover-card/default/react'),
+  'command-palette.default': () => import('./command-palette/default/react'),
+  'icon-button.default': () => import('./icon-button/default/react'),
+  'button-group.default': () => import('./button-group/default/react'),
+  'copy-button.default': () => import('./copy-button/default/react'),
+  'toggle-button.default': () => import('./toggle-button/default/react'),
+  'segmented-control.default': () => import('./segmented-control/default/react'),
+  'color-mode-toggle.default': () => import('./color-mode-toggle/default/react'),
+  'dropdown-menu.default': () => import('./dropdown-menu/default/react'),
+  'context-menu.default': () => import('./context-menu/default/react'),
+  'more-menu.default': () => import('./more-menu/default/react'),
+  'toolbar.default': () => import('./toolbar/default/react'),
+  'number-input.default': () => import('./number-input/default/react'),
+  'password-input.default': () => import('./password-input/default/react'),
+  'search-input.default': () => import('./search-input/default/react'),
+  'file-input.default': () => import('./file-input/default/react'),
+  'input-group.default': () => import('./input-group/default/react'),
+  'checkbox-group.default': () => import('./checkbox-group/default/react'),
+  'calendar.default': () => import('./calendar/default/react'),
+  'date-input.default': () => import('./date-input/default/react'),
+  'date-range-input.default': () => import('./date-range-input/default/react'),
+  'date-time-input.default': () => import('./date-time-input/default/react'),
+  'time-input.default': () => import('./time-input/default/react'),
+  'tokenizer.default': () => import('./tokenizer/default/react'),
+  'multi-selector.default': () => import('./multi-selector/default/react'),
+  'color-input.default': () => import('./color-input/default/react'),
+  'color-picker.default': () => import('./color-picker/default/react'),
+  'table.default': () => import('./table/default/react'),
+  'tree.default': () => import('./tree/default/react'),
+  'file-tree.default': () => import('./file-tree/default/react'),
 };
 
 export const demoRegistry: Record<DemoId, DemoEntry> = {
@@ -515,6 +735,281 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'chat-tool-calls.default',
     snippets: demoSnippets['chat-tool-calls.default'],
     react: reactDemoLoaders['chat-tool-calls.default'],
+  },
+  'kbd.default': {
+    id: 'kbd.default',
+    snippets: demoSnippets['kbd.default'],
+    react: reactDemoLoaders['kbd.default'],
+  },
+  'skeleton.default': {
+    id: 'skeleton.default',
+    snippets: demoSnippets['skeleton.default'],
+    react: reactDemoLoaders['skeleton.default'],
+  },
+  'status-dot.default': {
+    id: 'status-dot.default',
+    snippets: demoSnippets['status-dot.default'],
+    react: reactDemoLoaders['status-dot.default'],
+  },
+  'steps.default': {
+    id: 'steps.default',
+    snippets: demoSnippets['steps.default'],
+    react: reactDemoLoaders['steps.default'],
+  },
+  'loading-overlay.default': {
+    id: 'loading-overlay.default',
+    snippets: demoSnippets['loading-overlay.default'],
+    react: reactDemoLoaders['loading-overlay.default'],
+  },
+  'list.default': {
+    id: 'list.default',
+    snippets: demoSnippets['list.default'],
+    react: reactDemoLoaders['list.default'],
+  },
+  'description-list.default': {
+    id: 'description-list.default',
+    snippets: demoSnippets['description-list.default'],
+    react: reactDemoLoaders['description-list.default'],
+  },
+  'outline.default': {
+    id: 'outline.default',
+    snippets: demoSnippets['outline.default'],
+    react: reactDemoLoaders['outline.default'],
+  },
+  'toc.default': {
+    id: 'toc.default',
+    snippets: demoSnippets['toc.default'],
+    react: reactDemoLoaders['toc.default'],
+  },
+  'breadcrumbs.default': {
+    id: 'breadcrumbs.default',
+    snippets: demoSnippets['breadcrumbs.default'],
+    react: reactDemoLoaders['breadcrumbs.default'],
+  },
+  'app-shell.default': {
+    id: 'app-shell.default',
+    snippets: demoSnippets['app-shell.default'],
+    react: reactDemoLoaders['app-shell.default'],
+  },
+  'simple-grid.default': {
+    id: 'simple-grid.default',
+    snippets: demoSnippets['simple-grid.default'],
+    react: reactDemoLoaders['simple-grid.default'],
+  },
+  'scroll-area.default': {
+    id: 'scroll-area.default',
+    snippets: demoSnippets['scroll-area.default'],
+    react: reactDemoLoaders['scroll-area.default'],
+  },
+  'overflow-list.default': {
+    id: 'overflow-list.default',
+    snippets: demoSnippets['overflow-list.default'],
+    react: reactDemoLoaders['overflow-list.default'],
+  },
+  'resize-handle.default': {
+    id: 'resize-handle.default',
+    snippets: demoSnippets['resize-handle.default'],
+    react: reactDemoLoaders['resize-handle.default'],
+  },
+  'pagination.default': {
+    id: 'pagination.default',
+    snippets: demoSnippets['pagination.default'],
+    react: reactDemoLoaders['pagination.default'],
+  },
+  'side-nav.default': {
+    id: 'side-nav.default',
+    snippets: demoSnippets['side-nav.default'],
+    react: reactDemoLoaders['side-nav.default'],
+  },
+  'top-nav.default': {
+    id: 'top-nav.default',
+    snippets: demoSnippets['top-nav.default'],
+    react: reactDemoLoaders['top-nav.default'],
+  },
+  'top-nav-mega-menu.default': {
+    id: 'top-nav-mega-menu.default',
+    snippets: demoSnippets['top-nav-mega-menu.default'],
+    react: reactDemoLoaders['top-nav-mega-menu.default'],
+  },
+  'mobile-nav.default': {
+    id: 'mobile-nav.default',
+    snippets: demoSnippets['mobile-nav.default'],
+    react: reactDemoLoaders['mobile-nav.default'],
+  },
+  'tab-list.default': {
+    id: 'tab-list.default',
+    snippets: demoSnippets['tab-list.default'],
+    react: reactDemoLoaders['tab-list.default'],
+  },
+  'alert-dialog.default': {
+    id: 'alert-dialog.default',
+    snippets: demoSnippets['alert-dialog.default'],
+    react: reactDemoLoaders['alert-dialog.default'],
+  },
+  'drawer.default': {
+    id: 'drawer.default',
+    snippets: demoSnippets['drawer.default'],
+    react: reactDemoLoaders['drawer.default'],
+  },
+  'tooltip.default': {
+    id: 'tooltip.default',
+    snippets: demoSnippets['tooltip.default'],
+    react: reactDemoLoaders['tooltip.default'],
+  },
+  'popover.default': {
+    id: 'popover.default',
+    snippets: demoSnippets['popover.default'],
+    react: reactDemoLoaders['popover.default'],
+  },
+  'hover-card.default': {
+    id: 'hover-card.default',
+    snippets: demoSnippets['hover-card.default'],
+    react: reactDemoLoaders['hover-card.default'],
+  },
+  'command-palette.default': {
+    id: 'command-palette.default',
+    snippets: demoSnippets['command-palette.default'],
+    react: reactDemoLoaders['command-palette.default'],
+  },
+  'icon-button.default': {
+    id: 'icon-button.default',
+    snippets: demoSnippets['icon-button.default'],
+    react: reactDemoLoaders['icon-button.default'],
+  },
+  'button-group.default': {
+    id: 'button-group.default',
+    snippets: demoSnippets['button-group.default'],
+    react: reactDemoLoaders['button-group.default'],
+  },
+  'copy-button.default': {
+    id: 'copy-button.default',
+    snippets: demoSnippets['copy-button.default'],
+    react: reactDemoLoaders['copy-button.default'],
+  },
+  'toggle-button.default': {
+    id: 'toggle-button.default',
+    snippets: demoSnippets['toggle-button.default'],
+    react: reactDemoLoaders['toggle-button.default'],
+  },
+  'segmented-control.default': {
+    id: 'segmented-control.default',
+    snippets: demoSnippets['segmented-control.default'],
+    react: reactDemoLoaders['segmented-control.default'],
+  },
+  'color-mode-toggle.default': {
+    id: 'color-mode-toggle.default',
+    snippets: demoSnippets['color-mode-toggle.default'],
+    react: reactDemoLoaders['color-mode-toggle.default'],
+  },
+  'dropdown-menu.default': {
+    id: 'dropdown-menu.default',
+    snippets: demoSnippets['dropdown-menu.default'],
+    react: reactDemoLoaders['dropdown-menu.default'],
+  },
+  'context-menu.default': {
+    id: 'context-menu.default',
+    snippets: demoSnippets['context-menu.default'],
+    react: reactDemoLoaders['context-menu.default'],
+  },
+  'more-menu.default': {
+    id: 'more-menu.default',
+    snippets: demoSnippets['more-menu.default'],
+    react: reactDemoLoaders['more-menu.default'],
+  },
+  'toolbar.default': {
+    id: 'toolbar.default',
+    snippets: demoSnippets['toolbar.default'],
+    react: reactDemoLoaders['toolbar.default'],
+  },
+  'number-input.default': {
+    id: 'number-input.default',
+    snippets: demoSnippets['number-input.default'],
+    react: reactDemoLoaders['number-input.default'],
+  },
+  'password-input.default': {
+    id: 'password-input.default',
+    snippets: demoSnippets['password-input.default'],
+    react: reactDemoLoaders['password-input.default'],
+  },
+  'search-input.default': {
+    id: 'search-input.default',
+    snippets: demoSnippets['search-input.default'],
+    react: reactDemoLoaders['search-input.default'],
+  },
+  'file-input.default': {
+    id: 'file-input.default',
+    snippets: demoSnippets['file-input.default'],
+    react: reactDemoLoaders['file-input.default'],
+  },
+  'input-group.default': {
+    id: 'input-group.default',
+    snippets: demoSnippets['input-group.default'],
+    react: reactDemoLoaders['input-group.default'],
+  },
+  'checkbox-group.default': {
+    id: 'checkbox-group.default',
+    snippets: demoSnippets['checkbox-group.default'],
+    react: reactDemoLoaders['checkbox-group.default'],
+  },
+  'calendar.default': {
+    id: 'calendar.default',
+    snippets: demoSnippets['calendar.default'],
+    react: reactDemoLoaders['calendar.default'],
+  },
+  'date-input.default': {
+    id: 'date-input.default',
+    snippets: demoSnippets['date-input.default'],
+    react: reactDemoLoaders['date-input.default'],
+  },
+  'date-range-input.default': {
+    id: 'date-range-input.default',
+    snippets: demoSnippets['date-range-input.default'],
+    react: reactDemoLoaders['date-range-input.default'],
+  },
+  'date-time-input.default': {
+    id: 'date-time-input.default',
+    snippets: demoSnippets['date-time-input.default'],
+    react: reactDemoLoaders['date-time-input.default'],
+  },
+  'time-input.default': {
+    id: 'time-input.default',
+    snippets: demoSnippets['time-input.default'],
+    react: reactDemoLoaders['time-input.default'],
+  },
+  'tokenizer.default': {
+    id: 'tokenizer.default',
+    snippets: demoSnippets['tokenizer.default'],
+    react: reactDemoLoaders['tokenizer.default'],
+  },
+  'multi-selector.default': {
+    id: 'multi-selector.default',
+    snippets: demoSnippets['multi-selector.default'],
+    react: reactDemoLoaders['multi-selector.default'],
+  },
+  'color-input.default': {
+    id: 'color-input.default',
+    snippets: demoSnippets['color-input.default'],
+    react: reactDemoLoaders['color-input.default'],
+  },
+  'color-picker.default': {
+    id: 'color-picker.default',
+    snippets: demoSnippets['color-picker.default'],
+    react: reactDemoLoaders['color-picker.default'],
+  },
+  'table.default': {
+    id: 'table.default',
+    snippets: demoSnippets['table.default'],
+    react: reactDemoLoaders['table.default'],
+  },
+  'tree.default': {
+    id: 'tree.default',
+    snippets: demoSnippets['tree.default'],
+    react: reactDemoLoaders['tree.default'],
+  },
+  'file-tree.default': {
+    id: 'file-tree.default',
+    snippets: demoSnippets['file-tree.default'],
+    react: reactDemoLoaders['file-tree.default'],
   },
 };
 

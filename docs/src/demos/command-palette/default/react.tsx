@@ -1,0 +1,23 @@
+import { Button, CommandPalette } from '@var-ui/react';
+import { useState } from 'react';
+
+export default function Preview() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button intent="secondary" onPress={() => setOpen(true)}>
+        Open palette
+      </Button>
+      <CommandPalette
+        isOpen={open}
+        onOpenChange={setOpen}
+        hotkey={false}
+        items={[
+          { id: 'docs', title: 'Docs', meta: 'Guides' },
+          { id: 'components', title: 'Components', meta: 'Library' },
+        ]}
+        onAction={() => setOpen(false)}
+      />
+    </>
+  );
+}
