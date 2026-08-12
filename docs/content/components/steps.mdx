@@ -5,14 +5,26 @@ description: Ordered step list for sequential flows.
 
 # Steps
 
-Ordered step list for sequential flows.
+Numbered ordered list for sequential flows. Children should be `<li>` elements — there is no active-step prop; mark the current step with `aria-current="step"` on the list item.
 
 ## Examples
 
 ### Default
 
+Three setup steps.
+
 <Demo id="steps.default" />
+
+### Active step
+
+Highlight the current step with `aria-current="step"` on the active `<li>`.
+
+<Demo id="steps.active" />
 
 ## Props
 
 <PropsTable slug="steps" />
+
+## Accessibility
+
+Renders an `<ol>`. Use `aria-current="step"` on the active list item so assistive tech can announce progress. Keep step labels concise and sequential.

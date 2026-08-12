@@ -3,11 +3,16 @@ import type { DemoId } from './types';
 /** Demos that ship React previews only until Astro/HTML bindings exist. */
 export const REACT_ONLY_DEMO_IDS = new Set<DemoId>([
   'loading-overlay.default',
+  'loading-overlay.visible',
   'list.default',
   'description-list.default',
   'outline.default',
   'simple-grid.default',
+  'simple-grid.cols',
+  'scroll-area.fade',
   'overflow-list.default',
+  'overflow-list.many',
+  'steps.active',
   'pagination.default',
   'pagination.controlled',
   'top-nav-mega-menu.default',

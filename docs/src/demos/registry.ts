@@ -59,7 +59,9 @@ import { snippets as kbdDefaultSnippets } from './kbd/default/snippets';
 import { snippets as skeletonDefaultSnippets } from './skeleton/default/snippets';
 import { snippets as statusDotDefaultSnippets } from './status-dot/default/snippets';
 import { snippets as stepsDefaultSnippets } from './steps/default/snippets';
+import { snippets as stepsActiveSnippets } from './steps/active/snippets';
 import { snippets as loadingOverlayDefaultSnippets } from './loading-overlay/default/snippets';
+import { snippets as loadingOverlayVisibleSnippets } from './loading-overlay/visible/snippets';
 import { snippets as listDefaultSnippets } from './list/default/snippets';
 import { snippets as descriptionListDefaultSnippets } from './description-list/default/snippets';
 import { snippets as outlineDefaultSnippets } from './outline/default/snippets';
@@ -70,8 +72,11 @@ import { snippets as breadcrumbsCollapseSnippets } from './breadcrumbs/collapse/
 import { snippets as appShellDefaultSnippets } from './app-shell/default/snippets';
 import { snippets as appShellLayoutSnippets } from './app-shell/layout/snippets';
 import { snippets as simpleGridDefaultSnippets } from './simple-grid/default/snippets';
+import { snippets as simpleGridColsSnippets } from './simple-grid/cols/snippets';
 import { snippets as scrollAreaDefaultSnippets } from './scroll-area/default/snippets';
+import { snippets as scrollAreaFadeSnippets } from './scroll-area/fade/snippets';
 import { snippets as overflowListDefaultSnippets } from './overflow-list/default/snippets';
+import { snippets as overflowListManySnippets } from './overflow-list/many/snippets';
 import { snippets as resizeHandleDefaultSnippets } from './resize-handle/default/snippets';
 import { snippets as resizeHandleVerticalSnippets } from './resize-handle/vertical/snippets';
 import { snippets as paginationDefaultSnippets } from './pagination/default/snippets';
@@ -215,7 +220,9 @@ export const DEMO_IDS = [
   'skeleton.default',
   'status-dot.default',
   'steps.default',
+  'steps.active',
   'loading-overlay.default',
+  'loading-overlay.visible',
   'list.default',
   'description-list.default',
   'outline.default',
@@ -226,8 +233,11 @@ export const DEMO_IDS = [
   'app-shell.default',
   'app-shell.layout',
   'simple-grid.default',
+  'simple-grid.cols',
   'scroll-area.default',
+  'scroll-area.fade',
   'overflow-list.default',
+  'overflow-list.many',
   'resize-handle.default',
   'resize-handle.vertical',
   'pagination.default',
@@ -370,7 +380,9 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'skeleton.default': skeletonDefaultSnippets,
   'status-dot.default': statusDotDefaultSnippets,
   'steps.default': stepsDefaultSnippets,
+  'steps.active': stepsActiveSnippets,
   'loading-overlay.default': loadingOverlayDefaultSnippets,
+  'loading-overlay.visible': loadingOverlayVisibleSnippets,
   'list.default': listDefaultSnippets,
   'description-list.default': descriptionListDefaultSnippets,
   'outline.default': outlineDefaultSnippets,
@@ -381,8 +393,11 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'app-shell.default': appShellDefaultSnippets,
   'app-shell.layout': appShellLayoutSnippets,
   'simple-grid.default': simpleGridDefaultSnippets,
+  'simple-grid.cols': simpleGridColsSnippets,
   'scroll-area.default': scrollAreaDefaultSnippets,
+  'scroll-area.fade': scrollAreaFadeSnippets,
   'overflow-list.default': overflowListDefaultSnippets,
+  'overflow-list.many': overflowListManySnippets,
   'resize-handle.default': resizeHandleDefaultSnippets,
   'resize-handle.vertical': resizeHandleVerticalSnippets,
   'pagination.default': paginationDefaultSnippets,
@@ -525,7 +540,9 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'skeleton.default': () => import('./skeleton/default/react'),
   'status-dot.default': () => import('./status-dot/default/react'),
   'steps.default': () => import('./steps/default/react'),
+  'steps.active': () => import('./steps/active/react'),
   'loading-overlay.default': () => import('./loading-overlay/default/react'),
+  'loading-overlay.visible': () => import('./loading-overlay/visible/react'),
   'list.default': () => import('./list/default/react'),
   'description-list.default': () => import('./description-list/default/react'),
   'outline.default': () => import('./outline/default/react'),
@@ -536,8 +553,11 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'app-shell.default': () => import('./app-shell/default/react'),
   'app-shell.layout': () => import('./app-shell/layout/react'),
   'simple-grid.default': () => import('./simple-grid/default/react'),
+  'simple-grid.cols': () => import('./simple-grid/cols/react'),
   'scroll-area.default': () => import('./scroll-area/default/react'),
+  'scroll-area.fade': () => import('./scroll-area/fade/react'),
   'overflow-list.default': () => import('./overflow-list/default/react'),
+  'overflow-list.many': () => import('./overflow-list/many/react'),
   'resize-handle.default': () => import('./resize-handle/default/react'),
   'resize-handle.vertical': () => import('./resize-handle/vertical/react'),
   'pagination.default': () => import('./pagination/default/react'),
@@ -920,10 +940,20 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['steps.default'],
     react: reactDemoLoaders['steps.default'],
   },
+  'steps.active': {
+    id: 'steps.active',
+    snippets: demoSnippets['steps.active'],
+    react: reactDemoLoaders['steps.active'],
+  },
   'loading-overlay.default': {
     id: 'loading-overlay.default',
     snippets: demoSnippets['loading-overlay.default'],
     react: reactDemoLoaders['loading-overlay.default'],
+  },
+  'loading-overlay.visible': {
+    id: 'loading-overlay.visible',
+    snippets: demoSnippets['loading-overlay.visible'],
+    react: reactDemoLoaders['loading-overlay.visible'],
   },
   'list.default': {
     id: 'list.default',
@@ -975,15 +1005,30 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['simple-grid.default'],
     react: reactDemoLoaders['simple-grid.default'],
   },
+  'simple-grid.cols': {
+    id: 'simple-grid.cols',
+    snippets: demoSnippets['simple-grid.cols'],
+    react: reactDemoLoaders['simple-grid.cols'],
+  },
   'scroll-area.default': {
     id: 'scroll-area.default',
     snippets: demoSnippets['scroll-area.default'],
     react: reactDemoLoaders['scroll-area.default'],
   },
+  'scroll-area.fade': {
+    id: 'scroll-area.fade',
+    snippets: demoSnippets['scroll-area.fade'],
+    react: reactDemoLoaders['scroll-area.fade'],
+  },
   'overflow-list.default': {
     id: 'overflow-list.default',
     snippets: demoSnippets['overflow-list.default'],
     react: reactDemoLoaders['overflow-list.default'],
+  },
+  'overflow-list.many': {
+    id: 'overflow-list.many',
+    snippets: demoSnippets['overflow-list.many'],
+    react: reactDemoLoaders['overflow-list.many'],
   },
   'resize-handle.default': {
     id: 'resize-handle.default',

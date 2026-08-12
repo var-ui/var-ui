@@ -5,14 +5,26 @@ description: Fits items in a row and reports overflow via renderOverflow.
 
 # OverflowList
 
-Fits items in a row and reports overflow via renderOverflow.
+Fits as many items as possible in a single row and collapses the rest behind a caller-supplied overflow affordance via `renderOverflow`.
 
 ## Examples
 
 ### Default
 
+Cap visibility with `maxVisible` and render a `+N` indicator for hidden items.
+
 <Demo id="overflow-list.default" />
+
+### Many items
+
+Omit `maxVisible` so the list measures to fit — with a constrained width and many items, the overflow indicator reports how many are hidden.
+
+<Demo id="overflow-list.many" />
 
 ## Props
 
 <PropsTable slug="overflow-list" />
+
+## Accessibility
+
+Compose with `OverflowList.Item` children or an `items` + `renderItem` array. Keep the overflow control keyboard-accessible when it opens a menu (e.g. wrap `renderOverflow` in a button). Hidden items are not in the tab order until revealed.

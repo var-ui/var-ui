@@ -5,14 +5,26 @@ description: Blocks interaction and shows a spinner over content.
 
 # LoadingOverlay
 
-Blocks interaction and shows a spinner over content.
+Blocks pointer interaction over its children while async work runs and shows a spinner. Toggle with `visible`; set `label` for the spinner’s accessible name.
 
 ## Examples
 
 ### Default
 
+A compact content box with the overlay on.
+
 <Demo id="loading-overlay.default" />
+
+### Visible overlay
+
+Pass `visible` over a bordered content surface so the backdrop and spinner cover the region being loaded.
+
+<Demo id="loading-overlay.visible" />
 
 ## Props
 
 <PropsTable slug="loading-overlay" />
+
+## Accessibility
+
+When `visible`, the overlay sets `aria-busy="true"` and the spinner uses `label` (default `"Loading"`). Keep meaningful content as children so the blocked region remains in the document; avoid nesting interactive controls that stay focusable while the overlay is shown.

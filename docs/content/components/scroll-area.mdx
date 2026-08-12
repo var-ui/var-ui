@@ -5,14 +5,26 @@ description: Scrollable viewport with optional edge fade masks.
 
 # ScrollArea
 
-Scrollable viewport with optional edge fade masks.
+Scrollable viewport with optional edge fade masks driven by CSS scroll-driven animations. Set `orientation` for the scroll axis and `fade` for edge masks.
 
 ## Examples
 
 ### Default
 
+A fixed-height vertical viewport without fades.
+
 <Demo id="scroll-area.default" />
+
+### Fade
+
+Enable edge fades with `fade` (`true` follows `orientation`, or pass `"vertical"` / `"horizontal"` / `"both"`). Scroll to see masks appear at the edges.
+
+<Demo id="scroll-area.fade" />
 
 ## Props
 
 <PropsTable slug="scroll-area" />
+
+## Accessibility
+
+The root and viewport are plain `div`s. Prefer putting focusable content inside the scrollable region; fades are decorative (`aria-hidden`). Pass `viewportRef` when you need to control scroll position programmatically.

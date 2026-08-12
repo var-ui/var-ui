@@ -60,7 +60,9 @@ import KbdDefault from './kbd/default/react';
 import SkeletonDefault from './skeleton/default/react';
 import StatusDotDefault from './status-dot/default/react';
 import StepsDefault from './steps/default/react';
+import StepsActive from './steps/active/react';
 import LoadingOverlayDefault from './loading-overlay/default/react';
+import LoadingOverlayVisible from './loading-overlay/visible/react';
 import ListDefault from './list/default/react';
 import DescriptionListDefault from './description-list/default/react';
 import OutlineDefault from './outline/default/react';
@@ -71,8 +73,11 @@ import BreadcrumbsCollapse from './breadcrumbs/collapse/react';
 import AppShellDefault from './app-shell/default/react';
 import AppShellLayout from './app-shell/layout/react';
 import SimpleGridDefault from './simple-grid/default/react';
+import SimpleGridCols from './simple-grid/cols/react';
 import ScrollAreaDefault from './scroll-area/default/react';
+import ScrollAreaFade from './scroll-area/fade/react';
 import OverflowListDefault from './overflow-list/default/react';
+import OverflowListMany from './overflow-list/many/react';
 import ResizeHandleDefault from './resize-handle/default/react';
 import ResizeHandleVertical from './resize-handle/vertical/react';
 import PaginationDefault from './pagination/default/react';
@@ -215,7 +220,9 @@ export const reactDemoMap = {
   'skeleton.default': SkeletonDefault,
   'status-dot.default': StatusDotDefault,
   'steps.default': StepsDefault,
+  'steps.active': StepsActive,
   'loading-overlay.default': LoadingOverlayDefault,
+  'loading-overlay.visible': LoadingOverlayVisible,
   'list.default': ListDefault,
   'description-list.default': DescriptionListDefault,
   'outline.default': OutlineDefault,
@@ -226,8 +233,11 @@ export const reactDemoMap = {
   'app-shell.default': AppShellDefault,
   'app-shell.layout': AppShellLayout,
   'simple-grid.default': SimpleGridDefault,
+  'simple-grid.cols': SimpleGridCols,
   'scroll-area.default': ScrollAreaDefault,
+  'scroll-area.fade': ScrollAreaFade,
   'overflow-list.default': OverflowListDefault,
+  'overflow-list.many': OverflowListMany,
   'resize-handle.default': ResizeHandleDefault,
   'resize-handle.vertical': ResizeHandleVertical,
   'pagination.default': PaginationDefault,
