@@ -1,0 +1,13 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "paths": {
+      "@var-ui/core": ["../../packages/core/src/index.ts"],
+      "@var-ui/astro": ["../../packages/astro/index.ts"],
+      "@var-ui/docs": ["../../packages/docs/index.ts"],
+      "@var-ui/docs/*": ["../../packages/docs/*"]
+    }
+  },
+  "include": ["src/**/*", "astro.config.mjs", "typestyles-entry.ts", "content/**/*"],
+  "exclude": ["dist", "node_modules", ".astro"]
+}

@@ -1,0 +1,36 @@
+---
+title: Installation
+description: Packages used by the guide-only @var-ui/docs example.
+---
+
+# Installation
+
+This example depends on the docs kit and Var UI Astro/core packages (workspace links in the
+monorepo):
+
+- `@var-ui/docs` — Astro integration, guide routes, shell
+- `@var-ui/astro` — layout primitives, `ThemeScript`, `ColorModeToggle`
+- `@var-ui/core` — default design theme + styles
+- `astro` + `@astrojs/node` — SSR for injected guide routes (`prerender: false`)
+- `typestyles` + `@typestyles/vite` — CSS extraction (wired by `varDocs`)
+
+It does **not** depend on `@var-ui/docs-components` (framework switcher, demos, props tables).
+
+## Config sketch
+
+```js
+import { defaultThemeClassName } from '@var-ui/core';
+import varDocs from '@var-ui/docs';
+
+varDocs({
+  title: 'Example Docs',
+  theme: {
+    defaultClassName: defaultThemeClassName,
+    syntax: 'design-tokens',
+    colorMode: { default: 'system', storageKey: 'theme-mode' },
+  },
+  typestyles: { entry: 'typestyles-entry.ts' },
+  routes: { docs: { prefix: '/docs', collection: 'docs' } },
+  components: { Layout: './src/layouts/BaseLayout.astro' },
+});
+```
