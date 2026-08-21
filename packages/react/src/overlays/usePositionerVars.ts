@@ -45,15 +45,20 @@ function getStyle(
   placement: OverlayPlacement,
   popup: HTMLElement | null,
   trigger: HTMLElement | null,
+  includeAnchorWidth: boolean,
 ): PositionerStyle {
   const transformOrigin = getTransformOrigin(placement);
 
   if (!popup || typeof window === 'undefined') {
-    return {
+    const style: PositionerStyle = {
       '--var-ui-available-height': '0px',
       '--var-ui-available-width': '0px',
       '--var-ui-transform-origin': transformOrigin,
     };
+    if (includeAnchorWidth) {
+      style['--var-ui-anchor-width'] = '0px';
+    }
+    return style;
   }
 
   const side = getSide(placement);
@@ -76,11 +81,22 @@ function getStyle(
     '--var-ui-transform-origin': transformOrigin,
   };
 
-  if (trigger) {
-    style['--var-ui-anchor-width'] = `${Math.max(0, trigger.getBoundingClientRect().width)}px`;
+  if (includeAnchorWidth) {
+    style['--var-ui-anchor-width'] = trigger
+      ? `${Math.max(0, trigger.getBoundingClientRect().width)}px`
+      : '0px';
   }
 
   return style;
+}
+
+function stylesEqual(left: PositionerStyle, right: PositionerStyle): boolean {
+  return (
+    left['--var-ui-available-height'] === right['--var-ui-available-height'] &&
+    left['--var-ui-available-width'] === right['--var-ui-available-width'] &&
+    left['--var-ui-transform-origin'] === right['--var-ui-transform-origin'] &&
+    left['--var-ui-anchor-width'] === right['--var-ui-anchor-width']
+  );
 }
 
 export function usePositionerVars({
@@ -88,11 +104,19 @@ export function usePositionerVars({
   popupRef,
   triggerRef,
 }: UsePositionerVarsOptions): UsePositionerVarsResult {
-  const [style, setStyle] = useState<PositionerStyle>(() => getStyle(placement, null, null));
+  const [style, setStyle] = useState<PositionerStyle>(() =>
+    getStyle(placement, null, null, triggerRef !== undefined),
+  );
 
   useLayoutEffect(() => {
     const update = () => {
-      setStyle(getStyle(placement, popupRef.current, triggerRef?.current ?? null));
+      const nextStyle = getStyle(
+        placement,
+        popupRef.current,
+        triggerRef?.current ?? null,
+        triggerRef !== undefined,
+      );
+      setStyle((currentStyle) => (stylesEqual(currentStyle, nextStyle) ? currentStyle : nextStyle));
     };
 
     update();
@@ -107,7 +131,7 @@ export function usePositionerVars({
       window.removeEventListener('resize', update);
       observer?.disconnect();
     };
-  }, [placement, popupRef, triggerRef]);
+  });
 
   return { style };
 }
