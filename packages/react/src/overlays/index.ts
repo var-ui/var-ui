@@ -11,3 +11,9 @@ export {
   type UseOverlayPresenceOptions,
   type UseOverlayPresenceResult,
 } from './useOverlayPresence';
+export {
+  type OverlayPlacement,
+  usePositionerVars,
+  type UsePositionerVarsOptions,
+  type UsePositionerVarsResult,
+} from './usePositionerVars';
