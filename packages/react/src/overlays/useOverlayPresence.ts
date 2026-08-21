@@ -56,22 +56,33 @@ export function useOverlayPresence({
         'data-ending-style': '',
       });
 
-      const finishedAnimations = getAnimatedElementsRef
-        .current()
-        .filter((element): element is HTMLElement => element !== null)
-        .flatMap((element) =>
-          (element.getAnimations?.() ?? []).map((animation) => animation.finished),
-        );
-
-      if (prefersReducedMotion || finishedAnimations.length === 0) {
+      if (prefersReducedMotion) {
         setMounted(false);
       } else {
-        const finishExit = () => {
-          if (generationRef.current === generation) {
-            setMounted(false);
-          }
-        };
-        void Promise.all(finishedAnimations).then(finishExit, finishExit);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (generationRef.current !== generation) {
+              return;
+            }
+
+            const finishedAnimations = getAnimatedElementsRef
+              .current()
+              .filter((element): element is HTMLElement => element !== null)
+              .flatMap((element) =>
+                (element.getAnimations?.() ?? []).map((animation) => animation.finished),
+              );
+
+            if (finishedAnimations.length === 0) {
+              setMounted(false);
+            } else {
+              void Promise.allSettled(finishedAnimations).then(() => {
+                if (generationRef.current === generation) {
+                  setMounted(false);
+                }
+              });
+            }
+          });
+        });
       }
     }
 

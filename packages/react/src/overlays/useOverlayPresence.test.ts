@@ -26,6 +26,15 @@ describe('useOverlayPresence', () => {
     vi.unstubAllGlobals();
   });
 
+  function runFrame(time: number): void {
+    act(() => {
+      const callbacks = frameCallbacks.splice(0);
+      for (const callback of callbacks) {
+        callback(time);
+      }
+    });
+  }
+
   it('mounts with open attrs and clears starting style after two frames', () => {
     const { result } = renderHook(() =>
       useOverlayPresence({
@@ -43,24 +52,25 @@ describe('useOverlayPresence', () => {
       },
     });
 
-    act(() => {
-      frameCallbacks.shift()?.(0);
-    });
+    runFrame(0);
     expect(result.current.attrs['data-starting-style']).toBe('');
 
-    act(() => {
-      frameCallbacks.shift()?.(16);
-    });
+    runFrame(16);
     expect(result.current.attrs['data-starting-style']).toBeUndefined();
     expect(result.current.attrs['data-open']).toBe('');
   });
 
-  it('stays mounted with exit attrs while animations run', async () => {
+  it('queries exit animations after ending attrs have painted', async () => {
     let resolve!: () => void;
     const finished = new Promise<void>((finish) => {
       resolve = finish;
     });
-    const element = elementWithAnimation(finished);
+    let endingAttrsPainted = false;
+    const element = document.createElement('div');
+    const getAnimations = vi.fn<() => Animation[]>(() =>
+      endingAttrsPainted ? ([{ finished, cancel: () => {} }] as unknown as Animation[]) : [],
+    );
+    element.getAnimations = getAnimations;
     const { result, rerender } = renderHook(
       ({ isOpen }: { isOpen: boolean }) =>
         useOverlayPresence({
@@ -81,6 +91,15 @@ describe('useOverlayPresence', () => {
         'data-ending-style': '',
       },
     });
+    expect(getAnimations).not.toHaveBeenCalled();
+
+    runFrame(0);
+    expect(getAnimations).not.toHaveBeenCalled();
+
+    endingAttrsPainted = true;
+    runFrame(16);
+    expect(getAnimations).toHaveBeenCalledOnce();
+    expect(result.current.mounted).toBe(true);
 
     await act(async () => {
       resolve();
@@ -125,7 +144,7 @@ describe('useOverlayPresence', () => {
     expect(result.current.mounted).toBe(false);
   });
 
-  it('unmounts immediately when elements are null or have no animations', () => {
+  it('unmounts after checking painted elements that have no animations', () => {
     const element = document.createElement('div');
     Object.defineProperty(element, 'getAnimations', { value: undefined });
     const { result, rerender } = renderHook(
@@ -140,6 +159,49 @@ describe('useOverlayPresence', () => {
 
     rerender({ isOpen: false });
 
+    expect(result.current.mounted).toBe(true);
+    runFrame(0);
+    expect(result.current.mounted).toBe(true);
+    runFrame(16);
+    expect(result.current.mounted).toBe(false);
+  });
+
+  it('waits for remaining animations when one finished promise rejects', async () => {
+    let rejectCanceled!: (reason: Error) => void;
+    let resolveRunning!: () => void;
+    const canceled = new Promise<void>((_, reject) => {
+      rejectCanceled = reject;
+    });
+    const running = new Promise<void>((resolve) => {
+      resolveRunning = resolve;
+    });
+    const { result, rerender } = renderHook(
+      ({ isOpen }: { isOpen: boolean }) =>
+        useOverlayPresence({
+          isOpen,
+          reducedMotion: false,
+          getAnimatedElements: () => [
+            elementWithAnimation(canceled),
+            elementWithAnimation(running),
+          ],
+        }),
+      { initialProps: { isOpen: true } },
+    );
+
+    rerender({ isOpen: false });
+    runFrame(0);
+    runFrame(16);
+
+    await act(async () => {
+      rejectCanceled(new Error('animation canceled'));
+      await Promise.resolve();
+    });
+    expect(result.current.mounted).toBe(true);
+
+    await act(async () => {
+      resolveRunning();
+      await Promise.allSettled([canceled, running]);
+    });
     expect(result.current.mounted).toBe(false);
   });
 
