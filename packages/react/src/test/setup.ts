@@ -11,6 +11,14 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
   globalThis.ResizeObserver = ResizeObserverStub as typeof ResizeObserver;
 }
 
+if (typeof globalThis.PointerEvent === 'undefined') {
+  globalThis.PointerEvent = class PointerEvent extends MouseEvent {
+    constructor(type: string, init?: PointerEventInit) {
+      super(type, init);
+    }
+  } as typeof PointerEvent;
+}
+
 // jsdom doesn't implement `CSS.escape`; React Aria's virtual-focus collections (e.g. Autocomplete +
 // ListBox) use it to look up the active item's DOM node. Polyfill per the CSSOM spec so those
 // components don't crash in tests.
