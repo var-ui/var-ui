@@ -1,0 +1,46 @@
+export type OverlayOpenChangeReason =
+  | 'trigger-press'
+  | 'escape-key'
+  | 'outside-press'
+  | 'imperative'
+  | 'hover'
+  | 'focus'
+  | 'unknown';
+
+export type OverlayChangeEventDetails = {
+  reason: OverlayOpenChangeReason;
+  event: Event | null;
+  cancel: () => void;
+  isCanceled: boolean;
+};
+
+export type OverlayOpenChangeHandler = (open: boolean, details: OverlayChangeEventDetails) => void;
+
+export function createOverlayChangeDetails(init: {
+  reason: OverlayOpenChangeReason;
+  event: Event | null;
+}): OverlayChangeEventDetails {
+  const details: OverlayChangeEventDetails = {
+    reason: init.reason,
+    event: init.event,
+    isCanceled: false,
+    cancel() {
+      details.isCanceled = true;
+    },
+  };
+  return details;
+}
+
+export function inferOverlayCloseReason(event: Event | null): OverlayOpenChangeReason {
+  if (!event) return 'unknown';
+  if (event.type === 'keydown' && 'key' in event && event.key === 'Escape') {
+    return 'escape-key';
+  }
+  if (event.type === 'pointerdown' || event.type === 'mousedown') {
+    return 'outside-press';
+  }
+  if (event.type === 'click' || event.type === 'press') {
+    return 'trigger-press';
+  }
+  return 'unknown';
+}
