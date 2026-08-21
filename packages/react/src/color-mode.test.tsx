@@ -145,6 +145,29 @@ describe('useColorMode storageKey persistence', () => {
   });
 });
 
+describe('useColorMode wrapper color-scheme', () => {
+  it('inherits color-scheme in system mode so nested trees follow a parent pin', () => {
+    const { container } = render(
+      <DesignSystemProvider defaultColorMode="system">
+        <span>child</span>
+      </DesignSystemProvider>,
+    );
+    const wrapper = container.firstElementChild as HTMLElement;
+    expect(wrapper.style.colorScheme).toBe('inherit');
+    expect(wrapper.getAttribute('data-mode')).toBe('system');
+  });
+
+  it('pins color-scheme on the wrapper for an explicit light or dark preference', () => {
+    const { container } = render(
+      <DesignSystemProvider defaultColorMode="light">
+        <span>child</span>
+      </DesignSystemProvider>,
+    );
+    const wrapper = container.firstElementChild as HTMLElement;
+    expect(wrapper.style.colorScheme).toBe('light');
+  });
+});
+
 describe('useColorMode applyToDocument html sync', () => {
   function cleanupDocumentTheme() {
     document.documentElement.removeAttribute('data-mode');

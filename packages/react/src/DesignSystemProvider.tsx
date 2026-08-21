@@ -144,7 +144,10 @@ export function DesignSystemProvider({
         data-mode={colorMode}
         style={{
           display: 'contents',
-          colorScheme: colorMode === 'system' ? 'light dark' : resolvedColorMode,
+          // `inherit` (not `light dark`) so a nested provider follows a parent pin
+          // such as ThemeScript's `html { color-scheme: light }`. `light dark` would
+          // re-enable prefers-color-scheme for light-dark() tokens in this subtree.
+          colorScheme: colorMode === 'system' ? 'inherit' : resolvedColorMode,
         }}
       >
         {children}

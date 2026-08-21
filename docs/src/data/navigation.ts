@@ -52,6 +52,7 @@ export const componentSidebarSections: readonly SidebarSection[] = componentCate
     title: categoryLabels[category],
     items: componentRegistry
       .filter((entry) => entry.category === category)
+      .sort((a, b) => a.name.localeCompare(b.name))
       .map((entry) => ({
         text: entry.name,
         link: `/components/${entry.slug}`,

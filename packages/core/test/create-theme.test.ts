@@ -33,6 +33,21 @@ describe('createDesignTheme', () => {
     expect(css).toContain(
       '@property --var-ui-fontSize-md { syntax: "<length-percentage>"; inherits: true;',
     );
+    expect(css).toContain(
+      '@property --var-ui-fontFamily-body { syntax: "*"; inherits: true; initial-value: none;',
+    );
+    expect(css).toContain(
+      '@property --var-ui-shadow-sm { syntax: "*"; inherits: true; initial-value: none;',
+    );
+    expect(css).toContain(
+      '@property --var-ui-easing-standard { syntax: "*"; inherits: true; initial-value: none;',
+    );
+    expect(css).toContain(
+      '@property --var-ui-transition-overlayFade { syntax: "*"; inherits: true; initial-value: none;',
+    );
+    expect(css).toContain(
+      '@property --var-ui-stroke-default { syntax: "*"; inherits: true; initial-value: none;',
+    );
   });
 
   it('emits dark color values via light-dark() on theme tokens', () => {

@@ -24,13 +24,20 @@ describe('navigation', () => {
   it('lists all component registry entries in grouped sidebar sections', () => {
     expect(docsSidebar.map((item) => item.link)).toEqual(['/docs/getting-started']);
     const flatItems = componentSidebarSections.flatMap((section) => section.items);
-    expect(flatItems).toEqual(
-      componentRegistry.map((entry) => ({
-        text: entry.name,
-        link: `/components/${entry.slug}`,
-      })),
-    );
+    const expectedItems = componentRegistry.map((entry) => ({
+      text: entry.name,
+      link: `/components/${entry.slug}`,
+    }));
+    expect(flatItems).toEqual(expect.arrayContaining(expectedItems));
+    expect(flatItems).toHaveLength(expectedItems.length);
     expect(componentSidebar).toEqual(flatItems);
+  });
+
+  it('alphabetizes component sidebar items within each group', () => {
+    for (const section of componentSidebarSections) {
+      const names = section.items.map((item) => item.text);
+      expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b)));
+    }
   });
 
   it('lists theming guide pages', () => {

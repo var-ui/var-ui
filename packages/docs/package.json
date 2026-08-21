@@ -1,7 +1,6 @@
 {
   "name": "@var-ui/docs",
   "version": "0.0.1",
-  "private": true,
   "description": "Astro documentation kit built with Var UI — shell, TOC, search, and createDesignTheme() theming (including syntax highlighting)",
   "keywords": [
     "astro",
@@ -20,6 +19,7 @@
   },
   "files": [
     "index.ts",
+    "schema.ts",
     "src",
     "README.md"
   ],
@@ -38,6 +38,9 @@
     "./DocsThemePicker": "./src/components/DocsThemePicker.astro",
     "./DocsThemeScript": "./src/components/DocsThemeScript.astro",
     "./theme-css": "./src/integrations/theme-css-extract.ts"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "test": "vp test run"

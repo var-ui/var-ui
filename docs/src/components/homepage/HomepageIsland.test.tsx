@@ -18,6 +18,18 @@ describe('HomepageIsland', () => {
     expect(showcase.querySelector('.var-ui-alert')).toBeTruthy();
   });
 
+  it('does not isolate color-scheme from the docs site before storage hydrates', () => {
+    document.documentElement.setAttribute('data-mode', 'light');
+    document.documentElement.style.colorScheme = 'light';
+    render(<HomepageIsland />);
+
+    const showcase = screen.getByTestId('bento-showcase') as HTMLElement;
+    const wrapper = showcase.closest('[data-mode]') as HTMLElement | null;
+    expect(wrapper?.getAttribute('data-mode')).toBe('system');
+    expect(wrapper?.style.colorScheme).toBe('inherit');
+    expect(showcase.style.colorScheme).toBe('inherit');
+  });
+
   it('inherits color-scheme from the docs site on load and after toggle updates', async () => {
     localStorage.setItem('theme-mode', 'light');
     document.documentElement.setAttribute('data-mode', 'light');

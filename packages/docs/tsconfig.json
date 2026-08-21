@@ -7,7 +7,11 @@
     "strict": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "paths": {
+      "@var-ui/core": ["../core/src/index.ts"],
+      "@var-ui/core/*": ["../core/src/*"]
+    }
   },
   "include": [
     "index.ts",

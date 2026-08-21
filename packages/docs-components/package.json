@@ -1,7 +1,6 @@
 {
   "name": "@var-ui/docs-components",
   "version": "0.0.1",
-  "private": true,
   "description": "Optional Var UI docs plugin for design-system catalogs — demos, props extract, framework switcher, component page chrome",
   "keywords": [
     "astro",
@@ -34,6 +33,9 @@
     "./HiddenPropsTable": "./src/components/HiddenPropsTable.astro",
     "./scripts/componentPageTabs": "./src/scripts/componentPageTabs.ts",
     "./scripts/frameworkSwitcher": "./src/scripts/frameworkSwitcher.ts"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "test": "vp test run"

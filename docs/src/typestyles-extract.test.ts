@@ -17,5 +17,8 @@ describe('typestyles extraction', () => {
     expect(css).toContain('scroll-behavior: smooth');
     expect(css).toContain('box-sizing: border-box');
     expect(css).toMatch(/body\s*\{[^}]*margin:\s*0/);
+    expect(css).toContain(
+      '@property --var-ui-fontFamily-body { syntax: "*"; inherits: true; initial-value: none;',
+    );
   });
 });

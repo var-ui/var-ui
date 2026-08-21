@@ -14,7 +14,7 @@ export const colorPicker = typestyles.styles.component(
       thumbSize: { value: '0.875rem', syntax: '<length>' },
       border: { value: t.color.border.default.var, syntax: '<color>' },
       thumbBorder: { value: t.color.background.surface.var, syntax: '<color>' },
-      thumbShadow: { value: t.shadow.sm.var, syntax: '<shadow>' },
+      thumbShadow: { value: t.shadow.sm.var, syntax: '*', initial: 'none' },
       swatchSize: { value: '1.25rem', syntax: '<length>' },
       swatchSelectedRing: { value: t.color.border.focus.var, syntax: '<color>' },
       checkerLight: { value: t.color.background.subtle.var, syntax: '<color>' },

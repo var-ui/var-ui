@@ -10,7 +10,7 @@
   "ignore": [
     "@var-ui/example-vite-app",
     "@var-ui/example-astro-app",
-    "@var-ui/docs",
+    "@var-ui/example-astro-docs",
     "@var-ui/docs-site"
   ]
 }

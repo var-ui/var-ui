@@ -48,14 +48,15 @@ Configuration lives in the root `vite.config.ts` — lint (Oxlint), formatting (
 | `@var-ui/core`              | Framework-agnostic tokens and component styles |
 | `@var-ui/react`             | React bindings (React Aria Components)         |
 | `@var-ui/astro`             | Astro components (no React)                    |
+| `@var-ui/docs`              | Astro documentation kit (`packages/docs`)      |
+| `@var-ui/docs-components`   | Optional docs catalog plugin                   |
 | `@var-ui/example-vite-app`  | Example consumer app (`examples/vite-app`)     |
 | `@var-ui/example-astro-app` | Example Astro consumer (`examples/astro-app`)  |
-| `@var-ui/docs`              | Astro documentation kit (`packages/docs`)      |
 | `@var-ui/docs-site`         | Documentation site (`docs/`)                   |
 
 ## Publishing
 
-Versioning uses [Changesets](https://github.com/changesets/changesets). Add a changeset with `vp exec changeset` before merging user-facing changes. The release workflow publishes `@var-ui/core`, `@var-ui/react`, and `@var-ui/astro` to npm when changesets are merged on `main`. The Astro package ships source `.astro`/`.ts` files (no `vp pack` build step).
+Versioning uses [Changesets](https://github.com/changesets/changesets). Add a changeset with `vp exec changeset` before merging user-facing changes. The release workflow publishes `@var-ui/core`, `@var-ui/react`, `@var-ui/form`, `@var-ui/icons`, `@var-ui/astro`, `@var-ui/docs`, and `@var-ui/docs-components` to npm when changesets are merged on `main`. `@var-ui/astro`, `@var-ui/docs`, and `@var-ui/docs-components` ship source `.astro`/`.ts` files (no `vp pack` build step).
 
 ## Agent integration
 
