@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from 'vite-plus/test';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ReactElement } from 'react';
 import { LayerProvider } from '../layers/LayerProvider';
@@ -20,6 +20,47 @@ beforeEach(() => {
 });
 
 describe('CommandPalette', () => {
+  it('marks the panel open while the palette is open', () => {
+    wrap(
+      <CommandPalette
+        isOpen
+        hotkey={false}
+        items={[{ id: 'a', title: 'Open settings' }]}
+        onAction={() => {}}
+        onOpenChange={() => {}}
+      />,
+    );
+
+    const panel = screen.getByPlaceholderText('Search…').closest('[data-open]');
+    expect(panel?.getAttribute('data-open')).toBe('');
+  });
+
+  it('unmounts the panel after closing when there are no exit animations', async () => {
+    const { rerender } = wrap(
+      <CommandPalette
+        isOpen
+        hotkey={false}
+        items={[{ id: 'a', title: 'Open settings' }]}
+        onAction={() => {}}
+        onOpenChange={() => {}}
+      />,
+    );
+
+    rerender(
+      <LayerProvider>
+        <CommandPalette
+          isOpen={false}
+          hotkey={false}
+          items={[{ id: 'a', title: 'Open settings' }]}
+          onAction={() => {}}
+          onOpenChange={() => {}}
+        />
+      </LayerProvider>,
+    );
+
+    await waitFor(() => expect(screen.queryByPlaceholderText('Search…')).toBeNull());
+  });
+
   it('filters items and invokes onAction on Enter', async () => {
     const onAction = vi.fn();
     wrap(

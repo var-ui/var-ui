@@ -395,6 +395,15 @@ export {
 } from './icons';
 export { LayerProvider, useLayer, type LayerProviderProps } from './layers/LayerProvider';
 export {
+  createOverlayChangeDetails,
+  inferOverlayCloseReason,
+  useOverlayPresence,
+  usePositionerVars,
+  type OverlayChangeEventDetails,
+  type OverlayOpenChangeHandler,
+  type OverlayOpenChangeReason,
+} from './overlays';
+export {
   cx,
   recipeClassName,
   recipeProps,
