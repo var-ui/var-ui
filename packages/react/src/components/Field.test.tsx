@@ -242,6 +242,44 @@ describe('Field', () => {
     expect(root?.hasAttribute('data-invalid')).toBe(false);
   });
 
+  it('does not reset data-dirty when defaultValue changes after mount', async () => {
+    function Harness({ defaultValue }: { defaultValue: string }) {
+      return (
+        <Field.Root>
+          <Field.Label>Name</Field.Label>
+          <Field.Control>
+            <input defaultValue={defaultValue} />
+          </Field.Control>
+        </Field.Root>
+      );
+    }
+    const { rerender } = render(<Harness defaultValue="Ada" />);
+    const input = screen.getByLabelText('Name');
+    await userEvent.clear(input);
+    await userEvent.type(input, 'Grace');
+    expect(input.closest('.var-ui-field')?.hasAttribute('data-dirty')).toBe(true);
+    rerender(<Harness defaultValue="Grace" />);
+    await userEvent.tab();
+    expect(input.closest('.var-ui-field')?.hasAttribute('data-dirty')).toBe(true);
+  });
+
+  it('sets data-filled when a select has an implicit selected option', () => {
+    render(
+      <Field.Root>
+        <Field.Label>Country</Field.Label>
+        <Field.Control>
+          <select>
+            <option value="us">United States</option>
+            <option value="ca">Canada</option>
+          </select>
+        </Field.Control>
+      </Field.Root>,
+    );
+    expect(
+      screen.getByLabelText('Country').closest('.var-ui-field')?.hasAttribute('data-filled'),
+    ).toBe(true);
+  });
+
   it('sets data-invalid when Field.Error has children', () => {
     render(
       <Field.Root>

@@ -5,12 +5,16 @@ import {
   isValidElement,
   useCallback,
   useContext,
+  useEffect,
   useId,
   useMemo,
+  useRef,
   useState,
   type JSX,
+  type MutableRefObject,
   type ReactElement,
   type ReactNode,
+  type Ref,
 } from 'react';
 import { field } from '@var-ui/core';
 import { cx, recipeProps } from './utils';
@@ -48,12 +52,14 @@ export type FieldErrorProps = {
 };
 
 type ControlReport = {
-  dirty: boolean;
-  filled: boolean;
-  nativeInvalid: boolean;
-  nativeMessage: string;
+  dirty?: boolean;
+  filled?: boolean;
+  nativeInvalid?: boolean;
+  nativeMessage?: string;
   touched?: boolean;
 };
+
+type ControlBaseline = { kind: 'check'; checked: boolean } | { kind: 'value'; value: string };
 
 type FieldContextValue = {
   name?: string;
@@ -83,6 +89,7 @@ type ControlChildProps = {
   defaultChecked?: boolean;
   checked?: boolean;
   type?: string;
+  ref?: Ref<HTMLElement | null>;
   onBlur?: (event: ControlEvent) => void;
   onInput?: (event: ControlEvent) => void;
   onChange?: (event: ControlEvent) => void;
@@ -180,19 +187,40 @@ function asConstraintElement(
   return null;
 }
 
+function assignRef<T>(ref: Ref<T> | undefined, value: T): void {
+  if (typeof ref === 'function') ref(value);
+  else if (ref) (ref as MutableRefObject<T>).current = value;
+}
+
 function controlIsFilled(el: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): boolean {
   if (el instanceof HTMLInputElement && (el.type === 'checkbox' || el.type === 'radio')) {
     return el.checked;
   }
+  if (el instanceof HTMLSelectElement) {
+    return Array.from(el.selectedOptions).some(
+      (option) => option.value !== '' || option.text !== '',
+    );
+  }
   return el.value !== '';
 }
 
-function controlIsDirty(el: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): boolean {
+function readBaseline(
+  el: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
+): ControlBaseline {
   if (el instanceof HTMLInputElement && (el.type === 'checkbox' || el.type === 'radio')) {
-    return el.checked !== el.defaultChecked;
+    return { kind: 'check', checked: el.checked };
   }
-  const defaultValue = 'defaultValue' in el ? String(el.defaultValue) : '';
-  return el.value !== defaultValue;
+  return { kind: 'value', value: el.value };
+}
+
+function isDirtyAgainstBaseline(
+  el: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
+  baseline: ControlBaseline,
+): boolean {
+  if (baseline.kind === 'check') {
+    return el instanceof HTMLInputElement && el.checked !== baseline.checked;
+  }
+  return el.value !== baseline.value;
 }
 
 function FieldRoot({
@@ -235,12 +263,14 @@ function FieldRoot({
 
   const reportControl = useCallback(
     (report: ControlReport) => {
-      setNativeInvalidState(report.nativeInvalid);
-      setNativeMessage(report.nativeMessage);
-      setDirty(report.dirty);
-      setFilledOverride(report.filled);
+      if (report.nativeInvalid !== undefined) {
+        setNativeInvalidState(report.nativeInvalid);
+        onInvalidChange?.(report.nativeInvalid);
+      }
+      if (report.nativeMessage !== undefined) setNativeMessage(report.nativeMessage);
+      if (report.dirty !== undefined) setDirty(report.dirty);
+      if (report.filled !== undefined) setFilledOverride(report.filled);
       if (report.touched) setTouched(true);
-      onInvalidChange?.(report.nativeInvalid);
     },
     [onInvalidChange],
   );
@@ -304,12 +334,26 @@ function FieldControl({ children, className }: FieldControlProps): ReactElement 
   const { name, controlId, invalid, describedBy, errorMessageId, reportControl } =
     useFieldContext();
   const childProps = children.props as ControlChildProps;
+  const controlRef = useRef<HTMLElement | null>(null);
+  const baselineRef = useRef<ControlBaseline | null>(null);
+
+  useEffect(() => {
+    const el = asConstraintElement(controlRef.current);
+    if (!el) return;
+    if (!baselineRef.current) {
+      baselineRef.current = readBaseline(el);
+    }
+    reportControl({ filled: controlIsFilled(el) });
+  }, [reportControl]);
 
   const reportFromEvent = (event: ControlEvent) => {
     const el = asConstraintElement(event.currentTarget);
     if (!el) return;
+    if (!baselineRef.current) {
+      baselineRef.current = readBaseline(el);
+    }
     reportControl({
-      dirty: controlIsDirty(el),
+      dirty: isDirtyAgainstBaseline(el, baselineRef.current),
       filled: controlIsFilled(el),
       nativeInvalid: !el.validity.valid,
       nativeMessage: el.validationMessage,
@@ -324,6 +368,10 @@ function FieldControl({ children, className }: FieldControlProps): ReactElement 
     'aria-describedby': describedBy,
     'aria-invalid': invalid || undefined,
     'aria-errormessage': errorMessageId,
+    ref: (node: HTMLElement | null) => {
+      controlRef.current = node;
+      assignRef(childProps.ref, node);
+    },
     onBlur: (event: ControlEvent) => {
       childProps.onBlur?.(event);
       reportFromEvent(event);
