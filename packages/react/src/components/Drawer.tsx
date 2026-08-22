@@ -204,6 +204,7 @@ function DrawerBackdrop({
   children,
   className,
   isDismissable,
+  onPointerDown,
   ...props
 }: DrawerBackdropProps): JSX.Element {
   const ctx = useDrawerContext();
@@ -222,6 +223,7 @@ function DrawerBackdrop({
       isDismissable={isDismissable ?? ctx.isDismissable}
       UNSTABLE_portalContainer={ctx.portalContainer}
       onPointerDown={(event) => {
+        onPointerDown?.(event);
         if (event.target === event.currentTarget) {
           ctx.lastEventRef.current = event.nativeEvent;
         }

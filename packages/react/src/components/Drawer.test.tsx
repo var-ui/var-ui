@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vite-plus/test';
-import { render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vite-plus/test';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { IconProvider } from '../icons';
 import { Drawer } from './Drawer';
 
@@ -33,5 +33,22 @@ describe('Drawer', () => {
 
     expect(screen.getByRole('dialog', { name: 'Navigation drawer' })).toBeTruthy();
     expect(screen.getByText('Navigation links')).toBeTruthy();
+  });
+
+  it('preserves a consumer onPointerDown handler on the backdrop', () => {
+    const onPointerDown = vi.fn();
+    render(
+      <IconProvider icons={{}}>
+        <Drawer isOpen title="Settings" onPointerDown={onPointerDown}>
+          Drawer body
+        </Drawer>
+      </IconProvider>,
+    );
+
+    const backdrop = document.querySelector('.var-ui-drawer__overlay');
+    expect(backdrop).toBeTruthy();
+    fireEvent.pointerDown(backdrop!);
+
+    expect(onPointerDown).toHaveBeenCalledOnce();
   });
 });
