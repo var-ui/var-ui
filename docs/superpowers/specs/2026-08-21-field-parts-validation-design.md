@@ -25,14 +25,14 @@ Today:
 <TextField label="Email" description="Work email" errorMessage={errors.email} />
 ```
 
-| Gap                          | Detail                                                                             |
-| ---------------------------- | ---------------------------------------------------------------------------------- |
-| **No shared context**        | `Field` does not wire `aria-describedby` / `aria-invalid` onto arbitrary children  |
-| **Duplicated chrome**        | Every input reimplements Label + description + FieldError                          |
-| **String-only errors**       | `errorMessage` is a React prop; native `required` / `minLength` do not populate it |
-| **No validity attrs**        | Recipes cannot style `[data-invalid]` / `[data-dirty]` consistently                |
-| **`useForm` is values-only** | `@var-ui/form` does not talk to Constraint Validation or focus-first-invalid       |
-| **No Form primitive**        | Submit handlers are ad hoc; no consolidated server-error map like Base UI `Form`   |
+| Gap                         | Detail                                                                                      |
+| --------------------------- | ------------------------------------------------------------------------------------------- |
+| **No shared context**       | `Field` does not wire `aria-describedby` / `aria-invalid` onto arbitrary children           |
+| **Duplicated chrome**       | Every input reimplements Label + description + FieldError                                   |
+| **String-only errors**      | `errorMessage` is a React prop; native `required` / `minLength` do not populate it          |
+| **No validity attrs**       | Recipes cannot style `[data-invalid]` / `[data-dirty]` consistently                         |
+| **`useForm` is values-only** | `@var-ui/form` does not talk to Constraint Validation or focus-first-invalid              |
+| **No Form primitive**       | Submit handlers are ad hoc; no consolidated server-error map like Base UI `Form`            |
 
 Base UI Field is a context:
 
@@ -45,18 +45,18 @@ Base UI Field is a context:
 </Field.Root>
 ```
 
-RAC already does most of this inside `TextField` (`Label`, `Input`, `FieldError`, `Text slot="description"`). The gap is (1) the same chrome for _custom_ controls, (2) a public attribute contract, (3) a Form that plays with native validity.
+RAC already does most of this inside `TextField` (`Label`, `Input`, `FieldError`, `Text slot="description"`). The gap is (1) the same chrome for *custom* controls, (2) a public attribute contract, (3) a Form that plays with native validity.
 
 ## Goals
 
-| Goal                    | Detail                                                                                              |
-| ----------------------- | --------------------------------------------------------------------------------------------------- |
-| **Compound Field**      | `Field.Root`, `Field.Label`, `Field.Control`, `Field.Description`, `Field.Error`                    |
-| **Keep FieldMeta**      | Existing TextField props unchanged; implemented via parts internally                                |
-| **Native constraints**  | `required`, `minLength`, `maxLength`, `pattern`, `type="email"` surface through Field.Error         |
-| **Validity attributes** | `data-invalid`, `data-valid`, `data-dirty`, `data-touched`, `data-filled` on Root                   |
-| **Form primitive**      | `<Form onSubmit>` prevents native submit, focuses first invalid, supports `errors` map              |
-| **useForm stays**       | `@var-ui/form` remains the values/touched/validators helper; Form composes with it                  |
+| Goal                    | Detail                                                                                      |
+| ----------------------- | ------------------------------------------------------------------------------------------- |
+| **Compound Field**      | `Field.Root`, `Field.Label`, `Field.Control`, `Field.Description`, `Field.Error`            |
+| **Keep FieldMeta**      | Existing TextField props unchanged; implemented via parts internally                        |
+| **Native constraints**  | `required`, `minLength`, `maxLength`, `pattern`, `type="email"` surface through Field.Error |
+| **Validity attributes** | `data-invalid`, `data-valid`, `data-dirty`, `data-touched`, `data-filled` on Root           |
+| **Form primitive**      | `<Form onSubmit>` prevents native submit, focuses first invalid, supports `errors` map      |
+| **useForm stays**       | `@var-ui/form` remains the values/touched/validators helper; Form composes with it          |
 | **Recipes**             | `field` slots already exist (`root`, `label`, `description`, `error`); Control uses control recipes |
 
 ## Non-goals (v1)
@@ -64,7 +64,7 @@ RAC already does most of this inside `TextField` (`Label`, `Input`, `FieldError`
 - Replacing RAC field components with Base UI Field
 - Zod/Yup `schemaResolver` (Mantine-style) — `useForm` validators are enough; schema adapters later
 - Fieldset / legend component (add when a consumer needs it; `field` recipe can wait)
-- Rewriting every input to _only_ expose parts (convenience props stay)
+- Rewriting every input to *only* expose parts (convenience props stay)
 - Async / server validation beyond an `errors` map on Form
 - `match` / `min` / `max` for date fields beyond what RAC already does
 
@@ -147,14 +147,14 @@ Unlike Dialog, **Field default export remains the preset** (it is already a chro
 
 On `Field.Root` (and optionally the control element if we own it):
 
-| Attribute       | Meaning                                           |
-| --------------- | ------------------------------------------------- |
-| `data-invalid`  | Current value fails native or provided invalid    |
-| `data-valid`    | Touched/dirty and not invalid (avoid on pristine) |
-| `data-dirty`    | Value ≠ default / initial                         |
-| `data-touched`  | Blurred at least once                             |
-| `data-filled`   | Non-empty (checkbox: checked; select: non-null)   |
-| `data-disabled` | Disabled                                          |
+| Attribute        | Meaning                                              |
+| ---------------- | ---------------------------------------------------- |
+| `data-invalid`   | Current value fails native or provided invalid       |
+| `data-valid`     | Touched/dirty and not invalid (avoid on pristine)    |
+| `data-dirty`     | Value ≠ default / initial                            |
+| `data-touched`   | Blurred at least once                                |
+| `data-filled`    | Non-empty (checkbox: checked; select: non-null)      |
+| `data-disabled`  | Disabled                                             |
 
 Recipes: `field` root may style `&[data-invalid] .error` (already have error slot). Input recipes (`textField`) should style `&[data-invalid] input` / `[aria-invalid=true]` consistently. Prefer **one** hook: `aria-invalid` is already set by RAC; add `data-invalid` on Root for chrome (label color, etc.).
 
@@ -170,7 +170,7 @@ On `invalid` / `change` / `blur` of that input:
 2. If `Field.Error` has no explicit `children`, show `validationMessage`
 3. Explicit `children` on `Field.Error` win (app / `useForm` errors)
 
-RAC TextField already maps `isInvalid` + `FieldError`. For RAC-backed TextField used _without_ Field.Root, no change.
+RAC TextField already maps `isInvalid` + `FieldError`. For RAC-backed TextField used *without* Field.Root, no change.
 
 For custom `<input>` inside Field.Control, Root listens to native `invalid` (prevent default bubble if Form handles it).
 
@@ -225,9 +225,12 @@ const form = useForm({
   validate: { email: isEmail('Enter a valid email') },
 });
 
-<Form onSubmit={() => void form.handleSubmit(save)()} errors={form.errors}>
+<Form
+  onSubmit={() => void form.handleSubmit(save)()}
+  errors={form.errors}
+>
   <TextField {...form.getInputProps('email')} label="Email" />
-</Form>;
+</Form>
 ```
 
 No requirement to use Field parts with `useForm`. `getInputProps` already returns `errorMessage` / `isInvalid`. Form's focus-first-invalid still works if fields are native-invalid **or** `aria-invalid="true"`.
@@ -250,12 +253,12 @@ Do **not** add `tokens.components.field`. Use existing `color.border.danger` / `
 
 ## Migration
 
-| Old                                | New                                       |
-| ---------------------------------- | ----------------------------------------- |
-| `<Field label htmlFor>`            | Unchanged (preset)                        |
-| `<TextField label errorMessage>`   | Unchanged                                 |
-| Custom control needing aria wiring | `<Field.Root>` + parts                    |
-| `<form onSubmit>`                  | Optional `<Form>` for focus-first-invalid |
+| Old | New |
+| --- | --- |
+| `<Field label htmlFor>` | Unchanged (preset) |
+| `<TextField label errorMessage>` | Unchanged |
+| Custom control needing aria wiring | `<Field.Root>` + parts |
+| `<form onSubmit>` | Optional `<Form>` for focus-first-invalid |
 
 No breaking change to TextField or `useForm`.
 

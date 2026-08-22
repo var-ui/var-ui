@@ -24,17 +24,17 @@
 
 ## File map
 
-| File                                            | Responsibility                                                        |
-| ----------------------------------------------- | --------------------------------------------------------------------- |
-| `packages/react/src/components/Field.tsx`       | Preset + `Field.Root` / `Label` / `Control` / `Description` / `Error` |
-| `packages/react/src/components/Field.test.tsx`  | Preset + parts + validity attrs                                       |
-| `packages/react/src/components/Form.tsx`        | Native submit + errors map + focus first invalid                      |
-| `packages/react/src/components/Form.test.tsx`   | Submit / focus / server errors                                        |
-| `packages/react/src/components/index.ts`        | Export Form + Field part types                                        |
-| `docs/content/components/field.mdx`             | Parts + preset demos                                                  |
-| `docs/content/components/form.mdx`              | New page                                                              |
-| `docs/src/data/components.ts`                   | Form entry                                                            |
-| `docs/src/demos/field/parts/` + `form/default/` | Demos                                                                 |
+| File | Responsibility |
+| --- | --- |
+| `packages/react/src/components/Field.tsx` | Preset + `Field.Root` / `Label` / `Control` / `Description` / `Error` |
+| `packages/react/src/components/Field.test.tsx` | Preset + parts + validity attrs |
+| `packages/react/src/components/Form.tsx` | Native submit + errors map + focus first invalid |
+| `packages/react/src/components/Form.test.tsx` | Submit / focus / server errors |
+| `packages/react/src/components/index.ts` | Export Form + Field part types |
+| `docs/content/components/field.mdx` | Parts + preset demos |
+| `docs/content/components/form.mdx` | New page |
+| `docs/src/data/components.ts` | Form entry |
+| `docs/src/demos/field/parts/` + `form/default/` | Demos |
 
 ---
 
@@ -85,23 +85,14 @@ type FieldContextValue = {
 Preset:
 
 ```tsx
-export function Field({
-  label,
-  description,
-  errorMessage,
-  htmlFor,
-  className,
-  children,
-}: FieldProps) {
+export function Field({ label, description, errorMessage, htmlFor, className, children }: FieldProps) {
   return (
     <FieldRoot className={className} invalid={Boolean(errorMessage)}>
       {label ? <FieldLabel>{label}</FieldLabel> : null}
       <FieldControl>
-        {isValidElement(children) ? (
-          cloneElement(children, { id: htmlFor ?? children.props.id })
-        ) : (
-          <></>
-        )}
+        {isValidElement(children)
+          ? cloneElement(children, { id: htmlFor ?? children.props.id })
+          : <></>}
       </FieldControl>
       {description ? <FieldDescription>{description}</FieldDescription> : null}
       {errorMessage ? <FieldError>{errorMessage}</FieldError> : null}
@@ -169,14 +160,14 @@ EOF
 
 On `Field.Root` DOM node:
 
-| attr            | when                                                     |
-| --------------- | -------------------------------------------------------- |
-| `data-invalid`  | controlled `invalid` or native invalid or error children |
-| `data-valid`    | touched or dirty, and not invalid                        |
-| `data-dirty`    | value changed from defaultValue/defaultChecked           |
-| `data-touched`  | blurred once                                             |
-| `data-filled`   | non-empty string / checked / selected                    |
-| `data-disabled` | child `disabled`                                         |
+| attr | when |
+| --- | --- |
+| `data-invalid` | controlled `invalid` or native invalid or error children |
+| `data-valid` | touched or dirty, and not invalid |
+| `data-dirty` | value changed from defaultValue/defaultChecked |
+| `data-touched` | blurred once |
+| `data-filled` | non-empty string / checked / selected |
+| `data-disabled` | child `disabled` |
 
 Control listens to `blur`, `input`/`change`, and `invalid`. On those events, read `el.validity.valid` and `el.validationMessage`. Store `nativeMessage` in context. `Field.Error` renders `children` if provided, else `nativeMessage`. Explicit children always win.
 
@@ -232,9 +223,7 @@ it('sets data-invalid and shows native validationMessage on submit-invalid', asy
   await userEvent.click(screen.getByRole('button', { name: 'Go' }));
   const root = screen.getByLabelText('Email').closest('[data-invalid], .var-ui-field__root');
   // After invalid event:
-  expect(
-    screen.getByLabelText('Email').closest('.var-ui-field__root')?.hasAttribute('data-invalid'),
-  ).toBe(true);
+  expect(screen.getByLabelText('Email').closest('.var-ui-field__root')?.hasAttribute('data-invalid')).toBe(true);
   expect(screen.getByRole('alert').textContent?.length).toBeGreaterThan(0);
 });
 
@@ -302,7 +291,10 @@ EOF
 
 ```ts
 type FormProps = Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
-  onSubmit?: (event: FormEvent<HTMLFormElement>, data: FormData) => void | Promise<void>;
+  onSubmit?: (
+    event: FormEvent<HTMLFormElement>,
+    data: FormData,
+  ) => void | Promise<void>;
   errors?: Record<string, string | undefined>;
 };
 ```
@@ -506,16 +498,16 @@ If Task 2 changed `@var-ui/core` after all, add `'@var-ui/core': patch`.
 
 ## Spec coverage
 
-| Spec item                     | Task                                                                                                    |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Compound Field parts          | 1                                                                                                       |
-| Preset Field unchanged        | 1                                                                                                       |
-| Validity attrs                | 2                                                                                                       |
-| Native constraint message     | 2                                                                                                       |
-| Explicit Error wins           | 2                                                                                                       |
-| Form + focus first invalid    | 3                                                                                                       |
-| Form `errors` map             | 3                                                                                                       |
-| FieldMeta / useForm unchanged | constraint                                                                                              |
-| Docs                          | 4                                                                                                       |
-| No Zod / Fieldset             | constraint                                                                                              |
-| Double-label warning          | Task 1: `console.warn` in development when `Field.Root` children include an element with a `label` prop |
+| Spec item | Task |
+| --- | --- |
+| Compound Field parts | 1 |
+| Preset Field unchanged | 1 |
+| Validity attrs | 2 |
+| Native constraint message | 2 |
+| Explicit Error wins | 2 |
+| Form + focus first invalid | 3 |
+| Form `errors` map | 3 |
+| FieldMeta / useForm unchanged | constraint |
+| Docs | 4 |
+| No Zod / Fieldset | constraint |
+| Double-label warning | Task 1: `console.warn` in development when `Field.Root` children include an element with a `label` prop |

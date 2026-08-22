@@ -9,31 +9,31 @@
 
 Give every floating overlay a **shared lifecycle contract** so consumers can style and animate from CSS, and so `onOpenChange` can be vetoed by reason. Implement this as a small helper used by Dialog, Popover, Tooltip, HoverCard, Menu, Drawer, and CommandPalette — not as a new headless library.
 
-Stay on React Aria. Mirror Base UI's _attributes and event shape_, not their runtime.
+Stay on React Aria. Mirror Base UI's *attributes and event shape*, not their runtime.
 
 ## Problem
 
-| Gap                       | Today                                                                                    |
-| ------------------------- | ---------------------------------------------------------------------------------------- |
-| **Unmount is instant**    | RAC overlays unmount when closed; CSS cannot play an exit transition                     |
-| **Sparse state attrs**    | `data-open` exists on CommandPalette, MobileNav, Layout only                             |
-| **No animation protocol** | `prefers-reduced-motion` is honored on spinner/skeleton, not dialogs                     |
-| **No positioner vars**    | Consumers cannot `max-height: var(--available-height)`                                   |
-| **Boolean-only events**   | `onOpenChange(open: boolean)` — cannot distinguish Escape vs outside click vs trigger    |
-| **z-index workaround**    | `LayerProvider` allocates inline `z-index` instead of a stacking-context story           |
-| **iOS 26 Safari**         | `position: fixed` backdrops fail to cover the visual viewport; Base UI documents the fix |
+| Gap                         | Today                                                                                          |
+| --------------------------- | ---------------------------------------------------------------------------------------------- |
+| **Unmount is instant**      | RAC overlays unmount when closed; CSS cannot play an exit transition                           |
+| **Sparse state attrs**      | `data-open` exists on CommandPalette, MobileNav, Layout only                                   |
+| **No animation protocol**   | `prefers-reduced-motion` is honored on spinner/skeleton, not dialogs                           |
+| **No positioner vars**      | Consumers cannot `max-height: var(--available-height)`                                         |
+| **Boolean-only events**     | `onOpenChange(open: boolean)` — cannot distinguish Escape vs outside click vs trigger          |
+| **z-index workaround**      | `LayerProvider` allocates inline `z-index` instead of a stacking-context story                 |
+| **iOS 26 Safari**           | `position: fixed` backdrops fail to cover the visual viewport; Base UI documents the fix       |
 
 ## Goals
 
-| Goal                      | Detail                                                                                           |
-| ------------------------- | ------------------------------------------------------------------------------------------------ |
-| **Public `data-*` attrs** | `data-open`, `data-closed`, `data-starting-style`, `data-ending-style` on popup + backdrop       |
-| **Exit before unmount**   | Wait for CSS transitions/animations on the popup (and backdrop) before unmounting                |
-| **Reduced motion**        | `themeWhen.reducedMotion` / `atReducedMotion` skip duration; unmount immediately                 |
-| **Positioner CSS vars**   | `--var-ui-available-height`, `--var-ui-available-width`, `--var-ui-transform-origin`             |
-| **Change event details**  | `onOpenChange(open, details)` with `reason` + `cancel()`                                         |
+| Goal                      | Detail                                                                                         |
+| ------------------------- | ---------------------------------------------------------------------------------------------- |
+| **Public `data-*` attrs** | `data-open`, `data-closed`, `data-starting-style`, `data-ending-style` on popup + backdrop     |
+| **Exit before unmount**   | Wait for CSS transitions/animations on the popup (and backdrop) before unmounting              |
+| **Reduced motion**        | `themeWhen.reducedMotion` / `atReducedMotion` skip duration; unmount immediately               |
+| **Positioner CSS vars**   | `--var-ui-available-height`, `--var-ui-available-width`, `--var-ui-transform-origin`           |
+| **Change event details**  | `onOpenChange(open, details)` with `reason` + `cancel()`                                       |
 | **Document stacking**     | App root `isolation: isolate`; iOS 26 backdrop recipe; `LayerProvider` remains for theme portals |
-| **One helper**            | Shared hook + attribute map so each overlay does not reimplement the protocol                    |
+| **One helper**            | Shared hook + attribute map so each overlay does not reimplement the protocol                  |
 
 ## Non-goals (v1)
 
@@ -47,15 +47,15 @@ Stay on React Aria. Mirror Base UI's _attributes and event shape_, not their run
 
 These attributes are **public API** (same semver rules as class names). Document them on each overlay page.
 
-| Attribute             | Where              | Meaning                                                              |
-| --------------------- | ------------------ | -------------------------------------------------------------------- |
-| `data-open`           | popup, backdrop    | Present while open (including during exit until unmount)             |
-| `data-closed`         | popup, backdrop    | Present during the closing phase (for `@keyframes` exit)             |
-| `data-starting-style` | popup, backdrop    | Present for one frame / until open transition finishes               |
-| `data-ending-style`   | popup, backdrop    | Present while the close transition runs                              |
-| `data-placement`      | popup / positioner | RAC placement string (`top`, `bottom start`, …)                      |
-| `data-pressed`        | triggers           | If RAC already exposes it, pass through; do not invent a second name |
-| `data-disabled`       | triggers, items    | Pass through from RAC                                                |
+| Attribute                 | Where                         | Meaning                                                              |
+| ------------------------- | ----------------------------- | -------------------------------------------------------------------- |
+| `data-open`               | popup, backdrop               | Present while open (including during exit until unmount)             |
+| `data-closed`             | popup, backdrop               | Present during the closing phase (for `@keyframes` exit)             |
+| `data-starting-style`     | popup, backdrop               | Present for one frame / until open transition finishes               |
+| `data-ending-style`       | popup, backdrop               | Present while the close transition runs                              |
+| `data-placement`          | popup / positioner            | RAC placement string (`top`, `bottom start`, …)                      |
+| `data-pressed`            | triggers                      | If RAC already exposes it, pass through; do not invent a second name |
+| `data-disabled`           | triggers, items               | Pass through from RAC                                                |
 
 For form controls, validity attributes live in the [field spec](./2026-08-21-field-parts-validation-design.md) (`data-invalid`, `data-dirty`, …). Do not overload overlay attrs onto inputs.
 
@@ -129,12 +129,12 @@ Document the chosen RAC adapter in the implementation PR. The public attrs must 
 
 On the positioner / popup root (Popover, Tooltip, HoverCard, Menu, Select list):
 
-| Variable                    | Source                                                |
-| --------------------------- | ----------------------------------------------------- |
-| `--var-ui-available-height` | min(viewport remaining, RAC maxHeight if any)         |
-| `--var-ui-available-width`  | remaining inline size                                 |
-| `--var-ui-transform-origin` | side opposite placement (`top` → `bottom center`)     |
-| `--var-ui-anchor-width`     | trigger `getBoundingClientRect().width` (optional v1) |
+| Variable                         | Source                                              |
+| -------------------------------- | --------------------------------------------------- |
+| `--var-ui-available-height`      | min(viewport remaining, RAC maxHeight if any)       |
+| `--var-ui-available-width`       | remaining inline size                               |
+| `--var-ui-transform-origin`      | side opposite placement (`top` → `bottom center`)   |
+| `--var-ui-anchor-width`          | trigger `getBoundingClientRect().width` (optional v1) |
 
 Prefix `--var-ui-` to match tokens. Recipes use them; consumers may too (public).
 
@@ -161,7 +161,10 @@ type OverlayChangeEventDetails = {
   isCanceled: boolean;
 };
 
-type OverlayOpenChangeHandler = (open: boolean, details: OverlayChangeEventDetails) => void;
+type OverlayOpenChangeHandler = (
+  open: boolean,
+  details: OverlayChangeEventDetails,
+) => void;
 ```
 
 RAC's `onOpenChange` is `(isOpen: boolean) => void`. We wrap it:
@@ -213,14 +216,14 @@ Keep. It exists because token CSS variables do not cascade into `document.body` 
 
 ## Files (expected)
 
-| Area       | Likely path                                                                                                                     |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Helper     | `packages/react/src/overlays/useOverlayPresence.ts`                                                                             |
-| Events     | `packages/react/src/overlays/changeEvent.ts`                                                                                    |
-| Positioner | `packages/react/src/overlays/usePositionerVars.ts`                                                                              |
-| Recipes    | `packages/core/src/components/dialog.ts`, `overlay.ts`, `popover.ts`, `tooltip.ts`, `drawer.ts`, `commandPalette.ts`, `menu.ts` |
-| Tests      | `packages/react/src/overlays/*.test.ts` + overlay component tests                                                               |
-| Docs       | getting-started + new Animation handbook page                                                                                   |
+| Area        | Likely path                                                      |
+| ----------- | ---------------------------------------------------------------- |
+| Helper      | `packages/react/src/overlays/useOverlayPresence.ts`              |
+| Events      | `packages/react/src/overlays/changeEvent.ts`                     |
+| Positioner  | `packages/react/src/overlays/usePositionerVars.ts`               |
+| Recipes     | `packages/core/src/components/dialog.ts`, `overlay.ts`, `popover.ts`, `tooltip.ts`, `drawer.ts`, `commandPalette.ts`, `menu.ts` |
+| Tests       | `packages/react/src/overlays/*.test.ts` + overlay component tests |
+| Docs        | getting-started + new Animation handbook page                    |
 
 Exact filenames can shift; the export surface is `OverlayChangeEventDetails` + attributes above.
 
