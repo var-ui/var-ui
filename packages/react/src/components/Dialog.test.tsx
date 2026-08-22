@@ -77,11 +77,14 @@ describe('Dialog', () => {
       <IconProvider icons={{}}>
         <LayerProvider>
           <Dialog.Root>
-            <Tooltip content="Opens the dialog">
-              <Dialog.Trigger>
-                <button type="button">Custom</button>
-              </Dialog.Trigger>
-            </Tooltip>
+            <Tooltip.Root delay={0}>
+              <Tooltip.Trigger>
+                <Dialog.Trigger>
+                  <button type="button">Custom</button>
+                </Dialog.Trigger>
+              </Tooltip.Trigger>
+              <Tooltip.Popup>Opens the dialog</Tooltip.Popup>
+            </Tooltip.Root>
             <Dialog.Backdrop>
               <Dialog.Popup>
                 <Dialog.Title>Only title</Dialog.Title>

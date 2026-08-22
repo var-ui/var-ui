@@ -63,6 +63,24 @@ describe('HoverCard', () => {
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
   });
 
+  it('shows title from compound parts on hover', async () => {
+    wrap(
+      <HoverCard.Root openDelay={0} closeDelay={10}>
+        <HoverCard.Trigger>
+          <Link href="#profile">@user</Link>
+        </HoverCard.Trigger>
+        <HoverCard.Popup>
+          <HoverCard.Title>User</HoverCard.Title>
+          <HoverCard.Content>Preview</HoverCard.Content>
+        </HoverCard.Popup>
+      </HoverCard.Root>,
+    );
+    expect(screen.queryByRole('dialog')).toBeNull();
+    await userEvent.hover(screen.getByRole('link', { name: '@user' }));
+    await waitFor(() => expect(screen.getByRole('dialog')).toBeTruthy());
+    expect(screen.getByText('User')).toBeTruthy();
+  });
+
   it('opens and closes via keyboard focus for non-pointer users', async () => {
     wrap(
       <HoverCard trigger={<Link href="#profile">@user</Link>} openDelay={10} closeDelay={10}>
