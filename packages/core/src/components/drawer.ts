@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { overlayIosAbsoluteBackdrop, overlayPresenceStyles } from './overlayPresence';
 
 /**
  * General-purpose slide-in panel built on RAC Modal. Supports start/end/bottom
@@ -42,11 +43,14 @@ export const drawer = typestyles.styles.component(
       slots: ['overlay', 'panel', 'header', 'title', 'body', 'closeButton'],
       base: {
         overlay: {
+          ...overlayPresenceStyles(),
+          ...overlayIosAbsoluteBackdrop,
           position: 'fixed',
           inset: 0,
           backgroundColor: v.overlayBackground.var,
         },
         panel: {
+          ...overlayPresenceStyles({ scale: false }),
           position: 'fixed',
           display: 'flex',
           flexDirection: 'column',

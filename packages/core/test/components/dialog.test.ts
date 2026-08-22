@@ -7,4 +7,11 @@ describe('dialog', () => {
     const defaultClasses = dialog({ role: 'dialog' });
     expect(classes.modal.props).toEqual(defaultClasses.modal.props);
   });
+
+  it('preserves the public overlay and modal class names', () => {
+    const classes = dialog();
+
+    expect(classes.overlay.className).toContain('var-ui-dialog__overlay');
+    expect(classes.modal.className).toContain('var-ui-dialog__modal');
+  });
 });
