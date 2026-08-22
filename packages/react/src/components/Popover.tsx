@@ -303,7 +303,9 @@ function PopoverArrow({ className }: PopoverArrowProps): JSX.Element {
   const p = popoverSlots();
   return (
     <OverlayArrow>
-      <div {...recipeProps(p.arrow, className)} />
+      {({ placement }) => (
+        <div {...recipeProps(p.arrow, className)} data-placement={placement ?? undefined} />
+      )}
     </OverlayArrow>
   );
 }

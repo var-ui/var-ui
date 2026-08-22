@@ -55,8 +55,20 @@ export const popover = typestyles.styles.component(
       arrow: {
         width: 8,
         height: 8,
-        background: 'inherit',
+        backgroundColor: v.background.var,
         transform: 'rotate(45deg)',
+        '&[data-placement="bottom"]': {
+          transform: 'translateY(50%) rotate(45deg)',
+        },
+        '&[data-placement="top"]': {
+          transform: 'translateY(-50%) rotate(45deg)',
+        },
+        '&[data-placement="left"]': {
+          transform: 'translateX(-50%) rotate(45deg)',
+        },
+        '&[data-placement="right"]': {
+          transform: 'translateX(50%) rotate(45deg)',
+        },
       },
     };
   },

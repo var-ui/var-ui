@@ -67,6 +67,21 @@ describe('Popover', () => {
     expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('trigger-press');
   });
 
+  it('reports outside-press when dismissed via the overlay', async () => {
+    const onOpenChange = vi.fn<OverlayOpenChangeHandler>();
+    renderCompound(onOpenChange);
+    await userEvent.click(screen.getByRole('button', { name: 'Filters' }));
+    expect(await screen.findByRole('dialog')).toBeTruthy();
+    onOpenChange.mockClear();
+
+    const underlay = document.querySelector('[data-testid="underlay"]');
+    expect(underlay).toBeTruthy();
+    await userEvent.click(underlay!);
+
+    expect(onOpenChange.mock.calls[0]?.[0]).toBe(false);
+    expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('outside-press');
+  });
+
   it('reports escape-key when dismissed with Escape', async () => {
     const onOpenChange = vi.fn<OverlayOpenChangeHandler>();
     renderCompound(onOpenChange);
