@@ -1,12 +1,13 @@
 import {
-  Children,
   cloneElement,
   createContext,
   isValidElement,
   useCallback,
   useContext,
   useId,
+  useLayoutEffect,
   useMemo,
+  useState,
   type JSX,
   type ReactElement,
   type ReactNode,
@@ -54,6 +55,10 @@ type FieldContextValue = {
   invalid: boolean;
   setNativeInvalid: (invalid: boolean, message: string) => void;
   describedBy: string | undefined;
+  errorMessageId: string | undefined;
+  registerControlId: (id: string | undefined) => void;
+  setHasDescription: (mounted: boolean) => void;
+  setHasError: (mounted: boolean) => void;
 };
 
 type ControlChildProps = {
@@ -72,18 +77,6 @@ function useFieldContext(): FieldContextValue {
   return ctx;
 }
 
-function controlChildId(children: ReactNode): string | undefined {
-  const list = Children.toArray(children);
-  for (const child of list) {
-    if (!isValidElement(child) || child.type !== FieldControl) continue;
-    const controlChild = (child.props as FieldControlProps).children;
-    if (isValidElement(controlChild)) {
-      return (controlChild.props as ControlChildProps).id;
-    }
-  }
-  return undefined;
-}
-
 function FieldRoot({
   name,
   children,
@@ -92,11 +85,17 @@ function FieldRoot({
   onInvalidChange,
 }: FieldRootProps): JSX.Element {
   const generatedId = useId();
-  const controlId = controlChildId(children) ?? generatedId;
+  const [registeredControlId, setRegisteredControlId] = useState<string | undefined>();
+  const [hasDescription, setHasDescription] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const controlId = registeredControlId ?? generatedId;
   const descriptionId = `${generatedId}-description`;
   const errorId = `${generatedId}-error`;
   const isInvalid = Boolean(invalid);
-  const describedBy = [descriptionId, isInvalid ? errorId : undefined].filter(Boolean).join(' ');
+  const errorMessageId = isInvalid && hasError ? errorId : undefined;
+  const describedBy =
+    [hasDescription ? descriptionId : undefined, errorMessageId].filter(Boolean).join(' ') ||
+    undefined;
 
   const setNativeInvalid = useCallback(
     (nextInvalid: boolean, _message: string) => {
@@ -104,6 +103,10 @@ function FieldRoot({
     },
     [onInvalidChange],
   );
+
+  const registerControlId = useCallback((id: string | undefined) => {
+    setRegisteredControlId(id);
+  }, []);
 
   const value = useMemo<FieldContextValue>(
     () => ({
@@ -113,9 +116,23 @@ function FieldRoot({
       errorId,
       invalid: isInvalid,
       setNativeInvalid,
-      describedBy: describedBy || undefined,
+      describedBy,
+      errorMessageId,
+      registerControlId,
+      setHasDescription,
+      setHasError,
     }),
-    [name, controlId, descriptionId, errorId, isInvalid, setNativeInvalid, describedBy],
+    [
+      name,
+      controlId,
+      descriptionId,
+      errorId,
+      isInvalid,
+      setNativeInvalid,
+      describedBy,
+      errorMessageId,
+      registerControlId,
+    ],
   );
 
   const f = field();
@@ -137,20 +154,33 @@ function FieldLabel({ children, className }: FieldLabelProps): JSX.Element {
 }
 
 function FieldControl({ children, className }: FieldControlProps): ReactElement {
-  const { name, controlId, errorId, invalid, describedBy } = useFieldContext();
+  const { name, controlId, invalid, describedBy, errorMessageId, registerControlId } =
+    useFieldContext();
   const childProps = children.props as ControlChildProps;
+  const childId = childProps.id;
+
+  useLayoutEffect(() => {
+    if (!childId) return;
+    registerControlId(childId);
+    return () => registerControlId(undefined);
+  }, [childId, registerControlId]);
+
   return cloneElement(children, {
-    id: childProps.id ?? controlId,
+    id: childId ?? controlId,
     name: childProps.name ?? name,
     className: cx(childProps.className, className) || undefined,
     'aria-describedby': describedBy,
     'aria-invalid': invalid || undefined,
-    'aria-errormessage': invalid ? errorId : undefined,
+    'aria-errormessage': errorMessageId,
   } as Partial<ControlChildProps>);
 }
 
 function FieldDescription({ children, className }: FieldDescriptionProps): JSX.Element {
-  const { descriptionId } = useFieldContext();
+  const { descriptionId, setHasDescription } = useFieldContext();
+  useLayoutEffect(() => {
+    setHasDescription(true);
+    return () => setHasDescription(false);
+  }, [setHasDescription]);
   const f = field();
   return (
     <p {...recipeProps(f.description, className)} id={descriptionId}>
@@ -160,11 +190,19 @@ function FieldDescription({ children, className }: FieldDescriptionProps): JSX.E
 }
 
 function FieldError({ children, className, forceMount }: FieldErrorProps): JSX.Element | null {
-  const { errorId } = useFieldContext();
-  if (
-    !forceMount &&
-    (children === undefined || children === null || children === false || children === '')
-  ) {
+  const { errorId, setHasError } = useFieldContext();
+  const shouldMount =
+    forceMount ||
+    !(children === undefined || children === null || children === false || children === '');
+  useLayoutEffect(() => {
+    if (!shouldMount) {
+      setHasError(false);
+      return;
+    }
+    setHasError(true);
+    return () => setHasError(false);
+  }, [shouldMount, setHasError]);
+  if (!shouldMount) {
     return null;
   }
   const f = field();

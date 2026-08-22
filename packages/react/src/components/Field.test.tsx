@@ -35,4 +35,46 @@ describe('Field', () => {
     );
     expect(screen.getByLabelText('Email')).toBeTruthy();
   });
+
+  it('does not set aria-describedby when Description is not mounted', () => {
+    render(
+      <Field.Root invalid>
+        <Field.Label>Email</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+      </Field.Root>,
+    );
+    const input = screen.getByLabelText('Email');
+    expect(input.getAttribute('aria-describedby')).toBeNull();
+    expect(input.getAttribute('aria-errormessage')).toBeNull();
+  });
+
+  it('associates Field.Label with a nested Field.Control that has an explicit id', () => {
+    render(
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <div>
+          <Field.Control>
+            <input id="nested-email" />
+          </Field.Control>
+        </div>
+      </Field.Root>,
+    );
+    expect(screen.getByLabelText('Email').id).toBe('nested-email');
+  });
+
+  it('associates Field.Label with a nested Field.Control via generated id', () => {
+    render(
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <div>
+          <Field.Control>
+            <input />
+          </Field.Control>
+        </div>
+      </Field.Root>,
+    );
+    expect(screen.getByLabelText('Email')).toBeTruthy();
+  });
 });
