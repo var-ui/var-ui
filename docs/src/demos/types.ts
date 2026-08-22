@@ -29,6 +29,8 @@ export type DemoId =
   | 'timestamp.default'
   | 'timeline.default'
   | 'field.default'
+  | 'field.parts'
+  | 'form.default'
   | 'text-field.default'
   | 'text-area-field.default'
   | 'checkbox.default'

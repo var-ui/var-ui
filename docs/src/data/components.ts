@@ -189,6 +189,13 @@ export const componentRegistry: ComponentEntry[] = [
     importLine: "import { Field } from '@var-ui/react';",
   },
   {
+    slug: 'form',
+    name: 'Form',
+    category: 'data-input',
+    description: 'Native-constraint form that focuses the first invalid field.',
+    importLine: "import { Form } from '@var-ui/react';",
+  },
+  {
     slug: 'number-input',
     name: 'NumberInput',
     category: 'data-input',

@@ -26,6 +26,8 @@ import TextDefault from './text/default/react';
 import ThumbnailDefault from './thumbnail/default/react';
 import TimestampDefault from './timestamp/default/react';
 import FieldDefault from './field/default/react';
+import FieldParts from './field/parts/react';
+import FormDefault from './form/default/react';
 import TextFieldDefault from './text-field/default/react';
 import TextAreaFieldDefault from './text-area-field/default/react';
 import CheckboxDefault from './checkbox/default/react';
@@ -199,6 +201,8 @@ export const reactDemoMap = {
   'thumbnail.default': ThumbnailDefault,
   'timestamp.default': TimestampDefault,
   'field.default': FieldDefault,
+  'field.parts': FieldParts,
+  'form.default': FormDefault,
   'text-field.default': TextFieldDefault,
   'text-area-field.default': TextAreaFieldDefault,
   'checkbox.default': CheckboxDefault,

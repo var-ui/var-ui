@@ -25,6 +25,8 @@ import { snippets as textDefaultSnippets } from './text/default/snippets';
 import { snippets as thumbnailDefaultSnippets } from './thumbnail/default/snippets';
 import { snippets as timestampDefaultSnippets } from './timestamp/default/snippets';
 import { snippets as fieldDefaultSnippets } from './field/default/snippets';
+import { snippets as fieldPartsSnippets } from './field/parts/snippets';
+import { snippets as formDefaultSnippets } from './form/default/snippets';
 import { snippets as textFieldDefaultSnippets } from './text-field/default/snippets';
 import { snippets as textAreaFieldDefaultSnippets } from './text-area-field/default/snippets';
 import { snippets as checkboxDefaultSnippets } from './checkbox/default/snippets';
@@ -199,6 +201,8 @@ export const DEMO_IDS = [
   'thumbnail.default',
   'timestamp.default',
   'field.default',
+  'field.parts',
+  'form.default',
   'text-field.default',
   'text-area-field.default',
   'checkbox.default',
@@ -372,6 +376,8 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'thumbnail.default': thumbnailDefaultSnippets,
   'timestamp.default': timestampDefaultSnippets,
   'field.default': fieldDefaultSnippets,
+  'field.parts': fieldPartsSnippets,
+  'form.default': formDefaultSnippets,
   'text-field.default': textFieldDefaultSnippets,
   'text-area-field.default': textAreaFieldDefaultSnippets,
   'checkbox.default': checkboxDefaultSnippets,
@@ -545,6 +551,8 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'thumbnail.default': () => import('./thumbnail/default/react'),
   'timestamp.default': () => import('./timestamp/default/react'),
   'field.default': () => import('./field/default/react'),
+  'field.parts': () => import('./field/parts/react'),
+  'form.default': () => import('./form/default/react'),
   'text-field.default': () => import('./text-field/default/react'),
   'text-area-field.default': () => import('./text-area-field/default/react'),
   'checkbox.default': () => import('./checkbox/default/react'),
@@ -821,6 +829,16 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'field.default',
     snippets: demoSnippets['field.default'],
     react: reactDemoLoaders['field.default'],
+  },
+  'field.parts': {
+    id: 'field.parts',
+    snippets: demoSnippets['field.parts'],
+    react: reactDemoLoaders['field.parts'],
+  },
+  'form.default': {
+    id: 'form.default',
+    snippets: demoSnippets['form.default'],
+    react: reactDemoLoaders['form.default'],
   },
   'text-field.default': {
     id: 'text-field.default',
