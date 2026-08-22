@@ -1,5 +1,5 @@
 import { typestyles } from '../runtime';
-import { atDarkMode } from '../theme-conditions';
+import { atDarkMode, atReducedMotion } from '../theme-conditions';
 import { designTokens as t } from '../tokens';
 
 /**
@@ -159,6 +159,12 @@ export const commandPalette = typestyles.styles.component(
           '&[data-open]': {
             opacity: 1,
           },
+          '&[data-starting-style], &[data-ending-style]': {
+            opacity: 0,
+          },
+          ...atReducedMotion({
+            transition: 'none',
+          }),
           ...atDarkMode({
             boxShadow: 'none',
           }),

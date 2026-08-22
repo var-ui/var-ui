@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { overlayPresenceStyles } from './overlayPresence';
 
 /**
  * Standalone popover panel chrome (distinct from menu/select popover slots).
@@ -29,6 +30,7 @@ export const popover = typestyles.styles.component(
     return {
       slots: ['root', 'title', 'content'],
       root: {
+        ...overlayPresenceStyles({ scale: true }),
         borderWidth: t.borderWidth.default.var,
         borderStyle: 'solid',
         borderColor: v.border.var,
@@ -36,6 +38,7 @@ export const popover = typestyles.styles.component(
         backgroundColor: v.background.var,
         boxShadow: t.shadow.md.var,
         minWidth: '12rem',
+        maxHeight: 'var(--var-ui-available-height, none)',
         outline: 'none',
       },
       title: {

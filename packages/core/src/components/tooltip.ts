@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { overlayPresenceStyles } from './overlayPresence';
 
 /**
  * Compact dark-surface tooltip chrome.
@@ -19,6 +20,7 @@ export const tooltip = typestyles.styles.component(
     return {
       slots: ['root'],
       root: {
+        ...overlayPresenceStyles({ scale: true }),
         backgroundColor: v.background.var,
         color: v.foreground.var,
         fontSize: t.fontSize.sm.var,

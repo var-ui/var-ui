@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { overlayPresenceStyles } from './overlayPresence';
 
 /** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
 export const menuVarDefinitions = {
@@ -57,6 +58,7 @@ export const menu = typestyles.styles.component(
         'submenuChevron',
       ],
       popover: {
+        ...overlayPresenceStyles({ scale: true }),
         borderWidth: t.borderWidth.default.var,
         borderStyle: 'solid',
         borderColor: v.popoverBorder.var,
