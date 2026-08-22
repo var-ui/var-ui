@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vite-plus/test';
+import { describe, expect, it, vi } from 'vite-plus/test';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Field } from './Field';
@@ -364,5 +364,82 @@ describe('Field', () => {
     expect(
       screen.getByLabelText('Email').closest('.var-ui-field')?.hasAttribute('data-invalid'),
     ).toBe(true);
+  });
+
+  it('renders preset text children that are not a single element', () => {
+    render(<Field label="x">plain text</Field>);
+    expect(screen.getByText('plain text')).toBeTruthy();
+    expect(screen.getByText('x')).toBeTruthy();
+  });
+
+  it('renders two-element preset children', () => {
+    render(
+      <Field label="x">
+        <span>one</span>
+        <span>two</span>
+      </Field>,
+    );
+    expect(screen.getByText('one')).toBeTruthy();
+    expect(screen.getByText('two')).toBeTruthy();
+  });
+
+  it('does not set data-invalid when Field.Error is forceMounted without error content', () => {
+    render(
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+        <Field.Error forceMount />
+      </Field.Root>,
+    );
+    const root = screen.getByLabelText('Email').closest('.var-ui-field');
+    expect(root?.hasAttribute('data-invalid')).toBe(false);
+    expect(root?.querySelector('[role="alert"]')).toBeTruthy();
+  });
+
+  it('lets invalid={false} suppress native invalid', () => {
+    render(
+      <form>
+        <Field.Root invalid={false}>
+          <Field.Label>Email</Field.Label>
+          <Field.Control>
+            <input required />
+          </Field.Control>
+          <Field.Error />
+        </Field.Root>
+      </form>,
+    );
+    const input = screen.getByLabelText('Email') as HTMLInputElement;
+    act(() => {
+      input.checkValidity();
+    });
+    expect(input.closest('.var-ui-field')?.hasAttribute('data-invalid')).toBe(false);
+  });
+
+  it('warns in development when a Field.Root child has a label prop', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    function Nested({ label }: { label?: string }) {
+      return <input aria-label={label} />;
+    }
+
+    render(
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+      </Field.Root>,
+    );
+    expect(warn).not.toHaveBeenCalled();
+
+    render(
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <Nested label="Also email" />
+      </Field.Root>,
+    );
+    expect(warn).toHaveBeenCalled();
+    warn.mockRestore();
   });
 });

@@ -19,6 +19,21 @@ Do not pass `label` on TextField inside `Field.Root` — use Field parts around 
 
 <Demo id="field.parts" />
 
+## Validity attributes
+
+`Field.Root` sets these attributes for CSS:
+
+| Attribute       | When                                                                                            |
+| --------------- | ----------------------------------------------------------------------------------------------- |
+| `data-invalid`  | The field is invalid (controlled `invalid`, native constraint, error content, or a form error). |
+| `data-valid`    | Touched or dirty, and not invalid.                                                              |
+| `data-dirty`    | The value differs from the default.                                                             |
+| `data-touched`  | The control has been blurred at least once.                                                     |
+| `data-filled`   | The control has a non-empty value (checkbox/radio: checked).                                    |
+| `data-disabled` | The control is disabled.                                                                        |
+
+`invalid` is controlled when passed. If omitted, it is derived from native validity, `Field.Error` content, or a matching `Form` `errors` entry. `Field.Error` `forceMount` only keeps the error slot in the layout; it does not mark the field invalid.
+
 ## Props
 
 <PropsTable slug="field" />

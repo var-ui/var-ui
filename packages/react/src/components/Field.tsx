@@ -2,6 +2,7 @@ import {
   Children,
   cloneElement,
   createContext,
+  Fragment,
   isValidElement,
   useCallback,
   useContext,
@@ -109,13 +110,34 @@ function useFieldContext(): FieldContextValue {
   return ctx;
 }
 
-function errorPartMounts(props: FieldErrorProps, nativeMessage = ''): boolean {
-  const { children, forceMount } = props;
+function errorPartHasContent(props: FieldErrorProps, nativeMessage = ''): boolean {
+  const { children } = props;
   return Boolean(
-    forceMount ||
     !(children === undefined || children === null || children === false || children === '') ||
     nativeMessage,
   );
+}
+
+function errorPartMounts(props: FieldErrorProps, nativeMessage = ''): boolean {
+  return Boolean(props.forceMount || errorPartHasContent(props, nativeMessage));
+}
+
+function isSingleHostElement(node: ReactNode): node is ReactElement {
+  return isValidElement(node) && node.type !== Fragment;
+}
+
+function warnNestedFieldMeta(node: ReactNode): void {
+  if (process.env.NODE_ENV === 'production') return;
+  visitElements(node, (child) => {
+    if (child.type === FieldLabel) return false;
+    const label = (child.props as { label?: unknown }).label;
+    if (label != null) {
+      console.warn(
+        'Field.Root: a child has a `label` prop. Use Field.Label around a control without FieldMeta, or use the control’s label without Field parts.',
+      );
+    }
+    return false;
+  });
 }
 
 function visitElements(node: ReactNode, visit: (element: ReactElement) => boolean): boolean {
@@ -137,7 +159,7 @@ function treeHasPart(
   return visitElements(node, (child) => {
     if (child.type !== type) return false;
     return type === FieldError
-      ? errorPartMounts(child.props as FieldErrorProps, nativeMessage)
+      ? errorPartHasContent(child.props as FieldErrorProps, nativeMessage)
       : true;
   });
 }
@@ -260,8 +282,8 @@ function FieldRoot({
   const [touched, setTouched] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [filledOverride, setFilledOverride] = useState<boolean | undefined>(undefined);
-  const hasErrorChildren = treeHasPart(children, FieldError);
-  const isInvalid = Boolean(invalid) || nativeInvalid || hasErrorChildren || Boolean(formError);
+  const hasErrorContent = treeHasPart(children, FieldError);
+  const isInvalid = invalid ?? (nativeInvalid || hasErrorContent || Boolean(formError));
   const hasDescription = treeHasPart(children, FieldDescription);
   const hasError = treeHasPart(children, FieldError, formError || nativeMessage);
   const errorMessageId = isInvalid && hasError ? errorId : undefined;
@@ -322,6 +344,8 @@ function FieldRoot({
       errorMessageId,
     ],
   );
+
+  warnNestedFieldMeta(children);
 
   const f = field();
   return (
@@ -464,18 +488,19 @@ function Field({
   className,
   children,
 }: FieldProps): JSX.Element {
+  const control = isSingleHostElement(children) ? (
+    <FieldControl>
+      {cloneElement(children as ReactElement<ControlChildProps>, {
+        id: htmlFor ?? (children.props as ControlChildProps).id,
+      })}
+    </FieldControl>
+  ) : (
+    children
+  );
   return (
-    <FieldRoot className={className} invalid={Boolean(errorMessage)} htmlFor={htmlFor}>
+    <FieldRoot className={className} invalid={Boolean(errorMessage) || undefined} htmlFor={htmlFor}>
       {label ? <FieldLabel>{label}</FieldLabel> : null}
-      <FieldControl>
-        {isValidElement(children) ? (
-          cloneElement(children as ReactElement<ControlChildProps>, {
-            id: htmlFor ?? (children.props as ControlChildProps).id,
-          })
-        ) : (
-          <></>
-        )}
-      </FieldControl>
+      {control}
       {description ? <FieldDescription>{description}</FieldDescription> : null}
       {errorMessage ? <FieldError>{errorMessage}</FieldError> : null}
     </FieldRoot>
