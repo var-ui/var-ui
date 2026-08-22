@@ -25,5 +25,6 @@ export function overlayPresenceStyles(options: { scale?: boolean } = {}) {
 export const overlayIosAbsoluteBackdrop = {
   '@supports (-webkit-touch-callout: none)': {
     position: 'absolute',
+    height: '100dvh',
   },
 } as const;

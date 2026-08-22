@@ -20,7 +20,7 @@ describe('inferOverlayCloseReason', () => {
   });
 
   it('maps pointerdown to outside-press', () => {
-    const event = new PointerEvent('pointerdown');
+    const event = new MouseEvent('pointerdown');
     expect(inferOverlayCloseReason(event)).toBe('outside-press');
   });
 

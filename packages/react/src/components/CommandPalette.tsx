@@ -139,7 +139,7 @@ export function CommandPalette({
     [items, filter, query],
   );
 
-  const palette = presence.mounted ? (
+  const palette = (
     <dialog
       ref={dialogRef}
       aria-label={placeholder}
@@ -158,42 +158,44 @@ export function CommandPalette({
         onOpenChange?.(false);
       }}
     >
-      <div ref={panelRef} {...recipeProps(cp.dialog)} {...presence.attrs}>
-        <Autocomplete inputValue={query} onInputChange={setQuery}>
-          <div {...recipeProps(cp.inputRow)}>
-            <span {...recipeProps(cp.inputIcon)}>
-              <Icon name="search" />
-            </span>
-            <TextField aria-label={placeholder} style={{ display: 'flex', flex: 1, minWidth: 0 }}>
-              <Input {...recipeProps(cp.input)} placeholder={placeholder} autoFocus />
-            </TextField>
-          </div>
-          <ListBox
-            items={visibleItems}
-            {...recipeProps(cp.results)}
-            aria-label={placeholder}
-            renderEmptyState={() => <div {...recipeProps(cp.empty)}>{emptyLabel}</div>}
-          >
-            {(item) => (
-              <ListBoxItem
-                id={item.id}
-                textValue={item.title}
-                {...recipeProps(cp.result)}
-                onAction={() => onAction(item.id)}
-              >
-                {({ isFocused }) => (
-                  <span {...recipeProps(cp.resultLink, cx(isFocused && cp.resultLinkActive))}>
-                    <span {...recipeProps(cp.resultTitle)}>{item.title}</span>
-                    {item.meta ? <span {...recipeProps(cp.resultMeta)}>{item.meta}</span> : null}
-                  </span>
-                )}
-              </ListBoxItem>
-            )}
-          </ListBox>
-        </Autocomplete>
-      </div>
+      {presence.mounted ? (
+        <div ref={panelRef} {...recipeProps(cp.dialog)} {...presence.attrs}>
+          <Autocomplete inputValue={query} onInputChange={setQuery}>
+            <div {...recipeProps(cp.inputRow)}>
+              <span {...recipeProps(cp.inputIcon)}>
+                <Icon name="search" />
+              </span>
+              <TextField aria-label={placeholder} style={{ display: 'flex', flex: 1, minWidth: 0 }}>
+                <Input {...recipeProps(cp.input)} placeholder={placeholder} autoFocus />
+              </TextField>
+            </div>
+            <ListBox
+              items={visibleItems}
+              {...recipeProps(cp.results)}
+              aria-label={placeholder}
+              renderEmptyState={() => <div {...recipeProps(cp.empty)}>{emptyLabel}</div>}
+            >
+              {(item) => (
+                <ListBoxItem
+                  id={item.id}
+                  textValue={item.title}
+                  {...recipeProps(cp.result)}
+                  onAction={() => onAction(item.id)}
+                >
+                  {({ isFocused }) => (
+                    <span {...recipeProps(cp.resultLink, cx(isFocused && cp.resultLinkActive))}>
+                      <span {...recipeProps(cp.resultTitle)}>{item.title}</span>
+                      {item.meta ? <span {...recipeProps(cp.resultMeta)}>{item.meta}</span> : null}
+                    </span>
+                  )}
+                </ListBoxItem>
+              )}
+            </ListBox>
+          </Autocomplete>
+        </div>
+      ) : null}
     </dialog>
-  ) : null;
+  );
 
   return portalContainer ? createPortal(palette, portalContainer) : palette;
 }

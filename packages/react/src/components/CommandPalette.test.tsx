@@ -31,11 +31,14 @@ describe('CommandPalette', () => {
       />,
     );
 
-    const panel = screen.getByPlaceholderText('Search…').closest('[data-open]');
+    const panel = document.querySelector('.var-ui-command-palette__dialog');
+    expect(panel).not.toBeNull();
     expect(panel?.getAttribute('data-open')).toBe('');
+    expect(panel?.hasAttribute('data-starting-style')).toBe(true);
+    expect(panel?.hasAttribute('data-ending-style')).toBe(false);
   });
 
-  it('unmounts the panel after closing when there are no exit animations', async () => {
+  it('keeps the native dialog mounted and unmounts only the panel after closing', async () => {
     const { rerender } = wrap(
       <CommandPalette
         isOpen
@@ -59,6 +62,39 @@ describe('CommandPalette', () => {
     );
 
     await waitFor(() => expect(screen.queryByPlaceholderText('Search…')).toBeNull());
+    expect(document.querySelector('.var-ui-command-palette')).not.toBeNull();
+    expect(document.querySelector('.var-ui-command-palette__dialog')).toBeNull();
+  });
+
+  it('closes the native dialog after the panel exits so focus can be restored', async () => {
+    const { rerender } = wrap(
+      <CommandPalette
+        isOpen
+        hotkey={false}
+        items={[{ id: 'a', title: 'Open settings' }]}
+        onAction={() => {}}
+        onOpenChange={() => {}}
+      />,
+    );
+
+    const dialog = document.querySelector<HTMLDialogElement>('.var-ui-command-palette');
+    expect(dialog?.open).toBe(true);
+    const close = vi.spyOn(dialog as HTMLDialogElement, 'close');
+
+    rerender(
+      <LayerProvider>
+        <CommandPalette
+          isOpen={false}
+          hotkey={false}
+          items={[{ id: 'a', title: 'Open settings' }]}
+          onAction={() => {}}
+          onOpenChange={() => {}}
+        />
+      </LayerProvider>,
+    );
+
+    await waitFor(() => expect(close).toHaveBeenCalledOnce());
+    expect(dialog?.open).toBe(false);
   });
 
   it('filters items and invokes onAction on Enter', async () => {
