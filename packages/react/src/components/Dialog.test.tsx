@@ -1,12 +1,32 @@
 import { useState } from 'react';
-import { describe, expect, it } from 'vite-plus/test';
+import { describe, expect, it, vi } from 'vite-plus/test';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { IconProvider } from '../icons';
 import { LayerProvider } from '../layers/LayerProvider';
+import type { OverlayOpenChangeHandler } from '../overlays';
 import { Dialog } from './Dialog';
 import { SimpleDialog } from './SimpleDialog';
 import { Tooltip } from './Tooltip';
+
+function renderReasonDialog(onOpenChange: OverlayOpenChangeHandler) {
+  return render(
+    <IconProvider icons={{}}>
+      <LayerProvider>
+        <Dialog.Root onOpenChange={onOpenChange}>
+          <Dialog.Trigger>
+            <button type="button">Custom</button>
+          </Dialog.Trigger>
+          <Dialog.Backdrop>
+            <Dialog.Popup>
+              <Dialog.Title>Only title</Dialog.Title>
+            </Dialog.Popup>
+          </Dialog.Backdrop>
+        </Dialog.Root>
+      </LayerProvider>
+    </IconProvider>,
+  );
+}
 
 describe('Dialog', () => {
   it('opens from a custom trigger and allows omitting Close', async () => {
@@ -73,6 +93,40 @@ describe('Dialog', () => {
     );
     await userEvent.tab();
     expect((await screen.findByRole('tooltip')).textContent).toBe('Opens the dialog');
+  });
+
+  it('reports trigger-press when opened from the trigger', async () => {
+    const onOpenChange = vi.fn<OverlayOpenChangeHandler>();
+    renderReasonDialog(onOpenChange);
+    await userEvent.click(screen.getByRole('button', { name: 'Custom' }));
+    expect(onOpenChange.mock.calls[0]?.[0]).toBe(true);
+    expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('trigger-press');
+  });
+
+  it('reports outside-press when dismissed via the overlay', async () => {
+    const onOpenChange = vi.fn<OverlayOpenChangeHandler>();
+    renderReasonDialog(onOpenChange);
+    await userEvent.click(screen.getByRole('button', { name: 'Custom' }));
+    onOpenChange.mockClear();
+
+    const overlay = document.querySelector('.var-ui-dialog__overlay');
+    expect(overlay).toBeTruthy();
+    await userEvent.click(overlay!);
+
+    expect(onOpenChange.mock.calls[0]?.[0]).toBe(false);
+    expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('outside-press');
+  });
+
+  it('reports escape-key when dismissed with Escape', async () => {
+    const onOpenChange = vi.fn<OverlayOpenChangeHandler>();
+    renderReasonDialog(onOpenChange);
+    await userEvent.click(screen.getByRole('button', { name: 'Custom' }));
+    onOpenChange.mockClear();
+
+    await userEvent.keyboard('{Escape}');
+
+    expect(onOpenChange.mock.calls[0]?.[0]).toBe(false);
+    expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('escape-key');
   });
 });
 

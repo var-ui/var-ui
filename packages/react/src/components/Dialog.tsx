@@ -167,8 +167,9 @@ function DialogRoot({
     <DialogContext.Provider value={context}>
       {/*
         RAC DialogTrigger has no DOM node. Root captures the last keydown here so
-        inferOverlayCloseReason can map Escape. Backdrop records overlay clicks.
-        cancel() only blocks uncontrolled requestedOpen updates after onOpenChange.
+        inferOverlayCloseReason can map Escape. Backdrop records overlay pointerdown
+        (outside-press); Trigger stashes press/click (trigger-press). cancel() only
+        blocks uncontrolled requestedOpen updates after onOpenChange.
       */}
       <div
         style={{ display: 'contents' }}
@@ -188,8 +189,29 @@ const DialogTrigger = forwardRef(function DialogTrigger(
   { children, className, ...props }: DialogTriggerProps,
   ref: Ref<HTMLElement>,
 ) {
+  const ctx = useDialogContext();
   const child = Children.only(children);
-  const racTriggerProps: Record<string, unknown> = { ...props, className, ref };
+  const stashTriggerPress = (event?: { nativeEvent?: Event } | Event) => {
+    if (event instanceof Event) {
+      ctx.lastEventRef.current = event;
+      return;
+    }
+    if (event?.nativeEvent instanceof Event) {
+      ctx.lastEventRef.current = event.nativeEvent;
+      return;
+    }
+    ctx.lastEventRef.current = new Event('press');
+  };
+  const racTriggerProps: Record<string, unknown> = {
+    ...props,
+    className,
+    ref,
+    onClick: stashTriggerPress,
+    onPress: stashTriggerPress,
+    onPointerDown: () => {
+      ctx.lastEventRef.current = new Event('press');
+    },
+  };
   const merged = mergeOverlayChild(child, racTriggerProps);
   // RAC DialogTrigger injects press via PressResponder context, not cloneElement.
   // Host nodes (e.g. <button>) need Pressable so they register; RAC Button already does.
@@ -213,8 +235,10 @@ function DialogBackdrop({ children, className, isDismissable }: DialogBackdropPr
       onOpenChange={ctx.handleOpenChange}
       isDismissable={isDismissable ?? ctx.isDismissable}
       UNSTABLE_portalContainer={ctx.portalContainer}
-      onClick={(event) => {
-        ctx.lastEventRef.current = event.nativeEvent;
+      onPointerDown={(event) => {
+        if (event.target === event.currentTarget) {
+          ctx.lastEventRef.current = event.nativeEvent;
+        }
       }}
     >
       {children}
