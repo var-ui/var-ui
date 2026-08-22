@@ -24,23 +24,23 @@
 
 ## File map
 
-| File | Responsibility |
-| --- | --- |
-| `packages/react/src/overlays/changeEvent.ts` | `OverlayChangeEventDetails`, `createOverlayChangeDetails`, `inferOverlayCloseReason` |
-| `packages/react/src/overlays/useOverlayPresence.ts` | Mount/unmount + public data attrs |
-| `packages/react/src/overlays/usePositionerVars.ts` | `--var-ui-available-*` / `--var-ui-transform-origin` |
-| `packages/react/src/overlays/index.ts` | Public re-exports |
-| `packages/core/src/components/overlayPresence.ts` | Shared starting/ending CSS for recipes |
-| `packages/core/src/components/overlay.ts` | Backdrop animation + iOS `@supports` |
-| `packages/core/src/components/dialog.ts` | Overlay/modal presence styles + iOS |
-| `packages/core/src/components/popover.ts` | Presence + transform-origin |
-| `packages/core/src/components/tooltip.ts` | Presence + transform-origin |
-| `packages/core/src/components/hoverCard.ts` | Presence + transform-origin |
-| `packages/core/src/components/drawer.ts` | Overlay/panel presence + iOS |
-| `packages/core/src/components/menu.ts` | Popover slot presence |
-| `packages/core/src/components/commandPalette.ts` | Starting/ending attrs alongside `data-open` |
-| `packages/react/src/components/CommandPalette.tsx` | Spread presence attrs on panel |
-| `docs/content/docs/getting-started.mdx` | isolation, iOS 26, portal into theme root |
+| File                                                | Responsibility                                                                       |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `packages/react/src/overlays/changeEvent.ts`        | `OverlayChangeEventDetails`, `createOverlayChangeDetails`, `inferOverlayCloseReason` |
+| `packages/react/src/overlays/useOverlayPresence.ts` | Mount/unmount + public data attrs                                                    |
+| `packages/react/src/overlays/usePositionerVars.ts`  | `--var-ui-available-*` / `--var-ui-transform-origin`                                 |
+| `packages/react/src/overlays/index.ts`              | Public re-exports                                                                    |
+| `packages/core/src/components/overlayPresence.ts`   | Shared starting/ending CSS for recipes                                               |
+| `packages/core/src/components/overlay.ts`           | Backdrop animation + iOS `@supports`                                                 |
+| `packages/core/src/components/dialog.ts`            | Overlay/modal presence styles + iOS                                                  |
+| `packages/core/src/components/popover.ts`           | Presence + transform-origin                                                          |
+| `packages/core/src/components/tooltip.ts`           | Presence + transform-origin                                                          |
+| `packages/core/src/components/hoverCard.ts`         | Presence + transform-origin                                                          |
+| `packages/core/src/components/drawer.ts`            | Overlay/panel presence + iOS                                                         |
+| `packages/core/src/components/menu.ts`              | Popover slot presence                                                                |
+| `packages/core/src/components/commandPalette.ts`    | Starting/ending attrs alongside `data-open`                                          |
+| `packages/react/src/components/CommandPalette.tsx`  | Spread presence attrs on panel                                                       |
+| `docs/content/docs/getting-started.mdx`             | isolation, iOS 26, portal into theme root                                            |
 
 ---
 
@@ -60,10 +60,7 @@
 
 ```ts
 import { describe, expect, it } from 'vite-plus/test';
-import {
-  createOverlayChangeDetails,
-  inferOverlayCloseReason,
-} from './changeEvent';
+import { createOverlayChangeDetails, inferOverlayCloseReason } from './changeEvent';
 
 describe('createOverlayChangeDetails', () => {
   it('starts uncanceled and cancel() flips isCanceled', () => {
@@ -124,10 +121,7 @@ export type OverlayChangeEventDetails = {
   isCanceled: boolean;
 };
 
-export type OverlayOpenChangeHandler = (
-  open: boolean,
-  details: OverlayChangeEventDetails,
-) => void;
+export type OverlayOpenChangeHandler = (open: boolean, details: OverlayChangeEventDetails) => void;
 
 export function createOverlayChangeDetails(init: {
   reason: OverlayOpenChangeReason;
@@ -235,8 +229,7 @@ import { useOverlayPresence } from './useOverlayPresence';
 
 function elementWithAnimation(finished: Promise<void>): HTMLElement {
   const el = document.createElement('div');
-  el.getAnimations = () =>
-    [{ finished, cancel: () => {} }] as unknown as Animation[];
+  el.getAnimations = () => [{ finished, cancel: () => {} }] as unknown as Animation[];
   return el;
 }
 
@@ -377,12 +370,12 @@ type UsePositionerVarsResult = {
 
 `--var-ui-transform-origin` mapping (use the first token of RAC placement, e.g. `bottom start` → `bottom`):
 
-| side | origin |
-| --- | --- |
-| top | `bottom center` |
-| bottom | `top center` |
-| left | `center right` |
-| right | `center left` |
+| side   | origin          |
+| ------ | --------------- |
+| top    | `bottom center` |
+| bottom | `top center`    |
+| left   | `center right`  |
+| right  | `center left`   |
 
 Available height: `window.innerHeight - popup.getBoundingClientRect().top` when side is `bottom`, `popup.getBoundingClientRect().bottom` when side is `top`, otherwise `window.innerHeight`. Clamp to `>= 0` and stringify as `${px}px`.
 
@@ -536,7 +529,7 @@ EOF
 **Files:**
 
 - Modify: `packages/react/src/components/CommandPalette.tsx` — call `useOverlayPresence({ isOpen: open, getAnimatedElements: () => [panelRef.current] })`, spread `presence.attrs` onto the panel that already has `data-open`. Keep existing `data-open={open ? '' : undefined}` **or** replace it with `presence.attrs` (presence already sets `data-open` while mounted). Prefer spreading `presence.attrs` so starting/ending attrs appear. Attach `ref={panelRef}` on that panel.
-- Modify: `packages/react/src/components/CommandPalette.test.tsx` — open the palette and assert the panel has `data-open`. Close it with `reducedMotion` not easily injectable; assert `data-ending-style` is set *or* that `data-open` is removed after close. If close unmounts immediately (no CSS animations in jsdom), assert unmount — jsdom `getAnimations` is empty so presence unmounts immediately, which is correct.
+- Modify: `packages/react/src/components/CommandPalette.test.tsx` — open the palette and assert the panel has `data-open`. Close it with `reducedMotion` not easily injectable; assert `data-ending-style` is set _or_ that `data-open` is removed after close. If close unmounts immediately (no CSS animations in jsdom), assert unmount — jsdom `getAnimations` is empty so presence unmounts immediately, which is correct.
 - Modify: `packages/react/src/index.ts` — export overlay helpers:
 
 ```ts
@@ -584,6 +577,7 @@ Add a section **Portals and stacking** after the provider step:
 Wrap the application in an isolating root so portaled dialogs and popovers stack above page `z-index`:
 
 \`\`\`html
+
 <body>
   <div class="root">{children}</div>
 </body>
@@ -591,7 +585,7 @@ Wrap the application in an isolating root so portaled dialogs and popovers stack
 
 \`\`\`css
 .root {
-  isolation: isolate;
+isolation: isolate;
 }
 \`\`\`
 
@@ -661,15 +655,15 @@ EOF
 
 ## Spec coverage
 
-| Spec item | Task |
-| --- | --- |
-| `data-open` / `data-closed` / starting / ending | 2, 4, 5, 6 |
-| Exit waits on `getAnimations()` | 2 |
-| Reduced motion unmounts immediately | 2, 4 |
-| Positioner CSS vars | 3, 5 |
-| `reason` + `cancel()` | 1 |
-| iOS 26 backdrop | 4 |
-| isolation + portal docs | 7 |
-| CommandPalette keeps `data-open` | 5, 6 |
-| LayerProvider unchanged | (constraint) |
-| Dialog/Popover consumers | **next plan** (compound overlay parts) |
+| Spec item                                       | Task                                   |
+| ----------------------------------------------- | -------------------------------------- |
+| `data-open` / `data-closed` / starting / ending | 2, 4, 5, 6                             |
+| Exit waits on `getAnimations()`                 | 2                                      |
+| Reduced motion unmounts immediately             | 2, 4                                   |
+| Positioner CSS vars                             | 3, 5                                   |
+| `reason` + `cancel()`                           | 1                                      |
+| iOS 26 backdrop                                 | 4                                      |
+| isolation + portal docs                         | 7                                      |
+| CommandPalette keeps `data-open`                | 5, 6                                   |
+| LayerProvider unchanged                         | (constraint)                           |
+| Dialog/Popover consumers                        | **next plan** (compound overlay parts) |
