@@ -17,4 +17,21 @@ describe('Drawer', () => {
     expect(screen.getByText('Drawer body')).toBeTruthy();
     expect(document.querySelector('[class*="var-ui-drawer"]')).toBeTruthy();
   });
+
+  it('labels a compound drawer without a title via aria-label', () => {
+    render(
+      <IconProvider icons={{}}>
+        <Drawer.Root isOpen aria-label="Navigation drawer">
+          <Drawer.Backdrop>
+            <Drawer.Panel>
+              <Drawer.Body>Navigation links</Drawer.Body>
+            </Drawer.Panel>
+          </Drawer.Backdrop>
+        </Drawer.Root>
+      </IconProvider>,
+    );
+
+    expect(screen.getByRole('dialog', { name: 'Navigation drawer' })).toBeTruthy();
+    expect(screen.getByText('Navigation links')).toBeTruthy();
+  });
 });
