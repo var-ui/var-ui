@@ -1,0 +1,326 @@
+import {
+  Children,
+  createContext,
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type JSX,
+  type MutableRefObject,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
+} from 'react';
+import {
+  Header,
+  Menu as AriaMenu,
+  MenuItem as AriaMenuItem,
+  MenuSection as AriaMenuSection,
+  MenuTrigger as AriaMenuTrigger,
+  Popover as AriaPopover,
+  Pressable,
+  Separator,
+} from 'react-aria-components';
+import { menu } from '@var-ui/core';
+import { useLayer } from '../layers/LayerProvider';
+import {
+  createOverlayChangeDetails,
+  inferOverlayCloseReason,
+  mergeOverlayChild,
+  useOverlayPresence,
+  type OverlayOpenChangeHandler,
+  type UseOverlayPresenceResult,
+} from '../overlays';
+import { recipeProps } from './utils';
+
+export type MenuRootProps = {
+  children: ReactNode;
+  isOpen?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: OverlayOpenChangeHandler;
+  /**
+   * Element the menu portals into instead of `document.body`. Needed when a subtree renders
+   * under a different theme than the page ambient.
+   */
+  portalContainer?: Element;
+};
+
+/** Alias for docs and consumers referring to the root menu props. */
+export type MenuProps = MenuRootProps;
+
+export type MenuTriggerProps = {
+  children: ReactElement;
+  className?: string;
+};
+
+export type MenuPopupProps = {
+  children: ReactNode;
+  className?: string;
+  portalContainer?: Element;
+};
+
+export type MenuItemProps = {
+  children: ReactNode;
+  id: string;
+  onAction?: () => void;
+  className?: string;
+  isDisabled?: boolean;
+};
+
+export type MenuSeparatorProps = {
+  className?: string;
+};
+
+export type MenuSectionProps = {
+  children: ReactNode;
+  title?: string;
+  className?: string;
+};
+
+type MenuContextValue = {
+  presence: UseOverlayPresenceResult;
+  popupRef: MutableRefObject<HTMLDivElement | null>;
+  triggerRef: MutableRefObject<HTMLElement | null>;
+  setPopupEl: (element: HTMLDivElement | null) => void;
+  setTriggerEl: (element: HTMLElement | null) => void;
+  portalContainer?: Element;
+  lastEventRef: MutableRefObject<Event | null>;
+  handleOpenChange: (next: boolean) => void;
+};
+
+const MenuContext = createContext<MenuContextValue | null>(null);
+
+function useMenuContext(): MenuContextValue {
+  const ctx = useContext(MenuContext);
+  if (!ctx) {
+    throw new Error('Menu compound components must be rendered inside <Menu>.');
+  }
+  return ctx;
+}
+
+function composeHandler(existing: unknown, ours: (...args: unknown[]) => void) {
+  if (typeof existing !== 'function') {
+    return ours;
+  }
+  return (...args: unknown[]) => {
+    existing(...args);
+    ours(...args);
+  };
+}
+
+function MenuRoot({
+  children,
+  isOpen,
+  defaultOpen = false,
+  onOpenChange,
+  portalContainer,
+}: MenuRootProps): JSX.Element {
+  const [uncontrolledOpen, setRequestedOpen] = useState(defaultOpen);
+  const requestedOpen = isOpen ?? uncontrolledOpen;
+  const popupRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const [, setPopupEl] = useState<HTMLDivElement | null>(null);
+  const [, setTriggerEl] = useState<HTMLElement | null>(null);
+  const lastEventRef = useRef<Event | null>(null);
+
+  const presence = useOverlayPresence({
+    isOpen: requestedOpen,
+    getAnimatedElements: () => [popupRef.current],
+  });
+
+  const handleOpenChange = useCallback(
+    (next: boolean) => {
+      const details = createOverlayChangeDetails({
+        reason: inferOverlayCloseReason(lastEventRef.current),
+        event: lastEventRef.current,
+      });
+      onOpenChange?.(next, details);
+      lastEventRef.current = null;
+      if (details.isCanceled) return;
+      if (isOpen === undefined) setRequestedOpen(next);
+    },
+    [isOpen, onOpenChange],
+  );
+
+  useEffect(() => {
+    if (!presence.mounted) return;
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) {
+        lastEventRef.current = event;
+        return;
+      }
+      if (popupRef.current?.contains(target) || triggerRef.current?.contains(target)) {
+        return;
+      }
+      lastEventRef.current = event;
+    };
+    document.addEventListener('pointerdown', onPointerDown, true);
+    return () => document.removeEventListener('pointerdown', onPointerDown, true);
+  }, [presence.mounted]);
+
+  const context = useMemo<MenuContextValue>(
+    () => ({
+      presence,
+      popupRef,
+      triggerRef,
+      setPopupEl,
+      setTriggerEl,
+      portalContainer,
+      lastEventRef,
+      handleOpenChange,
+    }),
+    [handleOpenChange, portalContainer, presence],
+  );
+
+  return (
+    <MenuContext.Provider value={context}>
+      {/*
+        RAC MenuTrigger has no DOM node. Root captures the last keydown here so
+        inferOverlayCloseReason can map Escape. Document pointerdown (outside popup
+        and trigger) is outside-press; Trigger stashes press/click (trigger-press).
+        cancel() only blocks uncontrolled requestedOpen updates after onOpenChange.
+      */}
+      <div
+        style={{ display: 'contents' }}
+        onKeyDownCapture={(event) => {
+          lastEventRef.current = event.nativeEvent;
+        }}
+      >
+        <AriaMenuTrigger isOpen={presence.mounted} onOpenChange={handleOpenChange}>
+          {children}
+        </AriaMenuTrigger>
+      </div>
+    </MenuContext.Provider>
+  );
+}
+
+const MenuTrigger = forwardRef(function MenuTrigger(
+  { children, className, ...props }: MenuTriggerProps,
+  ref: Ref<HTMLElement>,
+) {
+  const ctx = useMenuContext();
+  const child = Children.only(children);
+  const stashTriggerPress = (...args: unknown[]) => {
+    const event = args[0] as { nativeEvent?: Event } | Event | undefined;
+    if (event instanceof Event) {
+      ctx.lastEventRef.current = event;
+      return;
+    }
+    if (event?.nativeEvent instanceof Event) {
+      ctx.lastEventRef.current = event.nativeEvent;
+      return;
+    }
+    ctx.lastEventRef.current = new Event('press');
+  };
+  const assignTriggerEl = (node: HTMLElement | null) => {
+    ctx.triggerRef.current = node;
+    ctx.setTriggerEl(node);
+  };
+  const triggerProps = props as Record<string, unknown>;
+  const racTriggerProps: Record<string, unknown> = {
+    ...triggerProps,
+    className,
+    ref: (node: HTMLElement | null) => {
+      assignTriggerEl(node);
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        (ref as MutableRefObject<HTMLElement | null>).current = node;
+      }
+    },
+    onClick: composeHandler(triggerProps.onClick, stashTriggerPress),
+    onPress: composeHandler(triggerProps.onPress, stashTriggerPress),
+    onPointerDown: composeHandler(triggerProps.onPointerDown, () => {
+      ctx.lastEventRef.current = new Event('press');
+    }),
+  };
+  const merged = mergeOverlayChild(child, racTriggerProps);
+  if (typeof child.type === 'string') {
+    return <Pressable>{merged as ReactElement<{ className?: string }, string>}</Pressable>;
+  }
+  return merged;
+});
+
+function MenuPopup({ children, className, portalContainer }: MenuPopupProps): JSX.Element {
+  const ctx = useMenuContext();
+  const m = menu();
+  const { style: layerStyle } = useLayer();
+
+  return (
+    <AriaPopover
+      {...recipeProps(m.popover, className)}
+      {...ctx.presence.attrs}
+      ref={(node: HTMLDivElement | null) => {
+        ctx.popupRef.current = node;
+        ctx.setPopupEl(node);
+      }}
+      style={layerStyle}
+      UNSTABLE_portalContainer={portalContainer ?? ctx.portalContainer}
+    >
+      <AriaMenu {...recipeProps(m.menu)} selectionMode="none">
+        {children}
+      </AriaMenu>
+    </AriaPopover>
+  );
+}
+
+function MenuItem({ children, id, onAction, className, isDisabled }: MenuItemProps): JSX.Element {
+  const m = menu();
+  return (
+    <AriaMenuItem
+      id={id}
+      onAction={onAction}
+      isDisabled={isDisabled}
+      {...recipeProps(m.item, className)}
+    >
+      {children}
+    </AriaMenuItem>
+  );
+}
+
+function MenuSeparator({ className }: MenuSeparatorProps): JSX.Element {
+  const m = menu();
+  return <Separator {...recipeProps(m.separator, className)} />;
+}
+
+function MenuSection({ children, title, className }: MenuSectionProps): JSX.Element {
+  const m = menu();
+  return (
+    <AriaMenuSection {...recipeProps(m.section, className)}>
+      {title ? <Header {...recipeProps(m.sectionHeader)}>{title}</Header> : null}
+      {children}
+    </AriaMenuSection>
+  );
+}
+
+/**
+ * Compound menu. `Menu` is Root; compose Trigger, Popup, and item parts.
+ * Keep `DropdownMenu` + `MenuContent({ sections })` for the data preset.
+ *
+ * ```tsx
+ * <Menu.Root>
+ *   <Menu.Trigger>
+ *     <Button>Song</Button>
+ *   </Menu.Trigger>
+ *   <Menu.Popup>
+ *     <Menu.Item id="lib" onAction={fn}>Add to Library</Menu.Item>
+ *     <Menu.Separator />
+ *     <Menu.Section title="Danger">
+ *       <Menu.Item id="delete" onAction={fn}>Delete</Menu.Item>
+ *     </Menu.Section>
+ *   </Menu.Popup>
+ * </Menu.Root>
+ * ```
+ */
+export const Menu = Object.assign(MenuRoot, {
+  Root: MenuRoot,
+  Trigger: MenuTrigger,
+  Popup: MenuPopup,
+  Item: MenuItem,
+  Separator: MenuSeparator,
+  Section: MenuSection,
+});

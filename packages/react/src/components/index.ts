@@ -22,6 +22,16 @@ export {
   type MenuItemDefinition,
   type MenuSectionDefinition,
 } from './DropdownMenu';
+export {
+  Menu,
+  type MenuItemProps,
+  type MenuPopupProps,
+  type MenuProps,
+  type MenuRootProps,
+  type MenuSectionProps,
+  type MenuSeparatorProps,
+  type MenuTriggerProps,
+} from './Menu';
 export { ColorInput, type ColorInputProps } from './ColorInput';
 export { ColorPicker, type ColorPickerProps } from './ColorPicker';
 export { ColorSwatch, type ColorSwatchProps } from './ColorSwatch';
