@@ -1,11 +1,6 @@
-import type { ReactNode } from 'react';
 import { describe, expect, it } from 'vite-plus/test';
 import { render, screen } from '@testing-library/react';
 import { Field } from './Field';
-
-function WrappedDescription({ children }: { children: ReactNode }) {
-  return <Field.Description>{children}</Field.Description>;
-}
 
 describe('Field', () => {
   it('wires label, description, and error around a custom control', () => {
@@ -81,21 +76,6 @@ describe('Field', () => {
     expect(input.id).toBe('nested-email');
   });
 
-  it('sets aria-describedby when Description is rendered by a wrapper', () => {
-    render(
-      <Field.Root>
-        <Field.Label>Email</Field.Label>
-        <Field.Control>
-          <input />
-        </Field.Control>
-        <WrappedDescription>Work email</WrappedDescription>
-      </Field.Root>,
-    );
-    const input = screen.getByLabelText('Email');
-    const description = screen.getByText('Work email');
-    expect(input.getAttribute('aria-describedby')).toBe(description.id);
-  });
-
   it('sets aria-describedby when Description is nested', () => {
     render(
       <Field.Root>
@@ -125,5 +105,29 @@ describe('Field', () => {
       </Field.Root>,
     );
     expect(screen.getByLabelText('Email')).toBeTruthy();
+  });
+
+  it('does not leave a dangling aria-describedby after Description unmounts', () => {
+    const { rerender } = render(
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+        <Field.Description>Work email</Field.Description>
+      </Field.Root>,
+    );
+    const describedBy = screen.getByLabelText('Email').getAttribute('aria-describedby');
+    expect(describedBy).toBe(screen.getByText('Work email').id);
+
+    rerender(
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+      </Field.Root>,
+    );
+    expect(screen.getByLabelText('Email').getAttribute('aria-describedby')).toBeNull();
   });
 });

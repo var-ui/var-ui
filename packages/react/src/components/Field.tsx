@@ -7,7 +7,6 @@ import {
   useContext,
   useId,
   useMemo,
-  useState,
   type JSX,
   type ReactElement,
   type ReactNode,
@@ -47,8 +46,6 @@ export type FieldErrorProps = {
   forceMount?: boolean;
 };
 
-type FieldPart = 'description' | 'error';
-
 type FieldContextValue = {
   name?: string;
   controlId: string;
@@ -58,8 +55,6 @@ type FieldContextValue = {
   setNativeInvalid: (invalid: boolean, message: string) => void;
   describedBy: string | undefined;
   errorMessageId: string | undefined;
-  registerControlId: (id: string) => void;
-  registerPart: (part: FieldPart) => void;
 };
 
 type ControlChildProps = {
@@ -127,23 +122,16 @@ function FieldRoot({
 }: FieldRootProps & { htmlFor?: string }): JSX.Element {
   const generatedId = useId();
   const walkedControlId = findControlChildId(children);
-  const [registeredControlId, setRegisteredControlId] = useState<string | undefined>();
-  const [parts, setParts] = useState<Set<FieldPart>>(() => {
-    const next = new Set<FieldPart>();
-    if (treeHasPart(children, FieldDescription)) next.add('description');
-    if (treeHasPart(children, FieldError)) next.add('error');
-    return next;
-  });
-
-  const controlId = htmlFor ?? registeredControlId ?? walkedControlId ?? generatedId;
+  const controlId = walkedControlId ?? htmlFor ?? generatedId;
   const descriptionId = `${generatedId}-description`;
   const errorId = `${generatedId}-error`;
   const isInvalid = Boolean(invalid);
-  const errorMessageId = isInvalid && parts.has('error') ? errorId : undefined;
+  const hasDescription = treeHasPart(children, FieldDescription);
+  const hasError = treeHasPart(children, FieldError);
+  const errorMessageId = isInvalid && hasError ? errorId : undefined;
   const describedBy =
-    [parts.has('description') ? descriptionId : undefined, errorMessageId]
-      .filter(Boolean)
-      .join(' ') || undefined;
+    [hasDescription ? descriptionId : undefined, errorMessageId].filter(Boolean).join(' ') ||
+    undefined;
 
   const setNativeInvalid = useCallback(
     (nextInvalid: boolean, _message: string) => {
@@ -151,24 +139,6 @@ function FieldRoot({
     },
     [onInvalidChange],
   );
-
-  // Render-phase register (React 18+): wrappers that render Description/Error
-  // (or Control) are invisible to the tree walk. Bail if already present so
-  // SSR retries stay stable.
-  const registerControlId = (id: string) => {
-    if (id === controlId) return;
-    setRegisteredControlId(id);
-  };
-
-  const registerPart = (part: FieldPart) => {
-    if (parts.has(part)) return;
-    setParts((prev) => {
-      if (prev.has(part)) return prev;
-      const next = new Set(prev);
-      next.add(part);
-      return next;
-    });
-  };
 
   const value = useMemo<FieldContextValue>(
     () => ({
@@ -180,8 +150,6 @@ function FieldRoot({
       setNativeInvalid,
       describedBy,
       errorMessageId,
-      registerControlId,
-      registerPart,
     }),
     [
       name,
@@ -192,7 +160,6 @@ function FieldRoot({
       setNativeInvalid,
       describedBy,
       errorMessageId,
-      parts,
     ],
   );
 
@@ -215,15 +182,10 @@ function FieldLabel({ children, className }: FieldLabelProps): JSX.Element {
 }
 
 function FieldControl({ children, className }: FieldControlProps): ReactElement {
-  const { name, controlId, invalid, describedBy, errorMessageId, registerControlId } =
-    useFieldContext();
+  const { name, controlId, invalid, describedBy, errorMessageId } = useFieldContext();
   const childProps = children.props as ControlChildProps;
-  const childId = childProps.id;
-  if (childId) {
-    registerControlId(childId);
-  }
   return cloneElement(children, {
-    id: childId ?? controlId,
+    id: childProps.id ?? controlId,
     name: childProps.name ?? name,
     className: cx(childProps.className, className) || undefined,
     'aria-describedby': describedBy,
@@ -233,8 +195,7 @@ function FieldControl({ children, className }: FieldControlProps): ReactElement 
 }
 
 function FieldDescription({ children, className }: FieldDescriptionProps): JSX.Element {
-  const { descriptionId, registerPart } = useFieldContext();
-  registerPart('description');
+  const { descriptionId } = useFieldContext();
   const f = field();
   return (
     <p {...recipeProps(f.description, className)} id={descriptionId}>
@@ -244,12 +205,8 @@ function FieldDescription({ children, className }: FieldDescriptionProps): JSX.E
 }
 
 function FieldError({ children, className, forceMount }: FieldErrorProps): JSX.Element | null {
-  const { errorId, registerPart } = useFieldContext();
-  const shouldMount = errorPartMounts({ children, forceMount });
-  if (shouldMount) {
-    registerPart('error');
-  }
-  if (!shouldMount) {
+  const { errorId } = useFieldContext();
+  if (!errorPartMounts({ children, forceMount })) {
     return null;
   }
   const f = field();
