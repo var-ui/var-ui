@@ -1,6 +1,6 @@
 'use client';
 
-import { Dialog, EmptyState, Icon } from '@var-ui/react';
+import { EmptyState, Icon, SimpleDialog } from '@var-ui/react';
 
 export type EmptyStateDialogTileProps = {
   className?: string;
@@ -12,7 +12,7 @@ export function EmptyStateDialogTile({ className, portalContainer }: EmptyStateD
     <div className={className}>
       <EmptyState
         action={
-          <Dialog
+          <SimpleDialog
             description="Give your project a name. You can rename it later."
             portalContainer={portalContainer}
             title="Create a project"

@@ -5,7 +5,7 @@ description: Modal confirmation for important or destructive actions.
 
 # AlertDialog
 
-Modal confirmation for important or destructive actions. Uses `role="alertdialog"`, a cancel action, and a confirm action that calls `onConfirm` (cancel / Escape never call `onConfirm`).
+Modal confirmation for important or destructive actions. Uses `role="alertdialog"`, a cancel action, and a confirm action that calls `onConfirm` (cancel / Escape never call `onConfirm`). The default export stays the assembled preset (`title` / `onConfirm` / `triggerLabel`). Compound parts (`AlertDialog.Root`, `AlertDialog.Trigger`, `AlertDialog.Backdrop`, `AlertDialog.Popup`, `AlertDialog.Title`, `AlertDialog.Actions`) are available for custom chrome. The trigger child must forward DOM props — there is no `render` prop.
 
 ## Examples
 

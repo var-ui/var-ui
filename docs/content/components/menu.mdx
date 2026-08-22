@@ -1,0 +1,22 @@
+---
+title: Menu
+description: Compound action menu with Trigger, Popup, Item, Section, and Separator parts.
+---
+
+# Menu
+
+Compound action menu. `Menu` is Root; compose `Menu.Trigger`, `Menu.Popup`, `Menu.Item`, `Menu.Section`, and `Menu.Separator`. The trigger child must forward DOM props — there is no `render` prop. For the data preset (`sections` of items), keep using [`DropdownMenu`](/components/dropdown-menu).
+
+## Examples
+
+### Default
+
+<Demo id="menu.default" />
+
+## Props
+
+<PropsTable slug="menu" />
+
+## Accessibility
+
+Built on React Aria `MenuTrigger` / `Menu`. Arrow keys move between items, Enter/Space activates, Escape closes. Give destructive items clear labels — visual tone is not enough.

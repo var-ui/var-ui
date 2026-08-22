@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vite-plus/test';
 import { astroDemoIds, astroDemoMap } from './astroDemoMap';
 import { htmlDemoIds, htmlDemoMap } from './htmlDemoMap';
 import { reactDemoIds, reactDemoMap } from './reactDemoMap';
+import { REACT_ONLY_DEMO_IDS } from './reactOnlyDemoIds';
 import {
   DEMO_IDS,
   assertDemoComplete,
@@ -18,18 +19,21 @@ describe('demo registry completeness', () => {
       expect(demoSnippets[id].astro.length).toBeGreaterThan(0);
       expect(demoSnippets[id].html.length).toBeGreaterThan(0);
       expect(reactDemoLoaders[id]).toBeTypeOf('function');
-      expect(astroDemoIds).toContain(id);
-      expect(htmlDemoIds).toContain(id);
+      if (!REACT_ONLY_DEMO_IDS.has(id)) {
+        expect(astroDemoIds).toContain(id);
+        expect(htmlDemoIds).toContain(id);
+      }
       assertDemoComplete(demoRegistry[id]);
     }
   });
 
   it('keeps astro/html/react map keys in sync with DEMO_IDS', () => {
-    expect([...astroDemoIds].sort()).toEqual([...DEMO_IDS].sort());
-    expect([...htmlDemoIds].sort()).toEqual([...DEMO_IDS].sort());
+    const crossFrameworkIds = DEMO_IDS.filter((id) => !REACT_ONLY_DEMO_IDS.has(id));
+    expect([...astroDemoIds].sort()).toEqual([...crossFrameworkIds].sort());
+    expect([...htmlDemoIds].sort()).toEqual([...crossFrameworkIds].sort());
     expect([...reactDemoIds].sort()).toEqual([...DEMO_IDS].sort());
-    expect(Object.keys(astroDemoMap).sort()).toEqual([...DEMO_IDS].sort());
-    expect(Object.keys(htmlDemoMap).sort()).toEqual([...DEMO_IDS].sort());
+    expect(Object.keys(astroDemoMap).sort()).toEqual([...crossFrameworkIds].sort());
+    expect(Object.keys(htmlDemoMap).sort()).toEqual([...crossFrameworkIds].sort());
     expect(Object.keys(reactDemoMap).sort()).toEqual([...DEMO_IDS].sort());
   });
 
