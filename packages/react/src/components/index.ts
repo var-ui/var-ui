@@ -51,7 +51,20 @@ export {
   type TabListProps,
   type TabListTabProps,
 } from './TabList';
-export { Dialog, type DialogProps } from './Dialog';
+export {
+  Dialog,
+  type DialogActionsProps,
+  type DialogBackdropProps,
+  type DialogCloseProps,
+  type DialogDescriptionProps,
+  type DialogHeaderProps,
+  type DialogPopupProps,
+  type DialogProps,
+  type DialogRootProps,
+  type DialogTitleProps,
+  type DialogTriggerProps,
+} from './Dialog';
+export { SimpleDialog, type SimpleDialogProps } from './SimpleDialog';
 export { AlertDialog, type AlertDialogProps } from './AlertDialog';
 export {
   CommandPalette,
