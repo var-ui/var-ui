@@ -43,6 +43,26 @@ describe('Form', () => {
     expect(data.get('email')).toBe('ada@example.com');
   });
 
+  it('does not call onSubmit when errors map is set and focuses a quoted name', async () => {
+    const onSubmit = vi.fn();
+    const name = 'user["email"]';
+    render(
+      <Form onSubmit={onSubmit} errors={{ [name]: 'Taken' }}>
+        <Field.Root name={name}>
+          <Field.Label>Email</Field.Label>
+          <Field.Control>
+            <input name={name} defaultValue="ada@example.com" />
+          </Field.Control>
+          <Field.Error />
+        </Field.Root>
+        <button type="submit">Save</button>
+      </Form>,
+    );
+    await userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    expect(onSubmit).not.toHaveBeenCalled();
+    expect(document.activeElement).toBe(screen.getByLabelText('Email'));
+  });
+
   it('shows Form errors map on the matching Field', () => {
     render(
       <Form errors={{ email: 'Taken' }}>

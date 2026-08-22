@@ -21,7 +21,9 @@ export function Form({ onSubmit, errors = {}, children, ...props }: FormProps): 
     }
     const firstErrorName = Object.keys(errors).find((name) => errors[name]);
     if (firstErrorName) {
-      form.querySelector<HTMLElement>(`[name="${firstErrorName}"]`)?.focus();
+      const item = form.elements.namedItem(firstErrorName);
+      const control = item instanceof RadioNodeList ? item[0] : item;
+      if (control instanceof HTMLElement) control.focus();
       return;
     }
     void onSubmit?.(event, new FormData(form));
