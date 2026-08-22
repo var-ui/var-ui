@@ -5,6 +5,8 @@ export {
   type OverlayOpenChangeHandler,
   type OverlayOpenChangeReason,
 } from './changeEvent';
+export { mergeOverlayChild } from './mergeOverlayChild';
+export { OverlayCloseContext, useOverlayClose } from './OverlayCloseContext';
 export {
   type OverlayPresenceAttrs,
   useOverlayPresence,
