@@ -23,4 +23,16 @@ describe('Field', () => {
     expect(container.querySelector('label')).toBeNull();
     expect(container.querySelector('p')).toBeNull();
   });
+
+  it('associates Field.Label with Field.Control via generated id', () => {
+    render(
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+      </Field.Root>,
+    );
+    expect(screen.getByLabelText('Email')).toBeTruthy();
+  });
 });
