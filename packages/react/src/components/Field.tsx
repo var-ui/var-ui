@@ -18,6 +18,7 @@ import {
   type Ref,
 } from 'react';
 import { field } from '@var-ui/core';
+import { FormErrorsContext } from './Form';
 import { cx, recipeProps } from './utils';
 
 export type FieldProps = {
@@ -69,6 +70,7 @@ type FieldContextValue = {
   errorId: string;
   invalid: boolean;
   nativeMessage: string;
+  formError: string;
   setNativeInvalid: (invalid: boolean, message: string) => void;
   reportControl: (report: ControlReport) => void;
   describedBy: string | undefined;
@@ -251,15 +253,17 @@ function FieldRoot({
   const controlId = walkedControl.id ?? htmlFor ?? generatedId;
   const descriptionId = `${generatedId}-description`;
   const errorId = `${generatedId}-error`;
+  const formErrors = useContext(FormErrorsContext);
+  const formError = (name && formErrors[name]) || '';
   const [nativeInvalid, setNativeInvalidState] = useState(false);
   const [nativeMessage, setNativeMessage] = useState('');
   const [touched, setTouched] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [filledOverride, setFilledOverride] = useState<boolean | undefined>(undefined);
   const hasErrorChildren = treeHasPart(children, FieldError);
-  const isInvalid = Boolean(invalid) || nativeInvalid || hasErrorChildren;
+  const isInvalid = Boolean(invalid) || nativeInvalid || hasErrorChildren || Boolean(formError);
   const hasDescription = treeHasPart(children, FieldDescription);
-  const hasError = treeHasPart(children, FieldError, nativeMessage);
+  const hasError = treeHasPart(children, FieldError, formError || nativeMessage);
   const errorMessageId = isInvalid && hasError ? errorId : undefined;
   const describedBy =
     [hasDescription ? descriptionId : undefined, errorMessageId].filter(Boolean).join(' ') ||
@@ -298,6 +302,7 @@ function FieldRoot({
       errorId,
       invalid: isInvalid,
       nativeMessage,
+      formError,
       setNativeInvalid,
       reportControl,
       describedBy,
@@ -310,6 +315,7 @@ function FieldRoot({
       errorId,
       isInvalid,
       nativeMessage,
+      formError,
       setNativeInvalid,
       reportControl,
       describedBy,
@@ -419,9 +425,9 @@ function FieldDescription({ children, className }: FieldDescriptionProps): JSX.E
 }
 
 function FieldError({ children, className, forceMount }: FieldErrorProps): JSX.Element | null {
-  const { errorId, nativeMessage } = useFieldContext();
+  const { errorId, nativeMessage, formError } = useFieldContext();
   const hasExplicitChildren = !(children === undefined || children === null || children === false);
-  const content = hasExplicitChildren ? children : nativeMessage;
+  const content = hasExplicitChildren ? children : formError || nativeMessage;
   if (!errorPartMounts({ children: content, forceMount })) {
     return null;
   }
