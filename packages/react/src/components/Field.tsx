@@ -7,6 +7,7 @@ import {
   useContext,
   useEffect,
   useId,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -187,9 +188,23 @@ function asConstraintElement(
   return null;
 }
 
-function assignRef<T>(ref: Ref<T> | undefined, value: T): void {
-  if (typeof ref === 'function') ref(value);
-  else if (ref) (ref as MutableRefObject<T>).current = value;
+function assignChildRef(
+  ref: Ref<HTMLElement | null> | undefined,
+  node: HTMLElement | null,
+): void | (() => void) {
+  if (!ref) return;
+  if (typeof ref === 'function') {
+    const cleanup = (ref as (instance: HTMLElement | null) => void | (() => void))(node);
+    if (typeof cleanup === 'function') return cleanup;
+    return () => {
+      ref(null);
+    };
+  }
+  const objectRef = ref as MutableRefObject<HTMLElement | null>;
+  objectRef.current = node;
+  return () => {
+    objectRef.current = null;
+  };
 }
 
 function controlIsFilled(el: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): boolean {
@@ -346,6 +361,8 @@ function FieldControl({ children, className }: FieldControlProps): ReactElement 
     reportControl({ filled: controlIsFilled(el) });
   }, [reportControl]);
 
+  useLayoutEffect(() => assignChildRef(childProps.ref, controlRef.current), [childProps.ref]);
+
   const reportFromEvent = (event: ControlEvent) => {
     const el = asConstraintElement(event.currentTarget);
     if (!el) return;
@@ -368,10 +385,7 @@ function FieldControl({ children, className }: FieldControlProps): ReactElement 
     'aria-describedby': describedBy,
     'aria-invalid': invalid || undefined,
     'aria-errormessage': errorMessageId,
-    ref: (node: HTMLElement | null) => {
-      controlRef.current = node;
-      assignRef(childProps.ref, node);
-    },
+    ref: controlRef,
     onBlur: (event: ControlEvent) => {
       childProps.onBlur?.(event);
       reportFromEvent(event);

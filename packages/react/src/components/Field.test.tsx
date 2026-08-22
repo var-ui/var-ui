@@ -280,6 +280,43 @@ describe('Field', () => {
     ).toBe(true);
   });
 
+  it('forwards a control child callback ref without reattaching on rerender', () => {
+    const seen: Array<HTMLElement | null> = [];
+    const cleanups: number[] = [];
+    const ref = (node: HTMLInputElement | null) => {
+      seen.push(node);
+      return () => {
+        cleanups.push(1);
+      };
+    };
+
+    const { rerender, unmount } = render(
+      <Field.Root>
+        <Field.Label>Name</Field.Label>
+        <Field.Control>
+          <input ref={ref} />
+        </Field.Control>
+      </Field.Root>,
+    );
+    const input = screen.getByLabelText('Name');
+    expect(seen).toEqual([input]);
+    expect(cleanups).toEqual([]);
+
+    rerender(
+      <Field.Root invalid>
+        <Field.Label>Name</Field.Label>
+        <Field.Control>
+          <input ref={ref} />
+        </Field.Control>
+      </Field.Root>,
+    );
+    expect(seen).toEqual([input]);
+    expect(cleanups).toEqual([]);
+
+    unmount();
+    expect(cleanups).toEqual([1]);
+  });
+
   it('sets data-invalid when Field.Error has children', () => {
     render(
       <Field.Root>
