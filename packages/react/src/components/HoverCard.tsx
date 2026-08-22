@@ -280,7 +280,6 @@ function HoverCardPopup({
       placement={placement}
       style={{ ...layerStyle, ...positioner.style } as CSSProperties}
       isOpen={ctx.presence.mounted}
-      onOpenChange={ctx.handleOpenChange}
       isNonModal
       UNSTABLE_portalContainer={portalContainer ?? ctx.portalContainer}
       onMouseEnter={ctx.cancelCloseTimer}

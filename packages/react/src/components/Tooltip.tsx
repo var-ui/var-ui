@@ -69,18 +69,6 @@ type TooltipRecipeFn = () => Record<TooltipSlot, string>;
 // instead of its slot overload, even though it returns a per-slot class map at runtime — see
 // packages/core/src/components/tooltip.ts. Recast until that recipe's overload resolution is fixed upstream.
 const tooltipSlots = tooltip as unknown as TooltipRecipeFn;
-/** Matches RAC TooltipTrigger's default closeDelay. */
-const TOOLTIP_CLOSE_DELAY = 500;
-
-function composeHandler(existing: unknown, ours: (...args: unknown[]) => void) {
-  if (typeof existing !== 'function') {
-    return ours;
-  }
-  return (...args: unknown[]) => {
-    existing(...args);
-    ours(...args);
-  };
-}
 
 type TooltipContextValue = {
   presence: UseOverlayPresenceResult;
@@ -91,8 +79,6 @@ type TooltipContextValue = {
   portalContainer?: Element;
   lastEventRef: MutableRefObject<Event | null>;
   handleOpenChange: (next: boolean) => void;
-  scheduleOpen: () => void;
-  scheduleClose: () => void;
 };
 
 const TooltipContext = createContext<TooltipContextValue | null>(null);
@@ -120,8 +106,6 @@ function TooltipRoot({
   const [, setPopupEl] = useState<HTMLDivElement | null>(null);
   const [, setTriggerEl] = useState<HTMLElement | null>(null);
   const lastEventRef = useRef<Event | null>(null);
-  const openTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const presence = useOverlayPresence({
     isOpen: requestedOpen,
@@ -142,36 +126,6 @@ function TooltipRoot({
     [isOpen, onOpenChange],
   );
 
-  const cancelOpenTimer = useCallback(() => {
-    if (openTimer.current !== undefined) {
-      clearTimeout(openTimer.current);
-      openTimer.current = undefined;
-    }
-  }, []);
-
-  const cancelCloseTimer = useCallback(() => {
-    if (closeTimer.current !== undefined) {
-      clearTimeout(closeTimer.current);
-      closeTimer.current = undefined;
-    }
-  }, []);
-
-  const scheduleOpen = useCallback(() => {
-    cancelCloseTimer();
-    cancelOpenTimer();
-    openTimer.current = setTimeout(() => {
-      handleOpenChange(true);
-    }, delay);
-  }, [cancelCloseTimer, cancelOpenTimer, delay, handleOpenChange]);
-
-  const scheduleClose = useCallback(() => {
-    cancelOpenTimer();
-    cancelCloseTimer();
-    closeTimer.current = setTimeout(() => {
-      handleOpenChange(false);
-    }, TOOLTIP_CLOSE_DELAY);
-  }, [cancelCloseTimer, cancelOpenTimer, handleOpenChange]);
-
   const context = useMemo<TooltipContextValue>(
     () => ({
       presence,
@@ -182,10 +136,8 @@ function TooltipRoot({
       portalContainer,
       lastEventRef,
       handleOpenChange,
-      scheduleOpen,
-      scheduleClose,
     }),
-    [handleOpenChange, portalContainer, presence, scheduleClose, scheduleOpen],
+    [handleOpenChange, portalContainer, presence],
   );
 
   return (
@@ -203,7 +155,6 @@ const TooltipTriggerPart = forwardRef(function TooltipTriggerPart(
 ) {
   const ctx = useTooltipContext();
   const child = Children.only(children);
-  const childProps = child.props as Record<string, unknown>;
   const assignTriggerEl = (node: HTMLElement | null) => {
     ctx.triggerRef.current = node;
     ctx.setTriggerEl(node);
@@ -220,10 +171,6 @@ const TooltipTriggerPart = forwardRef(function TooltipTriggerPart(
         (ref as MutableRefObject<HTMLElement | null>).current = node;
       }
     },
-    onMouseEnter: composeHandler(childProps.onMouseEnter, ctx.scheduleOpen),
-    onMouseLeave: composeHandler(childProps.onMouseLeave, ctx.scheduleClose),
-    onFocus: composeHandler(childProps.onFocus, ctx.scheduleOpen),
-    onBlur: composeHandler(childProps.onBlur, ctx.scheduleClose),
   });
   // RAC TooltipTrigger injects hover/focus via FocusableProvider context, not cloneElement.
   // Host nodes need Focusable so they register; RAC Button already does.
