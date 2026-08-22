@@ -361,7 +361,10 @@ function FieldControl({ children, className }: FieldControlProps): ReactElement 
     reportControl({ filled: controlIsFilled(el) });
   }, [reportControl]);
 
-  useLayoutEffect(() => assignChildRef(childProps.ref, controlRef.current), [childProps.ref]);
+  useLayoutEffect(
+    () => assignChildRef(childProps.ref, controlRef.current),
+    [childProps.ref, children.type, children.key],
+  );
 
   const reportFromEvent = (event: ControlEvent) => {
     const el = asConstraintElement(event.currentTarget);

@@ -317,6 +317,40 @@ describe('Field', () => {
     expect(cleanups).toEqual([1]);
   });
 
+  it('updates a control child callback ref when the host node is replaced', () => {
+    const seen: HTMLElement[] = [];
+    const cleanups: number[] = [];
+    const ref = (node: HTMLElement | null) => {
+      if (node) seen.push(node);
+      return () => {
+        cleanups.push(1);
+      };
+    };
+
+    function Harness({ as }: { as: 'input' | 'textarea' }) {
+      return (
+        <Field.Root>
+          <Field.Label>Name</Field.Label>
+          <Field.Control>
+            {as === 'input' ? <input ref={ref} /> : <textarea ref={ref} />}
+          </Field.Control>
+        </Field.Root>
+      );
+    }
+
+    const { rerender } = render(<Harness as="input" />);
+    const input = screen.getByLabelText('Name');
+    expect(input.tagName).toBe('INPUT');
+    expect(seen).toEqual([input]);
+    expect(cleanups).toEqual([]);
+
+    rerender(<Harness as="textarea" />);
+    const textarea = screen.getByLabelText('Name');
+    expect(textarea.tagName).toBe('TEXTAREA');
+    expect(cleanups).toEqual([1]);
+    expect(seen).toEqual([input, textarea]);
+  });
+
   it('sets data-invalid when Field.Error has children', () => {
     render(
       <Field.Root>
