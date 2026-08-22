@@ -185,13 +185,24 @@ function DialogRoot({
   );
 }
 
+function composeHandler(existing: unknown, ours: (...args: unknown[]) => void) {
+  if (typeof existing !== 'function') {
+    return ours;
+  }
+  return (...args: unknown[]) => {
+    existing(...args);
+    ours(...args);
+  };
+}
+
 const DialogTrigger = forwardRef(function DialogTrigger(
   { children, className, ...props }: DialogTriggerProps,
   ref: Ref<HTMLElement>,
 ) {
   const ctx = useDialogContext();
   const child = Children.only(children);
-  const stashTriggerPress = (event?: { nativeEvent?: Event } | Event) => {
+  const stashTriggerPress = (...args: unknown[]) => {
+    const event = args[0] as { nativeEvent?: Event } | Event | undefined;
     if (event instanceof Event) {
       ctx.lastEventRef.current = event;
       return;
@@ -202,15 +213,16 @@ const DialogTrigger = forwardRef(function DialogTrigger(
     }
     ctx.lastEventRef.current = new Event('press');
   };
+  const triggerProps = props as Record<string, unknown>;
   const racTriggerProps: Record<string, unknown> = {
-    ...props,
+    ...triggerProps,
     className,
     ref,
-    onClick: stashTriggerPress,
-    onPress: stashTriggerPress,
-    onPointerDown: () => {
+    onClick: composeHandler(triggerProps.onClick, stashTriggerPress),
+    onPress: composeHandler(triggerProps.onPress, stashTriggerPress),
+    onPointerDown: composeHandler(triggerProps.onPointerDown, () => {
       ctx.lastEventRef.current = new Event('press');
-    },
+    }),
   };
   const merged = mergeOverlayChild(child, racTriggerProps);
   // RAC DialogTrigger injects press via PressResponder context, not cloneElement.

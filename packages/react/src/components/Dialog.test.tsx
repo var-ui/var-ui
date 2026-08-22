@@ -95,6 +95,33 @@ describe('Dialog', () => {
     expect((await screen.findByRole('tooltip')).textContent).toBe('Opens the dialog');
   });
 
+  it('still fires a Trigger child onClick', async () => {
+    const onClick = vi.fn();
+    const onPointerDown = vi.fn();
+    render(
+      <IconProvider icons={{}}>
+        <LayerProvider>
+          <Dialog.Root>
+            <Dialog.Trigger>
+              <button type="button" onClick={onClick} onPointerDown={onPointerDown}>
+                Custom
+              </button>
+            </Dialog.Trigger>
+            <Dialog.Backdrop>
+              <Dialog.Popup>
+                <Dialog.Title>Only title</Dialog.Title>
+              </Dialog.Popup>
+            </Dialog.Backdrop>
+          </Dialog.Root>
+        </LayerProvider>
+      </IconProvider>,
+    );
+    await userEvent.click(screen.getByRole('button', { name: 'Custom' }));
+    expect(onClick).toHaveBeenCalled();
+    expect(onPointerDown).toHaveBeenCalled();
+    expect(screen.getByText('Only title')).toBeTruthy();
+  });
+
   it('reports trigger-press when opened from the trigger', async () => {
     const onOpenChange = vi.fn<OverlayOpenChangeHandler>();
     renderReasonDialog(onOpenChange);

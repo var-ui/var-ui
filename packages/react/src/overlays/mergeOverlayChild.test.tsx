@@ -28,17 +28,27 @@ describe('mergeOverlayChild', () => {
         type="button"
         onClick={() => calls.push('child-click')}
         onKeyDown={() => calls.push('child-keydown')}
+        onPointerDown={() => calls.push('child-pointerdown')}
       />,
       {
         onClick: () => calls.push('parent-click'),
         onKeyDown: () => calls.push('parent-keydown'),
+        onPointerDown: () => calls.push('parent-pointerdown'),
       },
     );
 
     merged.props.onClick();
     merged.props.onKeyDown();
+    merged.props.onPointerDown();
 
-    expect(calls).toEqual(['child-click', 'parent-click', 'child-keydown', 'parent-keydown']);
+    expect(calls).toEqual([
+      'child-click',
+      'parent-click',
+      'child-keydown',
+      'parent-keydown',
+      'child-pointerdown',
+      'parent-pointerdown',
+    ]);
   });
 
   it('merges class names and refs', () => {
