@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vite-plus/test';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Field } from './Field';
 
 describe('Field', () => {
@@ -129,5 +130,130 @@ describe('Field', () => {
       </Field.Root>,
     );
     expect(screen.getByLabelText('Email').getAttribute('aria-describedby')).toBeNull();
+  });
+
+  it('sets data-invalid and shows native validationMessage on submit-invalid', async () => {
+    render(
+      <form>
+        <Field.Root>
+          <Field.Label>Email</Field.Label>
+          <Field.Control>
+            <input required />
+          </Field.Control>
+          <Field.Error />
+        </Field.Root>
+        <button type="submit">Go</button>
+      </form>,
+    );
+    const input = screen.getByLabelText('Email') as HTMLInputElement;
+    act(() => {
+      input.checkValidity();
+    });
+    expect(input.closest('.var-ui-field')?.hasAttribute('data-invalid')).toBe(true);
+    expect(screen.getByRole('alert').textContent?.length).toBeGreaterThan(0);
+  });
+
+  it('lets explicit Field.Error children win over native message', async () => {
+    render(
+      <Field.Root invalid>
+        <Field.Label>Email</Field.Label>
+        <Field.Control>
+          <input required />
+        </Field.Control>
+        <Field.Error>Taken</Field.Error>
+      </Field.Root>,
+    );
+    expect(screen.getByRole('alert').textContent).toBe('Taken');
+  });
+
+  it('sets data-touched after blur', async () => {
+    render(
+      <Field.Root>
+        <Field.Label>Name</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+      </Field.Root>,
+    );
+    const input = screen.getByLabelText('Name');
+    await userEvent.click(input);
+    await userEvent.tab();
+    expect(input.closest('.var-ui-field')?.hasAttribute('data-touched')).toBe(true);
+  });
+
+  it('sets data-dirty after the value changes from defaultValue', async () => {
+    render(
+      <Field.Root>
+        <Field.Label>Name</Field.Label>
+        <Field.Control>
+          <input defaultValue="Ada" />
+        </Field.Control>
+      </Field.Root>,
+    );
+    const input = screen.getByLabelText('Name');
+    expect(input.closest('.var-ui-field')?.hasAttribute('data-dirty')).toBe(false);
+    await userEvent.clear(input);
+    await userEvent.type(input, 'Grace');
+    expect(input.closest('.var-ui-field')?.hasAttribute('data-dirty')).toBe(true);
+  });
+
+  it('sets data-filled when the control has a non-empty value', () => {
+    render(
+      <Field.Root>
+        <Field.Label>Name</Field.Label>
+        <Field.Control>
+          <input defaultValue="Ada" />
+        </Field.Control>
+      </Field.Root>,
+    );
+    expect(
+      screen.getByLabelText('Name').closest('.var-ui-field')?.hasAttribute('data-filled'),
+    ).toBe(true);
+  });
+
+  it('sets data-disabled when the control is disabled', () => {
+    render(
+      <Field.Root>
+        <Field.Label>Name</Field.Label>
+        <Field.Control>
+          <input disabled />
+        </Field.Control>
+      </Field.Root>,
+    );
+    expect(
+      screen.getByLabelText('Name').closest('.var-ui-field')?.hasAttribute('data-disabled'),
+    ).toBe(true);
+  });
+
+  it('sets data-valid after blur when the field is not invalid', async () => {
+    render(
+      <Field.Root>
+        <Field.Label>Name</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+      </Field.Root>,
+    );
+    const input = screen.getByLabelText('Name');
+    await userEvent.click(input);
+    await userEvent.tab();
+    const root = input.closest('.var-ui-field');
+    expect(root?.hasAttribute('data-valid')).toBe(true);
+    expect(root?.hasAttribute('data-invalid')).toBe(false);
+  });
+
+  it('sets data-invalid when Field.Error has children', () => {
+    render(
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+        <Field.Error>Taken</Field.Error>
+      </Field.Root>,
+    );
+    expect(
+      screen.getByLabelText('Email').closest('.var-ui-field')?.hasAttribute('data-invalid'),
+    ).toBe(true);
   });
 });
