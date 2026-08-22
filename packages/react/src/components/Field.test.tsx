@@ -1,6 +1,11 @@
+import type { ReactNode } from 'react';
 import { describe, expect, it } from 'vite-plus/test';
 import { render, screen } from '@testing-library/react';
 import { Field } from './Field';
+
+function WrappedDescription({ children }: { children: ReactNode }) {
+  return <Field.Description>{children}</Field.Description>;
+}
 
 describe('Field', () => {
   it('wires label, description, and error around a custom control', () => {
@@ -12,6 +17,17 @@ describe('Field', () => {
     expect(screen.getByLabelText('Amount')).toBeTruthy();
     expect(screen.getByText('In USD').className).toContain('var-ui-field__description');
     expect(screen.getByRole('alert').textContent).toBe('Required');
+  });
+
+  it('keeps preset htmlFor as the label and control id', () => {
+    render(
+      <Field label="Email" htmlFor="email">
+        <input />
+      </Field>,
+    );
+    const input = screen.getByLabelText('Email');
+    expect(input.id).toBe('email');
+    expect(document.querySelector('label')?.htmlFor).toBe('email');
   });
 
   it('renders only the control when no chrome props are set', () => {
@@ -62,9 +78,22 @@ describe('Field', () => {
       </Field.Root>,
     );
     const input = screen.getByLabelText('Email');
-    expect(input).toBeTruthy();
-    // Generated controlId overwrites the explicit id so Label/Control match without an effect.
-    expect(input.id).not.toBe('nested-email');
+    expect(input.id).toBe('nested-email');
+  });
+
+  it('sets aria-describedby when Description is rendered by a wrapper', () => {
+    render(
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+        <WrappedDescription>Work email</WrappedDescription>
+      </Field.Root>,
+    );
+    const input = screen.getByLabelText('Email');
+    const description = screen.getByText('Work email');
+    expect(input.getAttribute('aria-describedby')).toBe(description.id);
   });
 
   it('sets aria-describedby when Description is nested', () => {
