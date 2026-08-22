@@ -28,7 +28,7 @@ export const popover = typestyles.styles.component(
       },
     });
     return {
-      slots: ['root', 'title', 'content'],
+      slots: ['root', 'title', 'content', 'arrow'],
       root: {
         ...overlayPresenceStyles({ scale: true }),
         borderWidth: t.borderWidth.default.var,
@@ -51,6 +51,12 @@ export const popover = typestyles.styles.component(
       content: {
         padding: `${t.space[2].var} ${t.space[3].var} ${t.space[3].var}`,
         outline: 'none',
+      },
+      arrow: {
+        width: 8,
+        height: 8,
+        background: 'inherit',
+        transform: 'rotate(45deg)',
       },
     };
   },

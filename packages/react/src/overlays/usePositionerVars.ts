@@ -49,7 +49,7 @@ function getStyle(
 ): PositionerStyle {
   const transformOrigin = getTransformOrigin(placement);
 
-  if (!popup || typeof window === 'undefined') {
+  if ((!popup && !trigger) || typeof window === 'undefined') {
     const style: PositionerStyle = {
       '--var-ui-available-height': '0px',
       '--var-ui-available-width': '0px',
@@ -62,19 +62,21 @@ function getStyle(
   }
 
   const side = getSide(placement);
-  const bounds = popup.getBoundingClientRect();
-  const availableHeight =
-    side === 'bottom'
-      ? window.innerHeight - bounds.top
+  const anchor = trigger?.getBoundingClientRect();
+  const availableHeight = anchor
+    ? side === 'bottom'
+      ? window.innerHeight - anchor.bottom
       : side === 'top'
-        ? bounds.bottom
-        : window.innerHeight;
-  const availableWidth =
-    side === 'right'
-      ? window.innerWidth - bounds.left
+        ? anchor.top
+        : window.innerHeight
+    : window.innerHeight;
+  const availableWidth = anchor
+    ? side === 'right'
+      ? window.innerWidth - anchor.right
       : side === 'left'
-        ? bounds.right
-        : window.innerWidth;
+        ? anchor.left
+        : window.innerWidth
+    : window.innerWidth;
   const style: PositionerStyle = {
     '--var-ui-available-height': `${Math.max(0, availableHeight)}px`,
     '--var-ui-available-width': `${Math.max(0, availableWidth)}px`,
@@ -104,8 +106,11 @@ export function usePositionerVars({
   popupRef,
   triggerRef,
 }: UsePositionerVarsOptions): UsePositionerVarsResult {
+  const popupEl = popupRef.current;
+  const triggerEl = triggerRef?.current ?? null;
+  const includeAnchorWidth = triggerRef !== undefined;
   const [style, setStyle] = useState<PositionerStyle>(() =>
-    getStyle(placement, null, null, triggerRef !== undefined),
+    getStyle(placement, popupEl, triggerEl, includeAnchorWidth),
   );
 
   useLayoutEffect(() => {
@@ -114,7 +119,7 @@ export function usePositionerVars({
         placement,
         popupRef.current,
         triggerRef?.current ?? null,
-        triggerRef !== undefined,
+        includeAnchorWidth,
       );
       setStyle((currentStyle) => (stylesEqual(currentStyle, nextStyle) ? currentStyle : nextStyle));
     };
@@ -123,15 +128,18 @@ export function usePositionerVars({
     window.addEventListener('resize', update);
 
     const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(update);
-    if (popupRef.current) {
-      observer?.observe(popupRef.current);
+    if (triggerEl) {
+      observer?.observe(triggerEl);
+    }
+    if (popupEl) {
+      observer?.observe(popupEl);
     }
 
     return () => {
       window.removeEventListener('resize', update);
       observer?.disconnect();
     };
-  });
+  }, [includeAnchorWidth, placement, popupEl, popupRef, triggerEl, triggerRef]);
 
   return { style };
 }

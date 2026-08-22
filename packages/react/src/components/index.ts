@@ -72,7 +72,17 @@ export {
   type CommandPaletteProps,
 } from './CommandPalette';
 export { Tooltip, type TooltipProps } from './Tooltip';
-export { Popover, type PopoverProps } from './Popover';
+export {
+  Popover,
+  type PopoverArrowProps,
+  type PopoverContentProps,
+  type PopoverPopupProps,
+  type PopoverProps,
+  type PopoverRootProps,
+  type PopoverTitleProps,
+  type PopoverTriggerProps,
+} from './Popover';
+export { SimplePopover, type SimplePopoverProps } from './SimplePopover';
 export { HoverCard, type HoverCardProps } from './HoverCard';
 export { CodeBlock, type CodeBlockProps } from './CodeBlock';
 export { Alert, type AlertAppearance, type AlertProps, type AlertVariant } from './Alert';

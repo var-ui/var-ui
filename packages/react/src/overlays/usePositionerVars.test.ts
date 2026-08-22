@@ -58,25 +58,63 @@ describe('usePositionerVars', () => {
     expect(result.current.style['--var-ui-anchor-width']).toBe('0px');
   });
 
+  it('measures available height from the trigger and viewport, not the popup rect', () => {
+    const trigger = document.createElement('button');
+    trigger.getBoundingClientRect = () => rect(400, 80);
+    const popup = document.createElement('div');
+    popup.getBoundingClientRect = () => rect(80, 240);
+
+    const { result } = renderHook(() =>
+      usePositionerVars({
+        placement: 'top',
+        popupRef: { current: popup },
+        triggerRef: { current: trigger },
+      }),
+    );
+
+    expect(result.current.style['--var-ui-available-height']).toBe('400px');
+    expect(result.current.style['--var-ui-transform-origin']).toBe('bottom center');
+  });
+
+  it('does not remasure on rerender when the observed nodes are unchanged', () => {
+    const trigger = document.createElement('button');
+    const getRect = vi.fn<() => DOMRect>(() => rect(120, 80));
+    trigger.getBoundingClientRect = getRect;
+    const popupRef = { current: document.createElement('div') };
+    const triggerRef = { current: trigger };
+
+    const { rerender } = renderHook(() =>
+      usePositionerVars({
+        placement: 'bottom',
+        popupRef,
+        triggerRef,
+      }),
+    );
+    const callsAfterMount = getRect.mock.calls.length;
+    rerender();
+    rerender();
+    expect(getRect.mock.calls.length).toBe(callsAfterMount);
+  });
+
   it('measures and observes popup elements added or replaced through a stable ref', () => {
     class TestResizeObserver {
       static instances: TestResizeObserver[] = [];
-      observed: Element | null = null;
+      observed = new Set<Element>();
 
       constructor(private readonly callback: ResizeObserverCallback) {
         TestResizeObserver.instances.push(this);
       }
 
       observe(target: Element) {
-        this.observed = target;
+        this.observed.add(target);
       }
 
       disconnect() {
-        this.observed = null;
+        this.observed.clear();
       }
 
       notify(target: Element) {
-        if (this.observed === target) {
+        if (this.observed.has(target)) {
           this.callback([], this as unknown as ResizeObserver);
         }
       }
@@ -84,33 +122,39 @@ describe('usePositionerVars', () => {
     vi.stubGlobal('ResizeObserver', TestResizeObserver);
 
     const popupRef: { current: HTMLElement | null } = { current: null };
+    const triggerRef: { current: HTMLElement | null } = { current: null };
     const { result, rerender } = renderHook(() =>
       usePositionerVars({
         placement: 'bottom',
         popupRef,
+        triggerRef,
       }),
     );
     expect(result.current.style['--var-ui-available-height']).toBe('0px');
 
     const firstPopup = document.createElement('div');
-    firstPopup.getBoundingClientRect = () => rect(120);
+    const firstTrigger = document.createElement('button');
+    firstTrigger.getBoundingClientRect = () => rect(120);
     popupRef.current = firstPopup;
+    triggerRef.current = firstTrigger;
     rerender();
-    expect(result.current.style['--var-ui-available-height']).toBe(`${window.innerHeight - 120}px`);
+    expect(result.current.style['--var-ui-available-height']).toBe(`${window.innerHeight - 320}px`);
 
     let replacementTop = 240;
     const replacementPopup = document.createElement('div');
-    replacementPopup.getBoundingClientRect = () => rect(replacementTop);
+    const replacementTrigger = document.createElement('button');
+    replacementTrigger.getBoundingClientRect = () => rect(replacementTop);
     popupRef.current = replacementPopup;
+    triggerRef.current = replacementTrigger;
     rerender();
-    expect(result.current.style['--var-ui-available-height']).toBe(`${window.innerHeight - 240}px`);
+    expect(result.current.style['--var-ui-available-height']).toBe(`${window.innerHeight - 440}px`);
 
     replacementTop = 320;
     act(() => {
       TestResizeObserver.instances[TestResizeObserver.instances.length - 1]?.notify(
-        replacementPopup,
+        replacementTrigger,
       );
     });
-    expect(result.current.style['--var-ui-available-height']).toBe(`${window.innerHeight - 320}px`);
+    expect(result.current.style['--var-ui-available-height']).toBe(`${window.innerHeight - 520}px`);
   });
 });

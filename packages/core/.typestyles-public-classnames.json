@@ -341,6 +341,7 @@
     "pin-input__group",
     "pin-input__label",
     "popover",
+    "popover__arrow",
     "popover__content",
     "popover__title",
     "progress-bar",
@@ -3215,6 +3216,14 @@
       "kind": "component",
       "namespace": "popover",
       "suffix": "base",
+      "file": "src/components/popover.ts",
+      "line": 13
+    },
+    {
+      "className": "popover__arrow",
+      "kind": "component",
+      "namespace": "popover",
+      "suffix": "arrow",
       "file": "src/components/popover.ts",
       "line": 13
     },

@@ -8,4 +8,11 @@ describe('popover', () => {
     expect(classes.root).toBeTruthy();
     expect(classes.root).toContain('var-ui-popover');
   });
+
+  it('exposes the public arrow class name', () => {
+    const classes = popover();
+
+    expect(classes.arrow).toBeTruthy();
+    expect(classes.arrow).toContain('var-ui-popover__arrow');
+  });
 });
