@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vite-plus/test';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ReactElement } from 'react';
 import { LayerProvider } from '../layers/LayerProvider';
@@ -26,6 +26,32 @@ describe('AlertDialog', () => {
     expect(screen.getByText('This cannot be undone.')).toBeTruthy();
   });
 
+  it('supports a custom trigger and confirm action through compound parts', async () => {
+    const onConfirm = vi.fn();
+    wrap(
+      <AlertDialog.Root>
+        <AlertDialog.Trigger>
+          <button type="button">Review deletion</button>
+        </AlertDialog.Trigger>
+        <AlertDialog.Backdrop>
+          <AlertDialog.Popup>
+            <AlertDialog.Title>Delete custom item?</AlertDialog.Title>
+            <AlertDialog.Actions>
+              <button type="button" onClick={onConfirm}>
+                Delete forever
+              </button>
+            </AlertDialog.Actions>
+          </AlertDialog.Popup>
+        </AlertDialog.Backdrop>
+      </AlertDialog.Root>,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: 'Review deletion' }));
+    expect(screen.getByRole('alertdialog')).toBeTruthy();
+    await userEvent.click(screen.getByRole('button', { name: 'Delete forever' }));
+    expect(onConfirm).toHaveBeenCalledTimes(1);
+  });
+
   it('calls onConfirm on confirm and not on cancel, focusing Cancel when destructive', async () => {
     const onConfirm = vi.fn();
     wrap(
@@ -44,6 +70,9 @@ describe('AlertDialog', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
     expect(onConfirm).not.toHaveBeenCalled();
 
+    await waitFor(() => {
+      expect(screen.queryByRole('alertdialog')).toBeNull();
+    });
     await userEvent.click(screen.getByRole('button', { name: 'Open delete' }));
     await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
     expect(onConfirm).toHaveBeenCalledTimes(1);
@@ -65,7 +94,9 @@ describe('AlertDialog', () => {
     expect(screen.getByRole('alertdialog')).toBeTruthy();
     await userEvent.keyboard('{Escape}');
     expect(onConfirm).not.toHaveBeenCalled();
-    expect(screen.queryByRole('alertdialog')).toBeNull();
+    await waitFor(() => {
+      expect(screen.queryByRole('alertdialog')).toBeNull();
+    });
   });
 
   it('uses primary intent for confirm when not destructive', async () => {
@@ -98,6 +129,9 @@ describe('AlertDialog', () => {
     );
     expect(screen.getByRole('alertdialog')).toBeTruthy();
     await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
-    expect(onOpenChange).toHaveBeenCalledWith(false);
+    expect(onOpenChange).toHaveBeenCalledWith(
+      false,
+      expect.objectContaining({ reason: expect.any(String) }),
+    );
   });
 });

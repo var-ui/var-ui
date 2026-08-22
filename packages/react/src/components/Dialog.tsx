@@ -69,6 +69,7 @@ export type DialogBackdropProps = {
 export type DialogPopupProps = {
   children: ReactNode;
   className?: string;
+  role?: 'dialog' | 'alertdialog';
 };
 
 export type DialogHeaderProps = {
@@ -258,7 +259,7 @@ function DialogBackdrop({ children, className, isDismissable }: DialogBackdropPr
   );
 }
 
-function DialogPopup({ children, className }: DialogPopupProps): JSX.Element {
+function DialogPopup({ children, className, role = 'dialog' }: DialogPopupProps): JSX.Element {
   const ctx = useDialogContext();
   const d = dialog();
   return (
@@ -267,7 +268,7 @@ function DialogPopup({ children, className }: DialogPopupProps): JSX.Element {
       {...ctx.presence.attrs}
       ref={ctx.popupRef as Ref<HTMLDivElement>}
     >
-      <AriaDialog>
+      <AriaDialog role={role}>
         {({ close }) => (
           <OverlayCloseContext.Provider value={close}>
             <div {...recipeProps(d.content)}>{children}</div>
