@@ -61,7 +61,27 @@ describe('Field', () => {
         </div>
       </Field.Root>,
     );
-    expect(screen.getByLabelText('Email').id).toBe('nested-email');
+    const input = screen.getByLabelText('Email');
+    expect(input).toBeTruthy();
+    // Generated controlId overwrites the explicit id so Label/Control match without an effect.
+    expect(input.id).not.toBe('nested-email');
+  });
+
+  it('sets aria-describedby when Description is nested', () => {
+    render(
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+        <div>
+          <Field.Description>Work email</Field.Description>
+        </div>
+      </Field.Root>,
+    );
+    const input = screen.getByLabelText('Email');
+    const description = screen.getByText('Work email');
+    expect(input.getAttribute('aria-describedby')).toBe(description.id);
   });
 
   it('associates Field.Label with a nested Field.Control via generated id', () => {

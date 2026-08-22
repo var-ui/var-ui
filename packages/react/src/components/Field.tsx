@@ -1,13 +1,12 @@
 import {
+  Children,
   cloneElement,
   createContext,
   isValidElement,
   useCallback,
   useContext,
   useId,
-  useLayoutEffect,
   useMemo,
-  useState,
   type JSX,
   type ReactElement,
   type ReactNode,
@@ -56,9 +55,6 @@ type FieldContextValue = {
   setNativeInvalid: (invalid: boolean, message: string) => void;
   describedBy: string | undefined;
   errorMessageId: string | undefined;
-  registerControlId: (id: string | undefined) => void;
-  setHasDescription: (mounted: boolean) => void;
-  setHasError: (mounted: boolean) => void;
 };
 
 type ControlChildProps = {
@@ -77,6 +73,28 @@ function useFieldContext(): FieldContextValue {
   return ctx;
 }
 
+function errorPartMounts(props: FieldErrorProps): boolean {
+  const { children, forceMount } = props;
+  return Boolean(
+    forceMount ||
+    !(children === undefined || children === null || children === false || children === ''),
+  );
+}
+
+/** Walk the tree so describedby is correct on the first paint, including SSR. */
+function treeHasPart(node: ReactNode, type: typeof FieldDescription | typeof FieldError): boolean {
+  const list = Children.toArray(node);
+  for (const child of list) {
+    if (!isValidElement(child)) continue;
+    if (child.type === type) {
+      return type === FieldError ? errorPartMounts(child.props as FieldErrorProps) : true;
+    }
+    const nested = (child.props as { children?: ReactNode }).children;
+    if (nested != null && treeHasPart(nested, type)) return true;
+  }
+  return false;
+}
+
 function FieldRoot({
   name,
   children,
@@ -84,14 +102,12 @@ function FieldRoot({
   invalid,
   onInvalidChange,
 }: FieldRootProps): JSX.Element {
-  const generatedId = useId();
-  const [registeredControlId, setRegisteredControlId] = useState<string | undefined>();
-  const [hasDescription, setHasDescription] = useState(false);
-  const [hasError, setHasError] = useState(false);
-  const controlId = registeredControlId ?? generatedId;
-  const descriptionId = `${generatedId}-description`;
-  const errorId = `${generatedId}-error`;
+  const controlId = useId();
+  const descriptionId = `${controlId}-description`;
+  const errorId = `${controlId}-error`;
   const isInvalid = Boolean(invalid);
+  const hasDescription = treeHasPart(children, FieldDescription);
+  const hasError = treeHasPart(children, FieldError);
   const errorMessageId = isInvalid && hasError ? errorId : undefined;
   const describedBy =
     [hasDescription ? descriptionId : undefined, errorMessageId].filter(Boolean).join(' ') ||
@@ -104,10 +120,6 @@ function FieldRoot({
     [onInvalidChange],
   );
 
-  const registerControlId = useCallback((id: string | undefined) => {
-    setRegisteredControlId(id);
-  }, []);
-
   const value = useMemo<FieldContextValue>(
     () => ({
       name,
@@ -118,9 +130,6 @@ function FieldRoot({
       setNativeInvalid,
       describedBy,
       errorMessageId,
-      registerControlId,
-      setHasDescription,
-      setHasError,
     }),
     [
       name,
@@ -131,7 +140,6 @@ function FieldRoot({
       setNativeInvalid,
       describedBy,
       errorMessageId,
-      registerControlId,
     ],
   );
 
@@ -154,19 +162,12 @@ function FieldLabel({ children, className }: FieldLabelProps): JSX.Element {
 }
 
 function FieldControl({ children, className }: FieldControlProps): ReactElement {
-  const { name, controlId, invalid, describedBy, errorMessageId, registerControlId } =
-    useFieldContext();
+  const { name, controlId, invalid, describedBy, errorMessageId } = useFieldContext();
   const childProps = children.props as ControlChildProps;
-  const childId = childProps.id;
-
-  useLayoutEffect(() => {
-    if (!childId) return;
-    registerControlId(childId);
-    return () => registerControlId(undefined);
-  }, [childId, registerControlId]);
-
   return cloneElement(children, {
-    id: childId ?? controlId,
+    // Always the Root useId() so Label and Control share one id on first paint
+    // (SSR included). An explicit child id is overwritten.
+    id: controlId,
     name: childProps.name ?? name,
     className: cx(childProps.className, className) || undefined,
     'aria-describedby': describedBy,
@@ -176,11 +177,7 @@ function FieldControl({ children, className }: FieldControlProps): ReactElement 
 }
 
 function FieldDescription({ children, className }: FieldDescriptionProps): JSX.Element {
-  const { descriptionId, setHasDescription } = useFieldContext();
-  useLayoutEffect(() => {
-    setHasDescription(true);
-    return () => setHasDescription(false);
-  }, [setHasDescription]);
+  const { descriptionId } = useFieldContext();
   const f = field();
   return (
     <p {...recipeProps(f.description, className)} id={descriptionId}>
@@ -190,19 +187,8 @@ function FieldDescription({ children, className }: FieldDescriptionProps): JSX.E
 }
 
 function FieldError({ children, className, forceMount }: FieldErrorProps): JSX.Element | null {
-  const { errorId, setHasError } = useFieldContext();
-  const shouldMount =
-    forceMount ||
-    !(children === undefined || children === null || children === false || children === '');
-  useLayoutEffect(() => {
-    if (!shouldMount) {
-      setHasError(false);
-      return;
-    }
-    setHasError(true);
-    return () => setHasError(false);
-  }, [shouldMount, setHasError]);
-  if (!shouldMount) {
+  const { errorId } = useFieldContext();
+  if (!errorPartMounts({ children, forceMount })) {
     return null;
   }
   const f = field();
