@@ -4,6 +4,7 @@ import {
   forwardRef,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -145,6 +146,7 @@ function HoverCardRoot({
   const [, setPopupEl] = useState<HTMLDivElement | null>(null);
   const [, setTriggerEl] = useState<HTMLElement | null>(null);
   const lastEventRef = useRef<Event | null>(null);
+  const mountedRef = useRef(true);
   const openTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
@@ -155,6 +157,7 @@ function HoverCardRoot({
 
   const handleOpenChange = useCallback(
     (next: boolean) => {
+      if (!mountedRef.current) return;
       const details = createOverlayChangeDetails({
         reason: inferOverlayCloseReason(lastEventRef.current),
         event: lastEventRef.current,
@@ -181,21 +184,56 @@ function HoverCardRoot({
     }
   }, []);
 
-  const scheduleOpen = useCallback(() => {
-    cancelCloseTimer();
-    cancelOpenTimer();
-    openTimer.current = setTimeout(() => {
-      handleOpenChange(true);
-    }, openDelay);
-  }, [cancelCloseTimer, cancelOpenTimer, handleOpenChange, openDelay]);
+  const stashScheduleEvent = useCallback((...args: unknown[]) => {
+    const event = args[0] as { nativeEvent?: Event } | Event | undefined;
+    if (event instanceof Event) {
+      lastEventRef.current = event;
+      return;
+    }
+    if (event?.nativeEvent instanceof Event) {
+      lastEventRef.current = event.nativeEvent;
+      return;
+    }
+  }, []);
 
-  const scheduleClose = useCallback(() => {
-    cancelOpenTimer();
-    cancelCloseTimer();
-    closeTimer.current = setTimeout(() => {
-      handleOpenChange(false);
-    }, closeDelay);
-  }, [cancelCloseTimer, cancelOpenTimer, closeDelay, handleOpenChange]);
+  const scheduleOpen = useCallback(
+    (...args: unknown[]) => {
+      stashScheduleEvent(...args);
+      if (!lastEventRef.current) {
+        lastEventRef.current = new Event('hover');
+      }
+      cancelCloseTimer();
+      cancelOpenTimer();
+      openTimer.current = setTimeout(() => {
+        handleOpenChange(true);
+      }, openDelay);
+    },
+    [cancelCloseTimer, cancelOpenTimer, handleOpenChange, openDelay, stashScheduleEvent],
+  );
+
+  const scheduleClose = useCallback(
+    (...args: unknown[]) => {
+      stashScheduleEvent(...args);
+      if (!lastEventRef.current) {
+        lastEventRef.current = new Event('hover');
+      }
+      cancelOpenTimer();
+      cancelCloseTimer();
+      closeTimer.current = setTimeout(() => {
+        handleOpenChange(false);
+      }, closeDelay);
+    },
+    [cancelCloseTimer, cancelOpenTimer, closeDelay, handleOpenChange, stashScheduleEvent],
+  );
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      cancelOpenTimer();
+      cancelCloseTimer();
+    };
+  }, [cancelCloseTimer, cancelOpenTimer]);
 
   const context = useMemo<HoverCardContextValue>(
     () => ({

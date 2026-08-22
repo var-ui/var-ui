@@ -51,6 +51,24 @@ describe('mergeOverlayChild', () => {
     ]);
   });
 
+  it('composes onPress child first', () => {
+    const calls: string[] = [];
+    function PressHost({ onPress }: { onPress?: () => void }) {
+      return (
+        <button type="button" onClick={onPress}>
+          Go
+        </button>
+      );
+    }
+    const merged = mergeOverlayChild(<PressHost onPress={() => calls.push('child-press')} />, {
+      onPress: () => calls.push('parent-press'),
+    });
+
+    (merged.props as { onPress: () => void }).onPress();
+
+    expect(calls).toEqual(['child-press', 'parent-press']);
+  });
+
   it('merges class names and refs', () => {
     const childRef = createRef<HTMLButtonElement>();
     const parentRef = createRef<HTMLButtonElement>();
@@ -64,6 +82,23 @@ describe('mergeOverlayChild', () => {
     expect(screen.getByRole('button').className.split(' ')).toEqual(['child', 'parent']);
     expect(childRef.current).toBe(screen.getByRole('button'));
     expect(parentRef.current).toBe(screen.getByRole('button'));
+  });
+
+  it('composes callback refs child first', () => {
+    const childRef = vi.fn();
+    const parentRef = vi.fn();
+    const merged = mergeOverlayChild(<button ref={childRef} type="button" />, {
+      ref: parentRef,
+    });
+
+    render(merged);
+
+    const button = screen.getByRole('button');
+    expect(childRef).toHaveBeenCalledWith(button);
+    expect(parentRef).toHaveBeenCalledWith(button);
+    expect(childRef.mock.invocationCallOrder[0]).toBeLessThan(
+      parentRef.mock.invocationCallOrder[0],
+    );
   });
 
   it('throws when the child is not a valid element', () => {
@@ -83,9 +118,9 @@ describe('useOverlayClose', () => {
     expect(result.current).toBe(close);
   });
 
-  it('throws outside Dialog.Popup', () => {
+  it('throws outside a Popup', () => {
     expect(() => renderHook(() => useOverlayClose())).toThrow(
-      'Dialog.Close must be rendered inside Dialog.Popup',
+      'Close must be rendered inside a Popup',
     );
   });
 });

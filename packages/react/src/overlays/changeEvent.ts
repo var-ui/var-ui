@@ -42,5 +42,24 @@ export function inferOverlayCloseReason(event: Event | null): OverlayOpenChangeR
   if (event.type === 'click' || event.type === 'press') {
     return 'trigger-press';
   }
+  if (
+    event.type === 'mouseenter' ||
+    event.type === 'mouseleave' ||
+    event.type === 'mouseover' ||
+    event.type === 'mouseout' ||
+    event.type === 'pointerenter' ||
+    event.type === 'pointerleave' ||
+    event.type === 'hover'
+  ) {
+    return 'hover';
+  }
+  if (
+    event.type === 'focus' ||
+    event.type === 'blur' ||
+    event.type === 'focusin' ||
+    event.type === 'focusout'
+  ) {
+    return 'focus';
+  }
   return 'unknown';
 }

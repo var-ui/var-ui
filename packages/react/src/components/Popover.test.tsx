@@ -63,6 +63,7 @@ describe('Popover', () => {
     renderCompound(onOpenChange);
     await userEvent.click(screen.getByRole('button', { name: 'Filters' }));
     expect(await screen.findByRole('dialog')).toBeTruthy();
+    expect(onOpenChange).toHaveBeenCalledTimes(1);
     expect(onOpenChange.mock.calls[0]?.[0]).toBe(true);
     expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('trigger-press');
   });
@@ -78,6 +79,7 @@ describe('Popover', () => {
     expect(underlay).toBeTruthy();
     await userEvent.click(underlay!);
 
+    expect(onOpenChange).toHaveBeenCalledTimes(1);
     expect(onOpenChange.mock.calls[0]?.[0]).toBe(false);
     expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('outside-press');
   });
@@ -91,6 +93,7 @@ describe('Popover', () => {
 
     await userEvent.keyboard('{Escape}');
 
+    expect(onOpenChange).toHaveBeenCalledTimes(1);
     expect(onOpenChange.mock.calls[0]?.[0]).toBe(false);
     expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('escape-key');
   });

@@ -130,4 +130,62 @@ describe('HoverCard', () => {
     await userEvent.tab();
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
   });
+
+  it('reports hover when opened from pointer hover', async () => {
+    const onOpenChange = vi.fn<OverlayOpenChangeHandler>();
+    wrap(
+      <HoverCard.Root openDelay={0} closeDelay={10} onOpenChange={onOpenChange}>
+        <HoverCard.Trigger>
+          <Link href="#profile">@user</Link>
+        </HoverCard.Trigger>
+        <HoverCard.Popup>
+          <HoverCard.Content>Preview</HoverCard.Content>
+        </HoverCard.Popup>
+      </HoverCard.Root>,
+    );
+    await userEvent.hover(screen.getByRole('link', { name: '@user' }));
+    await waitFor(() => expect(onOpenChange).toHaveBeenCalled());
+    expect(onOpenChange).toHaveBeenCalledTimes(1);
+    expect(onOpenChange.mock.calls[0]?.[0]).toBe(true);
+    expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('hover');
+  });
+
+  it('reports focus when opened from keyboard focus', async () => {
+    const onOpenChange = vi.fn<OverlayOpenChangeHandler>();
+    wrap(
+      <HoverCard.Root openDelay={0} closeDelay={10} onOpenChange={onOpenChange}>
+        <HoverCard.Trigger>
+          <a href="#profile">@user</a>
+        </HoverCard.Trigger>
+        <HoverCard.Popup>
+          <HoverCard.Content>Preview</HoverCard.Content>
+        </HoverCard.Popup>
+      </HoverCard.Root>,
+    );
+    fireEvent.focus(screen.getByRole('link', { name: '@user' }));
+    await waitFor(() => expect(onOpenChange).toHaveBeenCalled());
+    expect(onOpenChange).toHaveBeenCalledTimes(1);
+    expect(onOpenChange.mock.calls[0]?.[0]).toBe(true);
+    expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('focus');
+  });
+
+  it('does not invoke onOpenChange after unmount while a hover timer is pending', async () => {
+    const onOpenChange = vi.fn<OverlayOpenChangeHandler>();
+    const { unmount } = wrap(
+      <HoverCard.Root openDelay={50} closeDelay={50} onOpenChange={onOpenChange}>
+        <HoverCard.Trigger>
+          <Link href="#profile">@user</Link>
+        </HoverCard.Trigger>
+        <HoverCard.Popup>
+          <HoverCard.Content>Preview</HoverCard.Content>
+        </HoverCard.Popup>
+      </HoverCard.Root>,
+    );
+    fireEvent.mouseEnter(screen.getByRole('link', { name: '@user' }));
+    unmount();
+    await new Promise((resolve) => {
+      setTimeout(resolve, 80);
+    });
+    expect(onOpenChange).not.toHaveBeenCalled();
+  });
 });

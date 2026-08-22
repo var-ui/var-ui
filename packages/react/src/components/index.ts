@@ -75,7 +75,16 @@ export {
   type DialogTriggerProps,
 } from './Dialog';
 export { SimpleDialog, type SimpleDialogProps } from './SimpleDialog';
-export { AlertDialog, type AlertDialogProps } from './AlertDialog';
+export {
+  AlertDialog,
+  type AlertDialogActionsProps,
+  type AlertDialogBackdropProps,
+  type AlertDialogPopupProps,
+  type AlertDialogProps,
+  type AlertDialogRootProps,
+  type AlertDialogTitleProps,
+  type AlertDialogTriggerProps,
+} from './AlertDialog';
 export {
   CommandPalette,
   type CommandPaletteItem,
@@ -264,7 +273,17 @@ export {
   type ComboboxProps,
   type ComboboxRootProps,
 } from './Combobox';
-export { Drawer, type DrawerProps } from './Drawer';
+export {
+  Drawer,
+  type DrawerBackdropProps,
+  type DrawerBodyProps,
+  type DrawerCloseProps,
+  type DrawerHeaderProps,
+  type DrawerPanelProps,
+  type DrawerProps,
+  type DrawerRootProps,
+  type DrawerTitleProps,
+} from './Drawer';
 export { Tokenizer, type TokenizerOption, type TokenizerProps } from './Tokenizer';
 export {
   cx,

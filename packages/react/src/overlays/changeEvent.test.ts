@@ -29,6 +29,14 @@ describe('inferOverlayCloseReason', () => {
     expect(inferOverlayCloseReason(event)).toBe('trigger-press');
   });
 
+  it('maps hover and focus events', () => {
+    expect(inferOverlayCloseReason(new Event('mouseenter'))).toBe('hover');
+    expect(inferOverlayCloseReason(new Event('mouseleave'))).toBe('hover');
+    expect(inferOverlayCloseReason(new Event('hover'))).toBe('hover');
+    expect(inferOverlayCloseReason(new Event('focus'))).toBe('focus');
+    expect(inferOverlayCloseReason(new Event('blur'))).toBe('focus');
+  });
+
   it('returns unknown for unrelated events', () => {
     expect(inferOverlayCloseReason(null)).toBe('unknown');
   });

@@ -8,6 +8,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type CSSProperties,
   type JSX,
   type MutableRefObject,
   type ReactElement,
@@ -31,6 +32,7 @@ import {
   inferOverlayCloseReason,
   mergeOverlayChild,
   useOverlayPresence,
+  usePositionerVars,
   type OverlayOpenChangeHandler,
   type UseOverlayPresenceResult,
 } from '../overlays';
@@ -249,6 +251,11 @@ function MenuPopup({ children, className, portalContainer }: MenuPopupProps): JS
   const ctx = useMenuContext();
   const m = menu();
   const { style: layerStyle } = useLayer();
+  const positioner = usePositionerVars({
+    placement: 'bottom',
+    popupRef: ctx.popupRef,
+    triggerRef: ctx.triggerRef,
+  });
 
   return (
     <AriaPopover
@@ -258,7 +265,7 @@ function MenuPopup({ children, className, portalContainer }: MenuPopupProps): JS
         ctx.popupRef.current = node;
         ctx.setPopupEl(node);
       }}
-      style={layerStyle}
+      style={{ ...layerStyle, ...positioner.style } as CSSProperties}
       UNSTABLE_portalContainer={portalContainer ?? ctx.portalContainer}
     >
       <AriaMenu {...recipeProps(m.menu)} selectionMode="none">

@@ -312,7 +312,12 @@ function DialogClose({
   const d = dialog();
 
   if (children) {
-    return mergeOverlayChild(Children.only(children), { onPress: close, className });
+    const child = Children.only(children);
+    const merged = mergeOverlayChild(child, { onPress: close, onClick: close, className });
+    if (typeof child.type === 'string') {
+      return <Pressable>{merged as ReactElement<{ className?: string }, string>}</Pressable>;
+    }
+    return merged;
   }
 
   return (

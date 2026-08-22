@@ -6,7 +6,7 @@ export function useOverlayClose(): () => void {
   const close = useContext(OverlayCloseContext);
 
   if (close === null) {
-    throw new Error('Dialog.Close must be rendered inside Dialog.Popup');
+    throw new Error('Close must be rendered inside a Popup');
   }
 
   return close;

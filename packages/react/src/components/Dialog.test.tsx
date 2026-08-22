@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { describe, expect, it, vi } from 'vite-plus/test';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { IconProvider } from '../icons';
 import { LayerProvider } from '../layers/LayerProvider';
@@ -125,10 +125,55 @@ describe('Dialog', () => {
     expect(screen.getByText('Only title')).toBeTruthy();
   });
 
+  it('dismisses when Close wraps a native button', async () => {
+    render(
+      <IconProvider icons={{}}>
+        <LayerProvider>
+          <Dialog.Root defaultOpen>
+            <Dialog.Backdrop>
+              <Dialog.Popup>
+                <Dialog.Title>Only title</Dialog.Title>
+                <Dialog.Close>
+                  <button type="button">Dismiss</button>
+                </Dialog.Close>
+              </Dialog.Popup>
+            </Dialog.Backdrop>
+          </Dialog.Root>
+        </LayerProvider>
+      </IconProvider>,
+    );
+    expect(screen.getByText('Only title')).toBeTruthy();
+    await userEvent.click(screen.getByText('Dismiss'));
+    await waitFor(() => expect(screen.queryByText('Only title')).toBeNull());
+  });
+
+  it('keeps the dialog open when cancel() is called while uncontrolled', async () => {
+    const onOpenChange: OverlayOpenChangeHandler = (_next, details) => {
+      details.cancel();
+    };
+    render(
+      <IconProvider icons={{}}>
+        <LayerProvider>
+          <Dialog.Root defaultOpen onOpenChange={onOpenChange}>
+            <Dialog.Backdrop>
+              <Dialog.Popup>
+                <Dialog.Title>Pinned</Dialog.Title>
+              </Dialog.Popup>
+            </Dialog.Backdrop>
+          </Dialog.Root>
+        </LayerProvider>
+      </IconProvider>,
+    );
+    expect(screen.getByText('Pinned')).toBeTruthy();
+    await userEvent.keyboard('{Escape}');
+    expect(screen.getByText('Pinned')).toBeTruthy();
+  });
+
   it('reports trigger-press when opened from the trigger', async () => {
     const onOpenChange = vi.fn<OverlayOpenChangeHandler>();
     renderReasonDialog(onOpenChange);
     await userEvent.click(screen.getByRole('button', { name: 'Custom' }));
+    expect(onOpenChange).toHaveBeenCalledTimes(1);
     expect(onOpenChange.mock.calls[0]?.[0]).toBe(true);
     expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('trigger-press');
   });
@@ -143,6 +188,7 @@ describe('Dialog', () => {
     expect(overlay).toBeTruthy();
     await userEvent.click(overlay!);
 
+    expect(onOpenChange).toHaveBeenCalledTimes(1);
     expect(onOpenChange.mock.calls[0]?.[0]).toBe(false);
     expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('outside-press');
   });
@@ -155,6 +201,7 @@ describe('Dialog', () => {
 
     await userEvent.keyboard('{Escape}');
 
+    expect(onOpenChange).toHaveBeenCalledTimes(1);
     expect(onOpenChange.mock.calls[0]?.[0]).toBe(false);
     expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('escape-key');
   });

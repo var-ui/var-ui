@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vite-plus/test';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { IconProvider } from '../icons';
 import { Drawer } from './Drawer';
 
@@ -50,5 +51,29 @@ describe('Drawer', () => {
     fireEvent.pointerDown(backdrop!);
 
     expect(onPointerDown).toHaveBeenCalledOnce();
+  });
+
+  it('dismisses when Close wraps a native button', async () => {
+    render(
+      <IconProvider icons={{}}>
+        <Drawer.Root defaultOpen>
+          <Drawer.Backdrop>
+            <Drawer.Panel>
+              <Drawer.Header>
+                <Drawer.Title>Settings</Drawer.Title>
+                <Drawer.Close>
+                  <button type="button">Dismiss</button>
+                </Drawer.Close>
+              </Drawer.Header>
+              <Drawer.Body>Drawer body</Drawer.Body>
+            </Drawer.Panel>
+          </Drawer.Backdrop>
+        </Drawer.Root>
+      </IconProvider>,
+    );
+
+    expect(screen.getByText('Settings')).toBeTruthy();
+    await userEvent.click(screen.getByText('Dismiss'));
+    await waitFor(() => expect(screen.queryByText('Settings')).toBeNull());
   });
 });

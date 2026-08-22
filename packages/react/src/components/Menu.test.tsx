@@ -74,6 +74,7 @@ describe('Menu', () => {
     renderCompound(onOpenChange);
     await userEvent.click(screen.getByRole('button', { name: 'Song' }));
     expect(await screen.findByRole('menu')).toBeTruthy();
+    expect(onOpenChange).toHaveBeenCalledTimes(1);
     expect(onOpenChange.mock.calls[0]?.[0]).toBe(true);
     expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('trigger-press');
   });
@@ -89,6 +90,7 @@ describe('Menu', () => {
     expect(underlay).toBeTruthy();
     await userEvent.click(underlay!);
 
+    expect(onOpenChange).toHaveBeenCalledTimes(1);
     expect(onOpenChange.mock.calls[0]?.[0]).toBe(false);
     expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('outside-press');
   });
@@ -102,8 +104,20 @@ describe('Menu', () => {
 
     await userEvent.keyboard('{Escape}');
 
+    expect(onOpenChange).toHaveBeenCalledTimes(1);
     expect(onOpenChange.mock.calls[0]?.[0]).toBe(false);
     expect(onOpenChange.mock.calls[0]?.[1].reason).toBe('escape-key');
+  });
+
+  it('sets positioner transform-origin on the popup', async () => {
+    renderCompound();
+    await userEvent.click(screen.getByRole('button', { name: 'Song' }));
+    expect(await screen.findByRole('menu')).toBeTruthy();
+    const popover = document.querySelector('.var-ui-menu__popover');
+    expect(popover).toBeTruthy();
+    expect((popover as HTMLElement).style.getPropertyValue('--var-ui-transform-origin')).toBe(
+      'top center',
+    );
   });
 
   it('keeps the menu open when cancel() is called while uncontrolled', async () => {
