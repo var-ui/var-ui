@@ -19,13 +19,13 @@ Today:
 <Dialog triggerLabel="Open" title="Notifications" description="You are all caught up." />
 ```
 
-| Gap                    | Detail                                                                                          |
-| ---------------------- | ----------------------------------------------------------------------------------------------- |
-| **Fixed chrome**       | Cannot omit close, add a footer, or put custom body without forking                             |
-| **Trigger lock-in**    | Dialog always renders a secondary `Button` labeled `triggerLabel`                               |
-| **No composition**     | Cannot nest Tooltip on a Dialog trigger (Base UI does this via nested `render`)                 |
-| **Portal + theme**     | `portalContainer` is a bolted-on escape hatch instead of an explicit `Portal` part              |
-| **Inconsistent depth** | Accordion / Combobox / Layout are compound; overlays are assembled                              |
+| Gap                    | Detail                                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| **Fixed chrome**       | Cannot omit close, add a footer, or put custom body without forking                              |
+| **Trigger lock-in**    | Dialog always renders a secondary `Button` labeled `triggerLabel`                                |
+| **No composition**     | Cannot nest Tooltip on a Dialog trigger (Base UI does this via nested `render`)                  |
+| **Portal + theme**     | `portalContainer` is a bolted-on escape hatch instead of an explicit `Portal` part               |
+| **Inconsistent depth** | Accordion / Combobox / Layout are compound; overlays are assembled                               |
 | **Menu is data-only**  | `DropdownMenu` takes `sections[]` — custom item rows, links, or submenus require a new component |
 
 Accordion already shows the target shape:
@@ -41,14 +41,14 @@ Accordion already shows the target shape:
 
 ## Goals
 
-| Goal                     | Detail                                                                                          |
-| ------------------------ | ----------------------------------------------------------------------------------------------- |
-| **Compound is canonical** | `Dialog.Root`, `Dialog.Trigger`, `Dialog.Backdrop`, `Dialog.Popup`, `Dialog.Title`, `Dialog.Close` |
-| **Presets stay**         | Today's Dialog / AlertDialog / Popover / Tooltip / HoverCard / DropdownMenu APIs keep working under `Simple*` or current names as convenience wrappers |
-| **RAC underneath**       | Map parts onto existing RAC nodes; no new focus manager                                         |
-| **Recipes gain slots**   | `dialog`, `popover`, `tooltip`, `hoverCard`, `menu`, `drawer` expose every public part          |
-| **Trigger is a child**   | Consumer supplies the trigger node (Button, IconButton, Link, custom)                           |
-| **Astro**                | Static markup uses the same public class names; interaction remains React-only                  |
+| Goal                      | Detail                                                                                                                                                 |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Compound is canonical** | `Dialog.Root`, `Dialog.Trigger`, `Dialog.Backdrop`, `Dialog.Popup`, `Dialog.Title`, `Dialog.Close`                                                     |
+| **Presets stay**          | Today's Dialog / AlertDialog / Popover / Tooltip / HoverCard / DropdownMenu APIs keep working under `Simple*` or current names as convenience wrappers |
+| **RAC underneath**        | Map parts onto existing RAC nodes; no new focus manager                                                                                                |
+| **Recipes gain slots**    | `dialog`, `popover`, `tooltip`, `hoverCard`, `menu`, `drawer` expose every public part                                                                 |
+| **Trigger is a child**    | Consumer supplies the trigger node (Button, IconButton, Link, custom)                                                                                  |
+| **Astro**                 | Static markup uses the same public class names; interaction remains React-only                                                                         |
 
 ## Non-goals (v1)
 
@@ -60,24 +60,24 @@ Accordion already shows the target shape:
 
 ## Mapping to React Aria
 
-| var-ui part            | RAC node                                      |
-| ---------------------- | --------------------------------------------- |
-| `Dialog.Root`          | `DialogTrigger` (or controlled `ModalOverlay`) |
-| `Dialog.Trigger`       | Child pressable; default `Button` if omitted in preset only |
-| `Dialog.Backdrop`      | `ModalOverlay`                                |
-| `Dialog.Popup`         | `Modal` + `Dialog`                            |
-| `Dialog.Title`         | `Heading slot="title"`                        |
-| `Dialog.Description`   | description slot / `<p>`                      |
-| `Dialog.Close`         | `Button` calling RAC `close`                  |
-| `Popover.Root`         | `DialogTrigger`                               |
-| `Popover.Popup`        | `Popover` + `Dialog`                          |
-| `Tooltip.Root`         | `TooltipTrigger`                              |
-| `Tooltip.Popup`        | `Tooltip`                                     |
-| `Menu.Root`            | `MenuTrigger`                                 |
-| `Menu.Popup`           | `Popover` + `Menu`                            |
-| `Menu.Item`            | `MenuItem`                                    |
-| `Drawer.Root`          | controlled `ModalOverlay` (Drawer is usually controlled) |
-| `Drawer.Panel`         | `Modal` + `Dialog`                            |
+| var-ui part          | RAC node                                                    |
+| -------------------- | ----------------------------------------------------------- |
+| `Dialog.Root`        | `DialogTrigger` (or controlled `ModalOverlay`)              |
+| `Dialog.Trigger`     | Child pressable; default `Button` if omitted in preset only |
+| `Dialog.Backdrop`    | `ModalOverlay`                                              |
+| `Dialog.Popup`       | `Modal` + `Dialog`                                          |
+| `Dialog.Title`       | `Heading slot="title"`                                      |
+| `Dialog.Description` | description slot / `<p>`                                    |
+| `Dialog.Close`       | `Button` calling RAC `close`                                |
+| `Popover.Root`       | `DialogTrigger`                                             |
+| `Popover.Popup`      | `Popover` + `Dialog`                                        |
+| `Tooltip.Root`       | `TooltipTrigger`                                            |
+| `Tooltip.Popup`      | `Tooltip`                                                   |
+| `Menu.Root`          | `MenuTrigger`                                               |
+| `Menu.Popup`         | `Popover` + `Menu`                                          |
+| `Menu.Item`          | `MenuItem`                                                  |
+| `Drawer.Root`        | controlled `ModalOverlay` (Drawer is usually controlled)    |
+| `Drawer.Panel`       | `Modal` + `Dialog`                                          |
 
 `UNSTABLE_portalContainer` stays on Backdrop / Popup until RAC stabilizes the prop. Compound APIs still accept `portalContainer` on the portal-owning part.
 
@@ -118,10 +118,7 @@ v1 may skip a generic `render` on Close and instead:
 ### Types
 
 ```ts
-type OverlayOpenChangeHandler = (
-  open: boolean,
-  details: OverlayChangeEventDetails,
-) => void;
+type OverlayOpenChangeHandler = (open: boolean, details: OverlayChangeEventDetails) => void;
 // OverlayChangeEventDetails is defined in the popup-lifecycle spec.
 
 type DialogRootProps = {
@@ -271,15 +268,15 @@ Keep today's `Drawer({ title, children, isOpen, … })` as the preset by impleme
 
 ## Recipe changes
 
-| Recipe        | Add slots                                              | Keep existing                                      |
-| ------------- | ------------------------------------------------------ | -------------------------------------------------- |
-| `dialog`      | already has overlay/modal/content/header/heading/…     | Map part names to those slots; do not rename classes |
-| `popover`     | `arrow`, `positioner` (wrapper for RAC Popover)        | `root`, `title`, `content`                         |
-| `tooltip`     | `arrow` optional                                       | `root`                                             |
-| `hoverCard`   | same as popover                                        | existing                                           |
-| `menu`        | already item/section/separator                         | used by both DropdownMenu and Menu parts           |
-| `drawer`      | header/body/close already exist                        | attach to `Drawer.*`                               |
-| `overlay`     | shared backdrop/positioner — Dialog.Backdrop should compose `overlay()` instead of duplicating fixed-inset in `dialog` | |
+| Recipe      | Add slots                                                                                                              | Keep existing                                        |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `dialog`    | already has overlay/modal/content/header/heading/…                                                                     | Map part names to those slots; do not rename classes |
+| `popover`   | `arrow`, `positioner` (wrapper for RAC Popover)                                                                        | `root`, `title`, `content`                           |
+| `tooltip`   | `arrow` optional                                                                                                       | `root`                                               |
+| `hoverCard` | same as popover                                                                                                        | existing                                             |
+| `menu`      | already item/section/separator                                                                                         | used by both DropdownMenu and Menu parts             |
+| `drawer`    | header/body/close already exist                                                                                        | attach to `Drawer.*`                                 |
+| `overlay`   | shared backdrop/positioner — Dialog.Backdrop should compose `overlay()` instead of duplicating fixed-inset in `dialog` |                                                      |
 
 Public class names: **add only**. Snapshot update is expected.
 
@@ -293,14 +290,14 @@ Do not use Base UI `render={<MyButton />}` in v1. One-child merge is enough and 
 
 ## Migration
 
-| Old                                         | New                                      |
-| ------------------------------------------- | ---------------------------------------- |
-| `<Dialog triggerLabel title description />` | `<SimpleDialog … />` or compound tree    |
-| `<Popover trigger={btn} title>`             | `<SimplePopover>` or `Popover.Root`      |
-| `<Tooltip content children>`                | `<SimpleTooltip>` or `Tooltip.Root`      |
-| `<DropdownMenu sections>`                   | unchanged                                |
-| `<Drawer isOpen title>`                     | unchanged preset; parts available        |
-| `<AlertDialog title onConfirm>`             | unchanged preset; parts available        |
+| Old                                         | New                                   |
+| ------------------------------------------- | ------------------------------------- |
+| `<Dialog triggerLabel title description />` | `<SimpleDialog … />` or compound tree |
+| `<Popover trigger={btn} title>`             | `<SimplePopover>` or `Popover.Root`   |
+| `<Tooltip content children>`                | `<SimpleTooltip>` or `Tooltip.Root`   |
+| `<DropdownMenu sections>`                   | unchanged                             |
+| `<Drawer isOpen title>`                     | unchanged preset; parts available     |
+| `<AlertDialog title onConfirm>`             | unchanged preset; parts available     |
 
 Docs demos: Dialog / Popover / Tooltip switch to compound as the **default** demo; presets get a second demo titled “Simple”.
 

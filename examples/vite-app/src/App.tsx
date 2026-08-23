@@ -32,7 +32,7 @@ import {
   DateRangeInput,
   DateTimeInput,
   DesignSystemProvider,
-  Dialog,
+  SimpleDialog,
   Divider,
   EmptyState,
   FileTree,
@@ -56,7 +56,7 @@ import {
   Outline,
   OverflowList,
   Pagination,
-  Popover,
+  SimplePopover,
   ProgressBar,
   Section,
   Select,
@@ -77,7 +77,7 @@ import {
   ToastProvider,
   Tokenizer,
   Toolbar,
-  Tooltip,
+  SimpleTooltip,
   TopNav,
   Typeahead,
   ColorModeToggle,
@@ -939,7 +939,7 @@ function OverflowListDemo() {
         gap="sm"
         renderItem={(tag) => <Badge>{tag.label}</Badge>}
         renderOverflow={(hidden) => (
-          <Popover trigger={<Button size="sm">+{hidden.length}</Button>}>
+          <SimplePopover trigger={<Button size="sm">+{hidden.length}</Button>}>
             <Stack gap="xs">
               {(hidden as typeof tags).map((tag) => (
                 <Text key={tag.id} size="sm">
@@ -947,7 +947,7 @@ function OverflowListDemo() {
                 </Text>
               ))}
             </Stack>
-          </Popover>
+          </SimplePopover>
         )}
       />
     </Stack>
@@ -1171,12 +1171,12 @@ function OverlaysSection() {
       <Stack gap="md">
         <ToastDemo />
         <HStack gap="md">
-          <Tooltip content="Keyboard shortcut hint">
+          <SimpleTooltip content="Keyboard shortcut hint">
             <Button>Tooltip</Button>
-          </Tooltip>
-          <Popover trigger={<Button>Popover</Button>} title="Details">
+          </SimpleTooltip>
+          <SimplePopover trigger={<Button>Popover</Button>} title="Details">
             <Text>Interactive content inside a popover.</Text>
-          </Popover>
+          </SimplePopover>
           <HoverCard trigger={<Button>Hover card</Button>}>
             <Text>Richer preview with a link.</Text>
           </HoverCard>
@@ -1232,7 +1232,7 @@ export function App() {
                 </Stack>
                 <HStack gap="sm">
                   <ColorModeToggle includeSystem />
-                  <Dialog
+                  <SimpleDialog
                     triggerLabel="Open dialog"
                     title="Icon close button"
                     description="The dismiss control now uses the registry close glyph."

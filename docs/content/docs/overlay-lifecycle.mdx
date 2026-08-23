@@ -28,13 +28,13 @@ Stacking, themed portals, and iOS 26 Safari backdrops are in [Getting started](/
 
 Spread on the popup (and backdrop, when there is one). Presence is an empty string when set, omitted when not.
 
-| Attribute             | Meaning                                                                      |
-| --------------------- | ---------------------------------------------------------------------------- |
-| `data-open`           | Present while open, including during the exit animation until unmount        |
-| `data-closed`         | Present during the closing phase                                             |
-| `data-starting-style` | Present for two animation frames after open (the enter “from” state)         |
-| `data-ending-style`   | Present while the close transition runs                                      |
-| `data-placement`      | RAC placement string on positioned popups (`top`, `bottom start`, …)         |
+| Attribute             | Meaning                                                               |
+| --------------------- | --------------------------------------------------------------------- |
+| `data-open`           | Present while open, including during the exit animation until unmount |
+| `data-closed`         | Present during the closing phase                                      |
+| `data-starting-style` | Present for two animation frames after open (the enter “from” state)  |
+| `data-ending-style`   | Present while the close transition runs                               |
+| `data-placement`      | RAC placement string on positioned popups (`top`, `bottom start`, …)  |
 
 `data-open` stays on the node through exit so `&[data-open]` selectors keep working (CommandPalette already uses that pattern).
 
@@ -60,12 +60,12 @@ Closing does not remove the DOM until CSS animations on the popup (and backdrop,
 
 Set on positioned popups (Popover, Tooltip, HoverCard, Menu). Dialog and Drawer centered overlays use `transform-origin: center`.
 
-| Variable                      | Source                                              |
-| ----------------------------- | --------------------------------------------------- |
-| `--var-ui-available-height`   | Viewport space remaining from the trigger           |
-| `--var-ui-available-width`    | Remaining inline size from the trigger              |
-| `--var-ui-transform-origin`   | Opposite the placement side (`top` → `bottom center`) |
-| `--var-ui-anchor-width`       | Trigger width, when the overlay has a trigger ref   |
+| Variable                    | Source                                                |
+| --------------------------- | ----------------------------------------------------- |
+| `--var-ui-available-height` | Viewport space remaining from the trigger             |
+| `--var-ui-available-width`  | Remaining inline size from the trigger                |
+| `--var-ui-transform-origin` | Opposite the placement side (`top` → `bottom center`) |
+| `--var-ui-anchor-width`     | Trigger width, when the overlay has a trigger ref     |
 
 Prefix is `--var-ui-` to match tokens. Values are `${px}px` strings.
 

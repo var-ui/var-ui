@@ -142,6 +142,18 @@
       "types": "./dist/components/Button.d.mts",
       "import": "./dist/components/Button.mjs"
     },
+    "./components/ButtonGroup": {
+      "types": "./dist/components/ButtonGroup.d.mts",
+      "import": "./dist/components/ButtonGroup.mjs"
+    },
+    "./button-group": {
+      "types": "./dist/components/ButtonGroup.d.mts",
+      "import": "./dist/components/ButtonGroup.mjs"
+    },
+    "./ButtonGroup": {
+      "types": "./dist/components/ButtonGroup.d.mts",
+      "import": "./dist/components/ButtonGroup.mjs"
+    },
     "./components/Calendar": {
       "types": "./dist/components/Calendar.d.mts",
       "import": "./dist/components/Calendar.mjs"
@@ -250,6 +262,18 @@
       "types": "./dist/components/Collapsible.d.mts",
       "import": "./dist/components/Collapsible.mjs"
     },
+    "./components/ColorInput": {
+      "types": "./dist/components/ColorInput.d.mts",
+      "import": "./dist/components/ColorInput.mjs"
+    },
+    "./color-input": {
+      "types": "./dist/components/ColorInput.d.mts",
+      "import": "./dist/components/ColorInput.mjs"
+    },
+    "./ColorInput": {
+      "types": "./dist/components/ColorInput.d.mts",
+      "import": "./dist/components/ColorInput.mjs"
+    },
     "./components/ColorModeToggle": {
       "types": "./dist/components/ColorModeToggle.d.mts",
       "import": "./dist/components/ColorModeToggle.mjs"
@@ -261,6 +285,30 @@
     "./ColorModeToggle": {
       "types": "./dist/components/ColorModeToggle.d.mts",
       "import": "./dist/components/ColorModeToggle.mjs"
+    },
+    "./components/ColorPicker": {
+      "types": "./dist/components/ColorPicker.d.mts",
+      "import": "./dist/components/ColorPicker.mjs"
+    },
+    "./color-picker": {
+      "types": "./dist/components/ColorPicker.d.mts",
+      "import": "./dist/components/ColorPicker.mjs"
+    },
+    "./ColorPicker": {
+      "types": "./dist/components/ColorPicker.d.mts",
+      "import": "./dist/components/ColorPicker.mjs"
+    },
+    "./components/ColorSwatch": {
+      "types": "./dist/components/ColorSwatch.d.mts",
+      "import": "./dist/components/ColorSwatch.mjs"
+    },
+    "./color-swatch": {
+      "types": "./dist/components/ColorSwatch.d.mts",
+      "import": "./dist/components/ColorSwatch.mjs"
+    },
+    "./ColorSwatch": {
+      "types": "./dist/components/ColorSwatch.d.mts",
+      "import": "./dist/components/ColorSwatch.mjs"
     },
     "./components/Combobox": {
       "types": "./dist/components/Combobox.d.mts",
@@ -285,6 +333,30 @@
     "./CommandPalette": {
       "types": "./dist/components/CommandPalette.d.mts",
       "import": "./dist/components/CommandPalette.mjs"
+    },
+    "./components/ContextMenu": {
+      "types": "./dist/components/ContextMenu.d.mts",
+      "import": "./dist/components/ContextMenu.mjs"
+    },
+    "./context-menu": {
+      "types": "./dist/components/ContextMenu.d.mts",
+      "import": "./dist/components/ContextMenu.mjs"
+    },
+    "./ContextMenu": {
+      "types": "./dist/components/ContextMenu.d.mts",
+      "import": "./dist/components/ContextMenu.mjs"
+    },
+    "./components/CopyButton": {
+      "types": "./dist/components/CopyButton.d.mts",
+      "import": "./dist/components/CopyButton.mjs"
+    },
+    "./copy-button": {
+      "types": "./dist/components/CopyButton.d.mts",
+      "import": "./dist/components/CopyButton.mjs"
+    },
+    "./CopyButton": {
+      "types": "./dist/components/CopyButton.d.mts",
+      "import": "./dist/components/CopyButton.mjs"
     },
     "./components/DateInput": {
       "types": "./dist/components/DateInput.d.mts",
@@ -430,6 +502,18 @@
       "types": "./dist/components/FileTree.d.mts",
       "import": "./dist/components/FileTree.mjs"
     },
+    "./components/Form": {
+      "types": "./dist/components/Form.d.mts",
+      "import": "./dist/components/Form.mjs"
+    },
+    "./form": {
+      "types": "./dist/components/Form.d.mts",
+      "import": "./dist/components/Form.mjs"
+    },
+    "./Form": {
+      "types": "./dist/components/Form.d.mts",
+      "import": "./dist/components/Form.mjs"
+    },
     "./components/Grid": {
       "types": "./dist/components/Grid.d.mts",
       "import": "./dist/components/Grid.mjs"
@@ -538,6 +622,30 @@
       "types": "./dist/components/List.d.mts",
       "import": "./dist/components/List.mjs"
     },
+    "./components/LoadingOverlay": {
+      "types": "./dist/components/LoadingOverlay.d.mts",
+      "import": "./dist/components/LoadingOverlay.mjs"
+    },
+    "./loading-overlay": {
+      "types": "./dist/components/LoadingOverlay.d.mts",
+      "import": "./dist/components/LoadingOverlay.mjs"
+    },
+    "./LoadingOverlay": {
+      "types": "./dist/components/LoadingOverlay.d.mts",
+      "import": "./dist/components/LoadingOverlay.mjs"
+    },
+    "./components/Menu": {
+      "types": "./dist/components/Menu.d.mts",
+      "import": "./dist/components/Menu.mjs"
+    },
+    "./menu": {
+      "types": "./dist/components/Menu.d.mts",
+      "import": "./dist/components/Menu.mjs"
+    },
+    "./Menu": {
+      "types": "./dist/components/Menu.d.mts",
+      "import": "./dist/components/Menu.mjs"
+    },
     "./components/MobileNav": {
       "types": "./dist/components/MobileNav.d.mts",
       "import": "./dist/components/MobileNav.mjs"
@@ -550,6 +658,18 @@
       "types": "./dist/components/MobileNav.d.mts",
       "import": "./dist/components/MobileNav.mjs"
     },
+    "./components/MoreMenu": {
+      "types": "./dist/components/MoreMenu.d.mts",
+      "import": "./dist/components/MoreMenu.mjs"
+    },
+    "./more-menu": {
+      "types": "./dist/components/MoreMenu.d.mts",
+      "import": "./dist/components/MoreMenu.mjs"
+    },
+    "./MoreMenu": {
+      "types": "./dist/components/MoreMenu.d.mts",
+      "import": "./dist/components/MoreMenu.mjs"
+    },
     "./components/MultiSelector": {
       "types": "./dist/components/MultiSelector.d.mts",
       "import": "./dist/components/MultiSelector.mjs"
@@ -561,6 +681,18 @@
     "./MultiSelector": {
       "types": "./dist/components/MultiSelector.d.mts",
       "import": "./dist/components/MultiSelector.mjs"
+    },
+    "./components/NumberInput": {
+      "types": "./dist/components/NumberInput.d.mts",
+      "import": "./dist/components/NumberInput.mjs"
+    },
+    "./number-input": {
+      "types": "./dist/components/NumberInput.d.mts",
+      "import": "./dist/components/NumberInput.mjs"
+    },
+    "./NumberInput": {
+      "types": "./dist/components/NumberInput.d.mts",
+      "import": "./dist/components/NumberInput.mjs"
     },
     "./components/Outline": {
       "types": "./dist/components/Outline.d.mts",
@@ -597,6 +729,18 @@
     "./Pagination": {
       "types": "./dist/components/Pagination.d.mts",
       "import": "./dist/components/Pagination.mjs"
+    },
+    "./components/PasswordInput": {
+      "types": "./dist/components/PasswordInput.d.mts",
+      "import": "./dist/components/PasswordInput.mjs"
+    },
+    "./password-input": {
+      "types": "./dist/components/PasswordInput.d.mts",
+      "import": "./dist/components/PasswordInput.mjs"
+    },
+    "./PasswordInput": {
+      "types": "./dist/components/PasswordInput.d.mts",
+      "import": "./dist/components/PasswordInput.mjs"
     },
     "./components/PinInput": {
       "types": "./dist/components/PinInput.d.mts",
@@ -729,6 +873,54 @@
     "./SideNav": {
       "types": "./dist/components/SideNav.d.mts",
       "import": "./dist/components/SideNav.mjs"
+    },
+    "./components/SimpleDialog": {
+      "types": "./dist/components/SimpleDialog.d.mts",
+      "import": "./dist/components/SimpleDialog.mjs"
+    },
+    "./simple-dialog": {
+      "types": "./dist/components/SimpleDialog.d.mts",
+      "import": "./dist/components/SimpleDialog.mjs"
+    },
+    "./SimpleDialog": {
+      "types": "./dist/components/SimpleDialog.d.mts",
+      "import": "./dist/components/SimpleDialog.mjs"
+    },
+    "./components/SimpleGrid": {
+      "types": "./dist/components/SimpleGrid.d.mts",
+      "import": "./dist/components/SimpleGrid.mjs"
+    },
+    "./simple-grid": {
+      "types": "./dist/components/SimpleGrid.d.mts",
+      "import": "./dist/components/SimpleGrid.mjs"
+    },
+    "./SimpleGrid": {
+      "types": "./dist/components/SimpleGrid.d.mts",
+      "import": "./dist/components/SimpleGrid.mjs"
+    },
+    "./components/SimplePopover": {
+      "types": "./dist/components/SimplePopover.d.mts",
+      "import": "./dist/components/SimplePopover.mjs"
+    },
+    "./simple-popover": {
+      "types": "./dist/components/SimplePopover.d.mts",
+      "import": "./dist/components/SimplePopover.mjs"
+    },
+    "./SimplePopover": {
+      "types": "./dist/components/SimplePopover.d.mts",
+      "import": "./dist/components/SimplePopover.mjs"
+    },
+    "./components/SimpleTooltip": {
+      "types": "./dist/components/SimpleTooltip.d.mts",
+      "import": "./dist/components/SimpleTooltip.mjs"
+    },
+    "./simple-tooltip": {
+      "types": "./dist/components/SimpleTooltip.d.mts",
+      "import": "./dist/components/SimpleTooltip.mjs"
+    },
+    "./SimpleTooltip": {
+      "types": "./dist/components/SimpleTooltip.d.mts",
+      "import": "./dist/components/SimpleTooltip.mjs"
     },
     "./components/Skeleton": {
       "types": "./dist/components/Skeleton.d.mts",

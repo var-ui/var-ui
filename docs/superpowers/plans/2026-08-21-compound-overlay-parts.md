@@ -26,21 +26,21 @@
 
 ## File map
 
-| File | Responsibility |
-| --- | --- |
-| `packages/react/src/overlays/mergeOverlayChild.ts` | Clone one child with RAC/close props |
-| `packages/react/src/overlays/OverlayCloseContext.ts` | `close()` from RAC Dialog render prop |
-| `packages/react/src/components/Dialog.tsx` | Compound Dialog |
-| `packages/react/src/components/SimpleDialog.tsx` | Previous Dialog API |
-| `packages/react/src/components/AlertDialog.tsx` | Preset + parts |
-| `packages/react/src/components/Popover.tsx` | Compound + SimplePopover |
-| `packages/react/src/components/Tooltip.tsx` | Compound + SimpleTooltip |
-| `packages/react/src/components/HoverCard.tsx` | Compound + SimpleHoverCard (optional name: keep `HoverCard` as preset) |
-| `packages/react/src/components/Menu.tsx` | New compound Menu |
-| `packages/react/src/components/Drawer.tsx` | Preset implemented with parts |
-| `packages/react/src/index.ts` | Exports |
-| `packages/core/src/components/popover.ts` | Add `arrow` slot (CSS triangle OK) |
-| Docs demos / mdx listed per task | Compound as default demo |
+| File                                                 | Responsibility                                                         |
+| ---------------------------------------------------- | ---------------------------------------------------------------------- |
+| `packages/react/src/overlays/mergeOverlayChild.ts`   | Clone one child with RAC/close props                                   |
+| `packages/react/src/overlays/OverlayCloseContext.ts` | `close()` from RAC Dialog render prop                                  |
+| `packages/react/src/components/Dialog.tsx`           | Compound Dialog                                                        |
+| `packages/react/src/components/SimpleDialog.tsx`     | Previous Dialog API                                                    |
+| `packages/react/src/components/AlertDialog.tsx`      | Preset + parts                                                         |
+| `packages/react/src/components/Popover.tsx`          | Compound + SimplePopover                                               |
+| `packages/react/src/components/Tooltip.tsx`          | Compound + SimpleTooltip                                               |
+| `packages/react/src/components/HoverCard.tsx`        | Compound + SimpleHoverCard (optional name: keep `HoverCard` as preset) |
+| `packages/react/src/components/Menu.tsx`             | New compound Menu                                                      |
+| `packages/react/src/components/Drawer.tsx`           | Preset implemented with parts                                          |
+| `packages/react/src/index.ts`                        | Exports                                                                |
+| `packages/core/src/components/popover.ts`            | Add `arrow` slot (CSS triangle OK)                                     |
+| Docs demos / mdx listed per task                     | Compound as default demo                                               |
 
 ---
 
@@ -86,7 +86,9 @@ describe('mergeOverlayChild', () => {
     const parent = vi.fn();
     const child = vi.fn();
     const merged = mergeOverlayChild(
-      <button type="button" onClick={child}>Go</button>,
+      <button type="button" onClick={child}>
+        Go
+      </button>,
       { onClick: parent },
     );
     render(merged);
@@ -151,17 +153,17 @@ Capture last event with `onKeyDownCapture` / overlay `onClick` on Backdrop (docu
 
 Parts:
 
-| Part | Renders |
-| --- | --- |
-| `Dialog` / `Dialog.Root` | `DialogTrigger` + presence context |
-| `Dialog.Trigger` | `mergeOverlayChild(children, racTriggerProps)` — if RAC injects props onto Trigger as first child, `Dialog.Trigger` must `forwardRef` and merge onto **its** child |
-| `Dialog.Backdrop` | `ModalOverlay` with `recipeProps(dialog().overlay)`, `presence.attrs`, `ref={backdropRef}`, `UNSTABLE_portalContainer`, `style={useLayer().style}` |
-| `Dialog.Popup` | `Modal` + `AriaDialog`; provide `OverlayCloseContext` with RAC `close`; spread `presence.attrs` on modal; `ref={popupRef}` |
-| `Dialog.Header` | `div` + `dialog().header` |
-| `Dialog.Title` | `Heading slot="title"` + `heading` |
-| `Dialog.Description` | `p` + `description` |
-| `Dialog.Actions` | `div` + `actions` |
-| `Dialog.Close` | default icon `Button` **or** `mergeOverlayChild(children, { onPress: close })` |
+| Part                     | Renders                                                                                                                                                            |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Dialog` / `Dialog.Root` | `DialogTrigger` + presence context                                                                                                                                 |
+| `Dialog.Trigger`         | `mergeOverlayChild(children, racTriggerProps)` — if RAC injects props onto Trigger as first child, `Dialog.Trigger` must `forwardRef` and merge onto **its** child |
+| `Dialog.Backdrop`        | `ModalOverlay` with `recipeProps(dialog().overlay)`, `presence.attrs`, `ref={backdropRef}`, `UNSTABLE_portalContainer`, `style={useLayer().style}`                 |
+| `Dialog.Popup`           | `Modal` + `AriaDialog`; provide `OverlayCloseContext` with RAC `close`; spread `presence.attrs` on modal; `ref={popupRef}`                                         |
+| `Dialog.Header`          | `div` + `dialog().header`                                                                                                                                          |
+| `Dialog.Title`           | `Heading slot="title"` + `heading`                                                                                                                                 |
+| `Dialog.Description`     | `p` + `description`                                                                                                                                                |
+| `Dialog.Actions`         | `div` + `actions`                                                                                                                                                  |
+| `Dialog.Close`           | default icon `Button` **or** `mergeOverlayChild(children, { onPress: close })`                                                                                     |
 
 `SimpleDialog` is the old `Dialog` body using parts:
 
@@ -300,7 +302,7 @@ Add one compound test: custom trigger + custom confirm button via `AlertDialog.T
 
 - [ ] **Step 2: Refactor preset to parts; keep the same props.**
 
-- [ ] **Step 3: Existing tests still PASS. `onOpenChange` may now be `(open, details) => void`. Update the controlled test: `onOpenChange` was `vi.fn()` expecting `(false)` — **change the assertion to** `expect(onOpenChange).toHaveBeenCalledWith(false, expect.objectContaining({ reason: expect.any(String) }))` while remaining compatible if the preset still calls with one argument. Spec wants two args. Update `AlertDialogProps.onOpenChange` to `OverlayOpenChangeHandler`.
+- [ ] **Step 3: Existing tests still PASS. `onOpenChange` may now be `(open, details) => void`. Update the controlled test: `onOpenChange` was `vi.fn()` expecting `(false)` — **change the assertion to\*\* `expect(onOpenChange).toHaveBeenCalledWith(false, expect.objectContaining({ reason: expect.any(String) }))` while remaining compatible if the preset still calls with one argument. Spec wants two args. Update `AlertDialogProps.onOpenChange` to `OverlayOpenChangeHandler`.
 
 - [ ] **Step 4: Commit**
 
@@ -422,10 +424,14 @@ EOF
     <Button>Song</Button>
   </Menu.Trigger>
   <Menu.Popup>
-    <Menu.Item id="lib" onAction={fn}>Add to Library</Menu.Item>
+    <Menu.Item id="lib" onAction={fn}>
+      Add to Library
+    </Menu.Item>
     <Menu.Separator />
     <Menu.Section title="Danger">
-      <Menu.Item id="delete" onAction={fn}>Delete</Menu.Item>
+      <Menu.Item id="delete" onAction={fn}>
+        Delete
+      </Menu.Item>
     </Menu.Section>
   </Menu.Popup>
 </Menu.Root>
@@ -549,17 +555,17 @@ Popover and Tooltip follow the same split (`SimplePopover`, `SimpleTooltip`). Ho
 
 ## Spec coverage
 
-| Spec item | Task |
-| --- | --- |
-| Dialog compound + SimpleDialog | 2, 8 |
-| AlertDialog preset + parts | 3 |
-| Popover + Arrow slot | 4 |
-| Tooltip / HoverCard | 5 |
-| Menu compound; DropdownMenu stays | 6 |
-| Drawer parts; preset stays | 7 |
-| Trigger one-child merge | 1, 2 |
-| No `render` prop | constraint |
-| Recipe class names additive | 4 |
-| Portal container | 2, 4 |
-| Docs default = compound | 8 |
-| Tooltip nested on Dialog trigger | spike in 2 |
+| Spec item                         | Task       |
+| --------------------------------- | ---------- |
+| Dialog compound + SimpleDialog    | 2, 8       |
+| AlertDialog preset + parts        | 3          |
+| Popover + Arrow slot              | 4          |
+| Tooltip / HoverCard               | 5          |
+| Menu compound; DropdownMenu stays | 6          |
+| Drawer parts; preset stays        | 7          |
+| Trigger one-child merge           | 1, 2       |
+| No `render` prop                  | constraint |
+| Recipe class names additive       | 4          |
+| Portal container                  | 2, 4       |
+| Docs default = compound           | 8          |
+| Tooltip nested on Dialog trigger  | spike in 2 |
