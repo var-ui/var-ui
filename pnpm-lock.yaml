@@ -47,6 +47,11 @@ overrides:
   vite: npm:@voidzero-dev/vite-plus-core@0.2.2
   '@var-ui/docs-site>vite': npm:vite@^6.4.1
 
+patchedDependencies:
+  astro@5.18.2:
+    hash: 9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868
+    path: patches/astro@5.18.2.patch
+
 importers:
 
   .:
@@ -77,13 +82,13 @@ importers:
     dependencies:
       '@astrojs/mdx':
         specifier: ^4.3.0
-        version: 4.3.14(astro@5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))
+        version: 4.3.14(astro@5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))
       '@astrojs/netlify':
         specifier: ^6.5.0
-        version: 6.6.5(@types/node@24.13.2)(astro@5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
+        version: 6.6.5(@types/node@24.13.2)(astro@5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
       '@astrojs/react':
         specifier: ^4.3.0
-        version: 4.4.2(@types/node@24.13.2)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(esbuild@0.25.12)(jiti@2.7.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
+        version: 4.4.2(@types/node@24.13.2)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(esbuild@0.27.7)(jiti@2.7.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
       '@internationalized/date':
         specifier: 'catalog:'
         version: 3.12.2
@@ -107,7 +112,7 @@ importers:
         version: link:../packages/react
       astro:
         specifier: 'catalog:'
-        version: 5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
+        version: 5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
       highlight.js:
         specifier: ^11.11.1
         version: 11.11.1
@@ -174,7 +179,7 @@ importers:
         version: link:../../packages/core
       astro:
         specifier: 'catalog:'
-        version: 5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
+        version: 5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.9
@@ -193,7 +198,7 @@ importers:
     dependencies:
       '@astrojs/node':
         specifier: ^9.4.6
-        version: 9.5.5(astro@5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))
+        version: 9.5.5(astro@5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))
       '@var-ui/astro':
         specifier: workspace:*
         version: link:../../packages/astro
@@ -205,7 +210,7 @@ importers:
         version: link:../../packages/docs
       astro:
         specifier: 'catalog:'
-        version: 5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
+        version: 5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.9
@@ -215,7 +220,7 @@ importers:
         version: 0.5.2
       '@typestyles/vite':
         specifier: 'catalog:'
-        version: 0.4.4(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.27.7)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))
+        version: 0.4.4(vite@8.1.3(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -375,7 +380,7 @@ importers:
         version: link:../core
       astro:
         specifier: 'catalog:'
-        version: 5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
+        version: 5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
       jsdom:
         specifier: ^26.0.0
         version: 26.1.0
@@ -412,7 +417,7 @@ importers:
     dependencies:
       '@astrojs/mdx':
         specifier: ^4.3.0
-        version: 4.3.14(astro@5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))
+        version: 4.3.14(astro@5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))
       '@typestyles/build-runner':
         specifier: ^0.5.2
         version: 0.5.2
@@ -446,7 +451,7 @@ importers:
         version: link:../react
       astro:
         specifier: 'catalog:'
-        version: 5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
+        version: 5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
       jsdom:
         specifier: ^26.0.0
         version: 26.1.0
@@ -486,7 +491,7 @@ importers:
         version: link:../docs
       astro:
         specifier: 'catalog:'
-        version: 5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
+        version: 5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
       jsdom:
         specifier: ^26.0.0
         version: 26.1.0
@@ -6857,12 +6862,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@4.3.14(astro@5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))':
+  '@astrojs/mdx@4.3.14(astro@5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))':
     dependencies:
       '@astrojs/markdown-remark': 6.3.11
       '@mdx-js/mdx': 3.1.1
       acorn: 8.17.0
-      astro: 5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
+      astro: 5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
       es-module-lexer: 1.7.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -6876,7 +6881,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/netlify@6.6.5(@types/node@24.13.2)(astro@5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)':
+  '@astrojs/netlify@6.6.5(@types/node@24.13.2)(astro@5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)':
     dependencies:
       '@astrojs/internal-helpers': 0.7.6
       '@astrojs/underscore-redirects': 1.0.0
@@ -6884,7 +6889,7 @@ snapshots:
       '@netlify/functions': 5.3.0
       '@netlify/vite-plugin': 2.12.9(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.25.12)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))(rollup@4.62.2)
       '@vercel/nft': 0.30.4(rollup@4.62.2)
-      astro: 5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
+      astro: 5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
       esbuild: 0.25.12
       tinyglobby: 0.2.17
       vite: '@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.25.12)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)'
@@ -6931,10 +6936,10 @@ snapshots:
       - uploadthing
       - yaml
 
-  '@astrojs/node@9.5.5(astro@5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))':
+  '@astrojs/node@9.5.5(astro@5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))':
     dependencies:
       '@astrojs/internal-helpers': 0.7.6
-      astro: 5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
+      astro: 5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)
       send: 1.2.1
       server-destroy: 1.0.1
     transitivePeerDependencies:
@@ -6944,15 +6949,15 @@ snapshots:
     dependencies:
       prismjs: 1.30.0
 
-  '@astrojs/react@4.4.2(@types/node@24.13.2)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(esbuild@0.25.12)(jiti@2.7.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)':
+  '@astrojs/react@4.4.2(@types/node@24.13.2)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(esbuild@0.27.7)(jiti@2.7.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)':
     dependencies:
       '@types/react': 18.3.31
       '@types/react-dom': 18.3.7(@types/react@18.3.31)
-      '@vitejs/plugin-react': 4.7.0(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.25.12)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))
+      '@vitejs/plugin-react': 4.7.0(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.27.7)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
       ultrahtml: 1.7.0
-      vite: '@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.25.12)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)'
+      vite: '@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.27.7)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)'
     transitivePeerDependencies:
       - '@arethetypeswrong/core'
       - '@types/node'
@@ -8968,11 +8973,6 @@ snapshots:
       - supports-color
       - typescript
 
-  '@typestyles/vite@0.4.4(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.27.7)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))':
-    dependencies:
-      '@typestyles/build-runner': 0.5.2
-      vite: '@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.27.7)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)'
-
   '@typestyles/vite@0.4.4(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))':
     dependencies:
       '@typestyles/build-runner': 0.5.2
@@ -9028,7 +9028,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@vitejs/plugin-react@4.7.0(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.25.12)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))':
+  '@vitejs/plugin-react@4.7.0(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.27.7)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0))':
     dependencies:
       '@babel/core': 7.29.7
       '@babel/plugin-transform-react-jsx-self': 7.29.7(@babel/core@7.29.7)
@@ -9036,7 +9036,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.27
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: '@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.25.12)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)'
+      vite: '@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.27.7)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0)'
     transitivePeerDependencies:
       - supports-color
 
@@ -9495,7 +9495,7 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro@5.18.2(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0):
+  astro@5.18.2(patch_hash=9d89166f7e7a3b3e84b17f3137ee643bac9851ea4db9c3b97ef27365a2dab868)(@netlify/blobs@10.7.9)(@types/node@24.13.2)(jiti@2.7.0)(rollup@4.62.2)(terser@5.48.0)(tsx@4.23.0)(typescript@6.0.3)(yaml@2.9.0):
     dependencies:
       '@astrojs/compiler': 2.13.1
       '@astrojs/internal-helpers': 0.7.6
