@@ -12,7 +12,10 @@ export const topNav = [
   { text: 'Playground', link: '/playground', match: '/playground' },
 ] as const;
 
-export const docsSidebar = [{ text: 'Getting started', link: '/docs/getting-started' }] as const;
+export const docsSidebar = [
+  { text: 'Getting started', link: '/docs/getting-started' },
+  { text: 'Overlay lifecycle', link: '/docs/overlay-lifecycle' },
+] as const;
 
 export const themingSidebarSections: readonly SidebarSection[] = [
   {

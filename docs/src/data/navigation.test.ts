@@ -22,7 +22,10 @@ describe('navigation', () => {
   });
 
   it('lists all component registry entries in grouped sidebar sections', () => {
-    expect(docsSidebar.map((item) => item.link)).toEqual(['/docs/getting-started']);
+    expect(docsSidebar.map((item) => item.link)).toEqual([
+      '/docs/getting-started',
+      '/docs/overlay-lifecycle',
+    ]);
     const flatItems = componentSidebarSections.flatMap((section) => section.items);
     const expectedItems = componentRegistry.map((entry) => ({
       text: entry.name,

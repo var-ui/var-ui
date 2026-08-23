@@ -1,0 +1,136 @@
+---
+title: Overlay lifecycle
+description: State attributes, exit animation, positioner CSS variables, and onOpenChange details for floating overlays.
+---
+
+# Overlay lifecycle
+
+Dialog, Popover, Tooltip, HoverCard, Menu, Drawer, AlertDialog, and CommandPalette share a **lifecycle contract** so you can style enter/exit in CSS and distinguish why an overlay opened or closed.
+
+These `data-*` attributes and `--var-ui-*` variables are public API (same semver rules as class names). Recipes already animate from them; you can target the same hooks in your own CSS.
+
+Helpers live on `@var-ui/react`:
+
+```ts
+import {
+  useOverlayPresence,
+  usePositionerVars,
+  createOverlayChangeDetails,
+  type OverlayOpenChangeHandler,
+} from '@var-ui/react';
+```
+
+Compound overlays already call these. Use the hooks directly only if you are building a custom overlay on React Aria.
+
+Stacking, themed portals, and iOS 26 Safari backdrops are in [Getting started](/docs/getting-started).
+
+## State attributes
+
+Spread on the popup (and backdrop, when there is one). Presence is an empty string when set, omitted when not.
+
+| Attribute             | Meaning                                                                      |
+| --------------------- | ---------------------------------------------------------------------------- |
+| `data-open`           | Present while open, including during the exit animation until unmount        |
+| `data-closed`         | Present during the closing phase                                             |
+| `data-starting-style` | Present for two animation frames after open (the enter “from” state)         |
+| `data-ending-style`   | Present while the close transition runs                                      |
+| `data-placement`      | RAC placement string on positioned popups (`top`, `bottom start`, …)         |
+
+`data-open` stays on the node through exit so `&[data-open]` selectors keep working (CommandPalette already uses that pattern).
+
+Recipes transition opacity (and a slight scale on dialogs/popovers) from `[data-starting-style]` / `[data-ending-style]`. Reduced motion skips the duration and unmounts immediately.
+
+```css
+.var-ui-popover[data-starting-style],
+.var-ui-popover[data-ending-style] {
+  opacity: 0;
+}
+
+.var-ui-popover {
+  max-height: min(24rem, var(--var-ui-available-height));
+  transform-origin: var(--var-ui-transform-origin, center);
+}
+```
+
+### Exit before unmount
+
+Closing does not remove the DOM until CSS animations on the popup (and backdrop, when wired) finish. `prefers-reduced-motion: reduce` unmounts immediately.
+
+## Positioner CSS variables
+
+Set on positioned popups (Popover, Tooltip, HoverCard, Menu). Dialog and Drawer centered overlays use `transform-origin: center`.
+
+| Variable                      | Source                                              |
+| ----------------------------- | --------------------------------------------------- |
+| `--var-ui-available-height`   | Viewport space remaining from the trigger           |
+| `--var-ui-available-width`    | Remaining inline size from the trigger              |
+| `--var-ui-transform-origin`   | Opposite the placement side (`top` → `bottom center`) |
+| `--var-ui-anchor-width`       | Trigger width, when the overlay has a trigger ref   |
+
+Prefix is `--var-ui-` to match tokens. Values are `${px}px` strings.
+
+## Change event details
+
+Compound Dialog, Popover, Tooltip, HoverCard, Menu, Drawer, and AlertDialog call:
+
+```ts
+onOpenChange?: (open: boolean, details: OverlayChangeEventDetails) => void;
+```
+
+```ts
+type OverlayOpenChangeReason =
+  | 'trigger-press'
+  | 'escape-key'
+  | 'outside-press'
+  | 'imperative'
+  | 'hover'
+  | 'focus'
+  | 'unknown';
+
+type OverlayChangeEventDetails = {
+  reason: OverlayOpenChangeReason;
+  event: Event | null;
+  cancel: () => void;
+  isCanceled: boolean;
+};
+```
+
+v1 reasons you can rely on: `escape-key`, `outside-press`, `trigger-press`. Hover/focus overlays also report `hover` and `focus`. Anything else may be `unknown`.
+
+`cancel()` blocks the open-state update **when the overlay is uncontrolled**. If you pass `isOpen`, `cancel()` is a no-op — ignore `open` in the parent instead.
+
+```tsx
+<Dialog.Root
+  onOpenChange={(open, details) => {
+    if (!open && details.reason === 'outside-press') {
+      details.cancel();
+      return;
+    }
+    setOpen(open);
+  }}
+>
+  …
+</Dialog.Root>
+```
+
+CommandPalette still uses `onOpenChange?: (open: boolean) => void`. It does spread presence attributes on the panel.
+
+## Helpers
+
+### `useOverlayPresence({ isOpen, reducedMotion?, getAnimatedElements })`
+
+Returns `{ mounted, attrs }`. Drive `isOpen` from the requested open state. Keep React Aria’s `isOpen={presence.mounted}` so the node (and `getAnimations()`) exist through exit. Pass popup and backdrop elements to `getAnimatedElements`.
+
+### `usePositionerVars({ placement, popupRef, triggerRef? })`
+
+Returns `{ style }` with the variables above. Merge onto the popup root with `useLayer().style` when you also use `LayerProvider`.
+
+### `createOverlayChangeDetails({ reason, event })`
+
+Builds the `details` object with `cancel()` / `isCanceled`. Overlay components wrap RAC’s boolean `onOpenChange` with this.
+
+## Related
+
+- [Getting started](/docs/getting-started) — `isolation: isolate`, themed `portalContainer`, iOS 26 backdrops
+- [CSS variables](/theming/css-variables) — design tokens and component variables
+- [Dialog](/components/dialog), [Popover](/components/popover), [Tooltip](/components/tooltip), [Menu](/components/menu)
