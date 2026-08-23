@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { overlayIosAbsoluteBackdrop, overlayPresenceStyles } from './overlayPresence';
 
 /**
  * Shared floating-layer chrome: a dimmed fixed backdrop plus a centered
@@ -22,6 +23,8 @@ export const overlay = typestyles.styles.component(
     return {
       slots: ['backdrop', 'positioner'],
       backdrop: {
+        ...overlayPresenceStyles(),
+        ...overlayIosAbsoluteBackdrop,
         position: 'fixed',
         inset: 0,
         backgroundColor: v.background.var,

@@ -5,13 +5,34 @@ description: Composable label, description, and error chrome.
 
 # Field
 
-Composable label, description, and error chrome.
+Composable label, description, and error chrome. The default export is a preset (`label`, `description`, `errorMessage`, `htmlFor`). Compose `Field.Root`, `Field.Label`, `Field.Control`, `Field.Description`, and `Field.Error` when you need native constraint messages or custom controls.
+
+Do not pass `label` on TextField inside `Field.Root` — use Field parts around a control without FieldMeta, or use TextField's `label` / `description` / `errorMessage` without Field parts.
 
 ## Examples
 
 ### Default
 
 <Demo id="field.default" />
+
+### Parts
+
+<Demo id="field.parts" />
+
+## Validity attributes
+
+`Field.Root` sets these attributes for CSS:
+
+| Attribute       | When                                                                                            |
+| --------------- | ----------------------------------------------------------------------------------------------- |
+| `data-invalid`  | The field is invalid (controlled `invalid`, native constraint, error content, or a form error). |
+| `data-valid`    | Touched or dirty, and not invalid.                                                              |
+| `data-dirty`    | The value differs from the default.                                                             |
+| `data-touched`  | The control has been blurred at least once.                                                     |
+| `data-filled`   | The control has a non-empty value (checkbox/radio: checked).                                    |
+| `data-disabled` | The control is disabled.                                                                        |
+
+`invalid` is controlled when passed. If omitted, it is derived from native validity, `Field.Error` content, or a matching `Form` `errors` entry. `Field.Error` `forceMount` only keeps the error slot in the layout; it does not mark the field invalid.
 
 ## Props
 

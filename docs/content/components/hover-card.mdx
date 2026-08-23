@@ -5,7 +5,9 @@ description: Rich preview shown on hover or focus.
 
 # HoverCard
 
-Rich preview shown on hover or focus. Unlike `Tooltip`, content may include interactive elements (links). Open/close delays are independent (`openDelay` / `closeDelay`).
+Rich preview shown on hover or focus. Unlike `Tooltip`, content may include interactive elements (links). Open/close delays are independent (`openDelay` / `closeDelay`). `HoverCard` stays the assembled preset (`trigger` / `title` / children). Compound parts (`HoverCard.Root`, `HoverCard.Trigger`, `HoverCard.Popup`, `HoverCard.Title`, `HoverCard.Content`) are available for custom chrome. The trigger child must forward DOM props — there is no `render` prop.
+
+State attributes, positioner CSS variables, and `onOpenChange` details are documented in [Overlay lifecycle](/docs/overlay-lifecycle).
 
 ## Examples
 

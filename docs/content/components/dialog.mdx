@@ -5,15 +5,27 @@ description: Modal overlay for focused tasks.
 
 # Dialog
 
-Modal overlay for focused tasks.
+Modal overlay for focused tasks. `Dialog` is the compound Root (`Dialog.Trigger`, `Dialog.Backdrop`, `Dialog.Popup`, and chrome parts). The trigger child must forward DOM props (a `Button` or a host element) — there is no `render` prop. For the previous `triggerLabel` / `title` / `description` API, use the `SimpleDialog` preset.
+
+There is no `@var-ui/astro` Dialog — Astro and HTML previews show a static core-recipe approximation of the open chrome; full interaction is React-only.
+
+You can nest `Tooltip` parts around `Dialog.Trigger` (Tooltip wraps the trigger, both stay inside `Dialog`) without a `render` prop.
+
+State attributes, exit animation, and `onOpenChange` details are documented in [Overlay lifecycle](/docs/overlay-lifecycle).
 
 ## Examples
 
-### Open and close
+### Compound parts
 
-Control visibility with `useState` and wire `isOpen` / `onOpenChange` to `DialogTrigger`. There is no `@var-ui/astro` Dialog — Astro and HTML previews show a static core-recipe approximation of the open chrome; full interaction is React-only.
+Compose Trigger, Backdrop, Popup, and chrome. `Dialog` is Root.
 
 <Demo id="dialog.default" />
+
+### SimpleDialog preset
+
+`SimpleDialog` keeps the assembled 80% case copy-pasteable.
+
+<Demo id="dialog.simple" />
 
 ## Props
 
@@ -21,4 +33,4 @@ Control visibility with `useState` and wire `isOpen` / `onOpenChange` to `Dialog
 
 ## Accessibility
 
-Built on React Aria Components where applicable.
+Built on React Aria Components where applicable. Focus moves into the dialog; Escape and the backdrop dismiss when `isDismissable` is true.

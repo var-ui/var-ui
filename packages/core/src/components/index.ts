@@ -115,6 +115,7 @@ export {
 } from './layout';
 export { overflowList } from './overflowList';
 export { overlay } from './overlay';
+export { overlayPresenceStyles } from './overlayPresence';
 export { pagination } from './pagination';
 export { passwordField } from './passwordField';
 export { pinInput } from './pinInput';

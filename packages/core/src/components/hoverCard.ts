@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { overlayPresenceStyles } from './overlayPresence';
 
 /**
  * Non-modal rich preview card chrome — surface treatment like `popover`, with
@@ -31,6 +32,7 @@ export const hoverCard = typestyles.styles.component(
     return {
       slots: ['root', 'title', 'content'],
       root: {
+        ...overlayPresenceStyles({ scale: true }),
         borderWidth: t.borderWidth.default.var,
         borderStyle: 'solid',
         borderColor: v.border.var,

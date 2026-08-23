@@ -30,6 +30,9 @@ overrides:
   vite: 'catalog:'
   '@var-ui/docs-site>vite': 'npm:vite@^6.4.1'
 
+patchedDependencies:
+  astro@5.18.2: patches/astro@5.18.2.patch
+
 peerDependencyRules:
   allowAny:
     - vite

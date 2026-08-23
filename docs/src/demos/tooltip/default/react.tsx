@@ -2,8 +2,11 @@ import { Button, Tooltip } from '@var-ui/react';
 
 export default function Preview() {
   return (
-    <Tooltip content="Save changes">
-      <Button>Save</Button>
+    <Tooltip>
+      <Tooltip.Trigger>
+        <Button>Save</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Popup>Save changes</Tooltip.Popup>
     </Tooltip>
   );
 }

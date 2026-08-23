@@ -1,15 +1,15 @@
 import type { JSX, ReactNode } from 'react';
-import {
-  Dialog as AriaDialog,
-  DialogTrigger,
-  Heading,
-  Modal,
-  ModalOverlay,
-} from 'react-aria-components';
-import { dialog } from '@var-ui/core';
-import { useLayer } from '../layers/LayerProvider';
+import type { OverlayOpenChangeHandler } from '../overlays';
 import { Button } from './Button';
-import { recipeProps } from './utils';
+import {
+  Dialog,
+  type DialogActionsProps,
+  type DialogBackdropProps,
+  type DialogPopupProps,
+  type DialogRootProps,
+  type DialogTitleProps,
+  type DialogTriggerProps,
+} from './Dialog';
 
 export type AlertDialogProps = {
   /** Dialog heading shown in the modal header. */
@@ -29,7 +29,7 @@ export type AlertDialogProps = {
   /** Controls the open state. Required when `triggerLabel` is omitted. */
   isOpen?: boolean;
   /** Called when the open state changes (including Escape/cancel dismissal). */
-  onOpenChange?: (open: boolean) => void;
+  onOpenChange?: OverlayOpenChangeHandler;
   /**
    * Element the modal portals into instead of `document.body`. Needed when a subtree renders
    * under a different theme than the page ambient (the theme's CSS custom properties only
@@ -38,7 +38,25 @@ export type AlertDialogProps = {
   portalContainer?: Element;
 };
 
-export function AlertDialog({
+export type AlertDialogRootProps = DialogRootProps;
+export type AlertDialogTriggerProps = DialogTriggerProps;
+export type AlertDialogBackdropProps = DialogBackdropProps;
+export type AlertDialogPopupProps = Omit<DialogPopupProps, 'role'>;
+export type AlertDialogTitleProps = DialogTitleProps;
+export type AlertDialogActionsProps = DialogActionsProps;
+
+const AlertDialogRoot = Dialog.Root;
+const AlertDialogTrigger = Dialog.Trigger;
+const AlertDialogBackdrop = Dialog.Backdrop;
+
+function AlertDialogPopup(props: AlertDialogPopupProps): JSX.Element {
+  return <Dialog.Popup {...props} role="alertdialog" />;
+}
+
+const AlertDialogTitle = Dialog.Title;
+const AlertDialogActions = Dialog.Actions;
+
+function AlertDialogPreset({
   title,
   description,
   cancelLabel = 'Cancel',
@@ -50,64 +68,50 @@ export function AlertDialog({
   onOpenChange,
   portalContainer,
 }: AlertDialogProps): JSX.Element {
-  const d = dialog({ role: 'alertdialog' });
-  const { style: layerStyle } = useLayer();
-
-  const modal = (
-    <Modal {...recipeProps(d.modal)}>
-      <AriaDialog role="alertdialog">
-        {({ close }) => (
-          <div {...recipeProps(d.content)}>
-            <div {...recipeProps(d.header)}>
-              <Heading slot="title" {...recipeProps(d.heading)}>
-                {title}
-              </Heading>
-            </div>
-            <p {...recipeProps(d.description)}>{description}</p>
-            <div {...recipeProps(d.actions)}>
-              <Button intent="secondary" autoFocus={isDestructive} onPress={close}>
-                {cancelLabel}
-              </Button>
-              <Button
-                intent={isDestructive ? 'danger' : 'primary'}
-                onPress={() => {
-                  onConfirm();
-                  close();
-                }}
-              >
-                {confirmLabel}
-              </Button>
-            </div>
-          </div>
-        )}
-      </AriaDialog>
-    </Modal>
+  const popup = (
+    <AlertDialogBackdrop>
+      <AlertDialogPopup>
+        <Dialog.Header>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+        </Dialog.Header>
+        <Dialog.Description>{description}</Dialog.Description>
+        <AlertDialogActions>
+          <Dialog.Close>
+            <Button intent="secondary" autoFocus={isDestructive}>
+              {cancelLabel}
+            </Button>
+          </Dialog.Close>
+          <Dialog.Close>
+            <Button intent={isDestructive ? 'danger' : 'primary'} onPress={onConfirm}>
+              {confirmLabel}
+            </Button>
+          </Dialog.Close>
+        </AlertDialogActions>
+      </AlertDialogPopup>
+    </AlertDialogBackdrop>
   );
-
-  if (triggerLabel) {
-    return (
-      <DialogTrigger isOpen={isOpen} onOpenChange={onOpenChange}>
-        <Button intent="secondary">{triggerLabel}</Button>
-        <ModalOverlay
-          {...recipeProps(d.overlay)}
-          style={layerStyle}
-          UNSTABLE_portalContainer={portalContainer}
-        >
-          {modal}
-        </ModalOverlay>
-      </DialogTrigger>
-    );
-  }
 
   return (
-    <ModalOverlay
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
-      {...recipeProps(d.overlay)}
-      style={layerStyle}
-      UNSTABLE_portalContainer={portalContainer}
-    >
-      {modal}
-    </ModalOverlay>
+    <AlertDialogRoot isOpen={isOpen} onOpenChange={onOpenChange} portalContainer={portalContainer}>
+      {triggerLabel ? (
+        <AlertDialogTrigger>
+          <Button intent="secondary">{triggerLabel}</Button>
+        </AlertDialogTrigger>
+      ) : null}
+      {popup}
+    </AlertDialogRoot>
   );
 }
+
+/**
+ * Confirmation dialog preset with compound parts for custom compositions.
+ * The default call signature remains title/onConfirm/triggerLabel based.
+ */
+export const AlertDialog = Object.assign(AlertDialogPreset, {
+  Root: AlertDialogRoot,
+  Trigger: AlertDialogTrigger,
+  Backdrop: AlertDialogBackdrop,
+  Popup: AlertDialogPopup,
+  Title: AlertDialogTitle,
+  Actions: AlertDialogActions,
+});

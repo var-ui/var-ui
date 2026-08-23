@@ -21,6 +21,7 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
       "hueToPureHex",
       "isValidHex",
       "normalizeHex",
+      "overlayPresenceStyles",
       "parseHex",
       "resolveScrollAreaFade",
       "rgbToHex",
@@ -206,7 +207,7 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
   "summary": {
     "runtimeByCategory": {
       "fonts": 4,
-      "helper": 15,
+      "helper": 16,
       "icons": 4,
       "layout": 6,
       "object": 9,
@@ -218,12 +219,12 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
       "tokens": 19,
     },
     "runtimeByKind": {
-      "function": 136,
+      "function": 137,
       "number": 4,
       "object": 33,
       "string": 4,
     },
-    "runtimeExports": 177,
+    "runtimeExports": 178,
     "typeOnlyExports": 116,
   },
   "typeOnlyExports": [

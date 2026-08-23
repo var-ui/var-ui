@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from 'vite-plus/test';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ReactElement } from 'react';
 import { LayerProvider } from '../layers/LayerProvider';
@@ -20,6 +20,83 @@ beforeEach(() => {
 });
 
 describe('CommandPalette', () => {
+  it('marks the panel open while the palette is open', () => {
+    wrap(
+      <CommandPalette
+        isOpen
+        hotkey={false}
+        items={[{ id: 'a', title: 'Open settings' }]}
+        onAction={() => {}}
+        onOpenChange={() => {}}
+      />,
+    );
+
+    const panel = document.querySelector('.var-ui-command-palette__dialog');
+    expect(panel).not.toBeNull();
+    expect(panel?.getAttribute('data-open')).toBe('');
+    expect(panel?.hasAttribute('data-starting-style')).toBe(true);
+    expect(panel?.hasAttribute('data-ending-style')).toBe(false);
+  });
+
+  it('keeps the native dialog mounted and unmounts only the panel after closing', async () => {
+    const { rerender } = wrap(
+      <CommandPalette
+        isOpen
+        hotkey={false}
+        items={[{ id: 'a', title: 'Open settings' }]}
+        onAction={() => {}}
+        onOpenChange={() => {}}
+      />,
+    );
+
+    rerender(
+      <LayerProvider>
+        <CommandPalette
+          isOpen={false}
+          hotkey={false}
+          items={[{ id: 'a', title: 'Open settings' }]}
+          onAction={() => {}}
+          onOpenChange={() => {}}
+        />
+      </LayerProvider>,
+    );
+
+    await waitFor(() => expect(screen.queryByPlaceholderText('Search…')).toBeNull());
+    expect(document.querySelector('.var-ui-command-palette')).not.toBeNull();
+    expect(document.querySelector('.var-ui-command-palette__dialog')).toBeNull();
+  });
+
+  it('closes the native dialog after the panel exits so focus can be restored', async () => {
+    const { rerender } = wrap(
+      <CommandPalette
+        isOpen
+        hotkey={false}
+        items={[{ id: 'a', title: 'Open settings' }]}
+        onAction={() => {}}
+        onOpenChange={() => {}}
+      />,
+    );
+
+    const dialog = document.querySelector<HTMLDialogElement>('.var-ui-command-palette');
+    expect(dialog?.open).toBe(true);
+    const close = vi.spyOn(dialog as HTMLDialogElement, 'close');
+
+    rerender(
+      <LayerProvider>
+        <CommandPalette
+          isOpen={false}
+          hotkey={false}
+          items={[{ id: 'a', title: 'Open settings' }]}
+          onAction={() => {}}
+          onOpenChange={() => {}}
+        />
+      </LayerProvider>,
+    );
+
+    await waitFor(() => expect(close).toHaveBeenCalledOnce());
+    expect(dialog?.open).toBe(false);
+  });
+
   it('filters items and invokes onAction on Enter', async () => {
     const onAction = vi.fn();
     wrap(

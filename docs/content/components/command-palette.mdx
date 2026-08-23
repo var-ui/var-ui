@@ -5,7 +5,7 @@ description: Searchable command palette for quick actions and navigation.
 
 # CommandPalette
 
-⌘K-style searchable command overlay. You own `isOpen` / `onOpenChange` and typically close inside `onAction`. Items match on `title`, `meta`, and optional `keywords`.
+⌘K-style searchable command overlay. You own `isOpen` / `onOpenChange` and typically close inside `onAction`. Items match on `title`, `meta`, and optional `keywords`. The panel uses overlay presence attributes (`data-open`, `data-starting-style`, `data-ending-style`); see [Overlay lifecycle](/docs/overlay-lifecycle). `onOpenChange` is still `(open: boolean)`.
 
 ## Examples
 

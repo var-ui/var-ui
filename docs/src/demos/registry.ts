@@ -25,6 +25,8 @@ import { snippets as textDefaultSnippets } from './text/default/snippets';
 import { snippets as thumbnailDefaultSnippets } from './thumbnail/default/snippets';
 import { snippets as timestampDefaultSnippets } from './timestamp/default/snippets';
 import { snippets as fieldDefaultSnippets } from './field/default/snippets';
+import { snippets as fieldPartsSnippets } from './field/parts/snippets';
+import { snippets as formDefaultSnippets } from './form/default/snippets';
 import { snippets as textFieldDefaultSnippets } from './text-field/default/snippets';
 import { snippets as textAreaFieldDefaultSnippets } from './text-area-field/default/snippets';
 import { snippets as checkboxDefaultSnippets } from './checkbox/default/snippets';
@@ -40,6 +42,7 @@ import { snippets as typeaheadDefaultSnippets } from './typeahead/default/snippe
 import { snippets as typeaheadFieldSnippets } from './typeahead/field/snippets';
 import { snippets as tabsDefaultSnippets } from './tabs/default/snippets';
 import { snippets as dialogDefaultSnippets } from './dialog/default/snippets';
+import { snippets as dialogSimpleSnippets } from './dialog/simple/snippets';
 import { snippets as layoutDefaultSnippets } from './layout/default/snippets';
 import { snippets as chipDefaultSnippets } from './chip/default/snippets';
 import { snippets as timelineDefaultSnippets } from './timeline/default/snippets';
@@ -102,8 +105,10 @@ import { snippets as alertDialogConfirmSnippets } from './alert-dialog/confirm/s
 import { snippets as drawerDefaultSnippets } from './drawer/default/snippets';
 import { snippets as drawerPlacementSnippets } from './drawer/placement/snippets';
 import { snippets as tooltipDefaultSnippets } from './tooltip/default/snippets';
+import { snippets as tooltipSimpleSnippets } from './tooltip/simple/snippets';
 import { snippets as tooltipPlacementSnippets } from './tooltip/placement/snippets';
 import { snippets as popoverDefaultSnippets } from './popover/default/snippets';
+import { snippets as popoverSimpleSnippets } from './popover/simple/snippets';
 import { snippets as popoverActionsSnippets } from './popover/actions/snippets';
 import { snippets as hoverCardDefaultSnippets } from './hover-card/default/snippets';
 import { snippets as hoverCardRichSnippets } from './hover-card/rich/snippets';
@@ -123,6 +128,7 @@ import { snippets as colorModeToggleDefaultSnippets } from './color-mode-toggle/
 import { snippets as colorModeToggleAppearanceSnippets } from './color-mode-toggle/appearance/snippets';
 import { snippets as dropdownMenuDefaultSnippets } from './dropdown-menu/default/snippets';
 import { snippets as dropdownMenuSectionsSnippets } from './dropdown-menu/sections/snippets';
+import { snippets as menuDefaultSnippets } from './menu/default/snippets';
 import { snippets as contextMenuDefaultSnippets } from './context-menu/default/snippets';
 import { snippets as contextMenuSectionsSnippets } from './context-menu/sections/snippets';
 import { snippets as moreMenuDefaultSnippets } from './more-menu/default/snippets';
@@ -195,6 +201,8 @@ export const DEMO_IDS = [
   'thumbnail.default',
   'timestamp.default',
   'field.default',
+  'field.parts',
+  'form.default',
   'text-field.default',
   'text-area-field.default',
   'checkbox.default',
@@ -210,6 +218,7 @@ export const DEMO_IDS = [
   'typeahead.field',
   'tabs.default',
   'dialog.default',
+  'dialog.simple',
   'layout.default',
   'chip.default',
   'timeline.default',
@@ -272,8 +281,10 @@ export const DEMO_IDS = [
   'drawer.default',
   'drawer.placement',
   'tooltip.default',
+  'tooltip.simple',
   'tooltip.placement',
   'popover.default',
+  'popover.simple',
   'popover.actions',
   'hover-card.default',
   'hover-card.rich',
@@ -293,6 +304,7 @@ export const DEMO_IDS = [
   'color-mode-toggle.appearance',
   'dropdown-menu.default',
   'dropdown-menu.sections',
+  'menu.default',
   'context-menu.default',
   'context-menu.sections',
   'more-menu.default',
@@ -364,6 +376,8 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'thumbnail.default': thumbnailDefaultSnippets,
   'timestamp.default': timestampDefaultSnippets,
   'field.default': fieldDefaultSnippets,
+  'field.parts': fieldPartsSnippets,
+  'form.default': formDefaultSnippets,
   'text-field.default': textFieldDefaultSnippets,
   'text-area-field.default': textAreaFieldDefaultSnippets,
   'checkbox.default': checkboxDefaultSnippets,
@@ -379,6 +393,7 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'typeahead.field': typeaheadFieldSnippets,
   'tabs.default': tabsDefaultSnippets,
   'dialog.default': dialogDefaultSnippets,
+  'dialog.simple': dialogSimpleSnippets,
   'layout.default': layoutDefaultSnippets,
   'chip.default': chipDefaultSnippets,
   'timeline.default': timelineDefaultSnippets,
@@ -441,8 +456,10 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'drawer.default': drawerDefaultSnippets,
   'drawer.placement': drawerPlacementSnippets,
   'tooltip.default': tooltipDefaultSnippets,
+  'tooltip.simple': tooltipSimpleSnippets,
   'tooltip.placement': tooltipPlacementSnippets,
   'popover.default': popoverDefaultSnippets,
+  'popover.simple': popoverSimpleSnippets,
   'popover.actions': popoverActionsSnippets,
   'hover-card.default': hoverCardDefaultSnippets,
   'hover-card.rich': hoverCardRichSnippets,
@@ -462,6 +479,7 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'color-mode-toggle.appearance': colorModeToggleAppearanceSnippets,
   'dropdown-menu.default': dropdownMenuDefaultSnippets,
   'dropdown-menu.sections': dropdownMenuSectionsSnippets,
+  'menu.default': menuDefaultSnippets,
   'context-menu.default': contextMenuDefaultSnippets,
   'context-menu.sections': contextMenuSectionsSnippets,
   'more-menu.default': moreMenuDefaultSnippets,
@@ -533,6 +551,8 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'thumbnail.default': () => import('./thumbnail/default/react'),
   'timestamp.default': () => import('./timestamp/default/react'),
   'field.default': () => import('./field/default/react'),
+  'field.parts': () => import('./field/parts/react'),
+  'form.default': () => import('./form/default/react'),
   'text-field.default': () => import('./text-field/default/react'),
   'text-area-field.default': () => import('./text-area-field/default/react'),
   'checkbox.default': () => import('./checkbox/default/react'),
@@ -548,6 +568,7 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'typeahead.field': () => import('./typeahead/field/react'),
   'tabs.default': () => import('./tabs/default/react'),
   'dialog.default': () => import('./dialog/default/react'),
+  'dialog.simple': () => import('./dialog/simple/react'),
   'layout.default': () => import('./layout/default/react'),
   'chip.default': () => import('./chip/default/react'),
   'timeline.default': () => import('./timeline/default/react'),
@@ -610,8 +631,10 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'drawer.default': () => import('./drawer/default/react'),
   'drawer.placement': () => import('./drawer/placement/react'),
   'tooltip.default': () => import('./tooltip/default/react'),
+  'tooltip.simple': () => import('./tooltip/simple/react'),
   'tooltip.placement': () => import('./tooltip/placement/react'),
   'popover.default': () => import('./popover/default/react'),
+  'popover.simple': () => import('./popover/simple/react'),
   'popover.actions': () => import('./popover/actions/react'),
   'hover-card.default': () => import('./hover-card/default/react'),
   'hover-card.rich': () => import('./hover-card/rich/react'),
@@ -631,6 +654,7 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'color-mode-toggle.appearance': () => import('./color-mode-toggle/appearance/react'),
   'dropdown-menu.default': () => import('./dropdown-menu/default/react'),
   'dropdown-menu.sections': () => import('./dropdown-menu/sections/react'),
+  'menu.default': () => import('./menu/default/react'),
   'context-menu.default': () => import('./context-menu/default/react'),
   'context-menu.sections': () => import('./context-menu/sections/react'),
   'more-menu.default': () => import('./more-menu/default/react'),
@@ -806,6 +830,16 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['field.default'],
     react: reactDemoLoaders['field.default'],
   },
+  'field.parts': {
+    id: 'field.parts',
+    snippets: demoSnippets['field.parts'],
+    react: reactDemoLoaders['field.parts'],
+  },
+  'form.default': {
+    id: 'form.default',
+    snippets: demoSnippets['form.default'],
+    react: reactDemoLoaders['form.default'],
+  },
   'text-field.default': {
     id: 'text-field.default',
     snippets: demoSnippets['text-field.default'],
@@ -880,6 +914,11 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'dialog.default',
     snippets: demoSnippets['dialog.default'],
     react: reactDemoLoaders['dialog.default'],
+  },
+  'dialog.simple': {
+    id: 'dialog.simple',
+    snippets: demoSnippets['dialog.simple'],
+    react: reactDemoLoaders['dialog.simple'],
   },
   'layout.default': {
     id: 'layout.default',
@@ -1191,6 +1230,11 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     snippets: demoSnippets['tooltip.default'],
     react: reactDemoLoaders['tooltip.default'],
   },
+  'tooltip.simple': {
+    id: 'tooltip.simple',
+    snippets: demoSnippets['tooltip.simple'],
+    react: reactDemoLoaders['tooltip.simple'],
+  },
   'tooltip.placement': {
     id: 'tooltip.placement',
     snippets: demoSnippets['tooltip.placement'],
@@ -1200,6 +1244,11 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'popover.default',
     snippets: demoSnippets['popover.default'],
     react: reactDemoLoaders['popover.default'],
+  },
+  'popover.simple': {
+    id: 'popover.simple',
+    snippets: demoSnippets['popover.simple'],
+    react: reactDemoLoaders['popover.simple'],
   },
   'popover.actions': {
     id: 'popover.actions',
@@ -1295,6 +1344,11 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'dropdown-menu.sections',
     snippets: demoSnippets['dropdown-menu.sections'],
     react: reactDemoLoaders['dropdown-menu.sections'],
+  },
+  'menu.default': {
+    id: 'menu.default',
+    snippets: demoSnippets['menu.default'],
+    react: reactDemoLoaders['menu.default'],
   },
   'context-menu.default': {
     id: 'context-menu.default',

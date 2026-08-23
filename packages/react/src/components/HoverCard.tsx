@@ -1,14 +1,38 @@
-import type { FocusEvent, JSX, MouseEvent, ReactElement, ReactNode } from 'react';
-import { cloneElement, useCallback, useRef, useState } from 'react';
 import {
-  Dialog,
-  DialogTrigger,
+  Children,
+  createContext,
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type JSX,
+  type MutableRefObject,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
+} from 'react';
+import {
+  Dialog as AriaDialog,
+  DialogTrigger as AriaDialogTrigger,
   Heading,
   Popover as AriaPopover,
   type Placement,
 } from 'react-aria-components';
 import { hoverCard } from '@var-ui/core';
 import { useLayer } from '../layers/LayerProvider';
+import {
+  createOverlayChangeDetails,
+  inferOverlayCloseReason,
+  mergeOverlayChild,
+  useOverlayPresence,
+  usePositionerVars,
+  type OverlayOpenChangeHandler,
+  type UseOverlayPresenceResult,
+} from '../overlays';
 import { recipeProps } from './utils';
 
 export type HoverCardProps = {
@@ -31,6 +55,39 @@ export type HoverCardProps = {
   portalContainer?: Element;
 };
 
+export type HoverCardRootProps = {
+  children: ReactNode;
+  openDelay?: number;
+  closeDelay?: number;
+  isOpen?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: OverlayOpenChangeHandler;
+  portalContainer?: Element;
+};
+
+export type HoverCardTriggerProps = {
+  children: ReactElement;
+  className?: string;
+};
+
+export type HoverCardPopupProps = {
+  children: ReactNode;
+  className?: string;
+  /** Preferred placement relative to the trigger. @default top */
+  placement?: Placement;
+  portalContainer?: Element;
+};
+
+export type HoverCardTitleProps = {
+  children: ReactNode;
+  className?: string;
+};
+
+export type HoverCardContentProps = {
+  children: ReactNode;
+  className?: string;
+};
+
 type HoverCardSlot = 'root' | 'title' | 'content';
 type HoverCardRecipeFn = () => Record<HoverCardSlot, string>;
 // `hoverCard` resolves to `styles`'s dimensioned-variant overload at the type level (returns
@@ -39,29 +96,79 @@ type HoverCardRecipeFn = () => Record<HoverCardSlot, string>;
 // fixed upstream.
 const hoverCardSlots = hoverCard as unknown as HoverCardRecipeFn;
 
-function callHandler<E>(handler: ((event: E) => void) | undefined, event: E): void {
-  handler?.(event);
+function composeHandler(existing: unknown, ours: (...args: unknown[]) => void) {
+  if (typeof existing !== 'function') {
+    return ours;
+  }
+  return (...args: unknown[]) => {
+    existing(...args);
+    ours(...args);
+  };
 }
 
-/**
- * Non-modal rich preview shown on hover or focus, with independent open/close delays. Unlike
- * `Popover`, it does not trap focus — the trigger and panel behave like a tooltip that happens to
- * host interactive content (e.g. links).
- */
-export function HoverCard({
-  trigger,
-  title,
+type HoverCardContextValue = {
+  presence: UseOverlayPresenceResult;
+  popupRef: MutableRefObject<HTMLDivElement | null>;
+  triggerRef: MutableRefObject<HTMLElement | null>;
+  setPopupEl: (element: HTMLDivElement | null) => void;
+  setTriggerEl: (element: HTMLElement | null) => void;
+  portalContainer?: Element;
+  lastEventRef: MutableRefObject<Event | null>;
+  handleOpenChange: (next: boolean) => void;
+  scheduleOpen: () => void;
+  scheduleClose: () => void;
+  cancelCloseTimer: () => void;
+};
+
+const HoverCardContext = createContext<HoverCardContextValue | null>(null);
+
+function useHoverCardContext(): HoverCardContextValue {
+  const ctx = useContext(HoverCardContext);
+  if (!ctx) {
+    throw new Error('HoverCard compound components must be rendered inside <HoverCard>.');
+  }
+  return ctx;
+}
+
+function HoverCardRoot({
   children,
   openDelay = 700,
   closeDelay = 300,
-  placement = 'top',
+  isOpen,
+  defaultOpen = false,
+  onOpenChange,
   portalContainer,
-}: HoverCardProps): JSX.Element {
-  const hc = hoverCardSlots();
-  const { style: layerStyle } = useLayer();
-  const [isOpen, setIsOpen] = useState(false);
+}: HoverCardRootProps): JSX.Element {
+  const [uncontrolledOpen, setRequestedOpen] = useState(defaultOpen);
+  const requestedOpen = isOpen ?? uncontrolledOpen;
+  const popupRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const [, setPopupEl] = useState<HTMLDivElement | null>(null);
+  const [, setTriggerEl] = useState<HTMLElement | null>(null);
+  const lastEventRef = useRef<Event | null>(null);
+  const mountedRef = useRef(true);
   const openTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  const presence = useOverlayPresence({
+    isOpen: requestedOpen,
+    getAnimatedElements: () => [popupRef.current],
+  });
+
+  const handleOpenChange = useCallback(
+    (next: boolean) => {
+      if (!mountedRef.current) return;
+      const details = createOverlayChangeDetails({
+        reason: inferOverlayCloseReason(lastEventRef.current),
+        event: lastEventRef.current,
+      });
+      onOpenChange?.(next, details);
+      lastEventRef.current = null;
+      if (details.isCanceled) return;
+      if (isOpen === undefined) setRequestedOpen(next);
+    },
+    [isOpen, onOpenChange],
+  );
 
   const cancelOpenTimer = useCallback(() => {
     if (openTimer.current !== undefined) {
@@ -77,75 +184,209 @@ export function HoverCard({
     }
   }, []);
 
-  const scheduleOpen = useCallback(() => {
-    cancelCloseTimer();
-    cancelOpenTimer();
-    openTimer.current = setTimeout(() => {
-      setIsOpen(true);
-    }, openDelay);
-  }, [cancelCloseTimer, cancelOpenTimer, openDelay]);
+  const stashScheduleEvent = useCallback((...args: unknown[]) => {
+    const event = args[0] as { nativeEvent?: Event } | Event | undefined;
+    if (event instanceof Event) {
+      lastEventRef.current = event;
+      return;
+    }
+    if (event?.nativeEvent instanceof Event) {
+      lastEventRef.current = event.nativeEvent;
+      return;
+    }
+  }, []);
 
-  const scheduleClose = useCallback(() => {
-    cancelOpenTimer();
-    cancelCloseTimer();
-    closeTimer.current = setTimeout(() => {
-      setIsOpen(false);
-    }, closeDelay);
-  }, [cancelCloseTimer, cancelOpenTimer, closeDelay]);
+  const scheduleOpen = useCallback(
+    (...args: unknown[]) => {
+      stashScheduleEvent(...args);
+      if (!lastEventRef.current) {
+        lastEventRef.current = new Event('hover');
+      }
+      cancelCloseTimer();
+      cancelOpenTimer();
+      openTimer.current = setTimeout(() => {
+        handleOpenChange(true);
+      }, openDelay);
+    },
+    [cancelCloseTimer, cancelOpenTimer, handleOpenChange, openDelay, stashScheduleEvent],
+  );
 
-  const triggerElement = cloneElement(trigger, {
-    onMouseEnter: (event: MouseEvent) => {
-      callHandler(trigger.props.onMouseEnter, event);
-      scheduleOpen();
+  const scheduleClose = useCallback(
+    (...args: unknown[]) => {
+      stashScheduleEvent(...args);
+      if (!lastEventRef.current) {
+        lastEventRef.current = new Event('hover');
+      }
+      cancelOpenTimer();
+      cancelCloseTimer();
+      closeTimer.current = setTimeout(() => {
+        handleOpenChange(false);
+      }, closeDelay);
     },
-    onMouseLeave: (event: MouseEvent) => {
-      callHandler(trigger.props.onMouseLeave, event);
-      scheduleClose();
+    [cancelCloseTimer, cancelOpenTimer, closeDelay, handleOpenChange, stashScheduleEvent],
+  );
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      cancelOpenTimer();
+      cancelCloseTimer();
+    };
+  }, [cancelCloseTimer, cancelOpenTimer]);
+
+  const context = useMemo<HoverCardContextValue>(
+    () => ({
+      presence,
+      popupRef,
+      triggerRef,
+      setPopupEl,
+      setTriggerEl,
+      portalContainer,
+      lastEventRef,
+      handleOpenChange,
+      scheduleOpen,
+      scheduleClose,
+      cancelCloseTimer,
+    }),
+    [cancelCloseTimer, handleOpenChange, portalContainer, presence, scheduleClose, scheduleOpen],
+  );
+
+  return (
+    <HoverCardContext.Provider value={context}>
+      <AriaDialogTrigger isOpen={presence.mounted} onOpenChange={handleOpenChange}>
+        {children}
+      </AriaDialogTrigger>
+    </HoverCardContext.Provider>
+  );
+}
+
+const HoverCardTrigger = forwardRef(function HoverCardTrigger(
+  { children, className, ...props }: HoverCardTriggerProps,
+  ref: Ref<HTMLElement>,
+) {
+  const ctx = useHoverCardContext();
+  const child = Children.only(children);
+  const childProps = child.props as Record<string, unknown>;
+  const assignTriggerEl = (node: HTMLElement | null) => {
+    ctx.triggerRef.current = node;
+    ctx.setTriggerEl(node);
+  };
+  const triggerProps = props as Record<string, unknown>;
+  const merged = mergeOverlayChild(child, {
+    ...triggerProps,
+    className,
+    ref: (node: HTMLElement | null) => {
+      assignTriggerEl(node);
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        (ref as MutableRefObject<HTMLElement | null>).current = node;
+      }
     },
-    onFocus: (event: FocusEvent) => {
-      callHandler(trigger.props.onFocus, event);
-      scheduleOpen();
-    },
-    onBlur: (event: FocusEvent) => {
-      callHandler(trigger.props.onBlur, event);
-      scheduleClose();
-    },
+    onMouseEnter: composeHandler(childProps.onMouseEnter, ctx.scheduleOpen),
+    onMouseLeave: composeHandler(childProps.onMouseLeave, ctx.scheduleClose),
+    onFocus: composeHandler(childProps.onFocus, ctx.scheduleOpen),
+    onBlur: composeHandler(childProps.onBlur, ctx.scheduleClose),
+  });
+  return merged;
+});
+
+function HoverCardPopup({
+  children,
+  className,
+  placement = 'top',
+  portalContainer,
+}: HoverCardPopupProps): JSX.Element {
+  const ctx = useHoverCardContext();
+  const hc = hoverCardSlots();
+  const { style: layerStyle } = useLayer();
+  const positioner = usePositionerVars({
+    placement,
+    popupRef: ctx.popupRef,
+    triggerRef: ctx.triggerRef,
   });
 
   return (
-    <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-      {triggerElement}
-      <AriaPopover
-        {...recipeProps(hc.root)}
-        placement={placement}
-        style={layerStyle}
-        isNonModal
-        UNSTABLE_portalContainer={portalContainer}
-        onMouseEnter={cancelCloseTimer}
-        onMouseLeave={scheduleClose}
-      >
-        <Dialog {...recipeProps(hc.content)}>
-          {/*
-           * `onFocus`/`onBlur` aren't part of RAC's `Dialog`/`Popover` DOM prop allowlist (they're
-           * only exposed on focusable elements), so a plain wrapper div carries the panel's
-           * hover/focus retention logic. `Heading[slot="title"]` still wires up via React context
-           * regardless of this extra nesting.
-           */}
-          <div
-            onMouseEnter={cancelCloseTimer}
-            onMouseLeave={scheduleClose}
-            onFocus={cancelCloseTimer}
-            onBlur={scheduleClose}
-          >
-            {title ? (
-              <Heading slot="title" {...recipeProps(hc.title)}>
-                {title}
-              </Heading>
-            ) : null}
-            {children}
-          </div>
-        </Dialog>
-      </AriaPopover>
-    </DialogTrigger>
+    <AriaPopover
+      {...recipeProps(hc.root, className)}
+      {...ctx.presence.attrs}
+      ref={(node: HTMLDivElement | null) => {
+        ctx.popupRef.current = node;
+        ctx.setPopupEl(node);
+      }}
+      placement={placement}
+      style={{ ...layerStyle, ...positioner.style } as CSSProperties}
+      isOpen={ctx.presence.mounted}
+      isNonModal
+      UNSTABLE_portalContainer={portalContainer ?? ctx.portalContainer}
+      onMouseEnter={ctx.cancelCloseTimer}
+      onMouseLeave={ctx.scheduleClose}
+    >
+      <AriaDialog>
+        {/*
+         * `onFocus`/`onBlur` aren't part of RAC's `Dialog`/`Popover` DOM prop allowlist (they're
+         * only exposed on focusable elements), so a plain wrapper div carries the panel's
+         * hover/focus retention logic. `Heading[slot="title"]` still wires up via React context
+         * regardless of this extra nesting.
+         */}
+        <div
+          onMouseEnter={ctx.cancelCloseTimer}
+          onMouseLeave={ctx.scheduleClose}
+          onFocus={ctx.cancelCloseTimer}
+          onBlur={ctx.scheduleClose}
+        >
+          {children}
+        </div>
+      </AriaDialog>
+    </AriaPopover>
   );
 }
+
+function HoverCardTitle({ children, className }: HoverCardTitleProps): JSX.Element {
+  const hc = hoverCardSlots();
+  return (
+    <Heading slot="title" {...recipeProps(hc.title, className)}>
+      {children}
+    </Heading>
+  );
+}
+
+function HoverCardContent({ children, className }: HoverCardContentProps): JSX.Element {
+  const hc = hoverCardSlots();
+  return <div {...recipeProps(hc.content, className)}>{children}</div>;
+}
+
+function HoverCardPreset({
+  trigger,
+  title,
+  children,
+  openDelay = 700,
+  closeDelay = 300,
+  placement = 'top',
+  portalContainer,
+}: HoverCardProps): JSX.Element {
+  return (
+    <HoverCardRoot openDelay={openDelay} closeDelay={closeDelay} portalContainer={portalContainer}>
+      <HoverCardTrigger>{trigger}</HoverCardTrigger>
+      <HoverCardPopup placement={placement} portalContainer={portalContainer}>
+        {title ? <HoverCardTitle>{title}</HoverCardTitle> : null}
+        <HoverCardContent>{children}</HoverCardContent>
+      </HoverCardPopup>
+    </HoverCardRoot>
+  );
+}
+
+/**
+ * Non-modal rich preview shown on hover or focus, with independent open/close delays. Unlike
+ * `Popover`, it does not trap focus — the trigger and panel behave like a tooltip that happens to
+ * host interactive content (e.g. links). `HoverCard` is the assembled preset; compose
+ * `HoverCard.Root` / `Trigger` / `Popup` for custom chrome.
+ */
+export const HoverCard = Object.assign(HoverCardPreset, {
+  Root: HoverCardRoot,
+  Trigger: HoverCardTrigger,
+  Popup: HoverCardPopup,
+  Title: HoverCardTitle,
+  Content: HoverCardContent,
+});

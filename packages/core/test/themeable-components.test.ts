@@ -25,6 +25,7 @@ describe('themeableComponents', () => {
           'controlSurfaceSize',
           'controlSizeVariants',
           'controlFocusStyles',
+          'overlayPresenceStyles',
         ].includes(name) &&
         !name.endsWith('Chrome') &&
         !name.startsWith('create'),

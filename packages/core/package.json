@@ -542,6 +542,14 @@
       "types": "./dist/components/overlay.d.mts",
       "import": "./dist/components/overlay.mjs"
     },
+    "./components/overlayPresence": {
+      "types": "./dist/components/overlayPresence.d.mts",
+      "import": "./dist/components/overlayPresence.mjs"
+    },
+    "./overlayPresence": {
+      "types": "./dist/components/overlayPresence.d.mts",
+      "import": "./dist/components/overlayPresence.mjs"
+    },
     "./components/pagination": {
       "types": "./dist/components/pagination.d.mts",
       "import": "./dist/components/pagination.mjs"

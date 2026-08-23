@@ -26,6 +26,8 @@ import TextDefault from './text/default/react';
 import ThumbnailDefault from './thumbnail/default/react';
 import TimestampDefault from './timestamp/default/react';
 import FieldDefault from './field/default/react';
+import FieldParts from './field/parts/react';
+import FormDefault from './form/default/react';
 import TextFieldDefault from './text-field/default/react';
 import TextAreaFieldDefault from './text-area-field/default/react';
 import CheckboxDefault from './checkbox/default/react';
@@ -41,6 +43,7 @@ import TypeaheadDefault from './typeahead/default/react';
 import TypeaheadField from './typeahead/field/react';
 import TabsDefault from './tabs/default/react';
 import DialogDefault from './dialog/default/react';
+import DialogSimple from './dialog/simple/react';
 import LayoutDefault from './layout/default/react';
 import ChipDefault from './chip/default/react';
 import TimelineDefault from './timeline/default/react';
@@ -103,8 +106,10 @@ import AlertDialogConfirm from './alert-dialog/confirm/react';
 import DrawerDefault from './drawer/default/react';
 import DrawerPlacement from './drawer/placement/react';
 import TooltipDefault from './tooltip/default/react';
+import TooltipSimple from './tooltip/simple/react';
 import TooltipPlacement from './tooltip/placement/react';
 import PopoverDefault from './popover/default/react';
+import PopoverSimple from './popover/simple/react';
 import PopoverActions from './popover/actions/react';
 import HoverCardDefault from './hover-card/default/react';
 import HoverCardRich from './hover-card/rich/react';
@@ -124,6 +129,7 @@ import ColorModeToggleDefault from './color-mode-toggle/default/react';
 import ColorModeToggleAppearance from './color-mode-toggle/appearance/react';
 import DropdownMenuDefault from './dropdown-menu/default/react';
 import DropdownMenuSections from './dropdown-menu/sections/react';
+import MenuDefault from './menu/default/react';
 import ContextMenuDefault from './context-menu/default/react';
 import ContextMenuSections from './context-menu/sections/react';
 import MoreMenuDefault from './more-menu/default/react';
@@ -195,6 +201,8 @@ export const reactDemoMap = {
   'thumbnail.default': ThumbnailDefault,
   'timestamp.default': TimestampDefault,
   'field.default': FieldDefault,
+  'field.parts': FieldParts,
+  'form.default': FormDefault,
   'text-field.default': TextFieldDefault,
   'text-area-field.default': TextAreaFieldDefault,
   'checkbox.default': CheckboxDefault,
@@ -210,6 +218,7 @@ export const reactDemoMap = {
   'typeahead.field': TypeaheadField,
   'tabs.default': TabsDefault,
   'dialog.default': DialogDefault,
+  'dialog.simple': DialogSimple,
   'layout.default': LayoutDefault,
   'chip.default': ChipDefault,
   'timeline.default': TimelineDefault,
@@ -272,8 +281,10 @@ export const reactDemoMap = {
   'drawer.default': DrawerDefault,
   'drawer.placement': DrawerPlacement,
   'tooltip.default': TooltipDefault,
+  'tooltip.simple': TooltipSimple,
   'tooltip.placement': TooltipPlacement,
   'popover.default': PopoverDefault,
+  'popover.simple': PopoverSimple,
   'popover.actions': PopoverActions,
   'hover-card.default': HoverCardDefault,
   'hover-card.rich': HoverCardRich,
@@ -293,6 +304,7 @@ export const reactDemoMap = {
   'color-mode-toggle.appearance': ColorModeToggleAppearance,
   'dropdown-menu.default': DropdownMenuDefault,
   'dropdown-menu.sections': DropdownMenuSections,
+  'menu.default': MenuDefault,
   'context-menu.default': ContextMenuDefault,
   'context-menu.sections': ContextMenuSections,
   'more-menu.default': MoreMenuDefault,

@@ -84,6 +84,13 @@ export const componentRegistry: ComponentEntry[] = [
     importLine: "import { DropdownMenu } from '@var-ui/react';",
   },
   {
+    slug: 'menu',
+    name: 'Menu',
+    category: 'action',
+    description: 'Compound action menu with Trigger, Popup, Item, Section, and Separator parts.',
+    importLine: "import { Menu } from '@var-ui/react';",
+  },
+  {
     slug: 'context-menu',
     name: 'ContextMenu',
     category: 'action',
@@ -180,6 +187,13 @@ export const componentRegistry: ComponentEntry[] = [
     category: 'data-input',
     description: 'Composable label, description, and error chrome.',
     importLine: "import { Field } from '@var-ui/react';",
+  },
+  {
+    slug: 'form',
+    name: 'Form',
+    category: 'data-input',
+    description: 'Native-constraint form that focuses the first invalid field.',
+    importLine: "import { Form } from '@var-ui/react';",
   },
   {
     slug: 'number-input',
@@ -375,7 +389,7 @@ export const componentRegistry: ComponentEntry[] = [
     name: 'Dialog',
     category: 'overlay',
     description: 'Modal overlay for focused tasks.',
-    importLine: "import { Dialog } from '@var-ui/react';",
+    importLine: "import { Dialog, SimpleDialog } from '@var-ui/react';",
   },
   {
     slug: 'tabs',
@@ -403,14 +417,14 @@ export const componentRegistry: ComponentEntry[] = [
     name: 'Tooltip',
     category: 'overlay',
     description: 'Short hint shown on hover or focus.',
-    importLine: "import { Tooltip } from '@var-ui/react';",
+    importLine: "import { Tooltip, SimpleTooltip } from '@var-ui/react';",
   },
   {
     slug: 'popover',
     name: 'Popover',
     category: 'overlay',
     description: 'Anchored panel opened by a trigger control.',
-    importLine: "import { Popover } from '@var-ui/react';",
+    importLine: "import { Popover, SimplePopover } from '@var-ui/react';",
   },
   {
     slug: 'hover-card',

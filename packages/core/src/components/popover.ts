@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { overlayPresenceStyles } from './overlayPresence';
 
 /**
  * Standalone popover panel chrome (distinct from menu/select popover slots).
@@ -27,8 +28,9 @@ export const popover = typestyles.styles.component(
       },
     });
     return {
-      slots: ['root', 'title', 'content'],
+      slots: ['root', 'title', 'content', 'arrow'],
       root: {
+        ...overlayPresenceStyles({ scale: true }),
         borderWidth: t.borderWidth.default.var,
         borderStyle: 'solid',
         borderColor: v.border.var,
@@ -36,6 +38,7 @@ export const popover = typestyles.styles.component(
         backgroundColor: v.background.var,
         boxShadow: t.shadow.md.var,
         minWidth: '12rem',
+        maxHeight: 'var(--var-ui-available-height, none)',
         outline: 'none',
       },
       title: {
@@ -48,6 +51,24 @@ export const popover = typestyles.styles.component(
       content: {
         padding: `${t.space[2].var} ${t.space[3].var} ${t.space[3].var}`,
         outline: 'none',
+      },
+      arrow: {
+        width: 8,
+        height: 8,
+        backgroundColor: v.background.var,
+        transform: 'rotate(45deg)',
+        '&[data-placement="bottom"]': {
+          transform: 'translateY(50%) rotate(45deg)',
+        },
+        '&[data-placement="top"]': {
+          transform: 'translateY(-50%) rotate(45deg)',
+        },
+        '&[data-placement="left"]': {
+          transform: 'translateX(-50%) rotate(45deg)',
+        },
+        '&[data-placement="right"]': {
+          transform: 'translateX(50%) rotate(45deg)',
+        },
       },
     };
   },

@@ -16,7 +16,7 @@ import { useResizable, type ResizableConfig } from '../hooks';
 import { IconButton } from './IconButton';
 import { ResizeHandle } from './ResizeHandle';
 import { Text } from './Typography';
-import { Tooltip } from './Tooltip';
+import { SimpleTooltip } from './SimpleTooltip';
 import { ScrollArea } from './ScrollArea';
 import { recipeProps } from './utils';
 
@@ -330,9 +330,9 @@ export function SideNavItem({
   );
 
   const wrappedTrigger = navCollapsed ? (
-    <Tooltip content={label} placement="right">
+    <SimpleTooltip content={label} placement="right">
       {trigger}
-    </Tooltip>
+    </SimpleTooltip>
   ) : (
     trigger
   );

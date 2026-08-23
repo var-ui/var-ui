@@ -6,6 +6,7 @@ import type { ComponentAttrsResult } from 'typestyles';
 import { commandPalette } from '@var-ui/core';
 import { Icon } from '../icons';
 import { useLayer } from '../layers/LayerProvider';
+import { useOverlayPresence } from '../overlays';
 import { cx, recipeProps } from './utils';
 
 export type CommandPaletteItem = {
@@ -87,10 +88,15 @@ export function CommandPalette({
   hotkey = true,
   filter = defaultFilter,
   portalContainer,
-}: CommandPaletteProps): JSX.Element {
+}: CommandPaletteProps): JSX.Element | null {
   const [query, setQuery] = useState('');
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const open = Boolean(isOpen);
+  const presence = useOverlayPresence({
+    isOpen: open,
+    getAnimatedElements: () => [panelRef.current],
+  });
   const cp = commandPaletteSlots({ open });
   const { style: layerStyle } = useLayer();
 
@@ -113,12 +119,12 @@ export function CommandPalette({
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
-    if (open) {
+    if (presence.mounted) {
       if (!dialog.open) dialog.showModal();
     } else if (dialog.open) {
       dialog.close();
     }
-  }, [open]);
+  }, [presence.mounted]);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -152,40 +158,42 @@ export function CommandPalette({
         onOpenChange?.(false);
       }}
     >
-      <div {...recipeProps(cp.dialog)} data-open={open ? '' : undefined}>
-        <Autocomplete inputValue={query} onInputChange={setQuery}>
-          <div {...recipeProps(cp.inputRow)}>
-            <span {...recipeProps(cp.inputIcon)}>
-              <Icon name="search" />
-            </span>
-            <TextField aria-label={placeholder} style={{ display: 'flex', flex: 1, minWidth: 0 }}>
-              <Input {...recipeProps(cp.input)} placeholder={placeholder} autoFocus />
-            </TextField>
-          </div>
-          <ListBox
-            items={visibleItems}
-            {...recipeProps(cp.results)}
-            aria-label={placeholder}
-            renderEmptyState={() => <div {...recipeProps(cp.empty)}>{emptyLabel}</div>}
-          >
-            {(item) => (
-              <ListBoxItem
-                id={item.id}
-                textValue={item.title}
-                {...recipeProps(cp.result)}
-                onAction={() => onAction(item.id)}
-              >
-                {({ isFocused }) => (
-                  <span {...recipeProps(cp.resultLink, cx(isFocused && cp.resultLinkActive))}>
-                    <span {...recipeProps(cp.resultTitle)}>{item.title}</span>
-                    {item.meta ? <span {...recipeProps(cp.resultMeta)}>{item.meta}</span> : null}
-                  </span>
-                )}
-              </ListBoxItem>
-            )}
-          </ListBox>
-        </Autocomplete>
-      </div>
+      {presence.mounted ? (
+        <div ref={panelRef} {...recipeProps(cp.dialog)} {...presence.attrs}>
+          <Autocomplete inputValue={query} onInputChange={setQuery}>
+            <div {...recipeProps(cp.inputRow)}>
+              <span {...recipeProps(cp.inputIcon)}>
+                <Icon name="search" />
+              </span>
+              <TextField aria-label={placeholder} style={{ display: 'flex', flex: 1, minWidth: 0 }}>
+                <Input {...recipeProps(cp.input)} placeholder={placeholder} autoFocus />
+              </TextField>
+            </div>
+            <ListBox
+              items={visibleItems}
+              {...recipeProps(cp.results)}
+              aria-label={placeholder}
+              renderEmptyState={() => <div {...recipeProps(cp.empty)}>{emptyLabel}</div>}
+            >
+              {(item) => (
+                <ListBoxItem
+                  id={item.id}
+                  textValue={item.title}
+                  {...recipeProps(cp.result)}
+                  onAction={() => onAction(item.id)}
+                >
+                  {({ isFocused }) => (
+                    <span {...recipeProps(cp.resultLink, cx(isFocused && cp.resultLinkActive))}>
+                      <span {...recipeProps(cp.resultTitle)}>{item.title}</span>
+                      {item.meta ? <span {...recipeProps(cp.resultMeta)}>{item.meta}</span> : null}
+                    </span>
+                  )}
+                </ListBoxItem>
+              )}
+            </ListBox>
+          </Autocomplete>
+        </div>
+      ) : null}
     </dialog>
   );
 

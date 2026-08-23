@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { overlayIosAbsoluteBackdrop, overlayPresenceStyles } from './overlayPresence';
 
 export const dialog = typestyles.styles.component(
   'dialog',
@@ -35,6 +36,8 @@ export const dialog = typestyles.styles.component(
       ],
       base: {
         overlay: {
+          ...overlayPresenceStyles(),
+          ...overlayIosAbsoluteBackdrop,
           position: 'fixed',
           inset: 0,
           backgroundColor: v.overlayBackground.var,
@@ -43,6 +46,7 @@ export const dialog = typestyles.styles.component(
           padding: t.space[4].var,
         },
         modal: {
+          ...overlayPresenceStyles({ scale: true }),
           width: 'min(480px, 100%)',
           backgroundColor: v.modalBackground.var,
           borderRadius: t.radius.lg.var,

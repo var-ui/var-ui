@@ -1,0 +1,18 @@
+diff --git a/dist/core/build/plugin.js b/dist/core/build/plugin.js
+index 916f46eac403b64d228d09c74aad2725339e1c28..90a338d82df6877bf19cb79c7ded56d917a8a3bd 100644
+--- a/dist/core/build/plugin.js
++++ b/dist/core/build/plugin.js
+@@ -36,7 +36,12 @@ function createPluginContainer(options, internals) {
+     async runPostHook(ssrOutputs, clientOutputs) {
+       const mutations = /* @__PURE__ */ new Map();
+       const mutate = (chunk, targets, newCode) => {
+-        chunk.code = newCode;
++        try {
++          chunk.code = newCode;
++        } catch {
++          // Rolldown OutputChunkImpl exposes `code` as a getter. The mutations
++          // map still writes the new source to disk in runPostBuildHooks.
++        }
+         mutations.set(chunk.fileName, {
+           targets,
+           code: newCode
