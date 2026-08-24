@@ -26,29 +26,29 @@
 
 ## File map
 
-| File | Responsibility |
-| --- | --- |
-| `packages/core/src/components/hidden.ts` | `hiddenStyle`, static `styles.class` pieces, `hiddenClassName` |
-| `packages/core/src/components/hidden.test.ts` | Style-object + class-name tests |
-| `packages/core/src/styles.ts` | Side-effect import so Hidden CSS extracts |
-| `packages/core/src/index.ts` | Public export of Hidden types/helpers |
-| `packages/core/src/components/icon.ts` | `[data-mirror] { transform: scaleX(-1) }` |
-| `packages/core/src/components/breadcrumbs.ts` | `marginLeft` → `marginInlineStart` |
-| `packages/core/src/components/mobileNav.ts` | `[dir="rtl"]` `translateX` flip |
-| `packages/react/src/direction.ts` | `Direction` type, `resolveDirection`, `resolveI18nProviderLocale` |
-| `packages/react/src/DirectionProvider.tsx` | Context, `dir`/`lang`, RAC `I18nProvider` |
-| `packages/react/src/DesignSystemProvider.tsx` | Compose `DirectionProvider` (`direction?`, `locale?`) |
-| `packages/react/src/components/Hidden.tsx` | React wrapper around `hiddenClassName` |
-| `packages/react/src/icons/Icon.tsx` | `data-mirror` on the icon span |
-| `packages/react/src/components/IconButton.tsx` | Forward `data-mirror` to inner `Icon` |
-| `packages/react/src/components/Pagination.tsx` | Mirror prev/next chevrons |
-| `packages/react/src/components/SideNav.tsx` | Mirror collapse + nested expand chevrons |
-| `packages/react/src/components/Tree.tsx` | Mirror expand chevron |
-| `packages/astro/src/components/Hidden.astro` | Slot + `hiddenClassName` |
-| `packages/astro/index.ts` | Export `Hidden` |
-| `docs/content/components/hidden.mdx` | Component page |
-| `docs/content/docs/getting-started.mdx` | `direction` / `locale` / RAC limitation |
-| `.changeset/rtl-hidden.md` | Minor for core, react, astro |
+| File                                           | Responsibility                                                    |
+| ---------------------------------------------- | ----------------------------------------------------------------- |
+| `packages/core/src/components/hidden.ts`       | `hiddenStyle`, static `styles.class` pieces, `hiddenClassName`    |
+| `packages/core/src/components/hidden.test.ts`  | Style-object + class-name tests                                   |
+| `packages/core/src/styles.ts`                  | Side-effect import so Hidden CSS extracts                         |
+| `packages/core/src/index.ts`                   | Public export of Hidden types/helpers                             |
+| `packages/core/src/components/icon.ts`         | `[data-mirror] { transform: scaleX(-1) }`                         |
+| `packages/core/src/components/breadcrumbs.ts`  | `marginLeft` → `marginInlineStart`                                |
+| `packages/core/src/components/mobileNav.ts`    | `[dir="rtl"]` `translateX` flip                                   |
+| `packages/react/src/direction.ts`              | `Direction` type, `resolveDirection`, `resolveI18nProviderLocale` |
+| `packages/react/src/DirectionProvider.tsx`     | Context, `dir`/`lang`, RAC `I18nProvider`                         |
+| `packages/react/src/DesignSystemProvider.tsx`  | Compose `DirectionProvider` (`direction?`, `locale?`)             |
+| `packages/react/src/components/Hidden.tsx`     | React wrapper around `hiddenClassName`                            |
+| `packages/react/src/icons/Icon.tsx`            | `data-mirror` on the icon span                                    |
+| `packages/react/src/components/IconButton.tsx` | Forward `data-mirror` to inner `Icon`                             |
+| `packages/react/src/components/Pagination.tsx` | Mirror prev/next chevrons                                         |
+| `packages/react/src/components/SideNav.tsx`    | Mirror collapse + nested expand chevrons                          |
+| `packages/react/src/components/Tree.tsx`       | Mirror expand chevron                                             |
+| `packages/astro/src/components/Hidden.astro`   | Slot + `hiddenClassName`                                          |
+| `packages/astro/index.ts`                      | Export `Hidden`                                                   |
+| `docs/content/components/hidden.mdx`           | Component page                                                    |
+| `docs/content/docs/getting-started.mdx`        | `direction` / `locale` / RAC limitation                           |
+| `.changeset/rtl-hidden.md`                     | Minor for core, react, astro                                      |
 
 ---
 
@@ -147,7 +147,11 @@ export function hiddenStyle(hide?: boolean | HiddenMap): Record<string, unknown>
 
 const hiddenAlways = typestyles.styles.class('hidden-always', { display: 'none' }, layer);
 const hiddenBaseTrue = typestyles.styles.class('hidden-base-true', { display: 'none' }, layer);
-const hiddenBaseFalse = typestyles.styles.class('hidden-base-false', { display: 'contents' }, layer);
+const hiddenBaseFalse = typestyles.styles.class(
+  'hidden-base-false',
+  { display: 'contents' },
+  layer,
+);
 
 const hiddenAt = {
   sm: {
@@ -203,7 +207,11 @@ const hiddenAt = {
 export function hiddenClassName(options: { hide?: boolean | HiddenMap } = {}): string {
   const hide = options.hide;
   if (hide === true) return hiddenAlways;
-  if (hide === false || hide == null || (typeof hide === 'object' && Object.keys(hide).length === 0)) {
+  if (
+    hide === false ||
+    hide == null ||
+    (typeof hide === 'object' && Object.keys(hide).length === 0)
+  ) {
     return hiddenBaseFalse;
   }
   const classes: string[] = [];
@@ -388,11 +396,7 @@ EOF
 
 ```ts
 import { describe, expect, it } from 'vite-plus/test';
-import {
-  RTL_I18N_FALLBACK_LOCALE,
-  resolveDirection,
-  resolveI18nProviderLocale,
-} from './direction';
+import { RTL_I18N_FALLBACK_LOCALE, resolveDirection, resolveI18nProviderLocale } from './direction';
 
 describe('resolveDirection', () => {
   it('defaults to ltr', () => {
@@ -533,10 +537,7 @@ export type Direction = 'ltr' | 'rtl';
 
 export const RTL_I18N_FALLBACK_LOCALE = 'ar';
 
-export function resolveDirection(options: {
-  direction?: Direction;
-  locale?: string;
-}): Direction {
+export function resolveDirection(options: { direction?: Direction; locale?: string }): Direction {
   if (options.direction) return options.direction;
   if (options.locale && isRTL(options.locale)) return 'rtl';
   return 'ltr';
@@ -559,11 +560,7 @@ import type { JSX, ReactNode } from 'react';
 import { createContext, useContext, useMemo } from 'react';
 import { I18nProvider } from 'react-aria-components';
 import { useIsomorphicLayoutEffect } from './color-mode';
-import {
-  type Direction,
-  resolveDirection,
-  resolveI18nProviderLocale,
-} from './direction';
+import { type Direction, resolveDirection, resolveI18nProviderLocale } from './direction';
 
 export type { Direction };
 
@@ -639,11 +636,7 @@ export {
   type Direction,
   type DirectionProviderProps,
 } from './DirectionProvider';
-export {
-  resolveDirection,
-  resolveI18nProviderLocale,
-  RTL_I18N_FALLBACK_LOCALE,
-} from './direction';
+export { resolveDirection, resolveI18nProviderLocale, RTL_I18N_FALLBACK_LOCALE } from './direction';
 ```
 
 - [ ] **Step 4: Run tests to verify they pass**
@@ -733,11 +726,7 @@ export type DesignSystemProviderProps = {
 Wrap the returned tree (both `applyToDocument` and wrapper branches) with:
 
 ```tsx
-<DirectionProvider
-  direction={direction}
-  locale={locale}
-  applyToDocument={applyToDocument}
->
+<DirectionProvider direction={direction} locale={locale} applyToDocument={applyToDocument}>
   {children}
 </DirectionProvider>
 ```
@@ -979,8 +968,8 @@ describe('mobileNav RTL', () => {
   it('flips closed translateX under dir=rtl', () => {
     const src = readFileSync(join(here, 'mobileNav.ts'), 'utf8');
     expect(src).toContain('[dir="rtl"]');
-    expect(src).toContain("translateX(100%)");
-    expect(src).toContain("translateX(-100%)");
+    expect(src).toContain('translateX(100%)');
+    expect(src).toContain('translateX(-100%)');
   });
 });
 ```
@@ -1393,7 +1382,7 @@ Add a short section to Hidden MDX after examples:
 
 `docs/content/docs/getting-started.mdx` — after “Wrap your app”, add:
 
-```mdx
+````mdx
 ## Direction and locale
 
 Pass `direction` and a real `locale` on `DesignSystemProvider`:
@@ -1403,6 +1392,7 @@ Pass `direction` and a real `locale` on `DesignSystemProvider`:
   {children}
 </DesignSystemProvider>
 ```
+````
 
 React Aria overlays (`Popover`, `Menu`, `start` / `end` placement) take direction from **locale**, not from `dir`. `I18nProvider` only accepts `locale`.
 
@@ -1414,7 +1404,8 @@ React Aria overlays (`Popover`, `Menu`, `start` / `end` placement) take directio
 - Directional icons opt in: `<Icon name="chevronRight" data-mirror={isRtl || undefined} />`.
 
 Do not set `dir` on the whole docs site to try this — use a `DirectionProvider` island (see Hidden).
-```
+
+````
 
 Fix SideNav compound names against the existing side-nav demo before committing.
 
@@ -1433,7 +1424,7 @@ docs: Hidden page, RTL island, and direction getting-started notes
 
 EOF
 )"
-```
+````
 
 ---
 
@@ -1476,21 +1467,21 @@ EOF
 
 ## Spec coverage (self-review)
 
-| Spec requirement | Task |
-| --- | --- |
-| `DirectionProvider` + nested islands | 3 |
-| `useDirection()` default ltr, no throw | 3 |
-| DSP `direction` / `locale` / `applyToDocument` `dir` | 4 |
-| RAC `I18nProvider` + `'ar'` workaround, no `lang=ar` | 3 |
-| `direction` wins over locale for `dir` | 3 |
-| Derive `dir` from `isRTL(locale)` when direction omitted | 3 |
-| `hiddenClassName` / `HiddenMap` + `base` | 1 |
-| React `Hidden` + `as` | 2 |
-| Astro `Hidden` | 8 |
-| Icon `data-mirror` + IconButton forward | 5 |
-| Pagination / SideNav / Tree mirrors | 7 |
-| breadcrumbs `marginInlineStart` | 6 |
-| mobileNav `[dir=rtl]` translate | 6 |
-| Docs Hidden page + getting started + RTL island | 9 |
-| Out of scope (DocsPage TOC, calendar, fileTree, …) | not tasked |
-| Minor changeset | 10 |
+| Spec requirement                                         | Task       |
+| -------------------------------------------------------- | ---------- |
+| `DirectionProvider` + nested islands                     | 3          |
+| `useDirection()` default ltr, no throw                   | 3          |
+| DSP `direction` / `locale` / `applyToDocument` `dir`     | 4          |
+| RAC `I18nProvider` + `'ar'` workaround, no `lang=ar`     | 3          |
+| `direction` wins over locale for `dir`                   | 3          |
+| Derive `dir` from `isRTL(locale)` when direction omitted | 3          |
+| `hiddenClassName` / `HiddenMap` + `base`                 | 1          |
+| React `Hidden` + `as`                                    | 2          |
+| Astro `Hidden`                                           | 8          |
+| Icon `data-mirror` + IconButton forward                  | 5          |
+| Pagination / SideNav / Tree mirrors                      | 7          |
+| breadcrumbs `marginInlineStart`                          | 6          |
+| mobileNav `[dir=rtl]` translate                          | 6          |
+| Docs Hidden page + getting started + RTL island          | 9          |
+| Out of scope (DocsPage TOC, calendar, fileTree, …)       | not tasked |
+| Minor changeset                                          | 10         |

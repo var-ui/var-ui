@@ -526,6 +526,18 @@
       "types": "./dist/components/Grid.d.mts",
       "import": "./dist/components/Grid.mjs"
     },
+    "./components/Hidden": {
+      "types": "./dist/components/Hidden.d.mts",
+      "import": "./dist/components/Hidden.mjs"
+    },
+    "./hidden": {
+      "types": "./dist/components/Hidden.d.mts",
+      "import": "./dist/components/Hidden.mjs"
+    },
+    "./Hidden": {
+      "types": "./dist/components/Hidden.d.mts",
+      "import": "./dist/components/Hidden.mjs"
+    },
     "./components/HoverCard": {
       "types": "./dist/components/HoverCard.d.mts",
       "import": "./dist/components/HoverCard.mjs"
