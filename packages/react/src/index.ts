@@ -437,6 +437,13 @@ export {
 export { designTokens, type DesignTokens } from './tokens';
 export { DesignSystemProvider, type DesignSystemProviderProps } from './DesignSystemProvider';
 export {
+  DirectionProvider,
+  useDirection,
+  type Direction,
+  type DirectionProviderProps,
+} from './DirectionProvider';
+export { resolveDirection, resolveI18nProviderLocale, RTL_I18N_FALLBACK_LOCALE } from './direction';
+export {
   useColorMode,
   readStoredColorMode,
   getColorModeInitScript,
