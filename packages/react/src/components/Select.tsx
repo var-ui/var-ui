@@ -7,11 +7,12 @@ import {
   ListBoxItem,
   Popover,
   Select as AriaSelect,
-  SelectValue,
+  SelectValue as AriaSelectValue,
   Text,
   type ListBoxItemProps,
   type PopoverProps,
   type SelectProps as RACSelectProps,
+  type SelectValueProps as RACSelectValueProps,
 } from 'react-aria-components';
 import { select } from '@var-ui/core';
 import { Icon } from '../icons';
@@ -25,19 +26,26 @@ export type SelectOption = {
   label: string;
 };
 
-export type SelectRootProps = Omit<RACSelectProps<SelectOption>, 'children' | 'className'> & {
+export type SelectRootProps<T extends object = SelectOption> = Omit<
+  RACSelectProps<T>,
+  'children' | 'className'
+> & {
   children: ReactNode;
   className?: string;
 };
 
-const SelectRoot = ({ children, className, ...props }: SelectRootProps): JSX.Element => {
+function SelectRoot<T extends object>({
+  children,
+  className,
+  ...props
+}: SelectRootProps<T>): JSX.Element {
   const s = select();
   return (
     <AriaSelect {...props} {...recipeProps(s.root, className)}>
       {children}
     </AriaSelect>
   );
-};
+}
 
 export type SelectLabelProps = { children: ReactNode; className?: string };
 
@@ -46,18 +54,45 @@ function SelectLabel({ children, className }: SelectLabelProps): JSX.Element {
   return <Label {...recipeProps(s.label, className)}>{children}</Label>;
 }
 
-export type SelectTriggerProps = {
+export type SelectValueProps<T extends object = SelectOption> = {
+  /** Placeholder when no value is selected. @default Select… */
   placeholder?: string;
   className?: string;
+  /** Custom closed-trigger content. Receives RAC `SelectValue` render props. */
+  children?: RACSelectValueProps<T>['children'];
 };
 
-function SelectTrigger({ placeholder = 'Select…', className }: SelectTriggerProps): JSX.Element {
+function SelectValue<T extends object = SelectOption>({
+  placeholder = 'Select…',
+  className,
+  children,
+}: SelectValueProps<T>): JSX.Element {
+  const s = select();
+  return (
+    <AriaSelectValue {...recipeProps(s.selectValue, className)}>
+      {children ??
+        (({ defaultChildren, isPlaceholder }) => (isPlaceholder ? placeholder : defaultChildren))}
+    </AriaSelectValue>
+  );
+}
+
+export type SelectTriggerProps = {
+  /** Placeholder when no value is selected. Ignored when `children` is set. @default Select… */
+  placeholder?: string;
+  className?: string;
+  /** Replace the default `Select.Value`. Compose `Select.Value` for a custom closed value. */
+  children?: ReactNode;
+};
+
+function SelectTrigger({
+  placeholder = 'Select…',
+  className,
+  children,
+}: SelectTriggerProps): JSX.Element {
   const s = select();
   return (
     <AriaButton {...recipeProps(s.trigger, className)}>
-      <SelectValue {...recipeProps(s.selectValue)}>
-        {({ defaultChildren, isPlaceholder }) => (isPlaceholder ? placeholder : defaultChildren)}
-      </SelectValue>
+      {children ?? <SelectValue placeholder={placeholder} />}
       <span {...recipeProps(s.triggerIcon)} aria-hidden>
         <Icon name="chevronDown" size="sm" />
       </span>
@@ -111,23 +146,30 @@ function SelectPopover({
   );
 }
 
-export type SelectListBoxProps<T extends object = SelectOption> = {
-  items?: Iterable<T>;
-  children: ReactNode | ((item: T) => ReactNode);
-  className?: string;
-};
+export type SelectListBoxProps<T extends object = SelectOption> =
+  | {
+      items: Iterable<T>;
+      children: (item: T) => ReactNode;
+      className?: string;
+    }
+  | {
+      items?: never;
+      children: ReactNode;
+      className?: string;
+    };
 
-function SelectListBox<T extends object>({
-  items,
-  children,
-  className,
-}: SelectListBoxProps<T>): JSX.Element {
+function SelectListBox<T extends object>(props: SelectListBoxProps<T>): JSX.Element {
   const s = select();
-  return (
-    <ListBox {...recipeProps(s.listbox, className)} items={items}>
-      {children}
-    </ListBox>
-  );
+  if ('items' in props && props.items != null) {
+    const { items, children, className } = props;
+    return (
+      <ListBox {...recipeProps(s.listbox, className)} items={items}>
+        {children}
+      </ListBox>
+    );
+  }
+  const { children, className } = props;
+  return <ListBox {...recipeProps(s.listbox, className)}>{children}</ListBox>;
 }
 
 export type SelectItemProps = ListBoxItemProps & { className?: string };
@@ -153,10 +195,15 @@ export type SelectProps = Omit<RACSelectProps<SelectOption>, 'children' | 'class
      * properties only cascade to descendants of the themed element).
      */
     portalContainer?: Element;
+    /** Additional CSS class names merged onto the root. */
     className?: string;
   };
 
-function SelectPreset({
+/**
+ * Dropdown single-select. `Select` with `options` is the assembled preset.
+ * Compose `Root`, `Trigger`, `Value`, `Popover`, `ListBox`, and `Item` for custom rows.
+ */
+function Select({
   label,
   description,
   errorMessage,
@@ -166,13 +213,8 @@ function SelectPreset({
   className,
   ...props
 }: SelectProps): JSX.Element {
-  const s = select();
   return (
-    <AriaSelect
-      {...props}
-      {...recipeProps(s.root, className)}
-      isInvalid={errorMessage ? true : undefined}
-    >
+    <SelectRoot {...props} className={className} isInvalid={errorMessage ? true : undefined}>
       {label ? <SelectLabel>{label}</SelectLabel> : null}
       <SelectTrigger placeholder={placeholder} />
       {description ? <SelectDescription>{description}</SelectDescription> : null}
@@ -186,21 +228,20 @@ function SelectPreset({
           ))}
         </SelectListBox>
       </SelectPopover>
-    </AriaSelect>
+    </SelectRoot>
   );
 }
 
-/**
- * Dropdown single-select. `Select` with `options` is the assembled preset.
- * Compose `Root`, `Trigger`, `Popover`, `ListBox`, and `Item` for custom rows.
- */
-export const Select = Object.assign(SelectPreset, {
+export const SelectNamespace = Object.assign(Select, {
   Root: SelectRoot,
   Label: SelectLabel,
   Trigger: SelectTrigger,
+  Value: SelectValue,
   Description: SelectDescription,
   Error: SelectError,
   Popover: SelectPopover,
   ListBox: SelectListBox,
   Item: SelectItem,
 });
+
+export { SelectNamespace as Select };

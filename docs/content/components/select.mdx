@@ -5,7 +5,7 @@ description: Dropdown single-select with options, or compound parts for custom r
 
 # Select
 
-Dropdown single-select. `Select` with `options` is the assembled preset (`label`, `description`, `errorMessage`, `placeholder`). Compose `Select.Root`, `Select.Trigger`, `Select.Popover`, `Select.ListBox`, and `Select.Item` when a row needs more than a label.
+Dropdown single-select. `Select` with `options` is the assembled preset (`label`, `description`, `errorMessage`, `placeholder`). Compose `Select.Root`, `Select.Trigger`, `Select.Value`, `Select.Popover`, `Select.ListBox`, and `Select.Item` when a row needs more than a label.
 
 Custom item rows are React-only. Astro and HTML previews keep using a native `<select>` with the core recipe classes.
 
@@ -23,7 +23,7 @@ Pass an `options` array of `{ id, label }` objects. Use `placeholder` when no va
 
 ### Compound parts
 
-Compose parts for custom item content. `textValue` is the string used for typeahead and the closed trigger.
+Compose parts for custom item content. `textValue` is the string used for typeahead and the default closed trigger. Compose `Select.Value` inside `Select.Trigger` when the closed value should match custom row chrome. Pass `portalContainer` on `Select.Popover` when the list must portal into a themed subtree instead of `document.body`.
 
 <Demo id="select.parts" />
 

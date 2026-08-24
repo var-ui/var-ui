@@ -51,13 +51,17 @@ export { RadioGroup, type RadioGroupOption, type RadioGroupProps } from './Radio
 export { CheckboxGroup, type CheckboxGroupOption, type CheckboxGroupProps } from './CheckboxGroup';
 export {
   Select,
+  type SelectDescriptionProps,
+  type SelectErrorProps,
   type SelectItemProps,
+  type SelectLabelProps,
   type SelectListBoxProps,
   type SelectOption,
   type SelectPopoverProps,
   type SelectProps,
   type SelectRootProps,
   type SelectTriggerProps,
+  type SelectValueProps,
 } from './Select';
 export { Tabs, type TabsProps } from './Tabs';
 export {

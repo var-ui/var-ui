@@ -53,7 +53,7 @@ describe('Select', () => {
     document.body.removeChild(container);
   });
 
-  it('renders custom item rows from compound parts', async () => {
+  it('renders custom item rows from compound parts and updates the trigger on select', async () => {
     render(
       <IconProvider icons={{}}>
         <Select.Root aria-label="Assignee">
@@ -73,6 +73,48 @@ describe('Select', () => {
     await userEvent.click(screen.getByRole('button', { name: /Assignee/ }));
 
     expect(screen.getByTestId('row-avatar')).toBeTruthy();
-    expect(screen.getByRole('option', { name: /Ada Lovelace/ })).toBeTruthy();
+    const option = screen.getByRole('option', { name: /Ada Lovelace/ });
+    expect(option).toBeTruthy();
+
+    await userEvent.click(option);
+
+    expect(screen.getByRole('button', { name: /Ada Lovelace/ })).toBeTruthy();
+    expect(screen.queryByText('Select…')).toBeNull();
+  });
+
+  it('renders a custom closed value from Select.Value', async () => {
+    render(
+      <IconProvider icons={{}}>
+        <Select.Root aria-label="Assignee">
+          <Select.Trigger>
+            <Select.Value>
+              {({ selectedText, isPlaceholder }) =>
+                isPlaceholder ? (
+                  'Select…'
+                ) : (
+                  <span>
+                    <span data-testid="trigger-avatar">{selectedText[0]}</span>
+                    {selectedText}
+                  </span>
+                )
+              }
+            </Select.Value>
+          </Select.Trigger>
+          <Select.Popover>
+            <Select.ListBox>
+              <Select.Item id="ada" textValue="Ada Lovelace">
+                Ada Lovelace
+              </Select.Item>
+            </Select.ListBox>
+          </Select.Popover>
+        </Select.Root>
+      </IconProvider>,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: /Assignee/ }));
+    await userEvent.click(await screen.findByRole('option', { name: /Ada Lovelace/ }));
+
+    expect(screen.getByTestId('trigger-avatar').textContent).toBe('A');
+    expect(screen.getByRole('button', { name: /Ada Lovelace/ })).toBeTruthy();
   });
 });
