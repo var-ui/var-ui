@@ -9,6 +9,7 @@ import {
   useResolvedColorMode,
 } from './color-mode';
 import { defaultThemeClassName } from '@var-ui/core/theme-constants';
+import { DirectionProvider, type Direction } from './DirectionProvider';
 
 export type DesignSystemProviderProps = {
   children: ReactNode;
@@ -30,6 +31,8 @@ export type DesignSystemProviderProps = {
    * this key: read as the initial color mode on mount, written on every `setColorMode` call.
    */
   storageKey?: string;
+  direction?: Direction;
+  locale?: string;
 };
 
 export function DesignSystemProvider({
@@ -41,6 +44,8 @@ export function DesignSystemProvider({
   customTheme,
   applyToDocument = false,
   storageKey,
+  direction,
+  locale,
 }: DesignSystemProviderProps): JSX.Element {
   // Starts at defaultColorMode on every render pass, matching what SSR renders — corrected from
   // localStorage in the layout effect below (client-only, before paint) rather than read here,
@@ -133,8 +138,14 @@ export function DesignSystemProvider({
     controlledColorMode,
   ]);
 
+  const directed = (
+    <DirectionProvider direction={direction} locale={locale} applyToDocument={applyToDocument}>
+      {children}
+    </DirectionProvider>
+  );
+
   if (applyToDocument) {
-    return <ColorModeContext.Provider value={value}>{children}</ColorModeContext.Provider>;
+    return <ColorModeContext.Provider value={value}>{directed}</ColorModeContext.Provider>;
   }
 
   return (
@@ -150,7 +161,7 @@ export function DesignSystemProvider({
           colorScheme: colorMode === 'system' ? 'inherit' : resolvedColorMode,
         }}
       >
-        {children}
+        {directed}
       </div>
     </ColorModeContext.Provider>
   );
