@@ -12,7 +12,7 @@ import { Hidden, Text } from '@var-ui/astro';
 <Hidden hide={{ md: true }} as="aside">
   <Text>Visible below md</Text>
 </Hidden>`,
-  html: `<aside>
+  html: `<aside class="var-ui-hidden-base-false var-ui-hidden-md-true">
   <p class="var-ui-text-block">Visible below md</p>
 </aside>`,
 } satisfies DemoSnippets;

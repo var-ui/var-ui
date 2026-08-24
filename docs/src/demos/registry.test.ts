@@ -11,6 +11,8 @@ import {
   reactDemoLoaders,
 } from './registry';
 import { render as renderButtonDefault } from './button/default/html';
+import { render as renderHiddenHideMd } from './hidden/hide-md/html';
+import { render as renderHiddenShowMd } from './hidden/show-md/html';
 
 describe('demo registry completeness', () => {
   it('has snippets and loaders for every id across frameworks', () => {
@@ -35,6 +37,15 @@ describe('demo registry completeness', () => {
     expect(Object.keys(astroDemoMap).sort()).toEqual([...crossFrameworkIds].sort());
     expect(Object.keys(htmlDemoMap).sort()).toEqual([...crossFrameworkIds].sort());
     expect(Object.keys(reactDemoMap).sort()).toEqual([...DEMO_IDS].sort());
+  });
+
+  it('keeps Hidden HTML snippets aligned with live hide classes', () => {
+    const hideMdClass = renderHiddenHideMd().match(/<aside class="([^"]+)"/)?.[1];
+    const showMdClass = renderHiddenShowMd().match(/<aside class="([^"]+)"/)?.[1];
+    expect(hideMdClass).toBeTruthy();
+    expect(showMdClass).toBeTruthy();
+    expect(demoSnippets['hidden.hide-md'].html).toContain(`class="${hideMdClass}"`);
+    expect(demoSnippets['hidden.show-md'].html).toContain(`class="${showMdClass}"`);
   });
 
   it('serializes HTML button previews with class + data attrs', () => {
