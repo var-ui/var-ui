@@ -16,6 +16,8 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
       "controlSizeVariants",
       "controlSurfaceSize",
       "hexToHsv",
+      "hiddenClassName",
+      "hiddenStyle",
       "hsvToHex",
       "hsvToRgb",
       "hueToPureHex",
@@ -207,7 +209,7 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
   "summary": {
     "runtimeByCategory": {
       "fonts": 4,
-      "helper": 16,
+      "helper": 18,
       "icons": 4,
       "layout": 6,
       "object": 9,
@@ -219,13 +221,13 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
       "tokens": 19,
     },
     "runtimeByKind": {
-      "function": 137,
+      "function": 139,
       "number": 4,
       "object": 33,
       "string": 4,
     },
-    "runtimeExports": 178,
-    "typeOnlyExports": 116,
+    "runtimeExports": 180,
+    "typeOnlyExports": 118,
   },
   "typeOnlyExports": [
     "AccordionGroupRecipeProps",
@@ -285,6 +287,8 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
     "FontSlotConfig",
     "GenerateColorsInput",
     "GenerateColorsResult",
+    "HiddenBreakpoint",
+    "HiddenMap",
     "Hsv",
     "IconName",
     "InferVarDefinitions",

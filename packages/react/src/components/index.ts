@@ -132,6 +132,7 @@ export {
 export { Form, FormErrorsContext, type FormProps } from './Form';
 export { AspectRatio, type AspectRatioProps } from './AspectRatio';
 export { Center, type CenterProps } from './Center';
+export { Hidden, type HiddenProps } from './Hidden';
 export { Breadcrumbs, type BreadcrumbItemData, type BreadcrumbsProps } from './Breadcrumbs';
 export { Toc, TocItem, type TocItemProps, type TocProps } from './Toc';
 export { List, ListItem, type ListItemData, type ListItemProps, type ListProps } from './List';

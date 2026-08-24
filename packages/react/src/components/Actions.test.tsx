@@ -34,6 +34,13 @@ describe('IconButton', () => {
     expect(button.getAttribute('data-layout')).toBe('icon');
     expect(screen.getByTestId('close-icon')).toBeTruthy();
   });
+
+  it('forwards data-mirror to the inner icon, not the button', () => {
+    wrap(<IconButton name="close" aria-label="Close" data-mirror />);
+    const button = screen.getByRole('button', { name: 'Close' });
+    expect(button.hasAttribute('data-mirror')).toBe(false);
+    expect(button.querySelector('[data-mirror]')).toBeTruthy();
+  });
 });
 
 describe('ButtonGroup', () => {

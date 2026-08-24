@@ -2,6 +2,7 @@ import { createRef, type ReactNode } from 'react';
 import { describe, expect, it } from 'vite-plus/test';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { DirectionProvider } from '../DirectionProvider';
 import { IconProvider } from '../icons';
 import { LayerProvider } from '../layers/LayerProvider';
 import { SideNav, type SideNavCollapseHandle } from './SideNav';
@@ -165,5 +166,35 @@ describe('SideNav', () => {
       </IconProvider>,
     );
     expect(screen.getByRole('navigation').getAttribute('data-collapsed')).toBe('');
+  });
+
+  it('mirrors the collapse chevron when direction is rtl', () => {
+    wrap(
+      <DirectionProvider direction="rtl">
+        <SideNav collapsible>
+          <span>item</span>
+        </SideNav>
+      </DirectionProvider>,
+    );
+    const collapse = screen.getByRole('button', { name: 'Collapse navigation' });
+    expect(collapse.querySelector('[data-mirror]')).toBeTruthy();
+  });
+
+  it('mirrors the nested expand chevron when direction is rtl', async () => {
+    wrap(
+      <DirectionProvider direction="rtl">
+        <SideNav>
+          <SideNav.Item label="Projects" collapsible>
+            <SideNav.Item label="Alpha" href="/projects/alpha" />
+          </SideNav.Item>
+        </SideNav>
+      </DirectionProvider>,
+    );
+    // Starts expanded (chevronDown) — only horizontal chevrons opt into mirror.
+    const collapse = screen.getByRole('button', { name: 'Collapse Projects' });
+    expect(collapse.querySelector('[data-mirror]')).toBeNull();
+    await userEvent.click(collapse);
+    const expand = screen.getByRole('button', { name: 'Expand Projects' });
+    expect(expand.querySelector('[data-mirror]')).toBeTruthy();
   });
 });

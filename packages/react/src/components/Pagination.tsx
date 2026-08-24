@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { Button as AriaButton } from 'react-aria-components';
 import { button, pagination, resolveButtonProps } from '@var-ui/core';
+import { useDirection } from '../DirectionProvider';
 import { IconButton } from './IconButton';
 import { Select } from './Select';
 import { cx, recipeProps } from './utils';
@@ -102,6 +103,7 @@ export function Pagination({
   label = 'Pagination',
   className,
 }: PaginationProps): JSX.Element | null {
+  const { isRtl } = useDirection();
   const p = pagination({ size });
   const pageSize = Number.isFinite(pageSizeProp) ? Math.max(1, Math.floor(pageSizeProp)) : 10;
   const totalPages =
@@ -220,6 +222,7 @@ export function Pagination({
           size={size}
           onPress={() => goTo(page - 1)}
           isDisabled={isDisabled || !hasPrevious}
+          data-mirror={isRtl || undefined}
         />
         {renderIndicator()}
         <IconButton
@@ -229,6 +232,7 @@ export function Pagination({
           size={size}
           onPress={() => goTo(page + 1)}
           isDisabled={isDisabled || !hasNext}
+          data-mirror={isRtl || undefined}
         />
       </div>
     </nav>

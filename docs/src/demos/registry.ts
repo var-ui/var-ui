@@ -10,6 +10,9 @@ import { snippets as buttonVariantsSnippets } from './button/variants/snippets';
 import { snippets as cardDefaultSnippets } from './card/default/snippets';
 import { snippets as carouselDefaultSnippets } from './carousel/default/snippets';
 import { snippets as centerDefaultSnippets } from './center/default/snippets';
+import { snippets as hiddenHideMdSnippets } from './hidden/hide-md/snippets';
+import { snippets as hiddenShowMdSnippets } from './hidden/show-md/snippets';
+import { snippets as directionRtlSnippets } from './direction/rtl/snippets';
 import { snippets as clickableCardDefaultSnippets } from './clickable-card/default/snippets';
 import { snippets as codeBlockDefaultSnippets } from './code-block/default/snippets';
 import { snippets as dividerDefaultSnippets } from './divider/default/snippets';
@@ -181,6 +184,9 @@ export const DEMO_IDS = [
   'stack.default',
   'grid.default',
   'center.default',
+  'hidden.hide-md',
+  'hidden.show-md',
+  'direction.rtl',
   'section.default',
   'divider.default',
   'aspect-ratio.default',
@@ -356,6 +362,9 @@ export const demoSnippets: Record<DemoId, DemoSnippets> = {
   'stack.default': stackDefaultSnippets,
   'grid.default': gridDefaultSnippets,
   'center.default': centerDefaultSnippets,
+  'hidden.hide-md': hiddenHideMdSnippets,
+  'hidden.show-md': hiddenShowMdSnippets,
+  'direction.rtl': directionRtlSnippets,
   'section.default': sectionDefaultSnippets,
   'divider.default': dividerDefaultSnippets,
   'aspect-ratio.default': aspectRatioDefaultSnippets,
@@ -531,6 +540,9 @@ export const reactDemoLoaders: Record<DemoId, DemoEntry['react']> = {
   'stack.default': () => import('./stack/default/react'),
   'grid.default': () => import('./grid/default/react'),
   'center.default': () => import('./center/default/react'),
+  'hidden.hide-md': () => import('./hidden/hide-md/react'),
+  'hidden.show-md': () => import('./hidden/show-md/react'),
+  'direction.rtl': () => import('./direction/rtl/react'),
   'section.default': () => import('./section/default/react'),
   'divider.default': () => import('./divider/default/react'),
   'aspect-ratio.default': () => import('./aspect-ratio/default/react'),
@@ -729,6 +741,21 @@ export const demoRegistry: Record<DemoId, DemoEntry> = {
     id: 'center.default',
     snippets: demoSnippets['center.default'],
     react: reactDemoLoaders['center.default'],
+  },
+  'hidden.hide-md': {
+    id: 'hidden.hide-md',
+    snippets: demoSnippets['hidden.hide-md'],
+    react: reactDemoLoaders['hidden.hide-md'],
+  },
+  'hidden.show-md': {
+    id: 'hidden.show-md',
+    snippets: demoSnippets['hidden.show-md'],
+    react: reactDemoLoaders['hidden.show-md'],
+  },
+  'direction.rtl': {
+    id: 'direction.rtl',
+    snippets: demoSnippets['direction.rtl'],
+    react: reactDemoLoaders['direction.rtl'],
   },
   'section.default': {
     id: 'section.default',

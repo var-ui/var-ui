@@ -9,6 +9,7 @@ export type IconButtonProps = Omit<RACButtonProps, 'className' | 'children'> & {
   name: IconName;
   className?: string;
   icon?: ReactNode;
+  'data-mirror'?: boolean | '';
 } & ButtonVariantProps;
 
 export function IconButton({
@@ -20,6 +21,7 @@ export function IconButton({
   size = 'md',
   elevated,
   className,
+  'data-mirror': dataMirror,
   ...props
 }: IconButtonProps): JSX.Element {
   const recipeProps_ = button(
@@ -31,7 +33,13 @@ export function IconButton({
   );
   return (
     <AriaButton {...props} {...recipeProps(recipeProps_, className)}>
-      {icon ?? <Icon name={name} size={size === 'lg' ? 'lg' : size === 'sm' ? 'sm' : 'md'} />}
+      {icon ?? (
+        <Icon
+          name={name}
+          size={size === 'lg' ? 'lg' : size === 'sm' ? 'sm' : 'md'}
+          data-mirror={dataMirror}
+        />
+      )}
     </AriaButton>
   );
 }

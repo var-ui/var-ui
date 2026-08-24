@@ -93,6 +93,9 @@ export const mobileNav = typestyles.styles.component(
             transform: 'translateX(-100%)',
             boxShadow: 'none',
           },
+          '[dir="rtl"] &:not([data-open])': {
+            transform: 'translateX(100%)',
+          },
         },
         '&[data-side="end"]': {
           insetInlineEnd: 0,
@@ -103,6 +106,9 @@ export const mobileNav = typestyles.styles.component(
           '&:not([data-open])': {
             transform: 'translateX(100%)',
             boxShadow: 'none',
+          },
+          '[dir="rtl"] &:not([data-open])': {
+            transform: 'translateX(-100%)',
           },
         },
       },

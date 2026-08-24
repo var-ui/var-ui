@@ -28,3 +28,9 @@ export type {
   ProgressBarTone,
 } from './components/semanticTone';
 export type { TocHeading } from './tocSpy';
+export {
+  hiddenClassName,
+  hiddenStyle,
+  type HiddenBreakpoint,
+  type HiddenMap,
+} from './components/hidden';

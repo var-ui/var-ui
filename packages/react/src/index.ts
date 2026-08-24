@@ -114,6 +114,8 @@ export {
   type AspectRatioProps,
   Center,
   type CenterProps,
+  Hidden,
+  type HiddenProps,
   Breadcrumbs,
   type BreadcrumbItemData,
   type BreadcrumbsProps,
@@ -434,6 +436,18 @@ export {
 } from './chat/useChatNewMessages';
 export { designTokens, type DesignTokens } from './tokens';
 export { DesignSystemProvider, type DesignSystemProviderProps } from './DesignSystemProvider';
+export {
+  DirectionProvider,
+  useDirection,
+  type Direction,
+  type DirectionProviderProps,
+} from './DirectionProvider';
+export {
+  resolveDirection,
+  resolveI18nProviderLocale,
+  LTR_I18N_FALLBACK_LOCALE,
+  RTL_I18N_FALLBACK_LOCALE,
+} from './direction';
 export {
   useColorMode,
   readStoredColorMode,

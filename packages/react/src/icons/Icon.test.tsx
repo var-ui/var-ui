@@ -57,4 +57,22 @@ describe('Icon', () => {
     expect(el.className).toContain('var-ui-icon');
     expect(el.getAttribute('data-size')).toBe('lg');
   });
+
+  it('sets data-mirror on the shell when requested', () => {
+    const { container } = render(<Icon name="search" data-mirror />);
+    expect(container.firstElementChild?.getAttribute('data-mirror')).not.toBeNull();
+  });
+
+  it('sets data-mirror when passed as an empty string', () => {
+    const { container } = render(<Icon name="search" data-mirror="" />);
+    expect(container.firstElementChild?.getAttribute('data-mirror')).not.toBeNull();
+  });
+
+  it('omits data-mirror when the prop is omitted or false', () => {
+    const omitted = render(<Icon name="search" />);
+    expect(omitted.container.firstElementChild?.hasAttribute('data-mirror')).toBe(false);
+
+    const off = render(<Icon name="search" data-mirror={false} />);
+    expect(off.container.firstElementChild?.hasAttribute('data-mirror')).toBe(false);
+  });
 });

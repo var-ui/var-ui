@@ -10,6 +10,9 @@ import { render as renderButtonVariants } from './button/variants/html';
 import { render as renderCardDefault } from './card/default/html';
 import { render as renderCarouselDefault } from './carousel/default/html';
 import { render as renderCenterDefault } from './center/default/html';
+import { render as renderHiddenHideMd } from './hidden/hide-md/html';
+import { render as renderHiddenShowMd } from './hidden/show-md/html';
+import { render as renderDirectionRtl } from './direction/rtl/html';
 import { render as renderClickableCardDefault } from './clickable-card/default/html';
 import { render as renderCodeBlockDefault } from './code-block/default/html';
 import { render as renderDividerDefault } from './divider/default/html';
@@ -78,6 +81,9 @@ export const htmlDemoMap = {
   'stack.default': renderStackDefault,
   'grid.default': renderGridDefault,
   'center.default': renderCenterDefault,
+  'hidden.hide-md': renderHiddenHideMd,
+  'hidden.show-md': renderHiddenShowMd,
+  'direction.rtl': renderDirectionRtl,
   'section.default': renderSectionDefault,
   'divider.default': renderDividerDefault,
   'aspect-ratio.default': renderAspectRatioDefault,
