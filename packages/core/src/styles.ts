@@ -13,6 +13,7 @@
  * ```
  */
 import './themeable-components';
+import './components/hidden';
 import './components/styles';
 import './base-styles';
 import './register-default-theme';
