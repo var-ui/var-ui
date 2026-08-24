@@ -6,6 +6,7 @@ export { default as HStack } from './src/components/HStack.astro';
 export { default as VStack } from './src/components/VStack.astro';
 export { default as Grid } from './src/components/Grid.astro';
 export { default as Center } from './src/components/Center.astro';
+export { default as Hidden } from './src/components/Hidden.astro';
 export { default as Section } from './src/components/Section.astro';
 export { default as ScrollArea } from './src/components/ScrollArea.astro';
 export { default as Divider } from './src/components/Divider.astro';
