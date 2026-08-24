@@ -180,7 +180,7 @@ describe('SideNav', () => {
     expect(collapse.querySelector('[data-mirror]')).toBeTruthy();
   });
 
-  it('mirrors the nested expand chevron when direction is rtl', () => {
+  it('mirrors the nested expand chevron when direction is rtl', async () => {
     wrap(
       <DirectionProvider direction="rtl">
         <SideNav>
@@ -190,7 +190,11 @@ describe('SideNav', () => {
         </SideNav>
       </DirectionProvider>,
     );
-    const expand = screen.getByRole('button', { name: 'Collapse Projects' });
+    // Starts expanded (chevronDown) — only horizontal chevrons opt into mirror.
+    const collapse = screen.getByRole('button', { name: 'Collapse Projects' });
+    expect(collapse.querySelector('[data-mirror]')).toBeNull();
+    await userEvent.click(collapse);
+    const expand = screen.getByRole('button', { name: 'Expand Projects' });
     expect(expand.querySelector('[data-mirror]')).toBeTruthy();
   });
 });

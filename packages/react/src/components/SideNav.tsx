@@ -358,7 +358,7 @@ export function SideNavItem({
             intent="ghost"
             size="sm"
             onPress={() => setIsExpanded((expanded) => !expanded)}
-            data-mirror={isRtl || undefined}
+            data-mirror={isRtl && !isExpanded ? true : undefined}
           />
         ) : null}
       </div>

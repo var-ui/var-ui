@@ -98,7 +98,10 @@ export const tree = typestyles.styles.component(
           cursor: 'pointer',
           color: 'inherit',
           transition: 'transform 0.15s ease',
+          // Expand rotates toward "down". In RTL the chevron is mirrored
+          // (scaleX(-1) on the icon), so +90deg would point up — use -90deg.
           '&[data-expanded]': { transform: 'rotate(90deg)' },
+          '[dir="rtl"] &[data-expanded]': { transform: 'rotate(-90deg)' },
         },
         label: {
           fontSize: t.fontSize.md.var,

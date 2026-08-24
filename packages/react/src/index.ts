@@ -442,7 +442,12 @@ export {
   type Direction,
   type DirectionProviderProps,
 } from './DirectionProvider';
-export { resolveDirection, resolveI18nProviderLocale, RTL_I18N_FALLBACK_LOCALE } from './direction';
+export {
+  resolveDirection,
+  resolveI18nProviderLocale,
+  LTR_I18N_FALLBACK_LOCALE,
+  RTL_I18N_FALLBACK_LOCALE,
+} from './direction';
 export {
   useColorMode,
   readStoredColorMode,

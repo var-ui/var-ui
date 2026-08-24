@@ -1,6 +1,8 @@
-import { Breadcrumbs, DirectionProvider, SideNav, Text } from '@var-ui/react';
+import { useState } from 'react';
+import { Breadcrumbs, DirectionProvider, Pagination, SideNav, Text } from '@var-ui/react';
 
 export default function Preview() {
+  const [page, setPage] = useState(1);
   return (
     <DirectionProvider direction="rtl">
       <div
@@ -15,7 +17,10 @@ export default function Preview() {
         <SideNav header={<SideNav.Heading heading="Docs" />}>
           <SideNav.Section title="Main">
             <SideNav.Item label="Overview" href="#overview" isSelected />
-            <SideNav.Item label="Hidden" href="#hidden" />
+            <SideNav.Item label="Guides" collapsible>
+              <SideNav.Item label="Hidden" href="#hidden" />
+              <SideNav.Item label="Direction" href="#direction" />
+            </SideNav.Item>
           </SideNav.Section>
         </SideNav>
       </div>
@@ -25,6 +30,7 @@ export default function Preview() {
           { id: 'here', label: 'Current' },
         ]}
       />
+      <Pagination page={page} onChange={setPage} totalPages={5} variant="compact" />
       <Text>dir=rtl island</Text>
     </DirectionProvider>
   );

@@ -329,12 +329,21 @@ describe('Tree', () => {
     expect(screen.getByTestId('end')).toBeTruthy();
   });
 
-  it('mirrors the expand chevron when direction is rtl', () => {
+  it('mirrors the expand chevron when direction is rtl', async () => {
     render(
       <DirectionProvider direction="rtl">
         <Tree items={FILE_TREE_ITEMS} aria-label="Files" />
       </DirectionProvider>,
     );
-    expect(document.querySelector('[data-mirror]')).toBeTruthy();
+    const row = screen.getByRole('treeitem', { name: /src/i });
+    const toggle = row.querySelector('button')!;
+    expect(toggle.querySelector('[data-mirror]')).toBeTruthy();
+
+    await userEvent.click(toggle);
+    expect(row.getAttribute('aria-expanded')).toBe('true');
+    expect(toggle.getAttribute('data-expanded')).toBe('');
+    // Collapsed→expanded must keep the mirrored icon; core CSS uses
+    // rotate(-90deg) under [dir=rtl] so it points down, not up.
+    expect(toggle.querySelector('[data-mirror]')).toBeTruthy();
   });
 });

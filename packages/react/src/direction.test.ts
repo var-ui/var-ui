@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vite-plus/test';
-import { RTL_I18N_FALLBACK_LOCALE, resolveDirection, resolveI18nProviderLocale } from './direction';
+import {
+  LTR_I18N_FALLBACK_LOCALE,
+  RTL_I18N_FALLBACK_LOCALE,
+  resolveDirection,
+  resolveI18nProviderLocale,
+} from './direction';
 
 describe('resolveDirection', () => {
   it('defaults to ltr', () => {
@@ -18,13 +23,22 @@ describe('resolveDirection', () => {
 });
 
 describe('resolveI18nProviderLocale', () => {
-  it('returns undefined for ltr with no locale (do not wrap I18nProvider)', () => {
+  it('returns undefined for default ltr with no locale (do not wrap I18nProvider)', () => {
     expect(resolveI18nProviderLocale({ direction: 'ltr' })).toBeUndefined();
+  });
+
+  it('resets to en-US when direction is explicitly ltr (nested island)', () => {
+    expect(resolveI18nProviderLocale({ direction: 'ltr', directionProp: 'ltr' })).toBe(
+      LTR_I18N_FALLBACK_LOCALE,
+    );
   });
 
   it('uses the caller locale when provided', () => {
     expect(resolveI18nProviderLocale({ direction: 'rtl', locale: 'he-IL' })).toBe('he-IL');
     expect(resolveI18nProviderLocale({ direction: 'rtl', locale: 'en-US' })).toBe('en-US');
+    expect(
+      resolveI18nProviderLocale({ direction: 'ltr', directionProp: 'ltr', locale: 'fr-FR' }),
+    ).toBe('fr-FR');
   });
 
   it('falls back to ar when direction is rtl and locale is omitted', () => {

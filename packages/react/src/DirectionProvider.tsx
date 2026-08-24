@@ -32,7 +32,11 @@ export function DirectionProvider({
     () => ({ direction, isRtl: direction === 'rtl' }),
     [direction],
   );
-  const i18nLocale = resolveI18nProviderLocale({ direction, locale });
+  const i18nLocale = resolveI18nProviderLocale({
+    direction,
+    directionProp,
+    locale,
+  });
 
   useIsomorphicLayoutEffect(() => {
     if (!applyToDocument || typeof document === 'undefined') return;

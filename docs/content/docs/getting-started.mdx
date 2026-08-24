@@ -25,12 +25,13 @@ Pass `direction` and a real `locale` on `DesignSystemProvider`:
 </DesignSystemProvider>
 ```
 
-`applyToDocument` syncs `html dir` (and `lang` when `locale` is set) after hydration / on mount. SSR apps that care about first paint should set `<html dir="rtl">` (and `lang` if needed) themselves.
+`applyToDocument` syncs `html dir` (and `lang` when `locale` is set) after hydration / on mount. It always writes `dir` for the resolved direction — including default `ltr`. If SSR set `<html dir="rtl">` and the client provider omits `direction`/`locale`, mount will rewrite `dir` to `ltr`. SSR apps that care about first paint should set `<html dir>` (and `lang` if needed) themselves **and** pass matching `direction`/`locale` to the provider.
 
 React Aria overlays (`Popover`, `Menu`, `start` / `end` placement) take direction from **locale**, not from `dir`. `I18nProvider` only accepts `locale`.
 
 - Prefer a real RTL locale (`he-IL`, `ar-EG`) so dates, numbers, and overlays agree.
 - `direction="rtl"` with no locale wraps `I18nProvider` with `ar` so placement still flips. That workaround does **not** set `html lang="ar"`.
+- `direction="ltr"` (explicit) with no locale wraps `I18nProvider` with `en-US` so a nested LTR island does not inherit a parent RTL locale for overlay placement.
 - `locale="en-US"` plus `direction="rtl"` keeps English formatting; overlays may **not** flip.
 - If you omit `direction` but pass `locale`, `dir` is derived from RAC `isRTL(locale)`.
 - `useDirection()` returns `{ direction, isRtl }` and defaults to `ltr` when no provider is mounted.
