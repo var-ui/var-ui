@@ -497,6 +497,13 @@ export const componentRegistry: ComponentEntry[] = [
     importLine: "import { Center } from '@var-ui/react';",
   },
   {
+    slug: 'hidden',
+    name: 'Hidden',
+    category: 'layout',
+    description: 'SSR-safe responsive show/hide via CSS media queries.',
+    importLine: "import { Hidden } from '@var-ui/react';",
+  },
+  {
     slug: 'aspect-ratio',
     name: 'AspectRatio',
     category: 'layout',

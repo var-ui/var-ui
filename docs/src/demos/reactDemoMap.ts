@@ -11,6 +11,9 @@ import ButtonVariants from './button/variants/react';
 import CardDefault from './card/default/react';
 import CarouselDefault from './carousel/default/react';
 import CenterDefault from './center/default/react';
+import HiddenHideMd from './hidden/hide-md/react';
+import HiddenShowMd from './hidden/show-md/react';
+import DirectionRtl from './direction/rtl/react';
 import ClickableCardDefault from './clickable-card/default/react';
 import CodeBlockDefault from './code-block/default/react';
 import DividerDefault from './divider/default/react';
@@ -181,6 +184,9 @@ export const reactDemoMap = {
   'stack.default': StackDefault,
   'grid.default': GridDefault,
   'center.default': CenterDefault,
+  'hidden.hide-md': HiddenHideMd,
+  'hidden.show-md': HiddenShowMd,
+  'direction.rtl': DirectionRtl,
   'section.default': SectionDefault,
   'divider.default': DividerDefault,
   'aspect-ratio.default': AspectRatioDefault,

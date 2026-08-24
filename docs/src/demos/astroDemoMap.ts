@@ -10,6 +10,9 @@ import ButtonVariants from './button/variants/astro.astro';
 import CardDefault from './card/default/astro.astro';
 import CarouselDefault from './carousel/default/astro.astro';
 import CenterDefault from './center/default/astro.astro';
+import HiddenHideMd from './hidden/hide-md/astro.astro';
+import HiddenShowMd from './hidden/show-md/astro.astro';
+import DirectionRtl from './direction/rtl/astro.astro';
 import ClickableCardDefault from './clickable-card/default/astro.astro';
 import CodeBlockDefault from './code-block/default/astro.astro';
 import DividerDefault from './divider/default/astro.astro';
@@ -78,6 +81,9 @@ export const astroDemoMap = {
   'stack.default': StackDefault,
   'grid.default': GridDefault,
   'center.default': CenterDefault,
+  'hidden.hide-md': HiddenHideMd,
+  'hidden.show-md': HiddenShowMd,
+  'direction.rtl': DirectionRtl,
   'section.default': SectionDefault,
   'divider.default': DividerDefault,
   'aspect-ratio.default': AspectRatioDefault,

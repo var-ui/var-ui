@@ -1,7 +1,7 @@
 # RTL direction + SSR-safe responsive visibility
 
 **Date:** 2026-08-05 (revised 2026-08-23)  
-**Status:** Draft for review  
+**Status:** Approved  
 **Inspired by:** [Reshaped `useRTL`](https://reshaped.so/docs/getting-started/overview), [`Hidden` utility](https://reshaped.so/docs/getting-started/overview)  
 **Related:** `DesignSystemProvider`, breakpoint tokens (`sm` 640 / `md` 768 / `lg` 1024 / `xl` 1280), `useMediaQuery`, layout recipes, React Aria `I18nProvider`
 
@@ -26,14 +26,14 @@ Hiding content with `useMediaQuery` and conditional render causes SSR/client mis
 
 ## Goals
 
-| Goal                  | Detail                                                                                          |
-| --------------------- | ----------------------------------------------------------------------------------------------- |
-| Direction context     | `direction` on `DesignSystemProvider` / `DirectionProvider` sets `dir` and `{ direction, isRtl }` |
-| RAC overlays          | Wrap `I18nProvider` so `start` / `end` placement can follow RTL when locale agrees              |
-| `useDirection()`      | Defaults to `{ direction: 'ltr', isRtl: false }` when no provider (does **not** throw)          |
-| Icon mirroring        | Opt-in `data-mirror` + `scaleX(-1)` — do not mirror the whole icon set                          |
-| Logical CSS (narrow)  | Fix remaining physical CSS in breadcrumbs and `mobileNav` slide                                 |
-| `Hidden` SSR-safe     | `hide` boolean or mobile-first map → hashed class with `@media` + `display: none`               |
+| Goal                 | Detail                                                                                            |
+| -------------------- | ------------------------------------------------------------------------------------------------- |
+| Direction context    | `direction` on `DesignSystemProvider` / `DirectionProvider` sets `dir` and `{ direction, isRtl }` |
+| RAC overlays         | Wrap `I18nProvider` so `start` / `end` placement can follow RTL when locale agrees                |
+| `useDirection()`     | Defaults to `{ direction: 'ltr', isRtl: false }` when no provider (does **not** throw)            |
+| Icon mirroring       | Opt-in `data-mirror` + `scaleX(-1)` — do not mirror the whole icon set                            |
+| Logical CSS (narrow) | Fix remaining physical CSS in breadcrumbs and `mobileNav` slide                                   |
+| `Hidden` SSR-safe    | `hide` boolean or mobile-first map → hashed class with `@media` + `display: none`                 |
 
 ## Non-goals (v1)
 
@@ -81,13 +81,13 @@ Hidden (React / Astro)     →  that class on `as` / a real HTML tag
 
 Adobe derives direction from locale. There is no independent `direction` prop.
 
-| Caller input                         | `dir` / CSS                         | `I18nProvider` locale                         | Overlays (`start` / `end`)      |
-| ------------------------------------ | ----------------------------------- | --------------------------------------------- | ------------------------------- |
-| `direction="rtl"` + `locale="he-IL"` | RTL                                 | `he-IL`                                       | Flip; dates/numbers follow `he` |
-| `direction="rtl"` only               | RTL                                 | `'ar'` **workaround, I18n only**              | Flip; do **not** set `html lang="ar"` |
-| `locale="he-IL"` only                | RTL (derived from `isRTL(locale)`)  | `he-IL`                                       | Flip                              |
-| `locale="en-US"` + `direction="rtl"` | RTL                                 | `en-US` (keep English formatting)             | **May not flip** — document this |
-| `direction="ltr"` / omitted, no locale | LTR                               | Do not wrap (leave RAC default)               | LTR                             |
+| Caller input                           | `dir` / CSS                        | `I18nProvider` locale             | Overlays (`start` / `end`)            |
+| -------------------------------------- | ---------------------------------- | --------------------------------- | ------------------------------------- |
+| `direction="rtl"` + `locale="he-IL"`   | RTL                                | `he-IL`                           | Flip; dates/numbers follow `he`       |
+| `direction="rtl"` only                 | RTL                                | `'ar'` **workaround, I18n only**  | Flip; do **not** set `html lang="ar"` |
+| `locale="he-IL"` only                  | RTL (derived from `isRTL(locale)`) | `he-IL`                           | Flip                                  |
+| `locale="en-US"` + `direction="rtl"`   | RTL                                | `en-US` (keep English formatting) | **May not flip** — document this      |
+| `direction="ltr"` / omitted, no locale | LTR                                | Do not wrap (leave RAC default)   | LTR                                   |
 
 Use RAC `isRTL(locale)` when deciding whether a provided locale is already RTL.
 
@@ -119,7 +119,7 @@ Do not auto-mirror every `Icon`. Opt in:
 
 ```tsx
 const { isRtl } = useDirection();
-<Icon name="chevronRight" data-mirror={isRtl || undefined} />
+<Icon name="chevronRight" data-mirror={isRtl || undefined} />;
 ```
 
 Icon recipe:
@@ -163,12 +163,12 @@ export type HiddenProps = {
 
 Semantics:
 
-| `hide`                         | Result                                      |
-| ------------------------------ | ------------------------------------------- |
-| `true`                         | Always `display: none`                      |
-| `false` / omitted / `{}`       | Always shown (`display: contents`)          |
-| `{ md: true }`                 | Visible below `md`, hidden `md` and up      |
-| `{ base: true, md: false }`    | Hidden below `md`, visible `md` and up      |
+| `hide`                      | Result                                 |
+| --------------------------- | -------------------------------------- |
+| `true`                      | Always `display: none`                 |
+| `false` / omitted / `{}`    | Always shown (`display: contents`)     |
+| `{ md: true }`              | Visible below `md`, hidden `md` and up |
+| `{ base: true, md: false }` | Hidden below `md`, visible `md` and up |
 
 Unspecified keys inherit the previous value. Default at `base` is visible (`false`).
 
@@ -182,12 +182,12 @@ Astro: `<Hidden hide={...}>` wraps the slot the same way; raw HTML uses `hiddenC
 
 Hidden does not wait on this list. Confirm already-logical (`layout` / `LayoutPanel`, `menu` `marginInlineStart`, `sideNav` chrome, `collapsible` open `rotate(180deg)`) and only change what still reads LTR:
 
-| Area        | Change                                                                 |
-| ----------- | ---------------------------------------------------------------------- |
-| breadcrumbs | Separator `marginLeft` → `marginInlineStart`                           |
-| mobileNav   | `[dir="rtl"]` override so start/end `translateX(±100%)` still exit off the start/end edge |
-| icon        | `[data-mirror] { transform: scaleX(-1) }`                              |
-| Pagination, SideNav, Tree | `data-mirror={isRtl \|\| undefined}` on directional chevrons |
+| Area                      | Change                                                                                    |
+| ------------------------- | ----------------------------------------------------------------------------------------- |
+| breadcrumbs               | Separator `marginLeft` → `marginInlineStart`                                              |
+| mobileNav                 | `[dir="rtl"]` override so start/end `translateX(±100%)` still exit off the start/end edge |
+| icon                      | `[data-mirror] { transform: scaleX(-1) }`                                                 |
+| Pagination, SideNav, Tree | `data-mirror={isRtl \|\| undefined}` on directional chevrons                              |
 
 Follow-up (logged, not this PR): `fileTree` / `tree` indent, `list`, `table`, `avatar`, `prose`, `steps`, `chat`, Carousel `scrollBy({ left })`, Calendar/Date chevrons.
 
@@ -210,12 +210,12 @@ SSR no-flash is proven by the Hidden demo (markup + CSS), not by rewriting `Docs
 
 ## Packages / export
 
-| Package         | Export                                                                 |
-| --------------- | ---------------------------------------------------------------------- |
-| `@var-ui/core`  | `hiddenClassName`, `HiddenMap` / breakpoint types, icon `[data-mirror]` |
+| Package         | Export                                                                                                                            |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `@var-ui/core`  | `hiddenClassName`, `HiddenMap` / breakpoint types, icon `[data-mirror]`                                                           |
 | `@var-ui/react` | `DirectionProvider`, `useDirection`, `Hidden`; `DesignSystemProvider` `direction` / `locale`; `Icon` / `IconButton` `data-mirror` |
-| `@var-ui/astro` | `Hidden.astro`                                                         |
-| docs            | Hidden page, getting-started notes, RTL island demo                    |
+| `@var-ui/astro` | `Hidden.astro`                                                                                                                    |
+| docs            | Hidden page, getting-started notes, RTL island demo                                                                               |
 
 One minor changeset covering the public API.
 

@@ -1,0 +1,40 @@
+---
+title: Hidden
+description: SSR-safe responsive show/hide via CSS media queries.
+---
+
+# Hidden
+
+Hides children with `display: none` inside breakpoint media queries. Markup stays in the HTML (no `useMediaQuery` / conditional render), so SSR and hydration match.
+
+`hide` is mobile-first and-up. Keys are `base` (0px) plus TypeStyles `sm` / `md` / `lg` / `xl`. Default at `base` is visible. When shown, the wrapper uses `display: contents`.
+
+## Examples
+
+### Hide from md
+
+Visible below `md`, hidden from `md` up.
+
+<Demo id="hidden.hide-md" />
+
+### Show from md
+
+Hidden below `md`, visible from `md` up (`base: true`, then `md: false`).
+
+<Demo id="hidden.show-md" />
+
+### RTL island
+
+`DirectionProvider` sets `dir` on a subtree. Side nav and breadcrumbs follow logical properties; chevrons opt into `data-mirror`.
+
+<Demo id="direction.rtl" />
+
+## Props
+
+<PropsTable slug="hidden" />
+
+## Accessibility
+
+`display: none` removes the subtree from the accessibility tree while hidden. That is the intended behavior for duplicate navigation. Do not use the HTML `hidden` attribute — it cannot be scoped to a media query.
+
+Astro and HTML should put `hiddenClassName({ hide })` on a real tag (`aside`, `nav`) when a landmark matters.

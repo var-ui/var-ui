@@ -59,6 +59,7 @@ const REQUIRED_FAMILY_SLUGS = [
   'top-nav-mega-menu',
   'mobile-nav',
   'tab-list',
+  'hidden',
   // Content / data
   'kbd',
   'list',
