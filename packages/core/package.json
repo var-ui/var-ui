@@ -406,6 +406,14 @@
       "types": "./dist/components/grid.d.mts",
       "import": "./dist/components/grid.mjs"
     },
+    "./components/hidden": {
+      "types": "./dist/components/hidden.d.mts",
+      "import": "./dist/components/hidden.mjs"
+    },
+    "./hidden": {
+      "types": "./dist/components/hidden.d.mts",
+      "import": "./dist/components/hidden.mjs"
+    },
     "./components/hoverCard": {
       "types": "./dist/components/hoverCard.d.mts",
       "import": "./dist/components/hoverCard.mjs"
