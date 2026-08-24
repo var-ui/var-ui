@@ -40,7 +40,7 @@ export const breadcrumbs = typestyles.styles.component(
         color: v.textColor.var,
         '&:not(:last-child)::after': {
           content: v.separator.var,
-          marginLeft: t.space[1].var,
+          marginInlineStart: t.space[1].var,
           color: v.textColor.var,
         },
         '&[data-current]': {
@@ -56,7 +56,7 @@ export const breadcrumbs = typestyles.styles.component(
         color: v.textColor.var,
         '&:not(:last-child)::after': {
           content: v.separator.var,
-          marginLeft: t.space[1].var,
+          marginInlineStart: t.space[1].var,
           color: v.textColor.var,
         },
       },
