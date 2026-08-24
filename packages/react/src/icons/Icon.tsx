@@ -12,6 +12,7 @@ export type IconProps = {
   size?: 'sm' | 'md' | 'lg' | 'inherit';
   className?: string;
   'aria-label'?: string;
+  'data-mirror'?: boolean | '';
 };
 
 /**
@@ -29,12 +30,14 @@ export function Icon({
   size = 'md',
   className,
   'aria-label': ariaLabel,
+  'data-mirror': dataMirror,
 }: IconProps): JSX.Element {
   const icons = useIcons();
   const glyph = children ?? (name ? icons[name] : undefined) ?? emptyFallback;
   return (
     <span
       {...recipeProps(icon({ size }), className)}
+      data-mirror={dataMirror ? '' : undefined}
       aria-hidden={ariaLabel ? undefined : true}
       aria-label={ariaLabel}
       role={ariaLabel ? 'img' : undefined}

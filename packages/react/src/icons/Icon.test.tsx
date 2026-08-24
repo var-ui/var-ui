@@ -57,4 +57,9 @@ describe('Icon', () => {
     expect(el.className).toContain('var-ui-icon');
     expect(el.getAttribute('data-size')).toBe('lg');
   });
+
+  it('sets data-mirror on the shell when requested', () => {
+    const { container } = render(<Icon name="search" data-mirror />);
+    expect(container.firstElementChild?.getAttribute('data-mirror')).not.toBeNull();
+  });
 });

@@ -1,6 +1,11 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 
+/** Opt-in horizontal flip for directional icons in RTL. */
+export const iconMirrorStyle = {
+  '&[data-mirror]': { transform: 'scaleX(-1)' },
+} as const;
+
 /**
  * Styling-only icon shell: sizes the em-box and colors the glyph via
  * `currentColor`. No SVG markup lives in core — the React `<Icon>` renders
@@ -30,6 +35,7 @@ export const icon = typestyles.styles.component(
           width: '100%',
           height: '100%',
         },
+        ...iconMirrorStyle,
       },
       variants: {
         size: {
