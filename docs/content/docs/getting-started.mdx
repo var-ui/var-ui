@@ -25,6 +25,8 @@ Pass `direction` and a real `locale` on `DesignSystemProvider`:
 </DesignSystemProvider>
 ```
 
+`applyToDocument` syncs `html dir` (and `lang` when `locale` is set) after hydration / on mount. SSR apps that care about first paint should set `<html dir="rtl">` (and `lang` if needed) themselves.
+
 React Aria overlays (`Popover`, `Menu`, `start` / `end` placement) take direction from **locale**, not from `dir`. `I18nProvider` only accepts `locale`.
 
 - Prefer a real RTL locale (`he-IL`, `ar-EG`) so dates, numbers, and overlays agree.

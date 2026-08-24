@@ -37,7 +37,7 @@ export function Icon({
   return (
     <span
       {...recipeProps(icon({ size }), className)}
-      data-mirror={dataMirror ? '' : undefined}
+      data-mirror={dataMirror === false || dataMirror == null ? undefined : ''}
       aria-hidden={ariaLabel ? undefined : true}
       aria-label={ariaLabel}
       role={ariaLabel ? 'img' : undefined}
