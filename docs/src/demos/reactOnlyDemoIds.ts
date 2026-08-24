@@ -104,4 +104,5 @@ export const REACT_ONLY_DEMO_IDS = new Set<DemoId>([
   'file-tree.nested',
   'field.parts',
   'form.default',
+  'select.parts',
 ]);

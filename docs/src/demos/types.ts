@@ -43,6 +43,7 @@ export type DemoId =
   | 'pin-input.default'
   | 'select.default'
   | 'select.options'
+  | 'select.parts'
   | 'combobox.default'
   | 'combobox.field'
   | 'typeahead.default'

@@ -164,7 +164,7 @@ export const componentRegistry: ComponentEntry[] = [
     slug: 'select',
     name: 'Select',
     category: 'data-input',
-    description: 'Dropdown single-select with options.',
+    description: 'Dropdown single-select with an options preset or compound parts for custom rows.',
     importLine: "import { Select } from '@var-ui/react';",
   },
   {

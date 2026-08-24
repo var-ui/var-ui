@@ -1,11 +1,13 @@
 ---
 title: Select
-description: Dropdown single-select with options.
+description: Dropdown single-select with options, or compound parts for custom rows.
 ---
 
 # Select
 
-Dropdown single-select with options.
+Dropdown single-select. `Select` with `options` is the assembled preset (`label`, `description`, `errorMessage`, `placeholder`). Compose `Select.Root`, `Select.Trigger`, `Select.Popover`, `Select.ListBox`, and `Select.Item` when a row needs more than a label.
+
+Custom item rows are React-only. Astro and HTML previews keep using a native `<select>` with the core recipe classes.
 
 ## Examples
 
@@ -18,6 +20,12 @@ Dropdown single-select with options.
 Pass an `options` array of `{ id, label }` objects. Use `placeholder` when no value is selected.
 
 <Demo id="select.options" />
+
+### Compound parts
+
+Compose parts for custom item content. `textValue` is the string used for typeahead and the closed trigger.
+
+<Demo id="select.parts" />
 
 ## Props
 

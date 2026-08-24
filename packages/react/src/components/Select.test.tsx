@@ -52,4 +52,27 @@ describe('Select', () => {
 
     document.body.removeChild(container);
   });
+
+  it('renders custom item rows from compound parts', async () => {
+    render(
+      <IconProvider icons={{}}>
+        <Select.Root aria-label="Assignee">
+          <Select.Trigger placeholder="Select…" />
+          <Select.Popover>
+            <Select.ListBox>
+              <Select.Item id="ada" textValue="Ada Lovelace">
+                <span data-testid="row-avatar">A</span>
+                Ada Lovelace
+              </Select.Item>
+            </Select.ListBox>
+          </Select.Popover>
+        </Select.Root>
+      </IconProvider>,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: /Assignee/ }));
+
+    expect(screen.getByTestId('row-avatar')).toBeTruthy();
+    expect(screen.getByRole('option', { name: /Ada Lovelace/ })).toBeTruthy();
+  });
 });
