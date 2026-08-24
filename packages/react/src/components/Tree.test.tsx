@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { describe, expect, it, vi } from 'vite-plus/test';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { DirectionProvider } from '../DirectionProvider';
 import { Tree, type TreeItemData } from './Tree';
 
 const FILE_TREE_ITEMS: TreeItemData[] = [
@@ -326,5 +327,14 @@ describe('Tree', () => {
     );
     expect(screen.getByTestId('start')).toBeTruthy();
     expect(screen.getByTestId('end')).toBeTruthy();
+  });
+
+  it('mirrors the expand chevron when direction is rtl', () => {
+    render(
+      <DirectionProvider direction="rtl">
+        <Tree items={FILE_TREE_ITEMS} aria-label="Files" />
+      </DirectionProvider>,
+    );
+    expect(document.querySelector('[data-mirror]')).toBeTruthy();
   });
 });

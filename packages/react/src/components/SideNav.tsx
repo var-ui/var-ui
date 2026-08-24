@@ -11,6 +11,7 @@ import {
 } from 'react';
 import { Button as AriaButton, Link as AriaLink } from 'react-aria-components';
 import { iconNameList, sideNav, SIDE_NAV_COLLAPSED_WIDTH, type IconName } from '@var-ui/core';
+import { useDirection } from '../DirectionProvider';
 import { Icon } from '../icons';
 import { useResizable, type ResizableConfig } from '../hooks';
 import { IconButton } from './IconButton';
@@ -111,6 +112,7 @@ export function SideNavCollapseButton({
 }: SideNavCollapseButtonProps): JSX.Element {
   const s = sideNav();
   const { isCollapsed, toggle } = useSideNavContext();
+  const { isRtl } = useDirection();
   const ariaLabel = label ?? (isCollapsed ? 'Expand navigation' : 'Collapse navigation');
   return (
     <button
@@ -119,7 +121,11 @@ export function SideNavCollapseButton({
       aria-label={ariaLabel}
       {...recipeProps(s.collapseButton, className)}
     >
-      <Icon name={isCollapsed ? 'chevronRight' : 'chevronLeft'} size="sm" />
+      <Icon
+        name={isCollapsed ? 'chevronRight' : 'chevronLeft'}
+        size="sm"
+        data-mirror={isRtl || undefined}
+      />
     </button>
   );
 }
@@ -297,6 +303,7 @@ export function SideNavItem({
 }: SideNavItemProps): JSX.Element {
   const s = sideNav();
   const { isCollapsed: navCollapsed } = useSideNavContext();
+  const { isRtl } = useDirection();
   const [isExpanded, setIsExpanded] = useState(true);
   const hasChildren = children != null;
   const iconNode = renderSideNavIcon(
@@ -351,6 +358,7 @@ export function SideNavItem({
             intent="ghost"
             size="sm"
             onPress={() => setIsExpanded((expanded) => !expanded)}
+            data-mirror={isRtl || undefined}
           />
         ) : null}
       </div>

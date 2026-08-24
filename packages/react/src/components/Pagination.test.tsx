@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vite-plus/test';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { DirectionProvider } from '../DirectionProvider';
 import { generatePageRange, Pagination } from './Pagination';
 
 describe('generatePageRange', () => {
@@ -98,5 +99,17 @@ describe('Pagination', () => {
   it('renders nothing when totalItems is zero', () => {
     const { container } = render(<Pagination page={1} onChange={() => {}} totalItems={0} />);
     expect(container.innerHTML).toBe('');
+  });
+
+  it('mirrors prev/next icons when direction is rtl', () => {
+    render(
+      <DirectionProvider direction="rtl">
+        <Pagination page={2} onChange={() => {}} totalPages={5} />
+      </DirectionProvider>,
+    );
+    const prev = screen.getByRole('button', { name: 'Go to previous page' });
+    const next = screen.getByRole('button', { name: 'Go to next page' });
+    expect(prev.querySelector('[data-mirror]')).toBeTruthy();
+    expect(next.querySelector('[data-mirror]')).toBeTruthy();
   });
 });

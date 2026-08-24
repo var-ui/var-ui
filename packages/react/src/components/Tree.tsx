@@ -12,6 +12,7 @@ import {
   useState,
 } from 'react';
 import { tree as treeStyles } from '@var-ui/core';
+import { useDirection } from '../DirectionProvider';
 import { Icon } from '../icons';
 import { useTreeFocus, type TreeFocusItem } from '../hooks/useTreeFocus';
 import { recipeProps } from './utils';
@@ -178,6 +179,7 @@ function TreeRowContent({
   groupContent,
 }: TreeRowContentProps): JSX.Element {
   const ctx = useTreeContext();
+  const { isRtl } = useDirection();
   const s = ctx.styles;
   const isSelected = ctx.selectionMode !== 'none' && ctx.isSelected(id);
   const isRovingTarget = ctx.focusedId === id;
@@ -243,11 +245,11 @@ function TreeRowContent({
               handleToggleClick();
             }}
           >
-            <Icon name="chevronRight" size="sm" />
+            <Icon name="chevronRight" size="sm" data-mirror={isRtl || undefined} />
           </button>
         ) : (
           <span {...recipeProps(s.toggle)} aria-hidden="true" style={{ visibility: 'hidden' }}>
-            <Icon name="chevronRight" size="sm" />
+            <Icon name="chevronRight" size="sm" data-mirror={isRtl || undefined} />
           </span>
         )}
         {startContent != null ? <span {...recipeProps(s.start)}>{startContent}</span> : null}
