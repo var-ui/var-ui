@@ -114,6 +114,8 @@ export {
   type AspectRatioProps,
   Center,
   type CenterProps,
+  Hidden,
+  type HiddenProps,
   Breadcrumbs,
   type BreadcrumbItemData,
   type BreadcrumbsProps,
