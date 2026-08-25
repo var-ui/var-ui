@@ -6,8 +6,6 @@ This project is using Vite+, a unified toolchain built on top of Vite, Rolldown,
 
 Docs are local at `node_modules/vite-plus/docs` or online at https://viteplus.dev/guide/.
 
-Use `vp` for workflow commands (`vp check`, `vp test run`, `vp run <task>`). Root `pnpm <script>` is equivalent when the script exists in `package.json`. Run `vp run` to list all available tasks.
-
 ## Review Checklist
 
 - [ ] Run `vp install` after pulling remote changes and before getting started.
@@ -16,3 +14,7 @@ Use `vp` for workflow commands (`vp check`, `vp test run`, `vp run <task>`). Roo
 - [ ] If setup, runtime, or package-manager behavior looks wrong, run `vp env doctor` and include its output when asking for help.
 
 <!--VITE PLUS END-->
+
+# TypeStyles first
+
+First-party UI chrome uses TypeStyles recipes (`typestyles.styles.component`) and design tokens — not new `*.css` files or ad-hoc `@media` queries. Apply classes with `recipeClassName` / `recipeProps`. Register site recipes in the TypeStyles extract entry. See `.cursor/rules/typestyles-first.mdc`.

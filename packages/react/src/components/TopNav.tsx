@@ -76,13 +76,30 @@ export function TopNav({
   return (
     <nav
       aria-label={label}
+      data-var-ui-top-nav
       data-layout={hasCenter ? 'grid' : undefined}
       {...recipeProps(s.root, className)}
     >
-      {heading != null ? <div {...recipeProps(s.heading)}>{heading}</div> : null}
-      {start != null ? <div {...recipeProps(s.start)}>{start}</div> : null}
-      {hasCenter ? <div {...recipeProps(s.center)}>{centerContent}</div> : null}
-      {endContent != null ? <div {...recipeProps(s.end)}>{endContent}</div> : null}
+      {heading != null ? (
+        <div data-var-ui-top-nav-heading {...recipeProps(s.heading)}>
+          {heading}
+        </div>
+      ) : null}
+      {start != null ? (
+        <div data-var-ui-top-nav-start {...recipeProps(s.start)}>
+          {start}
+        </div>
+      ) : null}
+      {hasCenter ? (
+        <div data-var-ui-top-nav-center {...recipeProps(s.center)}>
+          {centerContent}
+        </div>
+      ) : null}
+      {endContent != null ? (
+        <div data-var-ui-top-nav-end {...recipeProps(s.end)}>
+          {endContent}
+        </div>
+      ) : null}
     </nav>
   );
 }

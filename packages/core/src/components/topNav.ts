@@ -108,6 +108,7 @@ export const topNav = typestyles.styles.component(
         display: 'flex',
         alignItems: 'center',
         gap: t.space[4].var,
+        minWidth: 0,
         minHeight: t.size.nav.bar.var,
         paddingBlock: 0,
         paddingInline: t.space[4].var,

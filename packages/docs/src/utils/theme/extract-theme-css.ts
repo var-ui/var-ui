@@ -1,3 +1,11 @@
+/**
+ * Must match `layers` in `packages/core/src/runtime.ts`.
+ * Declared first so a lazy theme stylesheet that loads before `/typestyles.css`
+ * cannot invent `tokens`/`overrides` ahead of `reset`/`base`/`components`.
+ */
+const TYPESTYLES_CASCADE_LAYER_ORDER =
+  '@layer reset, base, tokens, components, overrides, utilities;';
+
 /** Drop duplicated core/component CSS; keep @font-face + theme class rules only. */
 export function extractThemeOnlyCss(css: string, themeId: string): string {
   const themeClass = `.theme-var-ui-${themeId}`;
@@ -8,5 +16,7 @@ export function extractThemeOnlyCss(css: string, themeId: string): string {
     throw new Error(`No theme CSS found for "${themeId}"`);
   }
   const start = Math.min(...candidates);
-  return css.slice(start).trim();
+  const extracted = css.slice(start).trim();
+  if (extracted.startsWith(TYPESTYLES_CASCADE_LAYER_ORDER)) return extracted;
+  return `${TYPESTYLES_CASCADE_LAYER_ORDER}\n${extracted}`;
 }

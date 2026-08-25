@@ -158,6 +158,11 @@ export const mobileNav = typestyles.styles.component(
         justifyContent: 'center',
         padding: t.space[2].var,
         borderRadius: t.radius.sm.var,
+        '& svg': {
+          display: 'block',
+          width: t.size.icon.md.var,
+          height: t.size.icon.md.var,
+        },
         '&:hover': {
           backgroundColor: v.toggleHoverBackground.var,
           color: v.headerColor.var,
