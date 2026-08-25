@@ -40,6 +40,7 @@ import SliderDefault from './slider/default/react';
 import PinInputDefault from './pin-input/default/react';
 import SelectDefault from './select/default/react';
 import SelectOptions from './select/options/react';
+import SelectParts from './select/parts/react';
 import ComboboxDefault from './combobox/default/react';
 import ComboboxField from './combobox/field/react';
 import TypeaheadDefault from './typeahead/default/react';
@@ -218,6 +219,7 @@ export const reactDemoMap = {
   'pin-input.default': PinInputDefault,
   'select.default': SelectDefault,
   'select.options': SelectOptions,
+  'select.parts': SelectParts,
   'combobox.default': ComboboxDefault,
   'combobox.field': ComboboxField,
   'typeahead.default': TypeaheadDefault,

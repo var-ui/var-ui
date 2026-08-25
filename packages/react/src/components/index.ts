@@ -49,7 +49,20 @@ export { Checkbox, type CheckboxProps } from './Checkbox';
 export { Switch, type SwitchProps } from './Switch';
 export { RadioGroup, type RadioGroupOption, type RadioGroupProps } from './RadioGroup';
 export { CheckboxGroup, type CheckboxGroupOption, type CheckboxGroupProps } from './CheckboxGroup';
-export { Select, type SelectOption, type SelectProps } from './Select';
+export {
+  Select,
+  type SelectDescriptionProps,
+  type SelectErrorProps,
+  type SelectItemProps,
+  type SelectLabelProps,
+  type SelectListBoxProps,
+  type SelectOption,
+  type SelectPopoverProps,
+  type SelectProps,
+  type SelectRootProps,
+  type SelectTriggerProps,
+  type SelectValueProps,
+} from './Select';
 export { Tabs, type TabsProps } from './Tabs';
 export {
   TabList,
