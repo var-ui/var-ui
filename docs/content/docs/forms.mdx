@@ -1,0 +1,125 @@
+---
+title: Forms
+description: Native constraints, Field parts, useForm, and third-party form libraries.
+---
+
+# Forms
+
+var-ui splits form work into three layers that compose:
+
+1. **Field chrome** — `TextField` `label` / `description` / `errorMessage`, or `Field.Root` parts around a custom or native control
+2. **`Form`** — a React `<form>` that runs the Constraint Validation API and focuses the first invalid field
+3. **`useForm`** — values, touched, and validators in `@var-ui/form`
+
+`useForm` does not replace `Form`. Native `required` / `minLength` / `type="email"` work without either helper.
+
+Pick **one** chrome pattern per control. Do not pass `label` on TextField inside `Field.Root` — that double-renders labels. Use Field parts around a control without FieldMeta, or use TextField's FieldMeta without Field parts.
+
+## Native constraints
+
+Put HTML constraint attributes on the control. Empty `Field.Error` shows the browser `validationMessage`. Explicit `Field.Error` children always win (app / `useForm` / server errors).
+
+```tsx
+<Field.Root name="email">
+  <Field.Label>Email</Field.Label>
+  <Field.Control>
+    <input name="email" type="email" required />
+  </Field.Control>
+  <Field.Error />
+</Field.Root>
+```
+
+`Field.Root` publishes `data-invalid`, `data-valid`, `data-dirty`, `data-touched`, `data-filled`, and `data-disabled` for CSS. See [Field](/components/field).
+
+## Form
+
+[`Form`](/components/form) is React-only. There is no `@var-ui/astro` Form; native `required` still works in Astro without it.
+
+On submit it `preventDefault()`s, runs `checkValidity()`, and:
+
+- if invalid, focuses the first `[aria-invalid="true"]` or `:invalid` control
+- if valid, calls `onSubmit(event, new FormData(form))`
+
+Pass `errors` for server / external messages keyed by field `name`. A truthy entry marks that `Field.Root` invalid and fills empty `Field.Error`. The app owns clearing `errors` — `Form` does not reset them when the control changes.
+
+```tsx
+<Form
+  onSubmit={(_event, data) => {
+    void save(data);
+  }}
+  errors={{ email: serverError }}
+>
+  <Field.Root name="email">
+    <Field.Label>Email</Field.Label>
+    <Field.Control>
+      <input name="email" type="email" required />
+    </Field.Control>
+    <Field.Error />
+  </Field.Root>
+  <Button type="submit">Save</Button>
+</Form>
+```
+
+Focus-first-invalid also works with TextField `isInvalid` / `aria-invalid="true"` — you do not have to use Field parts.
+
+## useForm
+
+`@var-ui/form` `useForm` is the values helper. Spread `getInputProps` onto TextField and pass `errors={form.errors}` into `Form`:
+
+```tsx
+import { isEmail, useForm } from '@var-ui/form';
+import { Form, TextField } from '@var-ui/react';
+
+const form = useForm({
+  initialValues: { email: '' },
+  validate: { email: isEmail('Enter a valid email') },
+});
+
+<Form onSubmit={() => void form.handleSubmit(save)()} errors={form.errors}>
+  <TextField {...form.getInputProps('email')} label="Email" />
+</Form>
+```
+
+No requirement to use Field parts with `useForm`. `getInputProps` already returns `errorMessage` and `isInvalid`.
+
+## React Hook Form and TanStack Form
+
+There are no first-class adapters. Spread the library's field props onto TextField the same way you would `getInputProps`.
+
+React Hook Form — use `Controller` (RAC `onChange` is the string value, not a DOM event):
+
+```tsx
+<Controller
+  name="email"
+  control={control}
+  render={({ field, fieldState }) => (
+    <TextField
+      name={field.name}
+      value={field.value}
+      onChange={field.onChange}
+      onBlur={field.onBlur}
+      label="Email"
+      isInvalid={fieldState.invalid}
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+TanStack Form:
+
+```tsx
+<form.Field name="email">
+  {(field) => (
+    <TextField
+      name={field.name}
+      value={field.state.value}
+      onChange={field.handleChange}
+      onBlur={field.handleBlur}
+      label="Email"
+      isInvalid={!field.state.meta.isValid}
+      errorMessage={field.state.meta.errors[0]}
+    />
+  )}
+</form.Field>
+```

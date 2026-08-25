@@ -14,6 +14,7 @@ export const topNav = [
 
 export const docsSidebar = [
   { text: 'Getting started', link: '/docs/getting-started' },
+  { text: 'Forms', link: '/docs/forms' },
   { text: 'Overlay lifecycle', link: '/docs/overlay-lifecycle' },
 ] as const;
 
