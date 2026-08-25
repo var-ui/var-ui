@@ -1,0 +1,30 @@
+---
+description: Use TypeStyles recipes and design tokens for UI chrome, not plain CSS files.
+alwaysApply: true
+---
+
+# TypeStyles first
+
+Var UI styles first-party UI with TypeStyles recipes, not new `*.css` files.
+
+- Tokens: `designTokens` (`t.space`, `t.color`, …)
+- Breakpoints: `styles.breakpoint('md', 'max')` — never raw `@media (max-width: …)` for design breakpoints
+- Apply classes with `recipeClassName` / `recipeProps` from `@var-ui/astro` or `@var-ui/react`
+- Register site/kit recipes in the TypeStyles extract entry (`docs/src/styles/index.ts`, `@var-ui/docs/styles`)
+
+```ts
+// ❌ BAD — chrome in a CSS file
+.foo { gap: 0.75rem; }
+@media (max-width: 767px) { .foo { display: none; } }
+
+// ✅ GOOD — recipe + tokens
+export const foo = typestyles.styles.component('docs-foo', () => ({
+  slots: ['root'],
+  root: {
+    gap: t.space[3].var,
+    [styles.breakpoint('md', 'max')]: { display: 'none' },
+  },
+}), { layer: 'components' });
+```
+
+Plain CSS is only for third-party/uncontrolled markup, or when TypeStyles cannot express the rule.

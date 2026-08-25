@@ -49,9 +49,15 @@ const defaultThemeClassName = config.theme.defaultClassName;
         link.rel = 'stylesheet';
         link.href = href;
         link.dataset.docsThemeStyle = themeId;
+        link.dataset.astroTransitionPersist = `docs-theme-style-${themeId}`;
         link.addEventListener('load', onReady, { once: true });
         link.addEventListener('error', onReady, { once: true });
-        document.head.appendChild(link);
+        const typestyles = document.querySelector('link[href="/typestyles.css"]');
+        if (typestyles?.parentNode) {
+          typestyles.parentNode.insertBefore(link, typestyles.nextSibling);
+        } else {
+          document.head.appendChild(link);
+        }
       }
 
       function applyDocsTheme(doc) {
@@ -74,6 +80,13 @@ const defaultThemeClassName = config.theme.defaultClassName;
       if (!window[navKey]) {
         window[navKey] = true;
         document.addEventListener('astro:before-swap', (event) => {
+          const newHead = event.newDocument.head;
+          for (const link of document.querySelectorAll('link[data-docs-theme-style]')) {
+            const id = link.dataset.docsThemeStyle;
+            if (id && !newHead.querySelector(`link[data-docs-theme-style="${id}"]`)) {
+              newHead.appendChild(link.cloneNode(true));
+            }
+          }
           applyDocsTheme(event.newDocument);
         });
         document.addEventListener('astro:after-swap', () => {

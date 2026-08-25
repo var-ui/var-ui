@@ -108,3 +108,10 @@ import DocsPage from '@var-ui/docs/DocsPage';
 ```
 
 See `docs/superpowers/specs/2026-08-11-var-docs-kit-design.md`.
+
+Import kit chrome recipes from your TypeStyles extract entry so `DocsPage` header CSS is emitted:
+
+```ts
+import '@var-ui/core/styles';
+import '@var-ui/docs/styles';
+```
