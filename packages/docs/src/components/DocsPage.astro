@@ -25,7 +25,7 @@ import {
   normalizeDocsPath,
   shouldShowDocsToc,
 } from '../utils/docs-toc';
-import { resolveGuideRouteConfig } from '../utils/routing';
+import { resolveGuideRouteConfig, stripAstroBase } from '../utils/routing';
 
 const {
   title = 'Docs',
@@ -57,7 +57,7 @@ const {
   htmlAttributes?: Record<string, string | undefined>;
 };
 
-const pathname = Astro.url.pathname;
+const pathname = stripAstroBase(Astro.url.pathname, import.meta.env.BASE_URL);
 const currentPath = normalizeDocsPath(pathname);
 const hasTocSlot = Astro.slots.has('toc');
 const guidePrefixes = resolveGuideRouteConfig(config.routes).map((route) => route.prefix);
@@ -88,7 +88,7 @@ function isSidebarLinkActive(link: string): boolean {
     <title>{title}</title>
     <ThemeScript themeClass={themeClassName} />
     {hasThemeScriptSlot ? <slot name="themeScript" /> : null}
-    <link rel="stylesheet" href="/typestyles.css" />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}typestyles.css`} />
     <ClientRouter />
     <slot name="head" />
   </head>

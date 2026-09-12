@@ -1,5 +1,4 @@
 import { fileURLToPath } from 'node:url';
-import node from '@astrojs/node';
 import { defaultThemeClassName } from '@var-ui/core';
 import varDocs from '@var-ui/docs';
 import { defineConfig } from 'astro/config';
@@ -7,8 +6,7 @@ import { defineConfig } from 'astro/config';
 const root = fileURLToPath(new URL('../..', import.meta.url));
 
 export default defineConfig({
-  output: 'server',
-  adapter: node({ mode: 'standalone' }),
+  output: 'static',
   integrations: [
     varDocs({
       title: 'Example Docs',

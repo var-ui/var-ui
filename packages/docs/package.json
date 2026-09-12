@@ -77,7 +77,25 @@
     "@var-ui/react": "workspace:^",
     "astro": "catalog:",
     "react": "catalog:",
+    "react-aria-components": "catalog:",
     "react-dom": "catalog:",
     "typestyles": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "@var-ui/icons": {
+      "optional": true
+    },
+    "@var-ui/react": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "react-aria-components": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
   }
 }

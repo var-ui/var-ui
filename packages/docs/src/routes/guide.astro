@@ -2,25 +2,44 @@
 /**
  * Shared guide page for docs + theming collections.
  * Layout and MDX shortcodes come from virtual modules configured in `varDocs()`.
+ * `injectRoute({ prerender })` owns static vs SSR — do not export `prerender` here.
  */
-import { getEntry, render } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import Layout from 'virtual:var-docs/components/Layout';
 import * as mdxComponents from 'virtual:var-docs/mdx-components';
 import config from 'virtual:var-docs/config';
-import { matchGuideRoute, resolveGuideRouteConfig } from '../utils/routing';
+import {
+  assertSingleStaticGuidePrefix,
+  guideCatchAllStaticPaths,
+  matchGuideRoute,
+  resolveGuideRouteConfig,
+  stripAstroBase,
+} from '../utils/routing';
 
-export const prerender = false;
+export async function getStaticPaths() {
+  const routes = resolveGuideRouteConfig(config.routes);
+  assertSingleStaticGuidePrefix(routes);
+  const [route] = routes;
+  const entries = await getCollection(route.collection);
+  return guideCatchAllStaticPaths(entries);
+}
 
-const pathname = Astro.url.pathname;
+const pathname = stripAstroBase(Astro.url.pathname, import.meta.env.BASE_URL);
 const routes = resolveGuideRouteConfig(config.routes);
 const matched = matchGuideRoute(pathname, routes);
 
 if (!matched) {
+  if (Astro.isPrerendered) {
+    throw new Error(`Guide page not found: ${pathname}`);
+  }
   return new Response(null, { status: 404, statusText: 'Not Found' });
 }
 
 const entry = await getEntry(matched.collection, matched.id);
 if (!entry) {
+  if (Astro.isPrerendered) {
+    throw new Error(`Guide entry not found: ${matched.collection}/${matched.id}`);
+  }
   return new Response(null, { status: 404, statusText: 'Not Found' });
 }
 

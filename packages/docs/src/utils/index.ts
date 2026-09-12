@@ -12,9 +12,14 @@ export { reattachTypestyles } from './reattachTypestyles';
 
 export {
   DEFAULT_GUIDE_ROUTES,
+  STATIC_MULTI_PREFIX_ERROR,
+  assertSingleStaticGuidePrefix,
+  guideCatchAllStaticPaths,
   guideInjectPatterns,
   matchGuideRoute,
+  prerenderGuideRoutes,
   resolveGuideRouteConfig,
+  stripAstroBase,
   type GuideRoutePrefix,
   type ResolvedGuideRoute,
 } from './routing';

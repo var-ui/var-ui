@@ -58,15 +58,15 @@ A **`packages/docs`** package turns reusable docs plumbing into a product: confi
 
 ## Non-goals (v1)
 
-| Item                                     | Reason                                                                                |
-| ---------------------------------------- | ------------------------------------------------------------------------------------- |
-| Full Starlight i18n parity               | Defer until needed                                                                    |
-| Pagefind (default)                       | Keep CommandPalette search index; add Pagefind plugin later                           |
-| Runtime `createDesignTheme()` in browser | Playground uses class + CSS var overrides on preview root (existing pattern)          |
-| Non–Var UI chrome frameworks             | Shell chrome is Var UI + typestyles; content/product being documented can be anything |
-| DS catalog features in core              | Demos, props extract, framework switcher → `@var-ui/docs-components` only             |
-| Publishing to npm in v1                  | Workspace package first; publish after dogfooding (Var UI + ideally TypeStyles)       |
-| Marketing homepage framework             | Homepage bento stays in consumer site, not core kit                                   |
+| Item                                     | Reason                                                                                                                           |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Full Starlight i18n parity               | Defer until needed                                                                                                               |
+| Pagefind (default)                       | Keep CommandPalette search index; add Pagefind plugin later                                                                      |
+| Runtime `createDesignTheme()` in browser | Playground uses class + CSS var overrides on preview root (existing pattern)                                                     |
+| Non–Var UI chrome frameworks             | Shell chrome is Var UI + typestyles; content/product being documented can be anything                                            |
+| DS catalog features in core              | Demos, props extract, framework switcher → `@var-ui/docs-components` only                                                        |
+| Publishing to npm in v1                  | **Superseded** — `@var-ui/core`, `@var-ui/astro`, and `@var-ui/docs` publish so external static guide sites can install from npm |
+| Marketing homepage framework             | Homepage bento stays in consumer site, not core kit                                                                              |
 
 ## Decisions
 
@@ -284,9 +284,6 @@ type VarDocsConfig = {
 
   /** Optional plugins. */
   plugins?: VarDocsPlugin[];
-
-  /** SSR / prerender — default true for docs routes. */
-  prerender?: boolean;
 
   /** Disable injected 404 route. */
   disable404Route?: boolean;
@@ -826,7 +823,7 @@ Ship as optional export from `@var-ui/docs-components` or `@var-ui/docs/theming`
 1. **Package publish surface** — single `@var-ui/docs` with subpath exports vs three npm packages from day one? → **Proposed:** workspace packages first; publish core before plugins.
 2. **Default search** — CommandPalette-only vs Pagefind in v1? → **Proposed:** CommandPalette default.
 3. **Splash template** — needed for Var UI homepage migration, or keep homepage fully custom forever? → **Proposed:** homepage stays consumer-owned.
-4. **SSR default** — Var UI docs uses `output: 'server'` + Netlify; kit default `prerender: true` for docs routes? → **Proposed:** `prerender: true` with adapter override; keep `disableGuideRoutes` escape hatch for Netlify SSR workspace quirks.
+4. **SSR default** — Var UI docs uses `output: 'server'` + Netlify; kit default `prerender: true` for docs routes? → **Resolved:** no user-facing `prerender` flag. Injected guides prerender only when `output: 'static'`; server/hybrid stay SSR. Keep `disableGuideRoutes` for Netlify SSR workspace quirks.
 5. **TypeStyles dogfood timing** — after Phase 5 theming hardening, or earlier with core-only? → **Proposed:** core-only spike once free-form `routes` + README examples land.
 
 ## References
