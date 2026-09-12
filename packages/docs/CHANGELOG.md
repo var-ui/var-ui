@@ -1,5 +1,11 @@
 # @var-ui/docs
 
+## 1.0.1
+
+### Patch Changes
+
+- [#13](https://github.com/var-ui/var-ui/pull/13) [`e61a5e6`](https://github.com/var-ui/var-ui/commit/e61a5e6a7f0d6e74c2ddbb430733b9e6db52f48a) Thanks [@dbanksdesign](https://github.com/dbanksdesign)! - Support `output: 'static'` for injected guide routes. React, `@var-ui/react`, and `@var-ui/icons` are optional peers for guide-only sites.
+
 ## 1.0.0
 
 ### Patch Changes
