@@ -138,14 +138,16 @@ describe('TopNav', () => {
         <TopNav.MegaMenu
           label="Solutions"
           items={[{ id: 'x', title: 'For startups', href: '/startups' }]}
-          openDelay={10}
-          closeDelay={10}
+          // `userEvent.click` also fires hover + focus, which schedule open. Short
+          // delays can open before `onPress` and then toggle the menu closed.
+          openDelay={10000}
+          closeDelay={10000}
         />
       </TopNav>,
     );
     const trigger = screen.getByRole('button', { name: 'Solutions' });
     await userEvent.click(trigger);
-    await waitFor(() => expect(screen.getByRole('link', { name: 'For startups' })).toBeTruthy());
+    expect(screen.getByRole('link', { name: 'For startups' })).toBeTruthy();
 
     await userEvent.keyboard('{Escape}');
     await waitFor(() => expect(screen.queryByRole('link', { name: 'For startups' })).toBeNull());
