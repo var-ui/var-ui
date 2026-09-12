@@ -53,6 +53,8 @@ export default defineConfig({
           'vp test run',
           'vp run --no-cache @var-ui/example-astro-app#check',
           'vp run --no-cache @var-ui/example-astro-app#build',
+          'vp run --no-cache @var-ui/example-astro-docs#build',
+          'test -f examples/astro-docs/dist/index.html && test -f examples/astro-docs/dist/docs/index.html && test -f examples/astro-docs/dist/docs/getting-started/index.html && test -f examples/astro-docs/dist/docs/installation/index.html',
         ],
       },
     },

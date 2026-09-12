@@ -6,6 +6,7 @@ import {
   matchGuideRoute,
   prerenderGuideRoutes,
   resolveGuideRouteConfig,
+  stripAstroBase,
 } from './routing';
 
 describe('matchGuideRoute', () => {
@@ -93,6 +94,24 @@ describe('guideInjectPatterns', () => {
   });
 });
 
+describe('stripAstroBase', () => {
+  it('leaves pathnames unchanged when the site is at the domain root', () => {
+    expect(stripAstroBase('/docs/getting-started', '/')).toBe('/docs/getting-started');
+    expect(stripAstroBase('/docs/getting-started/', '/')).toBe('/docs/getting-started/');
+  });
+
+  it('strips Astro `base` so guide matching sees the configured prefix', () => {
+    expect(stripAstroBase('/foo/docs/getting-started', '/foo/')).toBe('/docs/getting-started');
+    expect(stripAstroBase('/foo/docs', '/foo/')).toBe('/docs');
+    expect(stripAstroBase('/docs-site/docs/api/client', '/docs-site/')).toBe('/docs/api/client');
+  });
+
+  it('maps the base path itself to `/`', () => {
+    expect(stripAstroBase('/foo', '/foo/')).toBe('/');
+    expect(stripAstroBase('/foo/', '/foo/')).toBe('/');
+  });
+});
+
 describe('guideCatchAllStaticPaths', () => {
   it('drops the index entry so the prefix route owns /docs', () => {
     expect(guideCatchAllStaticPaths([{ id: 'index' }, { id: 'getting-started' }])).toEqual([
@@ -111,6 +130,11 @@ describe('guideCatchAllStaticPaths', () => {
       { params: { slug: 'api/client' } },
     ]);
   });
+
+  it('emits no catch-all paths for an empty or index-only collection', () => {
+    expect(guideCatchAllStaticPaths([])).toEqual([]);
+    expect(guideCatchAllStaticPaths([{ id: 'index' }])).toEqual([]);
+  });
 });
 
 describe('prerenderGuideRoutes', () => {
@@ -128,12 +152,18 @@ describe('assertSingleStaticGuidePrefix', () => {
     ).not.toThrow();
   });
 
+  it('throws when no prefixes are provided', () => {
+    expect(() => assertSingleStaticGuidePrefix([])).toThrow(
+      /exactly one `routes` prefix[\s\S]*disableGuideRoutes[\s\S]*output: 'server'/,
+    );
+  });
+
   it('throws when static sites declare more than one prefix', () => {
     expect(() =>
       assertSingleStaticGuidePrefix([
         { prefix: '/docs', collection: 'docs' },
         { prefix: '/theming', collection: 'theming' },
       ]),
-    ).toThrow(/disableGuideRoutes[\s\S]*output: 'server'/);
+    ).toThrow(/exactly one `routes` prefix[\s\S]*disableGuideRoutes[\s\S]*output: 'server'/);
   });
 });

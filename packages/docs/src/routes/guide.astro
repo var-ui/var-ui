@@ -13,6 +13,7 @@ import {
   guideCatchAllStaticPaths,
   matchGuideRoute,
   resolveGuideRouteConfig,
+  stripAstroBase,
 } from '../utils/routing';
 
 export async function getStaticPaths() {
@@ -23,7 +24,7 @@ export async function getStaticPaths() {
   return guideCatchAllStaticPaths(entries);
 }
 
-const pathname = Astro.url.pathname;
+const pathname = stripAstroBase(Astro.url.pathname, import.meta.env.BASE_URL);
 const routes = resolveGuideRouteConfig(config.routes);
 const matched = matchGuideRoute(pathname, routes);
 

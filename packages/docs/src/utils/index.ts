@@ -19,6 +19,7 @@ export {
   matchGuideRoute,
   prerenderGuideRoutes,
   resolveGuideRouteConfig,
+  stripAstroBase,
   type GuideRoutePrefix,
   type ResolvedGuideRoute,
 } from './routing';
