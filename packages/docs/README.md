@@ -37,6 +37,10 @@ export default defineConfig({
 });
 ```
 
+Guide-only sites do **not** need React. Install `@var-ui/react` + `react` (+ `react-dom`, `@var-ui/icons`, `react-aria-components`) only when using `DocsThemePicker` / `theme.presets`.
+
+`output: 'static'` is supported. Injected `/docs` routes prerender. Static injected routes accept **one** `routes` prefix in this release (default `/docs`). Sites with several prefixes should use `output: 'server'`, or `disableGuideRoutes` plus their own pages.
+
 `varDocs()` wires:
 
 - Config validation (`title`, `theme` incl. optional `presets`, `typestyles`, free-form `routes`, `components`)

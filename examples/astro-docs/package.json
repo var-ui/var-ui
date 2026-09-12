@@ -9,7 +9,6 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/node": "^9.4.6",
     "@var-ui/astro": "workspace:*",
     "@var-ui/core": "workspace:*",
     "@var-ui/docs": "workspace:*",

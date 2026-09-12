@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vite-plus/test';
-import { guideInjectPatterns, matchGuideRoute, resolveGuideRouteConfig } from './routing';
+import {
+  assertSingleStaticGuidePrefix,
+  guideCatchAllStaticPaths,
+  guideInjectPatterns,
+  matchGuideRoute,
+  prerenderGuideRoutes,
+  resolveGuideRouteConfig,
+} from './routing';
 
 describe('matchGuideRoute', () => {
   it('maps /docs and /docs/* to the docs collection', () => {
@@ -83,5 +90,50 @@ describe('guideInjectPatterns', () => {
   it('builds index + catch-all patterns', () => {
     expect(guideInjectPatterns('/docs')).toEqual(['docs', 'docs/[...slug]']);
     expect(guideInjectPatterns('/theming')).toEqual(['theming', 'theming/[...slug]']);
+  });
+});
+
+describe('guideCatchAllStaticPaths', () => {
+  it('drops the index entry so the prefix route owns /docs', () => {
+    expect(guideCatchAllStaticPaths([{ id: 'index' }, { id: 'getting-started' }])).toEqual([
+      { params: { slug: 'getting-started' } },
+    ]);
+  });
+
+  it('emits a catch-all slug for a top-level guide id', () => {
+    expect(guideCatchAllStaticPaths([{ id: 'getting-started' }])).toEqual([
+      { params: { slug: 'getting-started' } },
+    ]);
+  });
+
+  it('passes nested collection ids through as the slug string', () => {
+    expect(guideCatchAllStaticPaths([{ id: 'api/client' }])).toEqual([
+      { params: { slug: 'api/client' } },
+    ]);
+  });
+});
+
+describe('prerenderGuideRoutes', () => {
+  it('prerenders injected guides only for static output', () => {
+    expect(prerenderGuideRoutes('static')).toBe(true);
+    expect(prerenderGuideRoutes('server')).toBe(false);
+    expect(prerenderGuideRoutes('hybrid')).toBe(false);
+  });
+});
+
+describe('assertSingleStaticGuidePrefix', () => {
+  it('allows a single prefix', () => {
+    expect(() =>
+      assertSingleStaticGuidePrefix([{ prefix: '/docs', collection: 'docs' }]),
+    ).not.toThrow();
+  });
+
+  it('throws when static sites declare more than one prefix', () => {
+    expect(() =>
+      assertSingleStaticGuidePrefix([
+        { prefix: '/docs', collection: 'docs' },
+        { prefix: '/theming', collection: 'theming' },
+      ]),
+    ).toThrow(/disableGuideRoutes[\s\S]*output: 'server'/);
   });
 });

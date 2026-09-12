@@ -8,7 +8,12 @@ import { buildDocsThemeStyles, docsThemeStylesDevPlugin } from './integrations/t
 import { vitePluginVarDocsTypestyles } from './integrations/typestyles';
 import { vitePluginVarDocsVirtualModules } from './integrations/vite-virtual-modules';
 import { designTokenShikiTheme } from './utils/shiki-theme';
-import { guideInjectPatterns, resolveGuideRouteConfig } from './utils/routing';
+import {
+  assertSingleStaticGuidePrefix,
+  guideInjectPatterns,
+  prerenderGuideRoutes,
+  resolveGuideRouteConfig,
+} from './utils/routing';
 import { getLazyThemePresets } from './utils/theme/presets';
 
 function resolveShikiTheme(syntax: VarDocsConfig['theme']['syntax']) {
@@ -67,12 +72,16 @@ export default function varDocs(userOpts: VarDocsUserConfig): AstroIntegration {
           }
 
           const guideRoutes = resolveGuideRouteConfig(config.routes);
+          const prerender = prerenderGuideRoutes(astroConfig.output);
+          if (prerender) {
+            assertSingleStaticGuidePrefix(guideRoutes);
+          }
           for (const route of guideRoutes) {
             for (const pattern of guideInjectPatterns(route.prefix)) {
               injectRoute({
                 pattern,
                 entrypoint: '@var-ui/docs/routes/guide.astro',
-                prerender: false,
+                prerender,
               });
             }
           }

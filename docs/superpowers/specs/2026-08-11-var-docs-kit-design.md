@@ -58,15 +58,15 @@ A **`packages/docs`** package turns reusable docs plumbing into a product: confi
 
 ## Non-goals (v1)
 
-| Item                                     | Reason                                                                                |
-| ---------------------------------------- | ------------------------------------------------------------------------------------- |
-| Full Starlight i18n parity               | Defer until needed                                                                    |
-| Pagefind (default)                       | Keep CommandPalette search index; add Pagefind plugin later                           |
-| Runtime `createDesignTheme()` in browser | Playground uses class + CSS var overrides on preview root (existing pattern)          |
-| Non–Var UI chrome frameworks             | Shell chrome is Var UI + typestyles; content/product being documented can be anything |
-| DS catalog features in core              | Demos, props extract, framework switcher → `@var-ui/docs-components` only             |
-| Publishing to npm in v1                  | Workspace package first; publish after dogfooding (Var UI + ideally TypeStyles)       |
-| Marketing homepage framework             | Homepage bento stays in consumer site, not core kit                                   |
+| Item                                     | Reason                                                                                                                           |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Full Starlight i18n parity               | Defer until needed                                                                                                               |
+| Pagefind (default)                       | Keep CommandPalette search index; add Pagefind plugin later                                                                      |
+| Runtime `createDesignTheme()` in browser | Playground uses class + CSS var overrides on preview root (existing pattern)                                                     |
+| Non–Var UI chrome frameworks             | Shell chrome is Var UI + typestyles; content/product being documented can be anything                                            |
+| DS catalog features in core              | Demos, props extract, framework switcher → `@var-ui/docs-components` only                                                        |
+| Publishing to npm in v1                  | **Superseded** — `@var-ui/core`, `@var-ui/astro`, and `@var-ui/docs` publish so external static guide sites can install from npm |
+| Marketing homepage framework             | Homepage bento stays in consumer site, not core kit                                                                              |
 
 ## Decisions
 
