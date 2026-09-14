@@ -430,6 +430,14 @@
       "types": "./dist/components/icon.d.mts",
       "import": "./dist/components/icon.mjs"
     },
+    "./components/inlineCode": {
+      "types": "./dist/components/inlineCode.d.mts",
+      "import": "./dist/components/inlineCode.mjs"
+    },
+    "./inlineCode": {
+      "types": "./dist/components/inlineCode.d.mts",
+      "import": "./dist/components/inlineCode.mjs"
+    },
     "./components/inputGroup": {
       "types": "./dist/components/inputGroup.d.mts",
       "import": "./dist/components/inputGroup.mjs"

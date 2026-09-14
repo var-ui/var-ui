@@ -87,6 +87,7 @@ export { field } from './field';
 export { grid } from './grid';
 export { heading, textBlock } from './typography';
 export { icon } from './icon';
+export { inlineCode } from './inlineCode';
 export { kbd } from './kbd';
 export { outline } from './outline';
 export {

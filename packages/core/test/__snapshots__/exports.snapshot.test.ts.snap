@@ -21,6 +21,7 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
       "hsvToHex",
       "hsvToRgb",
       "hueToPureHex",
+      "inlineCode",
       "isValidHex",
       "normalizeHex",
       "overlayPresenceStyles",
@@ -210,7 +211,7 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
   "summary": {
     "runtimeByCategory": {
       "fonts": 4,
-      "helper": 18,
+      "helper": 19,
       "icons": 4,
       "layout": 6,
       "object": 9,
@@ -222,12 +223,12 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
       "tokens": 19,
     },
     "runtimeByKind": {
-      "function": 140,
+      "function": 141,
       "number": 4,
       "object": 33,
       "string": 4,
     },
-    "runtimeExports": 181,
+    "runtimeExports": 182,
     "typeOnlyExports": 118,
   },
   "typeOnlyExports": [

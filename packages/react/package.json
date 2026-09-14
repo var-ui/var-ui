@@ -238,6 +238,18 @@
       "types": "./dist/components/Chip.d.mts",
       "import": "./dist/components/Chip.mjs"
     },
+    "./components/Code": {
+      "types": "./dist/components/Code.d.mts",
+      "import": "./dist/components/Code.mjs"
+    },
+    "./code": {
+      "types": "./dist/components/Code.d.mts",
+      "import": "./dist/components/Code.mjs"
+    },
+    "./Code": {
+      "types": "./dist/components/Code.d.mts",
+      "import": "./dist/components/Code.mjs"
+    },
     "./components/CodeBlock": {
       "types": "./dist/components/CodeBlock.d.mts",
       "import": "./dist/components/CodeBlock.mjs"
