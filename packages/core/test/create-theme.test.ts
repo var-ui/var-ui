@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vite-plus/test';
-import { getRegisteredCss, reset } from 'typestyles';
+import { flushSync, getRegisteredCss, reset } from 'typestyles';
 import { createDesignTheme, disposeDesignTheme } from '../src/create-theme';
 import { DEFAULT_THEME_NAME, SURFACE_ATTRIBUTE } from '../src/theme-constants';
 import { extendTokens, resetExtendTokenRegistry } from '../src/extend-tokens';
@@ -14,6 +14,39 @@ import { designTokens } from '../src/tokens';
 
 /** Runtime uses scopeId `var-ui` — theme classes are `theme-var-ui-<name>`. */
 const themeClass = (name: string) => `.theme-var-ui-${name}`;
+
+/** jsdom rejects `@layer`; layered theme CSS lands on `#typestyles-fallback`. */
+const TYPESTYLES_FALLBACK_STYLE_ID = 'typestyles-fallback';
+
+function sheetCssText(): string {
+  const style = document.getElementById('typestyles') as HTMLStyleElement | null;
+  return Array.from(style?.sheet?.cssRules ?? [])
+    .map((rule) => rule.cssText)
+    .join('\n');
+}
+
+function fallbackCssText(): string {
+  return document.getElementById(TYPESTYLES_FALLBACK_STYLE_ID)?.textContent ?? '';
+}
+
+/** Live injected CSS: CSSOM on `#typestyles` plus text fallback. */
+function liveCssText(): string {
+  const style = document.getElementById('typestyles') as HTMLStyleElement | null;
+  return [sheetCssText(), style?.textContent ?? '', fallbackCssText()].join('\n');
+}
+
+function countInLiveCss(needle: string): number {
+  const text = liveCssText();
+  let count = 0;
+  let from = 0;
+  while (from < text.length) {
+    const found = text.indexOf(needle, from);
+    if (found === -1) return count;
+    count += 1;
+    from = found + needle.length;
+  }
+  return count;
+}
 
 describe('createDesignTheme', () => {
   beforeEach(() => {
@@ -336,6 +369,7 @@ describe('createDesignTheme', () => {
     expect(css).toContain('border-radius: 999px');
   });
 
+  // @vitest-environment jsdom
   it('replacing a theme with the same name does not grow CSS without bound', () => {
     createDesignTheme({
       name: 'live-edit',
@@ -350,21 +384,32 @@ describe('createDesignTheme', () => {
         tokens: { fontSize: { md: `${16 + (i % 4)}px` } },
       });
     }
+    flushSync();
     const afterReplace = getRegisteredCss();
     const replaceCount = afterReplace.split('.theme-var-ui-live-edit').length - 1;
     expect(replaceCount).toBe(createCount);
     expect(afterReplace).toContain('--var-ui-fontSize-md: 19px');
+    expect(liveCssText()).toContain('--var-ui-fontSize-md: 19px');
+    expect(liveCssText()).not.toContain('--var-ui-fontSize-md: 16px');
+    expect(countInLiveCss('.theme-var-ui-live-edit')).toBe(1);
   });
 
+  // @vitest-environment jsdom
   it('disposeDesignTheme unregisters the surface', () => {
     createDesignTheme({
       name: 'ephemeral',
       tokens: { fontSize: { md: '21px' } },
     });
+    flushSync();
     expect(getRegisteredCss()).toContain('.theme-var-ui-ephemeral');
+    expect(liveCssText()).toContain('.theme-var-ui-ephemeral');
+    expect(liveCssText()).toContain('--var-ui-fontSize-md: 21px');
     disposeDesignTheme('ephemeral');
+    flushSync();
     expect(getRegisteredCss()).not.toContain('.theme-var-ui-ephemeral');
     expect(getRegisteredCss()).not.toContain('--var-ui-fontSize-md: 21px');
+    expect(liveCssText()).not.toContain('.theme-var-ui-ephemeral');
+    expect(liveCssText()).not.toContain('--var-ui-fontSize-md: 21px');
   });
 
   describe('theme fonts', () => {

@@ -74,8 +74,8 @@ function designThemeSheetSegment(name: string): string {
 
 /**
  * Drop TypeStyles sheet rules for a design theme so the same `name` can replace
- * in place. TypeStyles 0.22.0 `tokens.createTheme` keeps the first registration
- * and has no `removeTheme`; `invalidateKeys` is the public unregister API.
+ * in place. TypeStyles has no `removeTheme`; `invalidateKeys` is the public
+ * unregister API (0.23.1+ also drops layered rules from live CSS).
  */
 export function unregisterDesignTheme(name: string): void {
   const segment = designThemeSheetSegment(name);
@@ -87,6 +87,7 @@ export function unregisterDesignTheme(name: string): void {
       `theme:${segment}:`,
       `layer:overrides:override:${classSelector}:`,
       `override:${classSelector}:`,
+      classSelector,
     ],
   );
 }
