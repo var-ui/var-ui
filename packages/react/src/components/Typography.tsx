@@ -33,11 +33,13 @@ export type TextProps = HTMLAttributes<HTMLElement> & {
   /** HTML element to render. @default p */
   as?: 'p' | 'span' | 'div';
   /** Typographic size. @default md */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   /** Foreground color emphasis. @default primary */
   tone?: 'primary' | 'secondary';
   /** Font weight. @default normal */
   weight?: 'normal' | 'medium' | 'semibold';
+  /** Max lines before truncation. @default none */
+  lineClamp?: 1 | 2 | 3;
 };
 
 /**
@@ -52,11 +54,20 @@ export function Text({
   size = 'md',
   tone = 'primary',
   weight = 'normal',
+  lineClamp,
   className,
   ...props
 }: TextProps): JSX.Element {
   return createElement(as, {
     ...props,
-    ...recipeProps(textBlock({ size, tone, weight }), className),
+    ...recipeProps(
+      textBlock({
+        size,
+        tone,
+        weight,
+        lineClamp: (lineClamp ?? false) as '1' | '2' | '3' | false,
+      }),
+      className,
+    ),
   });
 }

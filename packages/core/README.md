@@ -59,13 +59,13 @@ See [`examples/vite-app`](../vite-app/README.md) and [`examples/astro-app`](../a
 
 ### Key exports
 
-| Area              | Exports                                                                                                        |
-| ----------------- | -------------------------------------------------------------------------------------------------------------- |
-| **Themes**        | `createDesignTheme`, `DEFAULT_THEME_NAME`, `defaultThemeClassName`, `SURFACE_ATTRIBUTE`, `mergeThemeOverrides` |
-| **Tokens**        | `designTokens`, `tokens`, `tokenValues`, `generateColors`, `lightSyntaxValues`, `darkSyntaxValues`             |
-| **Customization** | `extendTokens`, `when`, `themeWhen`, `themeableComponents`, `defineFonts`, `groteskMono`                       |
-| **TypeStyles**    | `typestyles`, `styles`, `global`                                                                               |
-| **Types**         | `DesignTheme`, `DesignThemeConfig`, `DesignThemePreset`, `ThemeComponentsConfig`, `OverrideConfigFor`, …       |
+| Area              | Exports                                                                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Themes**        | `createDesignTheme`, `disposeDesignTheme`, `DEFAULT_THEME_NAME`, `defaultThemeClassName`, `SURFACE_ATTRIBUTE`, `mergeThemeOverrides` |
+| **Tokens**        | `designTokens`, `tokens`, `tokenValues`, `generateColors`, `lightSyntaxValues`, `darkSyntaxValues`                                   |
+| **Customization** | `extendTokens`, `when`, `themeWhen`, `themeableComponents`, `defineFonts`, `groteskMono`                                             |
+| **TypeStyles**    | `typestyles`, `styles`, `global`                                                                                                     |
+| **Types**         | `DesignTheme`, `DesignThemeConfig`, `DesignThemePreset`, `ThemeComponentsConfig`, `OverrideConfigFor`, …                             |
 
 ## Recipe inventory
 
@@ -137,6 +137,13 @@ reads semantic `color.*` plus Tier 1 `c.vars()`.
 
 Themes are thin wrappers around TypeStyles `tokens.createTheme`. Class names use the
 configured scope: `theme-var-ui-<name>` (e.g. `theme-var-ui-default`).
+
+### Runtime themes
+
+`createDesignTheme` is supported in the browser. Calling it again with the same `name`
+replaces the surface (theme editors). `disposeDesignTheme(name)` unregisters it.
+`@typestyles/vite` extract still covers recipes + the default theme. User-authored
+themes inject at runtime.
 
 ### Default theme
 

@@ -45,6 +45,7 @@ import { grid } from './components/grid';
 import { hoverCard } from './components/hoverCard';
 import { icon } from './components/icon';
 import { inputGroup } from './components/inputGroup';
+import { inlineCode } from './components/inlineCode';
 import { kbd } from './components/kbd';
 import { link } from './components/link';
 import { list } from './components/list';
@@ -85,6 +86,7 @@ import { skeleton } from './components/skeleton';
 import { slider } from './components/slider';
 import { spinner } from './components/spinner';
 import { stack } from './components/stack';
+import { surface } from './components/surface';
 import { statusDot } from './components/statusDot';
 import { steps } from './components/steps';
 import { switchStyles } from './components/switch';
@@ -159,6 +161,7 @@ export const themeableComponents = {
   hoverCard,
   icon,
   inputGroup,
+  inlineCode,
   kbd,
   link,
   linkButton,
@@ -197,6 +200,7 @@ export const themeableComponents = {
   slider,
   spinner,
   stack,
+  surface,
   statusDot,
   steps,
   switchStyles,

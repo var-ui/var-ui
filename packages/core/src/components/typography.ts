@@ -70,6 +70,7 @@ export const textBlock = typestyles.styles.component(
       },
       variants: {
         size: {
+          xs: { fontSize: t.fontSize.xs.var },
           sm: { fontSize: t.fontSize.sm.var },
           md: { fontSize: t.fontSize.md.var },
           lg: { fontSize: t.fontSize.lg.var },
@@ -83,8 +84,28 @@ export const textBlock = typestyles.styles.component(
           medium: { fontWeight: t.fontWeight.medium.var },
           semibold: { fontWeight: t.fontWeight.semibold.var },
         },
+        lineClamp: {
+          false: {},
+          '1': {
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          },
+          '2': {
+            overflow: 'hidden',
+            display: '-webkit-box',
+            WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: 2,
+          },
+          '3': {
+            overflow: 'hidden',
+            display: '-webkit-box',
+            WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: 3,
+          },
+        },
       },
-      defaultVariants: { size: 'md', tone: 'primary', weight: 'normal' },
+      defaultVariants: { size: 'md', tone: 'primary', weight: 'normal', lineClamp: 'false' },
     };
   },
   { layer: 'components' },

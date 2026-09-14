@@ -72,6 +72,34 @@ describe('Dialog', () => {
     expect(screen.getByText('Pinned')).toBeTruthy();
   });
 
+  it('opens and closes from isOpen', async () => {
+    function Harness() {
+      const [open, setOpen] = useState(false);
+      return (
+        <IconProvider icons={{}}>
+          <LayerProvider>
+            <>
+              <button type="button" onClick={() => setOpen(true)}>
+                Open
+              </button>
+              <Dialog.Root isOpen={open} onOpenChange={setOpen}>
+                <Dialog.Backdrop>
+                  <Dialog.Popup>
+                    <Dialog.Title>Settings</Dialog.Title>
+                  </Dialog.Popup>
+                </Dialog.Backdrop>
+              </Dialog.Root>
+            </>
+          </LayerProvider>
+        </IconProvider>
+      );
+    }
+    render(<Harness />);
+    expect(screen.queryByRole('dialog')).toBeNull();
+    await userEvent.click(screen.getByRole('button', { name: 'Open' }));
+    expect(await screen.findByRole('dialog', { name: 'Settings' })).toBeTruthy();
+  });
+
   it('nests Tooltip on Dialog.Trigger', async () => {
     render(
       <IconProvider icons={{}}>
