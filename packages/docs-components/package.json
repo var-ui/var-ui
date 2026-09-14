@@ -1,6 +1,6 @@
 {
   "name": "@var-ui/docs-components",
-  "version": "2.0.0",
+  "version": "0.1.0",
   "description": "Optional Var UI docs plugin for design-system catalogs — demos, props extract, framework switcher, component page chrome",
   "keywords": [
     "astro",
@@ -54,9 +54,9 @@
     "vite-plus": "catalog:"
   },
   "peerDependencies": {
-    "@var-ui/astro": "workspace:^",
-    "@var-ui/core": "workspace:^",
-    "@var-ui/docs": "workspace:^",
+    "@var-ui/astro": "workspace:>=0.1.0 <1.0.0",
+    "@var-ui/core": "workspace:>=0.1.0 <1.0.0",
+    "@var-ui/docs": "workspace:>=0.1.0 <1.0.0",
     "astro": "catalog:"
   }
 }

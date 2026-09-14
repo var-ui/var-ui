@@ -1,6 +1,6 @@
 {
   "name": "@var-ui/react",
-  "version": "2.0.0",
+  "version": "0.1.0",
   "description": "React components for the var-ui design system",
   "homepage": "https://github.com/var-ui/var-ui/tree/main/packages/react#readme",
   "bugs": "https://github.com/var-ui/var-ui/issues",
@@ -1432,8 +1432,8 @@
   },
   "peerDependencies": {
     "@internationalized/date": "catalog:",
-    "@var-ui/core": "workspace:^",
-    "@var-ui/icons": "workspace:^",
+    "@var-ui/core": "workspace:>=0.1.0 <1.0.0",
+    "@var-ui/icons": "workspace:>=0.1.0 <1.0.0",
     "react": "catalog:",
     "react-aria-components": "catalog:",
     "react-dom": "catalog:"
