@@ -395,6 +395,32 @@ describe('createDesignTheme', () => {
   });
 
   // @vitest-environment jsdom
+  it('disposeDesignTheme does not drop sibling themes with a shared name prefix', () => {
+    createDesignTheme({
+      name: 'dark',
+      tokens: { fontSize: { md: '20px' } },
+    });
+    createDesignTheme({
+      name: 'dark-mode',
+      tokens: { fontSize: { md: '22px' } },
+    });
+    flushSync();
+
+    disposeDesignTheme('dark');
+    flushSync();
+
+    const registered = getRegisteredCss();
+    const live = liveCssText();
+    expect(registered).toContain('.theme-var-ui-dark-mode');
+    expect(registered).toContain('--var-ui-fontSize-md: 22px');
+    expect(registered).not.toContain('--var-ui-fontSize-md: 20px');
+    expect(live).toContain('.theme-var-ui-dark-mode');
+    expect(live).toContain('--var-ui-fontSize-md: 22px');
+    expect(live).not.toContain('--var-ui-fontSize-md: 20px');
+    expect(live).not.toMatch(/\.theme-var-ui-dark\s*\{/);
+  });
+
+  // @vitest-environment jsdom
   it('disposeDesignTheme unregisters the surface', () => {
     createDesignTheme({
       name: 'ephemeral',

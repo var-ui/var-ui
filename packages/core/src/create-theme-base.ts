@@ -72,6 +72,58 @@ function designThemeSheetSegment(name: string): string {
   return scopeId ? `${sanitizeThemeSegment(scopeId)}-${sanitizedName}` : sanitizedName;
 }
 
+/** True when `selector` appears as its own selector, not a longer class prefix. */
+function cssTextContainsExactSelector(cssText: string, selector: string): boolean {
+  let from = 0;
+  while (from < cssText.length) {
+    const idx = cssText.indexOf(selector, from);
+    if (idx === -1) return false;
+    const next = cssText[idx + selector.length];
+    if (next === '{' || next === ' ' || next === ',' || next === ':') return true;
+    from = idx + selector.length;
+  }
+  return false;
+}
+
+/**
+ * Drop live CSSOM rules for one theme class. Uses exact selector matching so
+ * disposing `dark` does not remove `.theme-var-ui-dark-mode` (unlike prefix
+ * matching on `selectorText.startsWith`).
+ */
+function removeLiveCssomRulesForExactSelector(selector: string): void {
+  if (typeof document === 'undefined') return;
+  const sheet = (document.getElementById('typestyles') as HTMLStyleElement | null)?.sheet;
+  if (!sheet) return;
+
+  const purge = (list: CSSRuleList, owner: CSSStyleSheet | CSSGroupingRule): void => {
+    for (let i = list.length - 1; i >= 0; i -= 1) {
+      const rule = list[i]!;
+      if ('selectorText' in rule) {
+        const styleRule = rule as CSSStyleRule;
+        if (styleRule.selectorText === selector) {
+          owner.deleteRule(i);
+          continue;
+        }
+      }
+      if ('cssRules' in rule) {
+        const grouping = rule as CSSGroupingRule;
+        if (grouping.cssRules.length > 0) {
+          purge(grouping.cssRules, grouping);
+        }
+        if (grouping.cssRules.length === 0) {
+          owner.deleteRule(i);
+          continue;
+        }
+      }
+      if (!('selectorText' in rule) && cssTextContainsExactSelector(rule.cssText, selector)) {
+        owner.deleteRule(i);
+      }
+    }
+  };
+
+  purge(sheet.cssRules, sheet);
+}
+
 /**
  * Drop TypeStyles sheet rules for a design theme so the same `name` can replace
  * in place. TypeStyles has no `removeTheme`; `invalidateKeys` is the public
@@ -87,9 +139,9 @@ export function unregisterDesignTheme(name: string): void {
       `theme:${segment}:`,
       `layer:overrides:override:${classSelector}:`,
       `override:${classSelector}:`,
-      classSelector,
     ],
   );
+  removeLiveCssomRulesForExactSelector(classSelector);
 }
 
 /**
