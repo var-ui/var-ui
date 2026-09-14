@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vite-plus/test';
 import { getRegisteredCss, reset } from 'typestyles';
-import { createDesignTheme } from '../src/create-theme';
+// @ts-expect-error disposeDesignTheme exported in Task 2
+import { createDesignTheme, disposeDesignTheme } from '../src/create-theme';
 import { DEFAULT_THEME_NAME, SURFACE_ATTRIBUTE } from '../src/theme-constants';
 import { extendTokens, resetExtendTokenRegistry } from '../src/extend-tokens';
 import { resetRegisteredFontFaces } from '../src/fonts/register-font-face';
@@ -334,6 +335,37 @@ describe('createDesignTheme', () => {
     const css = getRegisteredCss();
     expect(css).toMatch(/@layer overrides \{[\s\S]*\.var-ui-button \{/);
     expect(css).toContain('border-radius: 999px');
+  });
+
+  it('replacing a theme with the same name does not grow CSS without bound', () => {
+    createDesignTheme({
+      name: 'live-edit',
+      tokens: { fontSize: { md: '16px' } },
+    });
+    const afterCreate = getRegisteredCss();
+    const createCount = afterCreate.split('.theme-var-ui-live-edit').length - 1;
+
+    for (let i = 0; i < 40; i += 1) {
+      createDesignTheme({
+        name: 'live-edit',
+        tokens: { fontSize: { md: `${16 + (i % 4)}px` } },
+      });
+    }
+    const afterReplace = getRegisteredCss();
+    const replaceCount = afterReplace.split('.theme-var-ui-live-edit').length - 1;
+    expect(replaceCount).toBe(createCount);
+    expect(afterReplace).toContain('--var-ui-fontSize-md: 19px');
+  });
+
+  it('disposeDesignTheme unregisters the surface', () => {
+    createDesignTheme({
+      name: 'ephemeral',
+      tokens: { fontSize: { md: '21px' } },
+    });
+    expect(getRegisteredCss()).toContain('.theme-var-ui-ephemeral');
+    disposeDesignTheme('ephemeral');
+    expect(getRegisteredCss()).not.toContain('.theme-var-ui-ephemeral');
+    expect(getRegisteredCss()).not.toContain('--var-ui-fontSize-md: 21px');
   });
 
   describe('theme fonts', () => {
