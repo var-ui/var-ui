@@ -1,4 +1,5 @@
 import { mergeThemeOverrides, type ThemeOverrides } from 'typestyles';
+import { invalidateKeys } from 'typestyles/hmr';
 import { registerExtendMap, type ExtendTokenValues } from './extend-tokens';
 import { registerFontFace } from './fonts/register-font-face';
 import { typestyles } from './runtime';
@@ -53,6 +54,43 @@ function omitColor(values: DesignThemeTokenValues): Omit<DesignThemeTokenValues,
   return rest;
 }
 
+/** Match TypeStyles `sanitizeClassSegment` so sheet keys line up with `createTheme`. */
+function sanitizeThemeSegment(label: string): string {
+  return (
+    label
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '') || 'style'
+  );
+}
+
+function designThemeSheetSegment(name: string): string {
+  const scopeId = typestyles.tokens.scopeId;
+  const sanitizedName = sanitizeThemeSegment(name);
+  return scopeId ? `${sanitizeThemeSegment(scopeId)}-${sanitizedName}` : sanitizedName;
+}
+
+/**
+ * Drop TypeStyles sheet rules for a design theme so the same `name` can replace
+ * in place. TypeStyles 0.22.0 `tokens.createTheme` keeps the first registration
+ * and has no `removeTheme`; `invalidateKeys` is the public unregister API.
+ */
+export function unregisterDesignTheme(name: string): void {
+  const segment = designThemeSheetSegment(name);
+  const classSelector = `.theme-${segment}`;
+  invalidateKeys(
+    [],
+    [
+      `layer:tokens:theme:${segment}:`,
+      `theme:${segment}:`,
+      `layer:overrides:override:${classSelector}:`,
+      `override:${classSelector}:`,
+    ],
+  );
+}
+
 /**
  * Merge token overrides + ambient colorMode and compile a TypeStyles theme surface.
  * Does not apply per-recipe `components` overrides — use {@link createDesignTheme} for that.
@@ -60,6 +98,7 @@ function omitColor(values: DesignThemeTokenValues): Omit<DesignThemeTokenValues,
 export function createDesignThemeBase<const E extends ExtendMap = Record<string, never>>(
   config: Omit<DesignThemeConfig<E>, 'components'>,
 ): DesignTheme<E> {
+  unregisterDesignTheme(config.name);
   const { from, tokens: tokenOverrides, colorMode, modes, extend, fonts } = config;
 
   const extendResult = extend ? registerExtendMap(extend) : undefined;

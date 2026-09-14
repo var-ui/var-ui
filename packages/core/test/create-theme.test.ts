@@ -1,6 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vite-plus/test';
 import { getRegisteredCss, reset } from 'typestyles';
-// @ts-expect-error disposeDesignTheme exported in Task 2
 import { createDesignTheme, disposeDesignTheme } from '../src/create-theme';
 import { DEFAULT_THEME_NAME, SURFACE_ATTRIBUTE } from '../src/theme-constants';
 import { extendTokens, resetExtendTokenRegistry } from '../src/extend-tokens';
