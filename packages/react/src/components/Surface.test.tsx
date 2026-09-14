@@ -9,4 +9,15 @@ describe('Surface', () => {
     expect(el.tagName).toBe('DIV');
     expect(el.className).toContain('var-ui-surface');
   });
+
+  it('forwards native div attributes', () => {
+    const { container } = render(
+      <Surface data-widget-id="widget-1" id="surface-root">
+        Content
+      </Surface>,
+    );
+    const el = container.querySelector('#surface-root');
+    expect(el).toBeTruthy();
+    expect(el?.getAttribute('data-widget-id')).toBe('widget-1');
+  });
 });
