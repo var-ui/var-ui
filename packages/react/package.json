@@ -1018,6 +1018,18 @@
       "types": "./dist/components/Steps.d.mts",
       "import": "./dist/components/Steps.mjs"
     },
+    "./components/Surface": {
+      "types": "./dist/components/Surface.d.mts",
+      "import": "./dist/components/Surface.mjs"
+    },
+    "./surface": {
+      "types": "./dist/components/Surface.d.mts",
+      "import": "./dist/components/Surface.mjs"
+    },
+    "./Surface": {
+      "types": "./dist/components/Surface.d.mts",
+      "import": "./dist/components/Surface.mjs"
+    },
     "./components/Switch": {
       "types": "./dist/components/Switch.d.mts",
       "import": "./dist/components/Switch.mjs"

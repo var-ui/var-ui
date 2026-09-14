@@ -249,6 +249,7 @@ export {
   type FileTreeProps,
 } from './FileTree';
 export { Kbd, type KbdProps } from './Kbd';
+export { Surface, type SurfaceProps } from './Surface';
 export { SimpleGrid, type SimpleGridProps } from './SimpleGrid';
 export { Skeleton, type SkeletonProps } from './Skeleton';
 export { StatusDot, type StatusDotProps } from './StatusDot';

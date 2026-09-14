@@ -746,6 +746,14 @@
       "types": "./dist/components/styles.d.mts",
       "import": "./dist/components/styles.mjs"
     },
+    "./components/surface": {
+      "types": "./dist/components/surface.d.mts",
+      "import": "./dist/components/surface.mjs"
+    },
+    "./surface": {
+      "types": "./dist/components/surface.d.mts",
+      "import": "./dist/components/surface.mjs"
+    },
     "./components/switch": {
       "types": "./dist/components/switch.d.mts",
       "import": "./dist/components/switch.mjs"

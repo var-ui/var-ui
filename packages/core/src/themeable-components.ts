@@ -86,6 +86,7 @@ import { skeleton } from './components/skeleton';
 import { slider } from './components/slider';
 import { spinner } from './components/spinner';
 import { stack } from './components/stack';
+import { surface } from './components/surface';
 import { statusDot } from './components/statusDot';
 import { steps } from './components/steps';
 import { switchStyles } from './components/switch';
@@ -199,6 +200,7 @@ export const themeableComponents = {
   slider,
   spinner,
   stack,
+  surface,
   statusDot,
   steps,
   switchStyles,

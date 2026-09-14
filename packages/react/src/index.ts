@@ -138,6 +138,8 @@ export {
   type StackProps,
   Spinner,
   type SpinnerProps,
+  Surface,
+  type SurfaceProps,
   ProgressBar,
   type ProgressBarProps,
   Banner,
