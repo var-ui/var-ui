@@ -1,5 +1,11 @@
 # @var-ui/core
 
+## 2.0.0
+
+### Minor Changes
+
+- [#15](https://github.com/var-ui/var-ui/pull/15) [`d3f873a`](https://github.com/var-ui/var-ui/commit/d3f873afdc82190dcef49ec37494d70efa1d457d) Thanks [@dbanksdesign](https://github.com/dbanksdesign)! - Support replacing and disposing runtime `createDesignTheme` surfaces. Add `Text` xs/lineClamp, inline `Code`, and `Surface`.
+
 ## 1.0.0
 
 ### Minor Changes

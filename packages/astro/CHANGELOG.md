@@ -1,5 +1,12 @@
 # @var-ui/astro
 
+## 2.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`d3f873a`](https://github.com/var-ui/var-ui/commit/d3f873afdc82190dcef49ec37494d70efa1d457d)]:
+  - @var-ui/core@2.0.0
+
 ## 1.0.0
 
 ### Minor Changes
