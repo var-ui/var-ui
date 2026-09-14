@@ -1,6 +1,12 @@
 # @var-ui/core
 
-1.x and 2.x were unpublished; this package is on 0.x until a stable 1.0.
+## 0.1.1
+
+### Patch Changes
+
+- [#18](https://github.com/var-ui/var-ui/pull/18) [`e16cf73`](https://github.com/var-ui/var-ui/commit/e16cf73998a012a7172b9e62f829845906b4179b) Thanks [@dbanksdesign](https://github.com/dbanksdesign)! - Keep `@var-ui/core/styles` registrations through `vp pack` so the published extraction entry is not an empty module.
+
+  1.x and 2.x were unpublished; this package is on 0.x until a stable 1.0.
 
 ## 0.1.0
 
