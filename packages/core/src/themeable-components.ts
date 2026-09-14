@@ -45,6 +45,7 @@ import { grid } from './components/grid';
 import { hoverCard } from './components/hoverCard';
 import { icon } from './components/icon';
 import { inputGroup } from './components/inputGroup';
+import { inlineCode } from './components/inlineCode';
 import { kbd } from './components/kbd';
 import { link } from './components/link';
 import { list } from './components/list';
@@ -159,6 +160,7 @@ export const themeableComponents = {
   hoverCard,
   icon,
   inputGroup,
+  inlineCode,
   kbd,
   link,
   linkButton,
