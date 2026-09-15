@@ -2,13 +2,26 @@ import { defineConfig } from 'vite-plus';
 
 export default defineConfig({
   fmt: {
-    ignorePatterns: ['**/node_modules/**', 'dist/**', '**/__snapshots__/**', '**/.astro/**'],
+    ignorePatterns: [
+      '**/node_modules/**',
+      'dist/**',
+      '**/__snapshots__/**',
+      '**/.astro/**',
+      '.docs/**',
+      'packages/cli/data/catalog.json',
+    ],
     singleQuote: true,
     semi: true,
     sortPackageJson: true,
   },
   lint: {
-    ignorePatterns: ['**/node_modules/**', 'dist/**', '**/__snapshots__/**', '**/.astro/**'],
+    ignorePatterns: [
+      '**/node_modules/**',
+      'dist/**',
+      '**/__snapshots__/**',
+      '**/.astro/**',
+      '.docs/**',
+    ],
     plugins: ['typescript'],
     jsPlugins: [{ name: 'vite-plus', specifier: 'vite-plus/oxlint-plugin' }],
     options: {

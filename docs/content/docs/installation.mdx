@@ -9,25 +9,25 @@ Install published `@var-ui/*` packages from npm. For the copy-paste Vite + React
 
 ## Packages
 
-| Package | Role |
-| --- | --- |
-| `@var-ui/core` | Tokens, recipes, and CSS extract entry (`@var-ui/core/styles`) |
-| `@var-ui/react` | React components |
-| `@var-ui/icons` | Optional default glyphs for `IconProvider` |
-| `@var-ui/astro` | Astro components (no React) |
-| `@var-ui/form` | Form state and validation |
-| `@var-ui/cli` | Dev dependency: `npx @var-ui/cli` for component lookup, search, and `init` |
+| Package         | Role                                                                       |
+| --------------- | -------------------------------------------------------------------------- |
+| `@var-ui/core`  | Tokens, recipes, and CSS extract entry (`@var-ui/core/styles`)             |
+| `@var-ui/react` | React components                                                           |
+| `@var-ui/icons` | Optional default glyphs for `IconProvider`                                 |
+| `@var-ui/astro` | Astro components (no React)                                                |
+| `@var-ui/form`  | Form state and validation                                                  |
+| `@var-ui/cli`   | Dev dependency: `npx @var-ui/cli` for component lookup, search, and `init` |
 
 `@var-ui/icons` is optional. Without it, pass `icons={{}}` to `IconProvider`.
 
 ## Peer dependencies
 
-| Peer | Notes |
-| --- | --- |
-| `react` / `react-dom` | 19 |
-| `react-aria-components` | Required by `@var-ui/react` |
-| `typestyles` | Required |
-| `@typestyles/vite` | Vite plugin for CSS extraction |
+| Peer                      | Notes                               |
+| ------------------------- | ----------------------------------- |
+| `react` / `react-dom`     | 19                                  |
+| `react-aria-components`   | Required by `@var-ui/react`         |
+| `typestyles`              | Required                            |
+| `@typestyles/vite`        | Vite plugin for CSS extraction      |
 | `@internationalized/date` | Required when using date components |
 
 ## This monorepo
