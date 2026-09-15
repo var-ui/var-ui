@@ -5,17 +5,106 @@ description: Create a project and render your first var-ui component.
 
 # Getting started
 
-This guide walks through adding var-ui to a React app and rendering a component with the design system providers.
+This guide is the happy path for a **Vite + React 19** app: install from npm, extract CSS, wrap providers, and render a Button.
 
-## 1. Install packages
+## Install
 
-Add `@var-ui/react`, `@var-ui/core`, and optionally `@var-ui/icons` to your app.
+```bash
+pnpm add @var-ui/react @var-ui/core @var-ui/icons react react-dom react-aria-components typestyles
+pnpm add -D @typestyles/vite
+```
 
-## 2. Wrap your app
+```bash
+npm install @var-ui/react @var-ui/core @var-ui/icons react react-dom react-aria-components typestyles
+npm install -D @typestyles/vite
+```
 
-Mount `DesignSystemProvider`, `IconProvider`, and `LayerProvider` at the root of your application.
+`@var-ui/icons` is optional. Without it, pass `icons={{}}` to `IconProvider`.
 
-## Direction and locale
+## Extract CSS
+
+Create a Vite extract entry that imports core styles:
+
+```ts
+// typestyles-entry.ts
+import '@var-ui/core/styles';
+```
+
+Register it with the Vite plugin:
+
+```ts
+import typestyles from '@typestyles/vite';
+
+export default {
+  plugins: [typestyles({ extract: { modules: ['typestyles-entry.ts'] } })],
+};
+```
+
+## Providers
+
+Mount `DesignSystemProvider` with `applyToDocument`, `IconProvider`, and `LayerProvider` at the root:
+
+```tsx
+import { defaultIcons } from '@var-ui/icons';
+import { DesignSystemProvider, IconProvider, LayerProvider } from '@var-ui/react';
+
+<DesignSystemProvider applyToDocument>
+  <IconProvider icons={defaultIcons}>
+    <LayerProvider>{children}</LayerProvider>
+  </IconProvider>
+</DesignSystemProvider>
+```
+
+Without `@var-ui/icons`, pass `icons={{}}` to `IconProvider`.
+
+`applyToDocument` puts the theme class on `html`. Isolate stacking and cover the visual viewport:
+
+```css
+html {
+  isolation: isolate;
+}
+
+body {
+  position: relative;
+}
+```
+
+## First component
+
+```tsx
+import { Button } from '@var-ui/react';
+
+<Button>Click me</Button>
+```
+
+## Astro without React
+
+```bash
+pnpm add @var-ui/astro @var-ui/core typestyles
+pnpm add -D @typestyles/vite
+```
+
+Use the same `typestyles-entry.ts` extract entry, then import Astro components:
+
+```astro
+---
+import { Button } from '@var-ui/astro';
+---
+
+<Button>Click me</Button>
+```
+
+See `examples/astro-app` in the repo for a full tree.
+
+## Next
+
+- [Installation](/docs/installation) — package list, peers, and this monorepo’s `workspace:*` note
+- [Overlay lifecycle](/docs/overlay-lifecycle) — overlay `data-*` attributes, positioner CSS variables, and `onOpenChange`
+- [Theming](/theming) — tokens, themes, and `createDesignTheme`
+
+## Direction, portals, and stacking
+
+### Direction and locale
 
 Pass `direction` and a real `locale` on `DesignSystemProvider`:
 
@@ -39,7 +128,7 @@ React Aria overlays (`Popover`, `Menu`, `start` / `end` placement) take directio
 
 Do not set `dir` on the whole docs site to try this — use a `DirectionProvider` island (see Hidden).
 
-## Portals and stacking
+### Portals and stacking
 
 Wrap the application in an isolating root so portaled dialogs and popovers stack above page `z-index`:
 
@@ -57,18 +146,12 @@ Wrap the application in an isolating root so portaled dialogs and popovers stack
 
 When `DesignSystemProvider` uses `applyToDocument`, put `isolation: isolate` on `html` or `body` instead of an extra wrapper.
 
-### Themed portals
+#### Themed portals
 
 Token CSS variables cascade from the theme class. If an overlay portals to `document.body` and the theme class is on a subtree, pass `portalContainer` pointing at the themed node (or use `applyToDocument`).
 
-### iOS 26+ Safari backdrops
+#### iOS 26+ Safari backdrops
 
 Dialog and drawer backdrops use `position: absolute` under `@supports (-webkit-touch-callout: none)`. Add `body { position: relative; }` so a scrolled page still covers the visual viewport.
 
 Overlay `data-*` attributes, positioner CSS variables, and `onOpenChange` details are documented in [Overlay lifecycle](/docs/overlay-lifecycle).
-
-## 3. Use a component
-
-Import components from `@var-ui/react` and compose them with TypeStyles-powered layout primitives.
-
-Detailed install commands and copy-paste snippets will be added in a follow-up pass.
