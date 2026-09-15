@@ -21,7 +21,11 @@ export function formatComponent(record: ComponentRecord, json: boolean): string 
   if (json) {
     return `${JSON.stringify(record, null, 2)}\n`;
   }
-  const heading = record.markdown.trimStart().startsWith('#') ? '' : `# ${record.name}\n\n`;
-  const body = `${heading}${record.importLine}\n\n${record.markdown}`;
-  return body.endsWith('\n') ? body : `${body}\n`;
+  const body = stripLeadingHeading(record.markdown);
+  const output = `# ${record.name}\n\n${record.importLine}\n\n${body}`;
+  return output.endsWith('\n') ? output : `${output}\n`;
+}
+
+function stripLeadingHeading(markdown: string): string {
+  return markdown.replace(/^\s*#[^\n]*\n?/, '').replace(/^\s+/, '');
 }

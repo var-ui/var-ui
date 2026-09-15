@@ -112,6 +112,15 @@ describe('applyAgentsBlock', () => {
   it('appends after a blank line when markers are missing', () => {
     expect(applyAgentsBlock('keep me', block)).toBe(`keep me\n\n${block}`);
   });
+
+  it('throws when only one marker is present', () => {
+    expect(() => applyAgentsBlock(`${AGENTS_START}\norphan`, block)).toThrow(
+      /incomplete var-ui agents block/i,
+    );
+    expect(() => applyAgentsBlock(`keep\n${AGENTS_END}`, block)).toThrow(
+      /incomplete var-ui agents block/i,
+    );
+  });
 });
 
 describe('initAgentsDocs', () => {

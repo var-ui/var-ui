@@ -16,9 +16,12 @@ function component(
   };
 }
 
-function guide(partial: Pick<GuideRecord, 'id' | 'title' | 'description'>): GuideRecord {
+function guide(
+  partial: Pick<GuideRecord, 'id' | 'title' | 'description'> &
+    Partial<Pick<GuideRecord, 'docsPath'>>,
+): GuideRecord {
   return {
-    docsPath: `/docs/${partial.id}`,
+    docsPath: partial.docsPath ?? `/docs/${partial.id}`,
     markdown: `# ${partial.title}\n`,
     ...partial,
   };
@@ -46,6 +49,18 @@ function miniCatalog(): Catalog {
         id: 'getting-started',
         title: 'Getting started',
         description: 'Install var-ui',
+      }),
+      guide({
+        id: 'docs/index',
+        title: 'Documentation',
+        description: 'Docs hub',
+        docsPath: '/docs',
+      }),
+      guide({
+        id: 'theming/index',
+        title: 'Theming',
+        description: 'Theming hub',
+        docsPath: '/theming',
       }),
     ],
   };
@@ -83,5 +98,17 @@ describe('findGuide', () => {
 
   it('returns undefined when no id or title matches', () => {
     expect(findGuide(catalog, 'install')).toBeUndefined();
+  });
+
+  it('returns a guide by docsPath', () => {
+    expect(findGuide(catalog, '/docs')?.title).toBe('Documentation');
+    expect(findGuide(catalog, '/theming')?.title).toBe('Theming');
+    expect(findGuide(catalog, '/docs/getting-started')?.id).toBe('getting-started');
+  });
+
+  it('returns namespaced index ids and treats bare index as unknown', () => {
+    expect(findGuide(catalog, 'docs/index')?.title).toBe('Documentation');
+    expect(findGuide(catalog, 'theming/index')?.title).toBe('Theming');
+    expect(findGuide(catalog, 'index')).toBeUndefined();
   });
 });

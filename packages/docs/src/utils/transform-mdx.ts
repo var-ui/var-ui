@@ -96,7 +96,11 @@ function renderPropsTable(props: TransformPropRow[]): string {
   const separator = '| --- | --- | --- | --- | --- |';
   const rows = props.map(
     (prop) =>
-      `| ${prop.name} | ${prop.type} | ${prop.required ? 'yes' : 'no'} | ${prop.default ?? ''} | ${prop.description ?? ''} |`,
+      `| ${escapeTableCell(prop.name)} | ${escapeTableCell(prop.type)} | ${prop.required ? 'yes' : 'no'} | ${escapeTableCell(prop.default ?? '')} | ${escapeTableCell(prop.description ?? '')} |`,
   );
   return [header, separator, ...rows].join('\n');
+}
+
+function escapeTableCell(value: string): string {
+  return value.replace(/\r?\n/g, ' ').replace(/\|/g, '\\|');
 }

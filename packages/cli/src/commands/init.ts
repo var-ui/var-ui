@@ -30,6 +30,9 @@ export function applyAgentsBlock(existing: string | null, block: string): string
   }
   const start = existing.indexOf(AGENTS_START);
   const end = existing.indexOf(AGENTS_END);
+  if ((start === -1) !== (end === -1) || (start !== -1 && end < start)) {
+    throw new Error('Incomplete var-ui agents block: both start and end markers are required.');
+  }
   if (start !== -1 && end !== -1 && end >= start) {
     return existing.slice(0, start) + block + existing.slice(end + AGENTS_END.length);
   }

@@ -15,6 +15,7 @@ const installation = readFileSync(
 describe('getting-started copy', () => {
   it('has copy-paste npm install and no stub sentence', () => {
     expect(gettingStarted).toContain('pnpm add @var-ui/react');
+    expect(gettingStarted).toContain('npm install @var-ui/react');
     expect(gettingStarted).toContain('@typestyles/vite');
     expect(gettingStarted).toContain("import '@var-ui/core/styles'");
     expect(gettingStarted).toContain('DesignSystemProvider');

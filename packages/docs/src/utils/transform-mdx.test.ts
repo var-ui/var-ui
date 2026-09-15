@@ -61,6 +61,18 @@ describe('transformMdx', () => {
     expect(empty.markdown).not.toContain('| intent |');
   });
 
+  it('escapes pipe characters in props table cells', () => {
+    const result = transformMdx({
+      source: '<PropsTable slug="button" />',
+      snippets,
+      props: [{ name: 'size', type: 'string | number', required: false, description: 'a | b' }],
+      filePath: 'button.mdx',
+    });
+    expect(result.markdown).toContain('| string \\| number |');
+    expect(result.markdown).toContain('| a \\| b |');
+    expect(result.markdown).not.toContain('| string | number |');
+  });
+
   it('replaces allowlisted widgets and leaves other JSX', () => {
     const result = transformMdx({
       source: '<ColorSwatches />\n\n<Form onSubmit={() => {}}>\n',

@@ -58,6 +58,7 @@ export async function buildCatalog(paths: RepoPaths, version: string): Promise<C
   const registryMod = (await import(
     pathToFileURL(join(paths.repoRoot, 'docs/src/data/components.ts')).href
   )) as { componentRegistry: RegistryEntry[] };
+  await extractComponentProps(paths);
   const snippetIndex = await indexSnippets(paths.docsDemos);
   const components: ComponentRecord[] = [];
 
@@ -97,6 +98,13 @@ export async function buildCatalog(paths: RepoPaths, version: string): Promise<C
   };
 }
 
+async function extractComponentProps(paths: RepoPaths): Promise<void> {
+  const { writeComponentProps } = (await import(
+    pathToFileURL(join(paths.repoRoot, 'docs/src/lib/extract-component-props.ts')).href
+  )) as { writeComponentProps: (outputDir: string) => void };
+  writeComponentProps(paths.propsDir);
+}
+
 async function indexSnippets(docsDemos: string): Promise<Record<string, Snippet>> {
   const files = listFiles(docsDemos, true).filter((file) => basename(file) === 'snippets.ts');
   const entries = await Promise.all(
@@ -128,9 +136,11 @@ async function loadGuideCollection(
   const files = listFiles(collectionDir, recursive)
     .filter((file) => file.endsWith('.mdx'))
     .sort();
+  const collection = prefix.replace(/^\//, '');
   return Promise.all(
     files.map(async (filePath) => {
-      const id = posixRelative(collectionDir, filePath).replace(/\.mdx$/, '');
+      const relativeId = posixRelative(collectionDir, filePath).replace(/\.mdx$/, '');
+      const id = relativeId === 'index' ? `${collection}/index` : relativeId;
       const source = readFileSync(filePath, 'utf8');
       const transformed = transformMdx({
         source,
@@ -142,7 +152,7 @@ async function loadGuideCollection(
         id,
         title: transformed.title,
         description: transformed.description,
-        docsPath: id === 'index' ? prefix : `${prefix}/${id}`,
+        docsPath: relativeId === 'index' ? prefix : `${prefix}/${relativeId}`,
         markdown: transformed.markdown,
       };
     }),
