@@ -1,5 +1,4 @@
 import type { DemoSnippets } from '../../types';
-import { render } from './html';
 
 export const snippets = {
   react: `import { ChatMessage, ChatMessageBubble } from '@var-ui/react';
@@ -24,5 +23,5 @@ const last = chatMessageBubble({ sender: 'assistant', variant: 'filled', group: 
     <div class:list={[last.root]}>Second part.</div>
   </div>
 </div>`,
-  html: render(),
+  html: `<div data-sender="assistant" class="var-ui-chat-message"><div data-sender="assistant" class="var-ui-chat-message__content"><div data-sender="assistant" class="var-ui-chat-message__header"><span data-sender="assistant" class="var-ui-chat-message__name">Navi</span></div><div data-sender="assistant" data-variant="filled" data-group="first" class="var-ui-chat-message-bubble">First part of a multi-part reply.</div><div data-sender="assistant" data-variant="filled" data-group="last" class="var-ui-chat-message-bubble">Second part.</div></div></div>`,
 } satisfies DemoSnippets;
