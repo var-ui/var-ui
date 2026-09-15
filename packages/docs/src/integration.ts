@@ -15,12 +15,35 @@ import {
   resolveGuideRouteConfig,
 } from './utils/routing';
 import { getLazyThemePresets } from './utils/theme/presets';
+import { resolveMarkdownViews } from './utils/markdown-href';
+import { writeMarkdownViews } from './utils/write-markdown-views';
 
 function resolveShikiTheme(syntax: VarDocsConfig['theme']['syntax']) {
   if (syntax == null || syntax === 'design-tokens') {
     return designTokenShikiTheme;
   }
   return syntax;
+}
+
+function emitMarkdownViews(
+  root: string,
+  config: VarDocsConfig,
+  logger: { info: (message: string) => void },
+): void {
+  const views = resolveMarkdownViews(config.markdownViews);
+  if (!views.enabled) {
+    return;
+  }
+  const routes = Object.fromEntries(
+    resolveGuideRouteConfig(config.routes).map((route) => [route.collection, route]),
+  );
+  writeMarkdownViews({
+    root,
+    title: config.title,
+    routes,
+    markdownViews: views,
+  });
+  logger.info('Wrote markdown views → public/llms.txt');
 }
 
 /**
@@ -100,6 +123,7 @@ export default function varDocs(userOpts: VarDocsUserConfig): AstroIntegration {
 
         const shikiTheme = resolveShikiTheme(config.theme.syntax);
         const root = fileURLToPath(astroConfig.root);
+        emitMarkdownViews(root, config, logger);
         const lazyPresets = getLazyThemePresets(config.theme.presets);
         const vitePlugins = [
           vitePluginVarDocsVirtualModules(config, { root: astroConfig.root }),
@@ -131,10 +155,11 @@ export default function varDocs(userOpts: VarDocsUserConfig): AstroIntegration {
         } as Parameters<typeof updateConfig>[0]);
       },
       'astro:build:start': async ({ logger }) => {
-        const lazyPresets = getLazyThemePresets(config.theme.presets);
-        if (lazyPresets.length === 0) return;
         // Prefer project cwd (Astro runs build from the site root).
         const root = process.cwd();
+        emitMarkdownViews(root, config, logger);
+        const lazyPresets = getLazyThemePresets(config.theme.presets);
+        if (lazyPresets.length === 0) return;
         logger.info(`Extracting lazy theme CSS → public/themes/`);
         await buildDocsThemeStyles({
           root,

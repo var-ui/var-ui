@@ -146,6 +146,21 @@ export const VarDocsUserConfigSchema = z.object({
   disableGuideRoutes: z.boolean().optional().default(false),
   /** Disable injected stub middleware (site may provide its own). */
   disableMiddleware: z.boolean().optional().default(false),
+  /**
+   * Sibling `.md` URLs, `/llms.txt`, and the DocsPage markdown link.
+   * Default true. Pass `false` to opt out, or an object for extra prefixes
+   * (e.g. `/components`) and an optional `llms.txt` tagline.
+   */
+  markdownViews: z
+    .union([
+      z.boolean(),
+      z.object({
+        extraPrefixes: z.array(z.string().min(1)).optional(),
+        tagline: z.string().optional(),
+      }),
+    ])
+    .optional()
+    .default(true),
 });
 
 export type VarDocsUserConfig = z.input<typeof VarDocsUserConfigSchema>;
