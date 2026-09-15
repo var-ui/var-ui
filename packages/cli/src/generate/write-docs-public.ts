@@ -7,7 +7,7 @@ export function writeDocsPublic(catalog: Catalog, publicDir: string): void {
   mkdirSync(componentsDir, { recursive: true });
 
   for (const component of catalog.components) {
-    const body = component.markdown.startsWith('#')
+    const body = component.markdown.trimStart().startsWith('#')
       ? component.markdown
       : `# ${component.name}\n\n${component.markdown}`;
     writeFileSync(join(componentsDir, `${component.slug}.md`), body);

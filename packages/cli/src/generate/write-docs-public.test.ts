@@ -93,6 +93,26 @@ describe('writeDocsPublic', () => {
       '# Button\n\nTriggers an action or event.\n',
     );
   });
+
+  it('does not duplicate an H1 when markdown starts with leading whitespace', () => {
+    const publicDir = tmpDir();
+    writeDocsPublic(
+      miniCatalog({
+        components: [
+          component({
+            slug: 'button',
+            name: 'Button',
+            markdown: '\n\n# Button\n\nTriggers an action or event.\n',
+          }),
+        ],
+      }),
+      publicDir,
+    );
+
+    const written = fs.readFileSync(path.join(publicDir, 'components', 'button.md'), 'utf8');
+    expect(written.match(/^# Button$/gm)).toEqual(['# Button']);
+    expect(written).toContain('# Button\n\nTriggers an action or event.\n');
+  });
 });
 
 describe('writeCatalogJson', () => {
