@@ -67,6 +67,7 @@ export default defineConfig({
       'packages/icons',
       'packages/astro',
       'packages/docs',
+      'packages/cli',
       'docs',
     ],
   },

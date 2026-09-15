@@ -1,0 +1,43 @@
+{
+  "name": "@var-ui/cli",
+  "version": "0.1.0",
+  "description": "CLI for discovering Var UI components, guides, and agent docs",
+  "homepage": "https://github.com/var-ui/var-ui/tree/main/packages/cli#readme",
+  "bugs": "https://github.com/var-ui/var-ui/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/var-ui/var-ui.git",
+    "directory": "packages/cli"
+  },
+  "bin": {
+    "var-ui": "./dist/bin.mjs"
+  },
+  "files": [
+    "dist",
+    "data"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "generate": "node --experimental-strip-types src/generate/run.ts",
+    "build": "node --experimental-strip-types src/generate/run.ts && vp pack",
+    "pack": "node --experimental-strip-types src/generate/run.ts && vp pack",
+    "dev": "vp pack --watch"
+  },
+  "devDependencies": {
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}
