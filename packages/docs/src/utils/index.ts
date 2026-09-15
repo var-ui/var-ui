@@ -11,6 +11,13 @@ export {
 export { reattachTypestyles } from './reattachTypestyles';
 
 export {
+  transformMdx,
+  type TransformMdxInput,
+  type TransformMdxResult,
+  type TransformPropRow,
+} from './transform-mdx';
+
+export {
   DEFAULT_GUIDE_ROUTES,
   STATIC_MULTI_PREFIX_ERROR,
   assertSingleStaticGuidePrefix,
