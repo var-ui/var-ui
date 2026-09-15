@@ -103,6 +103,20 @@ describe('runCli', () => {
     }
   });
 
+  it('prints a single H1 when component markdown already starts with # after whitespace', () => {
+    const padded: Catalog = {
+      ...catalog,
+      components: catalog.components.map((record) =>
+        record.slug === 'button' ? { ...record, markdown: '\n\n# Button\n\nbody' } : record,
+      ),
+    };
+    const cap = capture();
+    runCli(['component', 'Button'], cap.io, { catalog: padded });
+    expect(cap.exitCode).toBe(0);
+    expect(cap.stdout.match(/# Button/g)).toEqual(['# Button']);
+    expect(cap.stdout).toContain('body');
+  });
+
   it('trims the component query before lookup', () => {
     const cap = run(['component', '  Button  ']);
     expect(cap.exitCode).toBe(0);

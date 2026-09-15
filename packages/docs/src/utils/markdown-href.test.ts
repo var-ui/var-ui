@@ -14,6 +14,15 @@ describe('resolveMarkdownViews', () => {
 
   it('disables views when false', () => {
     expect(resolveMarkdownViews(false)).toEqual({ enabled: false, extraPrefixes: [] });
+    expect(resolveMarkdownViews(false).enabled).toBe(false);
+  });
+
+  it('produces a getting-started markdown href when views are enabled', () => {
+    const views = resolveMarkdownViews(true);
+    expect(views.enabled).toBe(true);
+    const href = markdownHref('/docs/getting-started', ['/docs']);
+    expect(href).not.toBeNull();
+    expect(href).toBe('/docs/getting-started.md');
   });
 
   it('enables views from the object form', () => {
