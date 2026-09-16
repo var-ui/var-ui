@@ -11,6 +11,23 @@ export {
 export { reattachTypestyles } from './reattachTypestyles';
 
 export {
+  markdownHref,
+  markdownPrefixes,
+  publicMarkdownRelPath,
+  resolveMarkdownViews,
+  type ResolvedMarkdownViews,
+} from './markdown-href';
+
+export {
+  transformMdx,
+  type TransformMdxInput,
+  type TransformMdxResult,
+  type TransformPropRow,
+} from './transform-mdx';
+
+export { writeMarkdownViews } from './write-markdown-views';
+
+export {
   DEFAULT_GUIDE_ROUTES,
   STATIC_MULTI_PREFIX_ERROR,
   assertSingleStaticGuidePrefix,

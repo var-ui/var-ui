@@ -25,6 +25,7 @@ import {
   normalizeDocsPath,
   shouldShowDocsToc,
 } from '../utils/docs-toc';
+import { markdownHref, markdownPrefixes, resolveMarkdownViews } from '../utils/markdown-href';
 import { resolveGuideRouteConfig, stripAstroBase } from '../utils/routing';
 
 const {
@@ -59,6 +60,9 @@ const {
 
 const pathname = stripAstroBase(Astro.url.pathname, import.meta.env.BASE_URL);
 const currentPath = normalizeDocsPath(pathname);
+const views = resolveMarkdownViews(config.markdownViews);
+const prefixes = markdownPrefixes(config.routes, views.extraPrefixes);
+const mdHref = views.enabled ? markdownHref(currentPath, prefixes) : null;
 const hasTocSlot = Astro.slots.has('toc');
 const guidePrefixes = resolveGuideRouteConfig(config.routes).map((route) => route.prefix);
 const showAutoToc =
@@ -140,6 +144,11 @@ function isSidebarLinkActive(link: string): boolean {
                 showTocPanel ? (
                   <div class="docs-page-body">
                     <div class:list={['docs-content', contentWidth === 'full' && 'docs-content--full']}>
+                      {mdHref ? (
+                        <p>
+                          <a href={mdHref}>Also available as Markdown</a>
+                        </p>
+                      ) : null}
                       <slot />
                     </div>
                     <aside class="docs-page-toc" aria-label="On this page">
@@ -148,6 +157,11 @@ function isSidebarLinkActive(link: string): boolean {
                   </div>
                 ) : (
                   <div class:list={['docs-content', contentWidth === 'full' && 'docs-content--full']}>
+                    {mdHref ? (
+                      <p>
+                        <a href={mdHref}>Also available as Markdown</a>
+                      </p>
+                    ) : null}
                     <slot />
                   </div>
                 )
@@ -161,6 +175,11 @@ function isSidebarLinkActive(link: string): boolean {
                 showTocPanel ? (
                   <div class="docs-page-body">
                     <div class="docs-content">
+                      {mdHref ? (
+                        <p>
+                          <a href={mdHref}>Also available as Markdown</a>
+                        </p>
+                      ) : null}
                       <slot />
                     </div>
                     <aside class="docs-page-toc" aria-label="On this page">
@@ -169,6 +188,11 @@ function isSidebarLinkActive(link: string): boolean {
                   </div>
                 ) : (
                   <div class="docs-content">
+                    {mdHref ? (
+                      <p>
+                        <a href={mdHref}>Also available as Markdown</a>
+                      </p>
+                    ) : null}
                     <slot />
                   </div>
                 )

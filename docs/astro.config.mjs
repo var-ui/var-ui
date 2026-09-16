@@ -38,6 +38,10 @@ export default defineConfig({
         Layout: './src/layouts/BaseLayout.astro',
         mdxComponents: './src/lib/guide-mdx-components.ts',
       },
+      markdownViews: {
+        extraPrefixes: ['/components'],
+        tagline: 'Var UI component catalog and guides, as markdown for agents.',
+      },
       // Site owns guide pages + middleware (Netlify SSR + workspace `.astro` resolution).
       disableGuideRoutes: true,
       disableMiddleware: true,

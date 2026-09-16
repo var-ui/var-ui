@@ -5,8 +5,8 @@
   "description": "Documentation site for var-ui",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "prebuild": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build",
+    "dev": "node --experimental-strip-types ../packages/cli/src/generate/run.ts --write-docs-public && astro dev",
+    "prebuild": "vp run -F @var-ui/core -F @var-ui/react -F @var-ui/icons build && node --experimental-strip-types ../packages/cli/src/generate/run.ts --write-docs-public",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",

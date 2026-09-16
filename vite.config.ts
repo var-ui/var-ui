@@ -2,13 +2,26 @@ import { defineConfig } from 'vite-plus';
 
 export default defineConfig({
   fmt: {
-    ignorePatterns: ['**/node_modules/**', 'dist/**', '**/__snapshots__/**', '**/.astro/**'],
+    ignorePatterns: [
+      '**/node_modules/**',
+      'dist/**',
+      '**/__snapshots__/**',
+      '**/.astro/**',
+      '.docs/**',
+      'packages/cli/data/catalog.json',
+    ],
     singleQuote: true,
     semi: true,
     sortPackageJson: true,
   },
   lint: {
-    ignorePatterns: ['**/node_modules/**', 'dist/**', '**/__snapshots__/**', '**/.astro/**'],
+    ignorePatterns: [
+      '**/node_modules/**',
+      'dist/**',
+      '**/__snapshots__/**',
+      '**/.astro/**',
+      '.docs/**',
+    ],
     plugins: ['typescript'],
     jsPlugins: [{ name: 'vite-plus', specifier: 'vite-plus/oxlint-plugin' }],
     options: {
@@ -54,7 +67,7 @@ export default defineConfig({
           'vp run --no-cache @var-ui/example-astro-app#check',
           'vp run --no-cache @var-ui/example-astro-app#build',
           'vp run --no-cache @var-ui/example-astro-docs#build',
-          'test -f examples/astro-docs/dist/index.html && test -f examples/astro-docs/dist/docs/index.html && test -f examples/astro-docs/dist/docs/getting-started/index.html && test -f examples/astro-docs/dist/docs/installation/index.html',
+          'test -f examples/astro-docs/dist/index.html && test -f examples/astro-docs/dist/docs/index.html && test -f examples/astro-docs/dist/docs/getting-started/index.html && test -f examples/astro-docs/dist/docs/installation/index.html && test -f examples/astro-docs/dist/llms.txt && test -f examples/astro-docs/dist/docs/getting-started.md',
         ],
       },
     },
@@ -67,6 +80,7 @@ export default defineConfig({
       'packages/icons',
       'packages/astro',
       'packages/docs',
+      'packages/cli',
       'docs',
     ],
   },

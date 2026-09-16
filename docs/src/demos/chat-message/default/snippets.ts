@@ -1,5 +1,4 @@
 import type { DemoSnippets } from '../../types';
-import { render } from './html';
 
 export const snippets = {
   react: `import { Avatar, ChatMessage, ChatMessageBubble, ChatMessageMetadata } from '@var-ui/react';
@@ -36,5 +35,5 @@ const time = textBlock({ size: 'sm', tone: 'secondary' });
     </div>
   </div>
 </div>`,
-  html: render(),
+  html: `<div data-sender="assistant" class="var-ui-chat-message"><div data-sender="assistant" class="var-ui-chat-message__avatar"><span data-size="sm" class="var-ui-avatar"><span data-size="sm" class="var-ui-avatar__initials" role="img" aria-label="Navi">N</span></span></div><div data-sender="assistant" class="var-ui-chat-message__content"><div data-sender="assistant" class="var-ui-chat-message__header"><span data-sender="assistant" class="var-ui-chat-message__name">Navi</span></div><div data-sender="assistant" data-variant="filled" data-group="none" class="var-ui-chat-message-bubble">Hello! How can I help?</div><div data-sender="assistant" class="var-ui-chat-message__metadata"><div data-direction="row" data-gap="xs" data-align="center" data-justify="start" data-wrap="nowrap" class="var-ui-stack"><time data-size="sm" data-tone="secondary" data-weight="normal" data-line-clamp="false" class="var-ui-text-block" datetime="2026-07-19T21:35:00.000Z" title="Jul 19, 2026, 2:35 PM">2:35 PM</time></div></div></div></div>`,
 } satisfies DemoSnippets;

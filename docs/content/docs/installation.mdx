@@ -5,14 +5,31 @@ description: Package setup for React apps using var-ui.
 
 # Installation
 
-var-ui ships as workspace packages in this monorepo. Downstream apps install the published `@var-ui/*` packages from npm once releases are available.
+Install published `@var-ui/*` packages from npm. For the copy-paste Vite + React path, start with [Getting started](/docs/getting-started).
 
-## Workspace apps
+## Packages
 
-Link `@var-ui/core`, `@var-ui/react`, and `@var-ui/icons` with your package manager's workspace protocol, then add Vite aliases if you want to develop against source.
+| Package         | Role                                                                       |
+| --------------- | -------------------------------------------------------------------------- |
+| `@var-ui/core`  | Tokens, recipes, and CSS extract entry (`@var-ui/core/styles`)             |
+| `@var-ui/react` | React components                                                           |
+| `@var-ui/icons` | Optional default glyphs for `IconProvider`                                 |
+| `@var-ui/astro` | Astro components (no React)                                                |
+| `@var-ui/form`  | Form state and validation                                                  |
+| `@var-ui/cli`   | Dev dependency: `npx @var-ui/cli` for component lookup, search, and `init` |
+
+`@var-ui/icons` is optional. Without it, pass `icons={{}}` to `IconProvider`.
 
 ## Peer dependencies
 
-React 19 and a modern bundler with CSS extraction support for TypeStyles are required.
+| Peer                      | Notes                               |
+| ------------------------- | ----------------------------------- |
+| `react` / `react-dom`     | 19                                  |
+| `react-aria-components`   | Required by `@var-ui/react`         |
+| `typestyles`              | Required                            |
+| `@typestyles/vite`        | Vite plugin for CSS extraction      |
+| `@internationalized/date` | Required when using date components |
 
-Package manager commands and version pins will be documented here before the first public release.
+## This monorepo
+
+This repository still links packages with `workspace:*`. Downstream apps install the published versions from npm and do not use the workspace protocol.

@@ -52,6 +52,7 @@ Guide-only sites do **not** need React. Install `@astrojs/react`, `@var-ui/react
 - `@astrojs/mdx` + `rehype-slug` when MDX is not already registered
 - `virtual:var-docs/config` (+ Layout / MDX component virtual modules)
 - Optional injected guide routes + middleware (disable on Netlify SSR sites)
+- Markdown views **on by default**: sibling `.md` URLs, `/llms.txt`, and an “Also available as Markdown” link on `DocsPage`. Opt out with `markdownViews: false`. Design-system catalogs pass `extraPrefixes: ['/components']` so the kit indexes CLI-generated component markdown.
 
 ### Showcase presets
 
