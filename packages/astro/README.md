@@ -2,7 +2,7 @@
 
 Astro components for the var-ui design system — same visual system as
 `@var-ui/react`, **no React runtime**. Components ship as source `.astro` and
-`.ts` files; your Astro app compiles them with TypeStyles.
+`.ts` files; your Astro app compiles them.
 
 See the full design spec:
 [`docs/superpowers/specs/2026-07-18-var-ui-astro-design.md`](../../docs/superpowers/specs/2026-07-18-var-ui-astro-design.md).
@@ -16,11 +16,20 @@ pnpm add @var-ui/astro @var-ui/core astro
 **Peer dependencies:** `astro`, `@var-ui/core`. No `react`, `react-aria-components`,
 or `@var-ui/react`.
 
-## TypeStyles setup
+## Styles
 
-Recipe CSS must be extracted at build time with
-[`@typestyles/vite`](https://github.com/type-styles/typestyles). Add a side-effect
-entry that imports `@var-ui/core/styles`, then point the plugin at it:
+Import the published stylesheet in a layout:
+
+```astro
+---
+import '@var-ui/core/styles.css';
+---
+```
+
+### Advanced: extract CSS
+
+Use `@typestyles/vite` for custom `createDesignTheme` modules or tree-shaken CSS.
+Do not also import `@var-ui/core/styles.css`.
 
 ```ts
 // typestyles-entry.ts
@@ -44,7 +53,8 @@ Link the generated stylesheet in your layout (path depends on your build output)
 <link rel="stylesheet" href="/typestyles.css" />
 ```
 
-See [`examples/astro-app`](../../examples/astro-app) for a working workspace setup.
+See [`examples/astro-app`](../../examples/astro-app) for a working **workspace** setup
+(that example still extracts).
 
 ## ThemeScript
 
