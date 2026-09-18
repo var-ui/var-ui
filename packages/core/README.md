@@ -7,6 +7,7 @@ This is a **library package** (not a standalone app). Import it from apps or the
 ## Quick start
 
 ```ts
+import '@var-ui/core/styles.css';
 import {
   button,
   layout,
@@ -16,7 +17,6 @@ import {
   defaultThemeClassName,
 } from '@var-ui/core';
 
-// Register styles at build time via `@var-ui/core/styles` (see TypeStyles setup below).
 document.body.className = defaultThemeClassName; // `theme-var-ui-default`
 element.className = button({ intent: 'primary' });
 // `layout` — multi-pane page shell recipe; `layoutUtility` — legacy docs stack/section helpers
@@ -25,7 +25,10 @@ element.className = button({ intent: 'primary' });
 Custom themes return a `DesignTheme` from `createDesignTheme({ name: 'acme' })` — use
 `theme.className` the same way. See [Theme surfaces](#theme-surfaces).
 
-### TypeStyles extraction
+### Advanced: TypeStyles extraction
+
+Use extract for custom `createDesignTheme` modules, app-owned recipes, or tree-shaken CSS.
+Do not import `@var-ui/core/styles.css` in the same app.
 
 Add a build entry that side-effect-imports the styles bundle, then point
 `@typestyles/vite` at it:
@@ -55,7 +58,7 @@ only use a few components, import the recipes you need instead (see
 Syntax highlighting is app-owned: use `color.code` tokens and wire them to your
 highlighter (see [Syntax highlighting](#syntax-highlighting) below).
 
-See [`examples/vite-app`](../vite-app/README.md) and [`examples/astro-app`](../astro-app/) for full workspace setups.
+See [`examples/vite-app`](../../examples/vite-app/README.md) and [`examples/astro-app`](../../examples/astro-app/) for full workspace setups.
 
 ### Key exports
 

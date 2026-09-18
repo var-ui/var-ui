@@ -17,7 +17,8 @@
   "sideEffects": [
     "./dist/base-styles.mjs",
     "./dist/register-default-theme.mjs",
-    "./dist/styles.mjs"
+    "./dist/styles.mjs",
+    "./dist/styles.css"
   ],
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
@@ -38,6 +39,7 @@
       "types": "./dist/styles.d.mts",
       "import": "./dist/styles.mjs"
     },
+    "./styles.css": "./dist/styles.css",
     "./base-styles": {
       "types": "./dist/base-styles.d.mts",
       "import": "./dist/base-styles.mjs"
@@ -911,14 +913,15 @@
     "access": "public"
   },
   "scripts": {
-    "build": "vp pack && node ../../scripts/generate-subpath-exports.mjs core",
-    "pack": "vp pack && node ../../scripts/generate-subpath-exports.mjs core",
+    "build": "vp pack && node scripts/generate-styles-css.mjs && node ../../scripts/generate-subpath-exports.mjs core",
+    "pack": "vp pack && node scripts/generate-styles-css.mjs && node ../../scripts/generate-subpath-exports.mjs core",
     "dev": "vp pack --watch"
   },
   "dependencies": {
     "typestyles": "catalog:"
   },
   "devDependencies": {
+    "@typestyles/build-runner": "^0.5.2",
     "@typestyles/cli": "^0.2.1",
     "@typestyles/eslint-plugin": "^0.3.1",
     "vite": "catalog:",

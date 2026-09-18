@@ -5,40 +5,29 @@ description: Create a project and render your first var-ui component.
 
 # Getting started
 
-This guide is the happy path for a **Vite + React 19** app: install from npm, extract CSS, wrap providers, and render a Button.
+This guide is the happy path for a **Vite + React 19** app: install from npm, import CSS, wrap providers, and render a Button.
 
 ## Install
 
 ```bash
-pnpm add @var-ui/react @var-ui/core @var-ui/icons react react-dom react-aria-components typestyles
-pnpm add -D @typestyles/vite
+pnpm add @var-ui/react @var-ui/core @var-ui/icons react react-dom react-aria-components
 ```
 
 ```bash
-npm install @var-ui/react @var-ui/core @var-ui/icons react react-dom react-aria-components typestyles
-npm install -D @typestyles/vite
+npm install @var-ui/react @var-ui/core @var-ui/icons react react-dom react-aria-components
 ```
 
 `@var-ui/icons` is optional. Without it, pass `icons={{}}` to `IconProvider`.
 
-## Extract CSS
+You do not add `typestyles` to the app. It arrives with `@var-ui/core`.
 
-Create a Vite extract entry that imports core styles:
-
-```ts
-// typestyles-entry.ts
-import '@var-ui/core/styles';
-```
-
-Register it with the Vite plugin:
+## Import CSS
 
 ```ts
-import typestyles from '@typestyles/vite';
-
-export default {
-  plugins: [typestyles({ extract: { modules: ['typestyles-entry.ts'] } })],
-};
+import '@var-ui/core/styles.css';
 ```
+
+That file includes every recipe, base HTML styles, and the default theme. Custom `createDesignTheme` modules and unused-recipe shedding use extract instead — see [Installation](/docs/installation).
 
 ## Providers
 
@@ -80,25 +69,25 @@ import { Button } from '@var-ui/react';
 ## Astro without React
 
 ```bash
-pnpm add @var-ui/astro @var-ui/core typestyles
-pnpm add -D @typestyles/vite
+pnpm add @var-ui/astro @var-ui/core
 ```
 
-Use the same `typestyles-entry.ts` extract entry, then import Astro components:
+Import the same stylesheet in a layout, then import Astro components:
 
 ```astro
 ---
+import '@var-ui/core/styles.css';
 import { Button } from '@var-ui/astro';
 ---
 
 <Button>Click me</Button>
 ```
 
-See `examples/astro-app` in the repo for a full tree.
+See `examples/astro-app` in the repo for a full **workspace** tree. That example still extracts CSS with the TypeStyles Vite plugin because it lives in this monorepo.
 
 ## Next
 
-- [Installation](/docs/installation) — package list, peers, and this monorepo’s `workspace:*` note
+- [Installation](/docs/installation) — package list, peers, and TypeStyles extract for custom themes
 - [Overlay lifecycle](/docs/overlay-lifecycle) — overlay `data-*` attributes, positioner CSS variables, and `onOpenChange`
 - [Theming](/theming) — tokens, themes, and `createDesignTheme`
 

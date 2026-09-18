@@ -7,6 +7,7 @@
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { coreReservedExports } from './core-reserved-exports.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -49,29 +50,7 @@ function generateCoreExports() {
   const pkgPath = join(root, 'packages/core/package.json');
   const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
   const distDir = join(root, 'packages/core/dist');
-  const exports = {
-    '.': { types: './dist/index.d.mts', import: './dist/index.mjs' },
-    './theme-constants': {
-      types: './dist/theme-constants.d.mts',
-      import: './dist/theme-constants.mjs',
-    },
-    './register-default-theme': {
-      types: './dist/register-default-theme.d.mts',
-      import: './dist/register-default-theme.mjs',
-    },
-    './styles': {
-      types: './dist/styles.d.mts',
-      import: './dist/styles.mjs',
-    },
-    './base-styles': {
-      types: './dist/base-styles.d.mts',
-      import: './dist/base-styles.mjs',
-    },
-    './internal': {
-      types: './dist/internal.d.mts',
-      import: './dist/internal.mjs',
-    },
-  };
+  const exports = { ...coreReservedExports() };
 
   for (const recipe of listMjsFiles(join(distDir, 'components'))) {
     const distRel = `components/${recipe}`;
@@ -83,29 +62,7 @@ function generateCoreExports() {
   }
 
   // Re-apply reserved entry points so recipe short names cannot shadow them.
-  Object.assign(exports, {
-    '.': { types: './dist/index.d.mts', import: './dist/index.mjs' },
-    './theme-constants': {
-      types: './dist/theme-constants.d.mts',
-      import: './dist/theme-constants.mjs',
-    },
-    './register-default-theme': {
-      types: './dist/register-default-theme.d.mts',
-      import: './dist/register-default-theme.mjs',
-    },
-    './styles': {
-      types: './dist/styles.d.mts',
-      import: './dist/styles.mjs',
-    },
-    './base-styles': {
-      types: './dist/base-styles.d.mts',
-      import: './dist/base-styles.mjs',
-    },
-    './internal': {
-      types: './dist/internal.d.mts',
-      import: './dist/internal.mjs',
-    },
-  });
+  Object.assign(exports, coreReservedExports());
 
   pkg.exports = exports;
   writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');

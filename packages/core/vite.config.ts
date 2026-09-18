@@ -1,6 +1,10 @@
 import { defineConfig } from 'vite-plus';
 
 export default defineConfig({
+  test: {
+    // Full recipe graph + TypeStyles extract (styles-css.test.ts) can exceed 5s when the suite is busy.
+    testTimeout: 15_000,
+  },
   pack: {
     entry: [
       'src/index.ts',
