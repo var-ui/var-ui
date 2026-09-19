@@ -1,5 +1,5 @@
 import type { CSSProperties, JSX } from 'react';
-import { spinner, type SpinnerVariantProps } from '@var-ui/core';
+import { spinner, type SpinnerVariantProps } from '@var-ui/core/spinner';
 import { recipeProps } from './utils';
 
 export type SpinnerProps = SpinnerVariantProps & {

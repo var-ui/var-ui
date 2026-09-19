@@ -8,7 +8,7 @@ import {
   type KeyboardEvent,
   type MouseEvent,
 } from 'react';
-import { fileInput } from '@var-ui/core';
+import { fileInput } from '@var-ui/core/fileInput';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 

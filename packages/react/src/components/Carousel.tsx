@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { Children, useRef } from 'react';
 import { Button as AriaButton } from 'react-aria-components';
-import { carousel } from '@var-ui/core';
+import { carousel } from '@var-ui/core/carousel';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 

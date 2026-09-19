@@ -1,13 +1,12 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite-plus';
+import { coreSrcAliases } from '../../scripts/core-src-aliases.mjs';
 
 const coreSrc = fileURLToPath(new URL('../core/src', import.meta.url));
 
 export default defineConfig({
   resolve: {
-    alias: {
-      '@var-ui/core/theme-constants': `${coreSrc}/theme-constants.ts`,
-    },
+    alias: coreSrcAliases(coreSrc),
   },
   pack: {
     entry: ['src/index.ts'],

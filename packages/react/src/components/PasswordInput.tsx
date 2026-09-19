@@ -1,7 +1,8 @@
 import type { JSX } from 'react';
 import { useState } from 'react';
 import { FieldError, Input, Label, TextField as AriaTextField } from 'react-aria-components';
-import { passwordField, type ControlSize } from '@var-ui/core';
+import { passwordField } from '@var-ui/core/passwordField';
+import type { ControlSize } from '@var-ui/core';
 import { Icon } from '../icons';
 import type { BaseTextFieldProps } from './utils';
 import { recipeProps } from './utils';

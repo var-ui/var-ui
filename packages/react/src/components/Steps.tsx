@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { steps } from '@var-ui/core';
+import { steps } from '@var-ui/core/steps';
 import { recipeProps } from './utils';
 
 export type StepsProps = {

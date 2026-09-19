@@ -1,6 +1,6 @@
 import type { CSSProperties, JSX, ReactElement, ReactNode, RefObject } from 'react';
 import { Children, createContext, useContext, useMemo } from 'react';
-import { overflowList as overflowListStyles } from '@var-ui/core';
+import { overflowList as overflowListStyles } from '@var-ui/core/overflowList';
 import { recipeProps } from './utils';
 import { useOverflow } from '../hooks/useOverflow';
 

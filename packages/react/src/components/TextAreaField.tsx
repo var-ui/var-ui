@@ -1,6 +1,6 @@
 import type { JSX } from 'react';
 import { FieldError, Label, TextArea, TextField as AriaTextField } from 'react-aria-components';
-import { textAreaField } from '@var-ui/core';
+import { textAreaField } from '@var-ui/core/textAreaField';
 import type { BaseTextFieldProps } from './utils';
 import { recipeProps } from './utils';
 

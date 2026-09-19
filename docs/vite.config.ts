@@ -2,6 +2,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite-plus';
+import { coreSrcAliases } from '../scripts/core-src-aliases.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const docsRoot = fileURLToPath(new URL('.', import.meta.url));
@@ -39,31 +40,54 @@ export default defineConfig({
     setupFiles: ['./src/test/setup.ts'],
   },
   resolve: {
-    alias: {
-      '@var-ui/core/theme-constants': `${root}/packages/core/src/theme-constants.ts`,
-      '@var-ui/core/styles': `${root}/packages/core/src/styles.ts`,
-      '@var-ui/core/base-styles': `${root}/packages/core/src/base-styles.ts`,
-      '@var-ui/core/internal': `${root}/packages/core/src/internal.ts`,
-      '@var-ui/core': `${root}/packages/core/src/index.ts`,
-      '@var-ui/react': `${root}/packages/react/src/index.ts`,
-      '@var-ui/icons': `${root}/packages/icons/src/index.ts`,
-      '@var-ui/astro': `${root}/packages/astro/index.ts`,
-      '@var-ui/docs/schema': `${root}/packages/docs/schema.ts`,
-      '@var-ui/docs/utils': `${root}/packages/docs/src/utils/index.ts`,
-      '@var-ui/docs/shiki': `${root}/packages/docs/src/utils/shiki-theme.ts`,
-      '@var-ui/docs/middleware': `${root}/packages/docs/src/middleware.ts`,
-      '@var-ui/docs/DocsPage': `${root}/packages/docs/src/components/DocsPage.astro`,
-      '@var-ui/docs/DocsSearch': `${root}/packages/docs/src/components/DocsSearch.astro`,
-      '@var-ui/docs/DocsSidebar': `${root}/packages/docs/src/components/DocsSidebar.astro`,
-      '@var-ui/docs/DocsToc': `${root}/packages/docs/src/components/DocsToc.astro`,
-      '@var-ui/docs/DocsThemePicker': `${root}/packages/docs/src/components/DocsThemePicker.astro`,
-      '@var-ui/docs/DocsThemeScript': `${root}/packages/docs/src/components/DocsThemeScript.astro`,
-      '@var-ui/docs': `${root}/packages/docs/index.ts`,
-      '@var-ui/docs-components/framework': `${root}/packages/docs-components/src/framework.ts`,
-      '@var-ui/docs-components/scripts/frameworkSwitcher': `${root}/packages/docs-components/src/scripts/frameworkSwitcher.ts`,
-      '@var-ui/docs-components/scripts/componentPageTabs': `${root}/packages/docs-components/src/scripts/componentPageTabs.ts`,
-      '@var-ui/docs-components': `${root}/packages/docs-components/index.ts`,
-      '@': path.join(docsRoot, 'src'),
-    },
+    alias: [
+      ...coreSrcAliases(`${root}/packages/core/src`),
+      { find: '@var-ui/react', replacement: `${root}/packages/react/src/index.ts` },
+      { find: '@var-ui/icons', replacement: `${root}/packages/icons/src/index.ts` },
+      { find: '@var-ui/astro', replacement: `${root}/packages/astro/index.ts` },
+      { find: '@var-ui/docs/schema', replacement: `${root}/packages/docs/schema.ts` },
+      { find: '@var-ui/docs/utils', replacement: `${root}/packages/docs/src/utils/index.ts` },
+      { find: '@var-ui/docs/shiki', replacement: `${root}/packages/docs/src/utils/shiki-theme.ts` },
+      { find: '@var-ui/docs/middleware', replacement: `${root}/packages/docs/src/middleware.ts` },
+      {
+        find: '@var-ui/docs/DocsPage',
+        replacement: `${root}/packages/docs/src/components/DocsPage.astro`,
+      },
+      {
+        find: '@var-ui/docs/DocsSearch',
+        replacement: `${root}/packages/docs/src/components/DocsSearch.astro`,
+      },
+      {
+        find: '@var-ui/docs/DocsSidebar',
+        replacement: `${root}/packages/docs/src/components/DocsSidebar.astro`,
+      },
+      {
+        find: '@var-ui/docs/DocsToc',
+        replacement: `${root}/packages/docs/src/components/DocsToc.astro`,
+      },
+      {
+        find: '@var-ui/docs/DocsThemePicker',
+        replacement: `${root}/packages/docs/src/components/DocsThemePicker.astro`,
+      },
+      {
+        find: '@var-ui/docs/DocsThemeScript',
+        replacement: `${root}/packages/docs/src/components/DocsThemeScript.astro`,
+      },
+      { find: '@var-ui/docs', replacement: `${root}/packages/docs/index.ts` },
+      {
+        find: '@var-ui/docs-components/framework',
+        replacement: `${root}/packages/docs-components/src/framework.ts`,
+      },
+      {
+        find: '@var-ui/docs-components/scripts/frameworkSwitcher',
+        replacement: `${root}/packages/docs-components/src/scripts/frameworkSwitcher.ts`,
+      },
+      {
+        find: '@var-ui/docs-components/scripts/componentPageTabs',
+        replacement: `${root}/packages/docs-components/src/scripts/componentPageTabs.ts`,
+      },
+      { find: '@var-ui/docs-components', replacement: `${root}/packages/docs-components/index.ts` },
+      { find: '@', replacement: path.join(docsRoot, 'src') },
+    ],
   },
 });

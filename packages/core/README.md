@@ -51,9 +51,18 @@ export default defineConfig({
 ```
 
 `@var-ui/core/styles` registers every component recipe, base HTML styles, layout
-utilities, and the built-in default theme surface. For tree-shaken fixture apps that
-only use a few components, import the recipes you need instead (see
-[`examples/bundle-fixtures`](../../examples/bundle-fixtures/)).
+utilities, and the built-in default theme surface.
+
+For used-recipe CSS, side-effect-import binding subpaths instead of the catalog
+barrel (do not also import `styles.css`):
+
+```ts
+// typestyles-entry.ts
+import '@var-ui/react/button';
+import '@var-ui/core/register-default-theme';
+```
+
+See [`examples/bundle-fixtures`](../../examples/bundle-fixtures/).
 
 Syntax highlighting is app-owned: use `color.code` tokens and wire them to your
 highlighter (see [Syntax highlighting](#syntax-highlighting) below).

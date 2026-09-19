@@ -1,5 +1,5 @@
 import { createTocSpy, positionTocIndicator, type TocHeading } from '@var-ui/core/internal';
-import { toc } from '@var-ui/core';
+import { toc } from '@var-ui/core/toc';
 import { recipeClassName } from '../utils';
 
 const ROOT_SELECTOR = '[data-var-ui-toc]';

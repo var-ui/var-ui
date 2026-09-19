@@ -8,7 +8,7 @@ import {
   Separator,
   type MenuTriggerProps,
 } from 'react-aria-components';
-import { menu } from '@var-ui/core';
+import { menu } from '@var-ui/core/menu';
 import { Icon } from '../icons';
 import { cx, recipeProps } from './utils';
 

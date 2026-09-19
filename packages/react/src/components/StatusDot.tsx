@@ -1,5 +1,5 @@
 import type { JSX } from 'react';
-import { statusDot, type StatusDotVariantProps } from '@var-ui/core';
+import { statusDot, type StatusDotVariantProps } from '@var-ui/core/statusDot';
 import { recipeProps } from './utils';
 
 export type StatusDotProps = StatusDotVariantProps & {

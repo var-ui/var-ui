@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { createContext, useContext, useId } from 'react';
-import { list as listStyles } from '@var-ui/core';
+import { list as listStyles } from '@var-ui/core/list';
 import { recipeProps } from './utils';
 
 export type ListItemData = {

@@ -18,7 +18,7 @@ import {
   type ReactNode,
   type Ref,
 } from 'react';
-import { field } from '@var-ui/core';
+import { field } from '@var-ui/core/field';
 import { FormErrorsContext } from './Form';
 import { cx, recipeProps } from './utils';
 

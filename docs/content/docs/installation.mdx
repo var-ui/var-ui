@@ -32,16 +32,11 @@ Install published `@var-ui/*` packages from npm. For the copy-paste Vite + React
 
 ## Advanced: extract CSS
 
-Use this path for custom `createDesignTheme` modules, app-owned recipes, or tree-shaken CSS. Do **not** import `@var-ui/core/styles.css` in the same app — that doubles the stylesheet.
+Use this path for custom `createDesignTheme` modules, app-owned recipes, or tree-shaken CSS. Do **not** import `@var-ui/core/styles.css` in the same app — that doubles the stylesheet. Do **not** put `src/main.tsx` (or any module that touches `document`) in `extract.modules` — extract runs in Node.
 
 ```bash
 pnpm add typestyles
 pnpm add -D @typestyles/vite
-```
-
-```ts
-// typestyles-entry.ts
-import '@var-ui/core/styles';
 ```
 
 ```ts
@@ -51,6 +46,28 @@ export default {
   plugins: [typestyles({ extract: { modules: ['typestyles-entry.ts'] } })],
 };
 ```
+
+### Full catalog
+
+```ts
+// typestyles-entry.ts
+import '@var-ui/core/styles';
+```
+
+`import '@var-ui/react'` or `import '@var-ui/astro'` in that entry also yields the full catalog — those package barrels load every component.
+
+### Used recipes
+
+Side-effect-import each binding subpath you use, then the default theme. Named imports are not enough if the binding is unused (bundler DCE drops the recipe).
+
+```ts
+// typestyles-entry.ts
+import '@var-ui/react/button';
+import '@var-ui/react/text-field';
+import '@var-ui/core/register-default-theme';
+```
+
+Do **not** import the React or Astro package barrel on this path. Optional: `import '@var-ui/core/base-styles'` for the document reset.
 
 ## This monorepo
 

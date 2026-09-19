@@ -22,7 +22,7 @@ import {
   ModalOverlay,
   Pressable,
 } from 'react-aria-components';
-import { dialog } from '@var-ui/core';
+import { dialog } from '@var-ui/core/dialog';
 import { Icon } from '../icons';
 import { useLayer } from '../layers/LayerProvider';
 import {

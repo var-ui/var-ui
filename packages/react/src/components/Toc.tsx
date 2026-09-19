@@ -2,7 +2,7 @@ import type { CSSProperties, JSX, ReactNode } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link as AriaLink } from 'react-aria-components';
 import { positionTocIndicator, type TocHeading } from '@var-ui/core/internal';
-import { toc as tocStyles } from '@var-ui/core';
+import { toc as tocStyles } from '@var-ui/core/toc';
 import { useTocSpy } from '../hooks/useTocSpy';
 import { recipeProps } from './utils';
 

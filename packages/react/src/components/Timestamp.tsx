@@ -1,5 +1,5 @@
 import type { JSX } from 'react';
-import { textBlock } from '@var-ui/core';
+import { textBlock } from '@var-ui/core/typography';
 import { recipeProps } from './utils';
 
 export type TimestampProps = {

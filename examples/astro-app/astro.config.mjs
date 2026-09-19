@@ -1,15 +1,14 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import typestylesVite from '@typestyles/vite';
+import { coreSrcAliases } from '../../scripts/core-src-aliases.mjs';
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
 
-const devAliases = {
-  '@var-ui/core/styles': `${root}/packages/core/src/styles.ts`,
-  '@var-ui/core/internal': `${root}/packages/core/src/internal.ts`,
-  '@var-ui/core': `${root}/packages/core/src/index.ts`,
-  '@var-ui/astro': `${root}/packages/astro/index.ts`,
-};
+const devAliases = [
+  ...coreSrcAliases(`${root}/packages/core/src`),
+  { find: '@var-ui/astro', replacement: `${root}/packages/astro/index.ts` },
+];
 
 export default defineConfig(({ command }) => ({
   vite: {

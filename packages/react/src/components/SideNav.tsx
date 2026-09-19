@@ -10,7 +10,8 @@ import {
   useState,
 } from 'react';
 import { Button as AriaButton, Link as AriaLink } from 'react-aria-components';
-import { iconNameList, sideNav, SIDE_NAV_COLLAPSED_WIDTH, type IconName } from '@var-ui/core';
+import { iconNameList, type IconName } from '@var-ui/core/icons';
+import { sideNav, SIDE_NAV_COLLAPSED_WIDTH } from '@var-ui/core/sideNav';
 import { useDirection } from '../DirectionProvider';
 import { Icon } from '../icons';
 import { useResizable, type ResizableConfig } from '../hooks';

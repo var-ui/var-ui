@@ -1,5 +1,7 @@
 import type { JSX, ReactNode } from 'react';
-import { alert, type AlertVariant, type IconName, type SurfaceAppearance } from '@var-ui/core';
+import { alert, type AlertVariant } from '@var-ui/core/alert';
+import type { IconName } from '@var-ui/core/icons';
+import type { SurfaceAppearance } from '@var-ui/core';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 

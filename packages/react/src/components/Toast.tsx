@@ -10,11 +10,11 @@ import {
 import type { ComponentAttrsResult } from 'typestyles';
 import {
   toast as toastRecipe,
-  type IconName,
   type ToastPlacement,
   type ToastTone,
   type ToastVariantProps,
-} from '@var-ui/core';
+} from '@var-ui/core/toast';
+import type { IconName } from '@var-ui/core/icons';
 import { Icon } from '../icons';
 import { useLayer } from '../layers/LayerProvider';
 import { registerToastQueue, unregisterToastQueue } from '../toast/imperativeToast';

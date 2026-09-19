@@ -1,6 +1,6 @@
 import type { JSX } from 'react';
 import { useMemo, useState } from 'react';
-import { codeBlock } from '@var-ui/core';
+import { codeBlock } from '@var-ui/core/codeBlock';
 import { Icon } from '../icons';
 import { cx, recipeClassName, recipeProps } from './utils';
 

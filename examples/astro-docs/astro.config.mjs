@@ -2,6 +2,7 @@ import { fileURLToPath } from 'node:url';
 import { defaultThemeClassName } from '@var-ui/core';
 import varDocs from '@var-ui/docs';
 import { defineConfig } from 'astro/config';
+import { coreSrcAliases } from '../../scripts/core-src-aliases.mjs';
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
 
@@ -32,20 +33,26 @@ export default defineConfig({
       noExternal: ['@var-ui/docs', '@var-ui/astro', '@var-ui/core'],
     },
     resolve: {
-      alias: {
-        '@var-ui/core/theme-constants': `${root}/packages/core/src/theme-constants.ts`,
-        '@var-ui/core/styles': `${root}/packages/core/src/styles.ts`,
-        '@var-ui/core/internal': `${root}/packages/core/src/internal.ts`,
-        '@var-ui/core': `${root}/packages/core/src/index.ts`,
-        '@var-ui/astro': `${root}/packages/astro/index.ts`,
-        '@var-ui/docs/schema': `${root}/packages/docs/schema.ts`,
-        '@var-ui/docs/utils': `${root}/packages/docs/src/utils/index.ts`,
-        '@var-ui/docs/shiki': `${root}/packages/docs/src/utils/shiki-theme.ts`,
-        '@var-ui/docs/middleware': `${root}/packages/docs/src/middleware.ts`,
-        '@var-ui/docs/DocsPage': `${root}/packages/docs/src/components/DocsPage.astro`,
-        '@var-ui/docs/routes/guide.astro': `${root}/packages/docs/src/routes/guide.astro`,
-        '@var-ui/docs': `${root}/packages/docs/index.ts`,
-      },
+      alias: [
+        ...coreSrcAliases(`${root}/packages/core/src`),
+        { find: '@var-ui/astro', replacement: `${root}/packages/astro/index.ts` },
+        { find: '@var-ui/docs/schema', replacement: `${root}/packages/docs/schema.ts` },
+        { find: '@var-ui/docs/utils', replacement: `${root}/packages/docs/src/utils/index.ts` },
+        {
+          find: '@var-ui/docs/shiki',
+          replacement: `${root}/packages/docs/src/utils/shiki-theme.ts`,
+        },
+        { find: '@var-ui/docs/middleware', replacement: `${root}/packages/docs/src/middleware.ts` },
+        {
+          find: '@var-ui/docs/DocsPage',
+          replacement: `${root}/packages/docs/src/components/DocsPage.astro`,
+        },
+        {
+          find: '@var-ui/docs/routes/guide.astro',
+          replacement: `${root}/packages/docs/src/routes/guide.astro`,
+        },
+        { find: '@var-ui/docs', replacement: `${root}/packages/docs/index.ts` },
+      ],
     },
   },
 });

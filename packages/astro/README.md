@@ -32,8 +32,17 @@ Use `@typestyles/vite` for custom `createDesignTheme` modules or tree-shaken CSS
 Do not also import `@var-ui/core/styles.css`.
 
 ```ts
-// typestyles-entry.ts
+// typestyles-entry.ts — full catalog
 import '@var-ui/core/styles';
+```
+
+Used-recipe extract (Astro has no component subpath exports; side-effect-import the
+core recipes you use, not the `@var-ui/astro` barrel):
+
+```ts
+// typestyles-entry.ts
+import '@var-ui/core/button';
+import '@var-ui/core/register-default-theme';
 ```
 
 ```js

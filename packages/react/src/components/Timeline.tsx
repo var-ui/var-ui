@@ -1,13 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { Children, cloneElement, createContext, isValidElement, useContext } from 'react';
-import {
-  iconNameList,
-  timeline,
-  type IconName,
-  type TimelineSize,
-  type TimelineTone,
-  type TimelineVariantProps,
-} from '@var-ui/core';
+import { iconNameList, type IconName } from '@var-ui/core/icons';
+import { timeline, type TimelineTone, type TimelineVariantProps } from '@var-ui/core/timeline';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 

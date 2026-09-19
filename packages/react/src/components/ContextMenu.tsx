@@ -1,7 +1,7 @@
 import type { JSX, MouseEvent, ReactElement } from 'react';
 import { cloneElement, useState } from 'react';
 import { MenuTrigger, Popover, Pressable } from 'react-aria-components';
-import { menu } from '@var-ui/core';
+import { menu } from '@var-ui/core/menu';
 import { MenuContent, type MenuContentProps } from './DropdownMenu';
 import { recipeProps } from './utils';
 

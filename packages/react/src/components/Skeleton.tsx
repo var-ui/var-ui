@@ -1,5 +1,5 @@
 import type { CSSProperties, JSX } from 'react';
-import { skeleton } from '@var-ui/core';
+import { skeleton } from '@var-ui/core/skeleton';
 import { recipeProps } from './utils';
 
 export type SkeletonProps = {

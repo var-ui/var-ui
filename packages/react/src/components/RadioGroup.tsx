@@ -5,7 +5,7 @@ import {
   RadioGroup as AriaRadioGroup,
   type RadioGroupProps as RACRadioGroupProps,
 } from 'react-aria-components';
-import { radio } from '@var-ui/core';
+import { radio } from '@var-ui/core/radio';
 import { recipeProps } from './utils';
 
 export type RadioGroupOption = {

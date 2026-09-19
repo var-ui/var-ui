@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { FieldError, Input, Label, TextField as AriaTextField } from 'react-aria-components';
-import { textField, type ControlSize } from '@var-ui/core';
+import { textField } from '@var-ui/core/textField';
+import type { ControlSize } from '@var-ui/core';
 import type { BaseTextFieldProps } from './utils';
 import { recipeProps } from './utils';
 

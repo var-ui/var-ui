@@ -1,5 +1,5 @@
 import type { HTMLAttributes, JSX } from 'react';
-import { surface } from '@var-ui/core';
+import { surface } from '@var-ui/core/surface';
 import { recipeProps } from './utils';
 
 export type SurfaceProps = HTMLAttributes<HTMLDivElement> & {

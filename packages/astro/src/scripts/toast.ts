@@ -1,4 +1,4 @@
-import { defaultIconSvgs } from '@var-ui/core';
+import { defaultIconSvgs } from '@var-ui/core/icons';
 import type { ToastTone } from '@var-ui/core';
 
 export type ToastShowInput = {

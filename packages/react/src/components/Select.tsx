@@ -14,7 +14,7 @@ import {
   type SelectProps as RACSelectProps,
   type SelectValueProps as RACSelectValueProps,
 } from 'react-aria-components';
-import { select } from '@var-ui/core';
+import { select } from '@var-ui/core/select';
 import { Icon } from '../icons';
 import type { FieldMeta } from './utils';
 import { recipeProps } from './utils';

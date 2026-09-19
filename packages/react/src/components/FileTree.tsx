@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { fileTree } from '@var-ui/core';
+import { fileTree } from '@var-ui/core/fileTree';
 import { recipeProps } from './utils';
 
 export type FileTreeProps = {

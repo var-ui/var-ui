@@ -3,7 +3,7 @@ import {
   Checkbox as AriaCheckbox,
   type CheckboxProps as RACCheckboxProps,
 } from 'react-aria-components';
-import { checkbox } from '@var-ui/core';
+import { checkbox } from '@var-ui/core/checkbox';
 import { recipeProps } from './utils';
 
 export type CheckboxProps = Omit<RACCheckboxProps, 'children'> & {

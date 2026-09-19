@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { Switch as AriaSwitch, type SwitchProps as RACSwitchProps } from 'react-aria-components';
-import { switchStyles } from '@var-ui/core';
+import { switchStyles } from '@var-ui/core/switch';
 import { recipeProps } from './utils';
 
 export type SwitchProps = Omit<RACSwitchProps, 'children'> & {

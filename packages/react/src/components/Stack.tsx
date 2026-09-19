@@ -1,5 +1,5 @@
 import type { HTMLAttributes, JSX } from 'react';
-import { stack } from '@var-ui/core';
+import { stack } from '@var-ui/core/stack';
 import { recipeProps } from './utils';
 
 export type StackProps = HTMLAttributes<HTMLDivElement> & {

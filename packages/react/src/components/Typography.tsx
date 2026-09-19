@@ -1,6 +1,6 @@
 import type { HTMLAttributes, JSX } from 'react';
 import { createElement } from 'react';
-import { heading, textBlock } from '@var-ui/core';
+import { heading, textBlock } from '@var-ui/core/typography';
 import { recipeProps } from './utils';
 
 export type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {

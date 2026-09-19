@@ -1,5 +1,5 @@
 import type { HTMLAttributes, JSX, ReactNode } from 'react';
-import { buttonGroup } from '@var-ui/core';
+import { buttonGroup } from '@var-ui/core/buttonGroup';
 import { cx } from './utils';
 
 export type ButtonGroupProps = HTMLAttributes<HTMLDivElement> & {

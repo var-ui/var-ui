@@ -3,10 +3,10 @@ import { Children, useState } from 'react';
 import {
   avatar,
   avatarGroup,
-  statusDot,
   type AvatarStatusTone,
   type AvatarVariantProps,
-} from '@var-ui/core';
+} from '@var-ui/core/avatar';
+import { statusDot } from '@var-ui/core/statusDot';
 import { recipeProps } from './utils';
 
 export type { AvatarSize, AvatarStatusTone } from '@var-ui/core';

@@ -1,5 +1,5 @@
 import type { HTMLAttributes, JSX } from 'react';
-import { badge, type BadgeVariantProps } from '@var-ui/core';
+import { badge, type BadgeVariantProps } from '@var-ui/core/badge';
 import { recipeProps } from './utils';
 
 export type { BadgeTone, SurfaceAppearance as BadgeAppearance } from '@var-ui/core';

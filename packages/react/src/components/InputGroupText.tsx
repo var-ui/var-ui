@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { inputGroup } from '@var-ui/core';
+import { inputGroup } from '@var-ui/core/inputGroup';
 import { recipeProps } from './utils';
 
 export type InputGroupTextProps = {

@@ -7,7 +7,7 @@ import {
   Tabs as AriaTabs,
   type TabsProps as RACTabsProps,
 } from 'react-aria-components';
-import { tabs as tabsStyles } from '@var-ui/core';
+import { tabs as tabsStyles } from '@var-ui/core/tabs';
 import { positionTabsIndicator } from '@var-ui/core/internal';
 import { recipeProps } from './utils';
 

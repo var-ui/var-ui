@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { chatComposer } from '@var-ui/core';
+import { chatComposer } from '@var-ui/core/chat/chatComposer';
 import { recipeProps } from '../utils';
 
 export type ChatComposerProps = {

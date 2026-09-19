@@ -38,6 +38,8 @@ describe('installation copy', () => {
     expect(installation).toContain('@var-ui/core/styles');
     expect(installation).toContain('@typestyles/vite');
     expect(installation).toContain('@var-ui/core/styles.css');
+    expect(installation).toContain('@var-ui/react/button');
+    expect(installation).toContain('register-default-theme');
     expect(installation).not.toMatch(/\| `typestyles`\s+\| Required/);
   });
 });

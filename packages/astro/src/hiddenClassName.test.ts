@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vite-plus/test';
-import { hiddenClassName } from '@var-ui/core';
+import { hiddenClassName } from '@var-ui/core/hidden';
 import { recipeProps } from './utils';
 
 describe('Astro Hidden class contract', () => {

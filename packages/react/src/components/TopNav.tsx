@@ -1,6 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { Button as AriaButton, Link as AriaLink } from 'react-aria-components';
-import { iconNameList, topNav, type IconName } from '@var-ui/core';
+import { iconNameList, type IconName } from '@var-ui/core/icons';
+import { topNav } from '@var-ui/core/topNav';
 import { Icon } from '../icons';
 import { HoverCard } from './HoverCard';
 import { TopNavMegaMenu } from './TopNavMegaMenu';

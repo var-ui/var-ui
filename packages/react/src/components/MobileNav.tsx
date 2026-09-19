@@ -6,7 +6,7 @@ import {
   Modal,
   ModalOverlay,
 } from 'react-aria-components';
-import { mobileNav } from '@var-ui/core';
+import { mobileNav } from '@var-ui/core/mobileNav';
 import { Icon } from '../icons';
 import { useLayer } from '../layers/LayerProvider';
 import { useScrollLock } from '../hooks';

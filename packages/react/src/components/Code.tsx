@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { inlineCode } from '@var-ui/core';
+import { inlineCode } from '@var-ui/core/inlineCode';
 import { recipeProps } from './utils';
 
 export type CodeProps = {

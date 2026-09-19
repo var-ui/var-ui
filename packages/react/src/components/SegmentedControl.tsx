@@ -6,7 +6,8 @@ import {
   type ToggleButtonGroupProps as RACToggleButtonGroupProps,
   type ToggleButtonProps as RACToggleButtonProps,
 } from 'react-aria-components';
-import { segmentedControl, toggleButton } from '@var-ui/core';
+import { segmentedControl } from '@var-ui/core/segmentedControl';
+import { toggleButton } from '@var-ui/core/toggleButton';
 import { observeSegmentedControlIndicator } from '@var-ui/core/internal';
 import { recipeProps } from './utils';
 
