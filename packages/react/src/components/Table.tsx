@@ -1,6 +1,7 @@
 import type { CSSProperties, JSX, ReactNode } from 'react';
 import { createContext, useContext } from 'react';
-import { table as tableStyles, designTokens as t } from '@var-ui/core';
+import { table as tableStyles } from '@var-ui/core/table';
+import { designTokens as t } from '@var-ui/core/tokens';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 import type { SortDescriptor, SortDirection } from '../hooks/useTableSort';

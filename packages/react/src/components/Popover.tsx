@@ -24,7 +24,7 @@ import {
   Pressable,
   type Placement,
 } from 'react-aria-components';
-import { popover } from '@var-ui/core';
+import { popover } from '@var-ui/core/popover';
 import { useLayer } from '../layers/LayerProvider';
 import {
   createOverlayChangeDetails,

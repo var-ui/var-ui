@@ -1,5 +1,6 @@
 import type { ChangeEvent, JSX } from 'react';
-import { searchInput, type ControlSize } from '@var-ui/core';
+import { searchInput } from '@var-ui/core/searchInput';
+import type { ControlSize } from '@var-ui/core';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 

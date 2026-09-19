@@ -5,7 +5,7 @@ import {
   type KeyboardEvent,
   type MouseEvent as ReactMouseEvent,
 } from 'react';
-import { resizeHandle } from '@var-ui/core';
+import { resizeHandle } from '@var-ui/core/resizeHandle';
 import { recipeProps } from './utils';
 
 export type ResizeHandleProps = {

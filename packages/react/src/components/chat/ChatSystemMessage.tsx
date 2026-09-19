@@ -1,5 +1,6 @@
 import type { JSX, ReactNode } from 'react';
-import { chatSystemMessage, type ButtonTone } from '@var-ui/core';
+import { chatSystemMessage } from '@var-ui/core/chat/chatSystemMessage';
+import type { ButtonTone } from '@var-ui/core';
 import { recipeProps } from '../utils';
 
 export type ChatSystemMessageTone = ButtonTone;

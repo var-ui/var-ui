@@ -1,8 +1,10 @@
 import type { ChangeEvent, JSX } from 'react';
 import { useEffect, useId, useState } from 'react';
 import { DialogTrigger, Label, Popover as AriaPopover } from 'react-aria-components';
-import { colorField, popover, type ControlSize } from '@var-ui/core';
-import { isValidHex, normalizeHex } from '@var-ui/core';
+import { colorField } from '@var-ui/core/colorField';
+import { popover } from '@var-ui/core/popover';
+import type { ControlSize } from '@var-ui/core';
+import { isValidHex, normalizeHex } from '@var-ui/core/color';
 import { useLayer } from '../layers/LayerProvider';
 import { useColorValue } from '../color';
 import { ColorPicker } from './ColorPicker';

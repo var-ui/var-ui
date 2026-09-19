@@ -1,6 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { Button as AriaButton, type ButtonProps as RACButtonProps } from 'react-aria-components';
-import { button, resolveButtonProps, type ButtonVariantProps, type IconName } from '@var-ui/core';
+import { button, resolveButtonProps, type ButtonVariantProps } from '@var-ui/core/button';
+import type { IconName } from '@var-ui/core/icons';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 

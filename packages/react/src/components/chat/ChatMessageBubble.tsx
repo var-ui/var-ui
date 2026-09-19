@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { chatMessageBubble } from '@var-ui/core';
+import { chatMessageBubble } from '@var-ui/core/chat/chatMessageBubble';
 import { useChatMessageContext } from './ChatContext';
 import { recipeProps } from '../utils';
 

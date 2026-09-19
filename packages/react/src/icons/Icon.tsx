@@ -1,5 +1,6 @@
 import type { JSX, ReactNode } from 'react';
-import { icon, type IconName } from '@var-ui/core';
+import { icon } from '@var-ui/core/icon';
+import type { IconName } from '@var-ui/core/icons';
 import { recipeProps } from '../components/utils';
 import { emptyFallback } from './emptyFallback';
 import { useIcons } from './IconProvider';

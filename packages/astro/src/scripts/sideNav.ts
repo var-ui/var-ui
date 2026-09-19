@@ -1,5 +1,5 @@
 import { createResizeHandle } from './resizeHandle';
-import { defaultIconSvgs } from '@var-ui/core';
+import { defaultIconSvgs } from '@var-ui/core/icons';
 
 /** Keep in sync with `SIDE_NAV_COLLAPSED_WIDTH` in `@var-ui/core`. */
 const SIDE_NAV_COLLAPSED_WIDTH = 56;

@@ -1,5 +1,5 @@
 import type { PointerEvent as ReactPointerEvent, RefObject } from 'react';
-import { clamp, type Hsv } from '@var-ui/core';
+import { clamp, type Hsv } from '@var-ui/core/color';
 
 export type PointerPoint = Pick<PointerEvent, 'clientX' | 'clientY'>;
 

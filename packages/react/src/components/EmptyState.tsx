@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { emptyState } from '@var-ui/core';
+import { emptyState } from '@var-ui/core/emptyState';
 import { recipeProps } from './utils';
 
 export type EmptyStateProps = {

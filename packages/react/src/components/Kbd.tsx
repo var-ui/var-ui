@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { kbd } from '@var-ui/core';
+import { kbd } from '@var-ui/core/kbd';
 import { recipeProps } from './utils';
 
 export type KbdProps = {

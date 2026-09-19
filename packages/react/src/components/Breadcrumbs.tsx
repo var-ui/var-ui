@@ -1,7 +1,7 @@
 import type { CSSProperties, JSX, ReactNode } from 'react';
 import { useState } from 'react';
 import { Breadcrumb, Breadcrumbs as AriaBreadcrumbs, Link } from 'react-aria-components';
-import { breadcrumbs as breadcrumbsStyles } from '@var-ui/core';
+import { breadcrumbs as breadcrumbsStyles } from '@var-ui/core/breadcrumbs';
 import { recipeProps } from './utils';
 
 export type BreadcrumbItemData = {

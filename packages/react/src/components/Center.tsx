@@ -1,5 +1,5 @@
 import type { HTMLAttributes, JSX } from 'react';
-import { center } from '@var-ui/core';
+import { center } from '@var-ui/core/center';
 import { recipeProps } from './utils';
 
 export type CenterProps = HTMLAttributes<HTMLDivElement> & {

@@ -4,7 +4,7 @@ import {
   ProgressBar as AriaProgressBar,
   type ProgressBarProps as RACProgressBarProps,
 } from 'react-aria-components';
-import { progressBar, type ProgressBarVariantProps } from '@var-ui/core';
+import { progressBar, type ProgressBarVariantProps } from '@var-ui/core/progressBar';
 import { recipeProps } from './utils';
 
 export type { ProgressBarTone, ProgressBarAppearance } from '@var-ui/core';

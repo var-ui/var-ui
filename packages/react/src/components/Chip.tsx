@@ -7,7 +7,8 @@ import {
   type Key,
   type ToggleButtonGroupProps,
 } from 'react-aria-components';
-import { chip, chipGroup, type ChipTone, type ChipVariantProps } from '@var-ui/core';
+import { chip, type ChipVariantProps } from '@var-ui/core/chip';
+import { chipGroup } from '@var-ui/core/chipGroup';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 

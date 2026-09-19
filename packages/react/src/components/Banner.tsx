@@ -1,6 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { Button as AriaButton } from 'react-aria-components';
-import { banner, type BannerTone, type BannerVariantProps, type IconName } from '@var-ui/core';
+import { banner, type BannerTone, type BannerVariantProps } from '@var-ui/core/banner';
+import type { IconName } from '@var-ui/core/icons';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 

@@ -15,7 +15,7 @@ import {
   type ListBoxItemProps,
   type PopoverProps,
 } from 'react-aria-components';
-import { combobox } from '@var-ui/core';
+import { combobox } from '@var-ui/core/combobox';
 import { Icon } from '../icons';
 import { recipeClassName, recipeProps } from './utils';
 

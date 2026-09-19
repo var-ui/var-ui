@@ -1,5 +1,5 @@
 import type { HTMLAttributes, JSX } from 'react';
-import { aspectRatio } from '@var-ui/core';
+import { aspectRatio } from '@var-ui/core/aspectRatio';
 import { cx } from './utils';
 
 export type AspectRatioProps = HTMLAttributes<HTMLDivElement> & {

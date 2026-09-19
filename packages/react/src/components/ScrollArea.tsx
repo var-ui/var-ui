@@ -4,7 +4,7 @@ import {
   scrollArea,
   type ScrollAreaFade,
   type ScrollAreaOrientation,
-} from '@var-ui/core';
+} from '@var-ui/core/scrollArea';
 import { recipeProps } from './utils';
 
 export type ScrollAreaProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {

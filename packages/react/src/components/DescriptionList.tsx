@@ -1,12 +1,8 @@
 import type { CSSProperties, JSX, ReactNode } from 'react';
 import { Children, createContext, useContext, useMemo, useState } from 'react';
-import {
-  button,
-  descriptionList as descriptionListStyles,
-  iconNameList,
-  resolveButtonProps,
-  type IconName,
-} from '@var-ui/core';
+import { button, resolveButtonProps } from '@var-ui/core/button';
+import { descriptionList as descriptionListStyles } from '@var-ui/core/descriptionList';
+import { iconNameList, type IconName } from '@var-ui/core/icons';
 import { Icon } from '../icons';
 import { recipeClassName, recipeProps } from './utils';
 

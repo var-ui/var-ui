@@ -28,5 +28,21 @@ export function coreReservedExports() {
       types: './dist/internal.d.mts',
       import: './dist/internal.mjs',
     },
+    './tokens': {
+      types: './dist/tokens/index.d.mts',
+      import: './dist/tokens/index.mjs',
+    },
+    './color': {
+      types: './dist/color/index.d.mts',
+      import: './dist/color/index.mjs',
+    },
+    './icons': {
+      types: './dist/icons/index.d.mts',
+      import: './dist/icons/index.mjs',
+    },
+    './breakpoints': {
+      types: './dist/breakpoints.d.mts',
+      import: './dist/breakpoints.mjs',
+    },
   };
 }

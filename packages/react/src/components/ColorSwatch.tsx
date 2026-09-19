@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes, JSX } from 'react';
-import { colorSwatch, type ControlSize } from '@var-ui/core';
+import { colorSwatch } from '@var-ui/core/colorPicker';
+import type { ControlSize } from '@var-ui/core';
 import { recipeProps } from './utils';
 
 export type ColorSwatchProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> & {

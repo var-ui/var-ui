@@ -1,5 +1,5 @@
 import type { AnchorHTMLAttributes, HTMLAttributes, JSX } from 'react';
-import { card } from '@var-ui/core';
+import { card } from '@var-ui/core/card';
 import { cx, recipeProps } from './utils';
 
 export type CardProps = HTMLAttributes<HTMLDivElement> & {

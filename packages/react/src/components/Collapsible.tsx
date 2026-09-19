@@ -6,7 +6,7 @@ import {
   DisclosurePanel,
   Heading,
 } from 'react-aria-components';
-import { collapsible, type CollapsibleVariantProps } from '@var-ui/core';
+import { collapsible, type CollapsibleVariantProps } from '@var-ui/core/collapsible';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 

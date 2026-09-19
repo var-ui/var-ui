@@ -19,11 +19,30 @@ describe('coreReservedExports', () => {
       import: './dist/styles.mjs',
     });
   });
+
+  it('reserves tokens, color, icons, and breakpoints as JS entries', () => {
+    const reserved = coreReservedExports();
+    for (const key of ['./tokens', './color', './icons', './breakpoints'] as const) {
+      expect(reserved[key]).toEqual({
+        types: expect.stringMatching(/^\.\/dist\/.+\.d\.mts$/),
+        import: expect.stringMatching(/^\.\/dist\/.+\.mjs$/),
+      });
+    }
+  });
 });
 
 describe('@var-ui/core package.json', () => {
   it('exports and marks styles.css as a side effect', () => {
     expect(pkg.exports['./styles.css']).toBe('./dist/styles.css');
     expect(pkg.sideEffects).toContain('./dist/styles.css');
+  });
+
+  it('exports tokens, color, icons, and breakpoints subpaths', () => {
+    for (const key of ['./tokens', './color', './icons', './breakpoints'] as const) {
+      expect(pkg.exports[key]).toEqual({
+        types: expect.stringMatching(/^\.\/dist\/.+\.d\.mts$/),
+        import: expect.stringMatching(/^\.\/dist\/.+\.mjs$/),
+      });
+    }
   });
 });

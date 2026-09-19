@@ -1,11 +1,10 @@
 import type { JSX, ReactNode } from 'react';
 import { useRef } from 'react';
+import { appShell, type AppShellContentPadding } from '@var-ui/core/appShell';
 import {
-  appShell,
-  type AppShellContentPadding,
   type AppShellMobileBreakpoint,
   appShellMobileBreakpointQueries,
-} from '@var-ui/core';
+} from '@var-ui/core/breakpoints';
 import { useHeadroom, type UseHeadroomOptions } from '../hooks/useHeadroom';
 import { useMediaQuery } from '../hooks';
 import { MobileNavProvider } from './MobileNav';

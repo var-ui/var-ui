@@ -18,22 +18,22 @@ const FIXTURES = {
     path: 'examples/bundle-fixtures/button-only',
     mode: 'regression',
     jsMaxKb: 2000,
-    cssMaxKb: 600,
-    cssMinKb: 250,
+    cssMaxKb: 200,
+    cssMinKb: 20,
   },
   'form-kit': {
     path: 'examples/bundle-fixtures/form-kit',
     mode: 'regression',
     jsMaxKb: 2000,
-    cssMaxKb: 600,
-    cssMinKb: 250,
+    cssMaxKb: 350,
+    cssMinKb: 20,
   },
   'date-kit': {
     path: 'examples/bundle-fixtures/date-kit',
     mode: 'regression',
     jsMaxKb: 2000,
-    cssMaxKb: 600,
-    cssMinKb: 250,
+    cssMaxKb: 350,
+    cssMinKb: 20,
   },
   gallery: {
     path: 'examples/vite-app',
@@ -52,6 +52,13 @@ const REQUIRED_CSS = ['.var-ui-button', 'theme-var-ui-default'];
 /** Recipes that should not ship in minimal fixtures (tree-shaking signal). */
 const FORBIDDEN_JS_MARKERS = {
   'button-only': ['var-ui-calendar', 'var-ui-command-palette', 'var-ui-file-tree'],
+};
+
+/** CSS class names that must not appear in used-recipe fixture extracts. */
+const FORBIDDEN_CSS_MARKERS = {
+  'button-only': ['.var-ui-calendar', '.var-ui-command-palette'],
+  'form-kit': ['.var-ui-calendar', '.var-ui-command-palette'],
+  'date-kit': ['.var-ui-command-palette', '.var-ui-file-tree'],
 };
 
 function readDirFiles(dir, ext) {
@@ -118,11 +125,20 @@ function measureFixture(name, config) {
     );
   }
 
-  const forbidden = FORBIDDEN_JS_MARKERS[name];
-  if (forbidden) {
-    for (const marker of forbidden) {
+  const forbiddenJs = FORBIDDEN_JS_MARKERS[name];
+  if (forbiddenJs) {
+    for (const marker of forbiddenJs) {
       if (jsSource.includes(marker)) {
         throw new Error(`[${name}] JS bundle includes unexpected recipe marker "${marker}"`);
+      }
+    }
+  }
+
+  const forbiddenCss = FORBIDDEN_CSS_MARKERS[name];
+  if (forbiddenCss) {
+    for (const marker of forbiddenCss) {
+      if (cssSource.includes(marker)) {
+        throw new Error(`[${name}] typestyles.css includes unexpected recipe marker "${marker}"`);
       }
     }
   }

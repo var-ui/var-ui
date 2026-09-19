@@ -1,5 +1,5 @@
 import type { HTMLAttributes, JSX } from 'react';
-import { grid } from '@var-ui/core';
+import { grid } from '@var-ui/core/grid';
 import { recipeProps } from './utils';
 
 export type GridProps = HTMLAttributes<HTMLDivElement> & {

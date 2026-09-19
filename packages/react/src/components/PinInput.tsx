@@ -1,7 +1,8 @@
 import type { ChangeEvent, ClipboardEvent, JSX, KeyboardEvent } from 'react';
 import { useCallback, useId, useRef, useState } from 'react';
 import { Label } from 'react-aria-components';
-import { pinInput, type ControlSize } from '@var-ui/core';
+import { pinInput } from '@var-ui/core/pinInput';
+import type { ControlSize } from '@var-ui/core';
 import { recipeProps } from './utils';
 import type { FieldMeta } from './utils';
 

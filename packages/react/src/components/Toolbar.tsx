@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { toolbar } from '@var-ui/core';
+import { toolbar } from '@var-ui/core/toolbar';
 import { recipeProps } from './utils';
 
 export type ToolbarProps = {

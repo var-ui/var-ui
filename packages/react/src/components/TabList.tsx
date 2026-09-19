@@ -9,7 +9,8 @@ import {
   useRef,
 } from 'react';
 import { Button as AriaButton, Link as AriaLink } from 'react-aria-components';
-import { iconNameList, tabList, type IconName } from '@var-ui/core';
+import { iconNameList, type IconName } from '@var-ui/core/icons';
+import { tabList } from '@var-ui/core/tabList';
 import { Icon } from '../icons';
 import { DropdownMenu } from './DropdownMenu';
 import { recipeProps } from './utils';

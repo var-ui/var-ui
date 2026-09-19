@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { copyButton } from '@var-ui/core';
+import { copyButton } from '@var-ui/core/copyButton';
 import { Icon } from '../icons';
 import { useCopy } from '../hooks/useCopy';
 import { cx, recipeClassName, recipeProps } from './utils';

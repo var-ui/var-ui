@@ -11,10 +11,18 @@
     "noEmit": true,
     "types": ["node"],
     "paths": {
+      "@var-ui/core/tokens": ["./../../packages/core/src/tokens/index.ts"],
+      "@var-ui/core/color": ["./../../packages/core/src/color/index.ts"],
+      "@var-ui/core/icons": ["./../../packages/core/src/icons/index.ts"],
+      "@var-ui/core/breakpoints": ["./../../packages/core/src/breakpoints.ts"],
       "@var-ui/core/theme-constants": ["./../../packages/core/src/theme-constants.ts"],
       "@var-ui/core/styles": ["./../../packages/core/src/styles.ts"],
       "@var-ui/core/base-styles": ["./../../packages/core/src/base-styles.ts"],
       "@var-ui/core/internal": ["./../../packages/core/src/internal.ts"],
+      "@var-ui/core/register-default-theme": [
+        "./../../packages/core/src/register-default-theme.ts"
+      ],
+      "@var-ui/core/*": ["./../../packages/core/src/components/*"],
       "@var-ui/core": ["./../../packages/core/src/index.ts"],
       "@var-ui/react": ["./../../packages/react/src/index.ts"],
       "@var-ui/icons": ["./../../packages/icons/src/index.ts"]

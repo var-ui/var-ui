@@ -1,5 +1,5 @@
 import type { HTMLAttributes, JSX } from 'react';
-import { simpleGrid } from '@var-ui/core';
+import { simpleGrid } from '@var-ui/core/simpleGrid';
 import { recipeProps } from './utils';
 
 export type SimpleGridProps = HTMLAttributes<HTMLDivElement> & {

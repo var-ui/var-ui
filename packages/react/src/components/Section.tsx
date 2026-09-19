@@ -1,5 +1,5 @@
 import type { HTMLAttributes, JSX } from 'react';
-import { section } from '@var-ui/core';
+import { section } from '@var-ui/core/section';
 import { recipeProps } from './utils';
 
 export type SectionProps = HTMLAttributes<HTMLElement> & {

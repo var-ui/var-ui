@@ -1,7 +1,7 @@
 import type { JSX, KeyboardEvent } from 'react';
 import { useRef } from 'react';
-import { colorPicker, DEFAULT_COLOR_SWATCHES, hueToPureHex } from '@var-ui/core';
-import { hsvToHex, normalizeHex } from '@var-ui/core';
+import { colorPicker } from '@var-ui/core/colorPicker';
+import { DEFAULT_COLOR_SWATCHES, hueToPureHex, hsvToHex, normalizeHex } from '@var-ui/core/color';
 import {
   alphaFromPointer,
   bindPointerDrag,

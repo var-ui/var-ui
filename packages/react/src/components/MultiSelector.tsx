@@ -7,7 +7,7 @@ import {
   Popover,
   type Selection,
 } from 'react-aria-components';
-import { multiSelector } from '@var-ui/core';
+import { multiSelector } from '@var-ui/core/multiSelector';
 import { Icon } from '../icons';
 import type { FieldMeta } from './utils';
 import { recipeProps } from './utils';

@@ -22,7 +22,7 @@ import {
   Pressable,
   type ModalOverlayProps,
 } from 'react-aria-components';
-import { drawer, type DrawerVariantProps } from '@var-ui/core';
+import { drawer, type DrawerVariantProps } from '@var-ui/core/drawer';
 import { Icon } from '../icons';
 import { useScrollLock } from '../hooks';
 import { useLayer } from '../layers/LayerProvider';

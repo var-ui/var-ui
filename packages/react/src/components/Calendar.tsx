@@ -11,7 +11,7 @@ import {
   Heading,
   type CalendarProps as RACCalendarProps,
 } from 'react-aria-components';
-import { calendar } from '@var-ui/core';
+import { calendar } from '@var-ui/core/calendar';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 

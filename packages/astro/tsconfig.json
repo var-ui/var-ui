@@ -6,7 +6,20 @@
     "strict": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "paths": {
+      "@var-ui/core": ["../core/src/index.ts"],
+      "@var-ui/core/tokens": ["../core/src/tokens/index.ts"],
+      "@var-ui/core/color": ["../core/src/color/index.ts"],
+      "@var-ui/core/icons": ["../core/src/icons/index.ts"],
+      "@var-ui/core/breakpoints": ["../core/src/breakpoints.ts"],
+      "@var-ui/core/theme-constants": ["../core/src/theme-constants.ts"],
+      "@var-ui/core/internal": ["../core/src/internal.ts"],
+      "@var-ui/core/styles": ["../core/src/styles.ts"],
+      "@var-ui/core/base-styles": ["../core/src/base-styles.ts"],
+      "@var-ui/core/register-default-theme": ["../core/src/register-default-theme.ts"],
+      "@var-ui/core/*": ["../core/src/components/*"]
+    }
   },
   "include": ["index.ts", "src/**/*.ts", "src/**/*.astro", "src/env.d.ts"]
 }

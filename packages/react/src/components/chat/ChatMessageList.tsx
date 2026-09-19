@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { chatMessageList } from '@var-ui/core';
+import { chatMessageList } from '@var-ui/core/chat/chatMessageList';
 import { ChatListContext, type ChatDensity } from './ChatContext';
 import { recipeProps } from '../utils';
 

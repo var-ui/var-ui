@@ -1,6 +1,6 @@
 import type { JSX } from 'react';
 import { Button as AriaButton } from 'react-aria-components';
-import { thumbnail } from '@var-ui/core';
+import { thumbnail } from '@var-ui/core/thumbnail';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 

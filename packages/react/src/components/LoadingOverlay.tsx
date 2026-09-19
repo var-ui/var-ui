@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { loadingOverlay } from '@var-ui/core';
+import { loadingOverlay } from '@var-ui/core/loadingOverlay';
 import { Spinner } from './Spinner';
 import { recipeProps } from './utils';
 

@@ -13,7 +13,7 @@ import {
   TagGroup,
   TagList,
 } from 'react-aria-components';
-import { tokenizer } from '@var-ui/core';
+import { tokenizer } from '@var-ui/core/tokenizer';
 import { Icon } from '../icons';
 import { recipeProps } from './utils';
 

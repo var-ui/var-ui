@@ -1,5 +1,5 @@
 import type { HTMLAttributes, JSX } from 'react';
-import { divider } from '@var-ui/core';
+import { divider } from '@var-ui/core/divider';
 import { recipeProps } from './utils';
 
 export type DividerProps = HTMLAttributes<HTMLHRElement> & {

@@ -8,7 +8,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { outline } from '@var-ui/core';
+import { outline } from '@var-ui/core/outline';
 import { cx, recipeClassName, recipeProps } from './utils';
 
 export type OutlineItemData = {

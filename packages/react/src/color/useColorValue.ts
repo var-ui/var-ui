@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { clamp, hexToHsv, hsvToHex, normalizeHex, type Hsv } from '@var-ui/core';
+import { clamp, hexToHsv, hsvToHex, normalizeHex, type Hsv } from '@var-ui/core/color';
 
 export type UseColorValueOptions = {
   value?: string;

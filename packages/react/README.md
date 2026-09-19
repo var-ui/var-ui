@@ -43,6 +43,14 @@ export function App() {
 For custom `createDesignTheme` modules or tree-shaken CSS, extract with `@typestyles/vite`
 instead of importing `styles.css`. Do not use both. Workspace apps in this repo still extract.
 
+Used-recipe extract (side-effect imports — do not import the `@var-ui/react` barrel):
+
+```ts
+// typestyles-entry.ts
+import '@var-ui/react/button';
+import '@var-ui/core/register-default-theme';
+```
+
 ## Icons
 
 var-ui components never bundle SVGs. They resolve **semantic icon names**

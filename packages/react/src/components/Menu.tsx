@@ -25,7 +25,7 @@ import {
   Pressable,
   Separator,
 } from 'react-aria-components';
-import { menu } from '@var-ui/core';
+import { menu } from '@var-ui/core/menu';
 import { useLayer } from '../layers/LayerProvider';
 import {
   createOverlayChangeDetails,

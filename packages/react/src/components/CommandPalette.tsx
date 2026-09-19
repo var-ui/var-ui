@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Autocomplete, Input, ListBox, ListBoxItem, TextField } from 'react-aria-components';
 import type { ComponentAttrsResult } from 'typestyles';
-import { commandPalette } from '@var-ui/core';
+import { commandPalette } from '@var-ui/core/commandPalette';
 import { Icon } from '../icons';
 import { useLayer } from '../layers/LayerProvider';
 import { useOverlayPresence } from '../overlays';

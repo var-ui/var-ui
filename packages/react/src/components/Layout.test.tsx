@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vite-plus/test';
 import { render, screen } from '@testing-library/react';
-import { getLayoutShellVars, layoutShellPaddingAssignments } from '@var-ui/core';
+import { getLayoutShellVars, layoutShellPaddingAssignments } from '@var-ui/core/layout';
 import {
   Layout,
   LayoutContent,

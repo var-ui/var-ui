@@ -1,5 +1,5 @@
 import { useCallback, useRef, type JSX, type ReactNode, type RefObject } from 'react';
-import { chatLayout } from '@var-ui/core';
+import { chatLayout } from '@var-ui/core/chat/chatLayout';
 import { Button } from '../Button';
 import { Icon } from '../../icons';
 import { useChatStreamScroll } from '../../chat/useChatStreamScroll';

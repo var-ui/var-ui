@@ -19,6 +19,10 @@ describe('package subpath exports', () => {
     expect(exports['./internal']?.import).toBe('./dist/internal.mjs');
     expect(exports['./register-default-theme']?.import).toBe('./dist/register-default-theme.mjs');
     expect(exports['./styles']?.import).toBe('./dist/styles.mjs');
+    expect(exports['./tokens']?.import).toBe('./dist/tokens/index.mjs');
+    expect(exports['./color']?.import).toBe('./dist/color/index.mjs');
+    expect(exports['./icons']?.import).toBe('./dist/icons/index.mjs');
+    expect(exports['./breakpoints']?.import).toBe('./dist/breakpoints.mjs');
   });
 
   it('react exposes button entry points', () => {
