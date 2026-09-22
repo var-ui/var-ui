@@ -1,5 +1,4 @@
 import type { DemoSnippets } from '../../types';
-import { render } from './html';
 
 export const snippets = {
   react: `import { useState } from 'react';
@@ -34,5 +33,5 @@ const send = button(resolveButtonProps({ intent: 'primary' }));
     <button type="button" class:list={[send]} aria-label="Send message" disabled>↑</button>
   </div>
 </div>`,
-  html: render(),
+  html: `<div data-appearance="default" class="var-ui-chat-composer"><div data-appearance="default" class="var-ui-chat-composer__inputRow"><textarea data-appearance="default" class="var-ui-chat-composer__input" rows="1" placeholder="Type a message…" aria-label="Message" disabled></textarea></div><div data-appearance="default" class="var-ui-chat-composer__actions"><button type="button" data-tone="accent" data-appearance="filled" data-size="md" data-layout="default" class="var-ui-button" aria-label="Send message" disabled><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></button></div></div>`,
 } satisfies DemoSnippets;

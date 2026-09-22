@@ -73,6 +73,24 @@ describe('TopNav', () => {
     expect(screen.getByRole('navigation').getAttribute('data-layout')).toBe('grid');
   });
 
+  it('marks heading, start, center, and end zones with data-var-ui-top-nav-*', () => {
+    wrap(
+      <TopNav
+        heading={<span>Brand</span>}
+        centerContent={<span>Mid</span>}
+        endContent={<span>End</span>}
+      >
+        <TopNav.Item label="Home" href="/" />
+      </TopNav>,
+    );
+    const nav = screen.getByRole('navigation');
+    expect(nav.hasAttribute('data-var-ui-top-nav')).toBe(true);
+    expect(nav.querySelector('[data-var-ui-top-nav-heading]')).toBeTruthy();
+    expect(nav.querySelector('[data-var-ui-top-nav-start]')).toBeTruthy();
+    expect(nav.querySelector('[data-var-ui-top-nav-center]')).toBeTruthy();
+    expect(nav.querySelector('[data-var-ui-top-nav-end]')).toBeTruthy();
+  });
+
   // TopNav.Menu is built on HoverCard, which opens on hover (after openDelay) or
   // keyboard focus — there is no press-to-open interaction for this part.
   it('opens TopNav.Menu on hover, revealing its rich items', async () => {
@@ -138,14 +156,16 @@ describe('TopNav', () => {
         <TopNav.MegaMenu
           label="Solutions"
           items={[{ id: 'x', title: 'For startups', href: '/startups' }]}
-          openDelay={10}
-          closeDelay={10}
+          // `userEvent.click` also fires hover + focus, which schedule open. Short
+          // delays can open before `onPress` and then toggle the menu closed.
+          openDelay={10000}
+          closeDelay={10000}
         />
       </TopNav>,
     );
     const trigger = screen.getByRole('button', { name: 'Solutions' });
     await userEvent.click(trigger);
-    await waitFor(() => expect(screen.getByRole('link', { name: 'For startups' })).toBeTruthy());
+    expect(screen.getByRole('link', { name: 'For startups' })).toBeTruthy();
 
     await userEvent.keyboard('{Escape}');
     await waitFor(() => expect(screen.queryByRole('link', { name: 'For startups' })).toBeNull());

@@ -1,5 +1,5 @@
 ---
-import { mobileNav } from '@var-ui/core';
+import { defaultIconSvgs, icon, mobileNav } from '@var-ui/core';
 import { recipeProps } from '../utils';
 
 type Props = {
@@ -9,6 +9,8 @@ type Props = {
 
 const { label = 'Open navigation', className } = Astro.props;
 const s = mobileNav();
+const hasIcon = Astro.slots.has('default');
+const iconRecipe = recipeProps(icon({ size: 'md' }));
 ---
 
 <button
@@ -18,7 +20,7 @@ const s = mobileNav();
   aria-expanded="false"
   {...recipeProps(s.toggle, className)}
 >
-  <slot />
+  {hasIcon ? <slot /> : <span {...iconRecipe} set:html={defaultIconSvgs.menu} />}
 </button>
 
 <script>

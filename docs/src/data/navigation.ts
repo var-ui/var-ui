@@ -12,11 +12,19 @@ export const topNav = [
   { text: 'Playground', link: '/playground', match: '/playground' },
 ] as const;
 
-export const docsSidebar = [
-  { text: 'Getting started', link: '/docs/getting-started' },
-  { text: 'Forms', link: '/docs/forms' },
-  { text: 'Overlay lifecycle', link: '/docs/overlay-lifecycle' },
-] as const;
+export const docsSidebarSections: readonly SidebarSection[] = [
+  {
+    title: 'Guides',
+    items: [
+      { text: 'Getting started', link: '/docs/getting-started' },
+      { text: 'Installation', link: '/docs/installation' },
+      { text: 'Overlay lifecycle', link: '/docs/overlay-lifecycle' },
+      { text: 'Forms', link: '/docs/forms' },
+    ],
+  },
+];
+
+export const docsSidebar = docsSidebarSections.flatMap((section) => section.items);
 
 export const themingSidebarSections: readonly SidebarSection[] = [
   {
@@ -73,7 +81,7 @@ export const playgroundSidebar = playgroundSidebarSections.flatMap((section) => 
 
 export const sidebar = {
   '/components': componentSidebarSections,
-  '/docs': docsSidebar,
+  '/docs': docsSidebarSections,
   '/theming': themingSidebarSections,
   '/playground': playgroundSidebarSections,
 } as const;

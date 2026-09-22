@@ -2,7 +2,7 @@ export * from './components';
 export * from './color';
 export * from './fonts';
 export * from './icons';
-export { createDesignTheme } from './create-theme';
+export { createDesignTheme, disposeDesignTheme } from './create-theme';
 export * from './theme-constants';
 export {
   extendTokens,

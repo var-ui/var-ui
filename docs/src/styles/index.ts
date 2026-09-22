@@ -9,4 +9,5 @@ import './shadowSwatches';
 import './playgroundShell';
 import './playgroundSidebar';
 import './docsThemePicker';
+import './docsTopNav';
 import './root';

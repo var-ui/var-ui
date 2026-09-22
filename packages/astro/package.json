@@ -1,6 +1,6 @@
 {
   "name": "@var-ui/astro",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Astro components for the var-ui design system",
   "keywords": [
     "astro-component",
@@ -42,7 +42,7 @@
     "vite-plus": "catalog:"
   },
   "peerDependencies": {
-    "@var-ui/core": "workspace:^",
+    "@var-ui/core": "workspace:>=0.1.0 <1.0.0",
     "astro": "catalog:"
   }
 }

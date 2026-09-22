@@ -1,6 +1,6 @@
 {
   "name": "@var-ui/docs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Astro documentation kit built with Var UI — shell, TOC, search, and createDesignTheme() theming (including syntax highlighting)",
   "keywords": [
     "astro",
@@ -28,6 +28,7 @@
     ".": "./index.ts",
     "./schema": "./schema.ts",
     "./utils": "./src/utils/index.ts",
+    "./styles": "./src/styles/index.ts",
     "./shiki": "./src/utils/shiki-theme.ts",
     "./middleware": "./src/middleware.ts",
     "./routes/guide.astro": "./src/routes/guide.astro",
@@ -71,13 +72,31 @@
   "peerDependencies": {
     "@typestyles/build-runner": "^0.5.2",
     "@typestyles/vite": "catalog:",
-    "@var-ui/astro": "workspace:^",
-    "@var-ui/core": "workspace:^",
-    "@var-ui/icons": "workspace:^",
-    "@var-ui/react": "workspace:^",
+    "@var-ui/astro": "workspace:>=0.1.0 <1.0.0",
+    "@var-ui/core": "workspace:>=0.1.0 <1.0.0",
+    "@var-ui/icons": "workspace:>=0.1.0 <1.0.0",
+    "@var-ui/react": "workspace:>=0.1.0 <1.0.0",
     "astro": "catalog:",
     "react": "catalog:",
+    "react-aria-components": "catalog:",
     "react-dom": "catalog:",
     "typestyles": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "@var-ui/icons": {
+      "optional": true
+    },
+    "@var-ui/react": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "react-aria-components": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
   }
 }

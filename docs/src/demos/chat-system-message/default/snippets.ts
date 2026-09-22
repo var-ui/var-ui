@@ -1,5 +1,4 @@
 import type { DemoSnippets } from '../../types';
-import { render } from './html';
 
 export const snippets = {
   react: `import { ChatSystemMessage } from '@var-ui/react';
@@ -22,5 +21,5 @@ const success = chatSystemMessage({ tone: 'success' });
 <div class:list={[success.root]} role="status">
   <span class:list={[success.text]}>Alex joined the conversation</span>
 </div>`,
-  html: render(),
+  html: `<div data-tone="info" class="var-ui-chat-system-message" role="status"><span data-tone="info" class="var-ui-chat-system-message__text">Model switched to GPT-5</span></div><div data-tone="success" class="var-ui-chat-system-message" role="status"><span data-tone="success" class="var-ui-chat-system-message__text">Alex joined the conversation</span></div>`,
 } satisfies DemoSnippets;

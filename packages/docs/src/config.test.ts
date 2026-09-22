@@ -86,4 +86,39 @@ describe('parseVarDocsConfig', () => {
     });
     expect(result.success).toBe(false);
   });
+
+  it('defaults markdownViews to true when omitted', () => {
+    const config = parseVarDocsConfig({
+      title: 'Var UI',
+      theme: { defaultClassName: 'theme-var-ui-default' },
+      typestyles: { entry: 'typestyles-entry.ts' },
+    });
+    expect(config.markdownViews).toBe(true);
+  });
+
+  it('parses markdownViews false', () => {
+    const config = parseVarDocsConfig({
+      title: 'Var UI',
+      theme: { defaultClassName: 'theme-var-ui-default' },
+      typestyles: { entry: 'typestyles-entry.ts' },
+      markdownViews: false,
+    });
+    expect(config.markdownViews).toBe(false);
+  });
+
+  it('parses markdownViews object with extraPrefixes and tagline', () => {
+    const config = parseVarDocsConfig({
+      title: 'Var UI',
+      theme: { defaultClassName: 'theme-var-ui-default' },
+      typestyles: { entry: 'typestyles-entry.ts' },
+      markdownViews: {
+        extraPrefixes: ['/components'],
+        tagline: 'Agent-readable Var UI docs',
+      },
+    });
+    expect(config.markdownViews).toEqual({
+      extraPrefixes: ['/components'],
+      tagline: 'Agent-readable Var UI docs',
+    });
+  });
 });

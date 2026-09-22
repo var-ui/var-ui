@@ -15,11 +15,16 @@ const hasStart = Astro.slots.has('default');
 
 <nav
   aria-label={label}
+  data-var-ui-top-nav
   data-layout={hasCenter ? 'grid' : undefined}
   {...recipeProps(s.root, className)}
 >
-  {Astro.slots.has('heading') && <div {...recipeProps(s.heading)}><slot name="heading" /></div>}
-  {hasStart && <div {...recipeProps(s.start)}><slot /></div>}
-  {hasCenter && <div {...recipeProps(s.center)}><slot name="center" /></div>}
-  {Astro.slots.has('end') && <div {...recipeProps(s.end)}><slot name="end" /></div>}
+  {Astro.slots.has('heading') && (
+    <div data-var-ui-top-nav-heading {...recipeProps(s.heading)}><slot name="heading" /></div>
+  )}
+  {hasStart && <div data-var-ui-top-nav-start {...recipeProps(s.start)}><slot /></div>}
+  {hasCenter && <div data-var-ui-top-nav-center {...recipeProps(s.center)}><slot name="center" /></div>}
+  {Astro.slots.has('end') && (
+    <div data-var-ui-top-nav-end {...recipeProps(s.end)}><slot name="end" /></div>
+  )}
 </nav>

@@ -1,0 +1,38 @@
+{
+  "version": "0.1.0",
+  "components": [
+    {
+      "slug": "button",
+      "name": "Button",
+      "category": "action",
+      "description": "Triggers an action or event.",
+      "importLine": "import { Button } from '@var-ui/react';",
+      "packages": ["react", "core"],
+      "docsPath": "/components/button",
+      "markdown": "# Button\n\nTriggers an action or event.\n\n```tsx\n<Button>Click me</Button>\n```\n",
+      "examples": [{ "id": "button.default", "react": "<Button>Click me</Button>" }],
+      "props": []
+    },
+    {
+      "slug": "banner",
+      "name": "Banner",
+      "category": "feedback",
+      "description": "Highlights a message",
+      "importLine": "import { Banner } from '@var-ui/react';",
+      "packages": ["react", "core"],
+      "docsPath": "/components/banner",
+      "markdown": "# Banner\n",
+      "examples": [],
+      "props": []
+    }
+  ],
+  "guides": [
+    {
+      "id": "getting-started",
+      "title": "Getting started",
+      "description": "Install var-ui",
+      "docsPath": "/docs/getting-started",
+      "markdown": "# Getting started\n\nInstall var-ui.\n"
+    }
+  ]
+}

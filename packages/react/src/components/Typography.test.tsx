@@ -24,4 +24,15 @@ describe('Typography', () => {
     expect(el.tagName).toBe('SPAN');
     expect(el.getAttribute('data-tone')).toBe('secondary');
   });
+
+  it('Text supports xs size and lineClamp', () => {
+    render(
+      <Text size="xs" lineClamp={2}>
+        clamped
+      </Text>,
+    );
+    const el = screen.getByText('clamped');
+    expect(el.getAttribute('data-size')).toBe('xs');
+    expect(el.getAttribute('data-line-clamp')).toBe('2');
+  });
 });

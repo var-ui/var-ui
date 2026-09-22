@@ -1,6 +1,6 @@
 {
   "name": "@var-ui/react",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "React components for the var-ui design system",
   "homepage": "https://github.com/var-ui/var-ui/tree/main/packages/react#readme",
   "bugs": "https://github.com/var-ui/var-ui/issues",
@@ -237,6 +237,18 @@
     "./Chip": {
       "types": "./dist/components/Chip.d.mts",
       "import": "./dist/components/Chip.mjs"
+    },
+    "./components/Code": {
+      "types": "./dist/components/Code.d.mts",
+      "import": "./dist/components/Code.mjs"
+    },
+    "./code": {
+      "types": "./dist/components/Code.d.mts",
+      "import": "./dist/components/Code.mjs"
+    },
+    "./Code": {
+      "types": "./dist/components/Code.d.mts",
+      "import": "./dist/components/Code.mjs"
     },
     "./components/CodeBlock": {
       "types": "./dist/components/CodeBlock.d.mts",
@@ -1006,6 +1018,18 @@
       "types": "./dist/components/Steps.d.mts",
       "import": "./dist/components/Steps.mjs"
     },
+    "./components/Surface": {
+      "types": "./dist/components/Surface.d.mts",
+      "import": "./dist/components/Surface.mjs"
+    },
+    "./surface": {
+      "types": "./dist/components/Surface.d.mts",
+      "import": "./dist/components/Surface.mjs"
+    },
+    "./Surface": {
+      "types": "./dist/components/Surface.d.mts",
+      "import": "./dist/components/Surface.mjs"
+    },
     "./components/Switch": {
       "types": "./dist/components/Switch.d.mts",
       "import": "./dist/components/Switch.mjs"
@@ -1408,8 +1432,8 @@
   },
   "peerDependencies": {
     "@internationalized/date": "catalog:",
-    "@var-ui/core": "workspace:^",
-    "@var-ui/icons": "workspace:^",
+    "@var-ui/core": "workspace:>=0.1.0 <1.0.0",
+    "@var-ui/icons": "workspace:>=0.1.0 <1.0.0",
     "react": "catalog:",
     "react-aria-components": "catalog:",
     "react-dom": "catalog:"

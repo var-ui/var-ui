@@ -1,6 +1,6 @@
 {
   "name": "@var-ui/core",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Framework-agnostic design tokens and component styles for var-ui",
   "homepage": "https://github.com/var-ui/var-ui/tree/main/packages/core#readme",
   "bugs": "https://github.com/var-ui/var-ui/issues",
@@ -17,7 +17,8 @@
   "sideEffects": [
     "./dist/base-styles.mjs",
     "./dist/register-default-theme.mjs",
-    "./dist/styles.mjs"
+    "./dist/styles.mjs",
+    "./dist/styles.css"
   ],
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
@@ -38,6 +39,7 @@
       "types": "./dist/styles.d.mts",
       "import": "./dist/styles.mjs"
     },
+    "./styles.css": "./dist/styles.css",
     "./base-styles": {
       "types": "./dist/base-styles.d.mts",
       "import": "./dist/base-styles.mjs"
@@ -430,6 +432,14 @@
       "types": "./dist/components/icon.d.mts",
       "import": "./dist/components/icon.mjs"
     },
+    "./components/inlineCode": {
+      "types": "./dist/components/inlineCode.d.mts",
+      "import": "./dist/components/inlineCode.mjs"
+    },
+    "./inlineCode": {
+      "types": "./dist/components/inlineCode.d.mts",
+      "import": "./dist/components/inlineCode.mjs"
+    },
     "./components/inputGroup": {
       "types": "./dist/components/inputGroup.d.mts",
       "import": "./dist/components/inputGroup.mjs"
@@ -738,6 +748,14 @@
       "types": "./dist/components/styles.d.mts",
       "import": "./dist/components/styles.mjs"
     },
+    "./components/surface": {
+      "types": "./dist/components/surface.d.mts",
+      "import": "./dist/components/surface.mjs"
+    },
+    "./surface": {
+      "types": "./dist/components/surface.d.mts",
+      "import": "./dist/components/surface.mjs"
+    },
     "./components/switch": {
       "types": "./dist/components/switch.d.mts",
       "import": "./dist/components/switch.mjs"
@@ -895,14 +913,15 @@
     "access": "public"
   },
   "scripts": {
-    "build": "vp pack && node ../../scripts/generate-subpath-exports.mjs core",
-    "pack": "vp pack && node ../../scripts/generate-subpath-exports.mjs core",
+    "build": "vp pack && node scripts/generate-styles-css.mjs && node ../../scripts/generate-subpath-exports.mjs core",
+    "pack": "vp pack && node scripts/generate-styles-css.mjs && node ../../scripts/generate-subpath-exports.mjs core",
     "dev": "vp pack --watch"
   },
   "dependencies": {
     "typestyles": "catalog:"
   },
   "devDependencies": {
+    "@typestyles/build-runner": "^0.5.2",
     "@typestyles/cli": "^0.2.1",
     "@typestyles/eslint-plugin": "^0.3.1",
     "vite": "catalog:",

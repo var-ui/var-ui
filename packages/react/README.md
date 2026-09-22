@@ -7,7 +7,7 @@ Framework-specific wrappers around accessible primitives ([React Aria Components
 ## Install
 
 ```bash
-pnpm add @var-ui/react @var-ui/core react react-dom react-aria-components typestyles
+pnpm add @var-ui/react @var-ui/core react react-dom react-aria-components
 ```
 
 Within this monorepo:
@@ -25,6 +25,7 @@ Peer dependencies: `react`, `react-dom`, `react-aria-components`, and `@var-ui/c
 ## Usage
 
 ```tsx
+import '@var-ui/core/styles.css';
 import { Button, DesignSystemProvider, layout, text } from '@var-ui/react';
 
 export function App() {
@@ -39,13 +40,8 @@ export function App() {
 }
 ```
 
-Import the package once in your **extraction entry** so all registrations land in production CSS:
-
-```ts
-// src/typestyles-entry.ts
-import '@var-ui/react';
-import './app-styles';
-```
+For custom `createDesignTheme` modules or tree-shaken CSS, extract with `@typestyles/vite`
+instead of importing `styles.css`. Do not use both. Workspace apps in this repo still extract.
 
 ## Icons
 

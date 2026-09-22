@@ -25,6 +25,7 @@ describe('navigation', () => {
     expect(docsSidebar.map((item) => item.link)).toEqual([
       '/docs/getting-started',
       '/docs/forms',
+      '/docs/installation',
       '/docs/overlay-lifecycle',
     ]);
     const flatItems = componentSidebarSections.flatMap((section) => section.items);

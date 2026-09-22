@@ -20,5 +20,7 @@ describe('typestyles extraction', () => {
     expect(css).toContain(
       '@property --var-ui-fontFamily-body { syntax: "*"; inherits: true; initial-value: none;',
     );
+    expect(css).toContain('.var-ui-docs-top-nav');
+    expect(css).toContain('[data-var-ui-mobile-nav-toggle]');
   });
 });

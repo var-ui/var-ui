@@ -131,6 +131,7 @@ export {
   type HoverCardTitleProps,
   type HoverCardTriggerProps,
 } from './HoverCard';
+export { Code, type CodeProps } from './Code';
 export { CodeBlock, type CodeBlockProps } from './CodeBlock';
 export { Alert, type AlertAppearance, type AlertProps, type AlertVariant } from './Alert';
 export {
@@ -248,6 +249,7 @@ export {
   type FileTreeProps,
 } from './FileTree';
 export { Kbd, type KbdProps } from './Kbd';
+export { Surface, type SurfaceProps } from './Surface';
 export { SimpleGrid, type SimpleGridProps } from './SimpleGrid';
 export { Skeleton, type SkeletonProps } from './Skeleton';
 export { StatusDot, type StatusDotProps } from './StatusDot';

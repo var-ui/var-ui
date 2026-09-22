@@ -69,3 +69,53 @@ export function guideInjectPatterns(prefix: string): string[] {
   }
   return [segment, `${segment}/[...slug]`];
 }
+
+/** Injected guide routes prerender only when the Astro app is fully static. */
+export function prerenderGuideRoutes(output: string): boolean {
+  return output === 'static';
+}
+
+/**
+ * Strip Astro `base` from a request pathname so guide matching sees `/docs/…`.
+ * `import.meta.env.BASE_URL` is `/` or a prefix that ends with `/`.
+ */
+export function stripAstroBase(pathname: string, base: string): string {
+  const normalizedBase = normalizeDocsPath(base);
+  if (!normalizedBase || normalizedBase === '/') {
+    return pathname;
+  }
+  const path = pathname.startsWith('/') ? pathname : `/${pathname}`;
+  const normalizedPath = normalizeDocsPath(path);
+  if (normalizedPath === normalizedBase) {
+    return '/';
+  }
+  if (normalizedPath.startsWith(`${normalizedBase}/`)) {
+    return normalizedPath.slice(normalizedBase.length);
+  }
+  return pathname;
+}
+
+export const STATIC_MULTI_PREFIX_ERROR =
+  "Static injected guide routes require exactly one `routes` prefix. Use `disableGuideRoutes` and your own pages, or set `output: 'server'`.";
+
+/**
+ * Static `injectRoute` patterns cannot target more than one prefix in this pass.
+ * Call from config setup (when prerendering) and from `getStaticPaths`.
+ */
+export function assertSingleStaticGuidePrefix(routes: readonly GuideRoutePrefix[]): void {
+  if (routes.length !== 1) {
+    throw new Error(STATIC_MULTI_PREFIX_ERROR);
+  }
+}
+
+/**
+ * Catch-all `getStaticPaths` entries for a guide collection.
+ * Omits `index` so the prefix route (`/docs`) owns that page.
+ */
+export function guideCatchAllStaticPaths(
+  entries: readonly { id: string }[],
+): { params: { slug: string } }[] {
+  return entries
+    .filter((entry) => entry.id !== 'index')
+    .map((entry) => ({ params: { slug: entry.id } }));
+}

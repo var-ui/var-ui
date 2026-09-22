@@ -7,6 +7,7 @@ This is a **library package** (not a standalone app). Import it from apps or the
 ## Quick start
 
 ```ts
+import '@var-ui/core/styles.css';
 import {
   button,
   layout,
@@ -16,7 +17,6 @@ import {
   defaultThemeClassName,
 } from '@var-ui/core';
 
-// Register styles at build time via `@var-ui/core/styles` (see TypeStyles setup below).
 document.body.className = defaultThemeClassName; // `theme-var-ui-default`
 element.className = button({ intent: 'primary' });
 // `layout` — multi-pane page shell recipe; `layoutUtility` — legacy docs stack/section helpers
@@ -25,7 +25,10 @@ element.className = button({ intent: 'primary' });
 Custom themes return a `DesignTheme` from `createDesignTheme({ name: 'acme' })` — use
 `theme.className` the same way. See [Theme surfaces](#theme-surfaces).
 
-### TypeStyles extraction
+### Advanced: TypeStyles extraction
+
+Use extract for custom `createDesignTheme` modules, app-owned recipes, or tree-shaken CSS.
+Do not import `@var-ui/core/styles.css` in the same app.
 
 Add a build entry that side-effect-imports the styles bundle, then point
 `@typestyles/vite` at it:
@@ -55,17 +58,17 @@ only use a few components, import the recipes you need instead (see
 Syntax highlighting is app-owned: use `color.code` tokens and wire them to your
 highlighter (see [Syntax highlighting](#syntax-highlighting) below).
 
-See [`examples/vite-app`](../vite-app/README.md) and [`examples/astro-app`](../astro-app/) for full workspace setups.
+See [`examples/vite-app`](../../examples/vite-app/README.md) and [`examples/astro-app`](../../examples/astro-app/) for full workspace setups.
 
 ### Key exports
 
-| Area              | Exports                                                                                                        |
-| ----------------- | -------------------------------------------------------------------------------------------------------------- |
-| **Themes**        | `createDesignTheme`, `DEFAULT_THEME_NAME`, `defaultThemeClassName`, `SURFACE_ATTRIBUTE`, `mergeThemeOverrides` |
-| **Tokens**        | `designTokens`, `tokens`, `tokenValues`, `generateColors`, `lightSyntaxValues`, `darkSyntaxValues`             |
-| **Customization** | `extendTokens`, `when`, `themeWhen`, `themeableComponents`, `defineFonts`, `groteskMono`                       |
-| **TypeStyles**    | `typestyles`, `styles`, `global`                                                                               |
-| **Types**         | `DesignTheme`, `DesignThemeConfig`, `DesignThemePreset`, `ThemeComponentsConfig`, `OverrideConfigFor`, …       |
+| Area              | Exports                                                                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Themes**        | `createDesignTheme`, `disposeDesignTheme`, `DEFAULT_THEME_NAME`, `defaultThemeClassName`, `SURFACE_ATTRIBUTE`, `mergeThemeOverrides` |
+| **Tokens**        | `designTokens`, `tokens`, `tokenValues`, `generateColors`, `lightSyntaxValues`, `darkSyntaxValues`                                   |
+| **Customization** | `extendTokens`, `when`, `themeWhen`, `themeableComponents`, `defineFonts`, `groteskMono`                                             |
+| **TypeStyles**    | `typestyles`, `styles`, `global`                                                                                                     |
+| **Types**         | `DesignTheme`, `DesignThemeConfig`, `DesignThemePreset`, `ThemeComponentsConfig`, `OverrideConfigFor`, …                             |
 
 ## Recipe inventory
 
@@ -137,6 +140,13 @@ reads semantic `color.*` plus Tier 1 `c.vars()`.
 
 Themes are thin wrappers around TypeStyles `tokens.createTheme`. Class names use the
 configured scope: `theme-var-ui-<name>` (e.g. `theme-var-ui-default`).
+
+### Runtime themes
+
+`createDesignTheme` is supported in the browser. Calling it again with the same `name`
+replaces the surface (theme editors). `disposeDesignTheme(name)` unregisters it.
+`@typestyles/vite` extract still covers recipes + the default theme. User-authored
+themes inject at runtime.
 
 ### Default theme
 

@@ -1,5 +1,4 @@
 import type { DemoSnippets } from '../../types';
-import { render } from './html';
 
 export const snippets = {
   react: `import { ChatMessage, ChatMessageBubble, ChatMessageList } from '@var-ui/react';
@@ -37,5 +36,5 @@ const userBubble = chatMessageBubble({ sender: 'user', variant: 'filled', group:
     </div>
   </div>
 </div>`,
-  html: render(),
+  html: `<div data-density="balanced" class="var-ui-chat-message-list" role="log" aria-live="polite"><div data-density="balanced" class="var-ui-chat-message-list__inner"><div data-sender="assistant" class="var-ui-chat-message"><div data-sender="assistant" class="var-ui-chat-message__content"><div data-sender="assistant" data-variant="filled" data-group="none" class="var-ui-chat-message-bubble">Hello! How can I help?</div></div></div><div data-sender="user" class="var-ui-chat-message"><div data-sender="user" class="var-ui-chat-message__content"><div data-sender="user" data-variant="filled" data-group="none" class="var-ui-chat-message-bubble">What components ship in var-ui?</div></div></div></div></div>`,
 } satisfies DemoSnippets;

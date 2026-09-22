@@ -37,6 +37,12 @@ export default defineConfig({
 });
 ```
 
+Guide-only sites do **not** need React. Install `@astrojs/react`, `@var-ui/react`, `react`, `react-dom`, `@var-ui/icons`, and `react-aria-components` only when using `DocsThemePicker`. `theme.presets` CSS extraction does not require React.
+
+`output: 'static'` is supported. Injected `/docs` routes prerender, including when Astro `base` is set. Static injected routes accept **exactly one** `routes` prefix in this release (default `/docs`). Sites with several prefixes should use `output: 'server'`, or `disableGuideRoutes` plus their own pages.
+
+`examples/astro-docs` dogfoods this setup in the monorepo and aliases workspace packages through Vite. Copy the snippet above for a published-npm consumer — not that example’s `vite.resolve.alias` block.
+
 `varDocs()` wires:
 
 - Config validation (`title`, `theme` incl. optional `presets`, `typestyles`, free-form `routes`, `components`)
@@ -46,6 +52,7 @@ export default defineConfig({
 - `@astrojs/mdx` + `rehype-slug` when MDX is not already registered
 - `virtual:var-docs/config` (+ Layout / MDX component virtual modules)
 - Optional injected guide routes + middleware (disable on Netlify SSR sites)
+- Markdown views **on by default**: sibling `.md` URLs, `/llms.txt`, and an “Also available as Markdown” link on `DocsPage`. Opt out with `markdownViews: false`. Design-system catalogs pass `extraPrefixes: ['/components']` so the kit indexes CLI-generated component markdown.
 
 ### Showcase presets
 
@@ -108,3 +115,10 @@ import DocsPage from '@var-ui/docs/DocsPage';
 ```
 
 See `docs/superpowers/specs/2026-08-11-var-docs-kit-design.md`.
+
+Import kit chrome recipes from your TypeStyles extract entry so `DocsPage` header CSS is emitted:
+
+```ts
+import '@var-ui/core/styles';
+import '@var-ui/docs/styles';
+```

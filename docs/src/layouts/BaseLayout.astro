@@ -8,6 +8,7 @@ import DocsThemeScript from '../components/DocsThemeScript.astro';
 import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
 import {
   componentSidebarSections,
+  docsSidebarSections,
   themingSidebarSections,
   topNav as topNavItems,
 } from '../data/navigation';
@@ -32,7 +33,9 @@ const sidebarSections = currentPath.startsWith('/components')
   ? componentSidebarSections
   : currentPath.startsWith('/theming')
     ? themingSidebarSections
-    : null;
+    : currentPath.startsWith('/docs')
+      ? docsSidebarSections
+      : null;
 
 const hljsScopeClass = recipeClassName(codeHljsScope().root);
 const searchItems = buildDocsSearchIndex();

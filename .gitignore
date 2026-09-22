@@ -7,6 +7,12 @@ dist-types
 docs/src/pages.gen.ts
 docs/src/lib/.cache/
 docs/public/themes/*.css
+docs/public/llms.txt
+docs/public/docs/
+docs/public/theming/*.md
+docs/public/components/
+examples/astro-docs/public/llms.txt
+examples/astro-docs/public/docs/
 .worktrees/
 
 # Local Netlify folder
