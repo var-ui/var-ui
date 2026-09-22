@@ -46,7 +46,20 @@ describe('getLazyThemePresets / href', () => {
 describe('extractThemeOnlyCss', () => {
   it('slices from @font-face or theme class', () => {
     const css = '/* head */\n@font-face{font-family:x}\n.theme-var-ui-forest{--c:1}';
-    expect(extractThemeOnlyCss(css, 'forest').startsWith('@font-face')).toBe(true);
+    const extracted = extractThemeOnlyCss(css, 'forest');
+    expect(extracted).toContain('@font-face{font-family:x}');
+    expect(extracted).toContain('.theme-var-ui-forest{--c:1}');
+  });
+
+  it('declares the TypeStyles layer order before any @layer blocks', () => {
+    const css = `@font-face{font-family:x}
+@layer tokens { .theme-var-ui-forest { --c: 1 } }
+@layer overrides { .theme-var-ui-forest .var-ui-top-nav { margin: 8px } }`;
+    const extracted = extractThemeOnlyCss(css, 'forest');
+    expect(
+      extracted.startsWith('@layer reset, base, tokens, components, overrides, utilities;'),
+    ).toBe(true);
+    expect(extracted.indexOf('@layer tokens')).toBeGreaterThan(extracted.indexOf('@layer reset,'));
   });
 
   it('throws when theme class missing', () => {

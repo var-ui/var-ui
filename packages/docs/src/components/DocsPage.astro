@@ -9,12 +9,16 @@ import {
   LayoutPanel,
   MobileNav,
   MobileNavToggle,
+  recipeClassName,
   SideNav,
+  SideNavItem,
+  SideNavSection,
   ThemeScript,
   TopNav,
   TopNavHeading,
   TopNavItem,
 } from '@var-ui/astro';
+import { docsTopNav } from '../styles/docsTopNav';
 import DocsSearch from './DocsSearch.astro';
 import DocsSidebar from './DocsSidebar.astro';
 import DocsToc from './DocsToc.astro';
@@ -79,10 +83,13 @@ const showTocPanel = hasTocSlot || showAutoToc;
 const hasToolsSlot = Astro.slots.has('tools');
 const hasThemePickerSlot = Astro.slots.has('themePicker');
 const hasThemeScriptSlot = Astro.slots.has('themeScript');
+const showMobileNav = topNav.length > 0 || Boolean(sidebarSections);
 
 function isSidebarLinkActive(link: string): boolean {
   return currentPath === normalizeDocsPath(link);
 }
+
+const nav = docsTopNav();
 ---
 
 <html lang="en" class={themeClassName} {...htmlAttributes}>
@@ -98,7 +105,7 @@ function isSidebarLinkActive(link: string): boolean {
   </head>
   <body class={cx('docs-body', bodyClassName)}>
     <AppShell variant="wash" height="fill" contentPadding={0} mobileBreakpoint="md">
-      <TopNav slot="topNav">
+      <TopNav slot="topNav" className={recipeClassName(nav.root)}>
         <TopNavHeading slot="heading" heading={brand.heading} headingHref={brand.href} />
         {
           topNav.map((item) => (
@@ -109,26 +116,51 @@ function isSidebarLinkActive(link: string): boolean {
             />
           ))
         }
-        <div slot="end" class="docs-top-nav__tools">
-          {sidebarSections ? <MobileNavToggle /> : null}
+        <div slot="end" class={recipeClassName(nav.tools)}>
           <div
-            class="docs-top-nav__tools-persist"
+            class={recipeClassName(nav.toolsPersist)}
             transition:persist="docs-top-nav-tools"
             transition:animate="none"
           >
             <DocsSearch items={searchItems} />
-            {hasToolsSlot ? <slot name="tools" /> : null}
-            <ColorModeToggle includeSystem size="md" />
+            <div class={recipeClassName(nav.toolbar)}>
+              {hasToolsSlot ? (
+                <div class={recipeClassName(nav.toolbarExtra)}>
+                  <slot name="tools" />
+                </div>
+              ) : null}
+              <ColorModeToggle includeSystem size="md" />
+            </div>
           </div>
+          {
+            showMobileNav ? <MobileNavToggle /> : null
+          }
         </div>
       </TopNav>
 
       {
-        sidebarSections && (
+        showMobileNav ? (
           <MobileNav slot="mobileNav" header="Menu">
-            <DocsSidebar sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
+            <div class={recipeClassName(nav.mobileNavBody)}>
+              {
+                topNav.length > 0 ? (
+                  <SideNavSection>
+                    {topNav.map((item) => (
+                      <SideNavItem
+                        label={item.text}
+                        href={item.link}
+                        isSelected={currentPath.startsWith(item.match)}
+                      />
+                    ))}
+                  </SideNavSection>
+                ) : null
+              }
+              {sidebarSections ? (
+                <DocsSidebar sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
+              ) : null}
+            </div>
           </MobileNav>
-        )
+        ) : null
       }
 
       {
@@ -229,18 +261,6 @@ function isSidebarLinkActive(link: string): boolean {
 </style>
 
 <style>
-  .docs-top-nav__tools {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .docs-top-nav__tools-persist {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
   .docs-site-layout {
     flex: 1 1 auto;
     min-height: 0;

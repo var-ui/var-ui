@@ -1,7 +1,10 @@
-import { typestyles } from '../runtime';
+import { styles, typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { controlFocusStyles } from './controlFocus';
 import { controlSizeMetrics, controlSizeVariants, controlSurfaceSize } from './controlSize';
+
+/** Command-trigger chrome collapses to an icon button below this width. */
+const belowXl = styles.breakpoint('xl', 'max');
 
 /**
  * Compact search field for toolbars and nav chrome.
@@ -119,6 +122,31 @@ export const searchInput = typestyles.styles.component(
           command: {
             root: {
               cursor: 'pointer',
+              [belowXl]: {
+                position: 'relative',
+                minWidth: 0,
+                width: 'auto',
+                justifyContent: 'center',
+                aspectRatio: '1 / 1',
+                paddingInline: t.space[2].var,
+                flexShrink: 0,
+              },
+            },
+            trigger: {
+              [belowXl]: {
+                position: 'absolute',
+                inset: 0,
+              },
+            },
+            triggerLabel: {
+              [belowXl]: {
+                display: 'none',
+              },
+            },
+            shortcut: {
+              [belowXl]: {
+                display: 'none',
+              },
             },
           },
         },

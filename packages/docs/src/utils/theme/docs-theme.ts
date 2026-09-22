@@ -38,6 +38,7 @@ export function ensureDocsThemeStyles(
   link.rel = 'stylesheet';
   link.href = href;
   link.dataset.docsThemeStyle = themeId;
+  link.dataset.astroTransitionPersist = `docs-theme-style-${themeId}`;
 
   let settled = false;
   const finish = () => {
@@ -49,7 +50,12 @@ export function ensureDocsThemeStyles(
 
   link.addEventListener('load', finish, { once: true });
   link.addEventListener('error', finish, { once: true });
-  document.head.appendChild(link);
+  const typestyles = document.querySelector('link[href="/typestyles.css"]');
+  if (typestyles?.parentNode) {
+    typestyles.parentNode.insertBefore(link, typestyles.nextSibling);
+  } else {
+    document.head.appendChild(link);
+  }
 
   queueMicrotask(() => {
     if (!link.sheet) finish();

@@ -15,6 +15,7 @@ const {
 } = Astro.props;
 ---
 
+{/* `.docs-search` is targeted by `docsTopNav` for toolbar flex layout. */}
 <div class="docs-search">
   <SearchInput
     variant="command"
@@ -30,10 +31,3 @@ const {
     aria-label={placeholder}
   />
 </div>
-
-<style>
-  .docs-search {
-    display: inline-flex;
-    align-items: center;
-  }
-</style>

@@ -6,6 +6,10 @@ type Props = {
 const { themeClass, storageKey = 'theme-mode' } = Astro.props;
 ---
 <meta name="color-scheme" content="light dark" />
+<style is:inline>
+  /* Must match `layers` in packages/core/src/runtime.ts */
+  @layer reset, base, tokens, components, overrides, utilities;
+</style>
 <script is:inline define:vars={{ themeClass, storageKey }}>
   function applyThemeTo(doc) {
     const root = doc.documentElement;

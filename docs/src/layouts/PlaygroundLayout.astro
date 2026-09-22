@@ -6,7 +6,11 @@ import {
   cx,
   Layout,
   LayoutContent,
+  MobileNav,
+  MobileNavToggle,
   recipeClassName,
+  SideNavItem,
+  SideNavSection,
   ThemeScript,
   TopNav,
   TopNavHeading,
@@ -19,6 +23,7 @@ import DocsThemePicker from '../components/DocsThemePicker.astro';
 import DocsThemeScript from '../components/DocsThemeScript.astro';
 import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
 import { topNav as topNavItems } from '../data/navigation';
+import { docsTopNav } from '@/styles/docsTopNav';
 
 const { title = 'Var UI', bleed = false } = Astro.props as {
   title?: string;
@@ -33,6 +38,7 @@ function normalizePath(path: string): string {
 
 const currentPath = normalizePath(pathname);
 const hljsScopeClass = recipeClassName(codeHljsScope().root);
+const nav = docsTopNav();
 ---
 
 <html lang="en" class={defaultThemeClassName} data-framework={framework}>
@@ -47,7 +53,7 @@ const hljsScopeClass = recipeClassName(codeHljsScope().root);
   </head>
   <body class={cx('docs-body', 'docs-body--playground', hljsScopeClass)}>
     <AppShell variant="wash" height="fill" contentPadding={0} mobileBreakpoint="md">
-      <TopNav slot="topNav">
+      <TopNav slot="topNav" className={recipeClassName(nav.root)}>
         <TopNavHeading slot="heading" heading="Var UI" headingHref="/" />
         {
           topNavItems.map((item) => (
@@ -58,18 +64,39 @@ const hljsScopeClass = recipeClassName(codeHljsScope().root);
             />
           ))
         }
-        <div slot="end" class="docs-top-nav__tools">
+        <div slot="end" class={recipeClassName(nav.tools)}>
           <div
-            class="docs-top-nav__tools-persist"
+            class={recipeClassName(nav.toolsPersist)}
             transition:persist="docs-top-nav-tools"
             transition:animate="none"
           >
             <DocsSearch />
-            <FrameworkSwitcher />
-            <ColorModeToggle includeSystem size="md" />
+            <div class={recipeClassName(nav.toolbar)}>
+              <div class={recipeClassName(nav.toolbarExtra)}>
+                <FrameworkSwitcher />
+              </div>
+              <ColorModeToggle includeSystem size="md" />
+            </div>
           </div>
+          <MobileNavToggle />
         </div>
       </TopNav>
+
+      <MobileNav slot="mobileNav" header="Menu">
+        <div class={recipeClassName(nav.mobileNavBody)}>
+          <SideNavSection>
+            {
+              topNavItems.map((item) => (
+                <SideNavItem
+                  label={item.text}
+                  href={item.link}
+                  isSelected={currentPath.startsWith(item.match)}
+                />
+              ))
+            }
+          </SideNavSection>
+        </div>
+      </MobileNav>
 
       <Layout height="fill" padding={0} className="docs-playground-layout">
         <LayoutContent label="Playground">
@@ -107,18 +134,6 @@ const hljsScopeClass = recipeClassName(codeHljsScope().root);
 </style>
 
 <style>
-  .docs-top-nav__tools {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .docs-top-nav__tools-persist {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
   .docs-playground-layout {
     flex: 1 1 auto;
     min-height: 0;
