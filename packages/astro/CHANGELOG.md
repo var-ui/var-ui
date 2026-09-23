@@ -1,6 +1,12 @@
 # @var-ui/astro
 
-1.x and 2.x were unpublished; this package is on 0.x until a stable 1.0.
+## 0.2.0
+
+### Minor Changes
+
+- [#24](https://github.com/var-ui/var-ui/pull/24) [`2ce8c1e`](https://github.com/var-ui/var-ui/commit/2ce8c1efd31a661ca42e15edec9586d75f15e852) Thanks [@dbanksdesign](https://github.com/dbanksdesign)! - Internal TypeStyles cleanup
+
+  1.x and 2.x were unpublished; this package is on 0.x until a stable 1.0.
 
 ## 0.1.0
 

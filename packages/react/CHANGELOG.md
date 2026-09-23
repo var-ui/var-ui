@@ -1,5 +1,11 @@
 # @var-ui/react
 
+## 0.2.0
+
+### Minor Changes
+
+- [#24](https://github.com/var-ui/var-ui/pull/24) [`2ce8c1e`](https://github.com/var-ui/var-ui/commit/2ce8c1efd31a661ca42e15edec9586d75f15e852) Thanks [@dbanksdesign](https://github.com/dbanksdesign)! - Internal TypeStyles cleanup
+
 ## 0.1.1
 
 ### Patch Changes
