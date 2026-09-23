@@ -10,7 +10,7 @@ import {
 } from 'react';
 import { fileInput } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type FileInputProps = {
   /** Visible label rendered above the dropzone. */
@@ -223,14 +223,14 @@ export function FileInput({
   }
 
   return (
-    <div {...recipeProps(fi.root, className)}>
-      <label {...recipeProps(fi.label)} id={labelId} htmlFor={inputId}>
+    <div {...mergeProps(fi.root, className)}>
+      <label {...mergeProps(fi.label)} id={labelId} htmlFor={inputId}>
         {label}
       </label>
       <div
         role="button"
         tabIndex={isDisabled ? -1 : 0}
-        {...recipeProps(fi.dropzone)}
+        {...mergeProps(fi.dropzone)}
         data-drag-over={isDragOver || undefined}
         data-disabled={isDisabled || undefined}
         aria-disabled={isDisabled || undefined}
@@ -243,18 +243,18 @@ export function FileInput({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
       >
-        <span {...recipeProps(fi.icon)}>
+        <span {...mergeProps(fi.icon)}>
           <Icon name="arrowUp" />
         </span>
         {hasValue ? (
-          <span {...recipeProps(fi.fileNameText)}>{fileNameDisplay}</span>
+          <span {...mergeProps(fi.fileNameText)}>{fileNameDisplay}</span>
         ) : (
-          <span {...recipeProps(fi.placeholderText)}>{placeholderLabel}</span>
+          <span {...mergeProps(fi.placeholderText)}>{placeholderLabel}</span>
         )}
         {hasValue ? (
           <button
             type="button"
-            {...recipeProps(fi.clearButton)}
+            {...mergeProps(fi.clearButton)}
             aria-label={`Clear ${label}`}
             onClick={handleClear}
           >
@@ -267,7 +267,7 @@ export function FileInput({
           type="file"
           tabIndex={-1}
           aria-hidden="true"
-          {...recipeProps(fi.hiddenInput)}
+          {...mergeProps(fi.hiddenInput)}
           accept={accept}
           multiple={multiple}
           disabled={isDisabled}
@@ -275,12 +275,12 @@ export function FileInput({
         />
       </div>
       {description ? (
-        <p {...recipeProps(fi.description)} id={descriptionId}>
+        <p {...mergeProps(fi.description)} id={descriptionId}>
           {description}
         </p>
       ) : null}
       {resolvedError ? (
-        <p {...recipeProps(fi.error)} id={errorId} role="alert">
+        <p {...mergeProps(fi.error)} id={errorId} role="alert">
           {resolvedError}
         </p>
       ) : null}

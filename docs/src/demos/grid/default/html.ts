@@ -1,18 +1,18 @@
 import { card, grid } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 function renderCard(title: string, body: string): string {
   const c = card();
   return serializeHtmlTag(
     'div',
-    recipeProps(c.root),
-    `${serializeHtmlTag('h3', recipeProps(c.title), title)}${serializeHtmlTag('div', recipeProps(c.body), body)}`,
+    mergeProps(c.root),
+    `${serializeHtmlTag('h3', mergeProps(c.title), title)}${serializeHtmlTag('div', mergeProps(c.body), body)}`,
   );
 }
 
 export function render(): string {
-  const gridRp = recipeProps(grid({ columns: 'two', gap: 'md' }));
+  const gridRp = mergeProps(grid({ columns: 'two', gap: 'md' }));
   return serializeHtmlTag(
     'div',
     gridRp,

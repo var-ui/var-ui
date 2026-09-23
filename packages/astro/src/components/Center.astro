@@ -1,6 +1,6 @@
 ---
 import { center } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   inline?: boolean;
@@ -8,6 +8,6 @@ type Props = {
 };
 
 const { inline = false, className } = Astro.props;
-const rp = recipeProps(center({ inline: inline ? 'true' : 'false' }), className);
+const rp = mergeProps(center({ inline: inline ? 'true' : 'false' }), className);
 ---
 <div {...rp}><slot /></div>

@@ -1,6 +1,6 @@
 ---
 import { sideNav } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   label: string;
@@ -19,7 +19,7 @@ const {
 } = Astro.props;
 const s = sideNav();
 const sharedProps = {
-  ...recipeProps(s.item, className),
+  ...mergeProps(s.item, className),
   'data-selected': isSelected || undefined,
   'data-disabled': isDisabled || undefined,
   'aria-current': isSelected ? ('page' as const) : undefined,
@@ -30,13 +30,13 @@ const sharedProps = {
   href ? (
     <a href={href} {...sharedProps}>
       <slot name="icon" />
-      <span {...recipeProps(s.itemLabel)}>{label}</span>
+      <span {...mergeProps(s.itemLabel)}>{label}</span>
       {Astro.slots.has('end') ? <slot name="end" /> : null}
     </a>
   ) : (
     <button type="button" disabled={isDisabled} {...sharedProps}>
       <slot name="icon" />
-      <span {...recipeProps(s.itemLabel)}>{label}</span>
+      <span {...mergeProps(s.itemLabel)}>{label}</span>
       {Astro.slots.has('end') ? <slot name="end" /> : null}
     </button>
   )

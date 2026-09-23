@@ -1,5 +1,5 @@
 import { card, carousel } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const chevronLeft =
@@ -9,11 +9,11 @@ const chevronRight =
 
 function renderSlide(title: string, body: string): string {
   const c = card();
-  const titleEl = serializeHtmlTag('h3', recipeProps(c.title), title);
-  const bodyEl = serializeHtmlTag('div', recipeProps(c.body), body);
-  const cardEl = serializeHtmlTag('div', recipeProps(c.root), `${titleEl}${bodyEl}`);
+  const titleEl = serializeHtmlTag('h3', mergeProps(c.title), title);
+  const bodyEl = serializeHtmlTag('div', mergeProps(c.body), body);
+  const cardEl = serializeHtmlTag('div', mergeProps(c.root), `${titleEl}${bodyEl}`);
   const s = carousel();
-  return serializeHtmlTag('div', { ...recipeProps(s.item), 'data-carousel-item': true }, cardEl);
+  return serializeHtmlTag('div', { ...mergeProps(s.item), 'data-carousel-item': true }, cardEl);
 }
 
 export function render(): string {
@@ -26,7 +26,7 @@ export function render(): string {
   const viewport = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(s.viewport),
+      ...mergeProps(s.viewport),
       'data-carousel-viewport': true,
       tabindex: '0',
       style: 'grid-auto-columns: 220px',
@@ -35,18 +35,18 @@ export function render(): string {
   );
   const prev = serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(s.control), 'aria-label': 'Previous', disabled: true },
+    { type: 'button', ...mergeProps(s.control), 'aria-label': 'Previous', disabled: true },
     chevronLeft,
   );
   const next = serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(s.control), 'aria-label': 'Next', disabled: true },
+    { type: 'button', ...mergeProps(s.control), 'aria-label': 'Next', disabled: true },
     chevronRight,
   );
-  const controls = serializeHtmlTag('div', recipeProps(s.controls), `${prev}${next}`);
+  const controls = serializeHtmlTag('div', mergeProps(s.controls), `${prev}${next}`);
   return serializeHtmlTag(
     'section',
-    { ...recipeProps(s.root), role: 'region', 'aria-label': 'Featured themes' },
+    { ...mergeProps(s.root), role: 'region', 'aria-label': 'Featured themes' },
     `${viewport}${controls}`,
   );
 }

@@ -1,6 +1,6 @@
 ---
 import { select } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 const s = select();
 const options = [
@@ -9,9 +9,9 @@ const options = [
 ];
 ---
 
-<div {...recipeProps(s.root)}>
-  <label {...recipeProps(s.label)} for="fruit">Fruit</label>
-  <select {...recipeProps(s.trigger)} id="fruit">
+<div {...mergeProps(s.root)}>
+  <label {...mergeProps(s.label)} for="fruit">Fruit</label>
+  <select {...mergeProps(s.trigger)} id="fruit">
     <option value="" disabled selected>Select…</option>
     {options.map((option) => <option value={option.id}>{option.label}</option>)}
   </select>

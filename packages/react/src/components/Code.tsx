@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { inlineCode } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type CodeProps = {
   children: ReactNode;
@@ -9,5 +9,5 @@ export type CodeProps = {
 
 /** Inline code snippet styling. */
 export function Code({ children, className }: CodeProps): JSX.Element {
-  return <code {...recipeProps(inlineCode(), className)}>{children}</code>;
+  return <code {...mergeProps(inlineCode(), className)}>{children}</code>;
 }

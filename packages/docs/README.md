@@ -39,7 +39,17 @@ export default defineConfig({
 
 Guide-only sites do **not** need React. Install `@astrojs/react`, `@var-ui/react`, `react`, `react-dom`, `@var-ui/icons`, and `react-aria-components` only when using `DocsThemePicker`. `theme.presets` CSS extraction does not require React.
 
-`output: 'static'` is supported. Injected `/docs` routes prerender, including when Astro `base` is set. Static injected routes accept **exactly one** `routes` prefix in this release (default `/docs`). Sites with several prefixes should use `output: 'server'`, or `disableGuideRoutes` plus their own pages.
+`output: 'static'` is supported. Injected `/docs` routes prerender, including when Astro `base` is set. Static injected routes accept **exactly one** `routes` prefix in this release (default `/docs`). Sites with several prefixes should use `output: 'server'`, or `disableGuideRoutes` plus `DocsGuidePage` in their own pages:
+
+```astro
+---
+// src/pages/docs/[...slug].astro
+import DocsGuidePage from '@var-ui/docs/DocsGuidePage';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import * as mdxComponents from '../../lib/guide-mdx-components';
+---
+<DocsGuidePage layout={BaseLayout} mdxComponents={mdxComponents} />
+```
 
 `examples/astro-docs` dogfoods this setup in the monorepo and aliases workspace packages through Vite. Copy the snippet above for a published-npm consumer — not that example’s `vite.resolve.alias` block.
 

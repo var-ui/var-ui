@@ -2,7 +2,7 @@ import type { ChangeEvent, ClipboardEvent, JSX, KeyboardEvent } from 'react';
 import { useCallback, useId, useRef, useState } from 'react';
 import { Label } from 'react-aria-components';
 import { pinInput, type ControlSize } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 import type { FieldMeta } from './utils';
 
 export type PinInputType = 'numeric' | 'alphanumeric';
@@ -173,14 +173,14 @@ export function PinInput({
   const groupLabel = ariaLabel ?? label;
 
   return (
-    <div {...recipeProps(p.root, className)}>
+    <div {...mergeProps(p.root, className)}>
       {label ? (
-        <Label {...recipeProps(p.label)} id={labelId}>
+        <Label {...mergeProps(p.label)} id={labelId}>
           {label}
         </Label>
       ) : null}
       <div
-        {...recipeProps(p.group)}
+        {...mergeProps(p.group)}
         role="group"
         aria-labelledby={label ? labelId : undefined}
         aria-label={label ? undefined : groupLabel}
@@ -192,7 +192,7 @@ export function PinInput({
             ref={(element) => {
               inputRefs.current[index] = element;
             }}
-            {...recipeProps(p.cell)}
+            {...mergeProps(p.cell)}
             type="text"
             inputMode={type === 'numeric' ? 'numeric' : 'text'}
             pattern={type === 'numeric' ? '[0-9]*' : undefined}
@@ -215,8 +215,8 @@ export function PinInput({
           />
         ))}
       </div>
-      {description ? <p {...recipeProps(p.description)}>{description}</p> : null}
-      {errorMessage ? <p {...recipeProps(p.error)}>{errorMessage}</p> : null}
+      {description ? <p {...mergeProps(p.description)}>{description}</p> : null}
+      {errorMessage ? <p {...mergeProps(p.error)}>{errorMessage}</p> : null}
     </div>
   );
 }

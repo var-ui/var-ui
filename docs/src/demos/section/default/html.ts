@@ -1,10 +1,10 @@
 import { section, textBlock } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
   const s = section();
-  const title = serializeHtmlTag('h2', recipeProps(s.title), 'Example section');
-  const body = serializeHtmlTag('p', recipeProps(textBlock({})), 'Section content goes here.');
-  return serializeHtmlTag('section', recipeProps(s.root), `${title}${body}`);
+  const title = serializeHtmlTag('h2', mergeProps(s.title), 'Example section');
+  const body = serializeHtmlTag('p', mergeProps(textBlock({})), 'Section content goes here.');
+  return serializeHtmlTag('section', mergeProps(s.root), `${title}${body}`);
 }

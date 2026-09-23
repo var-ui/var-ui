@@ -2,7 +2,7 @@ import type { CSSProperties, JSX, ReactNode } from 'react';
 import { createContext, useContext } from 'react';
 import { table as tableStyles, designTokens as t } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 import type { SortDescriptor, SortDirection } from '../hooks/useTableSort';
 
 export type TableColumnAlign = 'start' | 'center' | 'end';
@@ -148,14 +148,14 @@ export function TableColumn({
   return (
     <th
       scope="col"
-      {...recipeProps(s.headerCell, className)}
+      {...mergeProps(s.headerCell, className)}
       data-align={align !== 'start' ? align : undefined}
       data-row-header={isRowHeader ? '' : undefined}
       aria-sort={allowsSorting ? sortDirection : undefined}
       style={style}
     >
       {label}
-      {resizeHandle != null ? <span {...recipeProps(s.resizeHandle)}>{resizeHandle}</span> : null}
+      {resizeHandle != null ? <span {...mergeProps(s.resizeHandle)}>{resizeHandle}</span> : null}
     </th>
   );
 }
@@ -174,7 +174,7 @@ export function TableCell({
     <Tag
       {...(isRowHeader ? { scope: 'row' } : {})}
       colSpan={colSpan}
-      {...recipeProps(s.cell, className)}
+      {...mergeProps(s.cell, className)}
       data-align={align !== 'start' ? align : undefined}
     >
       {children}
@@ -187,7 +187,7 @@ export function TableRow({ children, isSelected, className }: TableRowProps): JS
   const { styles: s } = useTableContext();
   return (
     <tr
-      {...recipeProps(s.row, className)}
+      {...mergeProps(s.row, className)}
       aria-selected={isSelected}
       data-selected={isSelected ? '' : undefined}
     >
@@ -199,25 +199,25 @@ export function TableRow({ children, isSelected, className }: TableRowProps): JS
 /** `<thead>` within a `Table`. */
 export function TableHeader({ children, className }: TableHeaderProps): JSX.Element {
   const { styles: s } = useTableContext();
-  return <thead {...recipeProps(s.header, className)}>{children}</thead>;
+  return <thead {...mergeProps(s.header, className)}>{children}</thead>;
 }
 
 /** `<tbody>` within a `Table`. */
 export function TableBody({ children, className }: TableBodyProps): JSX.Element {
   const { styles: s } = useTableContext();
-  return <tbody {...recipeProps(s.body, className)}>{children}</tbody>;
+  return <tbody {...mergeProps(s.body, className)}>{children}</tbody>;
 }
 
 /** `<tfoot>` within a `Table`. */
 export function TableFooter({ children, className }: TableFooterProps): JSX.Element {
   const { styles: s } = useTableContext();
-  return <tfoot {...recipeProps(s.footer, className)}>{children}</tfoot>;
+  return <tfoot {...mergeProps(s.footer, className)}>{children}</tfoot>;
 }
 
 /** `<caption>` within a `Table`. */
 export function TableCaption({ children, className }: TableCaptionProps): JSX.Element {
   const { styles: s } = useTableContext();
-  return <caption {...recipeProps(s.caption, className)}>{children}</caption>;
+  return <caption {...mergeProps(s.caption, className)}>{children}</caption>;
 }
 
 /**
@@ -313,7 +313,7 @@ export function Table<T extends Record<string, unknown> = Record<string, unknown
         <TableBody>
           {rows.length === 0 ? (
             <tr>
-              <td {...recipeProps(s.empty)} colSpan={dataColumns.length}>
+              <td {...mergeProps(s.empty)} colSpan={dataColumns.length}>
                 {emptyContent}
               </td>
             </tr>
@@ -337,8 +337,8 @@ export function Table<T extends Record<string, unknown> = Record<string, unknown
 
   return (
     <TableContext.Provider value={{ styles: s }}>
-      <div {...recipeProps(s.root, className)}>
-        <table {...recipeProps(s.table)}>
+      <div {...mergeProps(s.root, className)}>
+        <table {...mergeProps(s.table)}>
           {caption != null ? <TableCaption>{caption}</TableCaption> : null}
           {colgroup}
           {content}

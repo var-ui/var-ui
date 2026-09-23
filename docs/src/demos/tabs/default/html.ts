@@ -1,5 +1,5 @@
 import { tabs, textBlock } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const panels = [
@@ -21,16 +21,16 @@ export function render(): string {
           'aria-selected': panel.selected ? 'true' : 'false',
           tabindex: panel.selected ? '0' : '-1',
           ...(panel.selected ? { 'data-selected': true } : {}),
-          ...recipeProps(t.tab),
+          ...mergeProps(t.tab),
         },
         panel.label,
       ),
     )
     .join('');
-  const list = serializeHtmlTag('div', { role: 'tablist', ...recipeProps(t.list) }, tabButtons);
+  const list = serializeHtmlTag('div', { role: 'tablist', ...mergeProps(t.list) }, tabButtons);
   const tabPanels = panels
     .map((panel) => {
-      const body = serializeHtmlTag('p', recipeProps(textBlock({})), panel.content);
+      const body = serializeHtmlTag('p', mergeProps(textBlock({})), panel.content);
       return serializeHtmlTag(
         'div',
         {
@@ -38,7 +38,7 @@ export function render(): string {
           id: `panel-${panel.id}`,
           'aria-labelledby': `tab-${panel.id}`,
           ...(panel.selected ? {} : { hidden: true }),
-          ...recipeProps(t.panel),
+          ...mergeProps(t.panel),
         },
         body,
       );
@@ -46,7 +46,7 @@ export function render(): string {
     .join('');
   return serializeHtmlTag(
     'div',
-    { 'data-var-ui-tabs': true, ...recipeProps(t.root) },
+    { 'data-var-ui-tabs': true, ...mergeProps(t.root) },
     `${list}${tabPanels}`,
   );
 }

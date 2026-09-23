@@ -8,7 +8,6 @@ import {
   Select,
   Tabs,
   readStoredColorMode,
-  recipeClassName,
   type ColorMode,
 } from '@var-ui/react';
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
@@ -26,8 +25,8 @@ const STORAGE_KEY = 'theme-mode';
 function ControlGroup({ label, children }: { label: string; children: ReactNode }) {
   const s = playgroundSidebarStyles();
   return (
-    <div className={recipeClassName(s.controlGroup)}>
-      <span className={recipeClassName(s.controlLabel)}>{label}</span>
+    <div className={s.controlGroup.className}>
+      <span className={s.controlLabel.className}>{label}</span>
       {children}
     </div>
   );
@@ -76,7 +75,7 @@ export default function PlaygroundEditorSidebar() {
     >
       <IconProvider icons={defaultIcons}>
         <LayerProvider>
-          <div className={recipeClassName(s.root)} data-playground-editor-sidebar>
+          <div className={s.root.className} data-playground-editor-sidebar>
             <ControlGroup label="Theme preset">
               <Select
                 aria-label="Theme preset"
@@ -89,7 +88,7 @@ export default function PlaygroundEditorSidebar() {
             </ControlGroup>
 
             <Tabs
-              // className={recipeClassName(s.editorTabs)}
+              // className={(s.editorTabs).className}
               tabs={[
                 {
                   id: 'base',

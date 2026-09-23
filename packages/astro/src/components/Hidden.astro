@@ -1,6 +1,6 @@
 ---
 import { hiddenClassName, type HiddenMap } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   hide?: boolean | HiddenMap;
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const { hide, as = 'div', className } = Astro.props;
-const rp = recipeProps(hiddenClassName({ hide }), className);
+const rp = mergeProps(hiddenClassName({ hide }), className);
 const Tag = as;
 ---
 <Tag {...rp}><slot /></Tag>

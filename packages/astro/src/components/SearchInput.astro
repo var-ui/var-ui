@@ -6,7 +6,7 @@ import {
   type SearchInputVariantProps,
 } from '@var-ui/core';
 import Kbd from './Kbd.astro';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = SearchInputVariantProps & {
   /** Links this trigger to a `CommandPalette` root `id` when `variant="command"`. */
@@ -33,34 +33,34 @@ const {
 } = Astro.props;
 
 const s = searchInput({ variant, size });
-const iconRecipe = recipeProps(icon({ size: size === 'lg' ? 'lg' : size === 'sm' ? 'sm' : 'md' }));
+const iconRecipe = mergeProps(icon({ size: size === 'lg' ? 'lg' : size === 'sm' ? 'sm' : 'md' }));
 ---
 
 <div
-  {...recipeProps(s.root, className)}
+  {...mergeProps(s.root, className)}
   data-var-ui-search-input
   data-variant={variant}
   data-command-palette={commandPaletteId}
 >
-  <span {...recipeProps(s.icon)} aria-hidden="true">
+  <span {...mergeProps(s.icon)} aria-hidden="true">
     <span {...iconRecipe} set:html={defaultIconSvgs.search} />
   </span>
   {
     variant === 'command' ? (
       <button
         type="button"
-        {...recipeProps(s.trigger)}
+        {...mergeProps(s.trigger)}
         data-var-ui-search-input-trigger
         aria-label={ariaLabel}
         aria-haspopup="dialog"
         aria-controls={commandPaletteId ? `${commandPaletteId}-dialog` : undefined}
         aria-expanded="false"
       >
-        <span {...recipeProps(s.triggerLabel)}>{placeholder}</span>
+        <span {...mergeProps(s.triggerLabel)}>{placeholder}</span>
       </button>
     ) : (
       <input
-        {...recipeProps(s.input)}
+        {...mergeProps(s.input)}
         type="search"
         name={name}
         value={value}
@@ -72,7 +72,7 @@ const iconRecipe = recipeProps(icon({ size: size === 'lg' ? 'lg' : size === 'sm'
     )
   }
   {variant === 'command' ? (
-    <span {...recipeProps(s.shortcut)}>
+    <span {...mergeProps(s.shortcut)}>
       <Kbd aria-hidden="true">{shortcut}</Kbd>
     </span>
   ) : null}

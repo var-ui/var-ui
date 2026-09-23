@@ -1,6 +1,6 @@
 ---
 import { textBlock } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 /** Stable demo values — relative label matches the React default demo intent. */
 const datetime = '2026-07-19T21:35:00.000Z';
@@ -11,7 +11,7 @@ const title = 'Jul 19, 2026, 2:35 PM';
 <time
   datetime={datetime}
   title={title}
-  {...recipeProps(textBlock({ size: 'sm', tone: 'secondary' }))}
+  {...mergeProps(textBlock({ size: 'sm', tone: 'secondary' }))}
 >
   {label}
 </time>

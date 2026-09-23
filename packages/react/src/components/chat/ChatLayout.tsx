@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { Icon } from '../../icons';
 import { useChatStreamScroll } from '../../chat/useChatStreamScroll';
 import { useChatNewMessages } from '../../chat/useChatNewMessages';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 export type ChatLayoutProps = {
   /** Message content — typically `ChatMessageList`. */
@@ -84,11 +84,11 @@ export function ChatLayout({
   ) : null;
 
   return (
-    <div {...recipeProps(l.root, className)}>
-      <div {...recipeProps(l.messageArea)} ref={setMessageAreaRef}>
+    <div {...mergeProps(l.root, className)}>
+      <div {...mergeProps(l.messageArea)} ref={setMessageAreaRef}>
         {hasVisibleContent(children) ? children : (emptyState ?? null)}
       </div>
-      <div {...recipeProps(l.dock)}>
+      <div {...mergeProps(l.dock)}>
         {scrollButton === undefined ? defaultButton : scrollButton}
         {composer}
       </div>

@@ -35,7 +35,7 @@ import {
   type OverlayOpenChangeHandler,
   type UseOverlayPresenceResult,
 } from '../overlays';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type PopoverRootProps = {
   children: ReactNode;
@@ -268,7 +268,7 @@ function PopoverPopup({
 
   return (
     <AriaPopover
-      {...recipeProps(p.root, className)}
+      {...mergeProps(p.root, className)}
       {...ctx.presence.attrs}
       ref={(node: HTMLDivElement | null) => {
         ctx.popupRef.current = node;
@@ -288,7 +288,7 @@ function PopoverPopup({
 function PopoverTitle({ children, className }: PopoverTitleProps): JSX.Element {
   const p = popoverSlots();
   return (
-    <Heading slot="title" {...recipeProps(p.title, className)}>
+    <Heading slot="title" {...mergeProps(p.title, className)}>
       {children}
     </Heading>
   );
@@ -296,7 +296,7 @@ function PopoverTitle({ children, className }: PopoverTitleProps): JSX.Element {
 
 function PopoverContent({ children, className }: PopoverContentProps): JSX.Element {
   const p = popoverSlots();
-  return <div {...recipeProps(p.content, className)}>{children}</div>;
+  return <div {...mergeProps(p.content, className)}>{children}</div>;
 }
 
 function PopoverArrow({ className }: PopoverArrowProps): JSX.Element {
@@ -304,7 +304,7 @@ function PopoverArrow({ className }: PopoverArrowProps): JSX.Element {
   return (
     <OverlayArrow>
       {({ placement }) => (
-        <div {...recipeProps(p.arrow, className)} data-placement={placement ?? undefined} />
+        <div {...mergeProps(p.arrow, className)} data-placement={placement ?? undefined} />
       )}
     </OverlayArrow>
   );

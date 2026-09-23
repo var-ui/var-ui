@@ -1,6 +1,6 @@
 ---
 import { divider } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   orientation?: 'horizontal' | 'vertical';
@@ -8,7 +8,7 @@ type Props = {
 };
 
 const { orientation = 'horizontal', className } = Astro.props;
-const rp = recipeProps(divider({ orientation }), className);
+const rp = mergeProps(divider({ orientation }), className);
 ---
 <hr
   {...rp}

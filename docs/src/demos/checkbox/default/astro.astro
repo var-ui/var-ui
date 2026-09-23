@@ -1,14 +1,14 @@
 ---
 import { checkbox } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 const cb = checkbox();
 ---
 
-<label {...recipeProps(cb.root)}>
+<label {...mergeProps(cb.root)}>
   <input type="checkbox" class="sr-only" />
-  <span {...recipeProps(cb.box)}></span>
-  <span {...recipeProps(cb.label)}>Accept terms</span>
+  <span {...mergeProps(cb.box)}></span>
+  <span {...mergeProps(cb.label)}>Accept terms</span>
 </label>
 
 <style>

@@ -1,7 +1,7 @@
 import type { CSSProperties, JSX, ReactElement, ReactNode, RefObject } from 'react';
 import { Children, createContext, useContext, useMemo } from 'react';
 import { overflowList as overflowListStyles } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 import { useOverflow } from '../hooks/useOverflow';
 
 type OverflowGapToken = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -65,7 +65,7 @@ const measureRowStyle: CSSProperties = {
 /** Row within an `OverflowList` — applies the recipe's `item` slot styling. */
 export function OverflowListItem({ children, className }: OverflowListItemProps): JSX.Element {
   const { styles: s } = useOverflowListContext();
-  return <span {...recipeProps(s.item, className)}>{children}</span>;
+  return <span {...mergeProps(s.item, className)}>{children}</span>;
 }
 
 /**
@@ -133,18 +133,18 @@ export function OverflowList<T = unknown>({
   return (
     <OverflowListContext.Provider value={{ styles: s }}>
       <div
-        {...recipeProps(s.root, className)}
+        {...mergeProps(s.root, className)}
         style={rootStyle}
         ref={containerRef as RefObject<HTMLDivElement>}
       >
         {visibleItems.map((entry, index) => renderEntry(entry, index))}
         {hiddenItems.length > 0 ? (
-          <span {...recipeProps(s.overflow)}>{renderOverflow(hiddenForCallback)}</span>
+          <span {...mergeProps(s.overflow)}>{renderOverflow(hiddenForCallback)}</span>
         ) : null}
       </div>
       <div aria-hidden="true" style={measureRowStyle} ref={measureRef as RefObject<HTMLDivElement>}>
         {sourceItems.map((entry, index) => renderEntry(entry, index))}
-        <span {...recipeProps(s.overflow)}>{renderOverflow(worstCaseHidden)}</span>
+        <span {...mergeProps(s.overflow)}>{renderOverflow(worstCaseHidden)}</span>
       </div>
     </OverflowListContext.Provider>
   );

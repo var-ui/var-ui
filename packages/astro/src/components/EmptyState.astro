@@ -1,6 +1,6 @@
 ---
 import { emptyState } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   title: string;
@@ -13,19 +13,19 @@ const e = emptyState();
 const hasIcon = Astro.slots.has('icon');
 const hasAction = Astro.slots.has('action');
 ---
-<div {...recipeProps(e.root, className)}>
+<div {...mergeProps(e.root, className)}>
   {
     hasIcon ? (
-      <div {...recipeProps(e.icon)} data-empty-state-icon aria-hidden="true">
+      <div {...mergeProps(e.icon)} data-empty-state-icon aria-hidden="true">
         <slot name="icon" />
       </div>
     ) : null
   }
-  <h3 {...recipeProps(e.title)}>{title}</h3>
-  {description ? <p {...recipeProps(e.description)}>{description}</p> : null}
+  <h3 {...mergeProps(e.title)}>{title}</h3>
+  {description ? <p {...mergeProps(e.description)}>{description}</p> : null}
   {
     hasAction ? (
-      <div {...recipeProps(e.action)}>
+      <div {...mergeProps(e.action)}>
         <slot name="action" />
       </div>
     ) : null

@@ -1,6 +1,6 @@
 'use client';
 
-import { TextField, recipeClassName } from '@var-ui/react';
+import { TextField } from '@var-ui/react';
 import { themePlaygroundStyles } from '@/styles/themePlayground';
 import type { PlaygroundColorField } from './themePlaygroundTokens';
 
@@ -21,9 +21,9 @@ export function ColorTokenField({ field, value, onChange }: ColorTokenFieldProps
   const s = themePlaygroundStyles();
 
   return (
-    <div className={recipeClassName(s.colorRow)}>
+    <div className={s.colorRow.className}>
       <span
-        className={recipeClassName(s.colorSwatch)}
+        className={s.colorSwatch.className}
         style={{ backgroundColor: swatchColor(value, field.defaultValue) }}
         aria-hidden
       />

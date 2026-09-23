@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, JSX } from 'react';
 import { colorSwatch, type ControlSize } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type ColorSwatchProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> & {
   /** CSS color shown in the swatch. */
@@ -27,7 +27,7 @@ export function ColorSwatch({
     <button
       type="button"
       {...props}
-      {...recipeProps(cs.root, className)}
+      {...mergeProps(cs.root, className)}
       data-selected={selected || undefined}
       style={{ ...style, backgroundColor: color }}
       aria-pressed={selected}

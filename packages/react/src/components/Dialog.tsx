@@ -35,7 +35,7 @@ import {
   type OverlayOpenChangeHandler,
   type UseOverlayPresenceResult,
 } from '../overlays';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type DialogRootProps = {
   children: ReactNode;
@@ -240,7 +240,7 @@ function DialogBackdrop({ children, className, isDismissable }: DialogBackdropPr
   const d = dialog();
   return (
     <ModalOverlay
-      {...recipeProps(d.overlay, className)}
+      {...mergeProps(d.overlay, className)}
       {...ctx.presence.attrs}
       ref={ctx.backdropRef as Ref<HTMLDivElement>}
       style={layerStyle}
@@ -264,14 +264,14 @@ function DialogPopup({ children, className, role = 'dialog' }: DialogPopupProps)
   const d = dialog();
   return (
     <Modal
-      {...recipeProps(d.modal, className)}
+      {...mergeProps(d.modal, className)}
       {...ctx.presence.attrs}
       ref={ctx.popupRef as Ref<HTMLDivElement>}
     >
       <AriaDialog role={role}>
         {({ close }) => (
           <OverlayCloseContext.Provider value={close}>
-            <div {...recipeProps(d.content)}>{children}</div>
+            <div {...mergeProps(d.content)}>{children}</div>
           </OverlayCloseContext.Provider>
         )}
       </AriaDialog>
@@ -281,13 +281,13 @@ function DialogPopup({ children, className, role = 'dialog' }: DialogPopupProps)
 
 function DialogHeader({ children, className }: DialogHeaderProps): JSX.Element {
   const d = dialog();
-  return <div {...recipeProps(d.header, className)}>{children}</div>;
+  return <div {...mergeProps(d.header, className)}>{children}</div>;
 }
 
 function DialogTitle({ children, className }: DialogTitleProps): JSX.Element {
   const d = dialog();
   return (
-    <Heading slot="title" {...recipeProps(d.heading, className)}>
+    <Heading slot="title" {...mergeProps(d.heading, className)}>
       {children}
     </Heading>
   );
@@ -295,12 +295,12 @@ function DialogTitle({ children, className }: DialogTitleProps): JSX.Element {
 
 function DialogDescription({ children, className }: DialogDescriptionProps): JSX.Element {
   const d = dialog();
-  return <p {...recipeProps(d.description, className)}>{children}</p>;
+  return <p {...mergeProps(d.description, className)}>{children}</p>;
 }
 
 function DialogActions({ children, className }: DialogActionsProps): JSX.Element {
   const d = dialog();
-  return <div {...recipeProps(d.actions, className)}>{children}</div>;
+  return <div {...mergeProps(d.actions, className)}>{children}</div>;
 }
 
 function DialogClose({
@@ -321,7 +321,7 @@ function DialogClose({
   }
 
   return (
-    <AriaButton {...recipeProps(d.closeButton, className)} aria-label={ariaLabel} onPress={close}>
+    <AriaButton {...mergeProps(d.closeButton, className)} aria-label={ariaLabel} onPress={close}>
       <Icon name="close" size="sm" />
     </AriaButton>
   );

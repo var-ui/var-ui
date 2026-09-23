@@ -1,6 +1,6 @@
 import type { JSX, KeyboardEvent } from 'react';
 import { useRef } from 'react';
-import { colorPicker, DEFAULT_COLOR_SWATCHES, hueToPureHex } from '@var-ui/core';
+import { colorPicker, hueToPureHex } from '@var-ui/core';
 import { hsvToHex, normalizeHex } from '@var-ui/core';
 import {
   alphaFromPointer,
@@ -9,7 +9,25 @@ import {
   saturationValueFromPointer,
   useColorValue,
 } from '../color';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
+
+/** Mantine-compatible preset swatches shown below the sliders by default. */
+const DEFAULT_COLOR_SWATCHES = [
+  '#25262b',
+  '#868e96',
+  '#fa5252',
+  '#e64980',
+  '#be4bdb',
+  '#7950f2',
+  '#4c6ef5',
+  '#228be6',
+  '#15aabf',
+  '#12b886',
+  '#40c057',
+  '#82c91e',
+  '#fab005',
+  '#fd7e14',
+] as const;
 
 export type ColorPickerProps = {
   /** Controlled hex color (e.g. `#228be6` or `#228be680` with alpha). */
@@ -17,7 +35,7 @@ export type ColorPickerProps = {
   /** Uncontrolled initial color. @default #228be6 */
   defaultValue?: string;
   onChange?: (value: string) => void;
-  /** Preset swatches below the sliders. @default DEFAULT_COLOR_SWATCHES */
+  /** Preset swatches below the sliders. @default Mantine-compatible preset palette */
   swatches?: string[];
   /** Swatches per row. @default 7 */
   swatchesPerRow?: 7 | 10;
@@ -91,10 +109,10 @@ export function ColorPicker({
   };
 
   return (
-    <div {...recipeProps(cp.root, className)} data-var-ui-color-picker>
+    <div {...mergeProps(cp.root, className)} data-var-ui-color-picker>
       <div
         ref={saturationRef}
-        {...recipeProps(cp.saturation)}
+        {...mergeProps(cp.saturation)}
         role="application"
         aria-label="Saturation and brightness"
         tabIndex={0}
@@ -107,7 +125,7 @@ export function ColorPicker({
         onKeyDown={onSaturationKeyDown}
       >
         <div
-          {...recipeProps(cp.saturationThumb)}
+          {...mergeProps(cp.saturationThumb)}
           style={{
             left: `${hsv.s}%`,
             top: `${100 - hsv.v}%`,
@@ -118,7 +136,7 @@ export function ColorPicker({
 
       <div
         ref={hueRef}
-        {...recipeProps(cp.hue)}
+        {...mergeProps(cp.hue)}
         role="slider"
         aria-label="Hue"
         aria-valuemin={0}
@@ -127,13 +145,13 @@ export function ColorPicker({
         tabIndex={0}
         onPointerDown={bindPointerDrag(hueRef, updateHue)}
       >
-        <div {...recipeProps(cp.hueThumb)} style={{ left: `${(hsv.h / 360) * 100}%` }} />
+        <div {...mergeProps(cp.hueThumb)} style={{ left: `${(hsv.h / 360) * 100}%` }} />
       </div>
 
       {withAlpha ? (
         <div
           ref={alphaRef}
-          {...recipeProps(cp.alpha)}
+          {...mergeProps(cp.alpha)}
           role="slider"
           aria-label="Alpha"
           aria-valuemin={0}
@@ -143,17 +161,17 @@ export function ColorPicker({
           onPointerDown={bindPointerDrag(alphaRef, updateAlpha)}
         >
           <div
-            {...recipeProps(cp.alphaGradient)}
+            {...mergeProps(cp.alphaGradient)}
             style={{
               backgroundImage: `linear-gradient(to right, transparent, ${opaqueHex})`,
             }}
           />
-          <div {...recipeProps(cp.alphaThumb)} style={{ left: `${(hsv.a ?? 1) * 100}%` }} />
+          <div {...mergeProps(cp.alphaThumb)} style={{ left: `${(hsv.a ?? 1) * 100}%` }} />
         </div>
       ) : null}
 
       {swatches.length > 0 ? (
-        <div {...recipeProps(cp.swatches)} role="listbox" aria-label="Color swatches">
+        <div {...mergeProps(cp.swatches)} role="listbox" aria-label="Color swatches">
           {swatches.map((swatch) => {
             const selected =
               normalizeHex(swatch).toLowerCase() === normalizeHex(currentHex).toLowerCase();
@@ -163,7 +181,7 @@ export function ColorPicker({
                 type="button"
                 role="option"
                 aria-selected={selected}
-                {...recipeProps(cp.swatch)}
+                {...mergeProps(cp.swatch)}
                 data-selected={selected || undefined}
                 style={{ backgroundColor: swatch }}
                 aria-label={swatch}

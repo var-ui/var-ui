@@ -8,7 +8,7 @@ import {
   chatMessageList,
   resolveButtonProps,
 } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const arrowUpIcon =
@@ -25,25 +25,25 @@ function messageRow(
   const a = avatar({ size: 'sm' });
   const initials = serializeHtmlTag(
     'span',
-    { ...recipeProps(a.initials), role: 'img', 'aria-label': name },
+    { ...mergeProps(a.initials), role: 'img', 'aria-label': name },
     initial,
   );
   const avatarEl = serializeHtmlTag(
     'div',
-    recipeProps(m.avatar),
-    serializeHtmlTag('span', recipeProps(a.root), initials),
+    mergeProps(m.avatar),
+    serializeHtmlTag('span', mergeProps(a.root), initials),
   );
   const header = serializeHtmlTag(
     'div',
-    recipeProps(m.header),
-    serializeHtmlTag('span', recipeProps(m.name), name),
+    mergeProps(m.header),
+    serializeHtmlTag('span', mergeProps(m.name), name),
   );
   const content = serializeHtmlTag(
     'div',
-    recipeProps(m.content),
-    `${header}${serializeHtmlTag('div', recipeProps(bubble.root), text)}`,
+    mergeProps(m.content),
+    `${header}${serializeHtmlTag('div', mergeProps(bubble.root), text)}`,
   );
-  return serializeHtmlTag('div', recipeProps(m.root), `${avatarEl}${content}`);
+  return serializeHtmlTag('div', mergeProps(m.root), `${avatarEl}${content}`);
 }
 
 export function render(): string {
@@ -53,20 +53,20 @@ export function render(): string {
 
   const listInner = serializeHtmlTag(
     'div',
-    recipeProps(list.inner),
+    mergeProps(list.inner),
     messageRow('assistant', 'Assistant', 'Hello! How can I help?', 'A'),
   );
   const listRoot = serializeHtmlTag(
     'div',
-    { ...recipeProps(list.root), role: 'log', 'aria-live': 'polite' },
+    { ...mergeProps(list.root), role: 'log', 'aria-live': 'polite' },
     listInner,
   );
-  const messageArea = serializeHtmlTag('div', recipeProps(l.messageArea), listRoot);
+  const messageArea = serializeHtmlTag('div', mergeProps(l.messageArea), listRoot);
 
   const input = serializeHtmlTag(
     'textarea',
     {
-      ...recipeProps(c.input),
+      ...mergeProps(c.input),
       rows: '1',
       placeholder: 'Type a message…',
       'aria-label': 'Message',
@@ -74,20 +74,20 @@ export function render(): string {
     },
     '',
   );
-  const inputRow = serializeHtmlTag('div', recipeProps(c.inputRow), input);
+  const inputRow = serializeHtmlTag('div', mergeProps(c.inputRow), input);
   const send = serializeHtmlTag(
     'button',
     {
       type: 'button',
-      ...recipeProps(button(resolveButtonProps({ intent: 'primary' }))),
+      ...mergeProps(button(resolveButtonProps({ intent: 'primary' }))),
       'aria-label': 'Send message',
       disabled: true,
     },
     arrowUpIcon,
   );
-  const actions = serializeHtmlTag('div', recipeProps(c.actions), send);
-  const composer = serializeHtmlTag('div', recipeProps(c.root), `${inputRow}${actions}`);
-  const dock = serializeHtmlTag('div', recipeProps(l.dock), composer);
-  const root = serializeHtmlTag('div', recipeProps(l.root), `${messageArea}${dock}`);
+  const actions = serializeHtmlTag('div', mergeProps(c.actions), send);
+  const composer = serializeHtmlTag('div', mergeProps(c.root), `${inputRow}${actions}`);
+  const dock = serializeHtmlTag('div', mergeProps(l.dock), composer);
+  const root = serializeHtmlTag('div', mergeProps(l.root), `${messageArea}${dock}`);
   return `<div style="height: 280px">${root}</div>`;
 }

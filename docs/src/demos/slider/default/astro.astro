@@ -1,22 +1,22 @@
 ---
 import { slider } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 const s = slider();
 const value = 40;
 ---
 
-<div {...recipeProps(s.root)} role="group" aria-label="Volume">
-  <label {...recipeProps(s.label)}>
+<div {...mergeProps(s.root)} role="group" aria-label="Volume">
+  <label {...mergeProps(s.label)}>
     <span>Volume</span>
-    <span {...recipeProps(s.output)}>{value}</span>
+    <span {...mergeProps(s.output)}>{value}</span>
   </label>
-  <div {...recipeProps(s.control)}>
-    <div {...recipeProps(s.track)}>
-      <div {...recipeProps(s.fill)} style={`width: ${value}%`}></div>
+  <div {...mergeProps(s.control)}>
+    <div {...mergeProps(s.track)}>
+      <div {...mergeProps(s.fill)} style={`width: ${value}%`}></div>
     </div>
     <div
-      {...recipeProps(s.thumb)}
+      {...mergeProps(s.thumb)}
       role="slider"
       aria-valuemin="0"
       aria-valuemax="100"

@@ -1,14 +1,14 @@
 import { button, resolveButtonProps, stack } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
-  const stackRp = recipeProps(
+  const stackRp = mergeProps(
     stack({ direction: 'row', gap: 'sm', align: 'center', justify: 'start', wrap: 'wrap' }),
   );
   const disabled = serializeHtmlTag(
     'button',
-    { type: 'button', disabled: true, ...recipeProps(button({})) },
+    { type: 'button', disabled: true, ...mergeProps(button({})) },
     'Disabled',
   );
   const disabledPrimary = serializeHtmlTag(
@@ -16,7 +16,7 @@ export function render(): string {
     {
       type: 'button',
       disabled: true,
-      ...recipeProps(button(resolveButtonProps({ intent: 'primary' }))),
+      ...mergeProps(button(resolveButtonProps({ intent: 'primary' }))),
     },
     'Disabled primary',
   );

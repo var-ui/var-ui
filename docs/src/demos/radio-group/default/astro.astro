@@ -1,6 +1,6 @@
 ---
 import { radio } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 const r = radio();
 const options = [
@@ -9,19 +9,19 @@ const options = [
 ];
 ---
 
-<div {...recipeProps(r.group)} role="radiogroup" aria-labelledby="plan-label">
-  <span {...recipeProps(r.groupLabel)} id="plan-label">Plan</span>
+<div {...mergeProps(r.group)} role="radiogroup" aria-labelledby="plan-label">
+  <span {...mergeProps(r.groupLabel)} id="plan-label">Plan</span>
   {
     options.map((option) => (
-      <label {...recipeProps(r.item)}>
+      <label {...mergeProps(r.item)}>
         <input
           type="radio"
           name="plan"
           value={option.value}
           style="position:absolute;width:1px;height:1px;opacity:0"
         />
-        <span {...recipeProps(r.control)} />
-        <span {...recipeProps(r.label)}>{option.label}</span>
+        <span {...mergeProps(r.control)} />
+        <span {...mergeProps(r.label)}>{option.label}</span>
       </label>
     ))
   }

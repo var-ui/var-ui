@@ -1,7 +1,7 @@
 ---
 import { Breadcrumbs, SideNav, SideNavHeading, SideNavItem, SideNavSection, Text } from '@var-ui/astro';
 import { icon } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 const chevron = icon({ size: 'sm' });
 ---
@@ -22,7 +22,7 @@ const chevron = icon({ size: 'sm' });
     ]}
   />
   <div style="display: flex; gap: 0.5rem; align-items: center;">
-    <span {...recipeProps(chevron)} data-mirror>
+    <span {...mergeProps(chevron)} data-mirror>
       <svg
         viewBox="0 0 24 24"
         width="16"
@@ -38,7 +38,7 @@ const chevron = icon({ size: 'sm' });
       </svg>
     </span>
     <Text>mirrored chevrons</Text>
-    <span {...recipeProps(chevron)} data-mirror>
+    <span {...mergeProps(chevron)} data-mirror>
       <svg
         viewBox="0 0 24 24"
         width="16"

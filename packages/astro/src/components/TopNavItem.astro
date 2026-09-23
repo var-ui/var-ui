@@ -1,6 +1,6 @@
 ---
 import { topNav } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   label: string;
@@ -21,7 +21,7 @@ const {
 } = Astro.props;
 const s = topNav();
 const sharedProps = {
-  ...recipeProps(s.item, className),
+  ...mergeProps(s.item, className),
   'data-selected': isSelected || undefined,
   'data-disabled': isDisabled || undefined,
   'aria-current': isSelected ? ('page' as const) : undefined,

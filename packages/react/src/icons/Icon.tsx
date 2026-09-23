@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { icon, type IconName } from '@var-ui/core';
-import { recipeProps } from '../components/utils';
+import { mergeProps } from '../components/utils';
 import { emptyFallback } from './emptyFallback';
 import { useIcons } from './IconProvider';
 
@@ -36,7 +36,7 @@ export function Icon({
   const glyph = children ?? (name ? icons[name] : undefined) ?? emptyFallback;
   return (
     <span
-      {...recipeProps(icon({ size }), className)}
+      {...mergeProps(icon({ size }), className)}
       data-mirror={dataMirror === false || dataMirror == null ? undefined : ''}
       aria-hidden={ariaLabel ? undefined : true}
       aria-label={ariaLabel}

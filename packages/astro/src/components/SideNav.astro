@@ -3,7 +3,7 @@ import { sideNav } from '@var-ui/core';
 import SideNavCollapseButton from './SideNavCollapseButton.astro';
 import ResizeHandle from './ResizeHandle.astro';
 import ScrollArea from './ScrollArea.astro';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type SideNavCollapsibleConfig = {
   defaultIsCollapsed?: boolean;
@@ -52,25 +52,25 @@ const hasFooterZone = hasFooter || hasFooterIcons || hasCollapseButton;
   data-resizable={resizableEnabled || undefined}
   data-collapsible-config={collapsibleEnabled ? JSON.stringify(collapsibleConfig) : undefined}
   data-resizable-config={resizableEnabled ? JSON.stringify(resizableConfig) : undefined}
-  {...recipeProps(s.root, className)}
+  {...mergeProps(s.root, className)}
 >
   {
     (hasHeader || hasTopContent) && (
-      <div {...recipeProps(s.stickyTop)}>
-        {hasHeader && <div {...recipeProps(s.heading)}><slot name="header" /></div>}
-        {hasTopContent && <div {...recipeProps(s.topContent)}><slot name="topContent" /></div>}
+      <div {...mergeProps(s.stickyTop)}>
+        {hasHeader && <div {...mergeProps(s.heading)}><slot name="header" /></div>}
+        {hasTopContent && <div {...mergeProps(s.topContent)}><slot name="topContent" /></div>}
       </div>
     )
   }
-  <ScrollArea fade="vertical" className={recipeProps(s.scrollArea).className}>
-    <div {...recipeProps(s.scrollable)}>
+  <ScrollArea fade="vertical" className={mergeProps(s.scrollArea).className}>
+    <div {...mergeProps(s.scrollable)}>
       <slot />
     </div>
   </ScrollArea>
   {
     hasFooterZone && (
-      <div {...recipeProps(s.footer)}>
-        {hasFooterIcons && <div {...recipeProps(s.footerIcons)}><slot name="footerIcons" /></div>}
+      <div {...mergeProps(s.footer)}>
+        {hasFooterIcons && <div {...mergeProps(s.footerIcons)}><slot name="footerIcons" /></div>}
         {hasFooter && <slot name="footer" />}
         {
           hasCollapseButton ? (

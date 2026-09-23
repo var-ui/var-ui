@@ -1,5 +1,5 @@
 import { topNav } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
@@ -8,7 +8,7 @@ export function render(): string {
     serializeHtmlTag(
       'a',
       {
-        ...recipeProps(s.item),
+        ...mergeProps(s.item),
         href,
         ...(selected ? { 'data-selected': true, 'aria-current': 'page' } : {}),
       },
@@ -16,10 +16,10 @@ export function render(): string {
     );
   return serializeHtmlTag(
     'nav',
-    { ...recipeProps(s.root), 'aria-label': 'Top navigation' },
+    { ...mergeProps(s.root), 'aria-label': 'Top navigation' },
     serializeHtmlTag(
       'div',
-      recipeProps(s.start),
+      mergeProps(s.start),
       item('Home', '/', true) + item('Docs', '/docs') + item('Blog', '/blog'),
     ),
   );

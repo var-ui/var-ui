@@ -2,7 +2,7 @@
 
 import type { ButtonTone, ToneAppearance } from '@var-ui/core';
 import { defaultIcons } from '@var-ui/icons';
-import { Button, IconProvider, Switch, recipeClassName } from '@var-ui/react';
+import { Button, IconProvider, Switch } from '@var-ui/react';
 import { useMemo, useState } from 'react';
 import type { DocsFramework } from '@/lib/framework';
 import { configuratorStyles } from '@/styles/configurator';
@@ -28,8 +28,8 @@ const DEFAULT_STATE: ButtonConfiguratorState = {
 function ControlGroup({ label, children }: { label: string; children: React.ReactNode }) {
   const c = configuratorStyles();
   return (
-    <div className={recipeClassName(c.controlGroup)}>
-      <span className={recipeClassName(c.controlLabel)}>{label}</span>
+    <div className={c.controlGroup.className}>
+      <span className={c.controlLabel.className}>{label}</span>
       {children}
     </div>
   );

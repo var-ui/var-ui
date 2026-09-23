@@ -2,7 +2,7 @@ import { useState, type JSX, type KeyboardEvent, type ReactNode } from 'react';
 import { chatToolCalls } from '@var-ui/core';
 import { Icon } from '../../icons';
 import { Spinner } from '../Spinner';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 export type ChatToolCallStatus = 'pending' | 'running' | 'complete' | 'error';
 
@@ -57,18 +57,18 @@ function ToolCallRow({ call }: { call: ChatToolCallItem }) {
         aria-expanded={hasDetail ? isOpen : undefined}
         onClick={hasDetail ? () => setIsOpen((prev) => !prev) : undefined}
         onKeyDown={hasDetail ? handleKeyDown : undefined}
-        {...recipeProps(t.header)}
+        {...mergeProps(t.header)}
       >
-        <span {...recipeProps(t.statusIcon)}>
+        <span {...mergeProps(t.statusIcon)}>
           <StatusIcon status={status} />
         </span>
-        <span {...recipeProps(t.name)}>{call.name}</span>
-        {call.target ? <span {...recipeProps(t.target)}>{call.target}</span> : null}
+        <span {...mergeProps(t.name)}>{call.name}</span>
+        {call.target ? <span {...mergeProps(t.target)}>{call.target}</span> : null}
         {call.duration && status === 'complete' ? (
-          <span {...recipeProps(t.duration)}>{call.duration}</span>
+          <span {...mergeProps(t.duration)}>{call.duration}</span>
         ) : null}
       </div>
-      {hasDetail && isOpen ? <div {...recipeProps(t.detail)}>{call.resultDetail}</div> : null}
+      {hasDetail && isOpen ? <div {...mergeProps(t.detail)}>{call.resultDetail}</div> : null}
     </div>
   );
 }
@@ -92,7 +92,7 @@ export function ChatToolCalls({ calls, className }: ChatToolCallsProps): JSX.Ele
 
   if (calls.length === 1) {
     return (
-      <div {...recipeProps(classes.root, className)}>
+      <div {...mergeProps(classes.root, className)}>
         <ToolCallRow call={calls[0]} />
       </div>
     );
@@ -101,25 +101,25 @@ export function ChatToolCalls({ calls, className }: ChatToolCallsProps): JSX.Ele
   const latest = calls[calls.length - 1];
 
   return (
-    <div {...recipeProps(classes.root, className)}>
+    <div {...mergeProps(classes.root, className)}>
       <button
         type="button"
         aria-expanded={isExpanded}
         onClick={() => setIsExpanded((prev) => !prev)}
-        {...recipeProps(classes.header)}
+        {...mergeProps(classes.header)}
       >
-        <span {...recipeProps(classes.statusIcon)}>
+        <span {...mergeProps(classes.statusIcon)}>
           <Icon name="wrench" size="sm" />
         </span>
-        <span {...recipeProps(classes.name)}>
+        <span {...mergeProps(classes.name)}>
           {isExpanded ? `${calls.length} tool calls` : latest.name}
         </span>
-        <span {...recipeProps(classes.chevron)}>
+        <span {...mergeProps(classes.chevron)}>
           <Icon name="chevronDown" size="sm" />
         </span>
       </button>
       {isExpanded ? (
-        <div {...recipeProps(classes.list)}>
+        <div {...mergeProps(classes.list)}>
           {calls.map((call, index) => (
             <ToolCallRow key={`${call.name}-${index}`} call={call} />
           ))}

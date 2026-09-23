@@ -1,6 +1,6 @@
 ---
 import { card } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   title?: string;
@@ -10,7 +10,7 @@ type Props = {
 const { title, className } = Astro.props;
 const c = card();
 ---
-<div {...recipeProps(c.root, className)}>
-  {title ? <h3 {...recipeProps(c.title)}>{title}</h3> : null}
-  <div {...recipeProps(c.body)}><slot /></div>
+<div {...mergeProps(c.root, className)}>
+  {title ? <h3 {...mergeProps(c.title)}>{title}</h3> : null}
+  <div {...mergeProps(c.body)}><slot /></div>
 </div>

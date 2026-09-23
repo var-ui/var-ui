@@ -1,7 +1,7 @@
 ---
 import type { ComponentAttrsResult } from 'typestyles';
 import { commandPalette } from '@var-ui/core';
-import { recipeClassName, recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 import type { CommandPaletteItem } from '../scripts/commandPaletteUtils';
 
 type CommandPaletteSlot =
@@ -39,17 +39,17 @@ const {
 
 const indexJson = JSON.stringify(items);
 const cp = (commandPalette as unknown as CommandPaletteRecipeFn)();
-const dialogRecipe = recipeProps(cp.root);
-const panelRecipe = recipeProps(cp.dialog, 'var-ui-command-palette__panel');
-const inputRowRecipe = recipeProps(cp.inputRow);
-const inputIconRecipe = recipeProps(cp.inputIcon);
-const inputRecipe = recipeProps(cp.input);
-const resultsRecipe = recipeProps(cp.results);
-const resultLinkClass = recipeClassName(cp.resultLink);
-const resultLinkActiveClass = recipeClassName(cp.resultLinkActive);
-const resultTitleClass = recipeClassName(cp.resultTitle);
-const resultMetaClass = recipeClassName(cp.resultMeta);
-const emptyClass = recipeClassName(cp.empty);
+const dialogRecipe = mergeProps(cp.root);
+const panelRecipe = mergeProps(cp.dialog, 'var-ui-command-palette__panel');
+const inputRowRecipe = mergeProps(cp.inputRow);
+const inputIconRecipe = mergeProps(cp.inputIcon);
+const inputRecipe = mergeProps(cp.input);
+const resultsRecipe = mergeProps(cp.results);
+const resultLinkClass = (cp.resultLink).className;
+const resultLinkActiveClass = (cp.resultLinkActive).className;
+const resultTitleClass = (cp.resultTitle).className;
+const resultMetaClass = (cp.resultMeta).className;
+const emptyClass = (cp.empty).className;
 ---
 
 <div

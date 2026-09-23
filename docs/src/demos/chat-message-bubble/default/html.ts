@@ -1,5 +1,5 @@
 import { chatMessage, chatMessageBubble } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
@@ -8,10 +8,10 @@ export function render(): string {
   const last = chatMessageBubble({ sender: 'assistant', variant: 'filled', group: 'last' });
   const name = serializeHtmlTag(
     'div',
-    recipeProps(m.header),
-    serializeHtmlTag('span', recipeProps(m.name), 'Navi'),
+    mergeProps(m.header),
+    serializeHtmlTag('span', mergeProps(m.name), 'Navi'),
   );
-  const bubbles = `${serializeHtmlTag('div', recipeProps(first.root), 'First part of a multi-part reply.')}${serializeHtmlTag('div', recipeProps(last.root), 'Second part.')}`;
-  const content = serializeHtmlTag('div', recipeProps(m.content), `${name}${bubbles}`);
-  return serializeHtmlTag('div', recipeProps(m.root), content);
+  const bubbles = `${serializeHtmlTag('div', mergeProps(first.root), 'First part of a multi-part reply.')}${serializeHtmlTag('div', mergeProps(last.root), 'Second part.')}`;
+  const content = serializeHtmlTag('div', mergeProps(m.content), `${name}${bubbles}`);
+  return serializeHtmlTag('div', mergeProps(m.root), content);
 }

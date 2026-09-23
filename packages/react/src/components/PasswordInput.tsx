@@ -4,7 +4,7 @@ import { FieldError, Input, Label, TextField as AriaTextField } from 'react-aria
 import { passwordField, type ControlSize } from '@var-ui/core';
 import { Icon } from '../icons';
 import type { BaseTextFieldProps } from './utils';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type PasswordInputProps = BaseTextFieldProps & {
   placeholder?: string;
@@ -32,18 +32,18 @@ export function PasswordInput({
       {...props}
       isDisabled={isDisabled}
       isInvalid={errorMessage ? true : undefined}
-      {...recipeProps(pf.root)}
+      {...mergeProps(pf.root)}
     >
-      {label ? <Label {...recipeProps(pf.label)}>{label}</Label> : null}
-      <div {...recipeProps(pf.inputWrapper)} data-disabled={isDisabled || undefined}>
+      {label ? <Label {...mergeProps(pf.label)}>{label}</Label> : null}
+      <div {...mergeProps(pf.inputWrapper)} data-disabled={isDisabled || undefined}>
         <Input
-          {...recipeProps(pf.input)}
+          {...mergeProps(pf.input)}
           type={visible ? 'text' : 'password'}
           placeholder={placeholder}
         />
         <button
           type="button"
-          {...recipeProps(pf.visibilityToggle)}
+          {...mergeProps(pf.visibilityToggle)}
           onClick={() => setVisible((v) => !v)}
           disabled={isDisabled}
           aria-label={visible ? 'Hide password' : 'Show password'}
@@ -52,8 +52,8 @@ export function PasswordInput({
           <Icon name={visible ? 'eyeOff' : 'eye'} size="sm" />
         </button>
       </div>
-      {description ? <p {...recipeProps(pf.description)}>{description}</p> : null}
-      <FieldError {...recipeProps(pf.error)}>{errorMessage ?? ''}</FieldError>
+      {description ? <p {...mergeProps(pf.description)}>{description}</p> : null}
+      <FieldError {...mergeProps(pf.error)}>{errorMessage ?? ''}</FieldError>
     </AriaTextField>
   );
 }

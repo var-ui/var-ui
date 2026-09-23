@@ -9,7 +9,7 @@ import {
   LayoutPanel,
   MobileNav,
   MobileNavToggle,
-  recipeClassName,
+  mergeProps,
   SideNav,
   SideNavItem,
   SideNavSection,
@@ -19,6 +19,7 @@ import {
   TopNavItem,
 } from '@var-ui/astro';
 import { docsTopNav } from '../styles/docsTopNav';
+import { docsPage, docsPageContent } from '../styles/docsPage';
 import DocsSearch from './DocsSearch.astro';
 import DocsSidebar from './DocsSidebar.astro';
 import DocsToc from './DocsToc.astro';
@@ -90,6 +91,17 @@ function isSidebarLinkActive(link: string): boolean {
 }
 
 const nav = docsTopNav();
+const page = docsPage();
+const sidebarContent = docsPageContent({
+  width: contentWidth === 'full' ? 'full' : 'default',
+  placement: 'standalone',
+});
+const pageBodyContent = docsPageContent({
+  width: contentWidth === 'full' ? 'full' : 'default',
+  placement: 'inPageBody',
+});
+const pageBodyDefaultContent = docsPageContent({ placement: 'inPageBody' });
+const defaultContent = docsPageContent();
 ---
 
 <html lang="en" class={themeClassName} {...htmlAttributes}>
@@ -105,7 +117,7 @@ const nav = docsTopNav();
   </head>
   <body class={cx('docs-body', bodyClassName)}>
     <AppShell variant="wash" height="fill" contentPadding={0} mobileBreakpoint="md">
-      <TopNav slot="topNav" className={recipeClassName(nav.root)}>
+      <TopNav slot="topNav" className={cx(nav.root)}>
         <TopNavHeading slot="heading" heading={brand.heading} headingHref={brand.href} />
         {
           topNav.map((item) => (
@@ -116,16 +128,16 @@ const nav = docsTopNav();
             />
           ))
         }
-        <div slot="end" class={recipeClassName(nav.tools)}>
+        <div slot="end" class={cx(nav.tools)}>
           <div
-            class={recipeClassName(nav.toolsPersist)}
+            class={cx(nav.toolsPersist)}
             transition:persist="docs-top-nav-tools"
             transition:animate="none"
           >
             <DocsSearch items={searchItems} />
-            <div class={recipeClassName(nav.toolbar)}>
+            <div class={cx(nav.toolbar)}>
               {hasToolsSlot ? (
-                <div class={recipeClassName(nav.toolbarExtra)}>
+                <div class={cx(nav.toolbarExtra)}>
                   <slot name="tools" />
                 </div>
               ) : null}
@@ -141,7 +153,7 @@ const nav = docsTopNav();
       {
         showMobileNav ? (
           <MobileNav slot="mobileNav" header="Menu">
-            <div class={recipeClassName(nav.mobileNavBody)}>
+            <div class={cx(nav.mobileNavBody)}>
               {
                 topNav.length > 0 ? (
                   <SideNavSection>
@@ -165,7 +177,7 @@ const nav = docsTopNav();
 
       {
         sidebarSections ? (
-          <Layout height="fill" padding={0} className="docs-site-layout">
+          <Layout height="fill" padding={0} className={cx(page.siteLayout)}>
             <LayoutPanel slot="start" side="start" width={280} hasDivider padding={0} isScrollable={false}>
               <SideNav label="Section navigation" collapsible>
                 <DocsSidebar sections={sidebarSections} isLinkActive={isSidebarLinkActive} />
@@ -174,8 +186,8 @@ const nav = docsTopNav();
             <LayoutContent label="Main content">
               {
                 showTocPanel ? (
-                  <div class="docs-page-body">
-                    <div class:list={['docs-content', contentWidth === 'full' && 'docs-content--full']}>
+                  <div class={cx(page.pageBody)}>
+                    <div {...mergeProps(pageBodyContent)}>
                       {mdHref ? (
                         <p>
                           <a href={mdHref}>Also available as Markdown</a>
@@ -183,12 +195,12 @@ const nav = docsTopNav();
                       ) : null}
                       <slot />
                     </div>
-                    <aside class="docs-page-toc" aria-label="On this page">
+                    <aside class={cx(page.toc)} aria-label="On this page">
                       {hasTocSlot ? <slot name="toc" /> : <DocsToc contentSelector={tocContentSelector} />}
                     </aside>
                   </div>
                 ) : (
-                  <div class:list={['docs-content', contentWidth === 'full' && 'docs-content--full']}>
+                  <div {...mergeProps(sidebarContent)}>
                     {mdHref ? (
                       <p>
                         <a href={mdHref}>Also available as Markdown</a>
@@ -201,12 +213,12 @@ const nav = docsTopNav();
             </LayoutContent>
           </Layout>
         ) : (
-          <Layout height="fill" padding={showTocPanel ? 0 : 6} className="docs-site-layout">
+          <Layout height="fill" padding={showTocPanel ? 0 : 6} className={cx(page.siteLayout)}>
             <LayoutContent label="Main content">
               {
                 showTocPanel ? (
-                  <div class="docs-page-body">
-                    <div class="docs-content">
+                  <div class={cx(page.pageBody)}>
+                    <div {...mergeProps(pageBodyDefaultContent)}>
                       {mdHref ? (
                         <p>
                           <a href={mdHref}>Also available as Markdown</a>
@@ -214,12 +226,12 @@ const nav = docsTopNav();
                       ) : null}
                       <slot />
                     </div>
-                    <aside class="docs-page-toc" aria-label="On this page">
+                    <aside class={cx(page.toc)} aria-label="On this page">
                       {hasTocSlot ? <slot name="toc" /> : <DocsToc contentSelector={tocContentSelector} />}
                     </aside>
                   </div>
                 ) : (
-                  <div class="docs-content">
+                  <div {...mergeProps(defaultContent)}>
                     {mdHref ? (
                       <p>
                         <a href={mdHref}>Also available as Markdown</a>
@@ -240,89 +252,3 @@ const nav = docsTopNav();
     </script>
   </body>
 </html>
-
-<style is:global>
-  html,
-  body.docs-body {
-    height: 100%;
-    margin: 0;
-  }
-
-  body.docs-body {
-    overflow: hidden;
-  }
-
-  body.docs-body #var-ui-app-shell-main {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    padding: 0;
-  }
-</style>
-
-<style>
-  .docs-site-layout {
-    flex: 1 1 auto;
-    min-height: 0;
-    min-width: 0;
-  }
-
-  .docs-content {
-    max-width: 60rem;
-    margin: 0 auto;
-    padding-bottom: 3rem;
-  }
-
-  .docs-page-body {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 13.75rem;
-    gap: 2.5rem;
-    align-items: start;
-    padding-inline: var(--var-ui-space-10);
-    padding-block: var(--var-ui-space-10);
-    padding-bottom: 3rem;
-    box-sizing: border-box;
-    min-height: 100%;
-  }
-
-  .docs-page-body .docs-content {
-    max-width: none;
-    margin: 0;
-    padding: 0;
-    min-width: 0;
-  }
-
-  .docs-page-toc {
-    position: sticky;
-    top: calc(var(--docs-header-height, 3.5rem) + 1.25rem);
-    align-self: start;
-    min-width: 0;
-    max-height: calc(100dvh - var(--docs-header-height, 3.5rem) - 2rem);
-    overflow-y: auto;
-  }
-
-  .docs-page-body :global(.docs-page-toc-nav) {
-    position: static;
-    top: auto;
-    padding: 0;
-    max-height: none;
-    overflow: visible;
-  }
-
-  @media (max-width: 960px) {
-    .docs-page-body {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .docs-page-toc {
-      display: none;
-    }
-  }
-
-  .docs-content--full {
-    max-width: none;
-    margin: 0;
-    padding-inline: var(--var-ui-space-10);
-    padding-block: var(--var-ui-space-10);
-  }
-</style>

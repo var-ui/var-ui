@@ -1,6 +1,6 @@
 ---
 import { steps } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   className?: string;
@@ -9,6 +9,6 @@ type Props = {
 const { className } = Astro.props;
 ---
 
-<ol {...recipeProps(steps().root, className)}>
+<ol {...mergeProps(steps().root, className)}>
   <slot />
 </ol>

@@ -1,18 +1,18 @@
 import { combobox } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
   const cb = combobox();
   const label = serializeHtmlTag(
     'label',
-    { ...recipeProps(cb.label), for: 'fruit-typeahead-field' },
+    { ...mergeProps(cb.label), for: 'fruit-typeahead-field' },
     'Fruit',
   );
   const input = serializeHtmlTag(
     'input',
     {
-      ...recipeProps(cb.input),
+      ...mergeProps(cb.input),
       id: 'fruit-typeahead-field',
       type: 'text',
       placeholder: 'Search…',
@@ -21,12 +21,12 @@ export function render(): string {
     },
     '',
   );
-  const wrapper = serializeHtmlTag('div', recipeProps(cb.inputWrapper), input);
+  const wrapper = serializeHtmlTag('div', mergeProps(cb.inputWrapper), input);
   const description = serializeHtmlTag(
     'p',
-    recipeProps(cb.description),
+    mergeProps(cb.description),
     'Start typing to filter the list.',
   );
-  const error = serializeHtmlTag('p', recipeProps(cb.error), 'Choose a fruit to continue.');
-  return serializeHtmlTag('div', recipeProps(cb.root), `${label}${wrapper}${description}${error}`);
+  const error = serializeHtmlTag('p', mergeProps(cb.error), 'Choose a fruit to continue.');
+  return serializeHtmlTag('div', mergeProps(cb.root), `${label}${wrapper}${description}${error}`);
 }

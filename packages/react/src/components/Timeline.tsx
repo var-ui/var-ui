@@ -9,7 +9,7 @@ import {
   type TimelineVariantProps,
 } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type { TimelineSize, TimelineTone } from '@var-ui/core';
 
@@ -91,13 +91,13 @@ function TimelineItemContent({
 
   return (
     <li
-      {...recipeProps(styles.item, className)}
+      {...mergeProps(styles.item, className)}
       data-timeline-item={index}
       data-active={isActive ? '' : undefined}
       data-pending={isPending ? '' : undefined}
     >
       <div
-        {...recipeProps(styles.bullet)}
+        {...mergeProps(styles.bullet)}
         data-active={isActive ? '' : undefined}
         data-pending={isPending ? '' : undefined}
         data-tone={tone}
@@ -105,10 +105,10 @@ function TimelineItemContent({
       >
         {bulletContent}
       </div>
-      <div {...recipeProps(styles.body)}>
-        <div {...recipeProps(styles.title)}>{title}</div>
-        {timestamp != null ? <div {...recipeProps(styles.timestamp)}>{timestamp}</div> : null}
-        {description != null ? <div {...recipeProps(styles.description)}>{description}</div> : null}
+      <div {...mergeProps(styles.body)}>
+        <div {...mergeProps(styles.title)}>{title}</div>
+        {timestamp != null ? <div {...mergeProps(styles.timestamp)}>{timestamp}</div> : null}
+        {description != null ? <div {...mergeProps(styles.description)}>{description}</div> : null}
         {children}
       </div>
     </li>
@@ -166,7 +166,7 @@ export function Timeline({
 
   return (
     <TimelineContext.Provider value={contextValue}>
-      <ol {...recipeProps(styles.root, className)} data-timeline>
+      <ol {...mergeProps(styles.root, className)} data-timeline>
         {enhancedChildren ?? itemNodes}
       </ol>
     </TimelineContext.Provider>

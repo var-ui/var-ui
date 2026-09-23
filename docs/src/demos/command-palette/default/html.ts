@@ -1,5 +1,5 @@
 import { commandPalette } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
@@ -10,7 +10,7 @@ export function render(): string {
     serializeHtmlTag(
       'dialog',
       {
-        ...(recipeProps(cp.root as never) as object),
+        ...(mergeProps(cp.root as never) as object),
         id: 'docs-command-palette-dialog',
         'aria-label': 'Search…',
       },

@@ -13,7 +13,7 @@ import {
 } from 'react-aria-components';
 import { calendar } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type CalendarProps<T extends DateValue = DateValue> = Omit<
   RACCalendarProps<T>,
@@ -37,22 +37,22 @@ export function Calendar<T extends DateValue = DateValue>({
 }: CalendarProps<T>): JSX.Element {
   const c = calendar();
   return (
-    <AriaCalendar {...props} {...recipeProps(c.root, className)}>
-      <header {...recipeProps(c.header)}>
-        <Button slot="previous" {...recipeProps(c.navButton)}>
+    <AriaCalendar {...props} {...mergeProps(c.root, className)}>
+      <header {...mergeProps(c.header)}>
+        <Button slot="previous" {...mergeProps(c.navButton)}>
           <Icon name="chevronLeft" size="sm" />
         </Button>
-        <Heading {...recipeProps(c.heading)} />
-        <Button slot="next" {...recipeProps(c.navButton)}>
+        <Heading {...mergeProps(c.heading)} />
+        <Button slot="next" {...mergeProps(c.navButton)}>
           <Icon name="chevronRight" size="sm" />
         </Button>
       </header>
-      <CalendarGrid {...recipeProps(c.grid)}>
+      <CalendarGrid {...mergeProps(c.grid)}>
         <CalendarGridHeader>
-          {(day) => <CalendarHeaderCell {...recipeProps(c.headerCell)}>{day}</CalendarHeaderCell>}
+          {(day) => <CalendarHeaderCell {...mergeProps(c.headerCell)}>{day}</CalendarHeaderCell>}
         </CalendarGridHeader>
         <CalendarGridBody>
-          {(date) => <CalendarCell date={date} {...recipeProps(c.cell)} />}
+          {(date) => <CalendarCell date={date} {...mergeProps(c.cell)} />}
         </CalendarGridBody>
       </CalendarGrid>
     </AriaCalendar>

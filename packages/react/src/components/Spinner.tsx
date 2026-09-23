@@ -1,6 +1,6 @@
 import type { CSSProperties, JSX } from 'react';
 import { spinner, type SpinnerVariantProps } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type SpinnerProps = SpinnerVariantProps & {
   label?: string;
@@ -28,7 +28,7 @@ export function Spinner({
 }: SpinnerProps): JSX.Element {
   return (
     <span role="status" className={className}>
-      <span {...recipeProps(spinner({ size, tone, appearance }))} aria-hidden="true" />
+      <span {...mergeProps(spinner({ size, tone, appearance }))} aria-hidden="true" />
       <span style={visuallyHidden}>{label}</span>
     </span>
   );

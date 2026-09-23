@@ -5,7 +5,7 @@ import {
   type ProgressBarProps as RACProgressBarProps,
 } from 'react-aria-components';
 import { progressBar, type ProgressBarVariantProps } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type { ProgressBarTone, ProgressBarAppearance } from '@var-ui/core';
 
@@ -43,18 +43,18 @@ export function ProgressBar({
   });
   const showValue = showValueText && !props.isIndeterminate;
   return (
-    <AriaProgressBar {...props} {...recipeProps(p.root, className)}>
+    <AriaProgressBar {...props} {...mergeProps(p.root, className)}>
       {({ percentage, valueText }) => (
         <>
           {label || showValue ? (
-            <div {...recipeProps(p.header)}>
-              {label ? <Label {...recipeProps(p.label)}>{label}</Label> : <span />}
-              {showValue ? <span {...recipeProps(p.valueText)}>{valueText}</span> : null}
+            <div {...mergeProps(p.header)}>
+              {label ? <Label {...mergeProps(p.label)}>{label}</Label> : <span />}
+              {showValue ? <span {...mergeProps(p.valueText)}>{valueText}</span> : null}
             </div>
           ) : null}
-          <div {...recipeProps(p.track)}>
+          <div {...mergeProps(p.track)}>
             <div
-              {...recipeProps(p.fill)}
+              {...mergeProps(p.fill)}
               style={props.isIndeterminate ? undefined : { width: `${percentage ?? 0}%` }}
             />
           </div>

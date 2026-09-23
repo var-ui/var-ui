@@ -1,12 +1,12 @@
 ---
 import { kbd } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   className?: string;
 };
 
 const { className } = Astro.props;
-const rp = recipeProps(kbd(), className);
+const rp = mergeProps(kbd(), className);
 ---
 <kbd {...rp}><slot /></kbd>

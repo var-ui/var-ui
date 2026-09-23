@@ -1,8 +1,8 @@
 import { button } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
-  const rp = recipeProps(button({}));
+  const rp = mergeProps(button({}));
   return serializeHtmlTag('button', { type: 'button', ...rp }, 'Click me');
 }

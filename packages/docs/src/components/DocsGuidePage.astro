@@ -1,0 +1,69 @@
+---
+/**
+ * Renders a guide entry from configured `varDocs({ routes })` collections.
+ * Pass the site layout and MDX shortcodes; use with injected routes or own pages.
+ */
+import { getEntry, render } from 'astro:content';
+import config from 'virtual:var-docs/config';
+import DocsGuideArticle from './DocsGuideArticle.astro';
+import { matchGuideRoute, resolveGuideRouteConfig, stripAstroBase } from '../utils/routing';
+
+const {
+  layout: Layout,
+  mdxComponents,
+  stripBase = false,
+} = Astro.props as {
+  layout: (props: { title: string; showToc?: boolean }) => unknown;
+  mdxComponents: Record<string, unknown>;
+  /** When true, strip Astro `base` before route matching (injected static routes). */
+  stripBase?: boolean;
+};
+
+const pathname = stripBase
+  ? stripAstroBase(Astro.url.pathname, import.meta.env.BASE_URL)
+  : Astro.url.pathname;
+const routes = resolveGuideRouteConfig(config.routes);
+const matched = matchGuideRoute(pathname, routes);
+
+if (!matched) {
+  if (Astro.isPrerendered) {
+    throw new Error(`Guide page not found: ${pathname}`);
+  }
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+const entry = await getEntry(matched.collection, matched.id);
+if (!entry) {
+  if (Astro.isPrerendered) {
+    throw new Error(`Guide entry not found: ${matched.collection}/${matched.id}`);
+  }
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+const { Content } = await render(entry);
+const data = entry.data as {
+  title: string;
+  description?: string;
+  template: 'guide' | 'splash';
+  tableOfContents: boolean;
+  wide: boolean;
+};
+const title = `${data.title} · ${config.title}`;
+const wide = data.wide === true;
+const showToc = data.tableOfContents !== false;
+
+Astro.locals.varDocsRoute = {
+  collection: matched.collection,
+  id: matched.id,
+  pathname: matched.pathname,
+  title: data.title,
+  description: data.description,
+  template: data.template,
+};
+---
+
+<Layout title={title} showToc={showToc}>
+  <DocsGuideArticle wide={wide}>
+    <Content components={{ ...mdxComponents }} />
+  </DocsGuideArticle>
+</Layout>

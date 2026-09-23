@@ -2,7 +2,7 @@ import type { JSX } from 'react';
 import { FieldError, Label, TextArea, TextField as AriaTextField } from 'react-aria-components';
 import { textAreaField } from '@var-ui/core';
 import type { BaseTextFieldProps } from './utils';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type TextAreaFieldProps = BaseTextFieldProps & {
   /** Placeholder text shown when the textarea is empty. */
@@ -18,11 +18,11 @@ export function TextAreaField({
 }: TextAreaFieldProps): JSX.Element {
   const field = textAreaField();
   return (
-    <AriaTextField {...props} {...recipeProps(field.root)}>
-      {label ? <Label {...recipeProps(field.label)}>{label}</Label> : null}
-      <TextArea {...recipeProps(field.input)} placeholder={placeholder} />
-      {description ? <p {...recipeProps(field.description)}>{description}</p> : null}
-      <FieldError {...recipeProps(field.error)}>{errorMessage ?? ''}</FieldError>
+    <AriaTextField {...props} {...mergeProps(field.root)}>
+      {label ? <Label {...mergeProps(field.label)}>{label}</Label> : null}
+      <TextArea {...mergeProps(field.input)} placeholder={placeholder} />
+      {description ? <p {...mergeProps(field.description)}>{description}</p> : null}
+      <FieldError {...mergeProps(field.error)}>{errorMessage ?? ''}</FieldError>
     </AriaTextField>
   );
 }

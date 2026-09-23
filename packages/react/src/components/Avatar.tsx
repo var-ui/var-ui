@@ -7,7 +7,7 @@ import {
   type AvatarStatusTone,
   type AvatarVariantProps,
 } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type { AvatarSize, AvatarStatusTone } from '@var-ui/core';
 
@@ -51,17 +51,17 @@ export function Avatar({
   const a = avatar({ size });
   const showImage = Boolean(src) && !errored;
   return (
-    <span {...recipeProps(a.root, className)}>
+    <span {...mergeProps(a.root, className)}>
       {showImage ? (
         <img
-          {...recipeProps(a.image)}
+          {...mergeProps(a.image)}
           src={src}
           alt={alt ?? name ?? ''}
           onError={() => setErrored(true)}
         />
       ) : (
         <span
-          {...recipeProps(a.initials)}
+          {...mergeProps(a.initials)}
           aria-hidden={alt || name ? undefined : true}
           role={alt || name ? 'img' : undefined}
           aria-label={alt ?? name}
@@ -70,8 +70,8 @@ export function Avatar({
         </span>
       )}
       {status ? (
-        <span {...recipeProps(a.status)} data-avatar-status>
-          <span {...recipeProps(statusDot({ tone: status }))} />
+        <span {...mergeProps(a.status)} data-avatar-status>
+          <span {...mergeProps(statusDot({ tone: status }))} />
         </span>
       ) : null}
     </span>
@@ -100,13 +100,13 @@ export function AvatarGroup({ children, max = 4, className }: AvatarGroupProps):
   const visible = items.slice(0, max);
   const hidden = items.length - visible.length;
   return (
-    <span {...recipeProps(g.root, className)}>
+    <span {...mergeProps(g.root, className)}>
       {visible.map((child, index) => (
-        <span {...recipeProps(g.item)} key={index}>
+        <span {...mergeProps(g.item)} key={index}>
           {child}
         </span>
       ))}
-      {hidden > 0 ? <span {...recipeProps(g.overflow)}>+{hidden}</span> : null}
+      {hidden > 0 ? <span {...mergeProps(g.overflow)}>+{hidden}</span> : null}
     </span>
   );
 }

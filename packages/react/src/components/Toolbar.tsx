@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { toolbar } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type ToolbarProps = {
   /** Content aligned to the start (leading) edge. */
@@ -51,11 +51,11 @@ export function Toolbar({
       role="toolbar"
       aria-label={label}
       aria-orientation={orientation}
-      {...recipeProps(s.root, className)}
+      {...mergeProps(s.root, className)}
     >
-      {startContent != null ? <div {...recipeProps(s.startSlot)}>{startContent}</div> : null}
-      {centerContent != null ? <div {...recipeProps(s.centerSlot)}>{centerContent}</div> : null}
-      {endContent != null ? <div {...recipeProps(s.endSlot)}>{endContent}</div> : null}
+      {startContent != null ? <div {...mergeProps(s.startSlot)}>{startContent}</div> : null}
+      {centerContent != null ? <div {...mergeProps(s.centerSlot)}>{centerContent}</div> : null}
+      {endContent != null ? <div {...mergeProps(s.endSlot)}>{endContent}</div> : null}
     </div>
   );
 }

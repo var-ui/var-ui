@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { steps } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type StepsProps = {
   children: ReactNode;
@@ -9,5 +9,5 @@ export type StepsProps = {
 
 /** Numbered steps list (`<ol>`). Children should be `<li>` elements. */
 export function Steps({ children, className }: StepsProps): JSX.Element {
-  return <ol {...recipeProps(steps().root, className)}>{children}</ol>;
+  return <ol {...mergeProps(steps().root, className)}>{children}</ol>;
 }

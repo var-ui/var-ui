@@ -1,6 +1,6 @@
 ---
 import { collapsible, defaultIconSvgs, type CollapsibleVariantProps } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 interface Props extends CollapsibleVariantProps {
   id?: string;
@@ -21,20 +21,20 @@ const c = collapsible({ variant });
 const hasTriggerSlot = Astro.slots.has('trigger');
 ---
 
-<details id={id} open={defaultExpanded || undefined} {...recipeProps(c.root, className)}>
-  <summary {...recipeProps(c.trigger)}>
+<details id={id} open={defaultExpanded || undefined} {...mergeProps(c.root, className)}>
+  <summary {...mergeProps(c.trigger)}>
     {
       hasTriggerSlot ? (
         <slot name="trigger" />
       ) : (
         <>
-          <span {...recipeProps(c.triggerIcon)} set:html={defaultIconSvgs.chevronDown} />
+          <span {...mergeProps(c.triggerIcon)} set:html={defaultIconSvgs.chevronDown} />
           {title}
         </>
       )
     }
   </summary>
-  <div {...recipeProps(c.panel)}>
+  <div {...mergeProps(c.panel)}>
     <slot />
   </div>
 </details>

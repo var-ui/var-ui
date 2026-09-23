@@ -1,5 +1,5 @@
 import { button, stack, resolveButtonProps } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const tones = ['neutral', 'accent', 'success', 'warning', 'danger', 'info'] as const;
@@ -12,7 +12,7 @@ function toneLabel(tone: (typeof tones)[number]) {
 function buttonTag(label: string, options: Parameters<typeof resolveButtonProps>[0]): string {
   return serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(button(resolveButtonProps(options))) },
+    { type: 'button', ...mergeProps(button(resolveButtonProps(options))) },
     label,
   );
 }
@@ -32,9 +32,9 @@ export function render(): string {
       const buttons = tones
         .map((tone) => buttonTag(toneLabel(tone), { tone, appearance }))
         .join('');
-      return serializeHtmlTag('div', recipeProps(row), buttons);
+      return serializeHtmlTag('div', mergeProps(row), buttons);
     })
     .join('');
 
-  return serializeHtmlTag('div', recipeProps(root), rows);
+  return serializeHtmlTag('div', mergeProps(root), rows);
 }

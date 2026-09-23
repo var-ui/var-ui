@@ -1,6 +1,6 @@
 ---
 import { grid } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   columns?: 'auto' | 1 | 2 | 3 | 4;
@@ -17,6 +17,6 @@ const columnVariant = {
 } as const;
 
 const { columns = 'auto', gap = 'md', className } = Astro.props;
-const rp = recipeProps(grid({ columns: columnVariant[columns], gap }), className);
+const rp = mergeProps(grid({ columns: columnVariant[columns], gap }), className);
 ---
 <div {...rp}><slot /></div>

@@ -14,7 +14,7 @@ import {
   type CollapsibleVariant,
 } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
 export type AccordionVariant = AccordionGroupVariantProps['variant'];
@@ -142,7 +142,7 @@ export function Accordion({
       expandedKeys={resolvedKeys}
       onExpandedChange={handleExpandedChange}
       isDisabled={isDisabled}
-      {...recipeProps(group.root, className)}
+      {...mergeProps(group.root, className)}
       data-var-ui-accordion
     >
       <AccordionContext.Provider value={{ itemVariant }}>{children}</AccordionContext.Provider>
@@ -154,7 +154,7 @@ function AccordionItem({ id, isDisabled, className, children }: AccordionItemPro
   const { itemVariant } = useAccordionContext();
   const c = collapsible({ variant: itemVariant });
   return (
-    <Disclosure id={id} isDisabled={isDisabled} {...recipeProps(c.root, className)}>
+    <Disclosure id={id} isDisabled={isDisabled} {...mergeProps(c.root, className)}>
       {children}
     </Disclosure>
   );
@@ -168,7 +168,7 @@ function AccordionTrigger({ children, className }: AccordionTriggerProps): JSX.E
     <Heading level={3} style={{ margin: 0 }}>
       <AriaButton
         slot="trigger"
-        {...recipeProps(c.trigger, className)}
+        {...mergeProps(c.trigger, className)}
         data-var-ui-accordion-trigger
         onKeyDown={(event) => {
           if (event.key === 'Home') {
@@ -186,7 +186,7 @@ function AccordionTrigger({ children, className }: AccordionTriggerProps): JSX.E
           }
         }}
       >
-        <span {...recipeProps(c.triggerIcon)} aria-hidden>
+        <span {...mergeProps(c.triggerIcon)} aria-hidden>
           <Icon name="chevronDown" size="sm" />
         </span>
         {children}
@@ -198,7 +198,7 @@ function AccordionTrigger({ children, className }: AccordionTriggerProps): JSX.E
 function AccordionPanel({ children, className }: AccordionPanelProps): JSX.Element {
   const { itemVariant } = useAccordionContext();
   const c = collapsible({ variant: itemVariant });
-  return <DisclosurePanel {...recipeProps(c.panel, className)}>{children}</DisclosurePanel>;
+  return <DisclosurePanel {...mergeProps(c.panel, className)}>{children}</DisclosurePanel>;
 }
 
 Accordion.Item = AccordionItem;

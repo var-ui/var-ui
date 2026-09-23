@@ -1,5 +1,5 @@
 import { chatToolCalls } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const wrenchIcon =
@@ -14,11 +14,11 @@ export function render(): string {
     'button',
     {
       type: 'button',
-      ...recipeProps(t.header),
+      ...mergeProps(t.header),
       'aria-expanded': 'false',
       disabled: true,
     },
-    `${serializeHtmlTag('span', recipeProps(t.statusIcon), wrenchIcon)}${serializeHtmlTag('span', recipeProps(t.name), 'run_tests')}${serializeHtmlTag('span', recipeProps(t.chevron), chevronIcon)}`,
+    `${serializeHtmlTag('span', mergeProps(t.statusIcon), wrenchIcon)}${serializeHtmlTag('span', mergeProps(t.name), 'run_tests')}${serializeHtmlTag('span', mergeProps(t.chevron), chevronIcon)}`,
   );
-  return serializeHtmlTag('div', recipeProps(t.root), header);
+  return serializeHtmlTag('div', mergeProps(t.root), header);
 }

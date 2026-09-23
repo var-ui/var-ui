@@ -1,7 +1,7 @@
 'use client';
 
 import type { DocsFramework } from '@/lib/framework';
-import { cx, recipeClassName } from '@var-ui/react';
+import { cx } from '@var-ui/react';
 import { useState, type CSSProperties } from 'react';
 import { homeBento } from '@/styles/homeBento';
 import {
@@ -41,97 +41,82 @@ export function BentoShowcase({ themeId, framework = 'react', previewStyle }: Be
 
   return (
     <div
-      className={cx(recipeClassName(b.showcase), theme.className)}
+      className={cx(b.showcase.className, theme.className)}
       data-framework={framework}
       data-testid="bento-showcase"
       ref={setPortalContainer}
       style={{ colorScheme: 'inherit', ...previewStyle }}
     >
-      <div className={recipeClassName(b.grid)}>
+      <div className={b.grid.className}>
         {useReactTiles ? (
           <QuickActionsTile
-            className={cx(
-              recipeClassName(b.tile),
-              recipeClassName(b.tileSpan2),
-              recipeClassName(b.tileRowSpan2),
-            )}
+            className={cx(b.tile.className, b.tileSpan2.className, b.tileRowSpan2.className)}
             portalContainer={portalContainer ?? undefined}
           />
         ) : (
           <MarkupTile
-            className={cx(
-              recipeClassName(b.tile),
-              recipeClassName(b.tileSpan2),
-              recipeClassName(b.tileRowSpan2),
-            )}
+            className={cx(b.tile.className, b.tileSpan2.className, b.tileRowSpan2.className)}
             html={renderQuickActionsTileMarkup()}
           />
         )}
         {useReactTiles ? (
-          <StatusFeedbackTile className={recipeClassName(b.tile)} />
+          <StatusFeedbackTile className={b.tile.className} />
         ) : (
-          <MarkupTile className={recipeClassName(b.tile)} html={renderStatusFeedbackTileMarkup()} />
+          <MarkupTile className={b.tile.className} html={renderStatusFeedbackTileMarkup()} />
         )}
         {useReactTiles ? (
-          <SettingsFormTile
-            className={cx(recipeClassName(b.tile), recipeClassName(b.tileRowSpan2))}
-          />
+          <SettingsFormTile className={cx(b.tile.className, b.tileRowSpan2.className)} />
         ) : (
           <MarkupTile
-            className={cx(recipeClassName(b.tile), recipeClassName(b.tileRowSpan2))}
+            className={cx(b.tile.className, b.tileRowSpan2.className)}
             html={renderSettingsFormTileMarkup()}
           />
         )}
         {useReactTiles ? (
           <EmptyStateDialogTile
-            className={recipeClassName(b.tile)}
+            className={b.tile.className}
             portalContainer={portalContainer ?? undefined}
           />
         ) : (
-          <MarkupTile
-            className={recipeClassName(b.tile)}
-            html={renderEmptyStateDialogTileMarkup()}
-          />
+          <MarkupTile className={b.tile.className} html={renderEmptyStateDialogTileMarkup()} />
         )}
         {useReactTiles ? (
           <ContentSampleTile
-            className={cx(recipeClassName(b.tile), recipeClassName(b.tileSpan2))}
+            className={cx(b.tile.className, b.tileSpan2.className)}
             framework={framework}
           />
         ) : (
           <MarkupTile
-            className={cx(recipeClassName(b.tile), recipeClassName(b.tileSpan2))}
+            className={cx(b.tile.className, b.tileSpan2.className)}
             html={renderContentSampleTileMarkup(framework)}
           />
         )}
         {useReactTiles ? (
-          <IdentityCardsTile className={recipeClassName(b.tile)} />
+          <IdentityCardsTile className={b.tile.className} />
         ) : (
-          <MarkupTile className={recipeClassName(b.tile)} html={renderIdentityCardsTileMarkup()} />
+          <MarkupTile className={b.tile.className} html={renderIdentityCardsTileMarkup()} />
         )}
         {useReactTiles ? (
-          <CarouselStripTile
-            className={cx(recipeClassName(b.tile), recipeClassName(b.tileSpan2))}
-          />
+          <CarouselStripTile className={cx(b.tile.className, b.tileSpan2.className)} />
         ) : (
           <MarkupTile
-            className={cx(recipeClassName(b.tile), recipeClassName(b.tileSpan2))}
+            className={cx(b.tile.className, b.tileSpan2.className)}
             html={renderCarouselStripTileMarkup()}
           />
         )}
         {useReactTiles ? (
-          <LayoutTabsTile className={cx(recipeClassName(b.tile), recipeClassName(b.tileSpan2))} />
+          <LayoutTabsTile className={cx(b.tile.className, b.tileSpan2.className)} />
         ) : (
           <MarkupTile
-            className={cx(recipeClassName(b.tile), recipeClassName(b.tileSpan2))}
+            className={cx(b.tile.className, b.tileSpan2.className)}
             html={renderLayoutTabsTileMarkup()}
           />
         )}
         {useReactTiles ? (
-          <BannerTile className={cx(recipeClassName(b.tile), recipeClassName(b.tileSpanFull))} />
+          <BannerTile className={cx(b.tile.className, b.tileSpanFull.className)} />
         ) : (
           <MarkupTile
-            className={cx(recipeClassName(b.tile), recipeClassName(b.tileSpanFull))}
+            className={cx(b.tile.className, b.tileSpanFull.className)}
             html={renderBannerTileMarkup()}
           />
         )}

@@ -1,23 +1,19 @@
 import { card } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { combine, mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
-
-function classOf(result: string | { className: string }): string {
-  return typeof result === 'string' ? result : result.className;
-}
 
 export function render(): string {
   const c = card();
-  const title = serializeHtmlTag('span', recipeProps(c.linkTitle), 'Theming guide');
+  const title = serializeHtmlTag('span', mergeProps(c.linkTitle), 'Theming guide');
   const description = serializeHtmlTag(
     'p',
-    recipeProps(c.linkDescription),
+    mergeProps(c.linkDescription),
     'Override any token with plain CSS custom properties.',
   );
-  const hint = serializeHtmlTag('span', recipeProps(c.linkHint), '5 min read');
+  const hint = serializeHtmlTag('span', mergeProps(c.linkHint), '5 min read');
   return serializeHtmlTag(
     'a',
-    { href: '#', ...recipeProps(c.root, classOf(c.linkRoot)) },
+    { href: '#', ...combine(c.root, c.linkRoot) },
     `${title}${description}${hint}`,
   );
 }

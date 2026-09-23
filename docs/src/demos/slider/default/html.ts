@@ -1,5 +1,5 @@
 import { slider } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
@@ -7,18 +7,18 @@ export function render(): string {
   const value = 40;
   const label = serializeHtmlTag(
     'label',
-    recipeProps(s.label),
-    `${serializeHtmlTag('span', {}, 'Volume')}${serializeHtmlTag('span', recipeProps(s.output), String(value))}`,
+    mergeProps(s.label),
+    `${serializeHtmlTag('span', {}, 'Volume')}${serializeHtmlTag('span', mergeProps(s.output), String(value))}`,
   );
   const track = serializeHtmlTag(
     'div',
-    recipeProps(s.track),
-    serializeHtmlTag('div', { ...recipeProps(s.fill), style: `width: ${value}%` }, ''),
+    mergeProps(s.track),
+    serializeHtmlTag('div', { ...mergeProps(s.fill), style: `width: ${value}%` }, ''),
   );
   const thumb = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(s.thumb),
+      ...mergeProps(s.thumb),
       role: 'slider',
       'aria-valuemin': '0',
       'aria-valuemax': '100',
@@ -28,10 +28,10 @@ export function render(): string {
     },
     '',
   );
-  const control = serializeHtmlTag('div', recipeProps(s.control), `${track}${thumb}`);
+  const control = serializeHtmlTag('div', mergeProps(s.control), `${track}${thumb}`);
   return serializeHtmlTag(
     'div',
-    { ...recipeProps(s.root), role: 'group', 'aria-label': 'Volume' },
+    { ...mergeProps(s.root), role: 'group', 'aria-label': 'Volume' },
     `${label}${control}`,
   );
 }

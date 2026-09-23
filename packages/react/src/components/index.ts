@@ -310,14 +310,7 @@ export {
   type DrawerTitleProps,
 } from './Drawer';
 export { Tokenizer, type TokenizerOption, type TokenizerProps } from './Tokenizer';
-export {
-  cx,
-  recipeClassName,
-  recipeProps,
-  type BaseTextFieldProps,
-  type FieldMeta,
-  type RecipeClass,
-} from './utils';
+export { cx, combine, mergeProps, type BaseTextFieldProps, type FieldMeta } from './utils';
 export { MultiSelector, type MultiSelectorOption, type MultiSelectorProps } from './MultiSelector';
 export { ResizeHandle, type ResizeHandleProps } from './ResizeHandle';
 export {

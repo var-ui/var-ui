@@ -20,7 +20,7 @@ import { useLayer } from '../layers/LayerProvider';
 import { registerToastQueue, unregisterToastQueue } from '../toast/imperativeToast';
 import { ToastQueue } from '../toast/toastQueue';
 import type { ToastContentData } from '../toast/types';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type { ToastTone, ToastPlacement } from '@var-ui/core';
 export type { ToastContentData } from '../toast/types';
@@ -80,16 +80,16 @@ export function Toast({
 }: ToastProps): JSX.Element {
   const t = toastSlots({ tone, appearance });
   return (
-    <div {...recipeProps(t.item, className)} role="status">
-      <span {...recipeProps(t.icon)}>
+    <div {...mergeProps(t.item, className)} role="status">
+      <span {...mergeProps(t.icon)}>
         <Icon name={toneIcon[tone]} />
       </span>
-      <div {...recipeProps(t.body)}>
-        <div {...recipeProps(t.title)}>{title}</div>
-        {description ? <div {...recipeProps(t.description)}>{description}</div> : null}
+      <div {...mergeProps(t.body)}>
+        <div {...mergeProps(t.title)}>{title}</div>
+        {description ? <div {...mergeProps(t.description)}>{description}</div> : null}
       </div>
       {onDismiss ? (
-        <AriaButton {...recipeProps(t.close)} aria-label={dismissLabel} onPress={onDismiss}>
+        <AriaButton {...mergeProps(t.close)} aria-label={dismissLabel} onPress={onDismiss}>
           <Icon name="close" size="sm" />
         </AriaButton>
       ) : null}
@@ -118,27 +118,27 @@ export function ToastRegion({
   const { style: layerStyle } = useLayer();
   const region = toastSlots({ placement });
   return (
-    <AriaToastRegion queue={queue} {...recipeProps(region.region, className)} style={layerStyle}>
+    <AriaToastRegion queue={queue} {...mergeProps(region.region, className)} style={layerStyle}>
       {({ toast: queued }) => {
         const tone = queued.content.tone ?? 'info';
         const t = toastSlots({ tone });
         return (
-          <AriaToast toast={queued} {...recipeProps(t.item)}>
-            <span {...recipeProps(t.icon)}>
+          <AriaToast toast={queued} {...mergeProps(t.item)}>
+            <span {...mergeProps(t.icon)}>
               <Icon name={toneIcon[tone]} />
             </span>
-            <AriaToastContent {...recipeProps(t.body)}>
-              <Text slot="title" {...recipeProps(t.title)}>
+            <AriaToastContent {...mergeProps(t.body)}>
+              <Text slot="title" {...mergeProps(t.title)}>
                 {queued.content.title}
               </Text>
               {queued.content.description ? (
-                <Text slot="description" {...recipeProps(t.description)}>
+                <Text slot="description" {...mergeProps(t.description)}>
                   {queued.content.description}
                 </Text>
               ) : null}
             </AriaToastContent>
             <AriaButton
-              {...recipeProps(t.close)}
+              {...mergeProps(t.close)}
               aria-label="Dismiss"
               onPress={() => queue.close(queued.key)}
             >

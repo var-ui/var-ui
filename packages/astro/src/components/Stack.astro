@@ -1,6 +1,6 @@
 ---
 import { stack } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   direction?: 'column' | 'row';
@@ -19,7 +19,7 @@ const {
   wrap = false,
   className,
 } = Astro.props;
-const rp = recipeProps(
+const rp = mergeProps(
   stack({ direction, gap, align, justify, wrap: wrap ? 'wrap' : 'nowrap' }),
   className,
 );

@@ -16,7 +16,7 @@ import {
 import type { UseResizableResult } from '../hooks';
 import { useMediaQuery, useScrollLock } from '../hooks';
 import { useLayer } from '../layers/LayerProvider';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 const dialogContentStyle: CSSProperties = { display: 'contents' };
 
@@ -150,7 +150,7 @@ export function Layout({
     <LayoutSlotsContext.Provider value={slots}>
       <LayoutDividerContext.Provider value={defaultHasDividers}>
         <div
-          {...recipeProps(l.root, className)}
+          {...mergeProps(l.root, className)}
           style={rootStyle}
           data-has-header={hasHeader ? '' : undefined}
           data-has-footer={hasFooter ? '' : undefined}
@@ -159,12 +159,12 @@ export function Layout({
           data-divider-header={headerHasDivider ? '' : undefined}
           data-divider-footer={footerHasDivider ? '' : undefined}
         >
-          <div {...recipeProps(l.outer)}>
-            <div {...recipeProps(l.inner)}>
+          <div {...mergeProps(l.outer)}>
+            <div {...mergeProps(l.inner)}>
               {hasHeader ? (
                 <LayoutAreaContext.Provider value="header">{header}</LayoutAreaContext.Provider>
               ) : null}
-              <div {...recipeProps(l.middle)}>
+              <div {...mergeProps(l.middle)}>
                 {hasStart ? (
                   <LayoutAreaContext.Provider value="start">{start}</LayoutAreaContext.Provider>
                 ) : null}
@@ -230,11 +230,11 @@ export function LayoutHeader({
   return (
     <LayoutAreaContext.Provider value="header">
       <div
-        {...recipeProps(s.header, className)}
+        {...mergeProps(s.header, className)}
         style={style}
         data-divider={effectiveHasDivider ? '' : undefined}
       >
-        <div {...recipeProps(s.headerInner)}>{children}</div>
+        <div {...mergeProps(s.headerInner)}>{children}</div>
       </div>
     </LayoutAreaContext.Provider>
   );
@@ -270,11 +270,11 @@ export function LayoutFooter({
   return (
     <LayoutAreaContext.Provider value="footer">
       <div
-        {...recipeProps(s.footer, className)}
+        {...mergeProps(s.footer, className)}
         style={style}
         data-divider={effectiveHasDivider ? '' : undefined}
       >
-        <div {...recipeProps(s.footerInner)}>{children}</div>
+        <div {...mergeProps(s.footerInner)}>{children}</div>
       </div>
     </LayoutAreaContext.Provider>
   );
@@ -306,7 +306,7 @@ export function LayoutContent({
 
   return (
     <LayoutAreaContext.Provider value="content">
-      <div {...recipeProps(s.content, className)} role={resolvedRole} aria-label={label}>
+      <div {...mergeProps(s.content, className)} role={resolvedRole} aria-label={label}>
         {children}
       </div>
     </LayoutAreaContext.Provider>
@@ -418,7 +418,7 @@ export function LayoutPanel({
 
   const panelBody = (
     <div
-      {...recipeProps(s.panel, className)}
+      {...mergeProps(s.panel, className)}
       data-side={dataSide}
       style={style}
       role={isOverlayMode ? undefined : resolvedRole}
@@ -434,11 +434,11 @@ export function LayoutPanel({
         isOpen={isOpen}
         onOpenChange={setOpen}
         isDismissable
-        {...recipeProps(s.overlayBackdrop)}
+        {...mergeProps(s.overlayBackdrop)}
         data-open={isOpen ? '' : undefined}
         style={layerStyle}
       >
-        <Modal {...recipeProps(s.overlay)} data-side={dataSide} data-open={isOpen ? '' : undefined}>
+        <Modal {...mergeProps(s.overlay)} data-side={dataSide} data-open={isOpen ? '' : undefined}>
           <AriaDialog aria-label={label ?? 'Panel'} style={dialogContentStyle}>
             {panelBody}
           </AriaDialog>

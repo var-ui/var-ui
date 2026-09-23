@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import { HighlightedCodeBlock } from '../HighlightedCodeBlock';
-import { recipeClassName } from '@var-ui/react';
 import { configuratorStyles } from '@/styles/configurator';
 
 export type ComponentConfiguratorProps = {
@@ -21,16 +20,16 @@ export function ComponentConfigurator({
   const c = configuratorStyles();
 
   return (
-    <div className={recipeClassName(c.root)} data-component-configurator>
-      <div className={recipeClassName(c.workspace)}>
-        <div className={recipeClassName(c.preview)}>
-          <div className={recipeClassName(c.previewInner)}>{preview}</div>
+    <div className={c.root.className} data-component-configurator>
+      <div className={c.workspace.className}>
+        <div className={c.preview.className}>
+          <div className={c.previewInner.className}>{preview}</div>
         </div>
-        <aside className={recipeClassName(c.controls)} aria-label="Component options">
+        <aside className={c.controls.className} aria-label="Component options">
           {controls}
         </aside>
       </div>
-      <div className={recipeClassName(c.code)}>
+      <div className={c.code.className}>
         <HighlightedCodeBlock code={code} language={language} {...(filename ? { filename } : {})} />
       </div>
     </div>

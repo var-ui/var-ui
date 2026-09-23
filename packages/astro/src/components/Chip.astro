@@ -1,6 +1,6 @@
 ---
 import { chip, type ChipVariantProps } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 interface Props extends ChipVariantProps {
   className?: string;
@@ -10,6 +10,6 @@ const { tone = 'neutral', appearance = 'subtle', className } = Astro.props;
 const c = chip({ tone, appearance });
 ---
 
-<span {...recipeProps(c.root, className)}>
-  <span {...recipeProps(c.label)}><slot /></span>
+<span {...mergeProps(c.root, className)}>
+  <span {...mergeProps(c.label)}><slot /></span>
 </span>

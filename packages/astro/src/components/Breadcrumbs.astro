@@ -1,6 +1,6 @@
 ---
 import { breadcrumbs as breadcrumbsStyles } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type BreadcrumbItemData = {
   id: string;
@@ -54,28 +54,28 @@ const style = separator ? `--var-ui-breadcrumbs-separator: "${separator}"` : und
 const lastId = items[items.length - 1]?.id;
 ---
 
-<nav aria-label={label} {...recipeProps(b.root, className)} style={style}>
-  <ol {...recipeProps(b.list)}>
+<nav aria-label={label} {...mergeProps(b.root, className)} style={style}>
+  <ol {...mergeProps(b.list)}>
     {
       visibleItems.map((item) => {
         const isCurrent = !item.isEllipsis && item.id === lastId;
         if (item.isEllipsis) {
           return (
-            <li {...recipeProps(b.ellipsisItem)}>
-              <span {...recipeProps(b.link)} data-disabled aria-hidden="true">
+            <li {...mergeProps(b.ellipsisItem)}>
+              <span {...mergeProps(b.link)} data-disabled aria-hidden="true">
                 {item.label}
               </span>
             </li>
           );
         }
         return (
-          <li {...recipeProps(b.item)} data-current={isCurrent || undefined}>
+          <li {...mergeProps(b.item)} data-current={isCurrent || undefined}>
             {item.href && !isCurrent ? (
-              <a href={item.href} {...recipeProps(b.link)}>
+              <a href={item.href} {...mergeProps(b.link)}>
                 {item.label}
               </a>
             ) : (
-              <span {...recipeProps(b.link)} data-disabled={isCurrent || undefined}>
+              <span {...mergeProps(b.link)} data-disabled={isCurrent || undefined}>
                 {item.label}
               </span>
             )}

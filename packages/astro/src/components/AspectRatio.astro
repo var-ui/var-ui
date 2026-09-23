@@ -1,6 +1,6 @@
 ---
 import { aspectRatio } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   ratio?: number;
@@ -8,6 +8,6 @@ type Props = {
 };
 
 const { ratio, className } = Astro.props;
-const rp = recipeProps(aspectRatio(), className);
+const rp = mergeProps(aspectRatio(), className);
 ---
 <div {...rp} style={ratio ? `aspect-ratio: ${ratio}` : undefined}><slot /></div>

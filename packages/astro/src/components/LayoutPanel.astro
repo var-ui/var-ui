@@ -1,6 +1,6 @@
 ---
 import { layoutPanel, type LayoutPadding } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   width?: number | string;
@@ -39,7 +39,7 @@ const style = widthValue != null ? { width: widthValue } : undefined;
 ---
 
 <div
-  {...recipeProps(s.panel, className)}
+  {...mergeProps(s.panel, className)}
   data-side={side}
   style={style}
   role={resolvedRole}

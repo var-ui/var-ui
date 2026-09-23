@@ -2,7 +2,7 @@
 import { Fragment } from 'astro/jsx-runtime';
 import { tabs as tabsRecipe } from '@var-ui/core';
 import { Toc } from '@var-ui/astro';
-import { recipeProps } from '../utils/recipeProps';
+import { mergeProps } from '../utils/mergeProps';
 
 type TabDef = { id: string; label: string };
 
@@ -16,9 +16,9 @@ type Props = {
 const { tabs, defaultSelectedId, className, tocContentSelector } = Astro.props;
 const selected = defaultSelectedId ?? tabs[0]?.id;
 const t = tabsRecipe();
-const rootClass = recipeProps(t.root, className).className;
-const listClass = recipeProps(t.list).className;
-const tabClass = recipeProps(t.tab).className;
+const rootClass = mergeProps(t.root, className).className;
+const listClass = mergeProps(t.list).className;
+const tabClass = mergeProps(t.tab).className;
 
 const panelSlots = await Promise.all(
   tabs.map(async (tab) => ({

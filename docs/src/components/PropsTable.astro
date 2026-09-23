@@ -4,7 +4,7 @@ import { PropsTable as ReactPropsTable } from './PropsTable';
 import { getAstroComponentDoc, hasAstroBinding } from '../lib/astro-component-docs';
 import { getHtmlApiDoc } from '../lib/html-api-docs';
 import { loadReactPropsDoc } from '../lib/load-react-props';
-import { recipeProps } from '../lib/recipeProps';
+import { mergeProps } from '../lib/mergeProps';
 
 type Props = {
   /** Component slug from the docs registry, e.g. `button`. */
@@ -13,7 +13,7 @@ type Props = {
 
 const { slug } = Astro.props;
 const framework = Astro.locals.framework;
-const tableWrap = recipeProps(proseContent().tableWrap);
+const tableWrap = mergeProps(proseContent().tableWrap);
 
 const reactDoc = framework === 'react' ? loadReactPropsDoc(slug) : null;
 const astroDoc = framework === 'astro' ? getAstroComponentDoc(slug) : null;

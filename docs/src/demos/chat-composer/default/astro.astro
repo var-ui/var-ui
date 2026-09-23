@@ -1,24 +1,24 @@
 ---
 import { button, chatComposer, resolveButtonProps } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 // No @var-ui/astro ChatComposer — static core-recipe chrome (non-interactive).
 const c = chatComposer();
 const send = button(resolveButtonProps({ intent: 'primary' }));
 ---
 
-<div {...recipeProps(c.root)}>
-  <div {...recipeProps(c.inputRow)}>
+<div {...mergeProps(c.root)}>
+  <div {...mergeProps(c.inputRow)}>
     <textarea
-      {...recipeProps(c.input)}
+      {...mergeProps(c.input)}
       rows="1"
       placeholder="Type a message…"
       aria-label="Message"
       disabled></textarea
     >
   </div>
-  <div {...recipeProps(c.actions)}>
-    <button type="button" {...recipeProps(send)} aria-label="Send message" disabled>
+  <div {...mergeProps(c.actions)}>
+    <button type="button" {...mergeProps(send)} aria-label="Send message" disabled>
       <svg
         viewBox="0 0 24 24"
         width="16"

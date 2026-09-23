@@ -9,7 +9,7 @@ import {
 describe('color-tokens', () => {
   it('builds palette swatches for every family and step', () => {
     const swatches = getPaletteSwatches();
-    expect(swatches).toHaveLength(390);
+    expect(swatches).toHaveLength(400);
     expect(swatches[0]).toMatchObject({
       family: 'rose',
       step: '1',

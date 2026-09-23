@@ -1,11 +1,11 @@
 ---
 import { textAreaField } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 const taf = textAreaField();
 ---
 
-<div {...recipeProps(taf.root)}>
-  <label {...recipeProps(taf.label)} for="notes">Notes</label>
-  <textarea {...recipeProps(taf.input)} id="notes" placeholder="Add a note…"></textarea>
+<div {...mergeProps(taf.root)}>
+  <label {...mergeProps(taf.label)} for="notes">Notes</label>
+  <textarea {...mergeProps(taf.input)} id="notes" placeholder="Add a note…"></textarea>
 </div>

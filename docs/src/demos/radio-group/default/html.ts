@@ -1,5 +1,5 @@
 import { radio } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const options = [
@@ -19,22 +19,22 @@ function renderOption(value: string, label: string): string {
     },
     '',
   );
-  const control = serializeHtmlTag('span', recipeProps(r.control), '');
-  const labelEl = serializeHtmlTag('span', recipeProps(r.label), label);
-  return serializeHtmlTag('label', recipeProps(r.item), `${input}${control}${labelEl}`);
+  const control = serializeHtmlTag('span', mergeProps(r.control), '');
+  const labelEl = serializeHtmlTag('span', mergeProps(r.label), label);
+  return serializeHtmlTag('label', mergeProps(r.item), `${input}${control}${labelEl}`);
 }
 
 export function render(): string {
   const r = radio();
   const groupLabel = serializeHtmlTag(
     'span',
-    { ...recipeProps(r.groupLabel), id: 'plan-label' },
+    { ...mergeProps(r.groupLabel), id: 'plan-label' },
     'Plan',
   );
   const items = options.map((o) => renderOption(o.value, o.label)).join('');
   return serializeHtmlTag(
     'div',
-    { ...recipeProps(r.group), role: 'radiogroup', 'aria-labelledby': 'plan-label' },
+    { ...mergeProps(r.group), role: 'radiogroup', 'aria-labelledby': 'plan-label' },
     `${groupLabel}${items}`,
   );
 }

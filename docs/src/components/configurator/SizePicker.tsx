@@ -1,4 +1,3 @@
-import { recipeClassName } from '@var-ui/react';
 import { configuratorStyles } from '@/styles/configurator';
 import { SIZE_OPTIONS } from './buttonCode';
 
@@ -17,7 +16,7 @@ export function SizePicker({ value, onChange }: SizePickerProps) {
   const c = configuratorStyles();
 
   return (
-    <div className={recipeClassName(c.sizeGrid)} role="radiogroup" aria-label="Size">
+    <div className={c.sizeGrid.className} role="radiogroup" aria-label="Size">
       {SIZE_OPTIONS.map((size) => {
         const isActive = size === value;
         return (
@@ -28,7 +27,7 @@ export function SizePicker({ value, onChange }: SizePickerProps) {
             aria-checked={isActive}
             aria-label={size}
             title={size}
-            className={recipeClassName(isActive ? c.optionButtonActive : c.optionButton)}
+            className={(isActive ? c.optionButtonActive : c.optionButton).className}
             onClick={() => onChange(size)}
           >
             {SIZE_LABELS[size]}

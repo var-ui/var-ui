@@ -1,6 +1,6 @@
 ---
 import { progressBar, type ProgressBarVariantProps } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = ProgressBarVariantProps & {
   value?: number;
@@ -36,7 +36,7 @@ const valueText = `${Math.round(percentage)}%`;
 const showHeader = Boolean(label) || showValue;
 ---
 <div
-  {...recipeProps(p.root, className)}
+  {...mergeProps(p.root, className)}
   role="progressbar"
   aria-label={label}
   aria-valuemin={isIndeterminate ? undefined : minValue}
@@ -45,15 +45,15 @@ const showHeader = Boolean(label) || showValue;
 >
   {
     showHeader ? (
-      <div {...recipeProps(p.header)}>
-        {label ? <span {...recipeProps(p.label)}>{label}</span> : <span />}
-        {showValue ? <span {...recipeProps(p.valueText)}>{valueText}</span> : null}
+      <div {...mergeProps(p.header)}>
+        {label ? <span {...mergeProps(p.label)}>{label}</span> : <span />}
+        {showValue ? <span {...mergeProps(p.valueText)}>{valueText}</span> : null}
       </div>
     ) : null
   }
-  <div {...recipeProps(p.track)}>
+  <div {...mergeProps(p.track)}>
     <div
-      {...recipeProps(p.fill)}
+      {...mergeProps(p.fill)}
       style={isIndeterminate ? undefined : { width: `${percentage}%` }}
     />
   </div>

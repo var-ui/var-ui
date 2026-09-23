@@ -5,7 +5,7 @@ import { topNav } from '@var-ui/core';
 import { Icon } from '../icons';
 import { renderTopNavIcon, type TopNavIcon, type TopNavRichItem } from './TopNav';
 import { Text } from './Typography';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 const OPEN_DELAY_DEFAULT = 150;
 const CLOSE_DELAY_DEFAULT = 250;
@@ -136,7 +136,7 @@ export function TopNavMegaMenu({
     <div ref={containerRef} onKeyDown={handleKeyDown} style={{ display: 'contents' }}>
       <AriaButton
         ref={triggerRef}
-        {...recipeProps(s.menuTrigger, className)}
+        {...mergeProps(s.menuTrigger, className)}
         aria-expanded={isOpen}
         aria-haspopup="true"
         onPress={toggle}
@@ -149,7 +149,7 @@ export function TopNavMegaMenu({
         <Icon name="chevronDown" size="sm" />
       </AriaButton>
       {isOpen && hasPanelContent ? (
-        <div {...recipeProps(s.megaPanel)} onMouseEnter={clearTimers} onMouseLeave={scheduleClose}>
+        <div {...mergeProps(s.megaPanel)} onMouseEnter={clearTimers} onMouseLeave={scheduleClose}>
           <div style={megaItemsColumnStyle}>
             {items?.map((item) => (
               <TopNavMegaMenuItem
@@ -209,7 +209,7 @@ export function TopNavMegaMenuItem({
   );
 
   const sharedProps = {
-    ...recipeProps(s.megaItem, className),
+    ...mergeProps(s.megaItem, className),
     'data-disabled': isDisabled ? '' : undefined,
     isDisabled,
   };
@@ -263,11 +263,11 @@ export function TopNavMegaMenuFeaturedCard({
   );
 
   return href ? (
-    <AriaLink href={href} {...recipeProps(s.featuredCard, className)} style={featuredCardLinkStyle}>
+    <AriaLink href={href} {...mergeProps(s.featuredCard, className)} style={featuredCardLinkStyle}>
       {body}
     </AriaLink>
   ) : (
-    <div {...recipeProps(s.featuredCard, className)}>{body}</div>
+    <div {...mergeProps(s.featuredCard, className)}>{body}</div>
   );
 }
 

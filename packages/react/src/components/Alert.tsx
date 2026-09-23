@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { alert, type AlertVariant, type IconName, type SurfaceAppearance } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type { AlertTone, AlertVariant, SurfaceAppearance as AlertAppearance } from '@var-ui/core';
 
@@ -50,24 +50,24 @@ export function Alert({
 
   return (
     <div
-      {...recipeProps(a.root, className)}
+      {...mergeProps(a.root, className)}
       data-alert
       data-alert-variant={variant}
       data-alert-appearance={appearance}
     >
       {resolvedIcon !== null ? (
-        <div {...recipeProps(a.icon)} data-alert-icon>
+        <div {...mergeProps(a.icon)} data-alert-icon>
           {resolvedIcon}
         </div>
       ) : null}
-      <div {...recipeProps(a.body)}>
-        {title ? <p {...recipeProps(a.title)}>{title}</p> : null}
-        <div {...recipeProps(a.content)} data-alert-content>
+      <div {...mergeProps(a.body)}>
+        {title ? <p {...mergeProps(a.title)}>{title}</p> : null}
+        <div {...mergeProps(a.content)} data-alert-content>
           {children}
         </div>
         {action ? (
-          <div {...recipeProps(a.action)}>
-            <a {...recipeProps(a.actionLink)} href={action.href} data-alert-action>
+          <div {...mergeProps(a.action)}>
+            <a {...mergeProps(a.actionLink)} href={action.href} data-alert-action>
               {action.label}
             </a>
           </div>

@@ -1,5 +1,5 @@
 import { textBlock } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 /** Stable demo values — relative label matches the React default demo intent. */
@@ -11,7 +11,7 @@ export function render(): string {
   return serializeHtmlTag(
     'time',
     {
-      ...recipeProps(textBlock({ size: 'sm', tone: 'secondary' })),
+      ...mergeProps(textBlock({ size: 'sm', tone: 'secondary' })),
       datetime: DEMO_ISO,
       title: DEMO_TITLE,
     },

@@ -8,7 +8,7 @@ import {
 } from 'react-aria-components';
 import { collapsible, type CollapsibleVariantProps } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type { CollapsibleVariant } from '@var-ui/core';
 
@@ -65,13 +65,13 @@ export function Collapsible({
       isExpanded={isExpanded}
       defaultExpanded={defaultExpanded}
       onExpandedChange={onExpandedChange}
-      {...recipeProps(c.root, className)}
+      {...mergeProps(c.root, className)}
     >
       <Heading level={3} style={{ margin: 0 }}>
-        <AriaButton slot="trigger" {...recipeProps(c.trigger)}>
+        <AriaButton slot="trigger" {...mergeProps(c.trigger)}>
           {trigger ?? (
             <>
-              <span {...recipeProps(c.triggerIcon)}>
+              <span {...mergeProps(c.triggerIcon)}>
                 <Icon name="chevronDown" size="sm" />
               </span>
               {title}
@@ -79,7 +79,7 @@ export function Collapsible({
           )}
         </AriaButton>
       </Heading>
-      <DisclosurePanel {...recipeProps(c.panel)}>{children}</DisclosurePanel>
+      <DisclosurePanel {...mergeProps(c.panel)}>{children}</DisclosurePanel>
     </Disclosure>
   );
 }

@@ -42,6 +42,7 @@ export default defineConfig({
         '@var-ui/docs/utils': `${root}/packages/docs/src/utils/index.ts`,
         '@var-ui/docs/shiki': `${root}/packages/docs/src/utils/shiki-theme.ts`,
         '@var-ui/docs/middleware': `${root}/packages/docs/src/middleware.ts`,
+        '@var-ui/docs/DocsGuidePage': `${root}/packages/docs/src/components/DocsGuidePage.astro`,
         '@var-ui/docs/DocsPage': `${root}/packages/docs/src/components/DocsPage.astro`,
         '@var-ui/docs/routes/guide.astro': `${root}/packages/docs/src/routes/guide.astro`,
         '@var-ui/docs': `${root}/packages/docs/index.ts`,

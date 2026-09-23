@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { createContext, useContext, useId } from 'react';
 import { list as listStyles } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type ListItemData = {
   id: string;
@@ -114,16 +114,16 @@ function ListItemContent({
 
   return (
     <li
-      {...recipeProps(s.item, className)}
+      {...mergeProps(s.item, className)}
       data-interactive={isInteractive ? '' : undefined}
       data-disabled={isDisabled ? '' : undefined}
     >
-      {startContent != null ? <span {...recipeProps(s.start)}>{startContent}</span> : null}
-      <span id={isInteractive ? labelId : undefined} {...recipeProps(s.label)}>
+      {startContent != null ? <span {...mergeProps(s.start)}>{startContent}</span> : null}
+      <span id={isInteractive ? labelId : undefined} {...mergeProps(s.label)}>
         {label}
       </span>
-      {description != null ? <span {...recipeProps(s.description)}>{description}</span> : null}
-      {endContent != null ? <span {...recipeProps(s.end)}>{endContent}</span> : null}
+      {description != null ? <span {...mergeProps(s.description)}>{description}</span> : null}
+      {endContent != null ? <span {...mergeProps(s.end)}>{endContent}</span> : null}
       {isInteractive && href != null ? (
         <a
           href={href}
@@ -196,8 +196,8 @@ export function List({
 
   return (
     <ListContext.Provider value={{ styles: s, listId }}>
-      <RootTag {...recipeProps(s.root, className)}>
-        {header != null ? <li {...recipeProps(s.header)}>{header}</li> : null}
+      <RootTag {...mergeProps(s.root, className)}>
+        {header != null ? <li {...mergeProps(s.header)}>{header}</li> : null}
         {children ?? itemNodes}
       </RootTag>
     </ListContext.Provider>

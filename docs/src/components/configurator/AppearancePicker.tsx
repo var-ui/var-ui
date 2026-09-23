@@ -1,5 +1,4 @@
 import type { ToneAppearance } from '@var-ui/core';
-import { recipeClassName } from '@var-ui/react';
 import { configuratorStyles } from '@/styles/configurator';
 import { APPEARANCE_OPTIONS } from './buttonCode';
 
@@ -12,7 +11,7 @@ export function AppearancePicker({ value, onChange }: AppearancePickerProps) {
   const c = configuratorStyles();
 
   return (
-    <div className={recipeClassName(c.appearanceGrid)} role="radiogroup" aria-label="Appearance">
+    <div className={c.appearanceGrid.className} role="radiogroup" aria-label="Appearance">
       {APPEARANCE_OPTIONS.map((appearance) => {
         const isActive = appearance.id === value;
         return (
@@ -23,7 +22,7 @@ export function AppearancePicker({ value, onChange }: AppearancePickerProps) {
             aria-checked={isActive}
             aria-label={appearance.label}
             title={appearance.label}
-            className={recipeClassName(isActive ? c.optionButtonActive : c.optionButton)}
+            className={(isActive ? c.optionButtonActive : c.optionButton).className}
             onClick={() => onChange(appearance.id)}
           >
             {appearance.label}

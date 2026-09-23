@@ -10,7 +10,7 @@ import {
 } from 'react-aria-components';
 import { menu } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx, recipeProps } from './utils';
+import { cx, mergeProps } from './utils';
 
 export type MenuItemDefinition = {
   id: string;
@@ -37,7 +37,7 @@ export function MenuContent({ sections }: MenuContentProps): JSX.Element {
   sections.forEach((section, sectionIndex) => {
     if (section.label) {
       nodes.push(
-        <Header key={`header-${sectionIndex}`} {...recipeProps(m.sectionHeader)}>
+        <Header key={`header-${sectionIndex}`} {...mergeProps(m.sectionHeader)}>
           {section.label}
         </Header>,
       );
@@ -50,27 +50,27 @@ export function MenuContent({ sections }: MenuContentProps): JSX.Element {
           textValue={item.label}
           isDisabled={item.disabled}
           onAction={item.onAction}
-          {...recipeProps(m.item, cx(item.danger && m.itemDanger))}
+          {...mergeProps(m.item, cx(item.danger && m.itemDanger))}
         >
           {({ isSelected }) => (
             <>
-              <span {...recipeProps(m.itemCheck)}>
+              <span {...mergeProps(m.itemCheck)}>
                 {isSelected ? <Icon name="check" size="sm" /> : null}
               </span>
-              <span {...recipeProps(m.itemLabel)}>{item.label}</span>
-              {item.shortcut ? <span {...recipeProps(m.itemShortcut)}>{item.shortcut}</span> : null}
+              <span {...mergeProps(m.itemLabel)}>{item.label}</span>
+              {item.shortcut ? <span {...mergeProps(m.itemShortcut)}>{item.shortcut}</span> : null}
             </>
           )}
         </AriaMenuItem>,
       );
     });
     if (sectionIndex < sections.length - 1) {
-      nodes.push(<Separator key={`sep-${sectionIndex}`} {...recipeProps(m.separator)} />);
+      nodes.push(<Separator key={`sep-${sectionIndex}`} {...mergeProps(m.separator)} />);
     }
   });
 
   return (
-    <AriaMenu {...recipeProps(m.menu)} selectionMode="none">
+    <AriaMenu {...mergeProps(m.menu)} selectionMode="none">
       {nodes}
     </AriaMenu>
   );
@@ -87,7 +87,7 @@ export function DropdownMenu({ trigger, sections, ...props }: DropdownMenuProps)
   return (
     <MenuTrigger {...props}>
       {trigger}
-      <Popover {...recipeProps(m.popover)}>
+      <Popover {...mergeProps(m.popover)}>
         <MenuContent sections={sections} />
       </Popover>
     </MenuTrigger>

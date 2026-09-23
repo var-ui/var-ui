@@ -2,7 +2,7 @@ import type { JSX } from 'react';
 import { useMemo, useState } from 'react';
 import { codeBlock } from '@var-ui/core';
 import { Icon } from '../icons';
-import { cx, recipeClassName, recipeProps } from './utils';
+import { combine, cx, mergeProps } from './utils';
 
 type CodeBlockVariant = 'default' | 'inline' | 'diff' | 'terminal';
 type FeedbackTone = 'success' | 'error' | null;
@@ -67,10 +67,10 @@ export function CodeBlock({
 }: CodeBlockProps): JSX.Element {
   const cb = codeBlock();
   const variantRootClass: Record<CodeBlockVariant, string> = {
-    default: recipeClassName(cb.rootDefault),
-    inline: recipeClassName(cb.rootInline),
-    diff: recipeClassName(cb.rootDiff),
-    terminal: recipeClassName(cb.rootTerminal),
+    default: cb.rootDefault.className,
+    inline: cb.rootInline.className,
+    diff: cb.rootDiff.className,
+    terminal: cb.rootTerminal.className,
   };
 
   const [isCopied, setIsCopied] = useState(false);
@@ -83,13 +83,13 @@ export function CodeBlock({
   const terminal = variant === 'terminal';
   const inline = variant === 'inline';
   const useHighlightedHtml = Boolean(codeHtml || lineHtml) && !terminal;
-  const resolvedCodeClassName = cx(recipeClassName(cb.code), highlightedCodeClassName);
+  const resolvedCodeClassName = cx(cb.code.className, highlightedCodeClassName);
 
   const feedbackClassName = cx(
-    recipeClassName(cb.feedback),
-    recipeClassName(cb.feedbackInline),
-    feedbackTone === 'success' && recipeClassName(cb.feedbackSuccess),
-    feedbackTone === 'error' && recipeClassName(cb.feedbackError),
+    cb.feedback.className,
+    cb.feedbackInline.className,
+    feedbackTone === 'success' && cb.feedbackSuccess.className,
+    feedbackTone === 'error' && cb.feedbackError.className,
   );
 
   const resetCopyState = () => {
@@ -120,10 +120,7 @@ export function CodeBlock({
   if (inline) {
     return (
       <code
-        {...recipeProps(
-          cb.root,
-          cx(variantRootClass[variant], recipeClassName(cb.code), className),
-        )}
+        {...mergeProps(cb.root, cx(variantRootClass[variant], cb.code.className, className))}
         data-codeblock
       >
         {code}
@@ -132,32 +129,28 @@ export function CodeBlock({
   }
 
   return (
-    <div {...recipeProps(cb.root, cx(variantRootClass[variant], className))} data-codeblock>
+    <div {...mergeProps(cb.root, cx(variantRootClass[variant], className))} data-codeblock>
       <div
-        {...recipeProps(cb.header, cx(terminal && recipeClassName(cb.headerTerminal)))}
+        {...mergeProps(cb.header, cx(terminal && cb.headerTerminal.className))}
         data-codeblock-header
       >
-        <div {...recipeProps(cb.title)}>
-          {filename ? <span {...recipeProps(cb.filename)}>{filename}</span> : null}
+        <div {...mergeProps(cb.title)}>
+          {filename ? <span {...mergeProps(cb.filename)}>{filename}</span> : null}
           {language ? (
-            <span
-              {...recipeProps(cb.language, cx(terminal && recipeClassName(cb.languageTerminal)))}
-            >
+            <span {...mergeProps(cb.language, cx(terminal && cb.languageTerminal.className))}>
               {language}
             </span>
           ) : null}
         </div>
         {copyable ? (
-          <div {...recipeProps(cb.actions)}>
+          <div {...mergeProps(cb.actions)}>
             <button
               type="button"
-              {...recipeProps(
+              {...combine(
                 cb.copyButton,
-                cx(
-                  !isCopied && !hasError && recipeClassName(cb.copyButtonIdle),
-                  isCopied && recipeClassName(cb.copyButtonCopied),
-                  hasError && recipeClassName(cb.copyButtonError),
-                ),
+                !isCopied && !hasError && cb.copyButtonIdle,
+                isCopied && cb.copyButtonCopied,
+                hasError && cb.copyButtonError,
               )}
               data-copied={isCopied || undefined}
               data-error={hasError || undefined}
@@ -175,40 +168,40 @@ export function CodeBlock({
       </div>
 
       <div
-        {...recipeProps(
+        {...mergeProps(
           cb.body,
-          cx(recipeClassName(cb.bodyScrollable), terminal && recipeClassName(cb.bodyTerminal)),
+          cx(cb.bodyScrollable.className, terminal && cb.bodyTerminal.className),
         )}
         data-codeblock-body
       >
         <pre
-          {...recipeProps(
+          {...mergeProps(
             cb.pre,
             cx(
-              wrapLongLines ? recipeClassName(cb.preWrap) : recipeClassName(cb.preScrollX),
-              terminal && recipeClassName(cb.preTerminal),
+              wrapLongLines ? cb.preWrap.className : cb.preScrollX.className,
+              terminal && cb.preTerminal.className,
             ),
           )}
           data-codeblock-pre
         >
           {showLineNumbers ? (
-            <code {...recipeProps(cb.code, recipeClassName(cb.lines))}>
+            <code {...mergeProps(cb.code, cb.lines.className)}>
               {lines.map((line, index) => {
                 const lineNumber = index + 1;
                 const lineContentHtml = lineHtml?.[index];
                 return (
                   <span
                     key={lineNumber}
-                    {...recipeProps(
+                    {...mergeProps(
                       cb.line,
-                      cx(highlightedSet.has(lineNumber) && recipeClassName(cb.lineHighlighted)),
+                      cx(highlightedSet.has(lineNumber) && cb.lineHighlighted.className),
                     )}
                   >
-                    <span {...recipeProps(cb.lineNumber)} aria-hidden="true">
+                    <span {...mergeProps(cb.lineNumber)} aria-hidden="true">
                       {lineNumber}
                     </span>
                     <span
-                      {...recipeProps(cb.lineContent)}
+                      {...mergeProps(cb.lineContent)}
                       {...(lineContentHtml
                         ? { dangerouslySetInnerHTML: { __html: lineContentHtml } }
                         : { children: line || ' ' })}
@@ -219,11 +212,11 @@ export function CodeBlock({
             </code>
           ) : useHighlightedHtml ? (
             <code
-              {...recipeProps(cb.code, resolvedCodeClassName)}
+              {...mergeProps(cb.code, resolvedCodeClassName)}
               dangerouslySetInnerHTML={{ __html: codeHtml! }}
             />
           ) : (
-            <code {...recipeProps(cb.code)}>{escapeHtml(code)}</code>
+            <code {...mergeProps(cb.code)}>{escapeHtml(code)}</code>
           )}
         </pre>
       </div>

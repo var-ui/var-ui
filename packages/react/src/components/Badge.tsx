@@ -1,6 +1,6 @@
 import type { HTMLAttributes, JSX } from 'react';
 import { badge, type BadgeVariantProps } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type { BadgeTone, SurfaceAppearance as BadgeAppearance } from '@var-ui/core';
 
@@ -19,5 +19,5 @@ export function Badge({
   className,
   ...props
 }: BadgeProps): JSX.Element {
-  return <span {...props} {...recipeProps(badge({ tone, appearance }), className)} />;
+  return <span {...props} {...mergeProps(badge({ tone, appearance }), className)} />;
 }

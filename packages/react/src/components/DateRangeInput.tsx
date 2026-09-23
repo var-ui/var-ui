@@ -22,7 +22,7 @@ import {
 } from 'react-aria-components';
 import { dateRangeInput } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type DateRangeInputProps<T extends DateValue = DateValue> = Omit<
   RACDateRangePickerProps<T>,
@@ -59,48 +59,48 @@ export function DateRangeInput<T extends DateValue = DateValue>({
 }: DateRangeInputProps<T>): JSX.Element {
   const dr = dateRangeInput();
   return (
-    <AriaDateRangePicker {...props} {...recipeProps(dr.root, className)}>
-      {label ? <Label {...recipeProps(dr.label)}>{label}</Label> : null}
-      <Group {...recipeProps(dr.group)}>
+    <AriaDateRangePicker {...props} {...mergeProps(dr.root, className)}>
+      {label ? <Label {...mergeProps(dr.label)}>{label}</Label> : null}
+      <Group {...mergeProps(dr.group)}>
         <AriaDateInput slot="start">
-          {(segment) => <DateSegment segment={segment} {...recipeProps(dr.segment)} />}
+          {(segment) => <DateSegment segment={segment} {...mergeProps(dr.segment)} />}
         </AriaDateInput>
-        <span {...recipeProps(dr.separator)}>–</span>
+        <span {...mergeProps(dr.separator)}>–</span>
         <AriaDateInput slot="end">
-          {(segment) => <DateSegment segment={segment} {...recipeProps(dr.segment)} />}
+          {(segment) => <DateSegment segment={segment} {...mergeProps(dr.segment)} />}
         </AriaDateInput>
-        <Button {...recipeProps(dr.trigger)}>
+        <Button {...mergeProps(dr.trigger)}>
           <Icon name="chevronDown" size="sm" />
         </Button>
       </Group>
       {description ? (
-        <Text slot="description" {...recipeProps(dr.description)}>
+        <Text slot="description" {...mergeProps(dr.description)}>
           {description}
         </Text>
       ) : null}
-      <FieldError {...recipeProps(dr.error)}>{errorMessage ?? ''}</FieldError>
-      <Popover {...recipeProps(dr.popover)}>
+      <FieldError {...mergeProps(dr.error)}>{errorMessage ?? ''}</FieldError>
+      <Popover {...mergeProps(dr.popover)}>
         <Dialog>
           <RangeCalendar>
-            <header {...recipeProps(dr.calendarHeader)}>
-              <Button slot="previous" {...recipeProps(dr.calendarNavButton)}>
+            <header {...mergeProps(dr.calendarHeader)}>
+              <Button slot="previous" {...mergeProps(dr.calendarNavButton)}>
                 <Icon name="chevronLeft" size="sm" />
               </Button>
-              <Heading {...recipeProps(dr.calendarHeading)} />
-              <Button slot="next" {...recipeProps(dr.calendarNavButton)}>
+              <Heading {...mergeProps(dr.calendarHeading)} />
+              <Button slot="next" {...mergeProps(dr.calendarNavButton)}>
                 <Icon name="chevronRight" size="sm" />
               </Button>
             </header>
-            <CalendarGrid {...recipeProps(dr.calendarGrid)}>
+            <CalendarGrid {...mergeProps(dr.calendarGrid)}>
               <CalendarGridHeader>
                 {(day) => (
-                  <CalendarHeaderCell {...recipeProps(dr.calendarHeaderCell)}>
+                  <CalendarHeaderCell {...mergeProps(dr.calendarHeaderCell)}>
                     {day}
                   </CalendarHeaderCell>
                 )}
               </CalendarGridHeader>
               <CalendarGridBody>
-                {(date) => <CalendarCell date={date} {...recipeProps(dr.calendarCell)} />}
+                {(date) => <CalendarCell date={date} {...mergeProps(dr.calendarCell)} />}
               </CalendarGridBody>
             </CalendarGrid>
           </RangeCalendar>

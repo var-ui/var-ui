@@ -8,7 +8,7 @@ import {
   type IconName,
 } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeClassName, recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type DescriptionListItemData = {
   id: string;
@@ -71,13 +71,13 @@ function DescriptionListItemContent({
   const iconNode = renderDescriptionListIcon(icon);
 
   return (
-    <div {...recipeProps(s.item, className)}>
-      <dt {...recipeProps(s.term)}>
+    <div {...mergeProps(s.item, className)}>
+      <dt {...mergeProps(s.term)}>
         {iconNode}
         {iconNode != null ? ' ' : null}
         {label}
       </dt>
-      <dd {...recipeProps(s.details)}>{children}</dd>
+      <dd {...mergeProps(s.details)}>{children}</dd>
     </div>
   );
 }
@@ -128,15 +128,15 @@ export function DescriptionList({
 
   return (
     <DescriptionListContext.Provider value={{ styles: s }}>
-      <dl {...recipeProps(s.root, className)} style={rootStyle}>
-        {title != null ? <div {...recipeProps(s.title)}>{title}</div> : null}
+      <dl {...mergeProps(s.root, className)} style={rootStyle}>
+        {title != null ? <div {...mergeProps(s.title)}>{title}</div> : null}
         {visibleContent}
         {isCollapsible ? (
           <button
             type="button"
-            {...recipeProps(
+            {...mergeProps(
               s.toggle,
-              recipeClassName(button(resolveButtonProps({ intent: 'ghost', size: 'sm' }))),
+              button(resolveButtonProps({ intent: 'ghost', size: 'sm' })).className,
             )}
             onClick={() => setExpanded((value) => !value)}
           >

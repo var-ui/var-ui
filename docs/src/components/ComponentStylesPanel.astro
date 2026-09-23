@@ -1,6 +1,6 @@
 ---
 import { proseContent } from '@var-ui/core/internal';
-import { recipeProps } from '../lib/recipeProps';
+import { mergeProps } from '../lib/mergeProps';
 import { getHtmlApiDoc } from '../lib/html-api-docs';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 const { slug } = Astro.props;
 const htmlDoc = getHtmlApiDoc(slug);
-const tableWrap = recipeProps(proseContent().tableWrap);
+const tableWrap = mergeProps(proseContent().tableWrap);
 ---
 
 <div class="component-styles-panel">

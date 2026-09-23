@@ -1,6 +1,6 @@
 ---
 import { codeBlock, defaultIconSvgs } from '@var-ui/core';
-import { cx, recipeClassName, recipeProps } from '../utils';
+import { cx, mergeProps } from '../utils';
 
 type CodeBlockVariant = 'default' | 'inline' | 'diff' | 'terminal';
 
@@ -50,10 +50,10 @@ const {
 
 const cb = codeBlock();
 const variantRootClass: Record<CodeBlockVariant, string> = {
-  default: recipeClassName(cb.rootDefault),
-  inline: recipeClassName(cb.rootInline),
-  diff: recipeClassName(cb.rootDiff),
-  terminal: recipeClassName(cb.rootTerminal),
+  default: (cb.rootDefault).className,
+  inline: (cb.rootInline).className,
+  diff: (cb.rootDiff).className,
+  terminal: (cb.rootTerminal).className,
 };
 
 const highlightedSet = new Set(highlightedLines);
@@ -61,57 +61,57 @@ const lines = code.replace(/\n$/, '').split('\n');
 const terminal = variant === 'terminal';
 const inline = variant === 'inline';
 const useHighlightedHtml = Boolean(codeHtml || lineHtml) && !terminal;
-const resolvedCodeClassName = cx(recipeClassName(cb.code), highlightedCodeClassName);
+const resolvedCodeClassName = cx((cb.code).className, highlightedCodeClassName);
 
 const feedbackClassName = cx(
-  recipeClassName(cb.feedback),
-  recipeClassName(cb.feedbackInline),
+  (cb.feedback).className,
+  (cb.feedbackInline).className,
 );
 ---
 
 {
   inline ? (
     <code
-      {...recipeProps(
+      {...mergeProps(
         cb.root,
-        cx(variantRootClass[variant], recipeClassName(cb.code), className),
+        cx(variantRootClass[variant], (cb.code).className, className),
       )}
       data-codeblock
     >
       {code}
     </code>
   ) : (
-    <div {...recipeProps(cb.root, cx(variantRootClass[variant], className))} data-codeblock>
+    <div {...mergeProps(cb.root, cx(variantRootClass[variant], className))} data-codeblock>
       <div
-        {...recipeProps(cb.header, cx(terminal && recipeClassName(cb.headerTerminal)))}
+        {...mergeProps(cb.header, cx(terminal && (cb.headerTerminal).className))}
         data-codeblock-header
       >
-        <div {...recipeProps(cb.title)}>
-          {filename ? <span {...recipeProps(cb.filename)}>{filename}</span> : null}
+        <div {...mergeProps(cb.title)}>
+          {filename ? <span {...mergeProps(cb.filename)}>{filename}</span> : null}
           {language ? (
             <span
-              {...recipeProps(cb.language, cx(terminal && recipeClassName(cb.languageTerminal)))}
+              {...mergeProps(cb.language, cx(terminal && (cb.languageTerminal).className))}
             >
               {language}
             </span>
           ) : null}
         </div>
         {copyable ? (
-          <div {...recipeProps(cb.actions)}>
+          <div {...mergeProps(cb.actions)}>
             <button
               type="button"
-              {...recipeProps(
+              {...mergeProps(
                 cb.copyButton,
-                cx(recipeClassName(cb.copyButtonIdle)),
+                cx((cb.copyButtonIdle).className),
               )}
               data-var-ui-code-copy
               data-code={code}
               data-copy-label={copyLabel}
               data-copied-label={copiedLabel}
               data-copy-error-label={copyErrorLabel}
-              data-class-idle={recipeClassName(cb.copyButtonIdle)}
-              data-class-copied={recipeClassName(cb.copyButtonCopied)}
-              data-class-error={recipeClassName(cb.copyButtonError)}
+              data-class-idle={(cb.copyButtonIdle).className}
+              data-class-copied={(cb.copyButtonCopied).className}
+              data-class-error={(cb.copyButtonError).className}
               aria-label={copyLabel}
             >
               <span data-codeblock-copy-icon set:html={defaultIconSvgs.copy} />
@@ -120,8 +120,8 @@ const feedbackClassName = cx(
             <span
               class={feedbackClassName}
               data-codeblock-feedback
-              data-class-success={recipeClassName(cb.feedbackSuccess)}
-              data-class-error={recipeClassName(cb.feedbackError)}
+              data-class-success={(cb.feedbackSuccess).className}
+              data-class-error={(cb.feedbackError).className}
               role="status"
               aria-live="polite"
             />
@@ -130,51 +130,51 @@ const feedbackClassName = cx(
       </div>
 
       <div
-        {...recipeProps(
+        {...mergeProps(
           cb.body,
-          cx(recipeClassName(cb.bodyScrollable), terminal && recipeClassName(cb.bodyTerminal)),
+          cx((cb.bodyScrollable).className, terminal && (cb.bodyTerminal).className),
         )}
         data-codeblock-body
       >
         <pre
-          {...recipeProps(
+          {...mergeProps(
             cb.pre,
             cx(
-              wrapLongLines ? recipeClassName(cb.preWrap) : recipeClassName(cb.preScrollX),
-              terminal && recipeClassName(cb.preTerminal),
+              wrapLongLines ? (cb.preWrap).className : (cb.preScrollX).className,
+              terminal && (cb.preTerminal).className,
             ),
           )}
           data-codeblock-pre>{showLineNumbers ? (
-            <code {...recipeProps(cb.code, recipeClassName(cb.lines))}>
+            <code {...mergeProps(cb.code, (cb.lines).className)}>
               {lines.map((line, index) => {
                 const lineNumber = index + 1;
                 const lineContentHtml = lineHtml?.[index];
                 return (
                   <span
-                    {...recipeProps(
+                    {...mergeProps(
                       cb.line,
-                      cx(highlightedSet.has(lineNumber) && recipeClassName(cb.lineHighlighted)),
+                      cx(highlightedSet.has(lineNumber) && (cb.lineHighlighted).className),
                     )}
                   >
-                    <span {...recipeProps(cb.lineNumber)} aria-hidden="true">
+                    <span {...mergeProps(cb.lineNumber)} aria-hidden="true">
                       {lineNumber}
                     </span>
                     {lineContentHtml ? (
                       <span
-                        {...recipeProps(cb.lineContent)}
+                        {...mergeProps(cb.lineContent)}
                         set:html={lineContentHtml}
                       />
                     ) : (
-                      <span {...recipeProps(cb.lineContent)}>{line || ' '}</span>
+                      <span {...mergeProps(cb.lineContent)}>{line || ' '}</span>
                     )}
                   </span>
                 );
               })}
             </code>
           ) : useHighlightedHtml ? (
-            <code {...recipeProps(cb.code, resolvedCodeClassName)} set:html={codeHtml} />
+            <code {...mergeProps(cb.code, resolvedCodeClassName)} set:html={codeHtml} />
           ) : (
-            <code {...recipeProps(cb.code)}>{escapeHtml(code)}</code>
+            <code {...mergeProps(cb.code)}>{escapeHtml(code)}</code>
           )}</pre>
       </div>
     </div>

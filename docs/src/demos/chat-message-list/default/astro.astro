@@ -1,6 +1,6 @@
 ---
 import { chatMessage, chatMessageBubble, chatMessageList } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 // No @var-ui/astro ChatMessageList — core recipe log region.
 const l = chatMessageList({ density: 'balanced' });
@@ -14,16 +14,16 @@ const assistantBubble = chatMessageBubble({
 const userBubble = chatMessageBubble({ sender: 'user', variant: 'filled', group: 'none' });
 ---
 
-<div {...recipeProps(l.root)} role="log" aria-live="polite">
-  <div {...recipeProps(l.inner)}>
-    <div {...recipeProps(assistant.root)}>
-      <div {...recipeProps(assistant.content)}>
-        <div {...recipeProps(assistantBubble.root)}>Hello! How can I help?</div>
+<div {...mergeProps(l.root)} role="log" aria-live="polite">
+  <div {...mergeProps(l.inner)}>
+    <div {...mergeProps(assistant.root)}>
+      <div {...mergeProps(assistant.content)}>
+        <div {...mergeProps(assistantBubble.root)}>Hello! How can I help?</div>
       </div>
     </div>
-    <div {...recipeProps(user.root)}>
-      <div {...recipeProps(user.content)}>
-        <div {...recipeProps(userBubble.root)}>What components ship in var-ui?</div>
+    <div {...mergeProps(user.root)}>
+      <div {...mergeProps(user.content)}>
+        <div {...mergeProps(userBubble.root)}>What components ship in var-ui?</div>
       </div>
     </div>
   </div>

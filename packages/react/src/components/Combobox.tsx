@@ -17,7 +17,7 @@ import {
 } from 'react-aria-components';
 import { combobox } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeClassName, recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type ComboboxOption = {
   id: string;
@@ -42,7 +42,7 @@ function ComboboxRoot<T extends ComboboxOption>({
 }: ComboboxRootProps<T>): JSX.Element {
   const styles = combobox();
   return (
-    <AriaComboBox {...props} {...recipeProps(styles.root, className)}>
+    <AriaComboBox {...props} {...mergeProps(styles.root, className)}>
       {children}
     </AriaComboBox>
   );
@@ -52,7 +52,7 @@ export type ComboboxLabelProps = { children: ReactNode; className?: string };
 
 function ComboboxLabel({ children, className }: ComboboxLabelProps): JSX.Element {
   const styles = combobox();
-  return <Label {...recipeProps(styles.label, className)}>{children}</Label>;
+  return <Label {...mergeProps(styles.label, className)}>{children}</Label>;
 }
 
 export type ComboboxInputProps = {
@@ -68,8 +68,8 @@ function ComboboxInput({
 }: ComboboxInputProps): JSX.Element {
   const styles = combobox();
   return (
-    <Group {...recipeProps(styles.inputWrapper, className)}>
-      <Input {...recipeProps(styles.input)} placeholder={placeholder} />
+    <Group {...mergeProps(styles.inputWrapper, className)}>
+      <Input {...mergeProps(styles.input)} placeholder={placeholder} />
       {clearable ? <ComboboxClearButton /> : null}
     </Group>
   );
@@ -81,7 +81,7 @@ function ComboboxClearButton(): JSX.Element {
   const isEmpty = !state?.selectedKey && !state?.inputValue;
   return (
     <Button
-      className={recipeClassName(styles.clearButton)}
+      className={styles.clearButton.className}
       slot={null}
       excludeFromTabOrder
       aria-label="Clear"
@@ -101,7 +101,7 @@ export type ComboboxDescriptionProps = { children: ReactNode; className?: string
 function ComboboxDescription({ children, className }: ComboboxDescriptionProps): JSX.Element {
   const styles = combobox();
   return (
-    <Text slot="description" {...recipeProps(styles.description, className)}>
+    <Text slot="description" {...mergeProps(styles.description, className)}>
       {children}
     </Text>
   );
@@ -111,7 +111,7 @@ export type ComboboxErrorProps = { children?: ReactNode; className?: string };
 
 function ComboboxError({ children, className }: ComboboxErrorProps): JSX.Element {
   const styles = combobox();
-  return <FieldError {...recipeProps(styles.error, className)}>{children ?? ''}</FieldError>;
+  return <FieldError {...mergeProps(styles.error, className)}>{children ?? ''}</FieldError>;
 }
 
 export type ComboboxPopoverProps = PopoverProps & { className?: string };
@@ -119,7 +119,7 @@ export type ComboboxPopoverProps = PopoverProps & { className?: string };
 function ComboboxPopover({ children, className, ...props }: ComboboxPopoverProps): JSX.Element {
   const styles = combobox();
   return (
-    <Popover {...props} {...recipeProps(styles.popover, className)}>
+    <Popover {...props} {...mergeProps(styles.popover, className)}>
       {children}
     </Popover>
   );
@@ -139,9 +139,9 @@ function ComboboxListBox<T extends ComboboxOption>({
   const styles = combobox();
   return (
     <ListBox
-      {...recipeProps(styles.listbox)}
+      {...mergeProps(styles.listbox)}
       items={items}
-      renderEmptyState={() => <div {...recipeProps(styles.empty)}>{emptyContent}</div>}
+      renderEmptyState={() => <div {...mergeProps(styles.empty)}>{emptyContent}</div>}
     >
       {children}
     </ListBox>
@@ -153,7 +153,7 @@ export type ComboboxItemProps = ListBoxItemProps & { className?: string };
 function ComboboxItem({ children, className, ...props }: ComboboxItemProps): JSX.Element {
   const styles = combobox();
   return (
-    <ListBoxItem {...props} {...recipeProps(styles.item, className)}>
+    <ListBoxItem {...props} {...mergeProps(styles.item, className)}>
       {children}
     </ListBoxItem>
   );

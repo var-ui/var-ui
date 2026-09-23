@@ -1,6 +1,6 @@
 ---
 import { alert, type AlertTone, type SurfaceAppearance } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   variant: AlertTone;
@@ -20,27 +20,27 @@ const hasIcon = Astro.slots.has('icon');
 ---
 
 <div
-  {...recipeProps(a.root, className)}
+  {...mergeProps(a.root, className)}
   data-alert
   data-alert-variant={variant}
   data-alert-appearance={appearance}
 >
   {
     hasIcon ? (
-      <div {...recipeProps(a.icon)} data-alert-icon>
+      <div {...mergeProps(a.icon)} data-alert-icon>
         <slot name="icon" />
       </div>
     ) : null
   }
-  <div {...recipeProps(a.body)}>
-    {title ? <p {...recipeProps(a.title)}>{title}</p> : null}
-    <div {...recipeProps(a.content)} data-alert-content>
+  <div {...mergeProps(a.body)}>
+    {title ? <p {...mergeProps(a.title)}>{title}</p> : null}
+    <div {...mergeProps(a.content)} data-alert-content>
       <slot />
     </div>
     {
       action ? (
-        <div {...recipeProps(a.action)}>
-          <a {...recipeProps(a.actionLink)} href={action.href} data-alert-action>
+        <div {...mergeProps(a.action)}>
+          <a {...mergeProps(a.actionLink)} href={action.href} data-alert-action>
             {action.label}
           </a>
         </div>

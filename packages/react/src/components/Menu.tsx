@@ -36,7 +36,7 @@ import {
   type OverlayOpenChangeHandler,
   type UseOverlayPresenceResult,
 } from '../overlays';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type MenuRootProps = {
   children: ReactNode;
@@ -259,7 +259,7 @@ function MenuPopup({ children, className, portalContainer }: MenuPopupProps): JS
 
   return (
     <AriaPopover
-      {...recipeProps(m.popover, className)}
+      {...mergeProps(m.popover, className)}
       {...ctx.presence.attrs}
       ref={(node: HTMLDivElement | null) => {
         ctx.popupRef.current = node;
@@ -268,7 +268,7 @@ function MenuPopup({ children, className, portalContainer }: MenuPopupProps): JS
       style={{ ...layerStyle, ...positioner.style } as CSSProperties}
       UNSTABLE_portalContainer={portalContainer ?? ctx.portalContainer}
     >
-      <AriaMenu {...recipeProps(m.menu)} selectionMode="none">
+      <AriaMenu {...mergeProps(m.menu)} selectionMode="none">
         {children}
       </AriaMenu>
     </AriaPopover>
@@ -282,7 +282,7 @@ function MenuItem({ children, id, onAction, className, isDisabled }: MenuItemPro
       id={id}
       onAction={onAction}
       isDisabled={isDisabled}
-      {...recipeProps(m.item, className)}
+      {...mergeProps(m.item, className)}
     >
       {children}
     </AriaMenuItem>
@@ -291,14 +291,14 @@ function MenuItem({ children, id, onAction, className, isDisabled }: MenuItemPro
 
 function MenuSeparator({ className }: MenuSeparatorProps): JSX.Element {
   const m = menu();
-  return <Separator {...recipeProps(m.separator, className)} />;
+  return <Separator {...mergeProps(m.separator, className)} />;
 }
 
 function MenuSection({ children, title, className }: MenuSectionProps): JSX.Element {
   const m = menu();
   return (
-    <AriaMenuSection {...recipeProps(m.section, className)}>
-      {title ? <Header {...recipeProps(m.sectionHeader)}>{title}</Header> : null}
+    <AriaMenuSection {...mergeProps(m.section, className)}>
+      {title ? <Header {...mergeProps(m.sectionHeader)}>{title}</Header> : null}
       {children}
     </AriaMenuSection>
   );

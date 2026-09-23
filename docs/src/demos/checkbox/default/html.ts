@@ -1,5 +1,5 @@
 import { checkbox } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
@@ -9,7 +9,7 @@ export function render(): string {
     { type: 'checkbox', style: 'position:absolute;width:1px;height:1px;opacity:0' },
     '',
   );
-  const box = serializeHtmlTag('span', recipeProps(cb.box), '');
-  const label = serializeHtmlTag('span', recipeProps(cb.label), 'Accept terms');
-  return serializeHtmlTag('label', recipeProps(cb.root), `${input}${box}${label}`);
+  const box = serializeHtmlTag('span', mergeProps(cb.box), '');
+  const label = serializeHtmlTag('span', mergeProps(cb.label), 'Accept terms');
+  return serializeHtmlTag('label', mergeProps(cb.root), `${input}${box}${label}`);
 }

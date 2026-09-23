@@ -1,6 +1,6 @@
 ---
 import { button, dialog, resolveButtonProps } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 const d = dialog();
 const trigger = button(resolveButtonProps({ intent: 'secondary' }));
@@ -8,17 +8,17 @@ const closeAction = button({});
 ---
 
 <div style="display: grid; gap: 1rem">
-  <button type="button" {...recipeProps(trigger)} disabled>Open dialog</button>
+  <button type="button" {...mergeProps(trigger)} disabled>Open dialog</button>
   <!-- No @var-ui/astro Dialog — static core-recipe chrome (open state, non-interactive). -->
   <div
-    {...recipeProps(d.overlay)}
+    {...mergeProps(d.overlay)}
     style="position: relative; inset: auto; min-height: 220px"
   >
-    <div {...recipeProps(d.modal)} role="dialog" aria-labelledby="dialog-demo-title" aria-modal="true">
-      <div {...recipeProps(d.content)}>
-        <div {...recipeProps(d.header)}>
-          <h2 id="dialog-demo-title" {...recipeProps(d.heading)}>Icon close button</h2>
-          <button type="button" {...recipeProps(d.closeButton)} aria-label="Close" disabled>
+    <div {...mergeProps(d.modal)} role="dialog" aria-labelledby="dialog-demo-title" aria-modal="true">
+      <div {...mergeProps(d.content)}>
+        <div {...mergeProps(d.header)}>
+          <h2 id="dialog-demo-title" {...mergeProps(d.heading)}>Icon close button</h2>
+          <button type="button" {...mergeProps(d.closeButton)} aria-label="Close" disabled>
             <svg
               viewBox="0 0 24 24"
               width="16"
@@ -34,8 +34,8 @@ const closeAction = button({});
             </svg>
           </button>
         </div>
-        <p {...recipeProps(d.description)}>The dismiss control now uses the registry close glyph.</p>
-        <button type="button" {...recipeProps(closeAction)} disabled>Close</button>
+        <p {...mergeProps(d.description)}>The dismiss control now uses the registry close glyph.</p>
+        <button type="button" {...mergeProps(closeAction)} disabled>Close</button>
       </div>
     </div>
   </div>

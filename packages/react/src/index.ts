@@ -490,10 +490,9 @@ export {
 } from './overlays';
 export {
   cx,
-  recipeClassName,
-  recipeProps,
+  combine,
+  mergeProps,
   type BaseTextFieldProps,
   type FieldMeta,
-  type RecipeClass,
 } from './components/utils';
 export * from './hooks';

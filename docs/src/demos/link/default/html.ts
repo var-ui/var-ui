@@ -1,7 +1,7 @@
 import { link } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
-  return serializeHtmlTag('a', { href: '#', ...recipeProps(link) }, 'Documentation');
+  return serializeHtmlTag('a', { href: '#', ...mergeProps(link) }, 'Documentation');
 }

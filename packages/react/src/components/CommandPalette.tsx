@@ -7,7 +7,7 @@ import { commandPalette } from '@var-ui/core';
 import { Icon } from '../icons';
 import { useLayer } from '../layers/LayerProvider';
 import { useOverlayPresence } from '../overlays';
-import { cx, recipeProps } from './utils';
+import { cx, mergeProps } from './utils';
 
 export type CommandPaletteItem = {
   /** Unique item identifier passed to `onAction`. */
@@ -143,7 +143,7 @@ export function CommandPalette({
     <dialog
       ref={dialogRef}
       aria-label={placeholder}
-      {...recipeProps(cp.root)}
+      {...mergeProps(cp.root)}
       style={layerStyle}
       onClick={(event) => {
         if (event.target === event.currentTarget) onOpenChange?.(false);
@@ -159,33 +159,33 @@ export function CommandPalette({
       }}
     >
       {presence.mounted ? (
-        <div ref={panelRef} {...recipeProps(cp.dialog)} {...presence.attrs}>
+        <div ref={panelRef} {...mergeProps(cp.dialog)} {...presence.attrs}>
           <Autocomplete inputValue={query} onInputChange={setQuery}>
-            <div {...recipeProps(cp.inputRow)}>
-              <span {...recipeProps(cp.inputIcon)}>
+            <div {...mergeProps(cp.inputRow)}>
+              <span {...mergeProps(cp.inputIcon)}>
                 <Icon name="search" />
               </span>
               <TextField aria-label={placeholder} style={{ display: 'flex', flex: 1, minWidth: 0 }}>
-                <Input {...recipeProps(cp.input)} placeholder={placeholder} autoFocus />
+                <Input {...mergeProps(cp.input)} placeholder={placeholder} autoFocus />
               </TextField>
             </div>
             <ListBox
               items={visibleItems}
-              {...recipeProps(cp.results)}
+              {...mergeProps(cp.results)}
               aria-label={placeholder}
-              renderEmptyState={() => <div {...recipeProps(cp.empty)}>{emptyLabel}</div>}
+              renderEmptyState={() => <div {...mergeProps(cp.empty)}>{emptyLabel}</div>}
             >
               {(item) => (
                 <ListBoxItem
                   id={item.id}
                   textValue={item.title}
-                  {...recipeProps(cp.result)}
+                  {...mergeProps(cp.result)}
                   onAction={() => onAction(item.id)}
                 >
                   {({ isFocused }) => (
-                    <span {...recipeProps(cp.resultLink, cx(isFocused && cp.resultLinkActive))}>
-                      <span {...recipeProps(cp.resultTitle)}>{item.title}</span>
-                      {item.meta ? <span {...recipeProps(cp.resultMeta)}>{item.meta}</span> : null}
+                    <span {...mergeProps(cp.resultLink, cx(isFocused && cp.resultLinkActive))}>
+                      <span {...mergeProps(cp.resultTitle)}>{item.title}</span>
+                      {item.meta ? <span {...mergeProps(cp.resultMeta)}>{item.meta}</span> : null}
                     </span>
                   )}
                 </ListBoxItem>

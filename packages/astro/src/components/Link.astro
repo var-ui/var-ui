@@ -1,6 +1,6 @@
 ---
 import { link } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   href: string;
@@ -16,4 +16,4 @@ type Props = {
 const { href, className, ...rest } = Astro.props;
 ---
 
-<a href={href} {...rest} {...recipeProps(link, className)}><slot /></a>
+<a href={href} {...rest} {...mergeProps(link, className)}><slot /></a>

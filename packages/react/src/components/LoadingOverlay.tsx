@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { loadingOverlay } from '@var-ui/core';
 import { Spinner } from './Spinner';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type LoadingOverlayProps = {
   /** When true, the overlay blocks pointer events and shows a spinner. */
@@ -26,11 +26,11 @@ export function LoadingOverlay({
   const lo = loadingOverlay();
 
   return (
-    <div {...recipeProps(lo.root, className)}>
+    <div {...mergeProps(lo.root, className)}>
       {children}
       {visible ? (
-        <div {...recipeProps(lo.overlay)} aria-busy="true">
-          <span {...recipeProps(lo.loader)}>
+        <div {...mergeProps(lo.overlay)} aria-busy="true">
+          <span {...mergeProps(lo.loader)}>
             <Spinner label={label} />
           </span>
         </div>

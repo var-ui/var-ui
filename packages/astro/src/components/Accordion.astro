@@ -1,6 +1,6 @@
 ---
 import { accordionGroup, type AccordionGroupVariantProps } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = AccordionGroupVariantProps & {
   /** When `single`, only one panel may be open at a time. @default single */
@@ -18,7 +18,7 @@ const group = accordionGroup({ variant: variant ?? 'bordered' });
   data-var-ui-accordion
   data-accordion-type={type}
   data-collapsible={collapsible ? 'true' : 'false'}
-  {...recipeProps(group.root, className)}
+  {...mergeProps(group.root, className)}
 >
   <slot />
 </div>

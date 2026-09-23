@@ -1,19 +1,20 @@
 ---
 /**
- * Shared guide page for docs + theming collections.
+ * Injected catch-all for guide content collections configured in `varDocs({ routes })`.
  * Layout and MDX shortcodes come from virtual modules configured in `varDocs()`.
+ * Sites with SSR or multiple prefixes should set `disableGuideRoutes: true` and use
+ * `@var-ui/docs/DocsGuidePage` in their own pages instead.
  * `injectRoute({ prerender })` owns static vs SSR — do not export `prerender` here.
  */
-import { getCollection, getEntry, render } from 'astro:content';
+import { getCollection } from 'astro:content';
+import DocsGuidePage from '../components/DocsGuidePage.astro';
 import Layout from 'virtual:var-docs/components/Layout';
 import * as mdxComponents from 'virtual:var-docs/mdx-components';
 import config from 'virtual:var-docs/config';
 import {
   assertSingleStaticGuidePrefix,
   guideCatchAllStaticPaths,
-  matchGuideRoute,
   resolveGuideRouteConfig,
-  stripAstroBase,
 } from '../utils/routing';
 
 export async function getStaticPaths() {
@@ -23,86 +24,6 @@ export async function getStaticPaths() {
   const entries = await getCollection(route.collection);
   return guideCatchAllStaticPaths(entries);
 }
-
-const pathname = stripAstroBase(Astro.url.pathname, import.meta.env.BASE_URL);
-const routes = resolveGuideRouteConfig(config.routes);
-const matched = matchGuideRoute(pathname, routes);
-
-if (!matched) {
-  if (Astro.isPrerendered) {
-    throw new Error(`Guide page not found: ${pathname}`);
-  }
-  return new Response(null, { status: 404, statusText: 'Not Found' });
-}
-
-const entry = await getEntry(matched.collection, matched.id);
-if (!entry) {
-  if (Astro.isPrerendered) {
-    throw new Error(`Guide entry not found: ${matched.collection}/${matched.id}`);
-  }
-  return new Response(null, { status: 404, statusText: 'Not Found' });
-}
-
-const { Content } = await render(entry);
-const data = entry.data as {
-  title: string;
-  description?: string;
-  template: 'guide' | 'splash';
-  tableOfContents: boolean;
-  wide: boolean;
-};
-const title = `${data.title} · ${config.title}`;
-const wide = data.wide === true;
-const showToc = data.tableOfContents !== false;
-
-Astro.locals.varDocsRoute = {
-  collection: matched.collection,
-  id: matched.id,
-  pathname: matched.pathname,
-  title: data.title,
-  description: data.description,
-  template: data.template,
-};
 ---
 
-<Layout title={title} showToc={showToc}>
-  <article class:list={['docs-article', wide && 'docs-article--wide']}>
-    <Content components={{ ...mdxComponents }} />
-  </article>
-</Layout>
-
-<style>
-  .docs-article {
-    max-width: 48rem;
-  }
-
-  .docs-article--wide {
-    max-width: 72rem;
-  }
-
-  .docs-article :global(h1) {
-    margin-block: 0 0.5rem;
-    font-size: 2rem;
-    line-height: 1.2;
-  }
-
-  .docs-article :global(h2) {
-    margin-block: 2rem 0.75rem;
-    font-size: 1.35rem;
-  }
-
-  .docs-article :global(h3) {
-    margin-block: 1.5rem 0.5rem;
-    font-size: 1.1rem;
-  }
-
-  .docs-article :global(p),
-  .docs-article :global(li) {
-    margin-block: 0.75rem;
-    line-height: 1.6;
-  }
-
-  .docs-article :global(code) {
-    font-size: 0.9em;
-  }
-</style>
+<DocsGuidePage layout={Layout} mdxComponents={mdxComponents} stripBase />

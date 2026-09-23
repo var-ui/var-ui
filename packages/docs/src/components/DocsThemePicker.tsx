@@ -2,14 +2,8 @@
 
 import { menu } from '@var-ui/core';
 import { defaultIcons } from '@var-ui/icons';
-import {
-  Icon,
-  IconButton,
-  IconProvider,
-  LayerProvider,
-  recipeClassName,
-  recipeProps,
-} from '@var-ui/react';
+import { Icon, IconButton, IconProvider, LayerProvider } from '@var-ui/react';
+import { mergeProps } from 'typestyles';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Header,
@@ -66,7 +60,7 @@ function ThemePickerMenu({
 
   return (
     <AriaMenu
-      {...recipeProps(m.menu)}
+      {...mergeProps(m.menu)}
       aria-label="Site theme"
       selectionMode="single"
       selectedKeys={[selectedId]}
@@ -77,19 +71,19 @@ function ThemePickerMenu({
         }
       }}
     >
-      <Header {...recipeProps(m.sectionHeader)}>Theme</Header>
+      <Header {...mergeProps(m.sectionHeader)}>Theme</Header>
       {presets.map((theme) => (
-        <AriaMenuItem key={theme.id} id={theme.id} textValue={theme.label} {...recipeProps(m.item)}>
+        <AriaMenuItem key={theme.id} id={theme.id} textValue={theme.label} {...mergeProps(m.item)}>
           {({ isSelected }) => (
             <>
-              <span {...recipeProps(m.itemCheck)}>
+              <span {...mergeProps(m.itemCheck)}>
                 {isSelected ? <Icon name="check" size="sm" /> : null}
               </span>
               <span
                 className={itemSwatchClassName}
                 style={{ backgroundColor: theme.swatch ?? 'currentColor' }}
               />
-              <span {...recipeProps(m.itemLabel)}>{theme.label}</span>
+              <span {...mergeProps(m.itemLabel)}>{theme.label}</span>
             </>
           )}
         </AriaMenuItem>
@@ -142,7 +136,7 @@ export default function DocsThemePicker({
   return (
     <IconProvider icons={defaultIcons}>
       <LayerProvider>
-        <div className={recipeClassName(s.root)} data-docs-theme-picker>
+        <div className={s.root.className} data-docs-theme-picker>
           <MenuTrigger>
             <IconButton
               aria-label="Choose site theme"
@@ -157,13 +151,13 @@ export default function DocsThemePicker({
                 </Icon>
               }
             />
-            <Popover {...recipeProps(menu().popover)} placement="top end" offset={10}>
+            <Popover {...mergeProps(menu().popover)} placement="top end" offset={10}>
               <ThemePickerMenu
                 presets={presets}
                 selectedId={selectedId}
                 onSelect={handleSelect}
                 isThemeId={controller.isThemeId}
-                itemSwatchClassName={recipeClassName(s.itemSwatch)}
+                itemSwatchClassName={s.itemSwatch.className}
               />
             </Popover>
           </MenuTrigger>
