@@ -1,13 +1,13 @@
 import { chatSystemMessage } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 function systemMessage(tone: 'info' | 'success', text: string): string {
   const s = chatSystemMessage({ tone });
   return serializeHtmlTag(
     'div',
-    { ...recipeProps(s.root), role: 'status' },
-    serializeHtmlTag('span', recipeProps(s.text), text),
+    { ...mergeProps(s.root), role: 'status' },
+    serializeHtmlTag('span', mergeProps(s.text), text),
   );
 }
 

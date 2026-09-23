@@ -1,16 +1,16 @@
 import { button, resolveButtonProps, stack } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
-  const stackRp = recipeProps(
+  const stackRp = mergeProps(
     stack({ direction: 'row', gap: 'sm', align: 'center', justify: 'start', wrap: 'nowrap' }),
   );
   const cancel = serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(button(resolveButtonProps({ intent: 'secondary' }))) },
+    { type: 'button', ...mergeProps(button(resolveButtonProps({ intent: 'secondary' }))) },
     'Cancel',
   );
-  const save = serializeHtmlTag('button', { type: 'button', ...recipeProps(button({})) }, 'Save');
+  const save = serializeHtmlTag('button', { type: 'button', ...mergeProps(button({})) }, 'Save');
   return serializeHtmlTag('div', stackRp, `${cancel}${save}`);
 }

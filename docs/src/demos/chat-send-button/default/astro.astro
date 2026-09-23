@@ -1,12 +1,12 @@
 ---
 import { button, resolveButtonProps } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 // No @var-ui/astro ChatSendButton — static Button chrome (send state only).
 const send = button(resolveButtonProps({ intent: 'primary' }));
 ---
 
-<button type="button" {...recipeProps(send)} aria-label="Send message">
+<button type="button" {...mergeProps(send)} aria-label="Send message">
   <svg
     viewBox="0 0 24 24"
     width="16"

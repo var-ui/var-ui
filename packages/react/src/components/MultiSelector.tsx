@@ -10,7 +10,7 @@ import {
 import { multiSelector } from '@var-ui/core';
 import { Icon } from '../icons';
 import type { FieldMeta } from './utils';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type MultiSelectorOption = {
   /** Unique option identifier passed to the selected value array. */
@@ -61,38 +61,38 @@ export function MultiSelector({
   }
 
   return (
-    <div {...recipeProps(ms.root, className)}>
+    <div {...mergeProps(ms.root, className)}>
       {label ? (
-        <Label id={labelId} {...recipeProps(ms.label)}>
+        <Label id={labelId} {...mergeProps(ms.label)}>
           {label}
         </Label>
       ) : null}
       <AriaButton
         ref={triggerRef}
-        {...recipeProps(ms.trigger)}
+        {...mergeProps(ms.trigger)}
         isDisabled={isDisabled}
         aria-labelledby={label ? `${labelId} ${triggerTextId}` : undefined}
         onPress={() => setIsOpen((open) => !open)}
       >
         <span
           id={triggerTextId}
-          {...recipeProps(ms.triggerValue)}
+          {...mergeProps(ms.triggerValue)}
           data-placeholder={isPlaceholder || undefined}
         >
           {triggerText}
         </span>
-        <span {...recipeProps(ms.triggerIcon)} aria-hidden>
+        <span {...mergeProps(ms.triggerIcon)} aria-hidden>
           <Icon name="arrowsUpDown" size="sm" />
         </span>
       </AriaButton>
       <Popover
-        {...recipeProps(ms.popover)}
+        {...mergeProps(ms.popover)}
         triggerRef={triggerRef}
         isOpen={isOpen}
         onOpenChange={setIsOpen}
       >
         <ListBox
-          {...recipeProps(ms.listbox)}
+          {...mergeProps(ms.listbox)}
           items={options}
           selectionMode="multiple"
           selectedKeys={new Set(value)}
@@ -100,22 +100,22 @@ export function MultiSelector({
           aria-labelledby={label ? labelId : undefined}
         >
           {(option) => (
-            <ListBoxItem id={option.id} textValue={option.label} {...recipeProps(ms.item)}>
+            <ListBoxItem id={option.id} textValue={option.label} {...mergeProps(ms.item)}>
               {({ isSelected }) => (
                 <>
-                  <span {...recipeProps(ms.itemCheckbox)} data-selected={isSelected || undefined}>
+                  <span {...mergeProps(ms.itemCheckbox)} data-selected={isSelected || undefined}>
                     {isSelected ? <Icon name="check" size="sm" /> : null}
                   </span>
-                  <span {...recipeProps(ms.itemLabel)}>{option.label}</span>
+                  <span {...mergeProps(ms.itemLabel)}>{option.label}</span>
                 </>
               )}
             </ListBoxItem>
           )}
         </ListBox>
       </Popover>
-      {description ? <p {...recipeProps(ms.description)}>{description}</p> : null}
+      {description ? <p {...mergeProps(ms.description)}>{description}</p> : null}
       {errorMessage ? (
-        <p {...recipeProps(ms.error)} role="alert">
+        <p {...mergeProps(ms.error)} role="alert">
           {errorMessage}
         </p>
       ) : null}

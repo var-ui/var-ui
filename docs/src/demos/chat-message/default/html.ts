@@ -1,5 +1,5 @@
 import { avatar, chatMessage, chatMessageBubble, stack, textBlock } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const DEMO_ISO = '2026-07-19T21:35:00.000Z';
@@ -12,24 +12,24 @@ export function render(): string {
   const a = avatar({ size: 'sm' });
   const initials = serializeHtmlTag(
     'span',
-    { ...recipeProps(a.initials), role: 'img', 'aria-label': 'Navi' },
+    { ...mergeProps(a.initials), role: 'img', 'aria-label': 'Navi' },
     'N',
   );
   const avatarEl = serializeHtmlTag(
     'div',
-    recipeProps(m.avatar),
-    serializeHtmlTag('span', recipeProps(a.root), initials),
+    mergeProps(m.avatar),
+    serializeHtmlTag('span', mergeProps(a.root), initials),
   );
   const name = serializeHtmlTag(
     'div',
-    recipeProps(m.header),
-    serializeHtmlTag('span', recipeProps(m.name), 'Navi'),
+    mergeProps(m.header),
+    serializeHtmlTag('span', mergeProps(m.name), 'Navi'),
   );
-  const bubbleEl = serializeHtmlTag('div', recipeProps(bubble.root), 'Hello! How can I help?');
+  const bubbleEl = serializeHtmlTag('div', mergeProps(bubble.root), 'Hello! How can I help?');
   const time = serializeHtmlTag(
     'time',
     {
-      ...recipeProps(textBlock({ size: 'sm', tone: 'secondary' })),
+      ...mergeProps(textBlock({ size: 'sm', tone: 'secondary' })),
       datetime: DEMO_ISO,
       title: DEMO_TITLE,
     },
@@ -37,15 +37,15 @@ export function render(): string {
   );
   const metadata = serializeHtmlTag(
     'div',
-    recipeProps(m.metadata),
+    mergeProps(m.metadata),
     serializeHtmlTag(
       'div',
-      recipeProps(
+      mergeProps(
         stack({ direction: 'row', gap: 'xs', align: 'center', justify: 'start', wrap: 'nowrap' }),
       ),
       time,
     ),
   );
-  const content = serializeHtmlTag('div', recipeProps(m.content), `${name}${bubbleEl}${metadata}`);
-  return serializeHtmlTag('div', recipeProps(m.root), `${avatarEl}${content}`);
+  const content = serializeHtmlTag('div', mergeProps(m.content), `${name}${bubbleEl}${metadata}`);
+  return serializeHtmlTag('div', mergeProps(m.root), `${avatarEl}${content}`);
 }

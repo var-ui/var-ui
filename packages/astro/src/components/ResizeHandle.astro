@@ -1,6 +1,6 @@
 ---
 import { resizeHandle } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   className?: string;
@@ -14,7 +14,7 @@ const s = resizeHandle();
 <div
   data-var-ui-side-nav-resize
   aria-label={label}
-  {...recipeProps(s.root, className)}
+  {...mergeProps(s.root, className)}
 >
-  <div {...recipeProps(s.pill)}></div>
+  <div {...mergeProps(s.pill)}></div>
 </div>

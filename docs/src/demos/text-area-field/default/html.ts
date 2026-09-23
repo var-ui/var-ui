@@ -1,14 +1,14 @@
 import { textAreaField } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
   const taf = textAreaField();
-  const label = serializeHtmlTag('label', { ...recipeProps(taf.label), for: 'notes' }, 'Notes');
+  const label = serializeHtmlTag('label', { ...mergeProps(taf.label), for: 'notes' }, 'Notes');
   const input = serializeHtmlTag(
     'textarea',
-    { ...recipeProps(taf.input), id: 'notes', placeholder: 'Add a note…' },
+    { ...mergeProps(taf.input), id: 'notes', placeholder: 'Add a note…' },
     '',
   );
-  return serializeHtmlTag('div', recipeProps(taf.root), `${label}${input}`);
+  return serializeHtmlTag('div', mergeProps(taf.root), `${label}${input}`);
 }

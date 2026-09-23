@@ -4,7 +4,7 @@ import {
   type AppShellContentPadding,
   type AppShellMobileBreakpoint,
 } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   height?: 'fill' | 'auto';
@@ -48,12 +48,12 @@ const hasMobileNav = Astro.slots.has('mobileNav');
 
 {
   disabled ? (
-    <main id="var-ui-app-shell-main" {...recipeProps(s.main, className)}>
+    <main id="var-ui-app-shell-main" {...mergeProps(s.main, className)}>
       <slot />
     </main>
   ) : (
     <div
-      {...recipeProps(s.root, className)}
+      {...mergeProps(s.root, className)}
       data-var-ui-app-shell
       data-var-ui-mobile-nav-provider
       data-mobile-breakpoint={mobileBreakpoint}
@@ -66,13 +66,13 @@ const hasMobileNav = Astro.slots.has('mobileNav');
       data-header-hidden={headerHidden ? '' : undefined}
       data-header-offset={headerOffset ? '' : undefined}
     >
-      <a href="#var-ui-app-shell-main" {...recipeProps(s.skipLink)}>Skip to content</a>
-      {hasBanner && <div {...recipeProps(s.banner)}><slot name="banner" /></div>}
-      <div {...recipeProps(s.frame)}>
-        {hasTopNav && <header {...recipeProps(s.topNav)}><slot name="topNav" /></header>}
-        {hasSideNav && <div {...recipeProps(s.sideNav)}><slot name="sideNav" /></div>}
-        <main id="var-ui-app-shell-main" {...recipeProps(s.main)}><slot /></main>
-        {hasAside && <aside {...recipeProps(s.aside)}><slot name="aside" /></aside>}
+      <a href="#var-ui-app-shell-main" {...mergeProps(s.skipLink)}>Skip to content</a>
+      {hasBanner && <div {...mergeProps(s.banner)}><slot name="banner" /></div>}
+      <div {...mergeProps(s.frame)}>
+        {hasTopNav && <header {...mergeProps(s.topNav)}><slot name="topNav" /></header>}
+        {hasSideNav && <div {...mergeProps(s.sideNav)}><slot name="sideNav" /></div>}
+        <main id="var-ui-app-shell-main" {...mergeProps(s.main)}><slot /></main>
+        {hasAside && <aside {...mergeProps(s.aside)}><slot name="aside" /></aside>}
       </div>
       {hasMobileNav && <slot name="mobileNav" />}
     </div>

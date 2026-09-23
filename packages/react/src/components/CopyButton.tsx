@@ -2,7 +2,7 @@ import type { JSX, ReactNode } from 'react';
 import { copyButton } from '@var-ui/core';
 import { Icon } from '../icons';
 import { useCopy } from '../hooks/useCopy';
-import { cx, recipeClassName, recipeProps } from './utils';
+import { combine } from './utils';
 
 export type CopyButtonRenderProps = {
   copied: boolean;
@@ -55,14 +55,12 @@ export function CopyButton({
   return (
     <button
       type="button"
-      {...recipeProps(
+      {...combine(
         cb.button,
-        cx(
-          !copied && !error && recipeClassName(cb.buttonIdle),
-          copied && recipeClassName(cb.buttonCopied),
-          error && recipeClassName(cb.buttonError),
-          className,
-        ),
+        !copied && !error && cb.buttonIdle,
+        copied && cb.buttonCopied,
+        error && cb.buttonError,
+        className,
       )}
       onClick={handleCopy}
       aria-label={label}

@@ -1,6 +1,6 @@
 ---
 import { avatar, chatMessage, chatMessageBubble, stack, textBlock } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 // No @var-ui/astro ChatMessage — core recipe row approximating React layout.
 const m = chatMessage({ sender: 'assistant' });
@@ -16,21 +16,21 @@ const metaRow = stack({
 const time = textBlock({ size: 'sm', tone: 'secondary' });
 ---
 
-<div {...recipeProps(m.root)}>
-  <div {...recipeProps(m.avatar)}>
-    <span {...recipeProps(a.root)}>
-      <span {...recipeProps(a.initials)} role="img" aria-label="Navi">N</span>
+<div {...mergeProps(m.root)}>
+  <div {...mergeProps(m.avatar)}>
+    <span {...mergeProps(a.root)}>
+      <span {...mergeProps(a.initials)} role="img" aria-label="Navi">N</span>
     </span>
   </div>
-  <div {...recipeProps(m.content)}>
-    <div {...recipeProps(m.header)}>
-      <span {...recipeProps(m.name)}>Navi</span>
+  <div {...mergeProps(m.content)}>
+    <div {...mergeProps(m.header)}>
+      <span {...mergeProps(m.name)}>Navi</span>
     </div>
-    <div {...recipeProps(bubble.root)}>Hello! How can I help?</div>
-    <div {...recipeProps(m.metadata)}>
-      <div {...recipeProps(metaRow)}>
+    <div {...mergeProps(bubble.root)}>Hello! How can I help?</div>
+    <div {...mergeProps(m.metadata)}>
+      <div {...mergeProps(metaRow)}>
         <time
-          {...recipeProps(time)}
+          {...mergeProps(time)}
           datetime="2026-07-19T21:35:00.000Z"
           title="Jul 19, 2026, 2:35 PM">2:35 PM</time
         >

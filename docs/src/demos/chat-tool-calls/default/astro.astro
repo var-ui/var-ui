@@ -1,14 +1,14 @@
 ---
 import { chatToolCalls } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 // No @var-ui/astro ChatToolCalls — static collapsed group chrome (expand is React-only).
 const t = chatToolCalls({ status: 'complete', expanded: 'false' });
 ---
 
-<div {...recipeProps(t.root)}>
-  <button type="button" {...recipeProps(t.header)} aria-expanded="false" disabled>
-    <span {...recipeProps(t.statusIcon)}>
+<div {...mergeProps(t.root)}>
+  <button type="button" {...mergeProps(t.header)} aria-expanded="false" disabled>
+    <span {...mergeProps(t.statusIcon)}>
       <svg
         viewBox="0 0 24 24"
         width="16"
@@ -25,8 +25,8 @@ const t = chatToolCalls({ status: 'complete', expanded: 'false' });
         ></path>
       </svg>
     </span>
-    <span {...recipeProps(t.name)}>run_tests</span>
-    <span {...recipeProps(t.chevron)}>
+    <span {...mergeProps(t.name)}>run_tests</span>
+    <span {...mergeProps(t.chevron)}>
       <svg
         viewBox="0 0 24 24"
         width="16"

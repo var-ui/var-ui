@@ -11,7 +11,7 @@ import {
   type TimeValue,
 } from 'react-aria-components';
 import { timeInput } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type TimeInputProps<T extends TimeValue = TimeValue> = Omit<
   RACTimeFieldProps<T>,
@@ -44,19 +44,19 @@ export function TimeInput<T extends TimeValue = TimeValue>({
 }: TimeInputProps<T>): JSX.Element {
   const ti = timeInput();
   return (
-    <AriaTimeField {...props} {...recipeProps(ti.root, className)}>
-      {label ? <Label {...recipeProps(ti.label)}>{label}</Label> : null}
-      <Group {...recipeProps(ti.group)}>
+    <AriaTimeField {...props} {...mergeProps(ti.root, className)}>
+      {label ? <Label {...mergeProps(ti.label)}>{label}</Label> : null}
+      <Group {...mergeProps(ti.group)}>
         <AriaDateInput>
-          {(segment) => <DateSegment segment={segment} {...recipeProps(ti.segment)} />}
+          {(segment) => <DateSegment segment={segment} {...mergeProps(ti.segment)} />}
         </AriaDateInput>
       </Group>
       {description ? (
-        <Text slot="description" {...recipeProps(ti.description)}>
+        <Text slot="description" {...mergeProps(ti.description)}>
           {description}
         </Text>
       ) : null}
-      <FieldError {...recipeProps(ti.error)}>{errorMessage ?? ''}</FieldError>
+      <FieldError {...mergeProps(ti.error)}>{errorMessage ?? ''}</FieldError>
     </AriaTimeField>
   );
 }

@@ -12,7 +12,7 @@ import { Button as AriaButton, Link as AriaLink } from 'react-aria-components';
 import { iconNameList, tabList, type IconName } from '@var-ui/core';
 import { Icon } from '../icons';
 import { DropdownMenu } from './DropdownMenu';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 /** Registry name or a caller-supplied node — excludes bare `string` so it isn't redundant with `IconName`. */
 export type TabListIcon = IconName | Exclude<ReactNode, string>;
@@ -80,12 +80,12 @@ export function TabListTab({
       {iconNode}
       {!isLabelHidden ? <span>{label}</span> : null}
       {!isLabelHidden && endContent != null ? endContent : null}
-      <span {...recipeProps(s.indicator)} aria-hidden="true" />
+      <span {...mergeProps(s.indicator)} aria-hidden="true" />
     </>
   );
 
   const sharedProps = {
-    ...recipeProps(s.tab, className),
+    ...mergeProps(s.tab, className),
     'data-selected': isSelected ? '' : undefined,
     'data-disabled': isDisabled ? '' : undefined,
     'aria-label': isLabelHidden ? label : undefined,
@@ -132,14 +132,14 @@ export function TabListMenu({ label, options, className }: TabListMenuProps): JS
     ctx.focusValue != null && options.some((option) => option.value === ctx.focusValue);
 
   const triggerProps = {
-    ...recipeProps(s.menuTrigger),
+    ...mergeProps(s.menuTrigger),
     'data-selected': isSelected ? '' : undefined,
     [FOCUSABLE_ATTR]: '',
     excludeFromTabOrder: !isRovingTabbable,
   };
 
   return (
-    <div {...recipeProps(s.menu, className)}>
+    <div {...mergeProps(s.menu, className)}>
       <DropdownMenu
         trigger={
           <AriaButton {...triggerProps}>
@@ -283,7 +283,7 @@ export function TabList({
         data-layout={layout}
         data-has-divider={hasDivider ? '' : undefined}
         onKeyDown={handleKeyDown}
-        {...recipeProps(s.root, className)}
+        {...mergeProps(s.root, className)}
       >
         {children}
       </nav>

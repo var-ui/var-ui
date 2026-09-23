@@ -1,6 +1,6 @@
 import type { AnchorHTMLAttributes, HTMLAttributes, JSX } from 'react';
 import { card } from '@var-ui/core';
-import { cx, recipeProps } from './utils';
+import { combine, mergeProps } from './utils';
 
 export type CardProps = HTMLAttributes<HTMLDivElement> & {
   /** Optional heading rendered above the body. */
@@ -17,9 +17,9 @@ export type CardProps = HTMLAttributes<HTMLDivElement> & {
 export function Card({ title, className, children, ...props }: CardProps): JSX.Element {
   const c = card();
   return (
-    <div {...props} {...recipeProps(c.root, className)}>
-      {title ? <h3 {...recipeProps(c.title)}>{title}</h3> : null}
-      <div {...recipeProps(c.body)}>{children}</div>
+    <div {...props} {...mergeProps(c.root, className)}>
+      {title ? <h3 {...mergeProps(c.title)}>{title}</h3> : null}
+      <div {...mergeProps(c.body)}>{children}</div>
     </div>
   );
 }
@@ -49,10 +49,10 @@ export function ClickableCard({
 }: ClickableCardProps): JSX.Element {
   const c = card();
   return (
-    <a {...props} className={cx(c.root, c.linkRoot, className)}>
-      <span {...recipeProps(c.linkTitle)}>{title}</span>
-      {description ? <p {...recipeProps(c.linkDescription)}>{description}</p> : null}
-      {hint ? <span {...recipeProps(c.linkHint)}>{hint}</span> : null}
+    <a {...props} {...combine(c.root, c.linkRoot, className)}>
+      <span {...mergeProps(c.linkTitle)}>{title}</span>
+      {description ? <p {...mergeProps(c.linkDescription)}>{description}</p> : null}
+      {hint ? <span {...mergeProps(c.linkHint)}>{hint}</span> : null}
     </a>
   );
 }

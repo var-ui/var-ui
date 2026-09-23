@@ -1,5 +1,5 @@
 import type { ButtonTone } from '@var-ui/core';
-import { Icon, recipeClassName } from '@var-ui/react';
+import { Icon } from '@var-ui/react';
 import { configuratorStyles } from '@/styles/configurator';
 import { TONE_OPTIONS } from './buttonCode';
 
@@ -12,7 +12,7 @@ export function ToneSwatchPicker({ value, onChange }: ToneSwatchPickerProps) {
   const c = configuratorStyles();
 
   return (
-    <div className={recipeClassName(c.toneGrid)} role="radiogroup" aria-label="Tone">
+    <div className={c.toneGrid.className} role="radiogroup" aria-label="Tone">
       {TONE_OPTIONS.map((tone) => {
         const isActive = tone.id === value;
         return (
@@ -23,12 +23,12 @@ export function ToneSwatchPicker({ value, onChange }: ToneSwatchPickerProps) {
             aria-checked={isActive}
             aria-label={tone.label}
             title={tone.label}
-            className={recipeClassName(isActive ? c.toneSwatchActive : c.toneSwatch)}
+            className={(isActive ? c.toneSwatchActive : c.toneSwatch).className}
             style={{ backgroundColor: tone.swatch }}
             onClick={() => onChange(tone.id)}
           >
             {isActive ? (
-              <span className={recipeClassName(c.toneCheck)} aria-hidden="true">
+              <span className={c.toneCheck.className} aria-hidden="true">
                 <Icon name="check" size="sm" />
               </span>
             ) : null}

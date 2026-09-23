@@ -1,6 +1,8 @@
 ---
 export const prerender = false;
-import GuideArticle from '../../components/GuideArticle.astro';
+import DocsGuidePage from '@var-ui/docs/DocsGuidePage';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import * as mdxComponents from '../../lib/guide-mdx-components';
 ---
 
-<GuideArticle />
+<DocsGuidePage layout={BaseLayout} mdxComponents={mdxComponents} />

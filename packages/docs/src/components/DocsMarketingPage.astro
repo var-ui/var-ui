@@ -1,0 +1,134 @@
+---
+/**
+ * Marketing shell: top nav and search without sidebar or TOC grid.
+ * Use for homepages, landing pages, and other full-width marketing content.
+ */
+import { ClientRouter } from 'astro:transitions';
+import {
+  AppShell,
+  ColorModeToggle,
+  cx,
+  Layout,
+  LayoutContent,
+  MobileNav,
+  MobileNavToggle,
+  mergeProps,
+  SideNavItem,
+  SideNavSection,
+  ThemeScript,
+  TopNav,
+  TopNavHeading,
+  TopNavItem,
+} from '@var-ui/astro';
+import { docsTopNav } from '../styles/docsTopNav';
+import { docsMarketingPage } from '../styles/docsMarketingPage';
+import DocsSearch from './DocsSearch.astro';
+import type { DocsBrand, DocsSearchItem, TopNavItem as TopNavItemType } from '../types';
+import { normalizeDocsPath } from '../utils/docs-toc';
+import { stripAstroBase } from '../utils/routing';
+
+const {
+  title = 'Docs',
+  themeClassName,
+  bodyClassName,
+  topNav,
+  searchItems = [],
+  brand = { heading: 'Docs', href: '/' },
+  htmlAttributes = {},
+} = Astro.props as {
+  title?: string;
+  themeClassName: string;
+  bodyClassName?: string;
+  topNav: readonly TopNavItemType[];
+  searchItems?: readonly DocsSearchItem[];
+  brand?: DocsBrand;
+  htmlAttributes?: Record<string, string | undefined>;
+};
+
+const pathname = stripAstroBase(Astro.url.pathname, import.meta.env.BASE_URL);
+const currentPath = normalizeDocsPath(pathname);
+const hasToolsSlot = Astro.slots.has('tools');
+const hasThemePickerSlot = Astro.slots.has('themePicker');
+const hasThemeScriptSlot = Astro.slots.has('themeScript');
+const showMobileNav = topNav.length > 0;
+
+const nav = docsTopNav();
+const page = docsMarketingPage();
+---
+
+<html lang="en" class={themeClassName} {...htmlAttributes}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <ThemeScript themeClass={themeClassName} />
+    {hasThemeScriptSlot ? <slot name="themeScript" /> : null}
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}typestyles.css`} />
+    <ClientRouter />
+    <slot name="head" />
+  </head>
+  <body class={cx('docs-body', bodyClassName)}>
+    <AppShell variant="wash" height="fill" contentPadding={0} mobileBreakpoint="md">
+      <TopNav slot="topNav" className={cx(nav.root)}>
+        <TopNavHeading slot="heading" heading={brand.heading} headingHref={brand.href} />
+        {
+          topNav.map((item) => (
+            <TopNavItem
+              label={item.text}
+              href={item.link}
+              isSelected={currentPath.startsWith(item.match)}
+            />
+          ))
+        }
+        <div slot="end" class={cx(nav.tools)}>
+          <div
+            class={cx(nav.toolsPersist)}
+            transition:persist="docs-top-nav-tools"
+            transition:animate="none"
+          >
+            <DocsSearch items={searchItems} />
+            <div class={cx(nav.toolbar)}>
+              {hasToolsSlot ? (
+                <div class={cx(nav.toolbarExtra)}>
+                  <slot name="tools" />
+                </div>
+              ) : null}
+              <ColorModeToggle includeSystem size="md" />
+            </div>
+          </div>
+          {showMobileNav ? <MobileNavToggle /> : null}
+        </div>
+      </TopNav>
+
+      {
+        showMobileNav ? (
+          <MobileNav slot="mobileNav" header="Menu">
+            <div class={cx(nav.mobileNavBody)}>
+              <SideNavSection>
+                {topNav.map((item) => (
+                  <SideNavItem
+                    label={item.text}
+                    href={item.link}
+                    isSelected={currentPath.startsWith(item.match)}
+                  />
+                ))}
+              </SideNavSection>
+            </div>
+          </MobileNav>
+        ) : null
+      }
+
+      <Layout height="fill" padding={0} className={cx(page.siteLayout)}>
+        <LayoutContent label="Main content">
+          <main {...mergeProps(page.main)}>
+            <slot />
+          </main>
+        </LayoutContent>
+      </Layout>
+    </AppShell>
+    {hasThemePickerSlot ? <slot name="themePicker" /> : null}
+    <script>
+      import '../scripts/docsPageClient.ts';
+    </script>
+  </body>
+</html>

@@ -19,7 +19,7 @@ import { ResizeHandle } from './ResizeHandle';
 import { Text } from './Typography';
 import { SimpleTooltip } from './SimpleTooltip';
 import { ScrollArea } from './ScrollArea';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type SideNavCollapsibleConfig = {
   /** Initial collapsed state for uncontrolled usage. @default false */
@@ -119,7 +119,7 @@ export function SideNavCollapseButton({
       type="button"
       onClick={toggle}
       aria-label={ariaLabel}
-      {...recipeProps(s.collapseButton, className)}
+      {...mergeProps(s.collapseButton, className)}
     >
       <Icon
         name={isCollapsed ? 'chevronRight' : 'chevronLeft'}
@@ -235,7 +235,7 @@ export function SideNavSection({
   const showHeader = !isCollapsed && (title != null || subtitle != null || endContent != null);
 
   return (
-    <div {...recipeProps(s.section, className)}>
+    <div {...mergeProps(s.section, className)}>
       {showHeader ? (
         <div
           style={{
@@ -246,7 +246,7 @@ export function SideNavSection({
           }}
         >
           <div style={{ minWidth: 0 }}>
-            {title != null ? <div {...recipeProps(s.sectionTitle)}>{title}</div> : null}
+            {title != null ? <div {...mergeProps(s.sectionTitle)}>{title}</div> : null}
             {subtitle != null ? (
               <Text as="span" size="sm" tone="secondary">
                 {subtitle}
@@ -313,13 +313,13 @@ export function SideNavItem({
   const triggerContent = (
     <>
       {iconNode}
-      <span {...recipeProps(s.itemLabel)}>{label}</span>
+      <span {...mergeProps(s.itemLabel)}>{label}</span>
       {!navCollapsed && endContent != null ? endContent : null}
     </>
   );
 
   const triggerProps = {
-    ...recipeProps(s.item, className),
+    ...mergeProps(s.item, className),
     'data-selected': isSelected ? '' : undefined,
     'data-disabled': isDisabled ? '' : undefined,
     'aria-current': isSelected ? ('page' as const) : undefined,
@@ -466,24 +466,24 @@ export function SideNav({
         aria-label={label}
         data-collapsed={isCollapsed ? '' : undefined}
         style={navWidth != null ? { width: navWidth } : undefined}
-        {...recipeProps(s.root, className)}
+        {...mergeProps(s.root, className)}
       >
         {header != null || topContent != null ? (
-          <div {...recipeProps(s.stickyTop)}>
-            {header != null ? <div {...recipeProps(s.heading)}>{header}</div> : null}
-            {topContent != null ? <div {...recipeProps(s.topContent)}>{topContent}</div> : null}
+          <div {...mergeProps(s.stickyTop)}>
+            {header != null ? <div {...mergeProps(s.heading)}>{header}</div> : null}
+            {topContent != null ? <div {...mergeProps(s.topContent)}>{topContent}</div> : null}
           </div>
         ) : null}
         <ScrollArea
           fade={isCollapsed ? false : 'vertical'}
           orientation="vertical"
-          className={recipeProps(s.scrollArea).className}
+          className={mergeProps(s.scrollArea).className}
         >
-          <div {...recipeProps(s.scrollable)}>{children}</div>
+          <div {...mergeProps(s.scrollable)}>{children}</div>
         </ScrollArea>
         {hasFooter ? (
-          <div {...recipeProps(s.footer)}>
-            {footerIcons != null ? <div {...recipeProps(s.footerIcons)}>{footerIcons}</div> : null}
+          <div {...mergeProps(s.footer)}>
+            {footerIcons != null ? <div {...mergeProps(s.footerIcons)}>{footerIcons}</div> : null}
             {footer}
             {hasCollapseButton ? (
               <SideNavCollapseButton label={collapsibleConfig.buttonLabel} />

@@ -1,6 +1,6 @@
 ---
 import { collapsible, type CollapsibleVariantProps } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 interface Props extends CollapsibleVariantProps {
   className?: string;
@@ -10,6 +10,6 @@ const { variant = 'accordion', className } = Astro.props;
 const c = collapsible({ variant });
 ---
 
-<div slot="panel" {...recipeProps(c.panel, className)}>
+<div slot="panel" {...mergeProps(c.panel, className)}>
   <slot />
 </div>

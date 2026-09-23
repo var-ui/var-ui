@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { inputGroup } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type InputGroupTextProps = {
   /** Text or a small icon rendered inside the addon. */
@@ -22,5 +22,5 @@ export type InputGroupTextProps = {
  */
 export function InputGroupText({ children, className }: InputGroupTextProps): JSX.Element {
   const g = inputGroup();
-  return <div {...recipeProps(g.text, className)}>{children}</div>;
+  return <div {...mergeProps(g.text, className)}>{children}</div>;
 }

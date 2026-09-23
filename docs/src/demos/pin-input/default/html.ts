@@ -1,5 +1,5 @@
 import { pinInput } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const LENGTH = 4;
@@ -9,7 +9,7 @@ export function render(): string {
   const p = pinInput();
   const label = serializeHtmlTag(
     'label',
-    { ...recipeProps(p.label), id: 'pin-input-demo-label' },
+    { ...mergeProps(p.label), id: 'pin-input-demo-label' },
     'Verification code',
   );
   const cells = Array.from({ length: LENGTH }, (_, index) => {
@@ -18,7 +18,7 @@ export function render(): string {
     return serializeHtmlTag(
       'input',
       {
-        ...recipeProps(p.cell),
+        ...mergeProps(p.cell),
         type: 'text',
         inputmode: 'numeric',
         pattern: '[0-9]*',
@@ -33,8 +33,8 @@ export function render(): string {
   }).join('');
   const group = serializeHtmlTag(
     'div',
-    { ...recipeProps(p.group), role: 'group', 'aria-labelledby': 'pin-input-demo-label' },
+    { ...mergeProps(p.group), role: 'group', 'aria-labelledby': 'pin-input-demo-label' },
     cells,
   );
-  return serializeHtmlTag('div', recipeProps(p.root), `${label}${group}`);
+  return serializeHtmlTag('div', mergeProps(p.root), `${label}${group}`);
 }

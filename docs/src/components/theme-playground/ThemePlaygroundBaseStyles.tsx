@@ -1,6 +1,6 @@
 'use client';
 
-import { Link, SegmentedControl, Select, Text, recipeClassName } from '@var-ui/react';
+import { Link, SegmentedControl, Select, Text } from '@var-ui/react';
 import type { Selection as AriaSelection } from 'react-aria-components';
 import { themePlaygroundStyles } from '@/styles/themePlayground';
 import {
@@ -28,8 +28,8 @@ type ThemePlaygroundBaseStylesProps = {
 function ControlGroup({ label, children }: { label: string; children: React.ReactNode }) {
   const s = themePlaygroundStyles();
   return (
-    <div className={recipeClassName(s.controlGroup)}>
-      <span className={recipeClassName(s.controlLabel)}>{label}</span>
+    <div className={s.controlGroup.className}>
+      <span className={s.controlLabel.className}>{label}</span>
       {children}
     </div>
   );
@@ -43,12 +43,12 @@ export function ThemePlaygroundBaseStyles({ state, onChange }: ThemePlaygroundBa
   };
 
   return (
-    <div className={recipeClassName(s.baseStyles)}>
+    <div className={s.baseStyles.className}>
       <ControlGroup label="Colors">
-        <div className={recipeClassName(s.colorList)}>
+        <div className={s.colorList.className}>
           {PLAYGROUND_COLOR_FIELDS.map((field) => (
-            <div key={field.path} className={recipeClassName(s.colorField)}>
-              <span className={recipeClassName(s.colorFieldLabel)}>{field.label}</span>
+            <div key={field.path} className={s.colorField.className}>
+              <span className={s.colorFieldLabel.className}>{field.label}</span>
               <ColorTokenField
                 field={field}
                 value={state.colors[field.path]}
@@ -142,7 +142,7 @@ export function ThemePlaygroundComponentsTab() {
   const s = themePlaygroundStyles();
 
   return (
-    <div className={recipeClassName(s.deferredTab)}>
+    <div className={s.deferredTab.className}>
       <Text size="sm">
         Per-component overrides use the same recipe API as themes. See{' '}
         <Link href="/theming/customize">Customize</Link> for{' '}
@@ -156,7 +156,7 @@ export function ThemePlaygroundAdvancedTab() {
   const s = themePlaygroundStyles();
 
   return (
-    <div className={recipeClassName(s.deferredTab)}>
+    <div className={s.deferredTab.className}>
       <Text size="sm">
         Custom <code>extend</code> namespaces and mode-conditional overrides are exported in v3. For
         now, use <Link href="/theming/customize">Customize</Link> for advanced token patches.

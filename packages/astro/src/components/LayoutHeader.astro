@@ -1,6 +1,6 @@
 ---
 import { layoutHeader, layoutShellPaddingAssignments, type LayoutPadding } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   hasDivider?: boolean;
@@ -32,6 +32,6 @@ const s = layoutHeader();
 const style = zoneOverrideStyle(height, padding);
 ---
 
-<div {...recipeProps(s.header, className)} style={style} data-divider={hasDivider ? '' : undefined}>
-  <div {...recipeProps(s.headerInner)}><slot /></div>
+<div {...mergeProps(s.header, className)} style={style} data-divider={hasDivider ? '' : undefined}>
+  <div {...mergeProps(s.headerInner)}><slot /></div>
 </div>

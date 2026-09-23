@@ -31,7 +31,7 @@ import {
   type OverlayOpenChangeHandler,
   type UseOverlayPresenceResult,
 } from '../overlays';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type TooltipRootProps = {
   children: ReactNode;
@@ -197,7 +197,7 @@ function TooltipPopup({
 
   return (
     <AriaTooltip
-      {...recipeProps(tip.root, className)}
+      {...mergeProps(tip.root, className)}
       {...ctx.presence.attrs}
       ref={(node: HTMLDivElement | null) => {
         ctx.popupRef.current = node;

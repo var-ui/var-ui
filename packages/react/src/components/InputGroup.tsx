@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes, JSX, ReactNode, Ref } from 'react';
 import { useId } from 'react';
 import { inputGroup } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type InputGroupProps = {
   /** Visible label rendered above the group. */
@@ -42,8 +42,8 @@ export function InputGroup({
   const g = inputGroup();
   const labelId = useId();
   return (
-    <div {...recipeProps(g.root, className)}>
-      <span id={labelId} {...recipeProps(g.label)}>
+    <div {...mergeProps(g.root, className)}>
+      <span id={labelId} {...mergeProps(g.label)}>
         {label}
       </span>
       <div
@@ -51,13 +51,13 @@ export function InputGroup({
         aria-labelledby={labelId}
         aria-disabled={isDisabled || undefined}
         data-disabled={isDisabled || undefined}
-        {...recipeProps(g.group)}
+        {...mergeProps(g.group)}
       >
         {children}
       </div>
-      {description ? <p {...recipeProps(g.description)}>{description}</p> : null}
+      {description ? <p {...mergeProps(g.description)}>{description}</p> : null}
       {errorMessage ? (
-        <p {...recipeProps(g.error)} role="alert">
+        <p {...mergeProps(g.error)} role="alert">
           {errorMessage}
         </p>
       ) : null}
@@ -76,5 +76,5 @@ export type InputGroupInputProps = InputHTMLAttributes<HTMLInputElement> & {
  */
 export function InputGroupInput({ className, ref, ...props }: InputGroupInputProps): JSX.Element {
   const g = inputGroup();
-  return <input {...props} ref={ref} {...recipeProps(g.input, className)} />;
+  return <input {...props} ref={ref} {...mergeProps(g.input, className)} />;
 }

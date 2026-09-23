@@ -44,7 +44,6 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
       "layoutShellPaddingAssignments",
     ],
     "object": [
-      "DEFAULT_COLOR_SWATCHES",
       "codeBlockVarDefinitions",
       "controlSizeMetrics",
       "layoutPanelVarDefinitions",
@@ -215,7 +214,7 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
       "helper": 18,
       "icons": 4,
       "layout": 6,
-      "object": 9,
+      "object": 8,
       "recipe": 107,
       "runtime": 3,
       "semantic-tone": 1,
@@ -226,10 +225,10 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
     "runtimeByKind": {
       "function": 142,
       "number": 4,
-      "object": 33,
+      "object": 32,
       "string": 4,
     },
-    "runtimeExports": 183,
+    "runtimeExports": 182,
     "typeOnlyExports": 118,
   },
   "typeOnlyExports": [

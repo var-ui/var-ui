@@ -1,6 +1,6 @@
 ---
 import { sideNav } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   className?: string;
@@ -15,7 +15,7 @@ const s = sideNav();
   type="button"
   data-var-ui-side-nav-collapse
   aria-label={label ?? 'Collapse navigation'}
-  {...recipeProps(s.collapseButton, className)}
+  {...mergeProps(s.collapseButton, className)}
 >
   <slot />
 </button>

@@ -1,20 +1,20 @@
 import { progressBar } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
   const p = progressBar({ tone: 'accent', indeterminate: 'false' });
   const header = serializeHtmlTag(
     'div',
-    recipeProps(p.header),
-    `${serializeHtmlTag('span', recipeProps(p.label), 'Uploading assets')}${serializeHtmlTag('span', recipeProps(p.valueText), '64%')}`,
+    mergeProps(p.header),
+    `${serializeHtmlTag('span', mergeProps(p.label), 'Uploading assets')}${serializeHtmlTag('span', mergeProps(p.valueText), '64%')}`,
   );
-  const fill = serializeHtmlTag('div', { ...recipeProps(p.fill), style: 'width: 64%' }, '');
-  const track = serializeHtmlTag('div', recipeProps(p.track), fill);
+  const fill = serializeHtmlTag('div', { ...mergeProps(p.fill), style: 'width: 64%' }, '');
+  const track = serializeHtmlTag('div', mergeProps(p.track), fill);
   return serializeHtmlTag(
     'div',
     {
-      ...recipeProps(p.root),
+      ...mergeProps(p.root),
       role: 'progressbar',
       'aria-label': 'Uploading assets',
       'aria-valuemin': '0',

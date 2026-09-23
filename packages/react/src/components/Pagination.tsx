@@ -4,7 +4,7 @@ import { button, pagination, resolveButtonProps } from '@var-ui/core';
 import { useDirection } from '../DirectionProvider';
 import { IconButton } from './IconButton';
 import { Select } from './Select';
-import { cx, recipeProps } from './utils';
+import { cx, mergeProps } from './utils';
 
 export type PaginationVariant = 'pages' | 'count' | 'compact' | 'dots' | 'none';
 
@@ -141,7 +141,7 @@ export function Pagination({
           item === '...' ? (
             <span
               key={`ellipsis-${range[index - 1]}-${range[index + 1]}`}
-              {...recipeProps(p.ellipsis)}
+              {...mergeProps(p.ellipsis)}
               aria-hidden="true"
             >
               …
@@ -149,7 +149,7 @@ export function Pagination({
           ) : (
             <AriaButton
               key={item}
-              {...recipeProps(
+              {...mergeProps(
                 button(resolveButtonProps({ intent: item === page ? 'secondary' : 'ghost', size })),
               )}
               onPress={() => goTo(item)}
@@ -165,21 +165,21 @@ export function Pagination({
 
       case 'count':
         return totalItems == null ? null : (
-          <span {...recipeProps(p.infoText)}>
+          <span {...mergeProps(p.infoText)}>
             {rangeStart}–{rangeEnd} of {totalItems}
           </span>
         );
 
       case 'compact':
         return totalPages == null ? null : (
-          <span {...recipeProps(p.infoText)}>
+          <span {...mergeProps(p.infoText)}>
             Page {page} of {totalPages}
           </span>
         );
 
       case 'dots':
         return totalPages == null ? null : (
-          <div {...recipeProps(p.dotsContainer)} role="group" aria-label="Page indicators">
+          <div {...mergeProps(p.dotsContainer)} role="group" aria-label="Page indicators">
             {Array.from({ length: totalPages }, (_, i) => (
               <button
                 key={i + 1}
@@ -188,7 +188,7 @@ export function Pagination({
                 aria-current={i + 1 === page ? 'page' : undefined}
                 onClick={() => goTo(i + 1)}
                 disabled={isDisabled}
-                {...recipeProps(p.dot, cx(i + 1 === page && p.dotActive))}
+                {...mergeProps(p.dot, cx(i + 1 === page && p.dotActive))}
               />
             ))}
           </div>
@@ -201,9 +201,9 @@ export function Pagination({
   }
 
   return (
-    <nav aria-label={label} {...recipeProps(p.root, className)}>
+    <nav aria-label={label} {...mergeProps(p.root, className)}>
       {pageSizeOptions && pageSizeOptions.length > 0 ? (
-        <div {...recipeProps(p.pageSizeGroup)}>
+        <div {...mergeProps(p.pageSizeGroup)}>
           <span>Rows per page</span>
           <Select
             aria-label="Items per page"
@@ -214,7 +214,7 @@ export function Pagination({
           />
         </div>
       ) : null}
-      <div {...recipeProps(p.controls)}>
+      <div {...mergeProps(p.controls)}>
         <IconButton
           name="chevronLeft"
           aria-label="Go to previous page"

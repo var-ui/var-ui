@@ -20,7 +20,7 @@ import {
 } from 'react';
 import { field } from '@var-ui/core';
 import { FormErrorsContext } from './Form';
-import { cx, recipeProps } from './utils';
+import { cx, mergeProps } from './utils';
 
 export type FieldProps = {
   /** Visible label rendered above the control. */
@@ -351,7 +351,7 @@ function FieldRoot({
   return (
     <FieldContext.Provider value={value}>
       <div
-        {...recipeProps(f.root, className)}
+        {...mergeProps(f.root, className)}
         data-invalid={isInvalid ? '' : undefined}
         data-valid={isValid ? '' : undefined}
         data-dirty={dirty ? '' : undefined}
@@ -369,7 +369,7 @@ function FieldLabel({ children, className }: FieldLabelProps): JSX.Element {
   const { controlId } = useFieldContext();
   const f = field();
   return (
-    <label {...recipeProps(f.label, className)} htmlFor={controlId}>
+    <label {...mergeProps(f.label, className)} htmlFor={controlId}>
       {children}
     </label>
   );
@@ -442,7 +442,7 @@ function FieldDescription({ children, className }: FieldDescriptionProps): JSX.E
   const { descriptionId } = useFieldContext();
   const f = field();
   return (
-    <p {...recipeProps(f.description, className)} id={descriptionId}>
+    <p {...mergeProps(f.description, className)} id={descriptionId}>
       {children}
     </p>
   );
@@ -457,7 +457,7 @@ function FieldError({ children, className, forceMount }: FieldErrorProps): JSX.E
   }
   const f = field();
   return (
-    <p {...recipeProps(f.error, className)} id={errorId} role="alert">
+    <p {...mergeProps(f.error, className)} id={errorId} role="alert">
       {content}
     </p>
   );

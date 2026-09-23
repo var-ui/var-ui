@@ -1,6 +1,6 @@
 import type { JSX } from 'react';
 import { textBlock } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type TimestampProps = {
   /** Date value to format. Accepts a `Date`, ISO string, or epoch milliseconds. */
@@ -71,7 +71,7 @@ export function Timestamp({
     <time
       dateTime={target.toISOString()}
       title={formatAbsolute(target, 'datetime', locale)}
-      {...recipeProps(textBlock({ size: 'sm', tone: 'secondary' }), className)}
+      {...mergeProps(textBlock({ size: 'sm', tone: 'secondary' }), className)}
     >
       {text}
     </time>

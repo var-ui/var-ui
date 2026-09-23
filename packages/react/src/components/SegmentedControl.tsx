@@ -8,7 +8,7 @@ import {
 } from 'react-aria-components';
 import { segmentedControl, toggleButton } from '@var-ui/core';
 import { observeSegmentedControlIndicator } from '@var-ui/core/internal';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type SegmentedControlOption = {
   id: string;
@@ -69,14 +69,14 @@ export function SegmentedControl({
         }
         onSelectionChange?.(keys);
       }}
-      {...recipeProps(s.root, className)}
+      {...mergeProps(s.root, className)}
     >
       {options.map((option) => (
         <AriaToggleButton
           key={option.id}
           id={option.id}
           aria-label={option['aria-label']}
-          {...recipeProps(t)}
+          {...mergeProps(t)}
         >
           {option.label}
         </AriaToggleButton>
@@ -99,7 +99,7 @@ export function ToggleButton({
 }: ToggleButtonProps): JSX.Element {
   const t = toggleButton({ size });
   return (
-    <AriaToggleButton {...props} {...recipeProps(t, className)}>
+    <AriaToggleButton {...props} {...mergeProps(t, className)}>
       {children}
     </AriaToggleButton>
   );

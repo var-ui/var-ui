@@ -19,6 +19,7 @@ export const PALETTE_FAMILIES = [
   'green',
   'emerald',
   'jade',
+  'phthalo',
   'teal',
   'mint',
   'cyan',

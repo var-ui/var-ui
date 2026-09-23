@@ -2,13 +2,13 @@
 
 import { defaultIcons } from '@var-ui/icons';
 import {
+  cx,
   Button,
   DesignSystemProvider,
   IconProvider,
   LayerProvider,
   SegmentedControl,
   readStoredColorMode,
-  recipeClassName,
   type ColorMode,
 } from '@var-ui/react';
 import type { Selection } from 'react-aria-components';
@@ -83,10 +83,10 @@ export default function ThemePlayground({ framework: initialFramework }: ThemePl
     >
       <IconProvider icons={defaultIcons}>
         <LayerProvider>
-          <div className={recipeClassName(s.root)} data-theme-playground>
-            <div className={recipeClassName(s.workspace)}>
-              <div className={recipeClassName(s.preview)}>
-                <div className={recipeClassName(s.toolbar)}>
+          <div className={s.root.className} data-theme-playground>
+            <div className={s.workspace.className}>
+              <div className={s.preview.className}>
+                <div className={s.toolbar.className}>
                   <SegmentedControl
                     aria-label="Preview viewport"
                     options={VIEWPORT_OPTIONS}
@@ -101,10 +101,11 @@ export default function ThemePlayground({ framework: initialFramework }: ThemePl
                     Export
                   </Button>
                 </div>
-                <div className={recipeClassName(s.previewInner)}>
+                <div className={s.previewInner.className}>
                   <div
-                    className={recipeClassName(
-                      state.viewport === 'mobile' ? s.previewFrameMobile : s.previewFrame,
+                    className={cx(
+                      (state.viewport === 'mobile' ? s.previewFrameMobile : s.previewFrame)
+                        .className,
                     )}
                   >
                     <BentoShowcase
@@ -116,7 +117,7 @@ export default function ThemePlayground({ framework: initialFramework }: ThemePl
                 </div>
               </div>
             </div>
-            <div className={recipeClassName(s.code)}>
+            <div className={s.code.className}>
               <HighlightedCodeBlock
                 code={codeOutput.code}
                 language={codeOutput.language}

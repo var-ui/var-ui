@@ -1,7 +1,7 @@
 import type { ChangeEvent, JSX } from 'react';
 import { searchInput, type ControlSize } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type SearchInputProps = {
   variant?: 'default' | 'command';
@@ -40,12 +40,12 @@ export function SearchInput({
   };
 
   return (
-    <div {...recipeProps(s.root, className)} data-var-ui-search-input data-variant={variant}>
-      <span {...recipeProps(s.icon)} aria-hidden="true">
+    <div {...mergeProps(s.root, className)} data-var-ui-search-input data-variant={variant}>
+      <span {...mergeProps(s.icon)} aria-hidden="true">
         <Icon name="search" size={size === 'lg' ? 'lg' : size === 'sm' ? 'sm' : 'md'} />
       </span>
       <input
-        {...recipeProps(s.input)}
+        {...mergeProps(s.input)}
         type="search"
         name={name}
         value={value}

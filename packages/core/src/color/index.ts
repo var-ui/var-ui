@@ -13,5 +13,3 @@ export {
   type Rgb,
   type Rgba,
 } from './convert';
-
-export { DEFAULT_COLOR_SWATCHES } from './swatches';

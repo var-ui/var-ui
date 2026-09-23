@@ -9,7 +9,7 @@ import {
   chatMessageList,
   resolveButtonProps,
 } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 // No @var-ui/astro ChatLayout — static core-recipe shell (scroll/send are React-only).
 const l = chatLayout();
@@ -22,39 +22,39 @@ const send = button(resolveButtonProps({ intent: 'primary' }));
 ---
 
 <div style="height: 280px">
-  <div {...recipeProps(l.root)}>
-    <div {...recipeProps(l.messageArea)}>
-      <div {...recipeProps(list.root)} role="log" aria-live="polite">
-        <div {...recipeProps(list.inner)}>
-          <div {...recipeProps(m.root)}>
-            <div {...recipeProps(m.avatar)}>
-              <span {...recipeProps(a.root)}>
-                <span {...recipeProps(a.initials)} role="img" aria-label="Assistant">A</span>
+  <div {...mergeProps(l.root)}>
+    <div {...mergeProps(l.messageArea)}>
+      <div {...mergeProps(list.root)} role="log" aria-live="polite">
+        <div {...mergeProps(list.inner)}>
+          <div {...mergeProps(m.root)}>
+            <div {...mergeProps(m.avatar)}>
+              <span {...mergeProps(a.root)}>
+                <span {...mergeProps(a.initials)} role="img" aria-label="Assistant">A</span>
               </span>
             </div>
-            <div {...recipeProps(m.content)}>
-              <div {...recipeProps(m.header)}>
-                <span {...recipeProps(m.name)}>Assistant</span>
+            <div {...mergeProps(m.content)}>
+              <div {...mergeProps(m.header)}>
+                <span {...mergeProps(m.name)}>Assistant</span>
               </div>
-              <div {...recipeProps(bubble.root)}>Hello! How can I help?</div>
+              <div {...mergeProps(bubble.root)}>Hello! How can I help?</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div {...recipeProps(l.dock)}>
-      <div {...recipeProps(c.root)}>
-        <div {...recipeProps(c.inputRow)}>
+    <div {...mergeProps(l.dock)}>
+      <div {...mergeProps(c.root)}>
+        <div {...mergeProps(c.inputRow)}>
           <textarea
-            {...recipeProps(c.input)}
+            {...mergeProps(c.input)}
             rows="1"
             placeholder="Type a message…"
             aria-label="Message"
             disabled></textarea
           >
         </div>
-        <div {...recipeProps(c.actions)}>
-          <button type="button" {...recipeProps(send)} aria-label="Send message" disabled>
+        <div {...mergeProps(c.actions)}>
+          <button type="button" {...mergeProps(send)} aria-label="Send message" disabled>
             <svg
               viewBox="0 0 24 24"
               width="16"

@@ -130,6 +130,6 @@ export function getHtmlApiDoc(slug: string): HtmlApiDoc | null {
   return {
     recipeName: resolved.recipeName,
     parts,
-    note: 'Apply via `recipeProps(recipe(…))` or copy the class / data attributes onto your markup.',
+    note: 'Apply via `mergeProps(recipe(…))` or copy the class / data attributes onto your markup.',
   };
 }

@@ -1,5 +1,5 @@
 import { appShell } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
@@ -12,13 +12,13 @@ export function render(): string {
     },
     serializeHtmlTag(
       'div',
-      { ...recipeProps(s.root), 'data-var-ui-app-shell': true },
+      { ...mergeProps(s.root), 'data-var-ui-app-shell': true },
       serializeHtmlTag(
         'div',
-        recipeProps(s.frame),
+        mergeProps(s.frame),
         serializeHtmlTag(
           'main',
-          { ...recipeProps(s.main), id: 'var-ui-app-shell-main' },
+          { ...mergeProps(s.main), id: 'var-ui-app-shell-main' },
           'Main content',
         ),
       ),

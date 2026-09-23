@@ -9,7 +9,7 @@ import {
 import { useHeadroom, type UseHeadroomOptions } from '../hooks/useHeadroom';
 import { useMediaQuery } from '../hooks';
 import { MobileNavProvider } from './MobileNav';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 /** `id` of the `<main>` landmark — target of the skip-to-content link. */
 export const APP_SHELL_MAIN_ID = 'var-ui-app-shell-main';
@@ -122,7 +122,7 @@ export function AppShell({
 
   if (disabled) {
     return (
-      <main id={APP_SHELL_MAIN_ID} {...recipeProps(s.main, className)} ref={mainRef}>
+      <main id={APP_SHELL_MAIN_ID} {...mergeProps(s.main, className)} ref={mainRef}>
         {children}
       </main>
     );
@@ -131,7 +131,7 @@ export function AppShell({
   return (
     <MobileNavProvider>
       <div
-        {...recipeProps(s.root, className)}
+        {...mergeProps(s.root, className)}
         data-mobile={isMobile ? '' : undefined}
         data-aside={aside ? '' : undefined}
         data-has-top-nav={topNav ? '' : undefined}
@@ -142,17 +142,17 @@ export function AppShell({
         data-header-hidden={effectiveHeaderHidden ? '' : undefined}
         data-header-offset={headerOffset ? '' : undefined}
       >
-        <a href={`#${APP_SHELL_MAIN_ID}`} {...recipeProps(s.skipLink)}>
+        <a href={`#${APP_SHELL_MAIN_ID}`} {...mergeProps(s.skipLink)}>
           Skip to content
         </a>
-        {banner ? <div {...recipeProps(s.banner)}>{banner}</div> : null}
-        <div {...recipeProps(s.frame)}>
-          {topNav ? <header {...recipeProps(s.topNav)}>{topNav}</header> : null}
-          {sideNav ? <div {...recipeProps(s.sideNav)}>{sideNav}</div> : null}
-          <main id={APP_SHELL_MAIN_ID} {...recipeProps(s.main)} ref={mainRef}>
+        {banner ? <div {...mergeProps(s.banner)}>{banner}</div> : null}
+        <div {...mergeProps(s.frame)}>
+          {topNav ? <header {...mergeProps(s.topNav)}>{topNav}</header> : null}
+          {sideNav ? <div {...mergeProps(s.sideNav)}>{sideNav}</div> : null}
+          <main id={APP_SHELL_MAIN_ID} {...mergeProps(s.main)} ref={mainRef}>
             {children}
           </main>
-          {aside ? <aside {...recipeProps(s.aside)}>{aside}</aside> : null}
+          {aside ? <aside {...mergeProps(s.aside)}>{aside}</aside> : null}
         </div>
         {mobileNav}
       </div>

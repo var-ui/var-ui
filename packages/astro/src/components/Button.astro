@@ -1,6 +1,6 @@
 ---
 import { button, resolveButtonProps, type ButtonVariantProps } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 interface Props extends ButtonVariantProps {
   className?: string;
@@ -18,7 +18,7 @@ const {
   type = 'button',
   disabled,
 } = Astro.props;
-const rp = recipeProps(
+const rp = mergeProps(
   button(resolveButtonProps({ intent, tone, appearance, size, elevated })),
   className,
 );

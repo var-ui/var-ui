@@ -5,7 +5,7 @@ import {
   type AvatarStatusTone,
   type AvatarVariantProps,
 } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 interface Props extends AvatarVariantProps {
   src?: string;
@@ -28,18 +28,18 @@ const a = avatar({ size });
 const accessibleName = alt ?? name;
 const showImage = Boolean(src);
 ---
-<span {...recipeProps(a.root, className)}>
+<span {...mergeProps(a.root, className)}>
   {
     showImage ? (
       <>
         <img
-          {...recipeProps(a.image)}
+          {...mergeProps(a.image)}
           src={src}
           alt={accessibleName ?? ''}
           onerror="this.hidden=true;this.nextElementSibling.hidden=false"
         />
         <span
-          {...recipeProps(a.initials)}
+          {...mergeProps(a.initials)}
           hidden
           aria-hidden={accessibleName ? undefined : true}
           role={accessibleName ? 'img' : undefined}
@@ -50,7 +50,7 @@ const showImage = Boolean(src);
       </>
     ) : (
       <span
-        {...recipeProps(a.initials)}
+        {...mergeProps(a.initials)}
         aria-hidden={accessibleName ? undefined : true}
         role={accessibleName ? 'img' : undefined}
         aria-label={accessibleName}
@@ -61,8 +61,8 @@ const showImage = Boolean(src);
   }
   {
     status ? (
-      <span {...recipeProps(a.status)} data-avatar-status>
-        <span {...recipeProps(statusDot({ tone: status }))} />
+      <span {...mergeProps(a.status)} data-avatar-status>
+        <span {...mergeProps(statusDot({ tone: status }))} />
       </span>
     ) : null
   }

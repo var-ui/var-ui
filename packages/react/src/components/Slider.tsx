@@ -8,7 +8,7 @@ import {
   type SliderProps as RACSliderProps,
 } from 'react-aria-components';
 import { slider } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 import type { FieldMeta } from './utils';
 
 export type SliderProps = Omit<RACSliderProps, 'className'> &
@@ -28,24 +28,24 @@ export function Slider({
 }: SliderProps): JSX.Element {
   const s = slider();
   return (
-    <AriaSlider {...props} {...recipeProps(s.root, className)}>
+    <AriaSlider {...props} {...mergeProps(s.root, className)}>
       {label ? (
-        <Label {...recipeProps(s.label)}>
+        <Label {...mergeProps(s.label)}>
           <span>{label}</span>
-          {showOutput ? <SliderOutput {...recipeProps(s.output)} /> : null}
+          {showOutput ? <SliderOutput {...mergeProps(s.output)} /> : null}
         </Label>
       ) : null}
-      <SliderTrack {...recipeProps(s.control)}>
+      <SliderTrack {...mergeProps(s.control)}>
         {({ state }) => (
           <>
-            <div {...recipeProps(s.track)}>
+            <div {...mergeProps(s.track)}>
               <div
-                {...recipeProps(s.fill)}
+                {...mergeProps(s.fill)}
                 style={{ width: `${state.getThumbPercent(0) * 100}%` }}
               />
             </div>
             <SliderThumb
-              {...recipeProps(s.thumb)}
+              {...mergeProps(s.thumb)}
               style={{
                 top: '50%',
                 transform: 'translate(-50%, -50%)',
@@ -54,8 +54,8 @@ export function Slider({
           </>
         )}
       </SliderTrack>
-      {description ? <p {...recipeProps(s.description)}>{description}</p> : null}
-      {errorMessage ? <p {...recipeProps(s.error)}>{errorMessage}</p> : null}
+      {description ? <p {...mergeProps(s.description)}>{description}</p> : null}
+      {errorMessage ? <p {...mergeProps(s.error)}>{errorMessage}</p> : null}
     </AriaSlider>
   );
 }

@@ -2,7 +2,7 @@ import type { JSX, ReactNode } from 'react';
 import { Button as AriaButton } from 'react-aria-components';
 import { banner, type BannerTone, type BannerVariantProps, type IconName } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type { BannerTone } from '@var-ui/core';
 
@@ -54,17 +54,17 @@ export function Banner({
   const glyph = icon === undefined ? <Icon name={toneIcon[tone]} /> : icon;
   return (
     <div
-      {...recipeProps(b.root, className)}
+      {...mergeProps(b.root, className)}
       role={tone === 'warning' || tone === 'danger' ? 'alert' : 'status'}
     >
-      {glyph !== null ? <span {...recipeProps(b.icon)}>{glyph}</span> : null}
-      <div {...recipeProps(b.content)}>
-        {title ? <span {...recipeProps(b.title)}>{title}</span> : null}
+      {glyph !== null ? <span {...mergeProps(b.icon)}>{glyph}</span> : null}
+      <div {...mergeProps(b.content)}>
+        {title ? <span {...mergeProps(b.title)}>{title}</span> : null}
         <span>{children}</span>
       </div>
-      {actions ? <div {...recipeProps(b.actions)}>{actions}</div> : null}
+      {actions ? <div {...mergeProps(b.actions)}>{actions}</div> : null}
       {onDismiss ? (
-        <AriaButton {...recipeProps(b.dismiss)} aria-label={dismissLabel} onPress={onDismiss}>
+        <AriaButton {...mergeProps(b.dismiss)} aria-label={dismissLabel} onPress={onDismiss}>
           <Icon name="close" size="sm" />
         </AriaButton>
       ) : null}

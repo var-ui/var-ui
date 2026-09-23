@@ -1,6 +1,6 @@
 ---
 import HighlightedCodeBlock from './HighlightedCodeBlock.astro';
-import { Heading, cx, recipeClassName } from '@var-ui/astro';
+import { Heading, cx } from '@var-ui/astro';
 import { demoChrome } from '../styles/demoChrome';
 
 type Framework = 'react' | 'astro' | 'html';
@@ -17,7 +17,7 @@ const { code, language = 'tsx', filename, framework, title } = Astro.props;
 const d = demoChrome();
 ---
 
-<div class={recipeClassName(d.root)} data-demo-chrome>
+<div class={(d.root).className} data-demo-chrome>
   {
     title ? (
       <Heading level={4} size="sm">
@@ -25,22 +25,22 @@ const d = demoChrome();
       </Heading>
     ) : null
   }
-  <div class={recipeClassName(d.card)}>
-    <div class={recipeClassName(d.preview)}>
-      <div class={recipeClassName(d.previewInner)}>
+  <div class={(d.card).className}>
+    <div class={(d.preview).className}>
+      <div class={(d.previewInner).className}>
         <slot />
       </div>
     </div>
     <section
-      class={cx(recipeClassName(d.code), recipeClassName(d.codeBlock))}
+      class={cx((d.code).className, (d.codeBlock).className)}
       data-demo-chrome-code
       data-demo-code={code}
       data-demo-framework={framework}
     >
       <HighlightedCodeBlock code={code} language={language} filename={filename} />
-      <div class={recipeClassName(d.codeFade)} data-demo-fade hidden></div>
-      <div class={recipeClassName(d.expand)} data-demo-expand-wrap>
-        <button type="button" class={recipeClassName(d.expandButton)} data-demo-expand>
+      <div class={(d.codeFade).className} data-demo-fade hidden></div>
+      <div class={(d.expand).className} data-demo-expand-wrap>
+        <button type="button" class={(d.expandButton).className} data-demo-expand>
           Expand code
         </button>
       </div>

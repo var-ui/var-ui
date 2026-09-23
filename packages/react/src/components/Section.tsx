@@ -1,6 +1,6 @@
 import type { HTMLAttributes, JSX } from 'react';
 import { section } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type SectionProps = HTMLAttributes<HTMLElement> & {
   /** Optional heading rendered as an h2 inside the section. */
@@ -17,8 +17,8 @@ export type SectionProps = HTMLAttributes<HTMLElement> & {
 export function Section({ title, className, children, ...props }: SectionProps): JSX.Element {
   const s = section();
   return (
-    <section {...props} {...recipeProps(s.root, className)}>
-      {title ? <h2 {...recipeProps(s.title)}>{title}</h2> : null}
+    <section {...props} {...mergeProps(s.root, className)}>
+      {title ? <h2 {...mergeProps(s.title)}>{title}</h2> : null}
       {children}
     </section>
   );

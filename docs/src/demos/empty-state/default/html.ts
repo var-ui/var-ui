@@ -1,5 +1,5 @@
 import { button, emptyState, resolveButtonProps } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const searchIcon =
@@ -9,20 +9,20 @@ export function render(): string {
   const e = emptyState();
   const iconWell = serializeHtmlTag(
     'div',
-    { ...recipeProps(e.icon), 'data-empty-state-icon': true, 'aria-hidden': 'true' },
+    { ...mergeProps(e.icon), 'data-empty-state-icon': true, 'aria-hidden': 'true' },
     searchIcon,
   );
-  const title = serializeHtmlTag('h3', recipeProps(e.title), 'No results');
+  const title = serializeHtmlTag('h3', mergeProps(e.title), 'No results');
   const description = serializeHtmlTag(
     'p',
-    recipeProps(e.description),
+    mergeProps(e.description),
     'Try a different filter, or clear the search.',
   );
   const btn = serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(button(resolveButtonProps({ intent: 'primary' }))) },
+    { type: 'button', ...mergeProps(button(resolveButtonProps({ intent: 'primary' }))) },
     'Clear filters',
   );
-  const action = serializeHtmlTag('div', recipeProps(e.action), btn);
-  return serializeHtmlTag('div', recipeProps(e.root), `${iconWell}${title}${description}${action}`);
+  const action = serializeHtmlTag('div', mergeProps(e.action), btn);
+  return serializeHtmlTag('div', mergeProps(e.root), `${iconWell}${title}${description}${action}`);
 }

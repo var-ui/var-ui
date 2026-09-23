@@ -1,12 +1,12 @@
 ---
 import { badge, type BadgeVariantProps } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 interface Props extends BadgeVariantProps {
   className?: string;
 }
 
 const { tone = 'neutral', appearance = 'subtle', className } = Astro.props;
-const rp = recipeProps(badge({ tone, appearance }), className);
+const rp = mergeProps(badge({ tone, appearance }), className);
 ---
 <span {...rp}><slot /></span>

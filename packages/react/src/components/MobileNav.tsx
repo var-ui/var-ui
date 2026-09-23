@@ -10,7 +10,7 @@ import { mobileNav } from '@var-ui/core';
 import { Icon } from '../icons';
 import { useLayer } from '../layers/LayerProvider';
 import { useScrollLock } from '../hooks';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 const dialogContentStyle: CSSProperties = { display: 'contents' };
 
@@ -108,7 +108,7 @@ export function MobileNavToggle({
 
   return (
     <AriaButton
-      {...recipeProps(s.toggle, className)}
+      {...mergeProps(s.toggle, className)}
       aria-label={label}
       aria-expanded={isOpen}
       onPress={() => {
@@ -191,13 +191,13 @@ export function MobileNav({
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       isDismissable
-      {...recipeProps(s.overlay)}
+      {...mergeProps(s.overlay)}
       data-open={isOpen ? '' : undefined}
       style={layerStyle}
       UNSTABLE_portalContainer={portalContainer}
     >
       <Modal
-        {...recipeProps(s.panel, className)}
+        {...mergeProps(s.panel, className)}
         data-side={resolvedSide}
         data-open={isOpen ? '' : undefined}
         style={panelStyle}
@@ -205,9 +205,9 @@ export function MobileNav({
         <AriaDialog aria-label={label} style={dialogContentStyle}>
           {({ close }) => (
             <>
-              <div {...recipeProps(s.header)}>
+              <div {...mergeProps(s.header)}>
                 <div style={{ minWidth: 0 }}>{header}</div>
-                <AriaButton {...recipeProps(s.closeButton)} aria-label={closeLabel} onPress={close}>
+                <AriaButton {...mergeProps(s.closeButton)} aria-label={closeLabel} onPress={close}>
                   <Icon name="close" size="sm" />
                 </AriaButton>
               </div>

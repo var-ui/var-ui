@@ -1,5 +1,5 @@
 import { resizeHandle } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
@@ -7,10 +7,10 @@ export function render(): string {
   return serializeHtmlTag(
     'div',
     {
-      ...recipeProps(s.root),
+      ...mergeProps(s.root),
       'data-var-ui-side-nav-resize': true,
       'aria-label': 'Resize sidebar',
     },
-    serializeHtmlTag('div', recipeProps(s.pill), ''),
+    serializeHtmlTag('div', mergeProps(s.pill), ''),
   );
 }

@@ -1,5 +1,6 @@
 // Docs-owned styles registered for @typestyles/vite extraction.
 import './codeHighlight';
+import './homePage';
 import './homeBento';
 import './configurator';
 import './themePlayground';
@@ -8,6 +9,5 @@ import './colorSwatches';
 import './shadowSwatches';
 import './playgroundShell';
 import './playgroundSidebar';
-import './docsThemePicker';
-import './docsTopNav';
+import '@var-ui/docs/styles';
 import './root';

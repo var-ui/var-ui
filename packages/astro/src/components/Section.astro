@@ -1,6 +1,6 @@
 ---
 import { section } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   title?: string;
@@ -9,8 +9,8 @@ type Props = {
 
 const { title, className } = Astro.props;
 const s = section();
-const rootProps = recipeProps(s.root, className);
-const titleProps = recipeProps(s.title);
+const rootProps = mergeProps(s.root, className);
+const titleProps = mergeProps(s.title);
 ---
 <section {...rootProps}>
   {title ? <h2 {...titleProps}>{title}</h2> : null}

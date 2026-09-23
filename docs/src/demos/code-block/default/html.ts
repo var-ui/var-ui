@@ -1,5 +1,5 @@
 import { codeBlock } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 function classOf(result: string | { className: string }): string {
@@ -9,18 +9,18 @@ function classOf(result: string | { className: string }): string {
 export function render(): string {
   const cb = codeBlock();
   const code = 'const greeting = "hello";';
-  const language = serializeHtmlTag('span', recipeProps(cb.language), 'tsx');
-  const title = serializeHtmlTag('div', recipeProps(cb.title), language);
+  const language = serializeHtmlTag('span', mergeProps(cb.language), 'tsx');
+  const title = serializeHtmlTag('div', mergeProps(cb.title), language);
   const header = serializeHtmlTag(
     'div',
-    { ...recipeProps(cb.header), 'data-codeblock-header': true },
+    { ...mergeProps(cb.header), 'data-codeblock-header': true },
     title,
   );
-  const codeEl = serializeHtmlTag('code', recipeProps(cb.code), code);
+  const codeEl = serializeHtmlTag('code', mergeProps(cb.code), code);
   const pre = serializeHtmlTag(
     'pre',
     {
-      ...recipeProps(cb.pre, classOf(cb.preScrollX)),
+      ...mergeProps(cb.pre, classOf(cb.preScrollX)),
       'data-codeblock-pre': true,
     },
     codeEl,
@@ -28,7 +28,7 @@ export function render(): string {
   const body = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(cb.body, classOf(cb.bodyScrollable)),
+      ...mergeProps(cb.body, classOf(cb.bodyScrollable)),
       'data-codeblock-body': true,
     },
     pre,
@@ -36,7 +36,7 @@ export function render(): string {
   return serializeHtmlTag(
     'div',
     {
-      ...recipeProps(cb.root, classOf(cb.rootDefault)),
+      ...mergeProps(cb.root, classOf(cb.rootDefault)),
       'data-codeblock': true,
     },
     `${header}${body}`,

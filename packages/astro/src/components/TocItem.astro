@@ -1,6 +1,6 @@
 ---
 import { toc } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   label: string;
@@ -13,13 +13,13 @@ type Props = {
 const { label, href, isSelected = false, isNested = false, className } = Astro.props;
 const s = toc();
 const linkProps = {
-  ...recipeProps(s.link, className),
+  ...mergeProps(s.link, className),
   ...(isSelected ? { 'data-selected': '' } : {}),
   'aria-current': isSelected ? ('location' as const) : undefined,
 };
 ---
 
-<li {...recipeProps(s.item)} data-nested={isNested || undefined}>
+<li {...mergeProps(s.item)} data-nested={isNested || undefined}>
   <a href={href} {...linkProps}>
     {label}
   </a>

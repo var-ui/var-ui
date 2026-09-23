@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { fileTree } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type FileTreeProps = {
   children: ReactNode;
@@ -10,8 +10,8 @@ export type FileTreeProps = {
 function FileTreeRoot({ children, className }: FileTreeProps): JSX.Element {
   const t = fileTree();
   return (
-    <div {...recipeProps(t.root, className)}>
-      <ul {...recipeProps(t.list)}>{children}</ul>
+    <div {...mergeProps(t.root, className)}>
+      <ul {...mergeProps(t.list)}>{children}</ul>
     </div>
   );
 }
@@ -25,11 +25,11 @@ export type FileTreeFolderProps = {
 function FileTreeFolder({ name, children, className }: FileTreeFolderProps): JSX.Element {
   const t = fileTree();
   return (
-    <li {...recipeProps(t.item, className)}>
-      <span {...recipeProps(t.row)}>
-        <span {...recipeProps(t.folder)}>{name}</span>
+    <li {...mergeProps(t.item, className)}>
+      <span {...mergeProps(t.row)}>
+        <span {...mergeProps(t.folder)}>{name}</span>
       </span>
-      {children != null ? <ul {...recipeProps(t.listNested)}>{children}</ul> : null}
+      {children != null ? <ul {...mergeProps(t.listNested)}>{children}</ul> : null}
     </li>
   );
 }
@@ -42,9 +42,9 @@ export type FileTreeFileProps = {
 function FileTreeFile({ name, className }: FileTreeFileProps): JSX.Element {
   const t = fileTree();
   return (
-    <li {...recipeProps(t.item, className)}>
-      <span {...recipeProps(t.row)}>
-        <span {...recipeProps(t.file)}>{name}</span>
+    <li {...mergeProps(t.item, className)}>
+      <span {...mergeProps(t.row)}>
+        <span {...mergeProps(t.file)}>{name}</span>
       </span>
     </li>
   );

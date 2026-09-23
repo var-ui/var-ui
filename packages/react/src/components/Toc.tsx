@@ -4,7 +4,7 @@ import { Link as AriaLink } from 'react-aria-components';
 import { positionTocIndicator, type TocHeading } from '@var-ui/core/internal';
 import { toc as tocStyles } from '@var-ui/core';
 import { useTocSpy } from '../hooks/useTocSpy';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type TocItemProps = {
   label: string;
@@ -25,10 +25,10 @@ export function TocItem({
   const s = tocStyles();
 
   return (
-    <li {...recipeProps(s.item)} data-nested={isNested || undefined}>
+    <li {...mergeProps(s.item)} data-nested={isNested || undefined}>
       <AriaLink
         href={href}
-        {...recipeProps(s.link, className)}
+        {...mergeProps(s.link, className)}
         {...(isSelected ? { 'data-selected': '' } : {})}
         aria-current={isSelected ? 'location' : undefined}
       >
@@ -72,7 +72,7 @@ function TocList({
   const s = tocStyles();
 
   return (
-    <ol ref={listRef} {...recipeProps(s.list)}>
+    <ol ref={listRef} {...mergeProps(s.list)}>
       {children ??
         (headings ?? []).map((heading) => (
           <TocItem
@@ -139,8 +139,8 @@ export function Toc({
   }
 
   return (
-    <nav aria-label={resolvedLabel} style={rootStyle} {...recipeProps(s.root, className)}>
-      {title != null ? <p {...recipeProps(s.title)}>{title}</p> : null}
+    <nav aria-label={resolvedLabel} style={rootStyle} {...mergeProps(s.root, className)}>
+      {title != null ? <p {...mergeProps(s.title)}>{title}</p> : null}
       <TocList listRef={listRef} headings={auto ? headings : undefined} activeId={activeId}>
         {children}
       </TocList>

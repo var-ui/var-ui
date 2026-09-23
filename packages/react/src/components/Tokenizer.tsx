@@ -15,7 +15,7 @@ import {
 } from 'react-aria-components';
 import { tokenizer } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type TokenizerOption = {
   /** Unique option identifier — also used as the token's key once selected. */
@@ -76,23 +76,23 @@ export function Tokenizer({
   }
 
   return (
-    <div {...recipeProps(tk.root, className)}>
-      {label ? <Label {...recipeProps(tk.label)}>{label}</Label> : null}
-      <Group {...recipeProps(tk.group)} isDisabled={isDisabled}>
+    <div {...mergeProps(tk.root, className)}>
+      {label ? <Label {...mergeProps(tk.label)}>{label}</Label> : null}
+      <Group {...mergeProps(tk.group)} isDisabled={isDisabled}>
         <TagGroup
           aria-label={label ?? 'Selected'}
-          {...recipeProps(tk.tokenList)}
+          {...mergeProps(tk.tokenList)}
           onRemove={(keys) => {
             for (const key of keys) removeToken(String(key));
           }}
         >
-          <TagList items={value} {...recipeProps(tk.tokenList)}>
+          <TagList items={value} {...mergeProps(tk.tokenList)}>
             {(item) => (
-              <Tag id={item.id} {...recipeProps(tk.token)} textValue={item.label}>
-                <span {...recipeProps(tk.tokenLabel)}>{item.label}</span>
+              <Tag id={item.id} {...mergeProps(tk.token)} textValue={item.label}>
+                <span {...mergeProps(tk.tokenLabel)}>{item.label}</span>
                 <Button
                   slot="remove"
-                  {...recipeProps(tk.tokenRemoveButton)}
+                  {...mergeProps(tk.tokenRemoveButton)}
                   aria-label={`Remove ${item.label}`}
                 >
                   <Icon name="close" size="sm" />
@@ -111,14 +111,14 @@ export function Tokenizer({
           }}
         >
           <Input
-            {...recipeProps(tk.input)}
+            {...mergeProps(tk.input)}
             placeholder={value.length === 0 ? placeholder : ''}
             onKeyDown={handleInputKeyDown}
           />
-          <Popover {...recipeProps(tk.popover)}>
+          <Popover {...mergeProps(tk.popover)}>
             <ListBox items={available}>
               {(option) => (
-                <ListBoxItem id={option.id} textValue={option.label} {...recipeProps(tk.item)}>
+                <ListBoxItem id={option.id} textValue={option.label} {...mergeProps(tk.item)}>
                   {option.label}
                 </ListBoxItem>
               )}
@@ -126,8 +126,8 @@ export function Tokenizer({
           </Popover>
         </AriaComboBox>
       </Group>
-      {description ? <p {...recipeProps(tk.description)}>{description}</p> : null}
-      {errorMessage ? <p {...recipeProps(tk.error)}>{errorMessage}</p> : null}
+      {description ? <p {...mergeProps(tk.description)}>{description}</p> : null}
+      {errorMessage ? <p {...mergeProps(tk.error)}>{errorMessage}</p> : null}
     </div>
   );
 }

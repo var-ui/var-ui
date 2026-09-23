@@ -32,7 +32,7 @@ import {
   thumbnail,
 } from '@var-ui/core';
 import type { DocsFramework } from '@/lib/framework';
-import { recipeProps } from '@/lib/recipeProps';
+import { mergeProps } from '@/lib/mergeProps';
 import { serializeHtmlTag } from '@/demos/serializeHtml';
 
 const PREVIEW_URL =
@@ -71,7 +71,7 @@ function serializeVoidTag(
 function vstack(gap: 'xs' | 'sm' | 'md', children: string): string {
   return serializeHtmlTag(
     'div',
-    recipeProps(stack({ direction: 'column', gap, align: 'stretch', justify: 'start' })),
+    mergeProps(stack({ direction: 'column', gap, align: 'stretch', justify: 'start' })),
     children,
   );
 }
@@ -83,7 +83,7 @@ function hstack(
 ): string {
   return serializeHtmlTag(
     'div',
-    recipeProps(
+    mergeProps(
       stack({
         direction: 'row',
         gap,
@@ -97,13 +97,13 @@ function hstack(
 }
 
 function renderHeading(text: string, size: 'sm' | 'md' = 'sm', level: 'h2' | 'h3' = 'h3'): string {
-  return serializeHtmlTag(level, recipeProps(heading({ size })), text);
+  return serializeHtmlTag(level, mergeProps(heading({ size })), text);
 }
 
 function renderButton(label: string, intent?: 'primary' | 'secondary' | 'ghost'): string {
   return serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(button(resolveButtonProps({ intent }))) },
+    { type: 'button', ...mergeProps(button(resolveButtonProps({ intent }))) },
     label,
   );
 }
@@ -112,21 +112,21 @@ function renderAvatar(name: string, initials: string): string {
   const a = avatar({ size: 'md' });
   const initialsEl = serializeHtmlTag(
     'span',
-    { ...recipeProps(a.initials), role: 'img', 'aria-label': name },
+    { ...mergeProps(a.initials), role: 'img', 'aria-label': name },
     initials,
   );
-  return serializeHtmlTag('span', recipeProps(a.root), initialsEl);
+  return serializeHtmlTag('span', mergeProps(a.root), initialsEl);
 }
 
 export function renderQuickActionsTileMarkup(): string {
   const tf = textField();
   const emailLabel = serializeHtmlTag(
     'label',
-    { ...recipeProps(tf.label), for: 'bento-invite-email' },
+    { ...mergeProps(tf.label), for: 'bento-invite-email' },
     'Email',
   );
   const emailInput = serializeVoidTag('input', {
-    ...recipeProps(tf.input),
+    ...mergeProps(tf.input),
     id: 'bento-invite-email',
     type: 'text',
     placeholder: 'ada@example.com',
@@ -141,35 +141,35 @@ export function renderQuickActionsTileMarkup(): string {
   const s = select();
   const roleLabel = serializeHtmlTag(
     'label',
-    { ...recipeProps(s.label), for: 'bento-invite-role' },
+    { ...mergeProps(s.label), for: 'bento-invite-role' },
     'Role',
   );
   const roleSelect = serializeHtmlTag(
     'select',
-    { ...recipeProps(s.trigger), id: 'bento-invite-role' },
+    { ...mergeProps(s.trigger), id: 'bento-invite-role' },
     roleOptions,
   );
-  const roleField = serializeHtmlTag('div', recipeProps(s.root), `${roleLabel}${roleSelect}`);
+  const roleField = serializeHtmlTag('div', mergeProps(s.root), `${roleLabel}${roleSelect}`);
 
   return vstack(
     'md',
-    `${renderHeading('Invite a teammate')}${serializeHtmlTag('div', recipeProps(tf.root), `${emailLabel}${emailInput}`)}${roleField}${hstack('sm', `${renderButton('Send invite', 'primary')}${renderButton('Cancel', 'secondary')}${renderButton('Learn more', 'ghost')}`, { wrap: true })}`,
+    `${renderHeading('Invite a teammate')}${serializeHtmlTag('div', mergeProps(tf.root), `${emailLabel}${emailInput}`)}${roleField}${hstack('sm', `${renderButton('Send invite', 'primary')}${renderButton('Cancel', 'secondary')}${renderButton('Learn more', 'ghost')}`, { wrap: true })}`,
   );
 }
 
 export function renderStatusFeedbackTileMarkup(): string {
   const a = alert({ tone: 'info', appearance: 'subtle', contentGap: 'spaced' });
-  const alertTitle = serializeHtmlTag('p', recipeProps(a.title), 'Deploy queued');
+  const alertTitle = serializeHtmlTag('p', mergeProps(a.title), 'Deploy queued');
   const alertContent = serializeHtmlTag(
     'div',
-    { ...recipeProps(a.content), 'data-alert-content': true },
+    { ...mergeProps(a.content), 'data-alert-content': true },
     'Waiting for the previous build to finish.',
   );
-  const alertBody = serializeHtmlTag('div', recipeProps(a.body), `${alertTitle}${alertContent}`);
+  const alertBody = serializeHtmlTag('div', mergeProps(a.body), `${alertTitle}${alertContent}`);
   const alertEl = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(a.root),
+      ...mergeProps(a.root),
       'data-alert': true,
       'data-alert-variant': 'info',
       'data-alert-appearance': 'subtle',
@@ -179,22 +179,22 @@ export function renderStatusFeedbackTileMarkup(): string {
 
   const badges = hstack(
     'sm',
-    `${serializeHtmlTag('span', recipeProps(badge({ tone: 'accent' })), 'Beta')}${serializeHtmlTag('span', recipeProps(badge({ tone: 'success' })), 'Stable')}`,
+    `${serializeHtmlTag('span', mergeProps(badge({ tone: 'accent' })), 'Beta')}${serializeHtmlTag('span', mergeProps(badge({ tone: 'success' })), 'Stable')}`,
     { wrap: true },
   );
 
   const p = progressBar({ tone: 'accent', indeterminate: 'false' });
   const progressHeader = serializeHtmlTag(
     'div',
-    recipeProps(p.header),
-    serializeHtmlTag('span', recipeProps(p.label), 'Build progress'),
+    mergeProps(p.header),
+    serializeHtmlTag('span', mergeProps(p.label), 'Build progress'),
   );
-  const progressFill = serializeHtmlTag('div', { ...recipeProps(p.fill), style: 'width: 72%' }, '');
-  const progressTrack = serializeHtmlTag('div', recipeProps(p.track), progressFill);
+  const progressFill = serializeHtmlTag('div', { ...mergeProps(p.fill), style: 'width: 72%' }, '');
+  const progressTrack = serializeHtmlTag('div', mergeProps(p.track), progressFill);
   const progressEl = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(p.root),
+      ...mergeProps(p.root),
       role: 'progressbar',
       'aria-label': 'Build progress',
       'aria-valuemin': '0',
@@ -204,10 +204,10 @@ export function renderStatusFeedbackTileMarkup(): string {
     `${progressHeader}${progressTrack}`,
   );
 
-  const rule = serializeHtmlTag('hr', recipeProps(divider({})), '');
+  const rule = serializeHtmlTag('hr', mergeProps(divider({})), '');
   const spinRing = serializeHtmlTag(
     'span',
-    { ...recipeProps(spinner({ size: 'sm' })), 'aria-hidden': 'true' },
+    { ...mergeProps(spinner({ size: 'sm' })), 'aria-hidden': 'true' },
     '',
   );
   const spinLabel = serializeHtmlTag('span', { style: VISUALLY_HIDDEN }, 'Syncing');
@@ -221,12 +221,12 @@ export function renderSettingsFormTileMarkup(): string {
   const p = pinInput();
   const pinLabel = serializeHtmlTag(
     'label',
-    { ...recipeProps(p.label), id: 'bento-pin-label' },
+    { ...mergeProps(p.label), id: 'bento-pin-label' },
     'Verification code',
   );
   const pinCells = Array.from({ length: 4 }, (_, index) =>
     serializeVoidTag('input', {
-      ...recipeProps(p.cell),
+      ...mergeProps(p.cell),
       type: 'text',
       inputmode: 'numeric',
       pattern: '[0-9]*',
@@ -238,22 +238,22 @@ export function renderSettingsFormTileMarkup(): string {
   ).join('');
   const pinGroup = serializeHtmlTag(
     'div',
-    { ...recipeProps(p.group), role: 'group', 'aria-labelledby': 'bento-pin-label' },
+    { ...mergeProps(p.group), role: 'group', 'aria-labelledby': 'bento-pin-label' },
     pinCells,
   );
-  const pinEl = serializeHtmlTag('div', recipeProps(p.root), `${pinLabel}${pinGroup}`);
+  const pinEl = serializeHtmlTag('div', mergeProps(p.root), `${pinLabel}${pinGroup}`);
 
   const switchInput = serializeVoidTag('input', {
     type: 'checkbox',
     role: 'switch',
     style: 'position:absolute;width:1px;height:1px;opacity:0',
   });
-  const switchThumb = serializeHtmlTag('span', recipeProps(sw.thumb), '');
-  const switchTrack = serializeHtmlTag('span', recipeProps(sw.track), switchThumb);
-  const switchLabel = serializeHtmlTag('span', recipeProps(sw.label), 'Email digest');
+  const switchThumb = serializeHtmlTag('span', mergeProps(sw.thumb), '');
+  const switchTrack = serializeHtmlTag('span', mergeProps(sw.track), switchThumb);
+  const switchLabel = serializeHtmlTag('span', mergeProps(sw.label), 'Email digest');
   const switchEl = serializeHtmlTag(
     'label',
-    recipeProps(sw.root),
+    mergeProps(sw.root),
     `${switchInput}${switchTrack}${switchLabel}`,
   );
 
@@ -262,18 +262,18 @@ export function renderSettingsFormTileMarkup(): string {
     type: 'checkbox',
     style: 'position:absolute;width:1px;height:1px;opacity:0',
   });
-  const checkboxBox = serializeHtmlTag('span', recipeProps(cb.box), '');
-  const checkboxLabel = serializeHtmlTag('span', recipeProps(cb.label), 'Push notifications');
+  const checkboxBox = serializeHtmlTag('span', mergeProps(cb.box), '');
+  const checkboxLabel = serializeHtmlTag('span', mergeProps(cb.label), 'Push notifications');
   const checkboxEl = serializeHtmlTag(
     'label',
-    recipeProps(cb.root),
+    mergeProps(cb.root),
     `${checkboxInput}${checkboxBox}${checkboxLabel}`,
   );
 
   const r = radio();
   const groupLabel = serializeHtmlTag(
     'span',
-    { ...recipeProps(r.groupLabel), id: 'bento-frequency-label' },
+    { ...mergeProps(r.groupLabel), id: 'bento-frequency-label' },
     'Frequency',
   );
   const radioOptions = [
@@ -288,21 +288,21 @@ export function renderSettingsFormTileMarkup(): string {
         value: option.value,
         style: 'position:absolute;width:1px;height:1px;opacity:0',
       });
-      const control = serializeHtmlTag('span', recipeProps(r.control), '');
-      const labelEl = serializeHtmlTag('span', recipeProps(r.label), option.label);
-      return serializeHtmlTag('label', recipeProps(r.item), `${input}${control}${labelEl}`);
+      const control = serializeHtmlTag('span', mergeProps(r.control), '');
+      const labelEl = serializeHtmlTag('span', mergeProps(r.label), option.label);
+      return serializeHtmlTag('label', mergeProps(r.item), `${input}${control}${labelEl}`);
     })
     .join('');
   const radioGroup = serializeHtmlTag(
     'div',
-    { ...recipeProps(r.group), role: 'radiogroup', 'aria-labelledby': 'bento-frequency-label' },
+    { ...mergeProps(r.group), role: 'radiogroup', 'aria-labelledby': 'bento-frequency-label' },
     `${groupLabel}${radioItems}`,
   );
 
   const f = field();
   const fieldLabel = serializeHtmlTag(
     'label',
-    { ...recipeProps(f.label), for: 'bento-quiet-hours-volume' },
+    { ...mergeProps(f.label), for: 'bento-quiet-hours-volume' },
     'Alert volume',
   );
   const rangeInput = serializeHtmlTag(
@@ -310,10 +310,10 @@ export function renderSettingsFormTileMarkup(): string {
     { id: 'bento-quiet-hours-volume', type: 'range' },
     '',
   );
-  const fieldDescription = serializeHtmlTag('p', recipeProps(f.description), 'Applies instantly.');
+  const fieldDescription = serializeHtmlTag('p', mergeProps(f.description), 'Applies instantly.');
   const fieldEl = serializeHtmlTag(
     'div',
-    recipeProps(f.root),
+    mergeProps(f.root),
     `${fieldLabel}${rangeInput}${fieldDescription}`,
   );
 
@@ -327,18 +327,18 @@ export function renderEmptyStateDialogTileMarkup(): string {
   const e = emptyState();
   const iconWell = serializeHtmlTag(
     'div',
-    { ...recipeProps(e.icon), 'data-empty-state-icon': true, 'aria-hidden': 'true' },
+    { ...mergeProps(e.icon), 'data-empty-state-icon': true, 'aria-hidden': 'true' },
     SEARCH_ICON,
   );
-  const title = serializeHtmlTag('h3', recipeProps(e.title), 'No projects yet');
+  const title = serializeHtmlTag('h3', mergeProps(e.title), 'No projects yet');
   const description = serializeHtmlTag(
     'p',
-    recipeProps(e.description),
+    mergeProps(e.description),
     'Create your first project to get started.',
   );
   const trigger = renderButton('New project', 'secondary');
-  const action = serializeHtmlTag('div', recipeProps(e.action), trigger);
-  return serializeHtmlTag('div', recipeProps(e.root), `${iconWell}${title}${description}${action}`);
+  const action = serializeHtmlTag('div', mergeProps(e.action), trigger);
+  return serializeHtmlTag('div', mergeProps(e.root), `${iconWell}${title}${description}${action}`);
 }
 
 function frameworkImportSnippet(framework: DocsFramework): string {
@@ -368,7 +368,7 @@ export function renderContentSampleTileMarkup(framework: DocsFramework): string 
   const timestampLabel = serializeHtmlTag(
     'time',
     {
-      ...recipeProps(textBlock({ size: 'sm', tone: 'secondary' })),
+      ...mergeProps(textBlock({ size: 'sm', tone: 'secondary' })),
       datetime: timestampIso,
     },
     'Jun 30, 2026',
@@ -376,12 +376,12 @@ export function renderContentSampleTileMarkup(framework: DocsFramework): string 
 
   const bodyText = serializeHtmlTag(
     'p',
-    recipeProps(textBlock({})),
+    mergeProps(textBlock({})),
     'Themes pin fixed-tone subtrees with modes and <code>data-surface</code> (<code>SURFACE_ATTRIBUTE</code>). See ',
   );
   const themingLink = serializeHtmlTag(
     'a',
-    { href: '/theming', ...recipeProps(link) },
+    { href: '/theming', ...mergeProps(link) },
     'the theming guide',
   );
   const bodyEnd = serializeHtmlTag('span', {}, ' for details.');
@@ -390,20 +390,20 @@ export function renderContentSampleTileMarkup(framework: DocsFramework): string 
   const code = frameworkImportSnippet(framework);
   const language = serializeHtmlTag(
     'span',
-    recipeProps(cb.language),
+    mergeProps(cb.language),
     frameworkCodeLanguage(framework),
   );
-  const codeTitle = serializeHtmlTag('div', recipeProps(cb.title), language);
+  const codeTitle = serializeHtmlTag('div', mergeProps(cb.title), language);
   const codeHeader = serializeHtmlTag(
     'div',
-    { ...recipeProps(cb.header), 'data-codeblock-header': true },
+    { ...mergeProps(cb.header), 'data-codeblock-header': true },
     codeTitle,
   );
-  const codeEl = serializeHtmlTag('code', recipeProps(cb.code), code);
+  const codeEl = serializeHtmlTag('code', mergeProps(cb.code), code);
   const pre = serializeHtmlTag(
     'pre',
     {
-      ...recipeProps(cb.pre, classOf(cb.preScrollX)),
+      ...mergeProps(cb.pre, classOf(cb.preScrollX)),
       'data-codeblock-pre': true,
     },
     codeEl,
@@ -411,7 +411,7 @@ export function renderContentSampleTileMarkup(framework: DocsFramework): string 
   const codeBody = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(cb.body, classOf(cb.bodyScrollable)),
+      ...mergeProps(cb.body, classOf(cb.bodyScrollable)),
       'data-codeblock-body': true,
     },
     pre,
@@ -419,7 +419,7 @@ export function renderContentSampleTileMarkup(framework: DocsFramework): string 
   const codeBlockEl = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(cb.root, classOf(cb.rootDefault)),
+      ...mergeProps(cb.root, classOf(cb.rootDefault)),
       'data-codeblock': true,
     },
     `${codeHeader}${codeBody}`,
@@ -427,7 +427,7 @@ export function renderContentSampleTileMarkup(framework: DocsFramework): string 
 
   return vstack(
     'sm',
-    `${renderHeading('Release notes')}${serializeHtmlTag('p', recipeProps(textBlock({ size: 'sm', tone: 'secondary' })), `Published ${timestampLabel}`)}${bodyText}${themingLink}${bodyEnd}${codeBlockEl}`,
+    `${renderHeading('Release notes')}${serializeHtmlTag('p', mergeProps(textBlock({ size: 'sm', tone: 'secondary' })), `Published ${timestampLabel}`)}${bodyText}${themingLink}${bodyEnd}${codeBlockEl}`,
   );
 }
 
@@ -440,37 +440,37 @@ export function renderIdentityCardsTileMarkup(): string {
   ];
   const avatarItems = avatars
     .map((user) =>
-      serializeHtmlTag('span', recipeProps(g.item), renderAvatar(user.name, user.initials)),
+      serializeHtmlTag('span', mergeProps(g.item), renderAvatar(user.name, user.initials)),
     )
     .join('');
-  const overflow = serializeHtmlTag('span', recipeProps(g.overflow), '+1');
-  const avatarRow = serializeHtmlTag('span', recipeProps(g.root), `${avatarItems}${overflow}`);
+  const overflow = serializeHtmlTag('span', mergeProps(g.overflow), '+1');
+  const avatarRow = serializeHtmlTag('span', mergeProps(g.root), `${avatarItems}${overflow}`);
 
   const c = card();
-  const cardTitle = serializeHtmlTag('h3', recipeProps(c.title), 'Design team');
+  const cardTitle = serializeHtmlTag('h3', mergeProps(c.title), 'Design team');
   const cardBody = serializeHtmlTag(
     'div',
-    recipeProps(c.body),
+    mergeProps(c.body),
     hstack(
       'sm',
-      `${avatarRow}${serializeHtmlTag('span', recipeProps(badge({ tone: 'accent' })), '4 members')}`,
+      `${avatarRow}${serializeHtmlTag('span', mergeProps(badge({ tone: 'accent' })), '4 members')}`,
       { align: 'center' },
     ),
   );
-  const teamCard = serializeHtmlTag('div', recipeProps(c.root), `${cardTitle}${cardBody}`);
+  const teamCard = serializeHtmlTag('div', mergeProps(c.root), `${cardTitle}${cardBody}`);
 
   const thumb = thumbnail({ size: 'md' });
   const thumbImage = serializeVoidTag('img', {
-    ...recipeProps(thumb.image),
+    ...mergeProps(thumb.image),
     src: PREVIEW_URL,
     alt: 'Cover preview',
   });
-  const thumb1 = serializeHtmlTag('span', recipeProps(thumb.root), thumbImage);
+  const thumb1 = serializeHtmlTag('span', mergeProps(thumb.root), thumbImage);
   const thumb2 = serializeHtmlTag(
     'span',
-    recipeProps(thumb.root),
+    mergeProps(thumb.root),
     serializeVoidTag('img', {
-      ...recipeProps(thumb.image),
+      ...mergeProps(thumb.image),
       src: PREVIEW_URL,
       alt: 'Icon preview',
     }),
@@ -478,16 +478,16 @@ export function renderIdentityCardsTileMarkup(): string {
   const thumbs = hstack('sm', `${thumb1}${thumb2}`);
 
   const clickable = card();
-  const linkTitle = serializeHtmlTag('span', recipeProps(clickable.linkTitle), 'All files');
+  const linkTitle = serializeHtmlTag('span', mergeProps(clickable.linkTitle), 'All files');
   const linkDescription = serializeHtmlTag(
     'p',
-    recipeProps(clickable.linkDescription),
+    mergeProps(clickable.linkDescription),
     'Browse every asset in the workspace.',
   );
-  const linkHint = serializeHtmlTag('span', recipeProps(clickable.linkHint), '24 files');
+  const linkHint = serializeHtmlTag('span', mergeProps(clickable.linkHint), '24 files');
   const clickableCard = serializeHtmlTag(
     'a',
-    { href: '#', ...recipeProps(clickable.root, classOf(clickable.linkRoot)) },
+    { href: '#', ...mergeProps(clickable.root, classOf(clickable.linkRoot)) },
     `${linkTitle}${linkDescription}${linkHint}`,
   );
 
@@ -499,28 +499,28 @@ export function renderCarouselStripTileMarkup(): string {
 
   function renderSlide(title: string): string {
     const c = card();
-    const cardTitle = serializeHtmlTag('h3', recipeProps(c.title), title);
+    const cardTitle = serializeHtmlTag('h3', mergeProps(c.title), title);
     const ratio = serializeHtmlTag(
       'div',
       {
-        ...recipeProps(aspectRatio()),
+        ...mergeProps(aspectRatio()),
         style: 'background: var(--color-background-subtle); aspect-ratio: 1.7777777777777777',
       },
       '',
     );
     const slideText = serializeHtmlTag(
       'p',
-      recipeProps(textBlock({ size: 'sm', tone: 'secondary' })),
+      mergeProps(textBlock({ size: 'sm', tone: 'secondary' })),
       'Scroll-snap slide.',
     );
     const cardBody = serializeHtmlTag(
       'div',
-      recipeProps(c.body),
+      mergeProps(c.body),
       vstack('xs', `${ratio}${slideText}`),
     );
-    const cardEl = serializeHtmlTag('div', recipeProps(c.root), `${cardTitle}${cardBody}`);
+    const cardEl = serializeHtmlTag('div', mergeProps(c.root), `${cardTitle}${cardBody}`);
     const s = carousel();
-    return serializeHtmlTag('div', { ...recipeProps(s.item), 'data-carousel-item': true }, cardEl);
+    return serializeHtmlTag('div', { ...mergeProps(s.item), 'data-carousel-item': true }, cardEl);
   }
 
   const s = carousel();
@@ -528,7 +528,7 @@ export function renderCarouselStripTileMarkup(): string {
   const viewport = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(s.viewport),
+      ...mergeProps(s.viewport),
       'data-carousel-viewport': true,
       tabindex: '0',
       style: 'grid-auto-columns: 180px',
@@ -537,46 +537,46 @@ export function renderCarouselStripTileMarkup(): string {
   );
   const prev = serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(s.control), 'aria-label': 'Previous', disabled: true },
+    { type: 'button', ...mergeProps(s.control), 'aria-label': 'Previous', disabled: true },
     CHEVRON_LEFT,
   );
   const next = serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(s.control), 'aria-label': 'Next', disabled: true },
+    { type: 'button', ...mergeProps(s.control), 'aria-label': 'Next', disabled: true },
     CHEVRON_RIGHT,
   );
-  const controls = serializeHtmlTag('div', recipeProps(s.controls), `${prev}${next}`);
+  const controls = serializeHtmlTag('div', mergeProps(s.controls), `${prev}${next}`);
   return serializeHtmlTag(
     'section',
-    { ...recipeProps(s.root), role: 'region', 'aria-label': 'Product tour' },
+    { ...mergeProps(s.root), role: 'region', 'aria-label': 'Product tour' },
     `${viewport}${controls}`,
   );
 }
 
 export function renderLayoutTabsTileMarkup(): string {
   const sec = section();
-  const sectionTitle = serializeHtmlTag('h2', recipeProps(sec.title), 'Layout preview');
+  const sectionTitle = serializeHtmlTag('h2', mergeProps(sec.title), 'Layout preview');
 
   const gridCard = card();
   const gridCell = (title: string) =>
     serializeHtmlTag(
       'div',
-      recipeProps(gridCard.root),
-      `${serializeHtmlTag('h3', recipeProps(gridCard.title), title)}${serializeHtmlTag('div', recipeProps(gridCard.body), 'Cell')}`,
+      mergeProps(gridCard.root),
+      `${serializeHtmlTag('h3', mergeProps(gridCard.title), title)}${serializeHtmlTag('div', mergeProps(gridCard.body), 'Cell')}`,
     );
   const gridCards = serializeHtmlTag(
     'div',
-    recipeProps(grid({ columns: 'two', gap: 'sm' })),
+    mergeProps(grid({ columns: 'two', gap: 'sm' })),
     `${gridCell('A')}${gridCell('B')}`,
   );
 
   const centerContent = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(center({ inline: 'false' })),
+      ...mergeProps(center({ inline: 'false' })),
       style: 'height: 80px',
     },
-    serializeHtmlTag('p', recipeProps(textBlock({ tone: 'secondary' })), 'Centered content'),
+    serializeHtmlTag('p', mergeProps(textBlock({ tone: 'secondary' })), 'Centered content'),
   );
 
   const panels = [
@@ -597,13 +597,13 @@ export function renderLayoutTabsTileMarkup(): string {
           'aria-selected': panel.selected ? 'true' : 'false',
           tabindex: panel.selected ? '0' : '-1',
           ...(panel.selected ? { 'data-selected': true } : {}),
-          ...recipeProps(t.tab),
+          ...mergeProps(t.tab),
         },
         panel.label,
       ),
     )
     .join('');
-  const tabList = serializeHtmlTag('div', { role: 'tablist', ...recipeProps(t.list) }, tabButtons);
+  const tabList = serializeHtmlTag('div', { role: 'tablist', ...mergeProps(t.list) }, tabButtons);
   const tabPanels = panels
     .map((panel) =>
       serializeHtmlTag(
@@ -613,7 +613,7 @@ export function renderLayoutTabsTileMarkup(): string {
           id: `bento-panel-${panel.id}`,
           'aria-labelledby': `bento-tab-${panel.id}`,
           ...(panel.selected ? {} : { hidden: true }),
-          ...recipeProps(t.panel),
+          ...mergeProps(t.panel),
         },
         panel.content,
       ),
@@ -621,30 +621,30 @@ export function renderLayoutTabsTileMarkup(): string {
     .join('');
   const tabsEl = serializeHtmlTag(
     'div',
-    { 'data-var-ui-tabs': true, ...recipeProps(t.root) },
+    { 'data-var-ui-tabs': true, ...mergeProps(t.root) },
     `${tabList}${tabPanels}`,
   );
 
-  return serializeHtmlTag('section', recipeProps(sec.root), `${sectionTitle}${tabsEl}`);
+  return serializeHtmlTag('section', mergeProps(sec.root), `${sectionTitle}${tabsEl}`);
 }
 
 export function renderBannerTileMarkup(): string {
   const b = banner({ tone: 'info', appearance: 'solid' });
-  const title = serializeHtmlTag('span', recipeProps(b.title), "You're on the Free plan");
+  const title = serializeHtmlTag('span', mergeProps(b.title), "You're on the Free plan");
   const message = serializeHtmlTag(
     'span',
     {},
     'Upgrade for unlimited projects and priority support.',
   );
-  const content = serializeHtmlTag('div', recipeProps(b.content), `${title} ${message}`);
+  const content = serializeHtmlTag('div', mergeProps(b.content), `${title} ${message}`);
   const actions = serializeHtmlTag(
     'div',
-    recipeProps(b.actions),
+    mergeProps(b.actions),
     renderButton('Upgrade plan', 'primary'),
   );
   return serializeHtmlTag(
     'div',
-    { ...recipeProps(b.root), 'data-banner': true, role: 'status' },
+    { ...mergeProps(b.root), 'data-banner': true, role: 'status' },
     `${content}${actions}`,
   );
 }

@@ -4,7 +4,7 @@ function toHtmlAttrName(key: string): string {
   return key === 'className' ? 'class' : key;
 }
 
-/** Serialize a tag + attrs (from recipeProps) into an HTML element string. */
+/** Serialize a tag + attrs (from mergeProps) into an HTML element string. */
 export function serializeHtmlTag(
   tag: string,
   props: Record<string, HtmlAttrValue>,

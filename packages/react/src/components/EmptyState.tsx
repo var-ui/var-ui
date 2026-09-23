@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { emptyState } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type EmptyStateProps = {
   /** Decorative glyph or illustration; consumers pass `<Icon>` or a custom node. */
@@ -37,15 +37,15 @@ export function EmptyState({
 }: EmptyStateProps): JSX.Element {
   const e = emptyState();
   return (
-    <div {...recipeProps(e.root, className)}>
+    <div {...mergeProps(e.root, className)}>
       {icon ? (
-        <div {...recipeProps(e.icon)} data-empty-state-icon aria-hidden="true">
+        <div {...mergeProps(e.icon)} data-empty-state-icon aria-hidden="true">
           {icon}
         </div>
       ) : null}
-      <h3 {...recipeProps(e.title)}>{title}</h3>
-      {description ? <p {...recipeProps(e.description)}>{description}</p> : null}
-      {action ? <div {...recipeProps(e.action)}>{action}</div> : null}
+      <h3 {...mergeProps(e.title)}>{title}</h3>
+      {description ? <p {...mergeProps(e.description)}>{description}</p> : null}
+      {action ? <div {...mergeProps(e.action)}>{action}</div> : null}
     </div>
   );
 }

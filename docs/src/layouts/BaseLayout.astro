@@ -1,6 +1,5 @@
 ---
 import DocsPage from '../../../packages/docs/src/components/DocsPage.astro';
-import { recipeClassName } from '@var-ui/astro';
 import { codeHljsScope } from '@/styles/codeHighlight';
 import { defaultThemeClassName } from '@var-ui/core';
 import DocsThemePicker from '../components/DocsThemePicker.astro';
@@ -37,7 +36,7 @@ const sidebarSections = currentPath.startsWith('/components')
       ? docsSidebarSections
       : null;
 
-const hljsScopeClass = recipeClassName(codeHljsScope().root);
+const hljsScopeClass = (codeHljsScope().root).className;
 const searchItems = buildDocsSearchIndex();
 ---
 

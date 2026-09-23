@@ -8,7 +8,7 @@ import { useColorValue } from '../color';
 import { ColorPicker } from './ColorPicker';
 import type { ColorPickerProps } from './ColorPicker';
 import type { FieldMeta } from './utils';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type ColorInputProps = FieldMeta &
   Pick<ColorPickerProps, 'swatches' | 'swatchesPerRow' | 'withAlpha'> & {
@@ -86,32 +86,32 @@ export function ColorInput({
   };
 
   return (
-    <div {...recipeProps(cf.root, className)}>
+    <div {...mergeProps(cf.root, className)}>
       {label ? (
-        <Label {...recipeProps(cf.label)} htmlFor={inputId}>
+        <Label {...mergeProps(cf.label)} htmlFor={inputId}>
           {label}
         </Label>
       ) : null}
-      <div {...recipeProps(cf.inputWrapper)} data-disabled={isDisabled || undefined}>
+      <div {...mergeProps(cf.inputWrapper)} data-disabled={isDisabled || undefined}>
         <DialogTrigger>
           <button
             type="button"
-            {...recipeProps(cf.swatchButton)}
+            {...mergeProps(cf.swatchButton)}
             disabled={isDisabled}
             aria-label="Open color picker"
           >
             <span
-              {...recipeProps(cf.swatchPreview)}
+              {...mergeProps(cf.swatchPreview)}
               style={{ backgroundColor: swatchColor }}
               aria-hidden
             />
           </button>
           <AriaPopover
-            {...recipeProps(p.root)}
+            {...mergeProps(p.root)}
             style={layerStyle}
             UNSTABLE_portalContainer={portalContainer}
           >
-            <div {...recipeProps(p.content)}>
+            <div {...mergeProps(p.content)}>
               <ColorPicker
                 value={color}
                 onChange={handlePickerChange}
@@ -124,7 +124,7 @@ export function ColorInput({
         </DialogTrigger>
         <input
           id={inputId}
-          {...recipeProps(cf.input)}
+          {...mergeProps(cf.input)}
           type="text"
           name={name}
           value={textValue}
@@ -139,9 +139,9 @@ export function ColorInput({
           onBlur={handleTextBlur}
         />
       </div>
-      {description ? <p {...recipeProps(cf.description)}>{description}</p> : null}
+      {description ? <p {...mergeProps(cf.description)}>{description}</p> : null}
       {errorMessage ? (
-        <p {...recipeProps(cf.error)} role="alert">
+        <p {...mergeProps(cf.error)} role="alert">
           {errorMessage}
         </p>
       ) : null}

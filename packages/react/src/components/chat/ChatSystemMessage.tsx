@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { chatSystemMessage, type ButtonTone } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 export type ChatSystemMessageTone = ButtonTone;
 
@@ -30,9 +30,9 @@ export function ChatSystemMessage({
 }: ChatSystemMessageProps): JSX.Element {
   const s = chatSystemMessage({ tone });
   return (
-    <div {...recipeProps(s.root, className)} role="status">
-      {icon ? <span {...recipeProps(s.icon)}>{icon}</span> : null}
-      <span {...recipeProps(s.text)}>{children}</span>
+    <div {...mergeProps(s.root, className)} role="status">
+      {icon ? <span {...mergeProps(s.icon)}>{icon}</span> : null}
+      <span {...mergeProps(s.text)}>{children}</span>
     </div>
   );
 }

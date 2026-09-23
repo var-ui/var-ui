@@ -6,7 +6,7 @@ import {
   layoutShellPaddingAssignments,
   textBlock,
 } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 function styleFromAssignments(assignments: Record<string, string>): string {
@@ -20,25 +20,25 @@ export function render(): string {
   const h = layoutHeader({});
   const header = serializeHtmlTag(
     'div',
-    recipeProps(h.header),
-    serializeHtmlTag('div', recipeProps(h.headerInner), 'Explorer'),
+    mergeProps(h.header),
+    serializeHtmlTag('div', mergeProps(h.headerInner), 'Explorer'),
   );
   const pStart = layoutPanel({ hasDivider: true });
   const start = serializeHtmlTag(
     'div',
-    { ...recipeProps(pStart.panel), 'data-side': 'start', style: 'width:180px' },
+    { ...mergeProps(pStart.panel), 'data-side': 'start', style: 'width:180px' },
     'Nav',
   );
   const content = serializeHtmlTag(
     'div',
-    recipeProps(layoutContent({ padding: 'inherit' }).content),
-    serializeHtmlTag('p', recipeProps(textBlock({ size: 'sm' })), 'Main content'),
+    mergeProps(layoutContent({ padding: 'inherit' }).content),
+    serializeHtmlTag('p', mergeProps(textBlock({ size: 'sm' })), 'Main content'),
   );
   const pEnd = layoutPanel({ hasDivider: true });
   const end = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(pEnd.panel),
+      ...mergeProps(pEnd.panel),
       'data-side': 'end',
       style: 'width:240px',
       role: 'complementary',
@@ -46,13 +46,13 @@ export function render(): string {
     },
     'Inspector',
   );
-  const middle = serializeHtmlTag('div', recipeProps(shell.middle), `${start}${content}${end}`);
-  const inner = serializeHtmlTag('div', recipeProps(shell.inner), `${header}${middle}`);
-  const outer = serializeHtmlTag('div', recipeProps(shell.outer), inner);
+  const middle = serializeHtmlTag('div', mergeProps(shell.middle), `${start}${content}${end}`);
+  const inner = serializeHtmlTag('div', mergeProps(shell.inner), `${header}${middle}`);
+  const outer = serializeHtmlTag('div', mergeProps(shell.outer), inner);
   return serializeHtmlTag(
     'div',
     {
-      ...recipeProps(shell.root),
+      ...mergeProps(shell.root),
       style: styleFromAssignments(layoutShellPaddingAssignments(0)),
       'data-has-header': '',
       'data-has-start': '',

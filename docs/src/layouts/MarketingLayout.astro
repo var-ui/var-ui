@@ -1,0 +1,36 @@
+---
+import DocsMarketingPage from '@var-ui/docs/DocsMarketingPage';
+import { codeHljsScope } from '@/styles/codeHighlight';
+import { defaultThemeClassName } from '@var-ui/core';
+import DocsThemePicker from '../components/DocsThemePicker.astro';
+import DocsThemeScript from '../components/DocsThemeScript.astro';
+import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
+import { topNav as topNavItems } from '../data/navigation';
+import { buildDocsSearchIndex } from '../lib/search-index';
+
+const { title = 'Var UI' } = Astro.props as { title?: string };
+
+const framework = Astro.locals.framework;
+const hljsScopeClass = (codeHljsScope().root).className;
+const searchItems = buildDocsSearchIndex();
+---
+
+<DocsMarketingPage
+  title={title}
+  themeClassName={defaultThemeClassName}
+  bodyClassName={hljsScopeClass}
+  topNav={topNavItems}
+  searchItems={searchItems}
+  brand={{ heading: 'Var UI', href: '/' }}
+  htmlAttributes={{ 'data-framework': framework }}
+>
+  <DocsThemeScript slot="themeScript" />
+  <FrameworkSwitcher slot="tools" />
+  <DocsThemePicker slot="themePicker" />
+  <slot name="head" slot="head" />
+  <slot />
+</DocsMarketingPage>
+
+<script>
+  import '../../typestyles-entry.ts';
+</script>

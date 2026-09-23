@@ -1,5 +1,5 @@
 import { timeline } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 function renderItem(
@@ -12,21 +12,21 @@ function renderItem(
   const bullet = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(styles.bullet),
+      ...mergeProps(styles.bullet),
       'data-active': active ? '' : undefined,
       'aria-hidden': 'true',
     },
     '',
   );
   const body = [
-    serializeHtmlTag('div', recipeProps(styles.title), title),
-    serializeHtmlTag('div', recipeProps(styles.timestamp), timestamp),
-    serializeHtmlTag('div', recipeProps(styles.description), description),
+    serializeHtmlTag('div', mergeProps(styles.title), title),
+    serializeHtmlTag('div', mergeProps(styles.timestamp), timestamp),
+    serializeHtmlTag('div', mergeProps(styles.description), description),
   ].join('');
-  const itemBody = serializeHtmlTag('div', recipeProps(styles.body), body);
+  const itemBody = serializeHtmlTag('div', mergeProps(styles.body), body);
   return serializeHtmlTag(
     'li',
-    { ...recipeProps(styles.item), 'data-active': active ? '' : undefined },
+    { ...mergeProps(styles.item), 'data-active': active ? '' : undefined },
     `${bullet}${itemBody}`,
   );
 }
@@ -38,5 +38,5 @@ export function render(): string {
     renderItem(styles, 'In review', '1 hour ago', 'Waiting on approval', true),
     renderItem(styles, 'Merged', 'Just now', 'PR #42', false),
   ].join('');
-  return serializeHtmlTag('ol', recipeProps(styles.root), items);
+  return serializeHtmlTag('ol', mergeProps(styles.root), items);
 }

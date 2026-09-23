@@ -9,7 +9,7 @@ import {
 } from 'react-aria-components';
 import { chip, chipGroup, type ChipTone, type ChipVariantProps } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type { ChipTone, SurfaceAppearance as ChipAppearance } from '@var-ui/core';
 
@@ -58,7 +58,7 @@ export type ChipProps = ChipVariantProps & {
 
 function ChipLabel({ children }: { children: ReactNode }): JSX.Element {
   const c = chip();
-  return <span {...recipeProps(c.label)}>{children}</span>;
+  return <span {...mergeProps(c.label)}>{children}</span>;
 }
 
 function ChipRemoveButton({
@@ -71,7 +71,7 @@ function ChipRemoveButton({
   const c = chip();
   return (
     <AriaButton
-      {...recipeProps(c.removeButton)}
+      {...mergeProps(c.removeButton)}
       aria-label={removeLabel}
       onPress={onRemove}
       excludeFromTabOrder
@@ -102,7 +102,7 @@ function ChipToggle({
       onChange={onChange}
       isDisabled={isDisabled}
       aria-label={ariaLabel}
-      {...recipeProps(c.root, className)}
+      {...mergeProps(c.root, className)}
       data-interactive
     >
       <ChipLabel>{children}</ChipLabel>
@@ -181,7 +181,7 @@ export function Chip({
 
   if (onRemove) {
     return (
-      <span {...recipeProps(c.root, className)}>
+      <span {...mergeProps(c.root, className)}>
         <ChipLabel>{children}</ChipLabel>
         <ChipRemoveButton onRemove={onRemove} removeLabel={removeLabel} />
       </span>
@@ -189,7 +189,7 @@ export function Chip({
   }
 
   return (
-    <span {...recipeProps(c.root, className)}>
+    <span {...mergeProps(c.root, className)}>
       <ChipLabel>{children}</ChipLabel>
     </span>
   );
@@ -223,7 +223,7 @@ export function ChipGroup({
       selectionMode={selectionMode}
       isDisabled={isDisabled}
       {...props}
-      {...recipeProps(g.root, className)}
+      {...mergeProps(g.root, className)}
     >
       <ChipGroupContext.Provider value={contextValue}>
         {children ??

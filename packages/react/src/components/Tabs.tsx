@@ -9,7 +9,7 @@ import {
 } from 'react-aria-components';
 import { tabs as tabsStyles } from '@var-ui/core';
 import { positionTabsIndicator } from '@var-ui/core/internal';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 type TabDefinition = {
   id: string;
@@ -54,17 +54,17 @@ export function Tabs({
         }
         onSelectionChange?.(key);
       }}
-      {...recipeProps(t.root)}
+      {...mergeProps(t.root)}
     >
-      <TabList ref={listRef} {...recipeProps(t.list)}>
+      <TabList ref={listRef} {...mergeProps(t.list)}>
         {tabs.map((tab) => (
-          <Tab key={tab.id} id={tab.id} {...recipeProps(t.tab)}>
+          <Tab key={tab.id} id={tab.id} {...mergeProps(t.tab)}>
             {tab.label}
           </Tab>
         ))}
       </TabList>
       {tabs.map((tab) => (
-        <TabPanel key={tab.id} id={tab.id} {...recipeProps(t.panel)}>
+        <TabPanel key={tab.id} id={tab.id} {...mergeProps(t.panel)}>
           {tab.content}
         </TabPanel>
       ))}

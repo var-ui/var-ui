@@ -33,7 +33,7 @@ import {
   type OverlayOpenChangeHandler,
   type UseOverlayPresenceResult,
 } from '../overlays';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type HoverCardProps = {
   /** Single focusable trigger element (e.g. a link or avatar). */
@@ -309,7 +309,7 @@ function HoverCardPopup({
 
   return (
     <AriaPopover
-      {...recipeProps(hc.root, className)}
+      {...mergeProps(hc.root, className)}
       {...ctx.presence.attrs}
       ref={(node: HTMLDivElement | null) => {
         ctx.popupRef.current = node;
@@ -346,7 +346,7 @@ function HoverCardPopup({
 function HoverCardTitle({ children, className }: HoverCardTitleProps): JSX.Element {
   const hc = hoverCardSlots();
   return (
-    <Heading slot="title" {...recipeProps(hc.title, className)}>
+    <Heading slot="title" {...mergeProps(hc.title, className)}>
       {children}
     </Heading>
   );
@@ -354,7 +354,7 @@ function HoverCardTitle({ children, className }: HoverCardTitleProps): JSX.Eleme
 
 function HoverCardContent({ children, className }: HoverCardContentProps): JSX.Element {
   const hc = hoverCardSlots();
-  return <div {...recipeProps(hc.content, className)}>{children}</div>;
+  return <div {...mergeProps(hc.content, className)}>{children}</div>;
 }
 
 function HoverCardPreset({

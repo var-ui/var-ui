@@ -1,6 +1,6 @@
 ---
 import { textBlock } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   as?: 'p' | 'span' | 'div';
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const { as = 'p', size = 'md', tone = 'primary', weight = 'normal', className } = Astro.props;
-const rp = recipeProps(textBlock({ size, tone, weight }), className);
+const rp = mergeProps(textBlock({ size, tone, weight }), className);
 const TextTag = as;
 ---
 <TextTag {...rp}><slot /></TextTag>

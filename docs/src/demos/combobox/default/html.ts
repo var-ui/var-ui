@@ -1,18 +1,18 @@
 import { combobox } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
   const cb = combobox();
   const label = serializeHtmlTag(
     'label',
-    { ...recipeProps(cb.label), for: 'fruit-search' },
+    { ...mergeProps(cb.label), for: 'fruit-search' },
     'Favorite fruit',
   );
   const input = serializeHtmlTag(
     'input',
     {
-      ...recipeProps(cb.input),
+      ...mergeProps(cb.input),
       id: 'fruit-search',
       type: 'text',
       placeholder: 'Search fruits…',
@@ -21,6 +21,6 @@ export function render(): string {
     },
     '',
   );
-  const wrapper = serializeHtmlTag('div', recipeProps(cb.inputWrapper), input);
-  return serializeHtmlTag('div', recipeProps(cb.root), `${label}${wrapper}`);
+  const wrapper = serializeHtmlTag('div', mergeProps(cb.inputWrapper), input);
+  return serializeHtmlTag('div', mergeProps(cb.root), `${label}${wrapper}`);
 }

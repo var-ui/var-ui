@@ -36,7 +36,7 @@ import {
   type OverlayOpenChangeHandler,
   type UseOverlayPresenceResult,
 } from '../overlays';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 const dialogContentStyle: CSSProperties = { display: 'contents' };
 
@@ -215,7 +215,7 @@ function DrawerBackdrop({
   return (
     <ModalOverlay
       {...props}
-      {...recipeProps(styles.overlay, className)}
+      {...mergeProps(styles.overlay, className)}
       {...ctx.presence.attrs}
       ref={ctx.backdropRef as Ref<HTMLDivElement>}
       style={layerStyle}
@@ -251,7 +251,7 @@ function DrawerPanel({
 
   return (
     <Modal
-      {...recipeProps(styles.panel, className)}
+      {...mergeProps(styles.panel, className)}
       {...ctx.presence.attrs}
       ref={ctx.panelRef as Ref<HTMLDivElement>}
       data-placement={placement}
@@ -269,14 +269,14 @@ function DrawerPanel({
 function DrawerHeader({ children, className }: DrawerHeaderProps): JSX.Element {
   const { size } = useDrawerContext();
   const styles = drawer({ size });
-  return <div {...recipeProps(styles.header, className)}>{children}</div>;
+  return <div {...mergeProps(styles.header, className)}>{children}</div>;
 }
 
 function DrawerTitle({ children, className }: DrawerTitleProps): JSX.Element {
   const { size } = useDrawerContext();
   const styles = drawer({ size });
   return (
-    <Heading slot="title" {...recipeProps(styles.title, className)}>
+    <Heading slot="title" {...mergeProps(styles.title, className)}>
       {children}
     </Heading>
   );
@@ -302,7 +302,7 @@ function DrawerClose({
 
   return (
     <AriaButton
-      {...recipeProps(styles.closeButton, className)}
+      {...mergeProps(styles.closeButton, className)}
       aria-label={ariaLabel}
       onPress={close}
     >
@@ -314,7 +314,7 @@ function DrawerClose({
 function DrawerBody({ children, className }: DrawerBodyProps): JSX.Element {
   const { size } = useDrawerContext();
   const styles = drawer({ size });
-  return <div {...recipeProps(styles.body, className)}>{children}</div>;
+  return <div {...mergeProps(styles.body, className)}>{children}</div>;
 }
 
 /**

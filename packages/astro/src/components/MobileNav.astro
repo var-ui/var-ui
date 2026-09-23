@@ -1,6 +1,6 @@
 ---
 import { mobileNav } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   header?: string;
@@ -27,7 +27,7 @@ const hasHeaderSlot = Astro.slots.has('header');
 ---
 
 <div data-var-ui-mobile-nav>
-  <div data-var-ui-mobile-nav-overlay {...recipeProps(s.overlay)}></div>
+  <div data-var-ui-mobile-nav-overlay {...mergeProps(s.overlay)}></div>
   <div
     data-var-ui-mobile-nav-panel
     data-side={resolvedSide}
@@ -35,9 +35,9 @@ const hasHeaderSlot = Astro.slots.has('header');
     aria-label={label}
     tabindex="-1"
     style={panelStyle}
-    {...recipeProps(s.panel, className)}
+    {...mergeProps(s.panel, className)}
   >
-    <div {...recipeProps(s.header)}>
+    <div {...mergeProps(s.header)}>
       <div class="mobile-nav__header-content">
         {hasHeaderSlot ? <slot name="header" /> : header}
       </div>
@@ -45,7 +45,7 @@ const hasHeaderSlot = Astro.slots.has('header');
         type="button"
         data-var-ui-mobile-nav-close
         aria-label={closeLabel}
-        {...recipeProps(s.closeButton)}
+        {...mergeProps(s.closeButton)}
       ></button>
     </div>
     <slot />

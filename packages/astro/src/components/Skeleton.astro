@@ -1,6 +1,6 @@
 ---
 import { skeleton } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   shape?: 'text' | 'rect' | 'circle';
@@ -9,6 +9,6 @@ type Props = {
 };
 
 const { shape = 'text', className, style } = Astro.props;
-const rp = recipeProps(skeleton({ shape }), className);
+const rp = mergeProps(skeleton({ shape }), className);
 ---
 <div {...rp} aria-hidden="true" style={style} />

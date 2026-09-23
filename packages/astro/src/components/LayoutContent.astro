@@ -1,6 +1,6 @@
 ---
 import { layoutContent, type LayoutPadding } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   padding?: LayoutPadding;
@@ -19,6 +19,6 @@ const s = layoutContent({ isScrollable, padding: toZonePaddingVariant(padding) }
 const resolvedRole = role ?? (label != null ? 'region' : undefined);
 ---
 
-<div {...recipeProps(s.content, className)} role={resolvedRole} aria-label={label}>
+<div {...mergeProps(s.content, className)} role={resolvedRole} aria-label={label}>
   <slot />
 </div>

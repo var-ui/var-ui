@@ -1,5 +1,5 @@
 import { switchStyles } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 export function render(): string {
@@ -13,8 +13,8 @@ export function render(): string {
     },
     '',
   );
-  const thumb = serializeHtmlTag('span', recipeProps(sw.thumb), '');
-  const track = serializeHtmlTag('span', recipeProps(sw.track), thumb);
-  const label = serializeHtmlTag('span', recipeProps(sw.label), 'Enable notifications');
-  return serializeHtmlTag('label', recipeProps(sw.root), `${input}${track}${label}`);
+  const thumb = serializeHtmlTag('span', mergeProps(sw.thumb), '');
+  const track = serializeHtmlTag('span', mergeProps(sw.track), thumb);
+  const label = serializeHtmlTag('span', mergeProps(sw.label), 'Enable notifications');
+  return serializeHtmlTag('label', mergeProps(sw.root), `${input}${track}${label}`);
 }

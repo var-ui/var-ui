@@ -1,5 +1,5 @@
 import { button, chatComposer, resolveButtonProps } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const arrowUpIcon =
@@ -10,7 +10,7 @@ export function render(): string {
   const input = serializeHtmlTag(
     'textarea',
     {
-      ...recipeProps(c.input),
+      ...mergeProps(c.input),
       rows: '1',
       placeholder: 'Type a message…',
       'aria-label': 'Message',
@@ -18,17 +18,17 @@ export function render(): string {
     },
     '',
   );
-  const inputRow = serializeHtmlTag('div', recipeProps(c.inputRow), input);
+  const inputRow = serializeHtmlTag('div', mergeProps(c.inputRow), input);
   const send = serializeHtmlTag(
     'button',
     {
       type: 'button',
-      ...recipeProps(button(resolveButtonProps({ intent: 'primary' }))),
+      ...mergeProps(button(resolveButtonProps({ intent: 'primary' }))),
       'aria-label': 'Send message',
       disabled: true,
     },
     arrowUpIcon,
   );
-  const actions = serializeHtmlTag('div', recipeProps(c.actions), send);
-  return serializeHtmlTag('div', recipeProps(c.root), `${inputRow}${actions}`);
+  const actions = serializeHtmlTag('div', mergeProps(c.actions), send);
+  return serializeHtmlTag('div', mergeProps(c.root), `${inputRow}${actions}`);
 }

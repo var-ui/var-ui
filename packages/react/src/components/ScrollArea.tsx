@@ -5,7 +5,7 @@ import {
   type ScrollAreaFade,
   type ScrollAreaOrientation,
 } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type ScrollAreaProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
   children: ReactNode;
@@ -43,20 +43,20 @@ export function ScrollArea({
   const showHorizontalFade = fadeMode === 'horizontal' || fadeMode === 'both';
 
   return (
-    <div {...props} {...recipeProps(s.root, className)}>
-      <div ref={viewportRef} {...recipeProps(s.viewport, viewportClassName)}>
+    <div {...props} {...mergeProps(s.root, className)}>
+      <div ref={viewportRef} {...mergeProps(s.viewport, viewportClassName)}>
         {showVerticalFade ? (
-          <div aria-hidden {...recipeProps(s.fadeTop)} data-edge="block-start" />
+          <div aria-hidden {...mergeProps(s.fadeTop)} data-edge="block-start" />
         ) : null}
         {showHorizontalFade ? (
-          <div aria-hidden {...recipeProps(s.fadeStart)} data-edge="inline-start" />
+          <div aria-hidden {...mergeProps(s.fadeStart)} data-edge="inline-start" />
         ) : null}
         {children}
         {showHorizontalFade ? (
-          <div aria-hidden {...recipeProps(s.fadeEnd)} data-edge="inline-end" />
+          <div aria-hidden {...mergeProps(s.fadeEnd)} data-edge="inline-end" />
         ) : null}
         {showVerticalFade ? (
-          <div aria-hidden {...recipeProps(s.fadeBottom)} data-edge="block-end" />
+          <div aria-hidden {...mergeProps(s.fadeBottom)} data-edge="block-end" />
         ) : null}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { button, resolveButtonProps } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const arrowUpIcon =
@@ -10,7 +10,7 @@ export function render(): string {
     'button',
     {
       type: 'button',
-      ...recipeProps(button(resolveButtonProps({ intent: 'primary' }))),
+      ...mergeProps(button(resolveButtonProps({ intent: 'primary' }))),
       'aria-label': 'Send message',
     },
     arrowUpIcon,

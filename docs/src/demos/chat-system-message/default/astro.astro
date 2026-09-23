@@ -1,15 +1,15 @@
 ---
 import { chatSystemMessage } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 // No @var-ui/astro ChatSystemMessage — core recipe markup.
 const info = chatSystemMessage({ tone: 'info' });
 const success = chatSystemMessage({ tone: 'success' });
 ---
 
-<div {...recipeProps(info.root)} role="status">
-  <span {...recipeProps(info.text)}>Model switched to GPT-5</span>
+<div {...mergeProps(info.root)} role="status">
+  <span {...mergeProps(info.text)}>Model switched to GPT-5</span>
 </div>
-<div {...recipeProps(success.root)} role="status">
-  <span {...recipeProps(success.text)}>Alex joined the conversation</span>
+<div {...mergeProps(success.root)} role="status">
+  <span {...mergeProps(success.text)}>Alex joined the conversation</span>
 </div>

@@ -1,6 +1,6 @@
 ---
 import { layout, layoutShellPaddingAssignments, layoutContentWidthAssignment, type LayoutPadding } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   height?: 'fill' | 'auto';
@@ -26,17 +26,17 @@ const hasEnd = Astro.slots.has('end');
 ---
 
 <div
-  {...recipeProps(l.root, className)}
+  {...mergeProps(l.root, className)}
   style={hasRootStyle ? rootStyle : undefined}
   data-has-header={hasHeader ? '' : undefined}
   data-has-footer={hasFooter ? '' : undefined}
   data-has-start={hasStart ? '' : undefined}
   data-has-end={hasEnd ? '' : undefined}
 >
-  <div {...recipeProps(l.outer)}>
-    <div {...recipeProps(l.inner)}>
+  <div {...mergeProps(l.outer)}>
+    <div {...mergeProps(l.inner)}>
       {hasHeader && <slot name="header" />}
-      <div {...recipeProps(l.middle)}>
+      <div {...mergeProps(l.middle)}>
         {hasStart && <slot name="start" />}
         <slot />
         {hasEnd && <slot name="end" />}

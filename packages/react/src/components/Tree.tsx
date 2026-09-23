@@ -15,7 +15,7 @@ import { tree as treeStyles } from '@var-ui/core';
 import { useDirection } from '../DirectionProvider';
 import { Icon } from '../icons';
 import { useTreeFocus, type TreeFocusItem } from '../hooks/useTreeFocus';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type TreeItemData = {
   id: string;
@@ -223,19 +223,19 @@ function TreeRowContent({
       data-has-children={hasChildren ? '' : undefined}
       data-selected={isSelected ? '' : undefined}
       tabIndex={isRovingTarget ? 0 : -1}
-      {...recipeProps(s.item)}
+      {...mergeProps(s.item)}
       onClick={handleRowClick}
     >
       <div
         style={{ position: 'relative' }}
         data-disabled={isDisabled ? '' : undefined}
         data-selected={isSelected ? '' : undefined}
-        {...recipeProps(s.row, className)}
+        {...mergeProps(s.row, className)}
       >
         {hasChildren ? (
           <button
             type="button"
-            {...recipeProps(s.toggle)}
+            {...mergeProps(s.toggle)}
             data-expanded={isExpanded ? '' : undefined}
             tabIndex={-1}
             aria-hidden="true"
@@ -248,16 +248,16 @@ function TreeRowContent({
             <Icon name="chevronRight" size="sm" data-mirror={isRtl || undefined} />
           </button>
         ) : (
-          <span {...recipeProps(s.toggle)} aria-hidden="true" style={{ visibility: 'hidden' }}>
+          <span {...mergeProps(s.toggle)} aria-hidden="true" style={{ visibility: 'hidden' }}>
             <Icon name="chevronRight" size="sm" data-mirror={isRtl || undefined} />
           </span>
         )}
-        {startContent != null ? <span {...recipeProps(s.start)}>{startContent}</span> : null}
-        <span id={isLinkLabelString ? undefined : labelId} {...recipeProps(s.label)}>
+        {startContent != null ? <span {...mergeProps(s.start)}>{startContent}</span> : null}
+        <span id={isLinkLabelString ? undefined : labelId} {...mergeProps(s.label)}>
           {label}
         </span>
-        {description != null ? <span {...recipeProps(s.description)}>{description}</span> : null}
-        {endContent != null ? <span {...recipeProps(s.end)}>{endContent}</span> : null}
+        {description != null ? <span {...mergeProps(s.description)}>{description}</span> : null}
+        {endContent != null ? <span {...mergeProps(s.end)}>{endContent}</span> : null}
         {href != null && !isDisabled ? (
           <a
             href={href}
@@ -295,7 +295,7 @@ function TreeItemsGroup({ items, level }: { items: TreeItemData[]; level: number
             endContent={ctx.renderEnd?.(item)}
             groupContent={
               hasChildren && isExpanded ? (
-                <ul role="group" {...recipeProps(ctx.styles.group)}>
+                <ul role="group" {...mergeProps(ctx.styles.group)}>
                   <TreeItemsGroup items={item.children ?? []} level={level + 1} />
                 </ul>
               ) : null
@@ -340,7 +340,7 @@ export function TreeItem({
       groupContent={
         hasChildren && isExpanded ? (
           <TreeLevelContext.Provider value={level + 1}>
-            <ul role="group" {...recipeProps(ctx.styles.group)}>
+            <ul role="group" {...mergeProps(ctx.styles.group)}>
               {children}
             </ul>
           </TreeLevelContext.Provider>
@@ -532,7 +532,7 @@ export function Tree({
           tabIndex={rootTabIndex}
           onKeyDown={handleKeyDown}
           onFocus={handleFocus}
-          {...recipeProps(s.root, className)}
+          {...mergeProps(s.root, className)}
         >
           {content}
         </ul>

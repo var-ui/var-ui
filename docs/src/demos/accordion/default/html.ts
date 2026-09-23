@@ -1,12 +1,12 @@
 import { accordionGroup, collapsible } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 function renderItem(id: string, title: string, body: string): string {
   const c = collapsible({ variant: 'accordion' });
-  const summary = serializeHtmlTag('summary', recipeProps(c.trigger), title);
-  const panel = serializeHtmlTag('div', recipeProps(c.panel), body);
-  return serializeHtmlTag('details', { ...recipeProps(c.root), id }, `${summary}${panel}`);
+  const summary = serializeHtmlTag('summary', mergeProps(c.trigger), title);
+  const panel = serializeHtmlTag('div', mergeProps(c.panel), body);
+  return serializeHtmlTag('details', { ...mergeProps(c.root), id }, `${summary}${panel}`);
 }
 
 export function render(): string {
@@ -15,5 +15,5 @@ export function render(): string {
     renderItem('billing', 'Billing', 'Update payment method and view invoices.'),
     renderItem('shipping', 'Shipping', 'Manage delivery addresses and preferences.'),
   ].join('');
-  return serializeHtmlTag('div', recipeProps(group.root), items);
+  return serializeHtmlTag('div', mergeProps(group.root), items);
 }

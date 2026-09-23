@@ -1,6 +1,6 @@
 ---
 import { spinner, type SpinnerVariantProps } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 interface Props extends SpinnerVariantProps {
   label?: string;
@@ -22,6 +22,6 @@ const visuallyHidden = {
 } as const;
 ---
 <span role="status" class={className}>
-  <span {...recipeProps(spinner({ size, tone, appearance }))} aria-hidden="true" />
+  <span {...mergeProps(spinner({ size, tone, appearance }))} aria-hidden="true" />
   <span style={visuallyHidden}>{label}</span>
 </span>

@@ -1,6 +1,6 @@
 ---
 import { topNav } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   label?: string;
@@ -17,14 +17,14 @@ const hasStart = Astro.slots.has('default');
   aria-label={label}
   data-var-ui-top-nav
   data-layout={hasCenter ? 'grid' : undefined}
-  {...recipeProps(s.root, className)}
+  {...mergeProps(s.root, className)}
 >
   {Astro.slots.has('heading') && (
-    <div data-var-ui-top-nav-heading {...recipeProps(s.heading)}><slot name="heading" /></div>
+    <div data-var-ui-top-nav-heading {...mergeProps(s.heading)}><slot name="heading" /></div>
   )}
-  {hasStart && <div data-var-ui-top-nav-start {...recipeProps(s.start)}><slot /></div>}
-  {hasCenter && <div data-var-ui-top-nav-center {...recipeProps(s.center)}><slot name="center" /></div>}
+  {hasStart && <div data-var-ui-top-nav-start {...mergeProps(s.start)}><slot /></div>}
+  {hasCenter && <div data-var-ui-top-nav-center {...mergeProps(s.center)}><slot name="center" /></div>}
   {Astro.slots.has('end') && (
-    <div data-var-ui-top-nav-end {...recipeProps(s.end)}><slot name="end" /></div>
+    <div data-var-ui-top-nav-end {...mergeProps(s.end)}><slot name="end" /></div>
   )}
 </nav>

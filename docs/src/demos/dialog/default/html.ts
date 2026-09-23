@@ -1,5 +1,5 @@
 import { button, dialog, resolveButtonProps } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const closeIcon =
@@ -11,41 +11,41 @@ export function render(): string {
     'button',
     {
       type: 'button',
-      ...recipeProps(button(resolveButtonProps({ intent: 'secondary' }))),
+      ...mergeProps(button(resolveButtonProps({ intent: 'secondary' }))),
       disabled: true,
     },
     'Open dialog',
   );
   const heading = serializeHtmlTag(
     'h2',
-    { id: 'dialog-demo-title', ...recipeProps(d.heading) },
+    { id: 'dialog-demo-title', ...mergeProps(d.heading) },
     'Icon close button',
   );
   const closeBtn = serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(d.closeButton), 'aria-label': 'Close', disabled: true },
+    { type: 'button', ...mergeProps(d.closeButton), 'aria-label': 'Close', disabled: true },
     closeIcon,
   );
-  const header = serializeHtmlTag('div', recipeProps(d.header), `${heading}${closeBtn}`);
+  const header = serializeHtmlTag('div', mergeProps(d.header), `${heading}${closeBtn}`);
   const description = serializeHtmlTag(
     'p',
-    recipeProps(d.description),
+    mergeProps(d.description),
     'The dismiss control now uses the registry close glyph.',
   );
   const closeAction = serializeHtmlTag(
     'button',
-    { type: 'button', ...recipeProps(button({})), disabled: true },
+    { type: 'button', ...mergeProps(button({})), disabled: true },
     'Close',
   );
   const content = serializeHtmlTag(
     'div',
-    recipeProps(d.content),
+    mergeProps(d.content),
     `${header}${description}${closeAction}`,
   );
   const modal = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(d.modal),
+      ...mergeProps(d.modal),
       role: 'dialog',
       'aria-labelledby': 'dialog-demo-title',
       'aria-modal': 'true',
@@ -55,7 +55,7 @@ export function render(): string {
   const overlay = serializeHtmlTag(
     'div',
     {
-      ...recipeProps(d.overlay),
+      ...mergeProps(d.overlay),
       style: 'position: relative; inset: auto; min-height: 220px',
     },
     modal,

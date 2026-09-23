@@ -5,7 +5,7 @@ import { Icon } from '../icons';
 import { HoverCard } from './HoverCard';
 import { TopNavMegaMenu } from './TopNavMegaMenu';
 import { Text } from './Typography';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 /** Registry name or a caller-supplied node — excludes bare `string` so it isn't redundant with `IconName`. */
 export type TopNavIcon = IconName | Exclude<ReactNode, string>;
@@ -78,25 +78,25 @@ export function TopNav({
       aria-label={label}
       data-var-ui-top-nav
       data-layout={hasCenter ? 'grid' : undefined}
-      {...recipeProps(s.root, className)}
+      {...mergeProps(s.root, className)}
     >
       {heading != null ? (
-        <div data-var-ui-top-nav-heading {...recipeProps(s.heading)}>
+        <div data-var-ui-top-nav-heading {...mergeProps(s.heading)}>
           {heading}
         </div>
       ) : null}
       {start != null ? (
-        <div data-var-ui-top-nav-start {...recipeProps(s.start)}>
+        <div data-var-ui-top-nav-start {...mergeProps(s.start)}>
           {start}
         </div>
       ) : null}
       {hasCenter ? (
-        <div data-var-ui-top-nav-center {...recipeProps(s.center)}>
+        <div data-var-ui-top-nav-center {...mergeProps(s.center)}>
           {centerContent}
         </div>
       ) : null}
       {endContent != null ? (
-        <div data-var-ui-top-nav-end {...recipeProps(s.end)}>
+        <div data-var-ui-top-nav-end {...mergeProps(s.end)}>
           {endContent}
         </div>
       ) : null}
@@ -183,7 +183,7 @@ export function TopNavItem({
   );
 
   const sharedProps = {
-    ...recipeProps(s.item, className),
+    ...mergeProps(s.item, className),
     'data-selected': isSelected ? '' : undefined,
     'data-disabled': isDisabled ? '' : undefined,
     'aria-current': isSelected ? ('page' as const) : undefined,
@@ -242,7 +242,7 @@ export function TopNavMenu({
   return (
     <HoverCard
       trigger={
-        <AriaButton {...recipeProps(s.menuTrigger, className)}>
+        <AriaButton {...mergeProps(s.menuTrigger, className)}>
           <span>{label}</span>
           <Icon name="chevronDown" size="sm" />
         </AriaButton>
@@ -253,7 +253,7 @@ export function TopNavMenu({
       <div style={menuListStyle}>
         {items.map((item) => {
           const itemProps = {
-            ...recipeProps(s.megaItem),
+            ...mergeProps(s.megaItem),
             'data-disabled': item.isDisabled ? '' : undefined,
             isDisabled: item.isDisabled,
           };

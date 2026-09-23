@@ -18,6 +18,7 @@ export const homeBento = typestyles.styles.component(
     switcher: {
       display: 'flex',
       flexWrap: 'wrap',
+      justifyContent: 'center',
       gap: t.space[2].var,
       marginBottom: t.space[4].var,
     },

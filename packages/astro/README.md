@@ -291,7 +291,7 @@ Components climb only as far as needed — no React, no React Aria:
 ## Utilities
 
 ```ts
-import { recipeProps, recipeClassName, cx } from '@var-ui/astro';
+import { mergeProps, combine, cx } from '@var-ui/astro';
 ```
 
 See `@var-ui/core` for theme tokens and component recipes used by Astro components.

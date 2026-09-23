@@ -1,6 +1,6 @@
 ---
 import { banner, defaultIconSvgs, type BannerVariantProps } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 interface Props extends BannerVariantProps {
   title?: string;
@@ -24,21 +24,21 @@ const hasActions = Astro.slots.has('actions');
 const role = tone === 'warning' || tone === 'danger' ? 'alert' : 'status';
 ---
 
-<div {...recipeProps(b.root, className)} data-banner role={role}>
+<div {...mergeProps(b.root, className)} data-banner role={role}>
   {
     hasIcon ? (
-      <span {...recipeProps(b.icon)}>
+      <span {...mergeProps(b.icon)}>
         <slot name="icon" />
       </span>
     ) : null
   }
-  <div {...recipeProps(b.content)}>
-    {title ? <span {...recipeProps(b.title)}>{title}</span> : null}
+  <div {...mergeProps(b.content)}>
+    {title ? <span {...mergeProps(b.title)}>{title}</span> : null}
     <span><slot /></span>
   </div>
   {
     hasActions ? (
-      <div {...recipeProps(b.actions)}>
+      <div {...mergeProps(b.actions)}>
         <slot name="actions" />
       </div>
     ) : null
@@ -47,7 +47,7 @@ const role = tone === 'warning' || tone === 'danger' ? 'alert' : 'status';
     dismissible ? (
       <button
         type="button"
-        {...recipeProps(b.dismiss)}
+        {...mergeProps(b.dismiss)}
         aria-label={dismissLabel}
         data-var-ui-banner-dismiss
         set:html={defaultIconSvgs.close}

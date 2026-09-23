@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, type JSX, type KeyboardEvent } from 'react';
 import { TextArea, TextField as AriaTextField } from 'react-aria-components';
 import { chatComposer } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 export type ChatComposerInputProps = {
   /** Controlled value. */
@@ -68,11 +68,11 @@ export function ChatComposerInput({
       onChange={onChange}
       isDisabled={isDisabled}
       aria-label="Message"
-      {...recipeProps(c.inputRow)}
+      {...mergeProps(c.inputRow)}
     >
       <TextArea
         ref={textAreaRef}
-        {...recipeProps(c.input, className)}
+        {...mergeProps(c.input, className)}
         placeholder={placeholder}
         onKeyDown={handleKeyDown}
         rows={1}

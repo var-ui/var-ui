@@ -1,7 +1,7 @@
 ---
 import { Fragment } from 'astro/jsx-runtime';
 import { tabs as tabsRecipe } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type TabDef = { id: string; label: string };
 
@@ -23,8 +23,8 @@ const panelSlots = await Promise.all(
 );
 ---
 
-<div data-var-ui-tabs {...recipeProps(t.root, className)}>
-  <div role="tablist" {...recipeProps(t.list)}>
+<div data-var-ui-tabs {...mergeProps(t.root, className)}>
+  <div role="tablist" {...mergeProps(t.list)}>
     {
       tabs.map((tab) => (
         <button
@@ -35,7 +35,7 @@ const panelSlots = await Promise.all(
           aria-selected={tab.id === selected ? 'true' : 'false'}
           tabindex={tab.id === selected ? 0 : -1}
           data-selected={tab.id === selected ? '' : undefined}
-          {...recipeProps(t.tab)}
+          {...mergeProps(t.tab)}
         >
           {tab.label}
         </button>
@@ -51,7 +51,7 @@ const panelSlots = await Promise.all(
           id={`panel-${tab.id}`}
           aria-labelledby={`tab-${tab.id}`}
           hidden={tab.id !== selected ? true : undefined}
-          {...recipeProps(t.panel)}
+          {...mergeProps(t.panel)}
         >
           {slotContent ? <Fragment set:html={slotContent} /> : null}
         </div>

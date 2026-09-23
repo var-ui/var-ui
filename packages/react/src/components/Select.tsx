@@ -17,7 +17,7 @@ import {
 import { select } from '@var-ui/core';
 import { Icon } from '../icons';
 import type { FieldMeta } from './utils';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type SelectOption = {
   /** Unique option identifier passed to the select value. */
@@ -41,7 +41,7 @@ function SelectRoot<T extends object>({
 }: SelectRootProps<T>): JSX.Element {
   const s = select();
   return (
-    <AriaSelect {...props} {...recipeProps(s.root, className)}>
+    <AriaSelect {...props} {...mergeProps(s.root, className)}>
       {children}
     </AriaSelect>
   );
@@ -51,7 +51,7 @@ export type SelectLabelProps = { children: ReactNode; className?: string };
 
 function SelectLabel({ children, className }: SelectLabelProps): JSX.Element {
   const s = select();
-  return <Label {...recipeProps(s.label, className)}>{children}</Label>;
+  return <Label {...mergeProps(s.label, className)}>{children}</Label>;
 }
 
 export type SelectValueProps<T extends object = SelectOption> = {
@@ -69,7 +69,7 @@ function SelectValue<T extends object = SelectOption>({
 }: SelectValueProps<T>): JSX.Element {
   const s = select();
   return (
-    <AriaSelectValue {...recipeProps(s.selectValue, className)}>
+    <AriaSelectValue {...mergeProps(s.selectValue, className)}>
       {children ??
         (({ defaultChildren, isPlaceholder }) => (isPlaceholder ? placeholder : defaultChildren))}
     </AriaSelectValue>
@@ -91,9 +91,9 @@ function SelectTrigger({
 }: SelectTriggerProps): JSX.Element {
   const s = select();
   return (
-    <AriaButton {...recipeProps(s.trigger, className)}>
+    <AriaButton {...mergeProps(s.trigger, className)}>
       {children ?? <SelectValue placeholder={placeholder} />}
-      <span {...recipeProps(s.triggerIcon)} aria-hidden>
+      <span {...mergeProps(s.triggerIcon)} aria-hidden>
         <Icon name="chevronDown" size="sm" />
       </span>
     </AriaButton>
@@ -105,7 +105,7 @@ export type SelectDescriptionProps = { children: ReactNode; className?: string }
 function SelectDescription({ children, className }: SelectDescriptionProps): JSX.Element {
   const s = select();
   return (
-    <Text slot="description" {...recipeProps(s.description, className)}>
+    <Text slot="description" {...mergeProps(s.description, className)}>
       {children}
     </Text>
   );
@@ -115,7 +115,7 @@ export type SelectErrorProps = { children?: ReactNode; className?: string };
 
 function SelectError({ children, className }: SelectErrorProps): JSX.Element {
   const s = select();
-  return <FieldError {...recipeProps(s.error, className)}>{children ?? ''}</FieldError>;
+  return <FieldError {...mergeProps(s.error, className)}>{children ?? ''}</FieldError>;
 }
 
 export type SelectPopoverProps = PopoverProps & {
@@ -138,7 +138,7 @@ function SelectPopover({
   return (
     <Popover
       {...props}
-      {...recipeProps(s.popover, className)}
+      {...mergeProps(s.popover, className)}
       UNSTABLE_portalContainer={portalContainer}
     >
       {children}
@@ -163,13 +163,13 @@ function SelectListBox<T extends object>(props: SelectListBoxProps<T>): JSX.Elem
   if ('items' in props && props.items != null) {
     const { items, children, className } = props;
     return (
-      <ListBox {...recipeProps(s.listbox, className)} items={items}>
+      <ListBox {...mergeProps(s.listbox, className)} items={items}>
         {children}
       </ListBox>
     );
   }
   const { children, className } = props;
-  return <ListBox {...recipeProps(s.listbox, className)}>{children}</ListBox>;
+  return <ListBox {...mergeProps(s.listbox, className)}>{children}</ListBox>;
 }
 
 export type SelectItemProps = ListBoxItemProps & { className?: string };
@@ -177,7 +177,7 @@ export type SelectItemProps = ListBoxItemProps & { className?: string };
 function SelectItem({ children, className, ...props }: SelectItemProps): JSX.Element {
   const s = select();
   return (
-    <ListBoxItem {...props} {...recipeProps(s.item, className)}>
+    <ListBoxItem {...props} {...mergeProps(s.item, className)}>
       {children}
     </ListBoxItem>
   );

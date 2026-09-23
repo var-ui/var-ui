@@ -6,7 +6,7 @@ import {
   type MouseEvent as ReactMouseEvent,
 } from 'react';
 import { resizeHandle } from '@var-ui/core';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type ResizeHandleProps = {
   /** @default 'horizontal' */
@@ -128,9 +128,9 @@ export function ResizeHandle({
       onMouseDown={handleMouseDown}
       onKeyDown={handleKeyDown}
       onDoubleClick={onCollapse}
-      {...recipeProps(s.root, className)}
+      {...mergeProps(s.root, className)}
     >
-      <div {...recipeProps(s.pill)} />
+      <div {...mergeProps(s.pill)} />
     </div>
   );
 }

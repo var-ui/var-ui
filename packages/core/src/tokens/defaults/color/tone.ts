@@ -7,13 +7,13 @@ const onDark = tokens.color.palette['stone-10'].var;
 export const tone = {
   accent: createToneFace({
     light: {
-      foreground: tokens.color.palette['plum-7'].var,
-      background: tokens.color.palette['plum-8'].var,
+      foreground: tokens.color.palette['phthalo-7'].var,
+      background: tokens.color.palette['phthalo-8'].var,
       foregroundOnBackground: onLight,
     },
     dark: {
-      foreground: tokens.color.palette['plum-4'].var,
-      background: tokens.color.palette['plum-7'].var,
+      foreground: tokens.color.palette['phthalo-4'].var,
+      background: tokens.color.palette['phthalo-7'].var,
       foregroundOnBackground: onLight,
     },
   }),

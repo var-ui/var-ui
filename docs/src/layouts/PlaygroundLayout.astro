@@ -8,7 +8,6 @@ import {
   LayoutContent,
   MobileNav,
   MobileNavToggle,
-  recipeClassName,
   SideNavItem,
   SideNavSection,
   ThemeScript,
@@ -23,7 +22,7 @@ import DocsThemePicker from '../components/DocsThemePicker.astro';
 import DocsThemeScript from '../components/DocsThemeScript.astro';
 import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
 import { topNav as topNavItems } from '../data/navigation';
-import { docsTopNav } from '@/styles/docsTopNav';
+import { docsTopNav } from '@var-ui/docs/styles';
 
 const { title = 'Var UI', bleed = false } = Astro.props as {
   title?: string;
@@ -37,7 +36,7 @@ function normalizePath(path: string): string {
 }
 
 const currentPath = normalizePath(pathname);
-const hljsScopeClass = recipeClassName(codeHljsScope().root);
+const hljsScopeClass = (codeHljsScope().root).className;
 const nav = docsTopNav();
 ---
 
@@ -53,7 +52,7 @@ const nav = docsTopNav();
   </head>
   <body class={cx('docs-body', 'docs-body--playground', hljsScopeClass)}>
     <AppShell variant="wash" height="fill" contentPadding={0} mobileBreakpoint="md">
-      <TopNav slot="topNav" className={recipeClassName(nav.root)}>
+      <TopNav slot="topNav" className={(nav.root).className}>
         <TopNavHeading slot="heading" heading="Var UI" headingHref="/" />
         {
           topNavItems.map((item) => (
@@ -64,15 +63,15 @@ const nav = docsTopNav();
             />
           ))
         }
-        <div slot="end" class={recipeClassName(nav.tools)}>
+        <div slot="end" class={(nav.tools).className}>
           <div
-            class={recipeClassName(nav.toolsPersist)}
+            class={(nav.toolsPersist).className}
             transition:persist="docs-top-nav-tools"
             transition:animate="none"
           >
             <DocsSearch />
-            <div class={recipeClassName(nav.toolbar)}>
-              <div class={recipeClassName(nav.toolbarExtra)}>
+            <div class={(nav.toolbar).className}>
+              <div class={(nav.toolbarExtra).className}>
                 <FrameworkSwitcher />
               </div>
               <ColorModeToggle includeSystem size="md" />
@@ -83,7 +82,7 @@ const nav = docsTopNav();
       </TopNav>
 
       <MobileNav slot="mobileNav" header="Menu">
-        <div class={recipeClassName(nav.mobileNavBody)}>
+        <div class={(nav.mobileNavBody).className}>
           <SideNavSection>
             {
               topNavItems.map((item) => (

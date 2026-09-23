@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { chatMessage } from '@var-ui/core';
 import { ChatMessageContext, type ChatSender, useChatListContext } from './ChatContext';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 export type ChatMessageProps = {
   /** Who sent this message — drives alignment and the default bubble color. */
@@ -42,16 +42,16 @@ export function ChatMessage({
   const m = chatMessage({ sender });
   return (
     <ChatMessageContext.Provider value={{ sender, density }}>
-      <div {...recipeProps(m.root, className)}>
-        {avatar ? <div {...recipeProps(m.avatar)}>{avatar}</div> : null}
-        <div {...recipeProps(m.content)}>
+      <div {...mergeProps(m.root, className)}>
+        {avatar ? <div {...mergeProps(m.avatar)}>{avatar}</div> : null}
+        <div {...mergeProps(m.content)}>
           {name ? (
-            <div {...recipeProps(m.header)}>
-              <span {...recipeProps(m.name)}>{name}</span>
+            <div {...mergeProps(m.header)}>
+              <span {...mergeProps(m.name)}>{name}</span>
             </div>
           ) : null}
           {children}
-          {metadata ? <div {...recipeProps(m.metadata)}>{metadata}</div> : null}
+          {metadata ? <div {...mergeProps(m.metadata)}>{metadata}</div> : null}
         </div>
       </div>
     </ChatMessageContext.Provider>

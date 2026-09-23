@@ -1,6 +1,6 @@
 ---
 import { chatMessage, chatMessageBubble } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 
 // No @var-ui/astro ChatMessageBubble — core recipe markup with group corners.
 const m = chatMessage({ sender: 'assistant' });
@@ -8,12 +8,12 @@ const first = chatMessageBubble({ sender: 'assistant', variant: 'filled', group:
 const last = chatMessageBubble({ sender: 'assistant', variant: 'filled', group: 'last' });
 ---
 
-<div {...recipeProps(m.root)}>
-  <div {...recipeProps(m.content)}>
-    <div {...recipeProps(m.header)}>
-      <span {...recipeProps(m.name)}>Navi</span>
+<div {...mergeProps(m.root)}>
+  <div {...mergeProps(m.content)}>
+    <div {...mergeProps(m.header)}>
+      <span {...mergeProps(m.name)}>Navi</span>
     </div>
-    <div {...recipeProps(first.root)}>First part of a multi-part reply.</div>
-    <div {...recipeProps(last.root)}>Second part.</div>
+    <div {...mergeProps(first.root)}>First part of a multi-part reply.</div>
+    <div {...mergeProps(last.root)}>Second part.</div>
   </div>
 </div>

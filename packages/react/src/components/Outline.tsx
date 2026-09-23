@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react';
 import { outline } from '@var-ui/core';
-import { cx, recipeClassName, recipeProps } from './utils';
+import { cx, mergeProps } from './utils';
 
 export type OutlineItemData = {
   id: string;
@@ -63,8 +63,8 @@ function OutlineItem({ id, level = 2, children, className }: OutlineItemProps): 
         href={`#${id}`}
         data-active={isActive ? '' : undefined}
         className={cx(
-          recipeClassName(isActive ? o.linkActive : o.link),
-          level === 3 ? recipeClassName(o.linkNested) : undefined,
+          (isActive ? o.linkActive : o.link).className,
+          level === 3 ? o.linkNested.className : undefined,
           className,
         )}
       >
@@ -141,10 +141,10 @@ function OutlineRoot({
       : children;
 
   return (
-    <nav aria-label={title} {...recipeProps(o.root, className)}>
-      <p {...recipeProps(o.title)}>{title}</p>
+    <nav aria-label={title} {...mergeProps(o.root, className)}>
+      <p {...mergeProps(o.title)}>{title}</p>
       <OutlineContext.Provider value={{ styles: o, activeId: current }}>
-        <ul {...recipeProps(o.list)}>{content}</ul>
+        <ul {...mergeProps(o.list)}>{content}</ul>
       </OutlineContext.Provider>
     </nav>
   );

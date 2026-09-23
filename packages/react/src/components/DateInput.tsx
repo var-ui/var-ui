@@ -22,7 +22,7 @@ import {
 } from 'react-aria-components';
 import { dateInput } from '@var-ui/core';
 import { Icon } from '../icons';
-import { recipeProps } from './utils';
+import { mergeProps } from './utils';
 
 export type DateInputProps<T extends DateValue = DateValue> = Omit<
   RACDatePickerProps<T>,
@@ -55,44 +55,44 @@ export function DateInput<T extends DateValue = DateValue>({
 }: DateInputProps<T>): JSX.Element {
   const di = dateInput();
   return (
-    <AriaDatePicker {...props} {...recipeProps(di.root, className)}>
-      {label ? <Label {...recipeProps(di.label)}>{label}</Label> : null}
-      <Group {...recipeProps(di.group)}>
+    <AriaDatePicker {...props} {...mergeProps(di.root, className)}>
+      {label ? <Label {...mergeProps(di.label)}>{label}</Label> : null}
+      <Group {...mergeProps(di.group)}>
         <AriaDateInput>
-          {(segment) => <DateSegment segment={segment} {...recipeProps(di.segment)} />}
+          {(segment) => <DateSegment segment={segment} {...mergeProps(di.segment)} />}
         </AriaDateInput>
-        <Button {...recipeProps(di.trigger)}>
+        <Button {...mergeProps(di.trigger)}>
           <Icon name="chevronDown" size="sm" />
         </Button>
       </Group>
       {description ? (
-        <Text slot="description" {...recipeProps(di.description)}>
+        <Text slot="description" {...mergeProps(di.description)}>
           {description}
         </Text>
       ) : null}
-      <FieldError {...recipeProps(di.error)}>{errorMessage ?? ''}</FieldError>
-      <Popover {...recipeProps(di.popover)}>
+      <FieldError {...mergeProps(di.error)}>{errorMessage ?? ''}</FieldError>
+      <Popover {...mergeProps(di.popover)}>
         <Dialog>
           <AriaCalendar>
-            <header {...recipeProps(di.calendarHeader)}>
-              <Button slot="previous" {...recipeProps(di.calendarNavButton)}>
+            <header {...mergeProps(di.calendarHeader)}>
+              <Button slot="previous" {...mergeProps(di.calendarNavButton)}>
                 <Icon name="chevronLeft" size="sm" />
               </Button>
-              <Heading {...recipeProps(di.calendarHeading)} />
-              <Button slot="next" {...recipeProps(di.calendarNavButton)}>
+              <Heading {...mergeProps(di.calendarHeading)} />
+              <Button slot="next" {...mergeProps(di.calendarNavButton)}>
                 <Icon name="chevronRight" size="sm" />
               </Button>
             </header>
-            <CalendarGrid {...recipeProps(di.calendarGrid)}>
+            <CalendarGrid {...mergeProps(di.calendarGrid)}>
               <CalendarGridHeader>
                 {(day) => (
-                  <CalendarHeaderCell {...recipeProps(di.calendarHeaderCell)}>
+                  <CalendarHeaderCell {...mergeProps(di.calendarHeaderCell)}>
                     {day}
                   </CalendarHeaderCell>
                 )}
               </CalendarGridHeader>
               <CalendarGridBody>
-                {(date) => <CalendarCell date={date} {...recipeProps(di.calendarCell)} />}
+                {(date) => <CalendarCell date={date} {...mergeProps(di.calendarCell)} />}
               </CalendarGridBody>
             </CalendarGrid>
           </AriaCalendar>

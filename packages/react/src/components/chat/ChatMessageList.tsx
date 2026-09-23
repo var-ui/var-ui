@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { chatMessageList } from '@var-ui/core';
 import { ChatListContext, type ChatDensity } from './ChatContext';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 export type ChatMessageListProps = {
   /** Message elements — typically `ChatMessage`. */
@@ -52,13 +52,13 @@ export function ChatMessageList({
         role="log"
         aria-live="polite"
         aria-busy={isStreaming || undefined}
-        {...recipeProps(l.root, className)}
+        {...mergeProps(l.root, className)}
       >
-        <div {...recipeProps(l.inner)}>
+        <div {...mergeProps(l.inner)}>
           {hasVisibleContent(children) ? (
             children
           ) : emptyState ? (
-            <div {...recipeProps(l.emptyState)}>{emptyState}</div>
+            <div {...mergeProps(l.emptyState)}>{emptyState}</div>
           ) : null}
         </div>
       </div>

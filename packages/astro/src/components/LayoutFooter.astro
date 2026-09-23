@@ -1,6 +1,6 @@
 ---
 import { layoutFooter, layoutShellPaddingAssignments, type LayoutPadding } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   hasDivider?: boolean;
@@ -32,6 +32,6 @@ const s = layoutFooter();
 const style = zoneOverrideStyle(height, padding);
 ---
 
-<div {...recipeProps(s.footer, className)} style={style} data-divider={hasDivider ? '' : undefined}>
-  <div {...recipeProps(s.footerInner)}><slot /></div>
+<div {...mergeProps(s.footer, className)} style={style} data-divider={hasDivider ? '' : undefined}>
+  <div {...mergeProps(s.footerInner)}><slot /></div>
 </div>

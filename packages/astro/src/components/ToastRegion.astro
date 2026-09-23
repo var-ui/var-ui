@@ -1,6 +1,6 @@
 ---
 import { toast as toastRecipe, type ToastPlacement } from '@var-ui/core';
-import { recipeProps } from '../utils';
+import { mergeProps } from '../utils';
 
 type Props = {
   /** Screen corner the region anchors to. @default bottom-end */
@@ -17,7 +17,7 @@ const region = toastRecipe({ placement });
 <div
   data-var-ui-toast-region
   data-max-visible={maxVisible}
-  {...recipeProps(region.region, className)}
+  {...mergeProps(region.region, className)}
   aria-live="polite"
   aria-relevant="additions"
 >

@@ -1,5 +1,5 @@
 import { thumbnail } from '@var-ui/core';
-import { recipeProps } from '../../../lib/recipeProps';
+import { mergeProps } from '../../../lib/mergeProps';
 import { serializeHtmlTag } from '../../serializeHtml';
 
 const PREVIEW_URL =
@@ -23,9 +23,9 @@ function serializeVoidTag(
 export function render(): string {
   const s = thumbnail({ size: 'md' });
   const image = serializeVoidTag('img', {
-    ...recipeProps(s.image),
+    ...mergeProps(s.image),
     src: PREVIEW_URL,
     alt: 'Preview image',
   });
-  return serializeHtmlTag('span', recipeProps(s.root), image);
+  return serializeHtmlTag('span', mergeProps(s.root), image);
 }

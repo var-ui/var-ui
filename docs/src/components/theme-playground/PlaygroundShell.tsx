@@ -1,14 +1,7 @@
 'use client';
 
 import type { DocsFramework } from '@/lib/framework';
-import {
-  Layout,
-  LayoutContent,
-  LayoutPanel,
-  ResizeHandle,
-  useResizable,
-  recipeClassName,
-} from '@var-ui/react';
+import { Layout, LayoutContent, LayoutPanel, ResizeHandle, useResizable } from '@var-ui/react';
 import PlaygroundEditorSidebar from './PlaygroundEditorSidebar';
 import ThemePlayground from './ThemePlayground';
 import { playgroundShellStyles } from '@/styles/playgroundShell';
@@ -31,11 +24,11 @@ export default function PlaygroundShell({ framework }: PlaygroundShellProps) {
   const shell = playgroundShellStyles();
 
   return (
-    <div className={recipeClassName(shell.root)} data-playground-shell>
+    <div className={shell.root.className} data-playground-shell>
       <Layout
         height="fill"
         padding={0}
-        className={recipeClassName(shell.layout)}
+        className={shell.layout.className}
         start={
           <>
             <LayoutPanel
