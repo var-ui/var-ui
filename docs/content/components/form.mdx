@@ -5,7 +5,7 @@ description: Native-constraint form that focuses the first invalid field.
 
 # Form
 
-Native-constraint form that focuses the first invalid field. `Form` is a React `<form>` that runs `checkValidity()`, accepts a server `errors` map keyed by field `name`, and does not replace `@var-ui/form` `useForm`. A truthy `errors` entry blocks submit; the app owns clearing it — `Form` does not reset `errors` when the control changes.
+Native-constraint form that focuses the first invalid field. `Form` is a React `<form>` that runs `checkValidity()`, accepts a server `errors` map keyed by field `name`, and does not replace `@var-ui/form` `useForm`. A truthy `errors` entry blocks submit; the app owns clearing it — `Form` does not reset `errors` when the control changes. Composition with `useForm` and third-party libraries is documented in [Forms](/docs/forms).
 
 There is no `@var-ui/astro` Form. Native `required` works in Astro without `Form`; focus-first-invalid is React-only.
 
