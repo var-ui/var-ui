@@ -3,7 +3,7 @@ import { getRegisteredCss } from 'typestyles';
 
 describe('base-styles', () => {
   it('registers reset, document defaults, and element typography', async () => {
-    await import('../src/base-styles');
+    await import('../src/theme/base-styles');
     const css = getRegisteredCss();
     expect(css).toContain('box-sizing: border-box');
     expect(css).toContain('scroll-behavior: smooth');

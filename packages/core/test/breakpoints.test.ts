@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vite-plus/test';
-import { appShellMobileBreakpointQueries } from '../src/breakpoints';
+import { appShellMobileBreakpointQueries } from '../src/components/breakpoints';
 
 describe('appShellMobileBreakpointQueries', () => {
   it('derives max-width matchMedia conditions from TypeStyles breakpoints', () => {

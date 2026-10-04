@@ -1,8 +1,9 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { overlayPresenceStyles } from './overlayPresence';
+import { themeableVars } from './themeableVars';
 
-/** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
+/** Internal CSS variables for theme overrides (`vars` on `theme.componentStyles`). */
 export const menuVarDefinitions = {
   popoverBackground: {
     value: t.color.background.surface.var,
@@ -38,7 +39,7 @@ export const menuVarDefinitions = {
   },
 } as const;
 
-export const menu = typestyles.styles.component(
+const menuRecipe = typestyles.styles.component(
   'menu',
   (c) => {
     const v = c.vars(menuVarDefinitions);
@@ -130,3 +131,5 @@ export const menu = typestyles.styles.component(
   },
   { layer: 'components' },
 );
+
+export const menu = themeableVars(menuRecipe, menuVarDefinitions);

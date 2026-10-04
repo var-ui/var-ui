@@ -1,8 +1,8 @@
-import { ContextMenu } from '@var-ui/react';
+import { Menu } from '@var-ui/react';
 
 export default function Preview() {
   return (
-    <ContextMenu
+    <Menu.ContextMenu
       sections={[
         {
           items: [
@@ -21,6 +21,6 @@ export default function Preview() {
       >
         Right-click me
       </div>
-    </ContextMenu>
+    </Menu.ContextMenu>
   );
 }

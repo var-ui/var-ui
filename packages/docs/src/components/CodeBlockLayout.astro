@@ -1,0 +1,75 @@
+---
+import CodeDemoCodeBlock from './CodeDemoCodeBlock.astro';
+import { combine, Heading, mergeProps } from '@var-ui/astro';
+import { codeBlock as codeBlockRecipe } from '../styles/codeBlock';
+
+export type CodeBlockFramework = 'react' | 'astro' | 'html';
+
+export type CodeBlockLayoutProps = {
+  code: string;
+  language?: string;
+  filename?: string;
+  /** Shown in the code header badge when set. */
+  framework?: CodeBlockFramework;
+  title?: string;
+  copyable?: boolean;
+  showLineNumbers?: boolean;
+};
+
+const {
+  code,
+  language = 'tsx',
+  filename,
+  framework,
+  title,
+  copyable = true,
+  showLineNumbers,
+} = Astro.props as CodeBlockLayoutProps;
+
+const hasPreview = Astro.slots.has('preview');
+const s = codeBlockRecipe();
+---
+
+<div {...mergeProps(s.root)} data-code-block>
+  {title ? (
+    <Heading level={4} size="sm">
+      {title}
+    </Heading>
+  ) : null}
+  <div {...mergeProps(s.card)}>
+    {
+      hasPreview ? (
+        <div {...mergeProps(s.preview)}>
+          <div {...mergeProps(s.previewInner)}>
+            <slot name="preview" />
+          </div>
+        </div>
+      ) : null
+    }
+    <section
+      {...combine(hasPreview ? s.code : {}, s.codeBlock)}
+      data-code-block-code
+      data-demo-code={code}
+      {...(framework ? { 'data-demo-framework': framework } : {})}
+    >
+      <CodeDemoCodeBlock
+        code={code}
+        language={language}
+        filename={filename}
+        copyable={copyable}
+        showLineNumbers={showLineNumbers}
+      />
+      <div {...mergeProps(s.codeFade)} data-demo-fade hidden></div>
+      <div {...mergeProps(s.expand)} data-demo-expand-wrap>
+        <button type="button" {...mergeProps(s.expandButton)} data-demo-expand>
+          Expand code
+        </button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+  import { initCodeBlockExpand } from '../scripts/codeBlockExpand';
+  initCodeBlockExpand();
+</script>

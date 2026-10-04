@@ -346,18 +346,6 @@
       "types": "./dist/components/CommandPalette.d.mts",
       "import": "./dist/components/CommandPalette.mjs"
     },
-    "./components/ContextMenu": {
-      "types": "./dist/components/ContextMenu.d.mts",
-      "import": "./dist/components/ContextMenu.mjs"
-    },
-    "./context-menu": {
-      "types": "./dist/components/ContextMenu.d.mts",
-      "import": "./dist/components/ContextMenu.mjs"
-    },
-    "./ContextMenu": {
-      "types": "./dist/components/ContextMenu.d.mts",
-      "import": "./dist/components/ContextMenu.mjs"
-    },
     "./components/CopyButton": {
       "types": "./dist/components/CopyButton.d.mts",
       "import": "./dist/components/CopyButton.mjs"
@@ -453,18 +441,6 @@
     "./Drawer": {
       "types": "./dist/components/Drawer.d.mts",
       "import": "./dist/components/Drawer.mjs"
-    },
-    "./components/DropdownMenu": {
-      "types": "./dist/components/DropdownMenu.d.mts",
-      "import": "./dist/components/DropdownMenu.mjs"
-    },
-    "./dropdown-menu": {
-      "types": "./dist/components/DropdownMenu.d.mts",
-      "import": "./dist/components/DropdownMenu.mjs"
-    },
-    "./DropdownMenu": {
-      "types": "./dist/components/DropdownMenu.d.mts",
-      "import": "./dist/components/DropdownMenu.mjs"
     },
     "./components/EmptyState": {
       "types": "./dist/components/EmptyState.d.mts",
@@ -681,18 +657,6 @@
     "./MobileNav": {
       "types": "./dist/components/MobileNav.d.mts",
       "import": "./dist/components/MobileNav.mjs"
-    },
-    "./components/MoreMenu": {
-      "types": "./dist/components/MoreMenu.d.mts",
-      "import": "./dist/components/MoreMenu.mjs"
-    },
-    "./more-menu": {
-      "types": "./dist/components/MoreMenu.d.mts",
-      "import": "./dist/components/MoreMenu.mjs"
-    },
-    "./MoreMenu": {
-      "types": "./dist/components/MoreMenu.d.mts",
-      "import": "./dist/components/MoreMenu.mjs"
     },
     "./components/MultiSelector": {
       "types": "./dist/components/MultiSelector.d.mts",
@@ -1401,6 +1365,30 @@
     "./ChatToolCalls": {
       "types": "./dist/components/chat/ChatToolCalls.d.mts",
       "import": "./dist/components/chat/ChatToolCalls.mjs"
+    },
+    "./components/menuContent": {
+      "types": "./dist/components/menuContent.d.mts",
+      "import": "./dist/components/menuContent.mjs"
+    },
+    "./menu-content": {
+      "types": "./dist/components/menuContent.d.mts",
+      "import": "./dist/components/menuContent.mjs"
+    },
+    "./menuContent": {
+      "types": "./dist/components/menuContent.d.mts",
+      "import": "./dist/components/menuContent.mjs"
+    },
+    "./components/menuPresets": {
+      "types": "./dist/components/menuPresets.d.mts",
+      "import": "./dist/components/menuPresets.mjs"
+    },
+    "./menu-presets": {
+      "types": "./dist/components/menuPresets.d.mts",
+      "import": "./dist/components/menuPresets.mjs"
+    },
+    "./menuPresets": {
+      "types": "./dist/components/menuPresets.d.mts",
+      "import": "./dist/components/menuPresets.mjs"
     }
   },
   "publishConfig": {

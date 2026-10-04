@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach } from 'vite-plus/test';
 import { flushSync, getRegisteredCss, reset } from 'typestyles';
-import { createDesignTheme, disposeDesignTheme } from '../src/create-theme';
-import { DEFAULT_THEME_NAME, SURFACE_ATTRIBUTE } from '../src/theme-constants';
-import { extendTokens, resetExtendTokenRegistry } from '../src/extend-tokens';
+import { createDesignTheme, disposeDesignTheme } from '../src/theme/create-theme';
+import { DEFAULT_THEME_NAME, SURFACE_ATTRIBUTE } from '../src/theme/constants';
+import { extendTokens, resetExtendTokenRegistry } from '../src/theme/extend-tokens';
 import { resetRegisteredFontFaces } from '../src/fonts/register-font-face';
-import { registerGlobals } from '../src/document-globals';
+import { registerGlobals } from '../src/theme/document-globals';
 import { styles } from '../src/runtime';
 import { button, resolveButtonProps } from '../src/components/button';
 import { badge } from '../src/components/badge';
@@ -117,9 +117,7 @@ describe('createDesignTheme', () => {
       },
     });
     const css = getRegisteredCss();
-    expect(css).toMatch(
-      /--var-ui-color-tone-accent-foreground:\s*light-dark\(var\(--var-ui-color-palette-sky-7\)/,
-    );
+    expect(css).toMatch(/--var-ui-tone-accent-foreground:\s*var\(--var-ui-color-palette-sky-7\)/);
   });
 
   it('sets color-scheme on the theme surface for light-dark() resolution', () => {
@@ -153,7 +151,7 @@ describe('createDesignTheme', () => {
       /@media \(prefers-color-scheme:\s*dark\)\s*{\s*\.theme-var-ui-system-fixture\s*{/,
     );
     expect(css).not.toContain(`${themeClass('system-fixture')}[data-mode="dark"]`);
-    expect(css).toMatch(/--var-ui-color-background-app:\s*light-dark\(/);
+    expect(css).toMatch(/--var-ui-color-tone-accent-foreground:\s*light-dark\(/);
   });
 
   it('compiles inline { light, dark } leaves in tokens.color to light-dark()', () => {
@@ -202,10 +200,7 @@ describe('createDesignTheme', () => {
 
     const css = getRegisteredCss();
     expect(css).toMatch(
-      /--var-ui-color-tone-accent-foreground:\s*light-dark\(oklch\(55% 0\.2 290\), oklch\(72% 0\.16 290\)\)/,
-    );
-    expect(css).toMatch(
-      /--var-ui-color-background-app:\s*light-dark\(var\(--var-ui-color-palette-neutral-0\)/,
+      /--var-ui-tone-accent-foreground:\s*light-dark\(oklch\(55% 0\.2 290\), oklch\(72% 0\.16 290\)\)/,
     );
   });
 
@@ -230,7 +225,7 @@ describe('createDesignTheme', () => {
   });
 
   it('extendTokens keeps dark override rules for shadow-like mode-aware leaves', () => {
-    extendTokens('brand', {
+    extendTokens('brandGlow', {
       glow: {
         light: '0 0 0 3px oklch(90% 0.1 280)',
         dark: '0 0 16px oklch(70% 0.2 280)',
@@ -238,9 +233,9 @@ describe('createDesignTheme', () => {
     });
 
     const css = getRegisteredCss();
-    expect(css).toContain('--var-ui-brand-glow: 0 0 0 3px oklch(90% 0.1 280)');
+    expect(css).toContain('--var-ui-brandGlow-glow: 0 0 0 3px oklch(90% 0.1 280)');
     expect(css).toContain(':root[data-mode="dark"]');
-    expect(css).toContain('--var-ui-brand-glow: 0 0 16px oklch(70% 0.2 280)');
+    expect(css).toContain('--var-ui-brandGlow-glow: 0 0 16px oklch(70% 0.2 280)');
   });
 
   it('extend merges refs onto theme.tokens and scopes light-dark values', () => {
@@ -267,24 +262,20 @@ describe('createDesignTheme', () => {
   it('components emits overrides under the theme class', () => {
     button(resolveButtonProps({ intent: 'primary', size: 'md' }));
 
-    createDesignTheme({
-      name: 'acme-components',
-      components: {
-        button: (t) => ({
-          base: {
-            borderRadius: t.radius.lg.var,
-          },
-          variants: {
-            tone: {
-              accent: { textTransform: 'uppercase' },
-            },
-            appearance: {
-              filled: {},
-            },
-          },
-        }),
+    const theme = createDesignTheme({ name: 'acme-components' });
+    theme.componentStyles(button, (t) => ({
+      base: {
+        borderRadius: t.radius.lg.var,
       },
-    });
+      variants: {
+        tone: {
+          accent: { textTransform: 'uppercase' },
+        },
+        appearance: {
+          filled: {},
+        },
+      },
+    }));
 
     const css = getRegisteredCss();
     expect(css).toMatch(/@layer overrides/);
@@ -295,13 +286,9 @@ describe('createDesignTheme', () => {
   it('components emits typed vars overrides on the var host slot', () => {
     sideNav();
 
-    createDesignTheme({
-      name: 'acme-nav-vars',
-      components: {
-        sideNav: {
-          vars: { border: 'transparent' },
-        },
-      },
+    const theme = createDesignTheme({ name: 'acme-nav-vars' });
+    theme.componentStyles(sideNav, {
+      vars: { border: 'transparent' },
     });
 
     const css = getRegisteredCss();
@@ -312,13 +299,9 @@ describe('createDesignTheme', () => {
   it('components emits layoutPanel vars on the panel host slot', () => {
     layoutPanel();
 
-    createDesignTheme({
-      name: 'acme-layout-panel-vars',
-      components: {
-        layoutPanel: {
-          vars: { border: 'transparent' },
-        },
-      },
+    const theme = createDesignTheme({ name: 'acme-layout-panel-vars' });
+    theme.componentStyles(layoutPanel, {
+      vars: { border: 'transparent' },
     });
 
     const css = getRegisteredCss();
@@ -330,21 +313,19 @@ describe('createDesignTheme', () => {
     button(resolveButtonProps({ intent: 'primary', size: 'md' }));
     badge({});
 
-    createDesignTheme({
+    const theme = createDesignTheme({
       name: 'acme-mixed',
       extend: {
         brand: {
           accent: { light: 'blue', dark: 'navy' },
         },
       },
-      components: {
-        button: (t) => ({
-          base: { color: t.brand.accent },
-        }),
-        badge: {
-          base: { borderRadius: '999px' },
-        },
-      },
+    });
+    theme.componentStyles(button, (t) => ({
+      base: { color: t.brand.accent },
+    }));
+    theme.componentStyles(badge, {
+      base: { borderRadius: '999px' },
     });
 
     const css = getRegisteredCss();

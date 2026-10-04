@@ -1,9 +1,9 @@
 import type { DemoSnippets } from '../../types';
 
 export const snippets = {
-  react: `import { Button, DropdownMenu } from '@var-ui/react';
+  react: `import { Button, Menu } from '@var-ui/react';
 
-<DropdownMenu
+<Menu.FromSections
   trigger={<Button>Actions</Button>}
   sections={[{ items: [{ id: 'edit', label: 'Edit' }] }]}
 />`,

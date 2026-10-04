@@ -1,9 +1,9 @@
 import type { DemoSnippets } from '../../types';
 
 export const snippets = {
-  react: `import { MoreMenu } from '@var-ui/react';
+  react: `import { Menu } from '@var-ui/react';
 
-<MoreMenu
+<Menu.Overflow
   aria-label="Row actions"
   sections={[
     {

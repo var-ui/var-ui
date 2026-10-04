@@ -155,7 +155,7 @@ export function controlAppearancePaint(v: ControlPaintRefs, appearance: ToneAppe
       };
     case 'outline':
       return {
-        [v.border.name]: v.semantic.var,
+        [v.border.name]: subtleBorderColor(v.semantic.var),
         [v.background.name]: 'transparent',
         [v.foreground.name]: v.semantic.var,
         [hoverWhenEnabled]: {

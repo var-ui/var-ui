@@ -1,5 +1,6 @@
 import { createTocSpy, positionTocIndicator, type TocHeading } from '@var-ui/core/internal';
 import { toc } from '@var-ui/core';
+import { mergeProps } from '../utils';
 
 const ROOT_SELECTOR = '[data-var-ui-toc]';
 const INITIALIZED_ATTR = 'data-var-ui-toc-initialized';
@@ -12,11 +13,11 @@ function renderTocList(list: HTMLOListElement, headings: TocHeading[]): void {
 
   for (const heading of headings) {
     const item = document.createElement('li');
-    item.className = s.item.className;
+    item.className = mergeProps(s.item).className;
     if (heading.level === 3) item.dataset.nested = '';
 
     const link = document.createElement('a');
-    link.className = s.link.className;
+    link.className = mergeProps(s.link).className;
     link.href = `#${heading.id}`;
     link.textContent = heading.text;
     link.dataset.tocLink = heading.id;

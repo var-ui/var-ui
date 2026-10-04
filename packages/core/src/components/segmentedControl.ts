@@ -1,9 +1,10 @@
 import { typestyles } from '../runtime';
-import { atDarkMode, atReducedMotion } from '../theme-conditions';
+import { atDarkMode, atReducedMotion } from '../theme/conditions';
 import { duration } from '../tokens/defaults/duration';
 import { easing } from '../tokens/defaults/easing';
 import { designTokens as t } from '../tokens';
 import { controlSizeVariants, segmentedControlSize } from './controlSize';
+import { themeableVars } from './themeableVars';
 
 const indicatorTransition = `transform ${duration.medium} ${easing.emphasized}, width ${duration.medium} ${easing.emphasized}, opacity ${duration.fast} ${easing.standard}`;
 
@@ -42,7 +43,7 @@ export const segmentedControlVarDefinitions = {
 /**
  * Segmented toggle group with a sliding surface indicator behind the active segment.
  */
-export const segmentedControl = typestyles.styles.component(
+const segmentedControlRecipe = typestyles.styles.component(
   'segmented-control',
   (c) => {
     const v = c.vars(segmentedControlVarDefinitions);
@@ -134,4 +135,9 @@ export const segmentedControl = typestyles.styles.component(
     };
   },
   { layer: 'components' },
+);
+
+export const segmentedControl = themeableVars(
+  segmentedControlRecipe,
+  segmentedControlVarDefinitions,
 );

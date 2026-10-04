@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach } from 'vite-plus/test';
 import { getRegisteredCss, reset } from 'typestyles';
-import { createDesignTheme } from '../src/create-theme';
-import { when } from '../src/theme-conditions';
-import { resetExtendTokenRegistry } from '../src/extend-tokens';
-import { registerGlobals } from '../src/document-globals';
+import { createDesignTheme } from '../src/theme/create-theme';
+import { when } from '../src/theme/conditions';
+import { resetExtendTokenRegistry } from '../src/theme/extend-tokens';
+import { registerGlobals } from '../src/theme/document-globals';
 import { styles } from '../src/runtime';
 import { button, resolveButtonProps } from '../src/components/button';
 
@@ -18,16 +18,12 @@ describe('theme conditions and colorModes', () => {
 
   it('emits light-dark() for color mode values on override properties', () => {
     button(resolveButtonProps({ intent: 'primary', size: 'md' }));
-    createDesignTheme({
-      name: 'mode-values',
-      components: {
-        button: () => ({
-          base: {
-            color: { light: '#111111', dark: '#eeeeee' },
-          },
-        }),
+    const theme = createDesignTheme({ name: 'mode-values' });
+    theme.componentStyles(button, () => ({
+      base: {
+        color: { light: '#111111', dark: '#eeeeee' },
       },
-    });
+    }));
 
     const css = getRegisteredCss();
     expect(css).toContain(`${themeClass('mode-values')} .var-ui-button`);
@@ -36,16 +32,12 @@ describe('theme conditions and colorModes', () => {
 
   it('emits conditional override rules for when.dark', () => {
     button(resolveButtonProps({ intent: 'primary', size: 'md' }));
-    createDesignTheme({
-      name: 'conditions',
-      components: {
-        button: () => ({
-          base: {
-            conditions: [when.dark({ letterSpacing: '0.06em' })],
-          },
-        }),
+    const theme = createDesignTheme({ name: 'conditions' });
+    theme.componentStyles(button, () => ({
+      base: {
+        conditions: [when.dark({ letterSpacing: '0.06em' })],
       },
-    });
+    }));
 
     const css = getRegisteredCss();
     expect(css).toContain(`${themeClass('conditions')} [data-mode="dark"] .var-ui-button`);

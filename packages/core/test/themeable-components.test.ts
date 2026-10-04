@@ -1,18 +1,22 @@
 import { describe, it, expect, expectTypeOf } from 'vite-plus/test';
-import type { DesignThemeConfig, ThemeComponentsConfig } from '../src/types';
-import type { OverrideConfigFor } from '../src/themeable-components';
+import { getComponentMeta } from 'typestyles';
+import type { OverrideConfigFor } from '../src/theme/registry';
 import * as components from '../src/components';
-import { themeableComponents } from '../src/themeable-components';
+import { themeableComponents } from '../src/theme/registry';
+import { styles } from '../src/runtime';
 import { button } from '../src/components/button';
 import { card } from '../src/components/card';
 import { badge } from '../src/components/badge';
+import { menu } from '../src/components/menu';
+import { createDesignTheme } from '../src/theme/create-theme';
 
 describe('themeableComponents', () => {
   it('includes every exported recipe function from components/', () => {
+    const themeable = styles.getThemeableComponents();
+
     const recipeExports = Object.entries(components).filter(
       ([name, value]) =>
         typeof value === 'function' &&
-        // Skip non-recipe helpers re-exported from components
         ![
           'layoutUtility',
           'text',
@@ -32,23 +36,25 @@ describe('themeableComponents', () => {
     );
 
     const missing: string[] = [];
-    for (const [name, value] of recipeExports) {
-      const registered = Object.values(themeableComponents).includes(
-        value as (typeof themeableComponents)[keyof typeof themeableComponents],
-      );
-      if (!registered) missing.push(name);
+    for (const [, value] of recipeExports) {
+      const meta = getComponentMeta(value as object);
+      if (!meta?.namespace) continue;
+      const registered = themeable.get(meta.namespace);
+      if (registered !== value) missing.push(meta.namespace);
     }
 
-    expect(missing, `Add missing recipes to themeableComponents: ${missing.join(', ')}`).toEqual(
-      [],
+    expect(missing, `Themeable registry missing namespaces: ${missing.join(', ')}`).toEqual([]);
+  });
+
+  it('matches getRegisteredComponentRefs keys to themeable namespaces', () => {
+    expect(Object.keys(themeableComponents).sort()).toEqual(
+      [...styles.getThemeableComponents().keys()].sort(),
     );
   });
 
   it('infers dimensioned button override shape with CSS + variant keys', () => {
     type ButtonOverride = OverrideConfigFor<typeof button>;
 
-    // Assignability checks (prefer over toMatchTypeOf — OverrideConfig includes
-    // `vars?: never` which breaks vitest's exact MatchType helper).
     const ok: ButtonOverride = {
       base: { borderRadius: '999px' },
       variants: {
@@ -67,8 +73,6 @@ describe('themeableComponents', () => {
     };
     void badDimension;
 
-    // VariantOptionStyle allows custom keys (custom props / nested blocks) while
-    // still mapping known CSS properties for IntelliSense.
     const customProp: ButtonOverride = {
       base: {
         borderRadius: '999px',
@@ -99,29 +103,29 @@ describe('themeableComponents', () => {
     void ok;
   });
 
-  it('types createDesignTheme components map per recipe', () => {
-    const componentOverrides: ThemeComponentsConfig = {
-      button: (t) => ({
-        base: { boxShadow: t.shadow.md.var, borderRadius: t.radius.lg.var },
-        variants: {
-          tone: {
-            accent: { textTransform: 'uppercase' },
-          },
-        },
-      }),
-      card: {
-        base: {
-          root: { borderRadius: '16px' },
+  it('infers menu vars on componentStyles overrides', () => {
+    type MenuOverride = OverrideConfigFor<typeof menu>;
+    const ok: MenuOverride = {
+      vars: { popoverBackground: 'red' },
+    };
+    void ok;
+  });
+
+  it('types componentStyles on createDesignTheme from the recipe handle', () => {
+    const theme = createDesignTheme({ name: 'typed' });
+    theme.componentStyles(button, (t) => ({
+      base: { boxShadow: t.shadow.md.var, borderRadius: t.radius.lg.var },
+      variants: {
+        tone: {
+          accent: { textTransform: 'uppercase' },
         },
       },
-      badge: { base: { letterSpacing: '0.06em' } },
-    };
-    void componentOverrides;
-
-    const config = {
-      name: 'typed',
-      components: componentOverrides,
-    } satisfies DesignThemeConfig;
-    void config;
+    }));
+    theme.componentStyles(card, {
+      base: {
+        root: { borderRadius: '16px' },
+      },
+    });
+    theme.componentStyles(badge, { base: { letterSpacing: '0.06em' } });
   });
 });

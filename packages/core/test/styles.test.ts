@@ -18,7 +18,7 @@ describe('@var-ui/core/styles', () => {
     registerBaseStyles();
     const css = getRegisteredCss();
     expect(css).toContain('.theme-var-ui-default');
-    expect(css).toMatch(/--var-ui-color-background-app:\s*light-dark\(/);
+    expect(css).toMatch(/--var-ui-color-tone-accent-foreground:\s*light-dark\(/);
   });
 
   it('re-exports registrations so vp pack cannot emit an empty styles.mjs', () => {

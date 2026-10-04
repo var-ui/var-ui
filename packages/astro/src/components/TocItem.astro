@@ -12,15 +12,17 @@ type Props = {
 
 const { label, href, isSelected = false, isNested = false, className } = Astro.props;
 const s = toc();
-const linkProps = {
-  ...mergeProps(s.link, className),
-  ...(isSelected ? { 'data-selected': '' } : {}),
-  'aria-current': isSelected ? ('location' as const) : undefined,
-};
+const itemClass = mergeProps(s.item).className;
+const linkClass = mergeProps(s.link, className).className;
 ---
 
-<li {...mergeProps(s.item)} data-nested={isNested || undefined}>
-  <a href={href} {...linkProps}>
+<li class={itemClass} data-nested={isNested || undefined}>
+  <a
+    href={href}
+    class={linkClass}
+    data-selected={isSelected ? '' : undefined}
+    aria-current={isSelected ? 'location' : undefined}
+  >
     {label}
   </a>
 </li>

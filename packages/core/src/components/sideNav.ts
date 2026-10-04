@@ -1,10 +1,11 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { themeableVars } from './themeableVars';
 
 /** Icon-only rail width in px when the nav is collapsed. */
 export const SIDE_NAV_COLLAPSED_WIDTH = 56;
 
-/** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
+/** Internal CSS variables for theme overrides (`vars` on `theme.componentStyles`). */
 export const sideNavVarDefinitions = {
   background: {
     value: t.color.background.surface.var,
@@ -70,7 +71,7 @@ export const sideNavVarDefinitions = {
  * ```
  */
 
-export const sideNav = typestyles.styles.component(
+const sideNavRecipe = typestyles.styles.component(
   'side-nav',
   (c) => {
     const v = c.vars(sideNavVarDefinitions);
@@ -85,7 +86,14 @@ export const sideNav = typestyles.styles.component(
         'footer',
         'footerIcons',
         'heading',
+        'headingBar',
+        'headingBrand',
+        'headingBrandText',
+        'headingBrandTitle',
+        'headingBrandMeta',
         'section',
+        'sectionHeader',
+        'sectionTitles',
         'sectionTitle',
         'item',
         'itemLabel',
@@ -182,6 +190,42 @@ export const sideNav = typestyles.styles.component(
         fontWeight: t.fontWeight.semibold.var,
         color: v.headingColor.var,
       },
+      headingBar: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: t.space[2].var,
+        minWidth: 0,
+      },
+      headingBrand: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: t.space[2].var,
+        minWidth: 0,
+        color: 'inherit',
+        textDecoration: 'none',
+      },
+      headingBrandText: {
+        display: 'flex',
+        flexDirection: 'column',
+        minWidth: 0,
+        overflow: 'hidden',
+        '[data-collapsed] &': {
+          display: 'none',
+        },
+      },
+      headingBrandTitle: {
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+      },
+      headingBrandMeta: {
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        fontSize: t.fontSize.sm.var,
+        color: t.color.text.secondary.var,
+      },
       section: {
         display: 'flex',
         flexDirection: 'column',
@@ -189,6 +233,15 @@ export const sideNav = typestyles.styles.component(
         '&:not(:first-child)': {
           marginTop: t.space[2].var,
         },
+      },
+      sectionHeader: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: t.space[2].var,
+      },
+      sectionTitles: {
+        minWidth: 0,
       },
       sectionTitle: {
         padding: `${t.space[1].var} ${t.space[2].var}`,
@@ -285,3 +338,5 @@ export const sideNav = typestyles.styles.component(
   },
   { layer: 'components' },
 );
+
+export const sideNav = themeableVars(sideNavRecipe, sideNavVarDefinitions);

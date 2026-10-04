@@ -8,7 +8,7 @@ import { ButtonGroup } from './ButtonGroup';
 import { Button } from './Button';
 import { IconButton } from './IconButton';
 import { SegmentedControl } from './SegmentedControl';
-import { DropdownMenu } from './DropdownMenu';
+import { Menu } from './Menu';
 import { NumberInput } from './NumberInput';
 import { Slider } from './Slider';
 
@@ -73,12 +73,12 @@ describe('SegmentedControl', () => {
   });
 });
 
-describe('DropdownMenu', () => {
+describe('Menu.FromSections', () => {
   it('opens menu items from the trigger', async () => {
     const user = userEvent.setup();
     const onAction = vi.fn();
     wrap(
-      <DropdownMenu
+      <Menu.FromSections
         trigger={<Button>Actions</Button>}
         sections={[{ items: [{ id: 'edit', label: 'Edit', onAction }] }]}
       />,

@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { toolbar } from '@var-ui/core';
+import { toolbar, type ControlSize } from '@var-ui/core';
 import { mergeProps } from './utils';
 
 export type ToolbarProps = {
@@ -12,7 +12,7 @@ export type ToolbarProps = {
   /** Accessible label for the toolbar (required — applied as aria-label). */
   label: string;
   /** Control density. @default md */
-  size?: 'sm' | 'md' | 'lg';
+  size?: ControlSize;
   /** Layout axis. @default horizontal */
   orientation?: 'horizontal' | 'vertical';
   /** Additional CSS class names merged onto the root element. */

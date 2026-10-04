@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vite-plus/test';
 import { getRegisteredCss, reset } from 'typestyles';
-import { registerGlobals } from '../../src/document-globals';
+import { registerGlobals } from '../../src/theme/document-globals';
 import { registerFontFace, resetRegisteredFontFaces } from '../../src/fonts/register-font-face';
 
 describe('registerFontFace', () => {

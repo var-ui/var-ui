@@ -70,7 +70,15 @@ const page = docsMarketingPage();
   <body class={cx('docs-body', bodyClassName)}>
     <AppShell variant="wash" height="fill" contentPadding={0} mobileBreakpoint="md">
       <TopNav slot="topNav" className={cx(nav.root)}>
-        <TopNavHeading slot="heading" heading={brand.heading} headingHref={brand.href} />
+        {
+          Astro.slots.has('brand') ? (
+            <TopNavHeading slot="heading" heading={brand.heading} headingHref={brand.href}>
+              <slot name="brand" />
+            </TopNavHeading>
+          ) : (
+            <TopNavHeading slot="heading" heading={brand.heading} headingHref={brand.href} />
+          )
+        }
         {
           topNav.map((item) => (
             <TopNavItem
@@ -93,6 +101,7 @@ const page = docsMarketingPage();
                   <slot name="tools" />
                 </div>
               ) : null}
+              {hasThemePickerSlot ? <slot name="themePicker" /> : null}
               <ColorModeToggle includeSystem size="md" />
             </div>
           </div>
@@ -126,7 +135,6 @@ const page = docsMarketingPage();
         </LayoutContent>
       </Layout>
     </AppShell>
-    {hasThemePickerSlot ? <slot name="themePicker" /> : null}
     <script>
       import '../scripts/docsPageClient.ts';
     </script>

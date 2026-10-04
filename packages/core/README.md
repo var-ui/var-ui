@@ -68,7 +68,7 @@ See [`examples/vite-app`](../../examples/vite-app/README.md) and [`examples/astr
 | **Tokens**        | `designTokens`, `tokens`, `tokenValues`, `generateColors`, `lightSyntaxValues`, `darkSyntaxValues`                                   |
 | **Customization** | `extendTokens`, `when`, `themeWhen`, `themeableComponents`, `defineFonts`, `groteskMono`                                             |
 | **TypeStyles**    | `typestyles`, `styles`, `global`                                                                                                     |
-| **Types**         | `DesignTheme`, `DesignThemeConfig`, `DesignThemePreset`, `ThemeComponentsConfig`, `OverrideConfigFor`, …                             |
+| **Types**         | `DesignTheme`, `DesignThemeConfig`, `DesignThemePreset`, `OverrideConfigFor`, …                                                      |
 
 ## Recipe inventory
 
@@ -164,14 +164,14 @@ copy examples from [`docs/src/themes/`](../../docs/src/themes/) in the docs repo
 
 ### Authoring a theme
 
-`createDesignTheme` merges a preset, token patches, ambient color mode, and optional
-component overrides:
+`createDesignTheme` merges a preset, token patches, and ambient color mode. Scoped recipe
+restyles use `theme.componentStyles(recipe, override)` after creation.
 
 1. **`from`** — optional `DesignThemePreset` (`{ tokens?, colorMode?, fonts? }`); defaults to built-in `tokenValues` + dark color mode
 2. **`tokens`** — mode-invariant overrides (light `color` face lives here by default)
 3. **`colorMode`** — ambient `{ light?, dark? }` color patches (compiled to `light-dark()`)
 4. **`generateColors`** — optional helper to build `{ light, dark }` color trees from an accent
-5. **`modes` / `extend` / `components` / `fonts`** — extra TypeStyles modes, custom tokens, typed recipe overrides, `@font-face` rules
+5. **`modes` / `extend` / `fonts`** — extra TypeStyles modes, custom token namespaces, `@font-face` rules
 
 ```ts
 import {
@@ -202,12 +202,11 @@ export const acmeTheme = createDesignTheme({
   name: 'acme',
   from: acmePreset, // optional; built-in defaults apply when omitted
   colorMode: { light, dark },
-  components: {
-    button: (t) => ({
-      base: { borderRadius: t.radius.lg.var },
-    }),
-  },
 });
+
+acmeTheme.componentStyles(button, (t) => ({
+  base: { borderRadius: t.radius.lg.var },
+}));
 
 // acmeTheme.className → `theme-var-ui-acme`
 ```
@@ -231,8 +230,9 @@ styles.override(recipe, overrideConfig, {
 });
 ```
 
-Each return value is a **`DesignTheme`**: `ThemeSurface` (`className`, `name`, string coercion)
-plus `tokens` (built-in refs merged with any `extend` namespaces).
+Each return value is a **`DesignTheme`**: `ThemeSurface` (`className`, `name`, string coercion),
+`tokens` (built-in refs merged with any `extend` namespaces), and
+`componentStyles(recipe, override)` (typed `styles.override` under the theme class).
 
 ### Ambient light / dark mode
 

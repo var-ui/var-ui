@@ -6,7 +6,7 @@ import {
   type ToggleButtonGroupProps as RACToggleButtonGroupProps,
   type ToggleButtonProps as RACToggleButtonProps,
 } from 'react-aria-components';
-import { segmentedControl, toggleButton } from '@var-ui/core';
+import { segmentedControl, toggleButton, type ControlSize } from '@var-ui/core';
 import { observeSegmentedControlIndicator } from '@var-ui/core/internal';
 import { mergeProps } from './utils';
 
@@ -21,7 +21,7 @@ export type SegmentedControlProps = Omit<RACToggleButtonGroupProps, 'children' |
   /** Segment definitions rendered as toggle buttons. */
   options: SegmentedControlOption[];
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: ControlSize;
 };
 
 /**
@@ -87,7 +87,7 @@ export function SegmentedControl({
 
 export type ToggleButtonProps = Omit<RACToggleButtonProps, 'className'> & {
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: ControlSize;
 };
 
 /** Standalone toggle button for toolbars and filters. */

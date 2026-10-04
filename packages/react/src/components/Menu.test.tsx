@@ -141,6 +141,18 @@ describe('Menu', () => {
     expect(screen.getByRole('menuitem', { name: 'Add to Library' })).toBeTruthy();
   });
 
+  it('opens items from Menu.FromSections', async () => {
+    const onAction = vi.fn();
+    wrap(
+      <Menu.FromSections
+        trigger={<Button>Actions</Button>}
+        sections={[{ items: [{ id: 'edit', label: 'Edit', onAction }] }]}
+      />,
+    );
+    await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
+    expect(await screen.findByRole('menuitem', { name: 'Edit' })).toBeTruthy();
+  });
+
   it('supports controlled isOpen', () => {
     function Controlled() {
       const [open] = useState(true);

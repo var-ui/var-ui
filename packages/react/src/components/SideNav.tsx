@@ -136,25 +136,10 @@ export type SideNavHeadingProps = {
   headingHref?: string;
   superheading?: ReactNode;
   subheading?: ReactNode;
-  /** Popover/DropdownMenu trigger rendered alongside the brand block (e.g. a team switcher). */
+  /** Popover or `Menu.FromSections` trigger rendered alongside the brand block (e.g. a team switcher). */
   menu?: ReactNode;
   className?: string;
 };
-
-const brandRowStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.5rem',
-  minWidth: 0,
-  color: 'inherit',
-  textDecoration: 'none',
-} as const;
-
-const ellipsisTextStyle = {
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-} as const;
 
 /** Brand block for the `header` zone: icon, heading text, optional super/sub lines, optional menu trigger. */
 export function SideNavHeading({
@@ -166,48 +151,34 @@ export function SideNavHeading({
   menu,
   className,
 }: SideNavHeadingProps): JSX.Element {
+  const s = sideNav();
   const { isCollapsed } = useSideNavContext();
   const iconNode = renderSideNavIcon(icon);
 
   const textNode = isCollapsed ? null : (
-    <span style={{ display: 'flex', flexDirection: 'column', minWidth: 0, overflow: 'hidden' }}>
+    <span {...mergeProps(s.headingBrandText)}>
       {superheading != null ? (
-        <Text as="span" size="sm" tone="secondary" style={ellipsisTextStyle}>
-          {superheading}
-        </Text>
+        <span {...mergeProps(s.headingBrandMeta)}>{superheading}</span>
       ) : null}
-      <span style={ellipsisTextStyle}>{heading}</span>
-      {subheading != null ? (
-        <Text as="span" size="sm" tone="secondary" style={ellipsisTextStyle}>
-          {subheading}
-        </Text>
-      ) : null}
+      <span {...mergeProps(s.headingBrandTitle)}>{heading}</span>
+      {subheading != null ? <span {...mergeProps(s.headingBrandMeta)}>{subheading}</span> : null}
     </span>
   );
 
   const brand = headingHref ? (
-    <AriaLink href={headingHref} style={brandRowStyle}>
+    <AriaLink href={headingHref} {...mergeProps(s.headingBrand)}>
       {iconNode}
       {textNode}
     </AriaLink>
   ) : (
-    <span style={brandRowStyle}>
+    <span {...mergeProps(s.headingBrand)}>
       {iconNode}
       {textNode}
     </span>
   );
 
   return (
-    <div
-      className={className}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '0.5rem',
-        minWidth: 0,
-      }}
-    >
+    <div {...mergeProps(s.headingBar, className)}>
       {brand}
       {!isCollapsed && menu ? menu : null}
     </div>
@@ -237,15 +208,8 @@ export function SideNavSection({
   return (
     <div {...mergeProps(s.section, className)}>
       {showHeader ? (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '0.5rem',
-          }}
-        >
-          <div style={{ minWidth: 0 }}>
+        <div {...mergeProps(s.sectionHeader)}>
+          <div {...mergeProps(s.sectionTitles)}>
             {title != null ? <div {...mergeProps(s.sectionTitle)}>{title}</div> : null}
             {subtitle != null ? (
               <Text as="span" size="sm" tone="secondary">

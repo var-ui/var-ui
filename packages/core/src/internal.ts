@@ -8,15 +8,16 @@ export {
   deepMergeThemeOverrides,
   mergeThemeOverrides,
   type ExtendMap,
-} from './create-theme-base';
-export { registerExtendMap, resetExtendTokenRegistry } from './extend-tokens';
+} from './theme/create-theme-base';
+export { registerExtendMap, resetExtendTokenRegistry } from './theme/extend-tokens';
 export { resetRegisteredFontFaces } from './fonts/register-font-face';
-export { registerBaseStyles } from './base-styles';
-export { registerDocumentGlobals, registerGlobals } from './document-globals';
+export { registerBaseStyles } from './theme/base-styles';
+export { registerDocumentGlobals, registerGlobals } from './theme/document-globals';
 export { registerColorSchemeGlobals } from './runtime';
-export * from './tocSpy';
-export * from './tabsIndicator';
-export * from './segmentedControlIndicator';
+export * from './components/toc/spy';
+export * from './components/indicators/tabs';
+export * from './components/indicators/segmented-control';
+export * from './components/indicators/toc';
 export { proseContent } from './components/proseContent';
 export { layout as layoutUtility, text } from './components/styles';
 export { namedContainerQuery } from './components/namedContainerQuery';

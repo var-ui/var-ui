@@ -3,7 +3,7 @@ import { getRegisteredCss } from 'typestyles';
 
 describe('document-globals', () => {
   it('registers html scroll and body reset styles', async () => {
-    await import('../src/document-globals');
+    await import('../src/theme/document-globals');
     const css = getRegisteredCss();
     expect(css).toContain('scroll-behavior: smooth');
     expect(css).toContain('scroll-behavior: auto');

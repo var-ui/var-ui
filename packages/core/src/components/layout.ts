@@ -1,6 +1,7 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { defineLayoutShellVars, getLayoutShellVars } from './layoutShellVars';
+import { themeableVars } from './themeableVars';
 
 export type { LayoutPadding } from './layoutShellVars';
 export {
@@ -287,7 +288,7 @@ type LayoutPanelVariantDefs = {
  * slots for responsive drawer mode. Divider borders target the content-facing
  * edge via `data-side`; negative margins collapse inner padding when seamless.
  */
-export const layoutPanel = typestyles.styles.component<
+const layoutPanelRecipe = typestyles.styles.component<
   typeof LAYOUT_PANEL_SLOTS,
   LayoutPanelVariantDefs
 >(
@@ -296,6 +297,7 @@ export const layoutPanel = typestyles.styles.component<
     const shell = getLayoutShellVars();
     const v = c.vars(layoutPanelVarDefinitions);
     return {
+      vars: layoutPanelVarDefinitions,
       slots: LAYOUT_PANEL_SLOTS,
       base: {
         panel: {
@@ -407,3 +409,5 @@ export const layoutPanel = typestyles.styles.component<
   },
   { layer: 'components' },
 );
+
+export const layoutPanel = themeableVars(layoutPanelRecipe, layoutPanelVarDefinitions);

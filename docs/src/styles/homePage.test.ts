@@ -15,6 +15,5 @@ describe('homePage CSS', () => {
     expect(css).toContain(belowMd);
     expect(css).toContain('radial-gradient');
     expect(css).toContain('text-align: center');
-    expect(css).toContain('home-page__heroWordmark');
   });
 });

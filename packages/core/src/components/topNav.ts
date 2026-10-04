@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { themeableVars } from './themeableVars';
 
 /** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
 export const topNavVarDefinitions = {
@@ -85,7 +86,7 @@ export const topNavVarDefinitions = {
  * ```
  */
 
-export const topNav = typestyles.styles.component(
+const topNavRecipe = typestyles.styles.component(
   'top-nav',
   (c) => {
     const v = c.vars(topNavVarDefinitions);
@@ -276,3 +277,5 @@ export const topNav = typestyles.styles.component(
   },
   { layer: 'components' },
 );
+
+export const topNav = themeableVars(topNavRecipe, topNavVarDefinitions);

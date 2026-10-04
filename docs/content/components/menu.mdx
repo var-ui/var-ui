@@ -1,19 +1,45 @@
 ---
 title: Menu
-description: Compound action menu with Trigger, Popup, Item, Section, and Separator parts.
+description: Action menu namespace with compound parts and data presets.
 ---
 
 # Menu
 
-Compound action menu. `Menu` is Root; compose `Menu.Trigger`, `Menu.Popup`, `Menu.Item`, `Menu.Section`, and `Menu.Separator`. The trigger child must forward DOM props — there is no `render` prop. For the data preset (`sections` of items), keep using [`DropdownMenu`](/components/dropdown-menu).
+Action menu namespace. `Menu` is Root for compound menus; use `Menu.FromSections`, `Menu.ContextMenu`, or `Menu.Overflow` for common presets. The trigger child must forward DOM props — there is no `render` prop.
 
 State attributes, positioner CSS variables, and `onOpenChange` details are documented in [Overlay lifecycle](/docs/overlay-lifecycle).
 
 ## Examples
 
-### Default
+### Compound parts
+
+Compose `Menu.Trigger`, `Menu.Popup`, `Menu.Item`, `Menu.Section`, and `Menu.Separator`.
 
 <Demo id="menu.default" />
+
+### From sections
+
+Pass a `trigger` and `sections` of items (optional section labels, shortcuts, `danger`, `disabled`).
+
+<Demo id="dropdown-menu.default" />
+
+<Demo id="dropdown-menu.sections" />
+
+### Context menu
+
+Wrap a surface and pass `sections`. Right-click (or the platform context-menu gesture) opens the menu at the pointer. The child must be a DOM element `Pressable` can attach a ref to (e.g. a `div`).
+
+<Demo id="context-menu.default" />
+
+<Demo id="context-menu.sections" />
+
+### Overflow
+
+Icon-only overflow menu using the `moreHorizontal` glyph — same `sections` shape as other presets.
+
+<Demo id="more-menu.default" />
+
+<Demo id="more-menu.overflow" />
 
 ## Props
 
@@ -21,4 +47,4 @@ State attributes, positioner CSS variables, and `onOpenChange` details are docum
 
 ## Accessibility
 
-Built on React Aria `MenuTrigger` / `Menu`. Arrow keys move between items, Enter/Space activates, Escape closes. Give destructive items clear labels — visual tone is not enough.
+Built on React Aria `MenuTrigger` / `Menu`. Arrow keys move between items, Enter/Space activates, Escape closes. Give destructive items clear labels — visual tone is not enough. For `Menu.ContextMenu`, ensure essential actions are also available without right-click for keyboard-only users.

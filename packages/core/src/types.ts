@@ -1,7 +1,6 @@
-import type { ThemeModeDefinition, ThemeSurface } from 'typestyles';
-import type { ExtendTokenValues, TokenRefsOf } from './extend-tokens';
+import type { OverrideConfigFor, ThemeModeDefinition, ThemeSurface } from 'typestyles';
+import type { ExtendTokenValues, TokenRefsOf } from './theme/extend-tokens';
 import type { FontFaceDefinition } from './fonts/types';
-import type { ThemeableComponentName, ThemeComponentOverrideFor } from './themeable-components';
 import type {
   DesignThemeColorMode,
   DesignThemePreset,
@@ -24,12 +23,7 @@ export type {
 
 export { colorModes, conditional } from 'typestyles';
 
-export type {
-  OverrideConfigFor,
-  ThemeableComponentName,
-  ThemeComponentOverride,
-  ThemeComponentOverrideFor,
-} from './themeable-components';
+export type { OverrideConfigFor } from './theme/registry';
 
 export type {
   DesignColorValues,
@@ -52,24 +46,8 @@ export type DesignThemeTokens<E extends ExtendMap = Record<string, never>> = Des
   TokenRefsOf<E>;
 
 /**
- * Per-recipe entry: static override object, or a factory that receives theme tokens
- * (built-ins + `extend` refs). Prefer factories in separate files for split themes.
- */
-export type ThemeComponentEntry<
-  TTokens = DesignThemeTokens,
-  K extends ThemeableComponentName = ThemeableComponentName,
-> = ThemeComponentOverrideFor<K> | ((t: TTokens) => ThemeComponentOverrideFor<K>);
-
-/**
- * Per-recipe override map. Keys are themeable recipes; values are typed to that
- * recipe's override shape (`base` / `variants` / slots) with CSS property IntelliSense.
- */
-export type ThemeComponentsConfig<TTokens = DesignThemeTokens> = {
-  [K in ThemeableComponentName]?: ThemeComponentEntry<TTokens, K>;
-};
-
-/**
  * Theme config: token overrides, ambient color modes, and optional preset base.
+ * Recipe restyles belong on {@link DesignTheme.componentStyles} after creation.
  */
 export type DesignThemeConfig<E extends ExtendMap = Record<string, never>> = {
   name: string;
@@ -88,18 +66,17 @@ export type DesignThemeConfig<E extends ExtendMap = Record<string, never>> = {
   surfaces?: boolean;
   /** Custom token namespaces; leaves are a string or `{ light, dark }`. */
   extend?: E;
-  /**
-   * Typed component restyles. Each entry is a plain override or `(t) => override`.
-   * Compiles to `styles.override` under this theme's class in the `overrides` layer.
-   */
-  components?: ThemeComponentsConfig<DesignThemeTokens<E>>;
   /** Self-hosted @font-face definitions registered when the theme is created. */
   fonts?: FontFaceDefinition[];
 };
 
-/** Theme surface plus merged token refs when `extend` is used. */
+/** Theme surface with token refs and scoped {@link styles.override} helper. */
 export type DesignTheme<E extends ExtendMap = Record<string, never>> = ThemeSurface & {
   tokens: DesignThemeTokens<E>;
+  componentStyles<C>(
+    component: C,
+    config: OverrideConfigFor<C> | ((t: DesignThemeTokens<E>) => OverrideConfigFor<C>),
+  ): void;
 };
 
 export type {

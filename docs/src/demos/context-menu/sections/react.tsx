@@ -1,8 +1,8 @@
-import { ContextMenu } from '@var-ui/react';
+import { Menu } from '@var-ui/react';
 
 export default function Preview() {
   return (
-    <ContextMenu
+    <Menu.ContextMenu
       sections={[
         {
           label: 'Edit',
@@ -32,6 +32,6 @@ export default function Preview() {
       >
         Project card — right-click for actions
       </div>
-    </ContextMenu>
+    </Menu.ContextMenu>
   );
 }

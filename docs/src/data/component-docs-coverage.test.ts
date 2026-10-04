@@ -13,9 +13,7 @@ const REQUIRED_FAMILY_SLUGS = [
   'toggle-button',
   'segmented-control',
   'color-mode-toggle',
-  'dropdown-menu',
-  'context-menu',
-  'more-menu',
+  'menu',
   'toolbar',
   // Data input
   'number-input',

@@ -1,5 +1,6 @@
 import { typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
+import { themeableVars } from './themeableVars';
 
 /** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
 export const codeBlockVarDefinitions = {
@@ -49,7 +50,7 @@ export const codeBlockVarDefinitions = {
   },
 } as const;
 
-export const codeBlock = typestyles.styles.component(
+const codeBlockRecipe = typestyles.styles.component(
   'code-block',
   (c) => {
     const v = c.vars(codeBlockVarDefinitions);
@@ -316,3 +317,5 @@ export const codeBlock = typestyles.styles.component(
   },
   { layer: 'components' },
 );
+
+export const codeBlock = themeableVars(codeBlockRecipe, codeBlockVarDefinitions);

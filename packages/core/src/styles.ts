@@ -14,8 +14,9 @@
  * import './my-theme';
  * ```
  */
-export { themeableComponents } from './themeable-components';
+import './components';
+export { themeableComponents } from './theme/registry';
 export { hiddenClassName, hiddenStyle } from './components/hidden';
 export { layout, text } from './components/styles';
-export { registerBaseStyles } from './base-styles';
-export { registerDefaultTheme } from './register-default-theme';
+export { registerBaseStyles } from './theme/base-styles';
+export { registerDefaultTheme } from './theme/register-default';

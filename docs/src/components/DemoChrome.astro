@@ -1,7 +1,5 @@
 ---
-import HighlightedCodeBlock from './HighlightedCodeBlock.astro';
-import { Heading, cx } from '@var-ui/astro';
-import { demoChrome } from '../styles/demoChrome';
+import CodeBlock from '@var-ui/docs/CodeBlock';
 
 type Framework = 'react' | 'astro' | 'html';
 
@@ -14,41 +12,8 @@ type Props = {
 };
 
 const { code, language = 'tsx', filename, framework, title } = Astro.props;
-const d = demoChrome();
 ---
 
-<div class={(d.root).className} data-demo-chrome>
-  {
-    title ? (
-      <Heading level={4} size="sm">
-        {title}
-      </Heading>
-    ) : null
-  }
-  <div class={(d.card).className}>
-    <div class={(d.preview).className}>
-      <div class={(d.previewInner).className}>
-        <slot />
-      </div>
-    </div>
-    <section
-      class={cx((d.code).className, (d.codeBlock).className)}
-      data-demo-chrome-code
-      data-demo-code={code}
-      data-demo-framework={framework}
-    >
-      <HighlightedCodeBlock code={code} language={language} filename={filename} />
-      <div class={(d.codeFade).className} data-demo-fade hidden></div>
-      <div class={(d.expand).className} data-demo-expand-wrap>
-        <button type="button" class={(d.expandButton).className} data-demo-expand>
-          Expand code
-        </button>
-      </div>
-    </section>
-  </div>
-</div>
-
-<script>
-  import { initDemoChromeExpand } from '../scripts/demoChromeExpand';
-  initDemoChromeExpand();
-</script>
+<CodeBlock code={code} language={language} filename={filename} framework={framework} title={title}>
+  <slot />
+</CodeBlock>

@@ -74,6 +74,7 @@ const nav = docsTopNav();
               <div class={(nav.toolbarExtra).className}>
                 <FrameworkSwitcher />
               </div>
+              <DocsThemePicker />
               <ColorModeToggle includeSystem size="md" />
             </div>
           </div>
@@ -105,7 +106,6 @@ const nav = docsTopNav();
         </LayoutContent>
       </Layout>
     </AppShell>
-    <DocsThemePicker />
     <script>
       import '../../typestyles-entry.ts';
       import '../scripts/reattachTypestyles.ts';
