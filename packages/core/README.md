@@ -171,7 +171,7 @@ restyles use `theme.componentStyles(recipe, override)` after creation.
 2. **`tokens`** — mode-invariant overrides (light `color` face lives here by default)
 3. **`colorMode`** — ambient `{ light?, dark? }` color patches (compiled to `light-dark()`)
 4. **`generateColors`** — optional helper to build `{ light, dark }` color trees from an accent
-5. **`modes` / `extend` / `fonts`** — extra TypeStyles modes, custom token namespaces, `@font-face` rules
+5. **`modes` / `fonts`** — extra TypeStyles modes and `@font-face` rules (`extend` is deprecated — use `tokens` for custom namespaces)
 
 ```ts
 import {
@@ -214,31 +214,30 @@ acmeTheme.componentStyles(button, (t) => ({
 ### What `createDesignTheme` compiles to
 
 ```ts
-typestyles.tokens.createTheme(name, {
-  base: { ...mergedModeInvariantTokens, color: lightColor },
-  colorMode: {
-    light: { color: mergedLightColorPatch },
-    dark: { color: mergedDarkColorPatch },
-  },
+typestyles.tokens.createTheme({
+  name: 'acme',
+  from: { tokens: tokenValues, colorMode: { dark } }, // default preset when omitted
+  tokens: { brand: { … }, color: { … } }, // overrides + custom namespaces
+  colorMode: { light, dark },
   modes: [...extraModes],
+  replace: true,
 });
 
-// Optional per-recipe overrides:
+// Optional per-recipe overrides after creation:
 styles.override(recipe, overrideConfig, {
   selectorPrefix: `.${theme.className}`,
   layer: 'overrides',
 });
 ```
 
-Each return value is a **`DesignTheme`**: `ThemeSurface` (`className`, `name`, string coercion),
-`tokens` (built-in refs merged with any `extend` namespaces), and
-`componentStyles(recipe, override)` (typed `styles.override` under the theme class).
+Each return value is a **`DesignTheme`**: `ThemeSurface` (`className`, `name`, `surface.tokens` from TypeStyles),
+plus `componentStyles(recipe, override)` (typed `styles.override` under the theme class).
 
 ### Ambient light / dark mode
 
 Dark overrides follow OS preference unless `data-mode="light"` or `data-mode="dark"` is set on
 the **same element** that carries the theme class. Only the **color** tree (including
-`color.code`) flips; radius, fontSize, etc. stay on `base`.
+`color.code`) flips; radius, fontSize, etc. stay on mode-invariant theme tokens.
 
 ### Fixed-tone surfaces (`SURFACE_ATTRIBUTE`)
 
@@ -306,8 +305,8 @@ export const acme = createDesignTheme({
 
 `generateColors` returns `{ light, dark }` (`DesignColorValues` patches, including `code`).
 That shape plugs straight into `colorMode`. For advanced merges, `mergeThemeOverrides` from
-`@var-ui/core` (re-exported from TypeStyles) is not a second theme API. Use `extend` / `components` for custom tokens and
-typed recipe restyles via `styles.override`.
+`@var-ui/core` (re-exported from TypeStyles) is not a second theme API. Use `tokens` for custom namespaces and
+typed recipe restyles via `theme.componentStyles` / `styles.override`.
 
 ## Authoring recipes
 

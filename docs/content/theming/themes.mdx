@@ -7,7 +7,7 @@ description: Create and apply custom var-ui themes with createDesignTheme.
 
 A theme is a named TypeStyles surface: light/dark token values (via `tokens` +
 `colorMode`), optional fixed `data-surface` subtrees, optional custom token
-namespaces (`extend`), and optional typed recipe restyles via
+namespaces (`tokens.brand`, …), and optional typed recipe restyles via
 `theme.componentStyles` (see Customize).
 
 Theme class names use the configured scope: `theme-var-ui-<name>` (e.g.
@@ -49,8 +49,9 @@ export const forestPreset: DesignThemePreset = {
 export const forestTheme = createDesignTheme({
   name: 'forest',
   ...forestPreset,
-  extend: {
-    /* optional custom tokens — see Customize */
+  tokens: {
+    /* optional custom namespaces — see Customize */
+    brand: { glow: '…' },
   },
 });
 
@@ -97,5 +98,5 @@ For SSR without a flash of wrong mode, also use `getColorModeInitScript`.
 
 ## Next
 
-- [Customize](/theming/customize) — `extend`, `componentStyles`, `styles.override`
+- [Customize](/theming/customize) — custom `tokens`, `componentStyles`, `styles.override`
 - [Design tokens](/theming/tokens) — what `tokens` / `colorMode` override

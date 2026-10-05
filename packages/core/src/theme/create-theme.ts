@@ -1,4 +1,4 @@
-import type { OverrideConfigFor, ThemeOverrides, ThemePreset, ThemeSurface } from 'typestyles';
+import type { CreateTokenValues, OverrideConfigFor, ThemePreset, ThemeSurface } from 'typestyles';
 import { registerFontFace } from '../fonts/register-font-face';
 import { styles, typestyles } from '../runtime';
 import { designTokens } from '../tokens';
@@ -9,8 +9,9 @@ import type {
   DesignThemeConfig,
   DesignThemePreset,
   DesignThemeTokens,
+  InferThemeExtendFromConfig,
 } from '../types';
-import { extendTokens, type ExtendTokenValues, type TokenRefsOf } from './extend-tokens';
+import type { ExtendTokenValues } from './extend-tokens';
 
 type ExtendMap = Record<string, ExtendTokenValues>;
 
@@ -20,69 +21,35 @@ const builtInPreset: DesignThemePreset = {
   colorMode: { dark },
 };
 
-function presetFromDesign(from: DesignThemePreset): ThemePreset {
+function presetForTypeStyles(from: DesignThemePreset): ThemePreset {
   return {
-    base: (from.tokens ?? {}) as ThemeOverrides,
+    tokens: {
+      ...(from.tokens ?? {}),
+      ...(from.extend ?? {}),
+    } as Record<string, CreateTokenValues>,
     colorMode: from.colorMode,
     modes: from.modes,
-    extend: from.extend as ThemePreset['extend'],
   };
 }
 
-function extendRefsForConfig<E extends ExtendMap>(
-  preset: DesignThemePreset,
-  extend: E | undefined,
-): TokenRefsOf<E> {
-  const merged = { ...(preset.extend ?? {}), ...(extend ?? {}) } as E;
-  const refs = {} as Record<string, unknown>;
-  for (const [namespace, values] of Object.entries(merged) as Array<
-    [keyof E & string, ExtendTokenValues]
-  >) {
-    refs[namespace] = extendTokens(namespace, values);
-  }
-  return refs as TokenRefsOf<E>;
+function themeTokensLayer(
+  tokenOverrides: DesignThemeConfig['tokens'],
+  extend: ExtendMap | undefined,
+): Record<string, CreateTokenValues> | undefined {
+  const layers = {
+    ...(extend ?? {}),
+    ...(tokenOverrides ?? {}),
+  } as Record<string, CreateTokenValues>;
+  return Object.keys(layers).length > 0 ? layers : undefined;
 }
 
-function themeTokenRefs<E extends ExtendMap>(
-  surface: ThemeSurface,
-  extendRefs: TokenRefsOf<E>,
-): DesignThemeTokens<E> {
-  const base = designTokens as DesignThemeTokens<E>;
-  const extendKeys = Object.keys(extendRefs);
-  const fromSurface = surface.tokens as Record<string, unknown> | undefined;
-
-  if (extendKeys.length === 0 && !fromSurface) {
-    return base;
-  }
-
-  return new Proxy(base, {
-    get(target, prop, receiver) {
-      if (typeof prop === 'string' && prop in extendRefs) {
-        return extendRefs[prop as keyof typeof extendRefs];
-      }
-      if (
-        fromSurface &&
-        typeof prop === 'string' &&
-        prop !== 'use' &&
-        prop in fromSurface &&
-        !(prop in target)
-      ) {
-        return fromSurface[prop];
-      }
-      return Reflect.get(target, prop, receiver);
-    },
-  }) as DesignThemeTokens<E>;
-}
-
-function themeSelectorPrefix(theme: ThemeSurface): string {
+function themeSelectorPrefix(theme: Pick<ThemeSurface, 'className'>): string {
   return theme.className.startsWith('.') ? theme.className : `.${theme.className}`;
 }
 
-function attachDesignTheme<E extends ExtendMap>(
-  theme: ThemeSurface,
-  tokens: DesignThemeTokens<E>,
-): DesignTheme<E> {
-  const selectorPrefix = themeSelectorPrefix(theme);
+function attachDesignTheme<E extends ExtendMap>(surface: ThemeSurface<E>): DesignTheme<E> {
+  const selectorPrefix = themeSelectorPrefix(surface);
+  const tokens = (surface.tokens ?? designTokens) as DesignThemeTokens<E>;
 
   const componentStyles = <C>(
     component: C,
@@ -95,12 +62,16 @@ function attachDesignTheme<E extends ExtendMap>(
     });
   };
 
-  return Object.assign(theme, { tokens, componentStyles }) as DesignTheme<E>;
+  return Object.assign(surface, { tokens, componentStyles }) as DesignTheme<E>;
 }
 
-function compileDesignTheme<const E extends ExtendMap = Record<string, never>>(
-  config: DesignThemeConfig<E>,
-): DesignTheme<E> {
+/**
+ * Merge token overrides, ambient colorMode, optional custom namespaces, and compile a theme surface.
+ * Delegates to TypeStyles `tokens.createTheme`; scoped recipe restyles use {@link DesignTheme.componentStyles}.
+ */
+export function createDesignTheme<const T extends DesignThemeConfig>(
+  config: T,
+): DesignTheme<InferThemeExtendFromConfig<T>> {
   const { from, tokens: tokenOverrides, colorMode, modes, extend, fonts, name } = config;
 
   const preset = from ?? builtInPreset;
@@ -108,36 +79,23 @@ function compileDesignTheme<const E extends ExtendMap = Record<string, never>>(
     registerFontFace(face);
   }
 
-  const extendRefs = extendRefsForConfig(preset, extend);
-
-  const theme = typestyles.tokens.createTheme(
+  const surface = typestyles.tokens.createTheme({
     name,
-    {
-      from: presetFromDesign(preset),
-      patch: {
-        base: (tokenOverrides ?? {}) as ThemeOverrides,
-        colorMode,
-        modes,
-        extend: extend as ThemePreset['extend'],
-      },
-    },
-    { replace: true },
-  );
+    replace: true,
+    from: presetForTypeStyles(preset),
+    tokens: themeTokensLayer(tokenOverrides, extend),
+    colorMode,
+    modes,
+  });
 
-  return attachDesignTheme(theme, themeTokenRefs(theme, extendRefs));
+  return attachDesignTheme(surface as ThemeSurface<InferThemeExtendFromConfig<T>>);
 }
 
 /**
- * Merge token overrides, ambient colorMode, optional `extend`, and compile a theme surface.
- * Scoped recipe restyles use {@link DesignTheme.componentStyles} after creation.
+ * Drop a runtime design theme surface (tokens + themed recipe overrides).
+ * Avoid theme names where one is a prefix of another (e.g. `dark` and `dark-mode`) — TypeStyles
+ * invalidation keys are prefix-based; prefer distinct names until upstream uses boundary-safe matching.
  */
-export function createDesignTheme<const E extends ExtendMap = Record<string, never>>(
-  config: DesignThemeConfig<E>,
-): DesignTheme<E> {
-  return compileDesignTheme(config);
-}
-
-/** Drop a runtime design theme surface (tokens + themed recipe overrides). */
 export function disposeDesignTheme(name: string): void {
   typestyles.tokens.disposeTheme(name, { removeLiveCss: true });
 }

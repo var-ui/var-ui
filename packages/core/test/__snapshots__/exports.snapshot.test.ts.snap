@@ -237,7 +237,7 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
       "string": 4,
     },
     "runtimeExports": 184,
-    "typeOnlyExports": 113,
+    "typeOnlyExports": 114,
   },
   "typeOnlyExports": [
     "AccordionGroupRecipeProps",
@@ -301,6 +301,7 @@ exports[`@var-ui/core public exports > matches the export inventory snapshot 1`]
     "HiddenMap",
     "Hsv",
     "IconName",
+    "InferThemeExtendFromConfig",
     "InferVarDefinitions",
     "LayoutBreakpoint",
     "LayoutPadding",

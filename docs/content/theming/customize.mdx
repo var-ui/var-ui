@@ -30,6 +30,13 @@ export const acme = createDesignTheme({
         hover: 'oklch(48% 0.2 290)',
       },
     },
+    // Custom namespaces — string leaves are mode-invariant; { light, dark } follow color mode
+    brand: {
+      glow: {
+        light: '0 0 0 3px oklch(90% 0.08 290)',
+        dark: '0 0 16px oklch(70% 0.18 290)',
+      },
+    },
   },
   colorMode: {
     dark: {
@@ -39,19 +46,9 @@ export const acme = createDesignTheme({
       },
     },
   },
-
-  // Custom tokens — string leaves are mode-invariant; { light, dark } follow color mode
-  extend: {
-    brand: {
-      glow: {
-        light: '0 0 0 3px oklch(90% 0.08 290)',
-        dark: '0 0 16px oklch(70% 0.18 290)',
-      },
-    },
-  },
 });
 
-// Per recipe: `(t) => override` or a plain object. `t` is built-ins + extend refs.
+// Per recipe: `(t) => override` or a plain object. `t` is built-ins + custom namespace refs.
 // Style blocks get CSS property IntelliSense; variant keys come from the recipe.
 acme.componentStyles(button, (t) => ({
   base: {
@@ -122,25 +119,25 @@ Host font files under your app's `public/fonts/` directory. Root-relative
 
 ## Split across files
 
-Hoist `extend` into a leaf module and type factories with `DesignThemeTokens` —
+Hoist custom namespaces into a leaf module and type factories with `DesignThemeTokens` —
 avoid `typeof theme.tokens` in override files (that cycles through the theme).
 
 ```ts
-// acme.extend.ts
+// acme.tokens.ts
 import type { DesignThemeTokens } from '@var-ui/core';
 
-export const acmeExtend = {
+export const acmeCustomTokens = {
   brand: {
     glow: { light: '…', dark: '…' },
   },
 } as const;
 
-export type AcmeTokens = DesignThemeTokens<typeof acmeExtend>;
+export type AcmeTokens = DesignThemeTokens<typeof acmeCustomTokens>;
 
 // button.ts
 import { button } from '@var-ui/core';
 import type { OverrideConfigFor } from '@var-ui/core';
-import type { AcmeTokens } from './acme.extend';
+import type { AcmeTokens } from './acme.tokens';
 
 export const buttonOverride = (t: AcmeTokens) =>
   ({
@@ -149,12 +146,12 @@ export const buttonOverride = (t: AcmeTokens) =>
 
 // theme.ts
 import { button, createDesignTheme } from '@var-ui/core';
-import { acmeExtend } from './acme.extend';
+import { acmeCustomTokens } from './acme.tokens';
 import { buttonOverride } from './button';
 
 export const acme = createDesignTheme({
   name: 'acme',
-  extend: acmeExtend,
+  tokens: acmeCustomTokens,
 });
 
 acme.componentStyles(button, buttonOverride);
@@ -189,7 +186,7 @@ const brand = extendTokens('brand', {
 
 | Need                                             | Use                                                                 |
 | ------------------------------------------------ | ------------------------------------------------------------------- |
-| Bulk restyle / new brand tokens                  | `extend` + `componentStyles` (this page)                            |
+| Bulk restyle / new brand tokens                  | `tokens` + `componentStyles` (this page)                            |
 | One property the recipe already exposes as a var | Set the CSS custom property in an override block or stylesheet      |
 | Nested themes fighting over the same recipe      | Prefer component vars (inheritance), or `styles.scope()` / `@scope` |
 | Hand-written CSS against a public class          | Target the stable base/slot class (e.g. `.var-ui-button`)           |

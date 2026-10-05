@@ -1,7 +1,7 @@
 import { badge, button, card, createDesignTheme, when, type OverrideConfigFor } from '@var-ui/core';
 
 /**
- * Demo theme for the vite example app — exercises `extend`, mode values
+ * Demo theme for the vite example app — exercises custom `tokens` namespaces, mode values
  * (`{ light, dark }` → `light-dark()`), and `componentStyles` + conditions.
  */
 export const acmeTheme = createDesignTheme({
@@ -31,7 +31,7 @@ export const acmeTheme = createDesignTheme({
     },
   },
 
-  extend: {
+  tokens: {
     brand: {
       glow: {
         light: '0 0 0 3px oklch(90% 0.08 290)',

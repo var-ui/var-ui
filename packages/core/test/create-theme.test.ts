@@ -48,6 +48,35 @@ function countInLiveCss(needle: string): number {
   return count;
 }
 
+/** Extract the `.theme-var-ui-<name> { … }` rule from layered theme CSS. */
+function themeSurfaceBlock(css: string, name: string): string | undefined {
+  const marker = themeClass(name);
+  let searchFrom = 0;
+  let start = -1;
+  while (searchFrom < css.length) {
+    const found = css.indexOf(marker, searchFrom);
+    if (found === -1) return undefined;
+    const next = css[found + marker.length];
+    if (next === undefined || next === '{' || next === ' ' || next === ',' || next === '\n') {
+      start = found;
+      break;
+    }
+    searchFrom = found + marker.length;
+  }
+  if (start === -1) return undefined;
+  const brace = css.indexOf('{', start);
+  if (brace === -1) return undefined;
+  let depth = 0;
+  for (let i = brace; i < css.length; i += 1) {
+    if (css[i] === '{') depth += 1;
+    else if (css[i] === '}') {
+      depth -= 1;
+      if (depth === 0) return css.slice(start, i + 1);
+    }
+  }
+  return undefined;
+}
+
 describe('createDesignTheme', () => {
   beforeEach(() => {
     reset();
@@ -236,10 +265,10 @@ describe('createDesignTheme', () => {
     expect(css).toContain('--var-ui-brandGlow-glow: 0 0 16px oklch(70% 0.2 280)');
   });
 
-  it('extend merges refs onto theme.tokens and scopes light-dark values', () => {
+  it('custom token namespaces merge refs onto theme.tokens and scope light-dark values', () => {
     const acme = createDesignTheme({
       name: 'acme-extend',
-      extend: {
+      tokens: {
         brand: {
           accent: {
             light: 'blue',
@@ -313,7 +342,7 @@ describe('createDesignTheme', () => {
 
     const theme = createDesignTheme({
       name: 'acme-mixed',
-      extend: {
+      tokens: {
         brand: {
           accent: { light: 'blue', dark: 'navy' },
         },
@@ -368,12 +397,15 @@ describe('createDesignTheme', () => {
     const replaceCount = afterReplace.split('.theme-var-ui-live-edit').length - 1;
     expect(replaceCount).toBe(createCount);
     expect(afterReplace).toContain('--var-ui-fontSize-md: 19px');
-    expect(liveCssText()).toContain('--var-ui-fontSize-md: 19px');
-    expect(liveCssText()).not.toContain('--var-ui-fontSize-md: 16px');
+    const liveTheme = themeSurfaceBlock(liveCssText(), 'live-edit');
+    expect(liveTheme).toContain('--var-ui-fontSize-md: 19px');
+    expect(liveTheme).not.toContain('--var-ui-fontSize-md: 16px');
     expect(countInLiveCss('.theme-var-ui-live-edit')).toBe(1);
   });
 
   // @vitest-environment jsdom
+  // TypeStyles dispose uses key prefixes — theme names that share a segment prefix (e.g. `dark` vs `dark-mode`)
+  // must not collide; upstream should use boundary-safe invalidation if that regresses.
   it('disposeDesignTheme does not drop sibling themes with a shared name prefix', () => {
     createDesignTheme({
       name: 'dark',
@@ -390,13 +422,11 @@ describe('createDesignTheme', () => {
 
     const registered = getRegisteredCss();
     const live = liveCssText();
-    expect(registered).toContain('.theme-var-ui-dark-mode');
-    expect(registered).toContain('--var-ui-fontSize-md: 22px');
-    expect(registered).not.toContain('--var-ui-fontSize-md: 20px');
-    expect(live).toContain('.theme-var-ui-dark-mode');
-    expect(live).toContain('--var-ui-fontSize-md: 22px');
-    expect(live).not.toContain('--var-ui-fontSize-md: 20px');
-    expect(live).not.toMatch(/\.theme-var-ui-dark\s*\{/);
+    expect(themeSurfaceBlock(registered, 'dark-mode')).toContain('--var-ui-fontSize-md: 22px');
+    expect(themeSurfaceBlock(registered, 'dark-mode')).not.toContain('--var-ui-fontSize-md: 20px');
+    expect(themeSurfaceBlock(registered, 'dark')).toBeUndefined();
+    expect(themeSurfaceBlock(live, 'dark-mode')).toContain('--var-ui-fontSize-md: 22px');
+    expect(themeSurfaceBlock(live, 'dark')).toBeUndefined();
   });
 
   // @vitest-environment jsdom
@@ -406,15 +436,14 @@ describe('createDesignTheme', () => {
       tokens: { fontSize: { md: '21px' } },
     });
     flushSync();
-    expect(getRegisteredCss()).toContain('.theme-var-ui-ephemeral');
-    expect(liveCssText()).toContain('.theme-var-ui-ephemeral');
-    expect(liveCssText()).toContain('--var-ui-fontSize-md: 21px');
+    expect(themeSurfaceBlock(getRegisteredCss(), 'ephemeral')).toContain(
+      '--var-ui-fontSize-md: 21px',
+    );
+    expect(themeSurfaceBlock(liveCssText(), 'ephemeral')).toContain('--var-ui-fontSize-md: 21px');
     disposeDesignTheme('ephemeral');
     flushSync();
-    expect(getRegisteredCss()).not.toContain('.theme-var-ui-ephemeral');
-    expect(getRegisteredCss()).not.toContain('--var-ui-fontSize-md: 21px');
-    expect(liveCssText()).not.toContain('.theme-var-ui-ephemeral');
-    expect(liveCssText()).not.toContain('--var-ui-fontSize-md: 21px');
+    expect(themeSurfaceBlock(getRegisteredCss(), 'ephemeral')).toBeUndefined();
+    expect(themeSurfaceBlock(liveCssText(), 'ephemeral')).toBeUndefined();
   });
 
   describe('theme fonts', () => {
