@@ -1,8 +1,7 @@
 ---
-import { Fragment } from 'astro/jsx-runtime';
-import { tabs as tabsRecipe } from '@var-ui/core';
-import { Toc } from '@var-ui/astro';
-import { mergeProps } from '../utils/mergeProps';
+import { tabs as tabsRecipe } from "@var-ui/core";
+import { Toc } from "@var-ui/astro";
+import { mergeProps } from "../utils/mergeProps";
 
 type TabDef = { id: string; label: string };
 
@@ -30,48 +29,46 @@ const panelSlots = await Promise.all(
 
 <div data-var-ui-tabs data-component-doc-tabs class={rootClass}>
   <div role="tablist" class={listClass}>
-    {
-      tabs.map((tab) => (
-        <button
-          type="button"
-          role="tab"
-          id={`tab-${tab.id}`}
-          aria-controls={`panel-${tab.id}`}
-          aria-selected={tab.id === selected ? 'true' : 'false'}
-          tabindex={tab.id === selected ? 0 : -1}
-          data-selected={tab.id === selected ? '' : undefined}
-          class={tabClass}
-        >
-          {tab.label}
-        </button>
-      ))
-    }
+    {tabs.map((tab) => (
+      <button
+        type="button"
+        role="tab"
+        id={`tab-${tab.id}`}
+        aria-controls={`panel-${tab.id}`}
+        aria-selected={tab.id === selected ? "true" : "false"}
+        tabindex={tab.id === selected ? 0 : -1}
+        data-selected={tab.id === selected ? "" : undefined}
+        class={tabClass}
+      >
+        {tab.label}
+      </button>
+    ))}
   </div>
 
   <div class="component-doc-tabs__body" data-component-doc-body>
     <div class="component-doc-tabs__panels">
-      {
-        tabs.map((tab) => {
-          const slotContent = panelSlots.find((panel) => panel.id === tab.id)?.content;
-          return (
-            <div
-              role="tabpanel"
-              id={`panel-${tab.id}`}
-              aria-labelledby={`tab-${tab.id}`}
-              hidden={tab.id !== selected ? true : undefined}
-              class="component-doc-tabs__panel"
-            >
-              {slotContent ? <Fragment set:html={slotContent} /> : null}
-            </div>
-          );
-        })
-      }
+      {tabs.map((tab) => {
+        const slotContent = panelSlots.find(
+          (panel) => panel.id === tab.id,
+        )?.content;
+        return (
+          <div
+            role="tabpanel"
+            id={`panel-${tab.id}`}
+            aria-labelledby={`tab-${tab.id}`}
+            hidden={tab.id !== selected ? true : undefined}
+            class="component-doc-tabs__panel"
+          >
+            {slotContent ? <Fragment set:html={slotContent} /> : null}
+          </div>
+        );
+      })}
     </div>
 
     <aside
       class="component-doc-tabs__toc"
       data-component-doc-toc
-      hidden={selected !== 'documentation' ? true : undefined}
+      hidden={selected !== "documentation" ? true : undefined}
       aria-label="On this page"
     >
       <Toc
@@ -111,7 +108,7 @@ const panelSlots = await Promise.all(
     min-width: 0;
   }
 
-  .component-doc-tabs :global([role='tabpanel']) {
+  .component-doc-tabs :global([role="tabpanel"]) {
     background: transparent;
     border: none;
     border-radius: 0;

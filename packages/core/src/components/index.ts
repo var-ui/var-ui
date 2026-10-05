@@ -143,6 +143,7 @@ export { mobileNav } from './mobileNav';
 export { topNav, topNavVarDefinitions } from './topNav';
 export { skeleton } from './skeleton';
 export { spinner, type SpinnerRecipeProps, type SpinnerVariantProps } from './spinner';
+export { visuallyHidden } from './visuallyHidden';
 export { stack } from './stack';
 export {
   statusDot,

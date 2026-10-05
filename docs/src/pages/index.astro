@@ -1,6 +1,7 @@
 ---
 import MarketingLayout from '../layouts/MarketingLayout.astro';
 import HomepageIsland from '../components/homepage/HomepageIsland';
+import VarUiWordmark from '../components/VarUiWordmark.astro';
 import homepagePreloads from 'virtual:homepage-preloads';
 import {
   Card,
@@ -91,7 +92,7 @@ const secondaryCta = mergeProps(
 
   <div class={cx(hp.root)}>
     <header class={cx(hp.hero)}>
-      <h1 class={cx(hp.heroWordmark)}>Var UI</h1>
+      <VarUiWordmark as="h1" size="hero" />
       <p class={cx(hp.heroHeadline)}>
         An open source design system that&apos;s fully customizable and agent ready.
       </p>

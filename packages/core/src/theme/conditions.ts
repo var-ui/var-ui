@@ -1,0 +1,64 @@
+import {
+  conditional,
+  type ConditionalOverride,
+  type ThemeCondition,
+  toMediaAtRuleKey,
+  type VariantOptionStyle,
+} from 'typestyles';
+import { typestyles } from '../runtime';
+
+const tsWhen = typestyles.tokens.when;
+const reducedMotionQuery = '(prefers-reduced-motion: reduce)';
+
+/** Canonical `ThemeCondition` presets for var-ui color mode and a11y media queries. */
+export const themeWhen = {
+  /** Explicit `data-mode="dark"` or system dark when not pinned to light. */
+  colorModeResolvedDark: tsWhen.or(
+    tsWhen.attr('data-mode', 'dark', { scope: 'ancestor' }),
+    tsWhen.and(
+      tsWhen.not(tsWhen.attr('data-mode', 'light', { scope: 'ancestor' })),
+      tsWhen.prefersDark,
+    ),
+  ),
+  colorModeExplicitDark: tsWhen.attr('data-mode', 'dark', { scope: 'ancestor' }),
+  colorModeExplicitLight: tsWhen.attr('data-mode', 'light', { scope: 'ancestor' }),
+  colorModeSystemDark: tsWhen.and(
+    tsWhen.not(tsWhen.attr('data-mode', 'light', { scope: 'ancestor' })),
+    tsWhen.not(tsWhen.attr('data-mode', 'dark', { scope: 'ancestor' })),
+    tsWhen.prefersDark,
+  ),
+  reducedMotion: tsWhen.media(reducedMotionQuery),
+} as const;
+
+/** `@media` key for reduced motion — internal; prefer {@link atReducedMotion}. */
+const reducedMotionAtRule = toMediaAtRuleKey(reducedMotionQuery);
+
+/** Reduced-motion styles for variant slots — spread into a style object. */
+export function atReducedMotion(style: VariantOptionStyle) {
+  return typestyles.styles.atRuleBlock(reducedMotionAtRule, style);
+}
+
+/**
+ * Resolved dark-mode styles for component recipe slots — spread into a style object.
+ * Matches {@link themeWhen.colorModeResolvedDark} (explicit dark or system dark when not light).
+ */
+export function atDarkMode(style: VariantOptionStyle) {
+  return {
+    'html[data-mode="dark"] &': style,
+    '@media (prefers-color-scheme: dark)': {
+      'html:not([data-mode="light"]) &': style,
+    },
+  };
+}
+
+/** Build a `conditions` entry for `styles.override()` — prefer `{ light, dark }` on color properties when possible. */
+export const when = {
+  dark: (style: VariantOptionStyle, id?: string): ConditionalOverride =>
+    conditional(themeWhen.colorModeResolvedDark, style, id),
+  light: (style: VariantOptionStyle, id?: string): ConditionalOverride =>
+    conditional(themeWhen.colorModeExplicitLight, style, id),
+  reducedMotion: (style: VariantOptionStyle, id?: string): ConditionalOverride =>
+    conditional(themeWhen.reducedMotion, style, id),
+  match: (condition: ThemeCondition, style: VariantOptionStyle, id?: string): ConditionalOverride =>
+    conditional(condition, style, id),
+};

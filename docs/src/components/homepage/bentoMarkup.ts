@@ -25,6 +25,7 @@ import {
   select,
   spinner,
   stack,
+  visuallyHidden,
   switchStyles,
   tabs,
   textBlock,
@@ -45,9 +46,6 @@ const CHEVRON_LEFT =
   '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M15 6l-6 6 6 6"></path></svg>';
 const CHEVRON_RIGHT =
   '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M9 6l6 6-6 6"></path></svg>';
-
-const VISUALLY_HIDDEN =
-  'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0';
 
 function classOf(result: string | { className: string }): string {
   return typeof result === 'string' ? result : result.className;
@@ -205,12 +203,13 @@ export function renderStatusFeedbackTileMarkup(): string {
   );
 
   const rule = serializeHtmlTag('hr', mergeProps(divider({})), '');
+  const spin = spinner({ size: 'sm' });
   const spinRing = serializeHtmlTag(
     'span',
-    { ...mergeProps(spinner({ size: 'sm' })), 'aria-hidden': 'true' },
+    { ...mergeProps(spin.indicator), 'aria-hidden': 'true' },
     '',
   );
-  const spinLabel = serializeHtmlTag('span', { style: VISUALLY_HIDDEN }, 'Syncing');
+  const spinLabel = serializeHtmlTag('span', mergeProps(visuallyHidden()), 'Syncing');
   const spinnerEl = hstack('sm', `${spinRing}${spinLabel}`, { align: 'center' });
 
   return vstack('md', `${alertEl}${badges}${progressEl}${rule}${spinnerEl}`);

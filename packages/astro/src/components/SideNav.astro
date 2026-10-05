@@ -83,12 +83,6 @@ const hasFooterZone = hasFooter || hasFooterIcons || hasCollapseButton;
   {resizableEnabled && <ResizeHandle />}
 </nav>
 
-<style>
-  nav[data-collapsed] :global(.side-nav-heading__text) {
-    display: none;
-  }
-</style>
-
 <script>
   import { initSideNavs } from '../scripts/sideNav';
   initSideNavs();

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vite-plus/test';
-import { resolveActiveHeading } from '../src/tocSpy';
+import { resolveActiveHeading } from '../src/components/toc/spy';
 
 describe('resolveActiveHeading', () => {
   it('prefers the last intersecting heading in document order', () => {

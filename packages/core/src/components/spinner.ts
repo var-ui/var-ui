@@ -32,38 +32,44 @@ export const spinner = typestyles.styles.component(
       size: { value: '20px', syntax: '<length>' },
     });
     return {
+      slots: ['root', 'indicator'],
       base: {
-        display: 'inline-block',
-        width: v.size.var,
-        height: v.size.var,
-        borderRadius: '50%',
-        borderWidth: t.borderWidth.thick.var,
-        borderStyle: 'solid',
-        borderColor: v.trackColor.var,
-        borderTopColor: v.indicatorColor.var,
-        animation: `${spin} 800ms linear infinite`,
-        '@media (prefers-reduced-motion: reduce)': {
-          animationDuration: '2400ms',
+        root: {},
+        indicator: {
+          display: 'inline-block',
+          width: v.size.var,
+          height: v.size.var,
+          borderRadius: '50%',
+          borderWidth: t.borderWidth.thick.var,
+          borderStyle: 'solid',
+          borderColor: v.trackColor.var,
+          borderTopColor: v.indicatorColor.var,
+          animation: `${spin} 800ms linear infinite`,
+          '@media (prefers-reduced-motion: reduce)': {
+            animationDuration: '2400ms',
+          },
         },
       },
       variants: {
         size: {
-          sm: { [v.size.name]: '14px' },
-          md: { [v.size.name]: '20px' },
-          lg: { [v.size.name]: '32px', borderWidth: '3px' },
+          sm: { indicator: { [v.size.name]: '14px' } },
+          md: { indicator: { [v.size.name]: '20px' } },
+          lg: { indicator: { [v.size.name]: '32px', borderWidth: '3px' } },
         },
         tone: {
-          accent: { [v.indicatorColor.name]: semanticTone.accent.foreground },
-          success: { [v.indicatorColor.name]: semanticTone.success.foreground },
-          warning: { [v.indicatorColor.name]: semanticTone.warning.foreground },
-          danger: { [v.indicatorColor.name]: semanticTone.danger.foreground },
-          info: { [v.indicatorColor.name]: semanticTone.info.foreground },
-          neutral: { [v.indicatorColor.name]: t.color.text.secondary.var },
+          accent: { indicator: { [v.indicatorColor.name]: semanticTone.accent.foreground } },
+          success: { indicator: { [v.indicatorColor.name]: semanticTone.success.foreground } },
+          warning: { indicator: { [v.indicatorColor.name]: semanticTone.warning.foreground } },
+          danger: { indicator: { [v.indicatorColor.name]: semanticTone.danger.foreground } },
+          info: { indicator: { [v.indicatorColor.name]: semanticTone.info.foreground } },
+          neutral: { indicator: { [v.indicatorColor.name]: t.color.text.secondary.var } },
         },
         appearance: {
-          solid: {},
+          solid: { indicator: {} },
           subtle: {
-            [v.trackColor.name]: subtleBackgroundColor(v.indicatorColor.var),
+            indicator: {
+              [v.trackColor.name]: subtleBackgroundColor(v.indicatorColor.var),
+            },
           },
         },
       },

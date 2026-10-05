@@ -1,9 +1,11 @@
+import { atProperty } from 'typestyles';
 import { styles, typestyles } from '../runtime';
-import { atReducedMotion } from '../theme-conditions';
+import { atReducedMotion } from '../theme/conditions';
 import { duration } from '../tokens/defaults/duration';
 import { easing } from '../tokens/defaults/easing';
 import { transition } from '../tokens/defaults/transition';
 import { designTokens as t } from '../tokens';
+import { themeableVars } from './themeableVars';
 
 const belowXl = styles.breakpoint('xl', 'max');
 const listIndent = t.space[3].var;
@@ -13,36 +15,36 @@ const indicatorTransition = `transform ${duration.medium} ${easing.standard}, he
 /** Internal CSS variables for theme overrides (`vars` on `createDesignTheme`). */
 export const tocVarDefinitions = {
   stickyTop: {
+    ...atProperty.length,
     value: t.space[5].var,
-    syntax: '<length>' as const,
   },
   stickyMaxHeightOffset: {
+    ...atProperty.length,
     value: t.space[6].var,
-    syntax: '<length>' as const,
   },
   titleColor: {
+    ...atProperty.color,
     value: t.color.text.secondary.var,
-    syntax: '<color>' as const,
   },
   railColor: {
+    ...atProperty.color,
     value: t.color.border.subtle.var,
-    syntax: '<color>' as const,
   },
   railWidth: {
+    ...atProperty.length,
     value: t.borderWidth.thick.var,
-    syntax: '<length>' as const,
   },
   railRadius: {
+    ...atProperty.length,
     value: t.borderWidth.thick.var,
-    syntax: '<length>' as const,
   },
   indicatorY: {
+    ...atProperty.length,
     value: '0px',
-    syntax: '<length>' as const,
   },
   indicatorHeight: {
+    ...atProperty.length,
     value: '0px',
-    syntax: '<length>' as const,
   },
   indicatorOpacity: {
     value: '0',
@@ -73,7 +75,7 @@ export const tocVarDefinitions = {
  * The active-row indicator is the list `::after` pseudo, positioned via
  * `positionTocIndicator`.
  */
-export const toc = typestyles.styles.component(
+const tocRecipe = typestyles.styles.component(
   'toc',
   (c) => {
     const v = c.vars(tocVarDefinitions);
@@ -166,3 +168,5 @@ export const toc = typestyles.styles.component(
   },
   { layer: 'components' },
 );
+
+export const toc = themeableVars(tocRecipe, tocVarDefinitions);

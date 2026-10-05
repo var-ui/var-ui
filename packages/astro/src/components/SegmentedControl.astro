@@ -1,0 +1,73 @@
+---
+import { segmentedControl, toggleButton, type ControlSize } from "@var-ui/core";
+import { mergeProps } from "../utils";
+
+type SegmentOption = {
+  id: string;
+  label: string;
+  /** Accessible name when the slotted content is not plain text (e.g. icon-only segments). */
+  "aria-label"?: string;
+};
+
+type Props = {
+  /** Segment definitions. Render rich content (e.g. icons) via a named slot matching each `id`. */
+  options: SegmentOption[];
+  /** Initially selected segment id. Defaults to the first option. */
+  selectedId?: string;
+  size?: ControlSize;
+  className?: string;
+  /** Accessible name for the group. */
+  "aria-label"?: string;
+};
+
+const {
+  options,
+  selectedId = options[0]?.id,
+  size = "md",
+  className,
+  "aria-label": ariaLabel,
+} = Astro.props;
+
+const s = segmentedControl({ size });
+const segmentRecipe = mergeProps(toggleButton({ segmented: true }));
+
+const optionContent = await Promise.all(
+  options.map(async (option) => ({
+    id: option.id,
+    content: Astro.slots.has(option.id)
+      ? await Astro.slots.render(option.id)
+      : null,
+  })),
+);
+---
+
+<div
+  role="group"
+  aria-label={ariaLabel}
+  data-var-ui-segmented-control
+  {...mergeProps(s.root, className)}
+>
+  {options.map((option) => {
+    const selected = option.id === selectedId;
+    const content = optionContent.find(
+      (entry) => entry.id === option.id,
+    )?.content;
+    return (
+      <button
+        type="button"
+        data-segment-id={option.id}
+        aria-pressed={selected ? "true" : "false"}
+        data-selected={selected ? "" : undefined}
+        aria-label={option["aria-label"]}
+        {...segmentRecipe}
+      >
+        {content ? <Fragment set:html={content} /> : option.label}
+      </button>
+    );
+  })}
+</div>
+
+<script>
+  import { initSegmentedControls } from "../scripts/segmentedControl";
+  initSegmentedControls();
+</script>

@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [...react(), typestyles({ extract: { modules: ['typestyles-entry.ts'] } })],
   resolve: {
     alias: {
-      '@var-ui/core/theme-constants': `${root}/packages/core/src/theme-constants.ts`,
+      '@var-ui/core/theme-constants': `${root}/packages/core/src/theme/constants.ts`,
       '@var-ui/core/styles': `${root}/packages/core/src/styles.ts`,
       '@var-ui/core/internal': `${root}/packages/core/src/internal.ts`,
       '@var-ui/core': `${root}/packages/core/src/index.ts`,

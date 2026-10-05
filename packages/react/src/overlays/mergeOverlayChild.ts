@@ -3,7 +3,13 @@ import { cx } from 'typestyles';
 
 type OverlayChildProps = Record<string, unknown> & { ref?: Ref<unknown> };
 
-const composedHandlerNames = ['onPress', 'onClick', 'onKeyDown', 'onPointerDown'] as const;
+const composedHandlerNames = [
+  'onPress',
+  'onClick',
+  'onKeyDown',
+  'onPointerDown',
+  'onContextMenu',
+] as const;
 
 function setRef<T>(ref: NonNullable<Ref<T>>, value: T | null): void {
   if (typeof ref === 'function') {

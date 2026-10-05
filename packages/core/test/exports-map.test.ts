@@ -15,9 +15,9 @@ describe('package subpath exports', () => {
   it('core exposes button and theme-constants entry points', () => {
     const { exports } = readPkg('core');
     expect(exports['./button']?.import).toBe('./dist/components/button.mjs');
-    expect(exports['./theme-constants']?.import).toBe('./dist/theme-constants.mjs');
+    expect(exports['./theme-constants']?.import).toBe('./dist/theme/constants.mjs');
     expect(exports['./internal']?.import).toBe('./dist/internal.mjs');
-    expect(exports['./register-default-theme']?.import).toBe('./dist/register-default-theme.mjs');
+    expect(exports['./register-default-theme']?.import).toBe('./dist/theme/register-default.mjs');
     expect(exports['./styles']?.import).toBe('./dist/styles.mjs');
   });
 

@@ -77,32 +77,12 @@ export const componentRegistry: ComponentEntry[] = [
     importLine: "import { ColorModeToggle } from '@var-ui/react';",
   },
   {
-    slug: 'dropdown-menu',
-    name: 'DropdownMenu',
-    category: 'action',
-    description: 'Action menu opened from a trigger; MenuContent renders sections and items.',
-    importLine: "import { DropdownMenu } from '@var-ui/react';",
-  },
-  {
     slug: 'menu',
     name: 'Menu',
     category: 'action',
-    description: 'Compound action menu with Trigger, Popup, Item, Section, and Separator parts.',
+    description:
+      'Action menu namespace — compound Trigger/Popup/Item parts plus FromSections, ContextMenu, and Overflow presets.',
     importLine: "import { Menu } from '@var-ui/react';",
-  },
-  {
-    slug: 'context-menu',
-    name: 'ContextMenu',
-    category: 'action',
-    description: 'Menu opened via right-click or long-press on a target.',
-    importLine: "import { ContextMenu } from '@var-ui/react';",
-  },
-  {
-    slug: 'more-menu',
-    name: 'MoreMenu',
-    category: 'action',
-    description: 'Overflow actions menu with a built-in more icon trigger.',
-    importLine: "import { MoreMenu } from '@var-ui/react';",
   },
   {
     slug: 'toolbar',

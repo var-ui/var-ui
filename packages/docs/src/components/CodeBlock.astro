@@ -1,0 +1,22 @@
+---
+import CodeBlockLayout from './CodeBlockLayout.astro';
+
+type DemoFramework = 'react' | 'astro' | 'html';
+
+type Props = {
+  code: string;
+  language?: string;
+  filename?: string;
+  framework?: DemoFramework;
+  title?: string;
+  copyable?: boolean;
+  showLineNumbers?: boolean;
+};
+
+const props = Astro.props as Props;
+const hasPreview = Astro.slots.has('default');
+---
+
+<CodeBlockLayout {...props}>
+  {hasPreview ? <slot slot="preview" /> : null}
+</CodeBlockLayout>

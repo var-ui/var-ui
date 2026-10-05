@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vite-plus/test';
 import { getRegisteredCss } from 'typestyles';
 import { tabs } from '../src/components/tabs';
-import { positionTabsIndicator, tabsIndicatorCssVars } from '../src/tabsIndicator';
+import { positionTabsIndicator, tabsIndicatorCssVars } from '../src/components/indicators/tabs';
 
 describe('positionTabsIndicator', () => {
   it('uses CSS var names that match the tabs recipe', () => {

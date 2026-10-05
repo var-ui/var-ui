@@ -1,6 +1,6 @@
 import { keyframes } from 'typestyles';
 import { typestyles } from '../runtime';
-import { atReducedMotion } from '../theme-conditions';
+import { atReducedMotion } from '../theme/conditions';
 import { designTokens as t } from '../tokens';
 import { semanticTone, type ProgressBarAppearance, type ProgressBarTone } from './semanticTone';
 

@@ -6,6 +6,7 @@ import rehypeSlug from 'rehype-slug';
 import { parseVarDocsConfig, type VarDocsConfig, type VarDocsUserConfig } from './config';
 import { buildDocsThemeStyles, docsThemeStylesDevPlugin } from './integrations/theme-css-extract';
 import { vitePluginVarDocsTypestyles } from './integrations/typestyles';
+import { vitePluginVarDocsPackageExports } from './integrations/vite-package-exports';
 import { vitePluginVarDocsVirtualModules } from './integrations/vite-virtual-modules';
 import { designTokenShikiTheme } from './utils/shiki-theme';
 import {
@@ -123,9 +124,11 @@ export default function varDocs(userOpts: VarDocsUserConfig): AstroIntegration {
 
         const shikiTheme = resolveShikiTheme(config.theme.syntax);
         const root = fileURLToPath(astroConfig.root);
+        const docsPkgRoot = fileURLToPath(new URL('..', import.meta.url));
         emitMarkdownViews(root, config, logger);
         const lazyPresets = getLazyThemePresets(config.theme.presets);
         const vitePlugins = [
+          vitePluginVarDocsPackageExports(docsPkgRoot),
           vitePluginVarDocsVirtualModules(config, { root: astroConfig.root }),
           vitePluginVarDocsTypestyles(config.typestyles.entry),
         ];

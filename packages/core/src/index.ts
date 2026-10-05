@@ -2,17 +2,17 @@ export * from './components';
 export * from './color';
 export * from './fonts';
 export * from './icons';
-export { createDesignTheme, disposeDesignTheme } from './create-theme';
-export * from './theme-constants';
+export { createDesignTheme, disposeDesignTheme } from './theme/create-theme';
+export * from './theme/constants';
 export {
   extendTokens,
   type ExtendTokenValues,
   type ModeAwareTokenLeaf,
   type TokenRefsOf,
-} from './extend-tokens';
-export * from './theme-conditions';
-export * from './themeable-components';
-export * from './breakpoints';
+} from './theme/extend-tokens';
+export * from './theme/conditions';
+export * from './theme/registry';
+export * from './components/breakpoints';
 export { typestyles, styles, global } from './runtime';
 export * from './types';
 export * from './tokens';
@@ -27,7 +27,7 @@ export type {
   ProgressBarAppearance,
   ProgressBarTone,
 } from './components/semanticTone';
-export type { TocHeading } from './tocSpy';
+export type { TocHeading } from './components/toc/spy';
 export {
   hiddenClassName,
   hiddenStyle,

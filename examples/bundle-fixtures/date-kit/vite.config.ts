@@ -1,7 +1,7 @@
 import react from '@vitejs/plugin-react';
 import typestyles from '@typestyles/vite';
-import { defineConfig } from 'vite-plus';
+import { defineConfig, type UserConfig } from 'vite-plus';
 
 export default defineConfig({
   plugins: [...react(), typestyles({ extract: { modules: ['typestyles-entry.ts'] } })],
-});
+} as UserConfig);

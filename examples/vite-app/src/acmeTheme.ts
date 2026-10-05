@@ -1,8 +1,8 @@
-import { createDesignTheme, when } from '@var-ui/core';
+import { badge, button, card, createDesignTheme, when, type OverrideConfigFor } from '@var-ui/core';
 
 /**
- * Demo theme for the vite example app — exercises V7 `extend` + `components` and
- * V8 mode values (`{ light, dark }` → `light-dark()`) + `conditions`.
+ * Demo theme for the vite example app — exercises `extend`, mode values
+ * (`{ light, dark }` → `light-dark()`), and `componentStyles` + conditions.
  */
 export const acmeTheme = createDesignTheme({
   name: 'acme',
@@ -40,54 +40,57 @@ export const acmeTheme = createDesignTheme({
       halo: 'radial-gradient(circle, oklch(70% 0.18 290 / 0.35), transparent 70%)',
     },
   },
-
-  components: {
-    button: (t) => ({
-      base: {
-        borderRadius: '999px',
-        boxShadow: t.brand.glow,
-        borderColor: {
-          light: t.color.border.default.var,
-          dark: t.color.border.strong.var,
-        },
-        letterSpacing: '0.02em',
-        conditions: [
-          when.dark({ letterSpacing: '0.06em', fontWeight: 600 }),
-          when.reducedMotion({ transition: 'none' }),
-        ],
-        '&:hover': { boxShadow: 'none' },
-      },
-      variants: {
-        tone: {
-          accent: { textTransform: 'uppercase', letterSpacing: '0.04em' },
-        },
-      },
-      compoundVariants: [
-        {
-          variants: { tone: 'accent', appearance: 'filled', size: 'lg' },
-          style: { letterSpacing: '0.08em' },
-        },
-      ],
-    }),
-    badge: (t) => ({
-      base: {
-        borderRadius: '999px',
-        textTransform: 'uppercase',
-        letterSpacing: '0.06em',
-        fontSize: t.fontSize.xs.var,
-      },
-    }),
-    card: (t) => ({
-      base: {
-        root: {
-          borderRadius: '16px',
-          backgroundImage: t.brand.halo,
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'top right',
-          backgroundSize: '40% 40%',
-          padding: t.space[4].var,
-        },
-      },
-    }),
-  },
 });
+
+acmeTheme.componentStyles(button, (t) => {
+  const config = {
+    base: {
+      borderRadius: '999px',
+      boxShadow: t.brand.glow,
+      borderColor: {
+        light: t.color.border.default.var,
+        dark: t.color.border.strong.var,
+      },
+      letterSpacing: '0.02em',
+      conditions: [
+        when.dark({ letterSpacing: '0.06em', fontWeight: 600 }),
+        when.reducedMotion({ transition: 'none' }),
+      ],
+      '&:hover': { boxShadow: 'none' },
+    },
+    variants: {
+      tone: {
+        accent: { textTransform: 'uppercase', letterSpacing: '0.04em' },
+      },
+    },
+    compoundVariants: [
+      {
+        variants: { tone: 'accent', appearance: 'filled', size: 'lg' },
+        style: { letterSpacing: '0.08em' },
+      },
+    ],
+  } satisfies OverrideConfigFor<typeof button>;
+  return config;
+});
+
+acmeTheme.componentStyles(badge, (t) => ({
+  base: {
+    borderRadius: '999px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.06em',
+    fontSize: t.fontSize.xs.var,
+  },
+}));
+
+acmeTheme.componentStyles(card, (t) => ({
+  base: {
+    root: {
+      borderRadius: '16px',
+      backgroundImage: t.brand.halo,
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'top right',
+      backgroundSize: '40% 40%',
+      padding: t.space[4].var,
+    },
+  },
+}));

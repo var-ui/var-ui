@@ -2,6 +2,7 @@ import { styles, typestyles } from '../runtime';
 import { designTokens as t } from '../tokens';
 import { controlFocusStyles } from './controlFocus';
 import { controlSizeMetrics, controlSizeVariants, controlSurfaceSize } from './controlSize';
+import type { ControlSize } from './semanticTone';
 
 /** Command-trigger chrome collapses to an icon button below this width. */
 const belowXl = styles.breakpoint('xl', 'max');
@@ -164,5 +165,5 @@ export const searchInput = typestyles.styles.component(
 
 export type SearchInputVariantProps = {
   variant?: 'default' | 'command';
-  size?: 'sm' | 'md' | 'lg';
+  size?: ControlSize;
 };

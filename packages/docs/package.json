@@ -40,6 +40,8 @@
     "./DocsToc": "./src/components/DocsToc.astro",
     "./DocsSearch": "./src/components/DocsSearch.astro",
     "./DocsThemePicker": "./src/components/DocsThemePicker.astro",
+    "./CodeBlock": "./src/components/CodeBlock.astro",
+    "./CodeDemoCodeBlock": "./src/components/CodeDemoCodeBlock.astro",
     "./DocsThemeScript": "./src/components/DocsThemeScript.astro",
     "./theme-css": "./src/integrations/theme-css-extract.ts"
   },
@@ -52,23 +54,17 @@
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",
     "@typestyles/build-runner": "^0.5.2",
+    "highlight.js": "^11.11.1",
     "rehype-slug": "^6.0.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "@typestyles/vite": "catalog:",
+    "@typestyles/vite": "^0.4.5",
     "@var-ui/astro": "workspace:*",
     "@var-ui/core": "workspace:*",
-    "@var-ui/icons": "workspace:*",
-    "@var-ui/react": "workspace:*",
     "astro": "catalog:",
     "jsdom": "^26.0.0",
-    "react": "catalog:",
-    "react-aria-components": "catalog:",
-    "react-dom": "catalog:",
-    "typestyles": "catalog:",
+    "typestyles": "0.25.0",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },
@@ -77,29 +73,7 @@
     "@typestyles/vite": "catalog:",
     "@var-ui/astro": "workspace:>=0.1.0 <1.0.0",
     "@var-ui/core": "workspace:>=0.1.0 <1.0.0",
-    "@var-ui/icons": "workspace:>=0.1.0 <1.0.0",
-    "@var-ui/react": "workspace:>=0.1.0 <1.0.0",
     "astro": "catalog:",
-    "react": "catalog:",
-    "react-aria-components": "catalog:",
-    "react-dom": "catalog:",
     "typestyles": "catalog:"
-  },
-  "peerDependenciesMeta": {
-    "@var-ui/icons": {
-      "optional": true
-    },
-    "@var-ui/react": {
-      "optional": true
-    },
-    "react": {
-      "optional": true
-    },
-    "react-aria-components": {
-      "optional": true
-    },
-    "react-dom": {
-      "optional": true
-    }
   }
 }

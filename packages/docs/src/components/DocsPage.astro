@@ -141,6 +141,7 @@ const defaultContent = docsPageContent();
                   <slot name="tools" />
                 </div>
               ) : null}
+              {hasThemePickerSlot ? <slot name="themePicker" /> : null}
               <ColorModeToggle includeSystem size="md" />
             </div>
           </div>
@@ -246,7 +247,6 @@ const defaultContent = docsPageContent();
         )
       }
     </AppShell>
-    {hasThemePickerSlot ? <slot name="themePicker" /> : null}
     <script>
       import '../scripts/docsPageClient.ts';
     </script>

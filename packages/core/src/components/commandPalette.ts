@@ -1,5 +1,5 @@
 import { typestyles } from '../runtime';
-import { atDarkMode, atReducedMotion } from '../theme-conditions';
+import { atDarkMode, atReducedMotion } from '../theme/conditions';
 import { designTokens as t } from '../tokens';
 
 /**

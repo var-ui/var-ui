@@ -15,19 +15,17 @@ export {
   type ColorModeToggleProps,
 } from './ColorModeToggle';
 export {
-  DropdownMenu,
-  MenuContent,
-  type DropdownMenuProps,
-  type MenuContentProps,
-  type MenuItemDefinition,
-  type MenuSectionDefinition,
-} from './DropdownMenu';
-export {
   Menu,
+  type MenuContentProps,
+  type MenuContextMenuProps,
+  type MenuFromSectionsProps,
+  type MenuItemDefinition,
   type MenuItemProps,
+  type MenuOverflowProps,
   type MenuPopupProps,
   type MenuProps,
   type MenuRootProps,
+  type MenuSectionDefinition,
   type MenuSectionProps,
   type MenuSeparatorProps,
   type MenuTriggerProps,
@@ -35,9 +33,7 @@ export {
 export { ColorInput, type ColorInputProps } from './ColorInput';
 export { ColorPicker, type ColorPickerProps } from './ColorPicker';
 export { ColorSwatch, type ColorSwatchProps } from './ColorSwatch';
-export { ContextMenu, type ContextMenuProps } from './ContextMenu';
 export { CopyButton, type CopyButtonProps, type CopyButtonRenderProps } from './CopyButton';
-export { MoreMenu, type MoreMenuProps } from './MoreMenu';
 export { Slider, type SliderProps } from './Slider';
 export { PinInput, type PinInputProps, type PinInputType } from './PinInput';
 export { NumberInput, type NumberInputProps } from './NumberInput';

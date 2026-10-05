@@ -67,7 +67,7 @@ export function rgbToHex(rgb: Rgba, includeAlpha = false): string {
   return `${base}${toByte(rgb.a * 255)}`;
 }
 
-export function rgbToHsv({ r, g, b, a = 1 }: Rgba): Hsv {
+export function rgbToHsv({ r, g, b, a }: Rgba): Hsv {
   const rn = r / 255;
   const gn = g / 255;
   const bn = b / 255;

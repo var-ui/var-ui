@@ -37,7 +37,7 @@ export default defineConfig({
 });
 ```
 
-Guide-only sites do **not** need React. Install `@astrojs/react`, `@var-ui/react`, `react`, `react-dom`, `@var-ui/icons`, and `react-aria-components` only when using `DocsThemePicker`. `theme.presets` CSS extraction does not require React.
+Guide-only sites do **not** need React. `DocsThemePicker` is plain Astro + JS, like the rest of the kit chrome. `theme.presets` CSS extraction does not require React either.
 
 `output: 'static'` is supported. Injected `/docs` routes prerender, including when Astro `base` is set. Static injected routes accept **exactly one** `routes` prefix in this release (default `/docs`). Sites with several prefixes should use `output: 'server'`, or `disableGuideRoutes` plus `DocsGuidePage` in their own pages:
 
@@ -83,8 +83,11 @@ varDocs({
 
 Add a preset: theme module + `typestyles-themes/{id}.ts` + one `presets` entry (no hardcoded script ID lists).
 
-Design-system features (demos, props tables, framework switcher, theme playground)
-belong in `@var-ui/docs-components` / `@var-ui/docs-playground` — not this package.
+Component catalogs (props tables, framework switcher, theme playground) live in
+`@var-ui/docs-components` / `@var-ui/docs-playground`. **`CodeBlock`** is the shared
+docs shell for source + optional live preview: syntax highlighting, copy control, and
+expand/collapse. Pass **default slot children** for the demo; the kit does not run your
+examples — you render islands, Astro, or static markup yourself.
 
 ## Content collections
 
@@ -123,6 +126,40 @@ import DocsPage from '@var-ui/docs/DocsPage';
   <article slot="default">…</article>
 </DocsPage>
 ```
+
+### Examples + source (`CodeBlock`)
+
+Register `@var-ui/docs/styles` in your TypeStyles entry (includes the `codeBlock` recipe).
+
+Import from **`@var-ui/docs/CodeBlock`** — not `@var-ui/astro`’s `CodeBlock`, which is the
+low-level UI primitive.
+
+```astro
+---
+import DocsCodeBlock from '@var-ui/docs/CodeBlock';
+import { Button } from '@var-ui/astro';
+const code = `import { Button } from '@var-ui/astro';\n\n<Button>Save</Button>`;
+---
+
+<DocsCodeBlock
+  code={code}
+  language="astro"
+  filename="Demo.astro"
+  framework="astro"
+  title="Basic button"
+>
+  <Button>Save</Button>
+</DocsCodeBlock>
+```
+
+Code-only (no default slot):
+
+```astro
+<DocsCodeBlock code={code} language="tsx" filename="Example.tsx" framework="react" />
+```
+
+Set `copyable={false}` to hide the copy button. Use `@var-ui/docs/CodeDemoCodeBlock` for a
+plain highlighted `@var-ui/astro` `CodeBlock` without the docs card chrome.
 
 See `docs/superpowers/specs/2026-08-11-var-docs-kit-design.md`.
 

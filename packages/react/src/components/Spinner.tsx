@@ -1,22 +1,10 @@
-import type { CSSProperties, JSX } from 'react';
-import { spinner, type SpinnerVariantProps } from '@var-ui/core';
+import type { JSX } from 'react';
+import { spinner, visuallyHidden, type SpinnerVariantProps } from '@var-ui/core';
 import { mergeProps } from './utils';
 
 export type SpinnerProps = SpinnerVariantProps & {
   label?: string;
   className?: string;
-};
-
-const visuallyHidden: CSSProperties = {
-  position: 'absolute',
-  width: 1,
-  height: 1,
-  padding: 0,
-  margin: -1,
-  overflow: 'hidden',
-  clip: 'rect(0 0 0 0)',
-  whiteSpace: 'nowrap',
-  border: 0,
 };
 
 export function Spinner({
@@ -26,10 +14,12 @@ export function Spinner({
   label = 'Loading',
   className,
 }: SpinnerProps): JSX.Element {
+  const s = spinner({ size, tone, appearance });
+
   return (
-    <span role="status" className={className}>
-      <span {...mergeProps(spinner({ size, tone, appearance }))} aria-hidden="true" />
-      <span style={visuallyHidden}>{label}</span>
+    <span role="status" {...mergeProps(s.root, className)}>
+      <span {...mergeProps(s.indicator)} aria-hidden="true" />
+      <span {...mergeProps(visuallyHidden())}>{label}</span>
     </span>
   );
 }

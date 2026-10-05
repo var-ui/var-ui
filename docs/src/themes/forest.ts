@@ -5,6 +5,11 @@ import {
   designTokens as p,
   groteskMono,
   lightSyntaxValues,
+  layoutPanel,
+  menu,
+  segmentedControl,
+  sideNav,
+  topNav,
   type DesignThemePreset,
   type DesignTokens,
 } from '@var-ui/core';
@@ -233,48 +238,51 @@ export const forestTheme = createDesignTheme({
   name: 'forest',
   ...forestPreset,
   modes: [],
-  components: {
-    menu: (t) => ({
-      vars: {
-        popoverBackground: t.color.background.app.var,
-      },
-    }),
-    segmentedControl: (t) => ({
-      vars: {
-        indicatorBackground: t.color.background.app.var,
-      },
-    }),
-    topNav: (t) => ({
-      vars: {
-        border: 'transparent',
-      },
-      base: {
-        root: {
-          borderBottomWidth: 0,
-          margin: t.space[2].var,
-          borderRadius: t.radius.lg.var,
-        },
-      },
-    }),
-    sideNav: (t) => ({
-      vars: {
-        border: t.color.background.app.var,
-      },
-      base: {
-        root: {
-          margin: t.space[2].var,
-          borderRadius: t.radius.lg.var,
-          overflow: 'hidden',
-        },
-        footer: {
-          borderWidth: t.borderWidth.thick.var,
-        },
-      },
-    }),
-    layoutPanel: () => ({
-      vars: {
-        border: 'transparent',
-      },
-    }),
-  },
 });
+
+forestTheme.componentStyles(menu, (tokens) => ({
+  vars: {
+    popoverBackground: tokens.color.background.app.var,
+  },
+}));
+
+forestTheme.componentStyles(segmentedControl, (tokens) => ({
+  vars: {
+    indicatorBackground: tokens.color.background.app.var,
+  },
+}));
+
+forestTheme.componentStyles(topNav, (tokens) => ({
+  vars: {
+    border: 'transparent',
+  },
+  base: {
+    root: {
+      borderBottomWidth: 0,
+      margin: tokens.space[2].var,
+      borderRadius: tokens.radius.lg.var,
+    },
+  },
+}));
+
+forestTheme.componentStyles(sideNav, (tokens) => ({
+  vars: {
+    border: tokens.color.background.app.var,
+  },
+  base: {
+    root: {
+      margin: tokens.space[2].var,
+      borderRadius: tokens.radius.lg.var,
+      overflow: 'hidden',
+    },
+    footer: {
+      borderWidth: tokens.borderWidth.thick.var,
+    },
+  },
+}));
+
+forestTheme.componentStyles(layoutPanel, () => ({
+  vars: {
+    border: 'transparent',
+  },
+}));

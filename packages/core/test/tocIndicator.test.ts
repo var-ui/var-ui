@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vite-plus/test';
 import { getRegisteredCss } from 'typestyles';
 import { toc } from '../src/components/toc';
-import { positionTocIndicator, tocIndicatorCssVars } from '../src/tocIndicator';
+import { positionTocIndicator, tocIndicatorCssVars } from '../src/components/indicators/toc';
 
 describe('positionTocIndicator', () => {
   it('uses CSS var names that match the toc recipe', () => {

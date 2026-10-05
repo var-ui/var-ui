@@ -8,7 +8,7 @@ import {
   positionSegmentedControlIndicator,
   segmentedControlIndicatorCssVars,
   syncSegmentedControlIndicator,
-} from '../src/segmentedControlIndicator';
+} from '../src/components/indicators/segmented-control';
 
 describe('positionSegmentedControlIndicator', () => {
   it('uses CSS var names that match the segmented-control recipe', () => {

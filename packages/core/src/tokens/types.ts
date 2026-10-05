@@ -1,4 +1,9 @@
-import type { InferValuesFromSchema, ModeAwareTokenLeaf } from 'typestyles';
+import type {
+  CreateTokenValues,
+  InferValuesFromSchema,
+  ModeAwareTokenLeaf,
+  ThemeModeDefinition,
+} from 'typestyles';
 import type { FontFaceDefinition } from '../fonts/types';
 import type { tokenSchema } from './schema';
 
@@ -53,5 +58,7 @@ export type DesignThemeColorMode = {
 export type DesignThemePreset = {
   tokens?: DesignThemeTokenValues;
   colorMode?: DesignThemeColorMode;
+  modes?: ThemeModeDefinition[];
+  extend?: Record<string, CreateTokenValues>;
   fonts?: FontFaceDefinition[];
 };

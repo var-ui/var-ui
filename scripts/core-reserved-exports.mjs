@@ -8,12 +8,12 @@ export function coreReservedExports() {
   return {
     '.': { types: './dist/index.d.mts', import: './dist/index.mjs' },
     './theme-constants': {
-      types: './dist/theme-constants.d.mts',
-      import: './dist/theme-constants.mjs',
+      types: './dist/theme/constants.d.mts',
+      import: './dist/theme/constants.mjs',
     },
     './register-default-theme': {
-      types: './dist/register-default-theme.d.mts',
-      import: './dist/register-default-theme.mjs',
+      types: './dist/theme/register-default.d.mts',
+      import: './dist/theme/register-default.mjs',
     },
     './styles': {
       types: './dist/styles.d.mts',
@@ -21,8 +21,8 @@ export function coreReservedExports() {
     },
     './styles.css': './dist/styles.css',
     './base-styles': {
-      types: './dist/base-styles.d.mts',
-      import: './dist/base-styles.mjs',
+      types: './dist/theme/base-styles.d.mts',
+      import: './dist/theme/base-styles.mjs',
     },
     './internal': {
       types: './dist/internal.d.mts',

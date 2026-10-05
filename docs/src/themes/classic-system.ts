@@ -1,9 +1,13 @@
 import { color } from 'typestyles/color';
 import {
+  button,
   createDesignTheme,
   createToneFace,
   designTokens as t,
   lightSyntaxValues,
+  segmentedControl,
+  tabs,
+  toc,
   type DesignThemePreset,
 } from '@var-ui/core';
 
@@ -234,74 +238,58 @@ export const classicSystemPreset: DesignThemePreset = {
 export const classicSystemTheme = createDesignTheme({
   name: 'classic-system',
   ...classicSystemPreset,
-  // modes: [
-  //   {
-  //     id: 'dark-elevation-shadow',
-  //     overrides: { shadow: classicDarkShadow },
-  //     when: typestyles.tokens.when.or(
-  //       typestyles.tokens.when.attr('data-mode', 'dark', { scope: 'self' }),
-  //       typestyles.tokens.when.and(
-  //         typestyles.tokens.when.not(
-  //           typestyles.tokens.when.attr('data-mode', 'light', { scope: 'self' }),
-  //         ),
-  //         typestyles.tokens.when.prefersDark,
-  //       ),
-  //     ),
-  //   },
-  // ],
-  components: {
-    tabs: () => ({
-      vars: {
-        railRadius: '0px',
-      },
-    }),
-    segmentedControl: () => ({
-      base: {
-        root: {
-          borderWidth: t.borderWidth.default.var,
-          borderStyle: 'solid',
-          borderColor: t.color.border.default.var,
-          padding: 0,
-          '&::after': {
-            boxShadow: 'none',
-            top: 0,
-            bottom: 0,
-            // borderWidth: t.borderWidth.default.var,
-            // borderStyle: 'solid',
-            // borderColor: t.color.border.default.var,
-          },
-        },
-      },
-    }),
-    toc: () => ({
-      vars: {
-        railRadius: '0px',
-      },
-    }),
-    button: (v) => {
-      const brutalistLift = '4px';
+});
 
-      return {
-        base: {
-          transition:
-            'background-color 80ms steps(2, end), border-color 80ms steps(2, end), box-shadow 80ms steps(2, end), transform 80ms steps(2, end)',
-          '&:hover:not([disabled])': {
-            transform: `translate(${brutalistLift}, calc(-1 * ${brutalistLift}))`,
-            boxShadow: v.shadow.xl.var,
-          },
-          '&:active:not([disabled])': {
-            transform: 'none',
-            boxShadow: 'none',
-          },
-        },
-        variants: {
-          appearance: {
-            filled: {
-              borderColor: v.color.border.default.var,
-            },
-          },
-        },
-      };
+classicSystemTheme.componentStyles(tabs, () => ({
+  vars: {
+    railRadius: '0px',
+  },
+}));
+
+classicSystemTheme.componentStyles(segmentedControl, () => ({
+  base: {
+    root: {
+      borderWidth: t.borderWidth.default.var,
+      borderStyle: 'solid',
+      borderColor: t.color.border.default.var,
+      padding: 0,
+      '&::after': {
+        boxShadow: 'none',
+        top: 0,
+        bottom: 0,
+      },
     },
   },
+}));
+
+classicSystemTheme.componentStyles(toc, () => ({
+  vars: {
+    railRadius: '0px',
+  },
+}));
+
+classicSystemTheme.componentStyles(button, (v) => {
+  const brutalistLift = '4px';
+
+  return {
+    base: {
+      transition:
+        'background-color 80ms steps(2, end), border-color 80ms steps(2, end), box-shadow 80ms steps(2, end), transform 80ms steps(2, end)',
+      '&:hover:not([disabled])': {
+        transform: `translate(${brutalistLift}, calc(-1 * ${brutalistLift}))`,
+        boxShadow: v.shadow.xl.var,
+      },
+      '&:active:not([disabled])': {
+        transform: 'none',
+        boxShadow: 'none',
+      },
+    },
+    variants: {
+      appearance: {
+        filled: {
+          borderColor: v.color.border.default.var,
+        },
+      },
+    },
+  };
 });

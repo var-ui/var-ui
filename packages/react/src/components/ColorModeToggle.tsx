@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import { useContext } from 'react';
 import type { Key, Selection } from 'react-aria-components';
-import type { IconName } from '@var-ui/core';
+import type { ControlSize, IconName } from '@var-ui/core';
 import {
   ColorModeContext,
   type ColorMode,
@@ -33,7 +33,7 @@ export type ColorModeToggleProps = {
    * preference is `'system'`. Defaults to media-query resolution when omitted.
    */
   resolvedColorMode?: ResolvedColorMode;
-  size?: 'sm' | 'md' | 'lg';
+  size?: ControlSize;
   className?: string;
   /** Accessible name for the control group. @default 'Color mode' */
   'aria-label'?: string;

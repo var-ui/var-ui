@@ -5,7 +5,9 @@ import { useCopy } from './useCopy';
 describe('useCopy', () => {
   beforeEach(() => {
     vi.stubGlobal('navigator', {
-      clipboard: { writeText: vi.fn().mockResolvedValue(undefined) },
+      clipboard: {
+        writeText: vi.fn<(text: string) => Promise<void>>().mockResolvedValue(undefined),
+      },
     });
   });
 

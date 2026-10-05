@@ -19,8 +19,8 @@ const showHeader = hasTitleSlot || title != null || subtitle != null || Astro.sl
 <div {...mergeProps(s.section, className)}>
   {
     showHeader && (
-      <div class="side-nav-section__header">
-        <div class="side-nav-section__titles">
+      <div {...mergeProps(s.sectionHeader)}>
+        <div {...mergeProps(s.sectionTitles)}>
           {hasTitleSlot ? <slot name="title" /> : title != null ? <SideNavSectionHeader title={title} /> : null}
           {subtitle != null ? (
             <Text as="span" size="sm" tone="secondary">
@@ -34,16 +34,3 @@ const showHeader = hasTitleSlot || title != null || subtitle != null || Astro.sl
   }
   <slot />
 </div>
-
-<style>
-  .side-nav-section__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  .side-nav-section__titles {
-    min-width: 0;
-  }
-</style>

@@ -72,7 +72,7 @@ export default defineConfig({
     plugins: [rolldownJsxOptionsCompat(), homepagePreloadPlugin()],
     resolve: {
       alias: {
-        '@var-ui/core/theme-constants': `${root}/packages/core/src/theme-constants.ts`,
+        '@var-ui/core/theme-constants': `${root}/packages/core/src/theme/constants.ts`,
         '@var-ui/core/styles': `${root}/packages/core/src/styles.ts`,
         '@var-ui/core/internal': `${root}/packages/core/src/internal.ts`,
         '@var-ui/core': `${root}/packages/core/src/index.ts`,
@@ -92,6 +92,8 @@ export default defineConfig({
         '@var-ui/docs/DocsSidebar': `${root}/packages/docs/src/components/DocsSidebar.astro`,
         '@var-ui/docs/DocsToc': `${root}/packages/docs/src/components/DocsToc.astro`,
         '@var-ui/docs/DocsThemePicker': `${root}/packages/docs/src/components/DocsThemePicker.astro`,
+        '@var-ui/docs/CodeBlock': `${root}/packages/docs/src/components/CodeBlock.astro`,
+        '@var-ui/docs/CodeDemoCodeBlock': `${root}/packages/docs/src/components/CodeDemoCodeBlock.astro`,
         '@var-ui/docs/DocsThemeScript': `${root}/packages/docs/src/components/DocsThemeScript.astro`,
         '@var-ui/docs/theme-css': `${root}/packages/docs/src/integrations/theme-css-extract.ts`,
         '@var-ui/docs': `${root}/packages/docs/index.ts`,

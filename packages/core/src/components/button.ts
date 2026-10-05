@@ -46,6 +46,8 @@ export const button = typestyles.styles.component(
         borderColor: v.border.var,
         borderRadius: t.radius.md.var,
         backgroundColor: v.background.var,
+        // background: `linear-gradient(to bottom, transparent, ${v.border.var}), ${v.background.var}`,
+        // backgroundBlendMode: "screen",
         color: v.foreground.var,
         fontSize: t.fontSize.md.var,
         fontWeight: t.fontWeight.medium.var,
@@ -151,7 +153,7 @@ export const buttonVariantPropDocs = [
   { name: 'intent', type: 'ButtonIntent', required: false },
   { name: 'tone', type: 'ButtonTone', required: false },
   { name: 'appearance', type: 'ToneAppearance', required: false },
-  { name: 'size', type: "'sm' | 'md' | 'lg'", required: false },
+  { name: 'size', type: 'ControlSize', required: false },
   { name: 'layout', type: "'default' | 'icon'", required: false },
   { name: 'elevated', type: 'boolean', required: false },
 ] as const satisfies ReadonlyArray<{

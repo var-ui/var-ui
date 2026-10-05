@@ -1,8 +1,8 @@
-import { MoreMenu } from '@var-ui/react';
+import { Menu } from '@var-ui/react';
 
 export default function Preview() {
   return (
-    <MoreMenu
+    <Menu.Overflow
       sections={[
         {
           items: [

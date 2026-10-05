@@ -1,8 +1,8 @@
-import { Button, DropdownMenu } from '@var-ui/react';
+import { Button, Menu } from '@var-ui/react';
 
 export default function Preview() {
   return (
-    <DropdownMenu
+    <Menu.FromSections
       trigger={<Button intent="secondary">Actions</Button>}
       sections={[
         {

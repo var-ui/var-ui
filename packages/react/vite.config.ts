@@ -6,7 +6,7 @@ const coreSrc = fileURLToPath(new URL('../core/src', import.meta.url));
 export default defineConfig({
   resolve: {
     alias: {
-      '@var-ui/core/theme-constants': `${coreSrc}/theme-constants.ts`,
+      '@var-ui/core/theme-constants': `${coreSrc}/theme/constants.ts`,
     },
   },
   pack: {

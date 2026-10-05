@@ -15,8 +15,8 @@
   ],
   "type": "module",
   "sideEffects": [
-    "./dist/base-styles.mjs",
-    "./dist/register-default-theme.mjs",
+    "./dist/theme/base-styles.mjs",
+    "./dist/theme/register-default.mjs",
     "./dist/styles.mjs",
     "./dist/styles.css"
   ],
@@ -28,12 +28,12 @@
       "import": "./dist/index.mjs"
     },
     "./theme-constants": {
-      "types": "./dist/theme-constants.d.mts",
-      "import": "./dist/theme-constants.mjs"
+      "types": "./dist/theme/constants.d.mts",
+      "import": "./dist/theme/constants.mjs"
     },
     "./register-default-theme": {
-      "types": "./dist/register-default-theme.d.mts",
-      "import": "./dist/register-default-theme.mjs"
+      "types": "./dist/theme/register-default.d.mts",
+      "import": "./dist/theme/register-default.mjs"
     },
     "./styles": {
       "types": "./dist/styles.d.mts",
@@ -41,8 +41,8 @@
     },
     "./styles.css": "./dist/styles.css",
     "./base-styles": {
-      "types": "./dist/base-styles.d.mts",
-      "import": "./dist/base-styles.mjs"
+      "types": "./dist/theme/base-styles.d.mts",
+      "import": "./dist/theme/base-styles.mjs"
     },
     "./internal": {
       "types": "./dist/internal.d.mts",
@@ -111,6 +111,14 @@
     "./breadcrumbs": {
       "types": "./dist/components/breadcrumbs.d.mts",
       "import": "./dist/components/breadcrumbs.mjs"
+    },
+    "./components/breakpoints": {
+      "types": "./dist/components/breakpoints.d.mts",
+      "import": "./dist/components/breakpoints.mjs"
+    },
+    "./breakpoints": {
+      "types": "./dist/components/breakpoints.d.mts",
+      "import": "./dist/components/breakpoints.mjs"
     },
     "./components/button": {
       "types": "./dist/components/button.d.mts",
@@ -431,6 +439,22 @@
     "./icon": {
       "types": "./dist/components/icon.d.mts",
       "import": "./dist/components/icon.mjs"
+    },
+    "./components/indicators/tabs": {
+      "types": "./dist/components/indicators/tabs.d.mts",
+      "import": "./dist/components/indicators/tabs.mjs"
+    },
+    "./indicators/tabs": {
+      "types": "./dist/components/indicators/tabs.d.mts",
+      "import": "./dist/components/indicators/tabs.mjs"
+    },
+    "./components/indicators/toc": {
+      "types": "./dist/components/indicators/toc.d.mts",
+      "import": "./dist/components/indicators/toc.mjs"
+    },
+    "./indicators/toc": {
+      "types": "./dist/components/indicators/toc.d.mts",
+      "import": "./dist/components/indicators/toc.mjs"
     },
     "./components/inlineCode": {
       "types": "./dist/components/inlineCode.d.mts",
@@ -804,6 +828,14 @@
       "types": "./dist/components/textField.d.mts",
       "import": "./dist/components/textField.mjs"
     },
+    "./components/themeableVars": {
+      "types": "./dist/components/themeableVars.d.mts",
+      "import": "./dist/components/themeableVars.mjs"
+    },
+    "./themeableVars": {
+      "types": "./dist/components/themeableVars.d.mts",
+      "import": "./dist/components/themeableVars.mjs"
+    },
     "./components/thumbnail": {
       "types": "./dist/components/thumbnail.d.mts",
       "import": "./dist/components/thumbnail.mjs"
@@ -843,6 +875,14 @@
     "./toc": {
       "types": "./dist/components/toc.d.mts",
       "import": "./dist/components/toc.mjs"
+    },
+    "./components/toc/spy": {
+      "types": "./dist/components/toc/spy.d.mts",
+      "import": "./dist/components/toc/spy.mjs"
+    },
+    "./toc/spy": {
+      "types": "./dist/components/toc/spy.d.mts",
+      "import": "./dist/components/toc/spy.mjs"
     },
     "./components/toggleButton": {
       "types": "./dist/components/toggleButton.d.mts",
@@ -907,6 +947,14 @@
     "./typography": {
       "types": "./dist/components/typography.d.mts",
       "import": "./dist/components/typography.mjs"
+    },
+    "./components/visuallyHidden": {
+      "types": "./dist/components/visuallyHidden.d.mts",
+      "import": "./dist/components/visuallyHidden.mjs"
+    },
+    "./visuallyHidden": {
+      "types": "./dist/components/visuallyHidden.d.mts",
+      "import": "./dist/components/visuallyHidden.mjs"
     }
   },
   "publishConfig": {
@@ -918,7 +966,7 @@
     "dev": "vp pack --watch"
   },
   "dependencies": {
-    "typestyles": "catalog:"
+    "typestyles": "0.25.0"
   },
   "devDependencies": {
     "@typestyles/build-runner": "^0.5.2",

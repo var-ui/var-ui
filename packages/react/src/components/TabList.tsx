@@ -9,9 +9,9 @@ import {
   useRef,
 } from 'react';
 import { Button as AriaButton, Link as AriaLink } from 'react-aria-components';
-import { iconNameList, tabList, type IconName } from '@var-ui/core';
+import { iconNameList, tabList, type ControlSize, type IconName } from '@var-ui/core';
 import { Icon } from '../icons';
-import { DropdownMenu } from './DropdownMenu';
+import { Menu } from './Menu';
 import { mergeProps } from './utils';
 
 /** Registry name or a caller-supplied node — excludes bare `string` so it isn't redundant with `IconName`. */
@@ -29,7 +29,7 @@ function renderTabListIcon(icon: TabListIcon | undefined, size: 'sm' | 'md' = 's
 type TabListContextValue = {
   value?: string;
   onChange?: (value: string) => void;
-  size: 'sm' | 'md' | 'lg';
+  size: ControlSize;
   /** Value of the item that currently holds the roving `tabIndex={0}` slot. */
   focusValue?: string;
 };
@@ -123,7 +123,7 @@ export type TabListMenuProps = {
   className?: string;
 };
 
-/** Overflow "More" trigger — reuses `DropdownMenu`; selecting an option calls `onChange`. */
+/** Overflow "More" trigger — reuses `Menu.FromSections`; selecting an option calls `onChange`. */
 export function TabListMenu({ label, options, className }: TabListMenuProps): JSX.Element {
   const ctx = useTabListContext();
   const s = tabList({ size: ctx.size });
@@ -140,7 +140,7 @@ export function TabListMenu({ label, options, className }: TabListMenuProps): JS
 
   return (
     <div {...mergeProps(s.menu, className)}>
-      <DropdownMenu
+      <Menu.FromSections
         trigger={
           <AriaButton {...triggerProps}>
             <span>{label}</span>
@@ -183,7 +183,7 @@ export type TabListProps = {
   value?: string;
   onChange?: (value: string) => void;
   /** @default 'md' */
-  size?: 'sm' | 'md' | 'lg';
+  size?: ControlSize;
   /** `hug` sizes tabs to content; `fill` stretches tabs/menu evenly across the width. @default 'hug' */
   layout?: 'hug' | 'fill';
   /** Border on the side opposite the indicator (bottom for horizontal, inline-end for vertical). @default false */

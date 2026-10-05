@@ -1,4 +1,4 @@
-import { atReducedMotion } from '../theme-conditions';
+import { atReducedMotion } from '../theme/conditions';
 import { designTokens as t } from '../tokens';
 
 export function overlayPresenceStyles(options: { scale?: boolean } = {}) {

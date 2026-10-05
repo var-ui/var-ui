@@ -1,7 +1,7 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
-import { themeableComponents } from '../../src/themeable-components';
+import { themeableComponents } from '../../src/theme/registry';
 
 const pkgRoot = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 

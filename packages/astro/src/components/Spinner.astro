@@ -1,5 +1,5 @@
 ---
-import { spinner, type SpinnerVariantProps } from '@var-ui/core';
+import { spinner, visuallyHidden, type SpinnerVariantProps } from '@var-ui/core';
 import { mergeProps } from '../utils';
 
 interface Props extends SpinnerVariantProps {
@@ -9,19 +9,9 @@ interface Props extends SpinnerVariantProps {
 
 const { size = 'md', tone = 'accent', appearance = 'solid', label = 'Loading', className } =
   Astro.props;
-const visuallyHidden = {
-  position: 'absolute',
-  width: '1px',
-  height: '1px',
-  padding: '0',
-  margin: '-1px',
-  overflow: 'hidden',
-  clip: 'rect(0 0 0 0)',
-  whiteSpace: 'nowrap',
-  border: '0',
-} as const;
+const s = spinner({ size, tone, appearance });
 ---
-<span role="status" class={className}>
-  <span {...mergeProps(spinner({ size, tone, appearance }))} aria-hidden="true" />
-  <span style={visuallyHidden}>{label}</span>
+<span role="status" {...mergeProps(s.root, className)}>
+  <span {...mergeProps(s.indicator)} aria-hidden="true" />
+  <span {...mergeProps(visuallyHidden())}>{label}</span>
 </span>

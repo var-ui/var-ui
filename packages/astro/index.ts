@@ -44,6 +44,8 @@ export { default as AccordionItem } from './src/components/AccordionItem.astro';
 export { default as AccordionTrigger } from './src/components/AccordionTrigger.astro';
 export { default as AccordionPanel } from './src/components/AccordionPanel.astro';
 export { default as Tabs } from './src/components/Tabs.astro';
+export { default as SegmentedControl } from './src/components/SegmentedControl.astro';
+export { default as ToggleButton } from './src/components/ToggleButton.astro';
 export { default as Layout } from './src/components/Layout.astro';
 export { default as LayoutHeader } from './src/components/LayoutHeader.astro';
 export { default as LayoutFooter } from './src/components/LayoutFooter.astro';
@@ -115,3 +117,13 @@ export {
   type CommandPaletteItem,
 } from './src/scripts/commandPaletteUtils';
 export { initSearchInput, initSearchInputs } from './src/scripts/searchInput';
+export {
+  initSegmentedControl,
+  initSegmentedControls,
+  SEGMENTED_CONTROL_CHANGE_EVENT,
+} from './src/scripts/segmentedControl';
+export {
+  initToggleButton,
+  initToggleButtons,
+  TOGGLE_BUTTON_CHANGE_EVENT,
+} from './src/scripts/toggleButton';

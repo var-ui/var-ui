@@ -35,8 +35,8 @@ function readCachedPreloads(): string[] {
 
 function clientManualChunks(id: string): string | undefined {
   if (
-    id.includes('/packages/core/src/tabsIndicator') ||
-    id.includes('/packages/core/src/segmentedControlIndicator')
+    id.includes('/packages/core/src/components/indicators/tabs') ||
+    id.includes('/packages/core/src/components/indicators/segmented-control')
   ) {
     return 'var-ui-components';
   }

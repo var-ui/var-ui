@@ -36,7 +36,12 @@ import {
   type OverlayOpenChangeHandler,
   type UseOverlayPresenceResult,
 } from '../overlays';
+import { MenuContent } from './menuContent';
+import { MenuContextMenu, MenuFromSections, MenuOverflow } from './menuPresets';
 import { mergeProps } from './utils';
+
+export type { MenuContentProps, MenuItemDefinition, MenuSectionDefinition } from './menuContent';
+export type { MenuContextMenuProps, MenuFromSectionsProps, MenuOverflowProps } from './menuPresets';
 
 export type MenuRootProps = {
   children: ReactNode;
@@ -305,22 +310,25 @@ function MenuSection({ children, title, className }: MenuSectionProps): JSX.Elem
 }
 
 /**
- * Compound menu. `Menu` is Root; compose Trigger, Popup, and item parts.
- * Keep `DropdownMenu` + `MenuContent({ sections })` for the data preset.
+ * Action menu namespace. Compose parts for full control, or use presets for common cases.
  *
  * ```tsx
- * <Menu.Root>
- *   <Menu.Trigger>
- *     <Button>Song</Button>
- *   </Menu.Trigger>
+ * // Compound
+ * <Menu>
+ *   <Menu.Trigger><Button>Song</Button></Menu.Trigger>
  *   <Menu.Popup>
  *     <Menu.Item id="lib" onAction={fn}>Add to Library</Menu.Item>
- *     <Menu.Separator />
- *     <Menu.Section title="Danger">
- *       <Menu.Item id="delete" onAction={fn}>Delete</Menu.Item>
- *     </Menu.Section>
  *   </Menu.Popup>
- * </Menu.Root>
+ * </Menu>
+ *
+ * // Data preset
+ * <Menu.FromSections trigger={<Button>Actions</Button>} sections={[...]} />
+ *
+ * // Right-click
+ * <Menu.ContextMenu sections={[...]}><div>Right-click me</div></Menu.ContextMenu>
+ *
+ * // Overflow
+ * <Menu.Overflow sections={[...]} />
  * ```
  */
 export const Menu = Object.assign(MenuRoot, {
@@ -330,4 +338,8 @@ export const Menu = Object.assign(MenuRoot, {
   Item: MenuItem,
   Separator: MenuSeparator,
   Section: MenuSection,
+  Content: MenuContent,
+  FromSections: MenuFromSections,
+  ContextMenu: MenuContextMenu,
+  Overflow: MenuOverflow,
 });

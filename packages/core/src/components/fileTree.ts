@@ -37,7 +37,7 @@ export const fileTree = typestyles.styles.component(
     return {
       slots: ['root', 'list', 'item', 'listNested', 'row', 'folder', 'file'],
       root: {
-        fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+        fontFamily: t.fontFamily.mono.var,
         fontSize: t.fontSize.sm.var,
         lineHeight: 1.5,
         color: v.rootForeground.var,

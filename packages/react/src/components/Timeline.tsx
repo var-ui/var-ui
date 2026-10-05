@@ -4,7 +4,6 @@ import {
   iconNameList,
   timeline,
   type IconName,
-  type TimelineSize,
   type TimelineTone,
   type TimelineVariantProps,
 } from '@var-ui/core';
