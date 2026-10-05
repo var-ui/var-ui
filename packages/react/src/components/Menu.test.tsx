@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { describe, expect, it, vi } from 'vite-plus/test';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { IconProvider } from '../icons';
 import { LayerProvider } from '../layers/LayerProvider';
@@ -151,6 +151,36 @@ describe('Menu', () => {
     );
     await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
     expect(await screen.findByRole('menuitem', { name: 'Edit' })).toBeTruthy();
+  });
+
+  it('opens Menu.ContextMenu on contextmenu only', async () => {
+    wrap(
+      <Menu.ContextMenu sections={[{ items: [{ id: 'copy', label: 'Copy' }] }]}>
+        <div>Right-click me</div>
+      </Menu.ContextMenu>,
+    );
+    const host = screen.getByText('Right-click me');
+    await userEvent.click(host);
+    expect(screen.queryByRole('menuitem', { name: 'Copy' })).toBeNull();
+
+    fireEvent.contextMenu(host, { clientX: 120, clientY: 240 });
+    expect(await screen.findByRole('menuitem', { name: 'Copy' })).toBeTruthy();
+    const anchor = document.querySelector('[data-context-menu-anchor]') as HTMLElement | null;
+    expect(anchor).toBeTruthy();
+    expect(anchor?.style.left).toBe('120px');
+    expect(anchor?.style.top).toBe('240px');
+  });
+
+  it('composes Menu.ContextMenu onContextMenu with the host handler', async () => {
+    const hostHandler = vi.fn();
+    wrap(
+      <Menu.ContextMenu sections={[{ items: [{ id: 'copy', label: 'Copy' }] }]}>
+        <div onContextMenu={hostHandler}>Right-click me</div>
+      </Menu.ContextMenu>,
+    );
+    fireEvent.contextMenu(screen.getByText('Right-click me'), { clientX: 0, clientY: 0 });
+    expect(hostHandler).toHaveBeenCalledTimes(1);
+    expect(await screen.findByRole('menuitem', { name: 'Copy' })).toBeTruthy();
   });
 
   it('supports controlled isOpen', () => {

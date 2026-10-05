@@ -1,7 +1,8 @@
-import type { JSX, MouseEvent, ReactElement } from 'react';
-import { cloneElement, useState } from 'react';
+import type { CSSProperties, JSX, MouseEvent, ReactElement } from 'react';
+import { useCallback, useState } from 'react';
 import { MenuTrigger, Popover, Pressable, type MenuTriggerProps } from 'react-aria-components';
 import { menu } from '@var-ui/core';
+import { mergeOverlayChild } from '../overlays';
 import { IconButton } from './IconButton';
 import { MenuContent, type MenuContentProps } from './menuContent';
 import { mergeProps } from './utils';
@@ -30,29 +31,62 @@ export function MenuFromSections({
 }
 
 export type MenuContextMenuProps = MenuContentProps & {
-  /** A single host element (e.g. `<div>`) — `Pressable` requires a DOM element it can forward a ref to. */
+  /** A single host element (e.g. `<div>`) that receives the context-menu gesture. */
   children: ReactElement<any, string>;
 };
 
-/** Right-click menu anchored to the wrapped surface. */
+const contextMenuAnchorStyle: CSSProperties = {
+  position: 'fixed',
+  width: 1,
+  height: 1,
+  pointerEvents: 'none',
+  opacity: 0,
+};
+
+/** Right-click menu anchored to the wrapped surface at the pointer. */
 export function MenuContextMenu({ children, sections }: MenuContextMenuProps): JSX.Element {
   const [open, setOpen] = useState(false);
+  const [anchor, setAnchor] = useState<{ x: number; y: number } | null>(null);
   const m = menu();
 
-  const trigger = cloneElement(children, {
-    onContextMenu: (event: MouseEvent) => {
-      event.preventDefault();
-      setOpen(true);
-    },
-  }) as ReactElement<any, string>;
+  const handleContextMenu = useCallback((...args: unknown[]) => {
+    const event = args[0] as MouseEvent;
+    event.preventDefault();
+    setAnchor({ x: event.clientX, y: event.clientY });
+    setOpen(true);
+  }, []);
+
+  const handleOpenChange = useCallback((next: boolean) => {
+    setOpen(next);
+    if (!next) {
+      setAnchor(null);
+    }
+  }, []);
+
+  const host = mergeOverlayChild(children, {
+    onContextMenu: handleContextMenu,
+  });
 
   return (
-    <MenuTrigger isOpen={open} onOpenChange={setOpen}>
-      <Pressable>{trigger}</Pressable>
-      <Popover {...mergeProps(m.popover)}>
-        <MenuContent sections={sections} />
-      </Popover>
-    </MenuTrigger>
+    <>
+      {host}
+      <MenuTrigger isOpen={open} onOpenChange={handleOpenChange}>
+        <Pressable>
+          <span
+            data-context-menu-anchor=""
+            aria-hidden
+            style={{
+              ...contextMenuAnchorStyle,
+              left: anchor?.x ?? 0,
+              top: anchor?.y ?? 0,
+            }}
+          />
+        </Pressable>
+        <Popover {...mergeProps(m.popover)} placement="bottom start">
+          <MenuContent sections={sections} />
+        </Popover>
+      </MenuTrigger>
+    </>
   );
 }
 

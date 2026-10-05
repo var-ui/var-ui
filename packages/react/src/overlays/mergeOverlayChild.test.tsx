@@ -51,6 +51,18 @@ describe('mergeOverlayChild', () => {
     ]);
   });
 
+  it('composes onContextMenu child first', () => {
+    const calls: string[] = [];
+    const merged = mergeOverlayChild(
+      <div onContextMenu={() => calls.push('child-contextmenu')} />,
+      { onContextMenu: () => calls.push('parent-contextmenu') },
+    );
+
+    merged.props.onContextMenu();
+
+    expect(calls).toEqual(['child-contextmenu', 'parent-contextmenu']);
+  });
+
   it('composes onPress child first', () => {
     const calls: string[] = [];
     function PressHost({ onPress }: { onPress?: () => void }) {
