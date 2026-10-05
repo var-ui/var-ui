@@ -2,8 +2,7 @@ import { describe, it, expect, beforeEach } from 'vite-plus/test';
 import { getRegisteredCss, reset } from 'typestyles';
 import { createDesignTheme } from '../src/theme/create-theme';
 import { when } from '../src/theme/conditions';
-import { resetExtendTokenRegistry } from '../src/theme/extend-tokens';
-import { registerGlobals } from '../src/theme/document-globals';
+import { registerTestGlobals } from './lib/register-test-globals';
 import { styles } from '../src/runtime';
 import { button, resolveButtonProps } from '../src/components/button';
 
@@ -12,8 +11,7 @@ const themeClass = (name: string) => `.theme-var-ui-${name}`;
 describe('theme conditions and colorModes', () => {
   beforeEach(() => {
     reset();
-    resetExtendTokenRegistry();
-    registerGlobals();
+    registerTestGlobals();
   });
 
   it('emits light-dark() for color mode values on override properties', () => {

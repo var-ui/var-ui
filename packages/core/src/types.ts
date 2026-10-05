@@ -59,11 +59,6 @@ export type DesignThemeConfig<E extends ExtendMap = Record<string, never>> = {
   colorMode?: DesignThemeColorMode;
   /** Additional TypeStyles modes (e.g. dark-only shadow overrides). */
   modes?: ThemeModeDefinition[];
-  /**
-   * @deprecated Surfaces use global `color-scheme` on `data-surface` since V9.
-   * Kept for API compatibility; has no effect.
-   */
-  surfaces?: boolean;
   /** Custom token namespaces; leaves are a string or `{ light, dark }`. */
   extend?: E;
   /** Self-hosted @font-face definitions registered when the theme is created. */

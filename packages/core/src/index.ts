@@ -3,6 +3,7 @@ export * from './color';
 export * from './fonts';
 export * from './icons';
 export { createDesignTheme, disposeDesignTheme } from './theme/create-theme';
+export { mergeThemeOverrides } from 'typestyles';
 export * from './theme/constants';
 export {
   extendTokens,

@@ -2,9 +2,9 @@ import { describe, it, expect, beforeEach } from 'vite-plus/test';
 import { flushSync, getRegisteredCss, reset } from 'typestyles';
 import { createDesignTheme, disposeDesignTheme } from '../src/theme/create-theme';
 import { DEFAULT_THEME_NAME, SURFACE_ATTRIBUTE } from '../src/theme/constants';
-import { extendTokens, resetExtendTokenRegistry } from '../src/theme/extend-tokens';
+import { extendTokens } from '../src/theme/extend-tokens';
 import { resetRegisteredFontFaces } from '../src/fonts/register-font-face';
-import { registerGlobals } from '../src/theme/document-globals';
+import { registerTestGlobals } from './lib/register-test-globals';
 import { styles } from '../src/runtime';
 import { button, resolveButtonProps } from '../src/components/button';
 import { badge } from '../src/components/badge';
@@ -52,15 +52,14 @@ describe('createDesignTheme', () => {
   beforeEach(() => {
     reset();
     resetRegisteredFontFaces();
-    resetExtendTokenRegistry();
-    registerGlobals();
+    registerTestGlobals();
   });
 
   it('registers declared tokens with inheritable @property rules', async () => {
     const { vi } = await import('vite-plus/test');
     vi.resetModules();
     reset();
-    registerGlobals();
+    registerTestGlobals();
     await import('../src/tokens/declare');
     const css = getRegisteredCss();
     expect(css).toContain(
@@ -132,7 +131,6 @@ describe('createDesignTheme', () => {
   it('does not emit surface color mode rules (surfaces use global color-scheme)', () => {
     createDesignTheme({
       name: 'ambient-only',
-      surfaces: false,
     });
 
     const css = getRegisteredCss();
@@ -423,8 +421,7 @@ describe('createDesignTheme', () => {
     beforeEach(() => {
       reset();
       resetRegisteredFontFaces();
-      resetExtendTokenRegistry();
-      registerGlobals();
+      registerTestGlobals();
     });
 
     it('registers fonts from config', () => {
@@ -474,8 +471,7 @@ describe('createDesignTheme', () => {
       beforeEach(() => {
         reset();
         resetRegisteredFontFaces();
-        resetExtendTokenRegistry();
-        registerGlobals();
+        registerTestGlobals();
       });
 
       it('does not register @font-face rules', () => {

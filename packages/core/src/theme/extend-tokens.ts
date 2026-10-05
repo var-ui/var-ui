@@ -26,21 +26,3 @@ export function extendTokens<const V extends ExtendTokenValues>(
     values as CreateTokenValues,
   ) as TokenRefTree<V>;
 }
-
-/** @deprecated Theme `extend` registers namespaces via `createTheme`; kept for tests that call `extendTokens` alone. */
-export function registerExtendMap<const E extends Record<string, ExtendTokenValues>>(
-  extend: E,
-): { refs: TokenRefsOf<E>; overrides: Record<string, CreateTokenValues> } {
-  const refs = {} as Record<string, unknown>;
-  const overrides: Record<string, CreateTokenValues> = {};
-  for (const [namespace, values] of Object.entries(extend) as Array<
-    [keyof E & string, ExtendTokenValues]
-  >) {
-    refs[namespace] = extendTokens(namespace, values);
-    overrides[namespace] = values as CreateTokenValues;
-  }
-  return { refs: refs as TokenRefsOf<E>, overrides };
-}
-
-/** @deprecated Pair with `reset()` from `typestyles` — namespace state clears on global reset. */
-export function resetExtendTokenRegistry(): void {}

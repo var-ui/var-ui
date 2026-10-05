@@ -257,9 +257,6 @@ Mark a subtree to pin light or dark chrome regardless of ambient mode:
 Keep wrappers scoped tightly — nested subtrees cannot "reset" to ambient mode without an
 explicit opposite surface marker.
 
-> **Note:** `surfaces` on `DesignThemeConfig` is deprecated and has no effect. Use
-> `SURFACE_ATTRIBUTE` markers and the global rules above instead.
-
 ### Astro (no React context)
 
 Use a tiny inline script to set **one** palette class on `document.documentElement` and **`data-mode`** for light/dark/system:
@@ -308,8 +305,8 @@ export const acme = createDesignTheme({
 ```
 
 `generateColors` returns `{ light, dark }` (`DesignColorValues` patches, including `code`).
-That shape plugs straight into `colorMode`. For advanced merges, `mergeThemeOverrides` is
-available (aliased as `deepMergeThemeOverrides`) — it is not a second theme API. Use `extend` / `components` for custom tokens and
+That shape plugs straight into `colorMode`. For advanced merges, `mergeThemeOverrides` from
+`@var-ui/core` (re-exported from TypeStyles) is not a second theme API. Use `extend` / `components` for custom tokens and
 typed recipe restyles via `styles.override`.
 
 ## Authoring recipes

@@ -89,7 +89,7 @@ function categorizeRuntimeExport(name: string): ExportCategory {
   if (name.endsWith('Chrome')) return 'chrome';
   if (semanticToneExports.has(name)) return 'semantic-tone';
   if (
-    /^(designTokens|tokens|tokenValues|palette|generateColors|createToneFace|buildToneFace|onBackground|TONE_|shadowElevation|darkSyntaxValues|lightSyntaxValues|PALETTE_|extendTokens|registerExtendMap|resetExtendTokenRegistry)/.test(
+    /^(designTokens|tokens|tokenValues|palette|generateColors|createToneFace|buildToneFace|onBackground|TONE_|shadowElevation|darkSyntaxValues|lightSyntaxValues|PALETTE_|extendTokens)/.test(
       name,
     ) ||
     name.startsWith('Palette')
@@ -97,7 +97,7 @@ function categorizeRuntimeExport(name: string): ExportCategory {
     return 'tokens';
   }
   if (
-    /^(createDesignTheme|disposeDesignTheme|deepMergeThemeOverrides|mergeThemeOverrides|themeableComponents|themeWhen|when|atReducedMotion|DEFAULT_THEME_NAME|SURFACE_ATTRIBUTE|defaultThemeClassName|colorModes|conditional)/.test(
+    /^(createDesignTheme|disposeDesignTheme|mergeThemeOverrides|themeableComponents|themeWhen|when|atReducedMotion|DEFAULT_THEME_NAME|SURFACE_ATTRIBUTE|defaultThemeClassName|colorModes|conditional)/.test(
       name,
     ) ||
     name.startsWith('Theme')

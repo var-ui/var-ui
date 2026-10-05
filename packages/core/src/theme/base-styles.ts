@@ -12,7 +12,7 @@ const baseLayer = 'base';
  * so component recipes in higher layers can override.
  *
  * Side effect on import: styles register when this module loads (via `@var-ui/core` or
- * `@var-ui/core/base-styles`). Pair with {@link registerGlobals} after `reset()` in tests.
+ * `@var-ui/core/base-styles`). Re-call {@link registerBaseStyles} after `reset()` in tests.
  */
 export function registerBaseStyles(): void {
   typestyles.global.apply(...reset({ layer: resetLayer, includeAppRootIsolation: false }));
