@@ -54,6 +54,7 @@ export default defineConfig({
   },
   staged: {
     '*.{js,jsx,ts,tsx,json,css,md}': 'vp check --fix',
+    'docs/content/**/*.{md,mdx}': 'vp run -F @var-ui/cli generate',
   },
   run: {
     cache: true,
