@@ -11,9 +11,9 @@ light and dark from the header to see tokens respond.
 
 ## How to customize (pick the right layer)
 
-1. **`createDesignTheme({ extend, components })`** — primary path. Mint custom
-   mode-aware tokens and restyle any recipe with full CSS and typed variant
-   names. No class names in your theme code.
+1. **`createDesignTheme` + `theme.componentStyles(recipe, override)`** — primary path.
+   Mint custom mode-aware tokens and restyle any recipe with full CSS and typed
+   variant names. No class names in your theme code.
 2. **Component CSS variables** — cheapest single-property tweak when a recipe
    already exposes a `c.vars()` hook (e.g. `--var-ui-button-background`).
 3. **Public classes / `styles.scope()`** — escape hatch for nested conflicting
