@@ -267,7 +267,7 @@ describe('createDesignTheme', () => {
 
   it('custom token namespaces merge refs onto theme.tokens and scope light-dark values', () => {
     const acme = createDesignTheme({
-      name: 'acme-extend',
+      name: 'acme-custom',
       tokens: {
         brand: {
           accent: {
@@ -282,7 +282,7 @@ describe('createDesignTheme', () => {
     expect(acme.tokens.color).toBeDefined();
 
     const css = getRegisteredCss();
-    expect(css).toContain(`${themeClass('acme-extend')}`);
+    expect(css).toContain(`${themeClass('acme-custom')}`);
     expect(css).toMatch(/--var-ui-brand-accent:\s*light-dark\(blue, navy\)/);
   });
 

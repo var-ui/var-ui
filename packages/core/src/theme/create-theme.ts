@@ -23,24 +23,10 @@ const builtInPreset: DesignThemePreset = {
 
 function presetForTypeStyles(from: DesignThemePreset): ThemePreset {
   return {
-    tokens: {
-      ...(from.tokens ?? {}),
-      ...(from.extend ?? {}),
-    } as Record<string, CreateTokenValues>,
+    tokens: (from.tokens ?? {}) as Record<string, CreateTokenValues>,
     colorMode: from.colorMode,
     modes: from.modes,
   };
-}
-
-function themeTokensLayer(
-  tokenOverrides: DesignThemeConfig['tokens'],
-  extend: ExtendMap | undefined,
-): Record<string, CreateTokenValues> | undefined {
-  const layers = {
-    ...(extend ?? {}),
-    ...(tokenOverrides ?? {}),
-  } as Record<string, CreateTokenValues>;
-  return Object.keys(layers).length > 0 ? layers : undefined;
 }
 
 function themeSelectorPrefix(theme: Pick<ThemeSurface, 'className'>): string {
@@ -72,7 +58,7 @@ function attachDesignTheme<E extends ExtendMap>(surface: ThemeSurface<E>): Desig
 export function createDesignTheme<const T extends DesignThemeConfig>(
   config: T,
 ): DesignTheme<InferThemeExtendFromConfig<T>> {
-  const { from, tokens: tokenOverrides, colorMode, modes, extend, fonts, name } = config;
+  const { from, tokens: tokenOverrides, colorMode, modes, fonts, name } = config;
 
   const preset = from ?? builtInPreset;
   for (const face of [...(preset.fonts ?? []), ...(fonts ?? [])]) {
@@ -83,7 +69,7 @@ export function createDesignTheme<const T extends DesignThemeConfig>(
     name,
     replace: true,
     from: presetForTypeStyles(preset),
-    tokens: themeTokensLayer(tokenOverrides, extend),
+    tokens: tokenOverrides as Record<string, CreateTokenValues> | undefined,
     colorMode,
     modes,
   });

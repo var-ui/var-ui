@@ -1,9 +1,4 @@
-import type {
-  CreateTokenValues,
-  InferValuesFromSchema,
-  ModeAwareTokenLeaf,
-  ThemeModeDefinition,
-} from 'typestyles';
+import type { InferValuesFromSchema, ModeAwareTokenLeaf, ThemeModeDefinition } from 'typestyles';
 import type { FontFaceDefinition } from '../fonts/types';
 import type { tokenSchema } from './schema';
 
@@ -59,7 +54,5 @@ export type DesignThemePreset = {
   tokens?: DesignThemeTokenValues;
   colorMode?: DesignThemeColorMode;
   modes?: ThemeModeDefinition[];
-  /** @deprecated Merge custom namespaces into `tokens` instead. */
-  extend?: Record<string, CreateTokenValues>;
   fonts?: FontFaceDefinition[];
 };

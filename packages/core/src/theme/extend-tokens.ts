@@ -8,7 +8,7 @@ export type ExtendTokenValues = {
   [key: string]: ModeAwareTokenLeaf | ExtendTokenValues;
 };
 
-/** `var(--…)` ref tree for an `extend` / `extendTokens` value shape. */
+/** `var(--…)` ref tree for a custom namespace registered via `extendTokens`. */
 export type TokenRefsOf<E extends Record<string, ExtendTokenValues>> = {
   readonly [N in keyof E]: TokenRefTree<E[N]>;
 };

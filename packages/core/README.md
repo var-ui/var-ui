@@ -171,7 +171,7 @@ restyles use `theme.componentStyles(recipe, override)` after creation.
 2. **`tokens`** — mode-invariant overrides (light `color` face lives here by default)
 3. **`colorMode`** — ambient `{ light?, dark? }` color patches (compiled to `light-dark()`)
 4. **`generateColors`** — optional helper to build `{ light, dark }` color trees from an accent
-5. **`modes` / `fonts`** — extra TypeStyles modes and `@font-face` rules (`extend` is deprecated — use `tokens` for custom namespaces)
+5. **`modes` / `fonts`** — extra TypeStyles modes and `@font-face` rules
 
 ```ts
 import {

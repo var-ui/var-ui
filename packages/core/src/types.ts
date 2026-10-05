@@ -48,13 +48,12 @@ type CustomThemeNamespaces<T> = {
     : Record<string, never>
   : Record<string, never>;
 
-/** Merges `extend` and custom keys from `tokens` for {@link DesignTheme} inference. */
-export type InferThemeExtendFromConfig<T> = (T extends { extend: infer E extends ExtendMap }
-  ? E
-  : Record<string, never>) &
-  (T extends { tokens: infer Tok extends Record<string, unknown> }
-    ? CustomThemeNamespaces<Tok>
-    : Record<string, never>);
+/** Custom namespace keys from `tokens` for {@link DesignTheme} inference. */
+export type InferThemeExtendFromConfig<T> = T extends {
+  tokens: infer Tok extends Record<string, unknown>;
+}
+  ? CustomThemeNamespaces<Tok>
+  : Record<string, never>;
 
 /**
  * Built-in design tokens plus refs from custom namespaces on `createDesignTheme({ tokens })`.
@@ -78,8 +77,6 @@ export type DesignThemeConfig = {
   colorMode?: DesignThemeColorMode;
   /** Additional TypeStyles modes (e.g. dark-only shadow overrides). */
   modes?: ThemeModeDefinition[];
-  /** @deprecated Prefer custom namespaces on `tokens`. Still merged at runtime. */
-  extend?: ExtendMap;
   /** Self-hosted @font-face definitions registered when the theme is created. */
   fonts?: FontFaceDefinition[];
 };
