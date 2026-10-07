@@ -1,7 +1,7 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
-import { themeableComponents } from '../../src/theme/registry';
+import { themeableComponents } from '../../src/styles';
 
 const pkgRoot = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -89,7 +89,7 @@ function categorizeRuntimeExport(name: string): ExportCategory {
   if (name.endsWith('Chrome')) return 'chrome';
   if (semanticToneExports.has(name)) return 'semantic-tone';
   if (
-    /^(designTokens|tokens|tokenValues|palette|generateColors|createToneFace|buildToneFace|onBackground|TONE_|shadowElevation|darkSyntaxValues|lightSyntaxValues|PALETTE_|extendTokens)/.test(
+    /^(designTokens|tokenValues|palette|generateColors|createToneFace|buildToneFace|onBackground|TONE_|shadowElevation|darkSyntaxValues|lightSyntaxValues|PALETTE_)/.test(
       name,
     ) ||
     name.startsWith('Palette')
@@ -97,14 +97,14 @@ function categorizeRuntimeExport(name: string): ExportCategory {
     return 'tokens';
   }
   if (
-    /^(createDesignTheme|disposeDesignTheme|mergeThemeOverrides|themeableComponents|themeWhen|when|atReducedMotion|DEFAULT_THEME_NAME|SURFACE_ATTRIBUTE|defaultThemeClassName|colorModes|conditional)/.test(
+    /^(createDesignTheme|disposeDesignTheme|mergeThemeOverrides|themeWhen|when|atReducedMotion|DEFAULT_THEME_NAME|SURFACE_ATTRIBUTE|defaultThemeClassName|colorModes|conditional)/.test(
       name,
     ) ||
     name.startsWith('Theme')
   ) {
     return 'theme';
   }
-  if (/^(typestyles|styles|global|registerColorSchemeGlobals)/.test(name)) return 'runtime';
+  if (/^(typestyles|styles|global)/.test(name)) return 'runtime';
   if (
     /^(toc|Toc|positionToc|TOC_|collectArticle|createTocSpy|findScrollContainer|pickActive|resolveActive)/.test(
       name,

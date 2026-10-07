@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vite-plus/test';
-import { themeableComponents } from '../src/theme/registry';
+import { themeableComponents } from '../src/styles';
 
 describe('recipe smoke', () => {
   it('invokes every themeable recipe without throwing', () => {

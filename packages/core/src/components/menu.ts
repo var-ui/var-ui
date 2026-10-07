@@ -3,7 +3,7 @@ import { designTokens as t } from '../tokens';
 import { overlayPresenceStyles } from './overlayPresence';
 import { themeableVars } from './themeableVars';
 
-/** Internal CSS variables for theme overrides (`vars` on `theme.componentStyles`). */
+/** Internal CSS variables for theme overrides (`vars` on theme `components`). */
 export const menuVarDefinitions = {
   popoverBackground: {
     value: t.color.background.surface.var,

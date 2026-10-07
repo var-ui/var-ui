@@ -24,7 +24,7 @@ describe('@var-ui/core/styles', () => {
   it('re-exports registrations so vp pack cannot emit an empty styles.mjs', () => {
     const source = readFileSync(new URL('../src/styles.ts', import.meta.url), 'utf8');
     expect(source).toMatch(/export\s*\{[\s\S]*registerDefaultTheme/);
-    expect(source).toMatch(/export\s*\{[\s\S]*themeableComponents/);
+    expect(source).toMatch(/export const themeableComponents/);
     expect(source).toMatch(/export\s*\{[\s\S]*registerBaseStyles/);
   });
 });

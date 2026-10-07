@@ -5,7 +5,6 @@
 export * from './components/semanticTone';
 export { resetRegisteredFontFaces } from './fonts/register-font-face';
 export { registerBaseStyles } from './theme/base-styles';
-export { registerColorSchemeGlobals } from './runtime';
 export * from './components/toc/spy';
 export * from './components/indicators/tabs';
 export * from './components/indicators/segmented-control';

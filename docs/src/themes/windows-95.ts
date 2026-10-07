@@ -6,6 +6,7 @@ import {
   darkSyntaxValues,
   lightSyntaxValues,
   typestyles,
+  type CreateTokenValues,
   type DesignThemePreset,
 } from '@var-ui/core';
 
@@ -215,7 +216,7 @@ export const windows95Preset: DesignThemePreset = {
     color: win95LightColorValues,
   },
   colorMode: {
-    dark: win95DarkColorValues,
+    dark: { color: win95DarkColorValues as CreateTokenValues },
   },
 };
 

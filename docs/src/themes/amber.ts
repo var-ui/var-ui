@@ -6,6 +6,7 @@ import {
   darkSyntaxValues,
   lightSyntaxValues,
   shadowElevationValues,
+  type CreateTokenValues,
   type DesignThemePreset,
   type DesignTokens,
 } from '@var-ui/core';
@@ -153,7 +154,7 @@ export const amberPreset: DesignThemePreset = {
     shadow: amberLightShadowValues,
   },
   colorMode: {
-    dark: amberDarkColorValues,
+    dark: { color: amberDarkColorValues as CreateTokenValues },
   },
 };
 

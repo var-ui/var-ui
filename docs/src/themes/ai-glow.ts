@@ -7,6 +7,7 @@ import {
   groteskMono,
   lightSyntaxValues,
   typestyles,
+  type CreateTokenValues,
   type DesignThemePreset,
 } from '@var-ui/core';
 
@@ -225,7 +226,7 @@ export const aiGlowPreset: DesignThemePreset = {
     color: aiGlowLightColorValues,
   },
   colorMode: {
-    dark: aiGlowDarkColorValues,
+    dark: { color: aiGlowDarkColorValues as CreateTokenValues },
   },
 };
 

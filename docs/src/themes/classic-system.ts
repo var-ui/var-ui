@@ -11,6 +11,11 @@ import {
   type DesignThemePreset,
 } from '@var-ui/core';
 
+void button;
+void segmentedControl;
+void tabs;
+void toc;
+
 export const classicSystemPreset: DesignThemePreset = {
   tokens: {
     fontFamily: {
@@ -238,58 +243,56 @@ export const classicSystemPreset: DesignThemePreset = {
 export const classicSystemTheme = createDesignTheme({
   name: 'classic-system',
   ...classicSystemPreset,
-});
-
-classicSystemTheme.componentStyles(tabs, () => ({
-  vars: {
-    railRadius: '0px',
-  },
-}));
-
-classicSystemTheme.componentStyles(segmentedControl, () => ({
-  base: {
-    root: {
-      borderWidth: t.borderWidth.default.var,
-      borderStyle: 'solid',
-      borderColor: t.color.border.default.var,
-      padding: 0,
-      '&::after': {
-        boxShadow: 'none',
-        top: 0,
-        bottom: 0,
+  components: {
+    tabs: () => ({
+      vars: {
+        railRadius: '0px',
       },
-    },
-  },
-}));
-
-classicSystemTheme.componentStyles(toc, () => ({
-  vars: {
-    railRadius: '0px',
-  },
-}));
-
-classicSystemTheme.componentStyles(button, (v) => {
-  const brutalistLift = '4px';
-
-  return {
-    base: {
-      transition:
-        'background-color 80ms steps(2, end), border-color 80ms steps(2, end), box-shadow 80ms steps(2, end), transform 80ms steps(2, end)',
-      '&:hover:not([disabled])': {
-        transform: `translate(${brutalistLift}, calc(-1 * ${brutalistLift}))`,
-        boxShadow: v.shadow.xl.var,
-      },
-      '&:active:not([disabled])': {
-        transform: 'none',
-        boxShadow: 'none',
-      },
-    },
-    variants: {
-      appearance: {
-        filled: {
-          borderColor: v.color.border.default.var,
+    }),
+    'segmented-control': ({ tokens }) => ({
+      base: {
+        root: {
+          borderWidth: tokens.borderWidth.default.var,
+          borderStyle: 'solid',
+          borderColor: tokens.color.border.default.var,
+          padding: 0,
+          '&::after': {
+            boxShadow: 'none',
+            top: 0,
+            bottom: 0,
+          },
         },
       },
+    }),
+    toc: () => ({
+      vars: {
+        railRadius: '0px',
+      },
+    }),
+    button: ({ tokens: v }) => {
+      const brutalistLift = '4px';
+
+      return {
+        base: {
+          transition:
+            'background-color 80ms steps(2, end), border-color 80ms steps(2, end), box-shadow 80ms steps(2, end), transform 80ms steps(2, end)',
+          '&:hover:not([disabled])': {
+            transform: `translate(${brutalistLift}, calc(-1 * ${brutalistLift}))`,
+            boxShadow: v.shadow.xl.var,
+          },
+          '&:active:not([disabled])': {
+            transform: 'none',
+            boxShadow: 'none',
+          },
+        },
+        variants: {
+          appearance: {
+            filled: {
+              borderColor: v.color.border.default.var,
+            },
+          },
+        },
+      };
     },
-  };
+  },
 });

@@ -4,8 +4,8 @@ import {
   createToneFace,
   designTokens as p,
   groteskMono,
-  lightSyntaxValues,
   layoutPanel,
+  lightSyntaxValues,
   menu,
   segmentedControl,
   sideNav,
@@ -13,6 +13,13 @@ import {
   type DesignThemePreset,
   type DesignTokens,
 } from '@var-ui/core';
+
+// Ensure recipes exist before `components` overrides compile (docs may tree-shake unused exports).
+void menu;
+void segmentedControl;
+void topNav;
+void sideNav;
+void layoutPanel;
 
 /** Zero-offset, zero-blur spread ring using the mode-aware border color. */
 function forestSpreadShadow(spread: number): string {
@@ -238,51 +245,48 @@ export const forestTheme = createDesignTheme({
   name: 'forest',
   ...forestPreset,
   modes: [],
+  components: {
+    menu: ({ tokens }) => ({
+      vars: {
+        popoverBackground: tokens.color.background.app.var,
+      },
+    }),
+    'segmented-control': ({ tokens }) => ({
+      vars: {
+        indicatorBackground: tokens.color.background.app.var,
+      },
+    }),
+    'top-nav': ({ tokens }) => ({
+      vars: {
+        border: 'transparent',
+      },
+      base: {
+        root: {
+          borderBottomWidth: 0,
+          margin: tokens.space[2].var,
+          borderRadius: tokens.radius.lg.var,
+        },
+      },
+    }),
+    'side-nav': ({ tokens }) => ({
+      vars: {
+        border: tokens.color.background.app.var,
+      },
+      base: {
+        root: {
+          margin: tokens.space[2].var,
+          borderRadius: tokens.radius.lg.var,
+          overflow: 'hidden',
+        },
+        footer: {
+          borderWidth: tokens.borderWidth.thick.var,
+        },
+      },
+    }),
+    'layout-panel': () => ({
+      vars: {
+        border: 'transparent',
+      },
+    }),
+  },
 });
-
-forestTheme.componentStyles(menu, (tokens) => ({
-  vars: {
-    popoverBackground: tokens.color.background.app.var,
-  },
-}));
-
-forestTheme.componentStyles(segmentedControl, (tokens) => ({
-  vars: {
-    indicatorBackground: tokens.color.background.app.var,
-  },
-}));
-
-forestTheme.componentStyles(topNav, (tokens) => ({
-  vars: {
-    border: 'transparent',
-  },
-  base: {
-    root: {
-      borderBottomWidth: 0,
-      margin: tokens.space[2].var,
-      borderRadius: tokens.radius.lg.var,
-    },
-  },
-}));
-
-forestTheme.componentStyles(sideNav, (tokens) => ({
-  vars: {
-    border: tokens.color.background.app.var,
-  },
-  base: {
-    root: {
-      margin: tokens.space[2].var,
-      borderRadius: tokens.radius.lg.var,
-      overflow: 'hidden',
-    },
-    footer: {
-      borderWidth: tokens.borderWidth.thick.var,
-    },
-  },
-}));
-
-forestTheme.componentStyles(layoutPanel, () => ({
-  vars: {
-    border: 'transparent',
-  },
-}));

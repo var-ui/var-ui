@@ -2,7 +2,6 @@ import { describe, it, expect, beforeEach } from 'vite-plus/test';
 import { flushSync, getRegisteredCss, reset } from 'typestyles';
 import { createDesignTheme, disposeDesignTheme } from '../src/theme/create-theme';
 import { DEFAULT_THEME_NAME, SURFACE_ATTRIBUTE } from '../src/theme/constants';
-import { extendTokens } from '../src/theme/extend-tokens';
 import { resetRegisteredFontFaces } from '../src/fonts/register-font-face';
 import { registerTestGlobals } from './lib/register-test-globals';
 import { styles } from '../src/runtime';
@@ -117,8 +116,10 @@ describe('createDesignTheme', () => {
       tokens: { fontSize: { md: '20px' } },
       colorMode: {
         dark: {
-          tone: {
-            accent: { foreground: '#ff0000', background: '#ff0000' },
+          color: {
+            tone: {
+              accent: { foreground: '#ff0000', background: '#ff0000' },
+            },
           },
         },
       },
@@ -135,17 +136,21 @@ describe('createDesignTheme', () => {
       name: 'ref-accent',
       colorMode: {
         light: {
-          tone: {
-            accent: {
-              foreground: designTokens.color.palette['sky-7'].var,
-              background: designTokens.color.palette['sky-7'].var,
+          color: {
+            tone: {
+              accent: {
+                foreground: designTokens.color.palette['sky-7'].var,
+                background: designTokens.color.palette['sky-7'].var,
+              },
             },
           },
         },
       },
     });
     const css = getRegisteredCss();
-    expect(css).toMatch(/--var-ui-tone-accent-foreground:\s*var\(--var-ui-color-palette-sky-7\)/);
+    expect(css).toMatch(
+      /--var-ui-color-tone-accent-foreground:\s*light-dark\(var\(--var-ui-color-palette-sky-7\)/,
+    );
   });
 
   it('sets color-scheme on the theme surface for light-dark() resolution', () => {
@@ -196,9 +201,9 @@ describe('createDesignTheme', () => {
       },
     });
 
-    const css = getRegisteredCss();
+    const css = `${getRegisteredCss()}\n${liveCssText()}`;
     expect(css).toMatch(
-      /--var-ui-color-background-app:\s*light-dark\(oklch\(95% 0\.02 150\), oklch\(23% 0\.02 165\)\)/,
+      /--var-ui-color-background-app:\s*light-dark\(oklch\(95% 0\.02 150\), var\(--var-ui-color-palette-slate-10\)\)/,
     );
   });
 
@@ -207,18 +212,22 @@ describe('createDesignTheme', () => {
       name: 'partial-palette',
       colorMode: {
         light: {
-          tone: {
-            accent: {
-              foreground: 'oklch(55% 0.2 290)',
-              background: 'oklch(55% 0.2 290)',
+          color: {
+            tone: {
+              accent: {
+                foreground: 'oklch(55% 0.2 290)',
+                background: 'oklch(55% 0.2 290)',
+              },
             },
           },
         },
         dark: {
-          tone: {
-            accent: {
-              foreground: 'oklch(72% 0.16 290)',
-              background: 'oklch(72% 0.16 290)',
+          color: {
+            tone: {
+              accent: {
+                foreground: 'oklch(72% 0.16 290)',
+                background: 'oklch(72% 0.16 290)',
+              },
             },
           },
         },
@@ -227,42 +236,8 @@ describe('createDesignTheme', () => {
 
     const css = getRegisteredCss();
     expect(css).toMatch(
-      /--var-ui-tone-accent-foreground:\s*light-dark\(oklch\(55% 0\.2 290\), oklch\(72% 0\.16 290\)\)/,
+      /--var-ui-color-tone-accent-foreground:\s*light-dark\(oklch\(55% 0\.2 290\), oklch\(72% 0\.16 290\)\)/,
     );
-  });
-
-  it('extendTokens registers light-dark() for color-compatible mode-aware leaves', () => {
-    const brand = extendTokens('brand', {
-      accent: {
-        light: 'oklch(55% 0.2 290)',
-        dark: 'oklch(72% 0.16 290)',
-      },
-      halo: 'radial-gradient(circle, red, transparent)',
-    });
-
-    expect(brand.accent).toBe('var(--var-ui-brand-accent)');
-    expect(brand.halo).toBe('var(--var-ui-brand-halo)');
-
-    const css = getRegisteredCss();
-    expect(css).toMatch(
-      /--var-ui-brand-accent:\s*light-dark\(oklch\(55% 0\.2 290\), oklch\(72% 0\.16 290\)\)/,
-    );
-    expect(css).toContain('--var-ui-brand-halo: radial-gradient(circle, red, transparent)');
-    expect(css).not.toContain(':root[data-mode="dark"]');
-  });
-
-  it('extendTokens keeps dark override rules for shadow-like mode-aware leaves', () => {
-    extendTokens('brandGlow', {
-      glow: {
-        light: '0 0 0 3px oklch(90% 0.1 280)',
-        dark: '0 0 16px oklch(70% 0.2 280)',
-      },
-    });
-
-    const css = getRegisteredCss();
-    expect(css).toContain('--var-ui-brandGlow-glow: 0 0 0 3px oklch(90% 0.1 280)');
-    expect(css).toContain(':root[data-mode="dark"]');
-    expect(css).toContain('--var-ui-brandGlow-glow: 0 0 16px oklch(70% 0.2 280)');
   });
 
   it('custom token namespaces merge refs onto theme.tokens and scope light-dark values', () => {
@@ -274,35 +249,61 @@ describe('createDesignTheme', () => {
             light: 'blue',
             dark: 'navy',
           },
+          halo: 'radial-gradient(circle, red, transparent)',
         },
       },
     });
 
     expect(acme.tokens.brand.accent).toBe('var(--var-ui-brand-accent)');
+    expect(acme.tokens.brand.halo).toBe('var(--var-ui-brand-halo)');
     expect(acme.tokens.color).toBeDefined();
 
     const css = getRegisteredCss();
     expect(css).toContain(`${themeClass('acme-custom')}`);
     expect(css).toMatch(/--var-ui-brand-accent:\s*light-dark\(blue, navy\)/);
+    expect(css).toContain('--var-ui-brand-halo: radial-gradient(circle, red, transparent)');
+  });
+
+  it('custom namespaces keep dark override rules for shadow-like mode-aware leaves', () => {
+    createDesignTheme({
+      name: 'acme-glow',
+      tokens: {
+        brandGlow: {
+          glow: {
+            light: '0 0 0 3px oklch(90% 0.1 280)',
+            dark: '0 0 16px oklch(70% 0.2 280)',
+          },
+        },
+      },
+    });
+
+    const css = getRegisteredCss();
+    expect(css).toContain('--var-ui-brandGlow-glow: 0 0 0 3px oklch(90% 0.1 280)');
+    expect(css).toContain(`${themeClass('acme-glow')}[data-mode="dark"]`);
+    expect(css).toContain('--var-ui-brandGlow-glow: 0 0 16px oklch(70% 0.2 280)');
   });
 
   it('components emits overrides under the theme class', () => {
     button(resolveButtonProps({ intent: 'primary', size: 'md' }));
 
-    const theme = createDesignTheme({ name: 'acme-components' });
-    theme.componentStyles(button, (t) => ({
-      base: {
-        borderRadius: t.radius.lg.var,
+    createDesignTheme({
+      name: 'acme-components',
+      components: {
+        button: ({ tokens: t }) => ({
+          base: {
+            borderRadius: t.radius.lg.var,
+          },
+          variants: {
+            tone: {
+              accent: { textTransform: 'uppercase' },
+            },
+            appearance: {
+              filled: {},
+            },
+          },
+        }),
       },
-      variants: {
-        tone: {
-          accent: { textTransform: 'uppercase' },
-        },
-        appearance: {
-          filled: {},
-        },
-      },
-    }));
+    });
 
     const css = getRegisteredCss();
     expect(css).toMatch(/@layer overrides/);
@@ -313,9 +314,13 @@ describe('createDesignTheme', () => {
   it('components emits typed vars overrides on the var host slot', () => {
     sideNav();
 
-    const theme = createDesignTheme({ name: 'acme-nav-vars' });
-    theme.componentStyles(sideNav, {
-      vars: { border: 'transparent' },
+    createDesignTheme({
+      name: 'acme-nav-vars',
+      components: {
+        'side-nav': {
+          vars: { border: 'transparent' },
+        },
+      },
     });
 
     const css = getRegisteredCss();
@@ -326,9 +331,13 @@ describe('createDesignTheme', () => {
   it('components emits layoutPanel vars on the panel host slot', () => {
     layoutPanel();
 
-    const theme = createDesignTheme({ name: 'acme-layout-panel-vars' });
-    theme.componentStyles(layoutPanel, {
-      vars: { border: 'transparent' },
+    createDesignTheme({
+      name: 'acme-layout-panel-vars',
+      components: {
+        'layout-panel': {
+          vars: { border: 'transparent' },
+        },
+      },
     });
 
     const css = getRegisteredCss();
@@ -340,19 +349,21 @@ describe('createDesignTheme', () => {
     button(resolveButtonProps({ intent: 'primary', size: 'md' }));
     badge({});
 
-    const theme = createDesignTheme({
+    createDesignTheme({
       name: 'acme-mixed',
       tokens: {
         brand: {
           accent: { light: 'blue', dark: 'navy' },
         },
       },
-    });
-    theme.componentStyles(button, (t) => ({
-      base: { color: t.brand.accent },
-    }));
-    theme.componentStyles(badge, {
-      base: { borderRadius: '999px' },
+      components: {
+        button: ({ tokens: t }) => ({
+          base: { color: t.brand.accent },
+        }),
+        badge: {
+          base: { borderRadius: '999px' },
+        },
+      },
     });
 
     const css = getRegisteredCss();

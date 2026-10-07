@@ -22,16 +22,3 @@ export const typestyles = createTypeStyles({
 
 /** Var UI's configured TypeStyles `styles` API (`component`, `override`, `scope`, …). */
 export const { styles, global } = typestyles;
-
-/** @internal Re-register after `reset()` in tests. */
-export function registerColorSchemeGlobals(): void {
-  typestyles.global.style(':root', { colorScheme: 'light dark' }, { layer: tokenLayer });
-  typestyles.global.style('[data-surface="dark"]', { colorScheme: 'dark' }, { layer: tokenLayer });
-  typestyles.global.style(
-    '[data-surface="light"]',
-    { colorScheme: 'light' },
-    { layer: tokenLayer },
-  );
-}
-
-registerColorSchemeGlobals();

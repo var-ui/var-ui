@@ -1,80 +1,61 @@
-import type { CreateTokenValues, OverrideConfigFor, ThemePreset, ThemeSurface } from 'typestyles';
+import type { CreateTokenValues, ThemeSurface } from 'typestyles';
 import { registerFontFace } from '../fonts/register-font-face';
-import { styles, typestyles } from '../runtime';
+import { typestyles } from '../runtime';
 import { designTokens } from '../tokens';
 import { dark } from '../tokens/defaults/color';
-import { tokenValues } from '../tokens/preset';
+import { defaultTokens } from '../tokens/preset';
+import type { DesignThemePreset } from '../tokens/types';
 import type {
+  CustomNamespacesFromTokenMap,
   DesignTheme,
-  DesignThemeConfig,
-  DesignThemePreset,
-  DesignThemeTokens,
-  InferThemeExtendFromConfig,
-} from '../types';
-import type { ExtendTokenValues } from './extend-tokens';
-
-type ExtendMap = Record<string, ExtendTokenValues>;
+  DesignThemeComponentsFor,
+  DesignThemeConfigFields,
+} from './types';
 
 /** Default token + dark color base merged when `from` is omitted. */
 const builtInPreset: DesignThemePreset = {
-  tokens: tokenValues,
-  colorMode: { dark },
+  tokens: defaultTokens,
+  colorMode: { dark: { color: dark as CreateTokenValues } },
 };
 
-function presetForTypeStyles(from: DesignThemePreset): ThemePreset {
-  return {
-    tokens: (from.tokens ?? {}) as Record<string, CreateTokenValues>,
-    colorMode: from.colorMode,
-    modes: from.modes,
-  };
-}
-
-function themeSelectorPrefix(theme: Pick<ThemeSurface, 'className'>): string {
-  return theme.className.startsWith('.') ? theme.className : `.${theme.className}`;
-}
-
-function attachDesignTheme<E extends ExtendMap>(surface: ThemeSurface<E>): DesignTheme<E> {
-  const selectorPrefix = themeSelectorPrefix(surface);
-  const tokens = (surface.tokens ?? designTokens) as DesignThemeTokens<E>;
-
-  const componentStyles = <C>(
-    component: C,
-    config: OverrideConfigFor<C> | ((t: DesignThemeTokens<E>) => OverrideConfigFor<C>),
-  ) => {
-    const resolved = typeof config === 'function' ? config(tokens) : config;
-    styles.override(component as never, resolved as never, {
-      selectorPrefix,
-      layer: 'overrides',
-    });
-  };
-
-  return Object.assign(surface, { tokens, componentStyles }) as DesignTheme<E>;
-}
+type CreateDesignThemeConfig<
+  Tok extends Record<string, CreateTokenValues> | undefined,
+  Rest extends Omit<DesignThemeConfigFields, 'name' | 'tokens'>,
+> = { name: string; tokens?: Tok } & Rest &
+  DesignThemeComponentsFor<CustomNamespacesFromTokenMap<NonNullable<Tok>>>;
 
 /**
- * Merge token overrides, ambient colorMode, optional custom namespaces, and compile a theme surface.
- * Delegates to TypeStyles `tokens.createTheme`; scoped recipe restyles use {@link DesignTheme.componentStyles}.
+ * Compile a TypeStyles theme surface (tokens, colorMode, modes, and optional `components` overrides).
  */
-export function createDesignTheme<const T extends DesignThemeConfig>(
-  config: T,
-): DesignTheme<InferThemeExtendFromConfig<T>> {
-  const { from, tokens: tokenOverrides, colorMode, modes, fonts, name } = config;
+export function createDesignTheme<
+  const Tok extends Record<string, CreateTokenValues> | undefined = undefined,
+  const Rest extends Omit<DesignThemeConfigFields, 'name' | 'tokens'> = {},
+>(
+  config: CreateDesignThemeConfig<Tok, Rest>,
+): DesignTheme<CustomNamespacesFromTokenMap<NonNullable<Tok>>> {
+  const { from, tokens: tokenOverrides, colorMode, modes, fonts, name, components } = config;
 
   const preset = from ?? builtInPreset;
   for (const face of [...(preset.fonts ?? []), ...(fonts ?? [])]) {
     registerFontFace(face);
   }
 
+  type CreateThemeArg = Parameters<typeof typestyles.tokens.createTheme>[0];
+
   const surface = typestyles.tokens.createTheme({
     name,
     replace: true,
-    from: presetForTypeStyles(preset),
-    tokens: tokenOverrides as Record<string, CreateTokenValues> | undefined,
+    from: preset,
+    tokens: tokenOverrides,
     colorMode,
     modes,
-  });
+    components,
+  } as CreateThemeArg);
 
-  return attachDesignTheme(surface as ThemeSurface<InferThemeExtendFromConfig<T>>);
+  return {
+    ...surface,
+    tokens: surface.tokens ?? designTokens,
+  } as DesignTheme<CustomNamespacesFromTokenMap<NonNullable<Tok>>>;
 }
 
 /**

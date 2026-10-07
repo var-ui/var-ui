@@ -1,4 +1,4 @@
-import type { DesignColorValues, SemanticColorTokens } from '../../types';
+import type { ColorTokenPatch, SemanticColorTokens } from '../../types';
 import { background, darkBackground } from './background';
 import { border, darkBorder } from './border';
 import { code, darkCode } from './code';
@@ -13,7 +13,7 @@ import { track, darkTrack } from './track';
 
 export { lightCodeValues, darkCodeValues } from './code';
 
-export const color: Omit<SemanticColorTokens, 'tone'> & Pick<DesignColorValues, 'tone'> = {
+export const color: Omit<SemanticColorTokens, 'tone'> & Pick<ColorTokenPatch, 'tone'> = {
   background,
   text,
   tone,

@@ -1,10 +1,9 @@
 /**
  * Build-time CSS extraction entry for `@typestyles/vite`.
  *
- * Re-export the registrations (do not use side-effect-only imports). `vp pack`
- * tree-shakes unused specifiers, and an empty `dist/styles.mjs` means hosts that
- * import `@var-ui/core/styles` never get recipes, base HTML styles, or the
- * default theme — CSS variables then fall back to `@property` initials.
+ * Re-export registrations (do not use side-effect-only imports). `themeableComponents`
+ * pins every themeable recipe handle so `vp pack` cannot emit an empty `dist/styles.mjs`
+ * (hosts would otherwise miss recipes, document globals, and the default theme).
  *
  * ```ts
  * // typestyles-entry.ts
@@ -14,8 +13,12 @@
  * import './my-theme';
  * ```
  */
+import { getRegisteredComponentRefs } from 'typestyles';
 import './components';
-export { themeableComponents } from './theme/registry';
+import { styles } from './runtime';
+
+/** Pins every themeable recipe handle for the extract bundle — not part of `@var-ui/core` main exports. */
+export const themeableComponents = getRegisteredComponentRefs(styles);
 export { hiddenClassName, hiddenStyle } from './components/hidden';
 export { layout, text } from './components/styles';
 export { registerBaseStyles } from './theme/base-styles';

@@ -7,6 +7,7 @@ import {
   groteskMono,
   lightSyntaxValues,
   typestyles,
+  type CreateTokenValues,
   type DesignThemePreset,
 } from '@var-ui/core';
 
@@ -215,7 +216,7 @@ export const newWavePreset: DesignThemePreset = {
     color: newWaveLightColorValues,
   },
   colorMode: {
-    dark: newWaveDarkColorValues,
+    dark: { color: newWaveDarkColorValues as CreateTokenValues },
   },
 };
 

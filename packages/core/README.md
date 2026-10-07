@@ -50,10 +50,10 @@ export default defineConfig({
 });
 ```
 
-`@var-ui/core/styles` registers every component recipe, base HTML styles, layout
-utilities, and the built-in default theme surface. For tree-shaken fixture apps that
-only use a few components, import the recipes you need instead (see
-[`examples/bundle-fixtures`](../../examples/bundle-fixtures/)).
+`@var-ui/core/styles` registers every component recipe, document globals (reset, base
+HTML styles, `color-scheme`), layout utilities, and the built-in default theme surface.
+For tree-shaken fixture apps that only use a few components, import the recipes you need
+instead (see [`examples/bundle-fixtures`](../../examples/bundle-fixtures/)).
 
 Syntax highlighting is app-owned: use `color.code` tokens and wire them to your
 highlighter (see [Syntax highlighting](#syntax-highlighting) below).
@@ -66,7 +66,7 @@ See [`examples/vite-app`](../../examples/vite-app/README.md) and [`examples/astr
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | **Themes**        | `createDesignTheme`, `disposeDesignTheme`, `DEFAULT_THEME_NAME`, `defaultThemeClassName`, `SURFACE_ATTRIBUTE`, `mergeThemeOverrides` |
 | **Tokens**        | `designTokens`, `tokens`, `tokenValues`, `generateColors`, `lightSyntaxValues`, `darkSyntaxValues`                                   |
-| **Customization** | `extendTokens`, `when`, `themeWhen`, `themeableComponents`, `defineFonts`, `groteskMono`                                             |
+| **Customization** | `when`, `themeWhen`, `defineFonts`, `groteskMono`                                                                                    |
 | **TypeStyles**    | `typestyles`, `styles`, `global`                                                                                                     |
 | **Types**         | `DesignTheme`, `DesignThemeConfig`, `DesignThemePreset`, `OverrideConfigFor`, …                                                      |
 
@@ -164,8 +164,8 @@ copy examples from [`docs/src/themes/`](../../docs/src/themes/) in the docs repo
 
 ### Authoring a theme
 
-`createDesignTheme` merges a preset, token patches, and ambient color mode. Scoped recipe
-restyles use `theme.componentStyles(recipe, override)` after creation.
+`createDesignTheme` merges a preset, token patches, ambient color mode, and optional
+scoped recipe restyles via TypeStyles `components` (recipe namespace keys).
 
 1. **`from`** — optional `DesignThemePreset` (`{ tokens?, colorMode?, fonts? }`); defaults to built-in `tokenValues` + dark color mode
 2. **`tokens`** — mode-invariant overrides (light `color` face lives here by default)
@@ -202,11 +202,12 @@ export const acmeTheme = createDesignTheme({
   name: 'acme',
   from: acmePreset, // optional; built-in defaults apply when omitted
   colorMode: { light, dark },
+  components: {
+    button: ({ tokens: t }) => ({
+      base: { borderRadius: t.radius.lg.var },
+    }),
+  },
 });
-
-acmeTheme.componentStyles(button, (t) => ({
-  base: { borderRadius: t.radius.lg.var },
-}));
 
 // acmeTheme.className → `theme-var-ui-acme`
 ```
@@ -221,17 +222,12 @@ typestyles.tokens.createTheme({
   colorMode: { light, dark },
   modes: [...extraModes],
   replace: true,
-});
-
-// Optional per-recipe overrides after creation:
-styles.override(recipe, overrideConfig, {
-  selectorPrefix: `.${theme.className}`,
-  layer: 'overrides',
+  components: { button: ({ tokens }) => ({ base: { … } }) },
 });
 ```
 
-Each return value is a **`DesignTheme`**: `ThemeSurface` (`className`, `name`, `surface.tokens` from TypeStyles),
-plus `componentStyles(recipe, override)` (typed `styles.override` under the theme class).
+Each return value is a **`DesignTheme`**: `ThemeSurface` (`className`, `name`, `tokens` from TypeStyles).
+Recipe restyles belong in `components` on the config (or ad-hoc `styles.override` with `selectorPrefix`).
 
 ### Ambient light / dark mode
 
@@ -242,8 +238,8 @@ the **same element** that carries the theme class. Only the **color** tree (incl
 ### Fixed-tone surfaces (`SURFACE_ATTRIBUTE`)
 
 Import `SURFACE_ATTRIBUTE` (`'data-surface'`) from `@var-ui/core`. Global `color-scheme`
-rules for `data-surface="light"` and `data-surface="dark"` are registered in `runtime.ts`
-on package load — no theme option required.
+rules for `data-surface="light"` and `data-surface="dark"` ship with `@var-ui/core/styles`
+(and `styles.css`) — no theme option required.
 
 Mark a subtree to pin light or dark chrome regardless of ambient mode:
 
@@ -303,10 +299,10 @@ export const acme = createDesignTheme({
 });
 ```
 
-`generateColors` returns `{ light, dark }` (`DesignColorValues` patches, including `code`).
+`generateColors` returns `{ light, dark }` (`ColorTokenPatch` values, including `code`).
 That shape plugs straight into `colorMode`. For advanced merges, `mergeThemeOverrides` from
 `@var-ui/core` (re-exported from TypeStyles) is not a second theme API. Use `tokens` for custom namespaces and
-typed recipe restyles via `theme.componentStyles` / `styles.override`.
+typed recipe restyles via `components` on `createDesignTheme` / `styles.override`.
 
 ## Authoring recipes
 

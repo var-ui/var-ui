@@ -15,7 +15,7 @@ vi.mock('typestyles/color-scale', async (importOriginal) => {
 
 import { palette } from '../../src/tokens/defaults/color/palette';
 import { generateColors } from '../../src/tokens/generate-colors';
-import type { DesignColorValues } from '../../src/tokens/types';
+import type { ColorTokenPatch } from '../../src/tokens/types';
 
 /** Snapshot of representative static palette steps. */
 const PALETTE_BYTE_IDENTICAL_FIXTURE: Record<string, string> = {
@@ -26,7 +26,7 @@ const PALETTE_BYTE_IDENTICAL_FIXTURE: Record<string, string> = {
   'gray-1': 'oklch(98.01% 0.002 264)',
 };
 
-function assertDesignColorShape(values: DesignColorValues): void {
+function assertDesignColorShape(values: ColorTokenPatch): void {
   expect(values.background).toMatchObject({
     app: expect.any(String),
     surface: expect.any(String),

@@ -3,7 +3,7 @@ import { contrastRatio, generateRamp, parseColor } from 'typestyles/color-scale'
 import { darkSyntaxValues, lightSyntaxValues } from './defaults/color';
 import { paletteHue } from './defaults/color/palette';
 import { buildToneFace } from './tone-face';
-import type { DesignColorValues, DesignTokens } from './types';
+import type { ColorTokenPatch, DesignTokens } from './types';
 
 export type NeutralStyle = 'neutral' | 'cool' | 'warm';
 export type ColorContrast = 'standard' | 'high';
@@ -15,8 +15,8 @@ export type GenerateColorsInput = {
 };
 
 export type GenerateColorsResult = {
-  light: DesignColorValues;
-  dark: DesignColorValues;
+  light: ColorTokenPatch;
+  dark: ColorTokenPatch;
 };
 
 /**

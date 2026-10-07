@@ -16,12 +16,16 @@ describe('theme conditions and colorModes', () => {
 
   it('emits light-dark() for color mode values on override properties', () => {
     button(resolveButtonProps({ intent: 'primary', size: 'md' }));
-    const theme = createDesignTheme({ name: 'mode-values' });
-    theme.componentStyles(button, () => ({
-      base: {
-        color: { light: '#111111', dark: '#eeeeee' },
+    createDesignTheme({
+      name: 'mode-values',
+      components: {
+        button: () => ({
+          base: {
+            color: { light: '#111111', dark: '#eeeeee' },
+          },
+        }),
       },
-    }));
+    });
 
     const css = getRegisteredCss();
     expect(css).toContain(`${themeClass('mode-values')} .var-ui-button`);
@@ -30,12 +34,16 @@ describe('theme conditions and colorModes', () => {
 
   it('emits conditional override rules for when.dark', () => {
     button(resolveButtonProps({ intent: 'primary', size: 'md' }));
-    const theme = createDesignTheme({ name: 'conditions' });
-    theme.componentStyles(button, () => ({
-      base: {
-        conditions: [when.dark({ letterSpacing: '0.06em' })],
+    createDesignTheme({
+      name: 'conditions',
+      components: {
+        button: () => ({
+          base: {
+            conditions: [when.dark({ letterSpacing: '0.06em' })],
+          },
+        }),
       },
-    }));
+    });
 
     const css = getRegisteredCss();
     expect(css).toContain(`${themeClass('conditions')} [data-mode="dark"] .var-ui-button`);
