@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vite-plus/test';
 import { flushSync, getRegisteredCss, reset } from 'typestyles';
 import { createDesignTheme, disposeDesignTheme } from '../src/theme/create-theme';
+import { defaultTheme, registerDefaultTheme } from '../src/theme/register-default';
 import { DEFAULT_THEME_NAME, SURFACE_ATTRIBUTE } from '../src/theme/constants';
 import { resetRegisteredFontFaces } from '../src/fonts/register-font-face';
 import { registerTestGlobals } from './lib/register-test-globals';
@@ -10,6 +11,7 @@ import { badge } from '../src/components/badge';
 import { layoutPanel } from '../src/components/layout';
 import { sideNav } from '../src/components/sideNav';
 import { designTokens } from '../src/tokens';
+import { defaultTokens } from '../src/tokens/preset';
 
 /** Runtime uses scopeId `var-ui` — theme classes are `theme-var-ui-<name>`. */
 const themeClass = (name: string) => `.theme-var-ui-${name}`;
@@ -81,6 +83,7 @@ describe('createDesignTheme', () => {
     reset();
     resetRegisteredFontFaces();
     registerTestGlobals();
+    registerDefaultTheme();
   });
 
   it('registers declared tokens with inheritable @property rules', async () => {
@@ -111,14 +114,15 @@ describe('createDesignTheme', () => {
   });
 
   it('emits dark color values via light-dark() on theme tokens', () => {
-    createDesignTheme({
+    defaultTheme.override({
       name: 'color-only-dark',
-      tokens: { fontSize: { md: '20px' } },
-      colorMode: {
-        dark: {
-          color: {
-            tone: {
-              accent: { foreground: '#ff0000', background: '#ff0000' },
+      tokens: {
+        fontSize: { md: '20px' },
+        color: {
+          tone: {
+            accent: {
+              foreground: { light: designTokens.color.tone.accent.foreground.var, dark: '#ff0000' },
+              background: { light: designTokens.color.tone.accent.background.var, dark: '#ff0000' },
             },
           },
         },
@@ -132,15 +136,19 @@ describe('createDesignTheme', () => {
   });
 
   it('accepts token refs in tokens.color', () => {
-    createDesignTheme({
+    defaultTheme.override({
       name: 'ref-accent',
-      colorMode: {
-        light: {
-          color: {
-            tone: {
-              accent: {
-                foreground: designTokens.color.palette['sky-7'].var,
-                background: designTokens.color.palette['sky-7'].var,
+      tokens: {
+        color: {
+          tone: {
+            accent: {
+              foreground: {
+                light: designTokens.color.palette['sky-7'].var,
+                dark: designTokens.color.palette['sky-4'].var,
+              },
+              background: {
+                light: designTokens.color.palette['sky-7'].var,
+                dark: designTokens.color.palette['sky-4'].var,
               },
             },
           },
@@ -149,23 +157,19 @@ describe('createDesignTheme', () => {
     });
     const css = getRegisteredCss();
     expect(css).toMatch(
-      /--var-ui-color-tone-accent-foreground:\s*light-dark\(var\(--var-ui-color-palette-sky-7\)/,
+      /--var-ui-color-tone-accent-foreground:\s*light-dark\(var\(--var-ui-color-palette-sky-7\),\s*var\(--var-ui-color-palette-sky-4\)\)/,
     );
   });
 
   it('sets color-scheme on the theme surface for light-dark() resolution', () => {
-    createDesignTheme({
-      name: 'with-surface',
-    });
+    defaultTheme.override({ name: 'with-surface' });
     const css = getRegisteredCss();
     expect(css).toContain(`${themeClass('with-surface')} { color-scheme: light dark`);
     expect(css).not.toContain(`${themeClass('with-surface')} [${SURFACE_ATTRIBUTE}="dark"]`);
   });
 
   it('does not emit surface color mode rules (surfaces use global color-scheme)', () => {
-    createDesignTheme({
-      name: 'ambient-only',
-    });
+    defaultTheme.override({ name: 'ambient-only' });
 
     const css = getRegisteredCss();
     expect(css).not.toContain(`${themeClass('ambient-only')} [${SURFACE_ATTRIBUTE}="dark"]`);
@@ -174,9 +178,7 @@ describe('createDesignTheme', () => {
   });
 
   it('does not emit prefers-color-scheme color token rules on the theme class', () => {
-    createDesignTheme({
-      name: 'system-fixture',
-    });
+    defaultTheme.override({ name: 'system-fixture' });
 
     const css = getRegisteredCss();
     expect(css).not.toMatch(
@@ -187,7 +189,7 @@ describe('createDesignTheme', () => {
   });
 
   it('compiles inline { light, dark } leaves in tokens.color to light-dark()', () => {
-    createDesignTheme({
+    defaultTheme.override({
       name: 'inline-mode-leaves',
       tokens: {
         color: {
@@ -202,32 +204,18 @@ describe('createDesignTheme', () => {
     });
 
     const css = `${getRegisteredCss()}\n${liveCssText()}`;
-    expect(css).toMatch(
-      /--var-ui-color-background-app:\s*light-dark\(oklch\(95% 0\.02 150\), var\(--var-ui-color-palette-slate-10\)\)/,
-    );
+    expect(css).toMatch(/--var-ui-color-background-app:\s*light-dark\(oklch\(95% 0\.02 150\)/);
   });
 
-  it('deep-merges partial colorMode onto the default preset with light-dark()', () => {
-    createDesignTheme({
+  it('deep-merges mode-aware color leaves onto the default theme with light-dark()', () => {
+    defaultTheme.override({
       name: 'partial-palette',
-      colorMode: {
-        light: {
-          color: {
-            tone: {
-              accent: {
-                foreground: 'oklch(55% 0.2 290)',
-                background: 'oklch(55% 0.2 290)',
-              },
-            },
-          },
-        },
-        dark: {
-          color: {
-            tone: {
-              accent: {
-                foreground: 'oklch(72% 0.16 290)',
-                background: 'oklch(72% 0.16 290)',
-              },
+      tokens: {
+        color: {
+          tone: {
+            accent: {
+              foreground: { light: 'oklch(55% 0.2 290)', dark: 'oklch(72% 0.16 290)' },
+              background: { light: 'oklch(55% 0.2 290)', dark: 'oklch(72% 0.16 290)' },
             },
           },
         },
@@ -244,6 +232,7 @@ describe('createDesignTheme', () => {
     const acme = createDesignTheme({
       name: 'acme-custom',
       tokens: {
+        ...defaultTokens,
         brand: {
           accent: {
             light: 'blue',
@@ -268,6 +257,7 @@ describe('createDesignTheme', () => {
     createDesignTheme({
       name: 'acme-glow',
       tokens: {
+        ...defaultTokens,
         brandGlow: {
           glow: {
             light: '0 0 0 3px oklch(90% 0.1 280)',
@@ -286,7 +276,7 @@ describe('createDesignTheme', () => {
   it('components emits overrides under the theme class', () => {
     button(resolveButtonProps({ intent: 'primary', size: 'md' }));
 
-    createDesignTheme({
+    defaultTheme.override({
       name: 'acme-components',
       components: {
         button: ({ tokens: t }) => ({
@@ -314,7 +304,7 @@ describe('createDesignTheme', () => {
   it('components emits typed vars overrides on the var host slot', () => {
     sideNav();
 
-    createDesignTheme({
+    defaultTheme.override({
       name: 'acme-nav-vars',
       components: {
         'side-nav': {
@@ -331,7 +321,7 @@ describe('createDesignTheme', () => {
   it('components emits layoutPanel vars on the panel host slot', () => {
     layoutPanel();
 
-    createDesignTheme({
+    defaultTheme.override({
       name: 'acme-layout-panel-vars',
       components: {
         'layout-panel': {
@@ -352,6 +342,7 @@ describe('createDesignTheme', () => {
     createDesignTheme({
       name: 'acme-mixed',
       tokens: {
+        ...defaultTokens,
         brand: {
           accent: { light: 'blue', dark: 'navy' },
         },
@@ -462,6 +453,7 @@ describe('createDesignTheme', () => {
       reset();
       resetRegisteredFontFaces();
       registerTestGlobals();
+      registerDefaultTheme();
     });
 
     it('registers fonts from config', () => {
@@ -481,20 +473,14 @@ describe('createDesignTheme', () => {
       expect(css).toContain('font-family: "Space Grotesk"');
     });
 
-    it('merges fonts from preset then config', () => {
-      const preset = {
+    it('registers fonts on createDesignTheme', () => {
+      createDesignTheme({
+        name: 'merged-fonts',
         fonts: [
           {
             family: 'JetBrains Mono',
             src: "url('/fonts/jetbrains-mono-latin.woff2') format('woff2')",
           },
-        ],
-      };
-
-      createDesignTheme({
-        name: 'merged-fonts',
-        from: preset,
-        fonts: [
           {
             family: 'Space Grotesk',
             src: "url('/fonts/space-grotesk-latin.woff2') format('woff2')",
@@ -515,7 +501,7 @@ describe('createDesignTheme', () => {
       });
 
       it('does not register @font-face rules', () => {
-        createDesignTheme({ name: DEFAULT_THEME_NAME });
+        createDesignTheme({ name: DEFAULT_THEME_NAME, tokens: defaultTokens });
         const css = getRegisteredCss();
         expect(css).not.toContain('@font-face');
       });

@@ -6,36 +6,27 @@ import { button, createDesignTheme, when, type OverrideConfigFor } from '@var-ui
  */
 export const acmeTheme = createDesignTheme({
   name: 'acme',
-  colorMode: {
-    light: {
-      color: {
-        tone: {
-          accent: {
-            foreground: 'oklch(55% 0.2 290)',
-            background: 'oklch(48% 0.2 290)',
-          },
-        },
-        border: {
-          focus: 'oklch(55% 0.18 290)',
-        },
-      },
-    },
-    dark: {
-      color: {
-        tone: {
-          accent: {
-            foreground: 'oklch(72% 0.16 290)',
-            background: 'oklch(78% 0.14 290)',
-          },
-        },
-        border: {
-          focus: 'oklch(72% 0.16 290)',
-        },
-      },
-    },
-  },
-
   tokens: {
+    color: {
+      tone: {
+        accent: {
+          foreground: {
+            light: 'oklch(55% 0.2 290)',
+            dark: 'oklch(72% 0.16 290)',
+          },
+          background: {
+            light: 'oklch(48% 0.2 290)',
+            dark: 'oklch(78% 0.14 290)',
+          },
+        },
+      },
+      border: {
+        focus: {
+          light: 'oklch(55% 0.18 290)',
+          dark: 'oklch(72% 0.16 290)',
+        },
+      },
+    },
     brand: {
       glow: {
         light: '0 0 0 3px oklch(90% 0.08 290)',

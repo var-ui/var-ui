@@ -1,5 +1,4 @@
-import type { InferValuesFromSchema, ModeAwareTokenLeaf, ThemePreset } from 'typestyles';
-import type { FontFaceDefinition } from '../fonts/types';
+import type { InferValuesFromSchema, ModeAwareTokenLeaf } from 'typestyles';
 import type { tokenSchema } from './schema';
 
 /** Require every key from a schema-derived token value tree (for default registration). */
@@ -7,7 +6,7 @@ type RequiredTokenValues<S> =
   S extends Record<string, unknown> ? { [K in keyof S]-?: RequiredTokenValues<S[K]> } : S;
 
 /** Schema-aware partial token values (mode-aware `{ light, dark }` leaves on scalars). */
-type DesignTokenPatch<T> = T extends string | number
+export type DesignTokenPatch<T> = T extends string | number
   ? ModeAwareTokenLeaf | T
   : T extends readonly (infer U)[]
     ? readonly DesignTokenPatch<U>[]
@@ -26,23 +25,17 @@ export type DesignTokens = RequiredTokenValues<InferValuesFromSchema<typeof toke
 /** Semantic color tokens — palette ramps are registered separately. */
 export type SemanticColorTokens = Omit<DesignTokens['color'], 'palette'>;
 
-/** Partial color namespace values for generators and color-mode patches. */
+/** Partial color namespace values for generators and theme patches (mode-aware leaves allowed). */
 export type ColorTokenPatch = DesignTokenPatch<DesignTokens['color']>;
 
-/** Partial built-in namespace overrides for `createDesignTheme({ tokens })`. */
+/** Partial built-in namespace overrides for `createDesignTheme({ tokens })` / `Theme.override`. */
 export type DesignThemeTokenValues = {
   [K in ThemeOverridableNamespace]?: DesignTokenPatch<DesignTokens[K]>;
 };
 
-/** Reusable TypeStyles preset plus optional `@font-face` rules for `createDesignTheme({ from })`. */
-export type DesignThemePreset = Omit<ThemePreset, 'tokens'> & {
-  tokens?: DesignThemeTokenValues;
-  fonts?: FontFaceDefinition[];
-};
-
 export type {
   DeepPartialTokenValues,
-  ThemeColorModePatches,
+  DeepPartialThemeTokens,
   ThemeModeDefinition,
-  ThemePreset,
+  ThemeOverrideInput,
 } from 'typestyles';

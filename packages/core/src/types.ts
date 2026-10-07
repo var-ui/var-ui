@@ -20,14 +20,13 @@ export { colorModes, conditional } from 'typestyles';
 
 export type {
   ColorTokenPatch,
+  DeepPartialThemeTokens,
   DeepPartialTokenValues,
-  DesignThemePreset,
   DesignThemeTokenValues,
   DesignTokens,
   SemanticColorTokens,
-  ThemeColorModePatches,
   ThemeModeDefinition,
-  ThemePreset,
+  ThemeOverrideInput,
 } from './tokens/types';
 
 export type {

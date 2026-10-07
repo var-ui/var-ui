@@ -1,61 +1,51 @@
-import type { CreateTokenValues, ThemeSurface } from 'typestyles';
+import type { CreateTokenValues } from 'typestyles';
 import { registerFontFace } from '../fonts/register-font-face';
 import { typestyles } from '../runtime';
 import { designTokens } from '../tokens';
-import { dark } from '../tokens/defaults/color';
-import { defaultTokens } from '../tokens/preset';
-import type { DesignThemePreset } from '../tokens/types';
 import type {
-  CustomNamespacesFromTokenMap,
   DesignTheme,
-  DesignThemeComponentsFor,
-  DesignThemeConfigFields,
+  DesignThemeComponentOverrideContext,
+  DesignThemeCreateConfig,
 } from './types';
 
-/** Default token + dark color base merged when `from` is omitted. */
-const builtInPreset: DesignThemePreset = {
-  tokens: defaultTokens,
-  colorMode: { dark: { color: dark as CreateTokenValues } },
-};
+type ThemeTokenTree = Record<string, CreateTokenValues>;
 
-type CreateDesignThemeConfig<
-  Tok extends Record<string, CreateTokenValues> | undefined,
-  Rest extends Omit<DesignThemeConfigFields, 'name' | 'tokens'>,
-> = { name: string; tokens?: Tok } & Rest &
-  DesignThemeComponentsFor<CustomNamespacesFromTokenMap<NonNullable<Tok>>>;
+type DesignThemeComponents<T extends Record<string, unknown>> = Record<
+  string,
+  | Record<string, unknown>
+  | ((ctx: DesignThemeComponentOverrideContext<T>) => Record<string, unknown>)
+>;
 
 /**
- * Compile a TypeStyles theme surface (tokens, colorMode, modes, and optional `components` overrides).
+ * Compile a TypeStyles theme surface (`tokens`, `modes`, optional `components`).
+ * Light/dark values belong on mode-aware token leaves (`{ light, dark }`).
+ * Fork child themes with {@link DesignTheme.override} on a parent theme (e.g. `defaultTheme`).
  */
-export function createDesignTheme<
-  const Tok extends Record<string, CreateTokenValues> | undefined = undefined,
-  const Rest extends Omit<DesignThemeConfigFields, 'name' | 'tokens'> = {},
->(
-  config: CreateDesignThemeConfig<Tok, Rest>,
-): DesignTheme<CustomNamespacesFromTokenMap<NonNullable<Tok>>> {
-  const { from, tokens: tokenOverrides, colorMode, modes, fonts, name, components } = config;
+export function createDesignTheme<const T extends Record<string, unknown> = Record<string, never>>(
+  config: DesignThemeCreateConfig & {
+    tokens?: T;
+    components?: DesignThemeComponents<T>;
+  },
+): DesignTheme<T & ThemeTokenTree> {
+  const { fonts, name, tokens: tokenOverrides, modes, components, replace } = config;
 
-  const preset = from ?? builtInPreset;
-  for (const face of [...(preset.fonts ?? []), ...(fonts ?? [])]) {
+  for (const face of fonts ?? []) {
     registerFontFace(face);
   }
 
-  type CreateThemeArg = Parameters<typeof typestyles.tokens.createTheme>[0];
-
   const surface = typestyles.tokens.createTheme({
     name,
-    replace: true,
-    from: preset,
+    replace: replace ?? true,
+    // Defaults use `designTokens.*.var` (SyntaxRef); TypeStyles theme tokens are CreateTokenValues.
     tokens: tokenOverrides,
-    colorMode,
     modes,
     components,
-  } as CreateThemeArg);
+  } as Parameters<typeof typestyles.tokens.createTheme>[0]);
 
   return {
     ...surface,
-    tokens: surface.tokens ?? designTokens,
-  } as DesignTheme<CustomNamespacesFromTokenMap<NonNullable<Tok>>>;
+    tokens: (surface.tokens ?? designTokens) as DesignTheme<T & ThemeTokenTree>['tokens'],
+  } as DesignTheme<T & ThemeTokenTree>;
 }
 
 /**

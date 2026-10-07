@@ -22,4 +22,4 @@ export const themeableComponents = getRegisteredComponentRefs(styles);
 export { hiddenClassName, hiddenStyle } from './components/hidden';
 export { layout, text } from './components/styles';
 export { registerBaseStyles } from './theme/base-styles';
-export { registerDefaultTheme } from './theme/register-default';
+export { defaultTheme, registerDefaultTheme } from './theme/register-default';

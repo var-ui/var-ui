@@ -1,33 +1,41 @@
-import type { CreateTokenValues, ThemeSurface, TokenRefTree } from 'typestyles';
-import type { FontFaceDefinition } from '../fonts/types';
 import type {
-  DesignThemePreset,
-  DesignThemeTokenValues,
-  ThemeColorModePatches,
-  ThemeModeDefinition,
-} from '../tokens/types';
+  CreateTokenValues,
+  InferThemeTokensFromConfig,
+  Theme,
+  ThemeComponentsFor,
+  TokenRefTree,
+} from 'typestyles';
+import type { FontFaceDefinition } from '../fonts/types';
+import type { DesignThemeTokenValues, ThemeModeDefinition } from '../tokens/types';
 
-type DesignTokenBag = typeof import('../tokens/declare').tokens;
+type DesignTokenRefs = typeof import('../tokens/declare').tokens;
 
-/** Fields accepted by {@link createDesignTheme} (excluding recipe overrides). */
-export type DesignThemeConfigFields = {
+/**
+ * Create-theme config. `tokens` is intentionally open so default trees that use
+ * `designTokens.*.var` (SyntaxRef) remain assignable; {@link createDesignTheme} casts
+ * at the TypeStyles boundary.
+ */
+export type DesignThemeCreateConfig = {
   name: string;
-  from?: DesignThemePreset;
-  /** Built-in namespace patches plus custom namespaces (e.g. `brand`). */
-  tokens?: Record<string, CreateTokenValues>;
-  colorMode?: ThemeColorModePatches;
+  replace?: boolean;
+  tokens?: Record<string, unknown>;
   modes?: ThemeModeDefinition[];
   fonts?: FontFaceDefinition[];
 };
 
+/** @deprecated Prefer {@link DesignThemeCreateConfig} */
+export type DesignThemeConfigFields = DesignThemeCreateConfig & {
+  tokens?: Record<string, CreateTokenValues>;
+};
+
 export type CustomNamespacesFromTokenMap<Tokens> =
-  Tokens extends Record<string, CreateTokenValues>
+  Tokens extends Record<string, unknown>
     ? Omit<Tokens, keyof DesignThemeTokenValues>
     : Record<string, never>;
 
 /** Custom `tokens` namespaces from a theme config (excludes built-in design namespaces). */
-export type InferCustomThemeTokens<C extends DesignThemeConfigFields> = C extends {
-  tokens: infer Tok extends Record<string, CreateTokenValues>;
+export type InferCustomThemeTokens<C extends DesignThemeCreateConfig> = C extends {
+  tokens: infer Tok extends Record<string, unknown>;
 }
   ? CustomNamespacesFromTokenMap<Tok>
   : Record<string, never>;
@@ -36,38 +44,38 @@ export type InferCustomThemeTokens<C extends DesignThemeConfigFields> = C extend
  * Declared design token refs plus custom namespaces from `createDesignTheme({ tokens })`.
  * Hoist custom token maps into a leaf module for override factories (avoids `typeof theme.tokens` cycles).
  */
-export type DesignThemeTokens<E extends Record<string, CreateTokenValues> = Record<string, never>> =
-  DesignTokenBag & {
-    readonly [K in keyof E & string]: TokenRefTree<E[K]>;
+export type DesignThemeTokens<E extends Record<string, unknown> = Record<string, never>> =
+  DesignTokenRefs & {
+    readonly [K in keyof E & string]: E[K] extends CreateTokenValues
+      ? TokenRefTree<E[K]>
+      : TokenRefTree<CreateTokenValues>;
   };
 
 /** Context passed to theme `components` factories — full design token refs + custom namespaces. */
 export type DesignThemeComponentOverrideContext<
-  E extends Record<string, CreateTokenValues> = Record<string, never>,
+  E extends Record<string, unknown> = Record<string, never>,
 > = {
-  readonly tokens: DesignThemeTokens<E>;
-  readonly theme: DesignTheme<E>;
+  readonly tokens: DesignThemeTokens<CustomNamespacesFromTokenMap<E>>;
+  readonly theme: DesignTheme<
+    E extends Record<string, CreateTokenValues> ? E : Record<string, never>
+  >;
 };
 
-type DesignThemeComponentOverrideFn<E extends Record<string, CreateTokenValues>> = (
-  ctx: DesignThemeComponentOverrideContext<E>,
-) => Record<string, unknown>;
-
-/** Typed `components` map for {@link createDesignTheme} (matches runtime `surface.tokens`). */
-export type DesignThemeComponentsFor<E extends Record<string, CreateTokenValues>> = {
-  components?: Record<string, Record<string, unknown> | DesignThemeComponentOverrideFn<E>>;
-};
-
-/** Var UI theme input — token layers, fonts, and TypeStyles `components` overrides. */
-export type DesignThemeConfig = DesignThemeConfigFields &
-  DesignThemeComponentsFor<Record<string, never>>;
-
-/** Theme surface returned by {@link createDesignTheme}. Recipe overrides use config `components`. */
+/**
+ * Theme returned by {@link createDesignTheme} / {@link DesignTheme.override}.
+ * `E` is the full `tokens` map (TypeStyles) so `.override()` patches are closed against that tree.
+ */
 export type DesignTheme<E extends Record<string, CreateTokenValues> = Record<string, never>> =
-  ThemeSurface<E> & {
-    tokens: DesignThemeTokens<E>;
+  Theme<E> & {
+    tokens: DesignThemeTokens<CustomNamespacesFromTokenMap<E>>;
   };
 
+/** Config input aligned with TypeStyles `createTheme` + optional `fonts`. */
+export type DesignThemeConfig = DesignThemeCreateConfig &
+  ThemeComponentsFor<{ tokens: Record<string, CreateTokenValues> }>;
+
+export type { InferThemeTokensFromConfig, ThemeComponentsFor };
+
 /** @deprecated Use {@link InferCustomThemeTokens} */
-export type InferThemeExtendFromConfig<C extends DesignThemeConfigFields> =
+export type InferThemeExtendFromConfig<C extends DesignThemeCreateConfig> =
   InferCustomThemeTokens<C>;

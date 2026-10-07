@@ -52,7 +52,7 @@ describe('theme conditions and colorModes', () => {
   });
 
   it('emits global color-scheme rules for root and surfaces', () => {
-    createDesignTheme({ name: 'scheme-fixture' });
+    createDesignTheme({ name: 'scheme-fixture', tokens: {} });
     const css = getRegisteredCss();
     expect(css).toMatch(/color-scheme:\s*light\s+dark/);
     expect(css).toContain('[data-surface="dark"]');

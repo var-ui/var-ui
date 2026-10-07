@@ -1,11 +1,12 @@
 export type {
   ColorTokenPatch,
+  DeepPartialThemeTokens,
   DeepPartialTokenValues,
-  DesignThemePreset,
   DesignThemeTokenValues,
   DesignTokens,
   SemanticColorTokens,
-  ThemeColorModePatches,
+  ThemeModeDefinition,
+  ThemeOverrideInput,
 } from './types';
 export {
   palette,
@@ -22,7 +23,7 @@ export {
 /** Declared design token refs (`declare.ts` exports `tokens` internally). */
 export { tokens as designTokens } from './declare';
 export { tokenValues } from './preset';
-export { darkSyntaxValues, lightSyntaxValues } from './defaults/color';
+export { darkSyntaxValues, lightSyntaxValues, type SyntaxFaceValues } from './defaults/color';
 export { shadowElevationValues } from './defaults/shadow';
 export { generateColors } from './generate-colors';
 export {
