@@ -966,7 +966,7 @@
     "dev": "vp pack --watch"
   },
   "dependencies": {
-    "typestyles": "0.25.0"
+    "typestyles": "catalog:"
   },
   "devDependencies": {
     "@typestyles/build-runner": "^0.5.2",

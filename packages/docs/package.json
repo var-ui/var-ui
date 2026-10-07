@@ -64,7 +64,7 @@
     "@var-ui/core": "workspace:*",
     "astro": "catalog:",
     "jsdom": "^26.0.0",
-    "typestyles": "0.25.0",
+    "typestyles": "catalog:",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },

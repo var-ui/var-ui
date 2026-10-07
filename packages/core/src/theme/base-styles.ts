@@ -1,20 +1,34 @@
 import { reset } from 'typestyles/globals';
 import { designTokens as t } from '../tokens';
 import { atReducedMotion } from './conditions';
+import { SURFACE_ATTRIBUTE } from './constants';
 import { typestyles } from '../runtime';
 
 const resetLayer = 'reset';
 const baseLayer = 'base';
+const tokenLayer = 'tokens';
 
 /**
- * CSS reset (Josh Comeau) plus token-driven defaults for bare HTML elements (`p`, `code`,
- * headings, links, lists, tables, etc.). Registered in the `reset` and `base` cascade layers
- * so component recipes in higher layers can override.
+ * Document globals shipped with `@var-ui/core/styles`: `color-scheme` for root and
+ * {@link SURFACE_ATTRIBUTE} markers, Josh Comeau CSS reset, and token-driven defaults for
+ * bare HTML elements. Registered in the `tokens`, `reset`, and `base` cascade layers so
+ * component recipes in higher layers can override.
  *
- * Side effect on import: styles register when this module loads (via `@var-ui/core` or
- * `@var-ui/core/base-styles`). Pair with {@link registerGlobals} after `reset()` in tests.
+ * Side effect on import via the styles extract entry. Re-call after `reset()` in tests.
  */
 export function registerBaseStyles(): void {
+  typestyles.global.style(':root', { colorScheme: 'light dark' }, { layer: tokenLayer });
+  typestyles.global.style(
+    `[${SURFACE_ATTRIBUTE}="dark"]`,
+    { colorScheme: 'dark' },
+    { layer: tokenLayer },
+  );
+  typestyles.global.style(
+    `[${SURFACE_ATTRIBUTE}="light"]`,
+    { colorScheme: 'light' },
+    { layer: tokenLayer },
+  );
+
   typestyles.global.apply(...reset({ layer: resetLayer, includeAppRootIsolation: false }));
 
   typestyles.global.style(
